@@ -1,0 +1,7647 @@
+{
+  "metadata": {
+    "cohort_type": "synthetic_mena",
+    "total_profiles": 500,
+    "creation_date": "2026-06-02",
+    "purpose": "Training and research purposes only",
+    "data_note": "All profiles are synthetically generated"
+  },
+  "profiles": [
+    {
+      "cohort_id": "cohort-0001",
+      "age": 7,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "malnutrition"
+      ],
+      "days_in_belgium": 776,
+      "family_status": "separated",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0002",
+      "age": 10,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Turkish"
+      ],
+      "vulnerability_flags": [
+        "health_issues",
+        "mental_health"
+      ],
+      "days_in_belgium": 582,
+      "family_status": "with_family",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0003",
+      "age": 9,
+      "origin_country": "Jordan",
+      "languages_spoken": [
+        "Turkish",
+        "Dari"
+      ],
+      "vulnerability_flags": [
+        "malnutrition",
+        "health_issues"
+      ],
+      "days_in_belgium": 422,
+      "family_status": "unaccompanied_minor",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0004",
+      "age": 17,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Kurdish",
+        "Arabic",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "trafficking"
+      ],
+      "days_in_belgium": 314,
+      "family_status": "with_family",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0005",
+      "age": 7,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Arabic",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "mental_health"
+      ],
+      "days_in_belgium": 727,
+      "family_status": "separated",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0006",
+      "age": 4,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "health_issues",
+        "malnutrition"
+      ],
+      "days_in_belgium": 347,
+      "family_status": "with_single_parent",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0007",
+      "age": 18,
+      "origin_country": "Palestine",
+      "languages_spoken": [
+        "Kurdish",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "trauma"
+      ],
+      "days_in_belgium": 863,
+      "family_status": "with_single_parent",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0008",
+      "age": 13,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Turkish",
+        "Kurdish"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 341,
+      "family_status": "with_relatives",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0009",
+      "age": 12,
+      "origin_country": "Palestine",
+      "languages_spoken": [
+        "Turkish",
+        "Dari",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "disability"
+      ],
+      "days_in_belgium": 856,
+      "family_status": "with_relatives",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0010",
+      "age": 18,
+      "origin_country": "Jordan",
+      "languages_spoken": [
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "trafficking",
+        "trauma"
+      ],
+      "days_in_belgium": 90,
+      "family_status": "with_relatives",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0011",
+      "age": 6,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "disability",
+        "mental_health"
+      ],
+      "days_in_belgium": 328,
+      "family_status": "separated",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0012",
+      "age": 5,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Kurdish",
+        "Arabic",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "disability"
+      ],
+      "days_in_belgium": 1063,
+      "family_status": "unaccompanied_minor",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0013",
+      "age": 4,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Arabic"
+      ],
+      "vulnerability_flags": [
+        "disability",
+        "mental_health"
+      ],
+      "days_in_belgium": 840,
+      "family_status": "with_single_parent",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0014",
+      "age": 16,
+      "origin_country": "Palestine",
+      "languages_spoken": [
+        "Arabic",
+        "Berber",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 452,
+      "family_status": "unaccompanied_minor",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0015",
+      "age": 14,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Dari",
+        "Kurdish",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "trauma",
+        "health_issues"
+      ],
+      "days_in_belgium": 453,
+      "family_status": "with_single_parent",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0016",
+      "age": 4,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Turkish"
+      ],
+      "vulnerability_flags": [
+        "trafficking"
+      ],
+      "days_in_belgium": 626,
+      "family_status": "with_single_parent",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0017",
+      "age": 4,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "disability",
+        "health_issues"
+      ],
+      "days_in_belgium": 1083,
+      "family_status": "with_single_parent",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0018",
+      "age": 10,
+      "origin_country": "Algeria",
+      "languages_spoken": [
+        "Arabic"
+      ],
+      "vulnerability_flags": [
+        "mental_health",
+        "malnutrition"
+      ],
+      "days_in_belgium": 391,
+      "family_status": "unaccompanied_minor",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0019",
+      "age": 5,
+      "origin_country": "Algeria",
+      "languages_spoken": [
+        "Berber",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "trafficking"
+      ],
+      "days_in_belgium": 203,
+      "family_status": "with_family",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0020",
+      "age": 18,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Turkish",
+        "Arabic",
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 1085,
+      "family_status": "unaccompanied_minor",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0021",
+      "age": 6,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Berber",
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "disability",
+        "malnutrition"
+      ],
+      "days_in_belgium": 190,
+      "family_status": "with_family",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0022",
+      "age": 13,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Turkish",
+        "Aramaic",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 717,
+      "family_status": "with_single_parent",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0023",
+      "age": 18,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Turkish"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 225,
+      "family_status": "unaccompanied_minor",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0024",
+      "age": 17,
+      "origin_country": "Jordan",
+      "languages_spoken": [
+        "Arabic",
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "trauma",
+        "mental_health"
+      ],
+      "days_in_belgium": 1055,
+      "family_status": "with_single_parent",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0025",
+      "age": 12,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Kurdish",
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "health_issues",
+        "trauma"
+      ],
+      "days_in_belgium": 1019,
+      "family_status": "unaccompanied_minor",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0026",
+      "age": 8,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Kurdish",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "health_issues",
+        "disability"
+      ],
+      "days_in_belgium": 986,
+      "family_status": "with_single_parent",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0027",
+      "age": 18,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Berber",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "mental_health"
+      ],
+      "days_in_belgium": 260,
+      "family_status": "with_relatives",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0028",
+      "age": 12,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Kurdish",
+        "Arabic",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "trafficking",
+        "health_issues"
+      ],
+      "days_in_belgium": 936,
+      "family_status": "unaccompanied_minor",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0029",
+      "age": 11,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "mental_health"
+      ],
+      "days_in_belgium": 696,
+      "family_status": "with_single_parent",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0030",
+      "age": 13,
+      "origin_country": "Jordan",
+      "languages_spoken": [
+        "Turkish"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 723,
+      "family_status": "with_family",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0031",
+      "age": 11,
+      "origin_country": "Algeria",
+      "languages_spoken": [
+        "Dari",
+        "Kurdish",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "malnutrition",
+        "trafficking"
+      ],
+      "days_in_belgium": 619,
+      "family_status": "separated",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0032",
+      "age": 14,
+      "origin_country": "Algeria",
+      "languages_spoken": [
+        "Arabic",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 429,
+      "family_status": "separated",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0033",
+      "age": 8,
+      "origin_country": "Jordan",
+      "languages_spoken": [
+        "Kurdish",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "trauma"
+      ],
+      "days_in_belgium": 57,
+      "family_status": "with_relatives",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0034",
+      "age": 9,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Dari",
+        "Arabic",
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "mental_health",
+        "health_issues"
+      ],
+      "days_in_belgium": 330,
+      "family_status": "unaccompanied_minor",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0035",
+      "age": 10,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Dari",
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 155,
+      "family_status": "with_relatives",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0036",
+      "age": 3,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Dari",
+        "Arabic",
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 855,
+      "family_status": "with_single_parent",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0037",
+      "age": 3,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Turkish",
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "trauma"
+      ],
+      "days_in_belgium": 168,
+      "family_status": "with_family",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0038",
+      "age": 7,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Turkish",
+        "Arabic"
+      ],
+      "vulnerability_flags": [
+        "trauma",
+        "malnutrition"
+      ],
+      "days_in_belgium": 979,
+      "family_status": "unaccompanied_minor",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0039",
+      "age": 7,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Turkish"
+      ],
+      "vulnerability_flags": [
+        "mental_health",
+        "trafficking"
+      ],
+      "days_in_belgium": 466,
+      "family_status": "unaccompanied_minor",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0040",
+      "age": 7,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Arabic"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 869,
+      "family_status": "with_relatives",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0041",
+      "age": 16,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Turkish",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "health_issues",
+        "disability"
+      ],
+      "days_in_belgium": 887,
+      "family_status": "separated",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0042",
+      "age": 17,
+      "origin_country": "Jordan",
+      "languages_spoken": [
+        "Turkish",
+        "Dari"
+      ],
+      "vulnerability_flags": [
+        "trafficking",
+        "health_issues"
+      ],
+      "days_in_belgium": 169,
+      "family_status": "with_single_parent",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0043",
+      "age": 17,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Dari",
+        "Berber",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 888,
+      "family_status": "with_relatives",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0044",
+      "age": 11,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Berber",
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 977,
+      "family_status": "with_family",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0045",
+      "age": 3,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Pashto",
+        "Kurdish",
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 1011,
+      "family_status": "with_relatives",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0046",
+      "age": 17,
+      "origin_country": "Jordan",
+      "languages_spoken": [
+        "Dari"
+      ],
+      "vulnerability_flags": [
+        "trafficking",
+        "malnutrition"
+      ],
+      "days_in_belgium": 814,
+      "family_status": "separated",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0047",
+      "age": 15,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Turkish",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "trafficking",
+        "disability"
+      ],
+      "days_in_belgium": 355,
+      "family_status": "with_single_parent",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0048",
+      "age": 7,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Turkish",
+        "Kurdish",
+        "Arabic"
+      ],
+      "vulnerability_flags": [
+        "disability"
+      ],
+      "days_in_belgium": 890,
+      "family_status": "with_single_parent",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0049",
+      "age": 15,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Turkish"
+      ],
+      "vulnerability_flags": [
+        "health_issues",
+        "mental_health"
+      ],
+      "days_in_belgium": 840,
+      "family_status": "separated",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0050",
+      "age": 11,
+      "origin_country": "Algeria",
+      "languages_spoken": [
+        "Kurdish",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "malnutrition"
+      ],
+      "days_in_belgium": 245,
+      "family_status": "with_family",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0051",
+      "age": 18,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Arabic"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 672,
+      "family_status": "with_relatives",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0052",
+      "age": 4,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Arabic",
+        "Pashto",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 259,
+      "family_status": "with_relatives",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0053",
+      "age": 8,
+      "origin_country": "Palestine",
+      "languages_spoken": [
+        "Turkish",
+        "Arabic",
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "trauma",
+        "disability"
+      ],
+      "days_in_belgium": 359,
+      "family_status": "unaccompanied_minor",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0054",
+      "age": 8,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Pashto",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "malnutrition"
+      ],
+      "days_in_belgium": 158,
+      "family_status": "separated",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0055",
+      "age": 7,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "trauma"
+      ],
+      "days_in_belgium": 601,
+      "family_status": "with_single_parent",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0056",
+      "age": 18,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Aramaic",
+        "Arabic",
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "mental_health",
+        "trafficking"
+      ],
+      "days_in_belgium": 876,
+      "family_status": "separated",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0057",
+      "age": 8,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Dari",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "malnutrition"
+      ],
+      "days_in_belgium": 947,
+      "family_status": "with_relatives",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0058",
+      "age": 11,
+      "origin_country": "Jordan",
+      "languages_spoken": [
+        "Dari"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 490,
+      "family_status": "with_single_parent",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0059",
+      "age": 12,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Hebrew",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 705,
+      "family_status": "with_relatives",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0060",
+      "age": 3,
+      "origin_country": "Jordan",
+      "languages_spoken": [
+        "Turkish",
+        "Dari"
+      ],
+      "vulnerability_flags": [
+        "trauma"
+      ],
+      "days_in_belgium": 720,
+      "family_status": "with_relatives",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0061",
+      "age": 11,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Turkish",
+        "Berber",
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 513,
+      "family_status": "separated",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0062",
+      "age": 18,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Dari"
+      ],
+      "vulnerability_flags": [
+        "mental_health",
+        "disability"
+      ],
+      "days_in_belgium": 128,
+      "family_status": "separated",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0063",
+      "age": 14,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "disability",
+        "malnutrition"
+      ],
+      "days_in_belgium": 248,
+      "family_status": "separated",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0064",
+      "age": 7,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 98,
+      "family_status": "with_relatives",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0065",
+      "age": 11,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Arabic",
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "malnutrition",
+        "health_issues"
+      ],
+      "days_in_belgium": 514,
+      "family_status": "with_single_parent",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0066",
+      "age": 12,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Turkish",
+        "Pashto",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 1031,
+      "family_status": "with_family",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0067",
+      "age": 12,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Turkish",
+        "Berber",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "health_issues",
+        "mental_health"
+      ],
+      "days_in_belgium": 810,
+      "family_status": "with_single_parent",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0068",
+      "age": 4,
+      "origin_country": "Algeria",
+      "languages_spoken": [
+        "Arabic",
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 95,
+      "family_status": "with_relatives",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0069",
+      "age": 8,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Pashto",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "malnutrition"
+      ],
+      "days_in_belgium": 164,
+      "family_status": "unaccompanied_minor",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0070",
+      "age": 4,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 887,
+      "family_status": "with_relatives",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0071",
+      "age": 13,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Kurdish",
+        "Aramaic",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 989,
+      "family_status": "separated",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0072",
+      "age": 4,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Arabic"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 732,
+      "family_status": "separated",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0073",
+      "age": 17,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Kurdish"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 827,
+      "family_status": "separated",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0074",
+      "age": 18,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 371,
+      "family_status": "with_single_parent",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0075",
+      "age": 14,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Turkish",
+        "Arabic",
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "health_issues",
+        "malnutrition"
+      ],
+      "days_in_belgium": 293,
+      "family_status": "separated",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0076",
+      "age": 6,
+      "origin_country": "Jordan",
+      "languages_spoken": [
+        "Pashto",
+        "Dari",
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "health_issues",
+        "trafficking"
+      ],
+      "days_in_belgium": 778,
+      "family_status": "separated",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0077",
+      "age": 15,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Kurdish",
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "trafficking",
+        "health_issues"
+      ],
+      "days_in_belgium": 799,
+      "family_status": "with_family",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0078",
+      "age": 6,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Kurdish"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 547,
+      "family_status": "unaccompanied_minor",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0079",
+      "age": 18,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 71,
+      "family_status": "with_single_parent",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0080",
+      "age": 18,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Kurdish",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "health_issues",
+        "trafficking"
+      ],
+      "days_in_belgium": 821,
+      "family_status": "with_relatives",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0081",
+      "age": 17,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Dari"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 432,
+      "family_status": "with_single_parent",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0082",
+      "age": 16,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Turkish"
+      ],
+      "vulnerability_flags": [
+        "health_issues"
+      ],
+      "days_in_belgium": 836,
+      "family_status": "with_relatives",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0083",
+      "age": 8,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Dari",
+        "Hebrew",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 1075,
+      "family_status": "separated",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0084",
+      "age": 17,
+      "origin_country": "Algeria",
+      "languages_spoken": [
+        "Turkish"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 315,
+      "family_status": "with_relatives",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0085",
+      "age": 16,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Arabic",
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "disability"
+      ],
+      "days_in_belgium": 809,
+      "family_status": "with_family",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0086",
+      "age": 17,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "trauma",
+        "mental_health"
+      ],
+      "days_in_belgium": 579,
+      "family_status": "separated",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0087",
+      "age": 18,
+      "origin_country": "Palestine",
+      "languages_spoken": [
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "health_issues"
+      ],
+      "days_in_belgium": 391,
+      "family_status": "with_relatives",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0088",
+      "age": 14,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Aramaic",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "disability"
+      ],
+      "days_in_belgium": 1087,
+      "family_status": "with_relatives",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0089",
+      "age": 8,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Pashto",
+        "Dari",
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 128,
+      "family_status": "with_relatives",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0090",
+      "age": 14,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Turkish"
+      ],
+      "vulnerability_flags": [
+        "mental_health"
+      ],
+      "days_in_belgium": 1074,
+      "family_status": "with_relatives",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0091",
+      "age": 9,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 751,
+      "family_status": "unaccompanied_minor",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0092",
+      "age": 4,
+      "origin_country": "Algeria",
+      "languages_spoken": [
+        "Turkish"
+      ],
+      "vulnerability_flags": [
+        "disability",
+        "malnutrition"
+      ],
+      "days_in_belgium": 268,
+      "family_status": "with_single_parent",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0093",
+      "age": 11,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Turkish"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 1054,
+      "family_status": "with_relatives",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0094",
+      "age": 9,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Pashto",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 901,
+      "family_status": "with_relatives",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0095",
+      "age": 3,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Turkish",
+        "Pashto",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "disability"
+      ],
+      "days_in_belgium": 831,
+      "family_status": "with_single_parent",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0096",
+      "age": 12,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Arabic",
+        "Berber",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 796,
+      "family_status": "with_family",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0097",
+      "age": 4,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Turkish",
+        "Pashto",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "trauma"
+      ],
+      "days_in_belgium": 769,
+      "family_status": "with_family",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0098",
+      "age": 11,
+      "origin_country": "Jordan",
+      "languages_spoken": [
+        "Kurdish",
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "mental_health",
+        "trauma"
+      ],
+      "days_in_belgium": 506,
+      "family_status": "with_single_parent",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0099",
+      "age": 9,
+      "origin_country": "Algeria",
+      "languages_spoken": [
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 223,
+      "family_status": "separated",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0100",
+      "age": 9,
+      "origin_country": "Palestine",
+      "languages_spoken": [
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "trafficking",
+        "trauma"
+      ],
+      "days_in_belgium": 800,
+      "family_status": "separated",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0101",
+      "age": 18,
+      "origin_country": "Algeria",
+      "languages_spoken": [
+        "Arabic",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "trauma"
+      ],
+      "days_in_belgium": 481,
+      "family_status": "unaccompanied_minor",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0102",
+      "age": 3,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Turkish",
+        "Kurdish"
+      ],
+      "vulnerability_flags": [
+        "mental_health",
+        "trafficking"
+      ],
+      "days_in_belgium": 528,
+      "family_status": "unaccompanied_minor",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0103",
+      "age": 12,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Dari",
+        "Berber",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "mental_health",
+        "health_issues"
+      ],
+      "days_in_belgium": 477,
+      "family_status": "with_family",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0104",
+      "age": 12,
+      "origin_country": "Palestine",
+      "languages_spoken": [
+        "Arabic"
+      ],
+      "vulnerability_flags": [
+        "trauma"
+      ],
+      "days_in_belgium": 100,
+      "family_status": "with_single_parent",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0105",
+      "age": 15,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Turkish",
+        "Pashto",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "mental_health"
+      ],
+      "days_in_belgium": 978,
+      "family_status": "with_relatives",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0106",
+      "age": 16,
+      "origin_country": "Palestine",
+      "languages_spoken": [
+        "Dari",
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "malnutrition",
+        "trafficking"
+      ],
+      "days_in_belgium": 889,
+      "family_status": "with_single_parent",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0107",
+      "age": 13,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Kurdish",
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 446,
+      "family_status": "unaccompanied_minor",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0108",
+      "age": 18,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Arabic",
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "trauma",
+        "mental_health"
+      ],
+      "days_in_belgium": 456,
+      "family_status": "with_relatives",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0109",
+      "age": 4,
+      "origin_country": "Palestine",
+      "languages_spoken": [
+        "Turkish",
+        "Dari",
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "trauma"
+      ],
+      "days_in_belgium": 413,
+      "family_status": "unaccompanied_minor",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0110",
+      "age": 5,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Arabic",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 1004,
+      "family_status": "with_relatives",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0111",
+      "age": 8,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Pashto",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "malnutrition",
+        "mental_health"
+      ],
+      "days_in_belgium": 514,
+      "family_status": "with_relatives",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0112",
+      "age": 3,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 523,
+      "family_status": "with_relatives",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0113",
+      "age": 14,
+      "origin_country": "Algeria",
+      "languages_spoken": [
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "mental_health",
+        "malnutrition"
+      ],
+      "days_in_belgium": 1041,
+      "family_status": "separated",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0114",
+      "age": 11,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "trafficking",
+        "trauma"
+      ],
+      "days_in_belgium": 521,
+      "family_status": "with_family",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0115",
+      "age": 15,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Turkish",
+        "Dari",
+        "Kurdish"
+      ],
+      "vulnerability_flags": [
+        "mental_health"
+      ],
+      "days_in_belgium": 543,
+      "family_status": "with_family",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0116",
+      "age": 9,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Dari",
+        "Arabic",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 1060,
+      "family_status": "separated",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0117",
+      "age": 4,
+      "origin_country": "Jordan",
+      "languages_spoken": [
+        "Dari",
+        "Kurdish",
+        "Arabic"
+      ],
+      "vulnerability_flags": [
+        "trauma"
+      ],
+      "days_in_belgium": 648,
+      "family_status": "with_family",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0118",
+      "age": 16,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "health_issues",
+        "mental_health"
+      ],
+      "days_in_belgium": 823,
+      "family_status": "with_relatives",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0119",
+      "age": 10,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Turkish",
+        "Dari",
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "trafficking",
+        "mental_health"
+      ],
+      "days_in_belgium": 77,
+      "family_status": "separated",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0120",
+      "age": 13,
+      "origin_country": "Palestine",
+      "languages_spoken": [
+        "Dari"
+      ],
+      "vulnerability_flags": [
+        "disability",
+        "health_issues"
+      ],
+      "days_in_belgium": 99,
+      "family_status": "with_relatives",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0121",
+      "age": 15,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Turkish",
+        "Dari"
+      ],
+      "vulnerability_flags": [
+        "malnutrition"
+      ],
+      "days_in_belgium": 785,
+      "family_status": "with_family",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0122",
+      "age": 8,
+      "origin_country": "Jordan",
+      "languages_spoken": [
+        "Aramaic",
+        "Arabic",
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 448,
+      "family_status": "with_relatives",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0123",
+      "age": 4,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Dari",
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 983,
+      "family_status": "unaccompanied_minor",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0124",
+      "age": 16,
+      "origin_country": "Jordan",
+      "languages_spoken": [
+        "Berber",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "malnutrition"
+      ],
+      "days_in_belgium": 494,
+      "family_status": "separated",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0125",
+      "age": 7,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Turkish",
+        "Berber",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 164,
+      "family_status": "with_single_parent",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0126",
+      "age": 17,
+      "origin_country": "Jordan",
+      "languages_spoken": [
+        "Kurdish"
+      ],
+      "vulnerability_flags": [
+        "health_issues"
+      ],
+      "days_in_belgium": 417,
+      "family_status": "with_single_parent",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0127",
+      "age": 7,
+      "origin_country": "Palestine",
+      "languages_spoken": [
+        "Pashto",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "health_issues",
+        "mental_health"
+      ],
+      "days_in_belgium": 788,
+      "family_status": "separated",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0128",
+      "age": 13,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "health_issues"
+      ],
+      "days_in_belgium": 977,
+      "family_status": "with_family",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0129",
+      "age": 15,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Dari",
+        "Arabic"
+      ],
+      "vulnerability_flags": [
+        "disability",
+        "trauma"
+      ],
+      "days_in_belgium": 544,
+      "family_status": "with_family",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0130",
+      "age": 3,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Kurdish",
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 266,
+      "family_status": "unaccompanied_minor",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0131",
+      "age": 8,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Arabic",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 68,
+      "family_status": "separated",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0132",
+      "age": 17,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Turkish",
+        "Pashto",
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 459,
+      "family_status": "separated",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0133",
+      "age": 9,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "trafficking"
+      ],
+      "days_in_belgium": 213,
+      "family_status": "separated",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0134",
+      "age": 18,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "health_issues"
+      ],
+      "days_in_belgium": 212,
+      "family_status": "with_family",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0135",
+      "age": 11,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Kurdish"
+      ],
+      "vulnerability_flags": [
+        "trafficking"
+      ],
+      "days_in_belgium": 574,
+      "family_status": "unaccompanied_minor",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0136",
+      "age": 4,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Berber",
+        "Arabic",
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "disability"
+      ],
+      "days_in_belgium": 438,
+      "family_status": "with_family",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0137",
+      "age": 6,
+      "origin_country": "Algeria",
+      "languages_spoken": [
+        "Turkish",
+        "Dari"
+      ],
+      "vulnerability_flags": [
+        "malnutrition"
+      ],
+      "days_in_belgium": 983,
+      "family_status": "with_family",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0138",
+      "age": 5,
+      "origin_country": "Algeria",
+      "languages_spoken": [
+        "Dari"
+      ],
+      "vulnerability_flags": [
+        "trauma",
+        "disability"
+      ],
+      "days_in_belgium": 251,
+      "family_status": "with_single_parent",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0139",
+      "age": 11,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "malnutrition",
+        "health_issues"
+      ],
+      "days_in_belgium": 874,
+      "family_status": "unaccompanied_minor",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0140",
+      "age": 5,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Hebrew",
+        "Aramaic",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "mental_health"
+      ],
+      "days_in_belgium": 116,
+      "family_status": "with_relatives",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0141",
+      "age": 16,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Dari",
+        "Arabic",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "trafficking"
+      ],
+      "days_in_belgium": 909,
+      "family_status": "with_relatives",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0142",
+      "age": 8,
+      "origin_country": "Algeria",
+      "languages_spoken": [
+        "Turkish",
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 302,
+      "family_status": "with_family",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0143",
+      "age": 5,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Arabic",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "trauma",
+        "health_issues"
+      ],
+      "days_in_belgium": 535,
+      "family_status": "with_family",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0144",
+      "age": 14,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Turkish",
+        "Dari"
+      ],
+      "vulnerability_flags": [
+        "malnutrition"
+      ],
+      "days_in_belgium": 358,
+      "family_status": "separated",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0145",
+      "age": 11,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "malnutrition",
+        "health_issues"
+      ],
+      "days_in_belgium": 1068,
+      "family_status": "with_family",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0146",
+      "age": 15,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Dari"
+      ],
+      "vulnerability_flags": [
+        "disability",
+        "trauma"
+      ],
+      "days_in_belgium": 495,
+      "family_status": "with_family",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0147",
+      "age": 3,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Pashto",
+        "Arabic",
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "trauma"
+      ],
+      "days_in_belgium": 367,
+      "family_status": "separated",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0148",
+      "age": 17,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Pashto",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "mental_health"
+      ],
+      "days_in_belgium": 577,
+      "family_status": "with_relatives",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0149",
+      "age": 14,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 135,
+      "family_status": "with_single_parent",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0150",
+      "age": 14,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Dari"
+      ],
+      "vulnerability_flags": [
+        "mental_health",
+        "trafficking"
+      ],
+      "days_in_belgium": 182,
+      "family_status": "with_family",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0151",
+      "age": 9,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Kurdish",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 886,
+      "family_status": "separated",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0152",
+      "age": 16,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Berber",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "health_issues"
+      ],
+      "days_in_belgium": 370,
+      "family_status": "separated",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0153",
+      "age": 17,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Aramaic",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "malnutrition",
+        "trafficking"
+      ],
+      "days_in_belgium": 354,
+      "family_status": "unaccompanied_minor",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0154",
+      "age": 18,
+      "origin_country": "Algeria",
+      "languages_spoken": [
+        "Turkish",
+        "Dari",
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 492,
+      "family_status": "with_family",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0155",
+      "age": 10,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Pashto",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "malnutrition",
+        "health_issues"
+      ],
+      "days_in_belgium": 490,
+      "family_status": "separated",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0156",
+      "age": 4,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Dari",
+        "Kurdish",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "malnutrition",
+        "health_issues"
+      ],
+      "days_in_belgium": 600,
+      "family_status": "with_single_parent",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0157",
+      "age": 8,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Turkish",
+        "Pashto",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "trafficking",
+        "trauma"
+      ],
+      "days_in_belgium": 791,
+      "family_status": "unaccompanied_minor",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0158",
+      "age": 3,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Turkish",
+        "Dari"
+      ],
+      "vulnerability_flags": [
+        "disability"
+      ],
+      "days_in_belgium": 712,
+      "family_status": "separated",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0159",
+      "age": 5,
+      "origin_country": "Palestine",
+      "languages_spoken": [
+        "Turkish"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 88,
+      "family_status": "with_single_parent",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0160",
+      "age": 11,
+      "origin_country": "Palestine",
+      "languages_spoken": [
+        "Turkish"
+      ],
+      "vulnerability_flags": [
+        "health_issues",
+        "disability"
+      ],
+      "days_in_belgium": 834,
+      "family_status": "unaccompanied_minor",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0161",
+      "age": 12,
+      "origin_country": "Jordan",
+      "languages_spoken": [
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "disability",
+        "malnutrition"
+      ],
+      "days_in_belgium": 46,
+      "family_status": "with_relatives",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0162",
+      "age": 14,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Kurdish",
+        "Arabic",
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 323,
+      "family_status": "unaccompanied_minor",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0163",
+      "age": 17,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Turkish",
+        "Arabic"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 928,
+      "family_status": "separated",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0164",
+      "age": 7,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Dari",
+        "Pashto",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "malnutrition"
+      ],
+      "days_in_belgium": 974,
+      "family_status": "unaccompanied_minor",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0165",
+      "age": 7,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "health_issues",
+        "disability"
+      ],
+      "days_in_belgium": 290,
+      "family_status": "with_family",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0166",
+      "age": 3,
+      "origin_country": "Jordan",
+      "languages_spoken": [
+        "Turkish",
+        "Arabic",
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "trauma"
+      ],
+      "days_in_belgium": 179,
+      "family_status": "unaccompanied_minor",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0167",
+      "age": 9,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Pashto",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "disability",
+        "trafficking"
+      ],
+      "days_in_belgium": 305,
+      "family_status": "with_single_parent",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0168",
+      "age": 16,
+      "origin_country": "Palestine",
+      "languages_spoken": [
+        "Dari",
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 1003,
+      "family_status": "unaccompanied_minor",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0169",
+      "age": 5,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 391,
+      "family_status": "separated",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0170",
+      "age": 16,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Kurdish",
+        "Arabic",
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "malnutrition"
+      ],
+      "days_in_belgium": 300,
+      "family_status": "separated",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0171",
+      "age": 16,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Dari",
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "health_issues"
+      ],
+      "days_in_belgium": 826,
+      "family_status": "separated",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0172",
+      "age": 15,
+      "origin_country": "Algeria",
+      "languages_spoken": [
+        "Kurdish",
+        "Arabic",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "trauma",
+        "mental_health"
+      ],
+      "days_in_belgium": 1026,
+      "family_status": "with_family",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0173",
+      "age": 17,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Pashto",
+        "Kurdish",
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "trafficking"
+      ],
+      "days_in_belgium": 108,
+      "family_status": "with_single_parent",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0174",
+      "age": 14,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Aramaic",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 746,
+      "family_status": "with_single_parent",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0175",
+      "age": 12,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "trafficking",
+        "mental_health"
+      ],
+      "days_in_belgium": 946,
+      "family_status": "with_family",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0176",
+      "age": 5,
+      "origin_country": "Algeria",
+      "languages_spoken": [
+        "Kurdish",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "trafficking"
+      ],
+      "days_in_belgium": 943,
+      "family_status": "with_single_parent",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0177",
+      "age": 12,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 552,
+      "family_status": "with_single_parent",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0178",
+      "age": 9,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 632,
+      "family_status": "separated",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0179",
+      "age": 5,
+      "origin_country": "Palestine",
+      "languages_spoken": [
+        "Pashto",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "trauma"
+      ],
+      "days_in_belgium": 618,
+      "family_status": "unaccompanied_minor",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0180",
+      "age": 17,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Turkish",
+        "Arabic",
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "trafficking"
+      ],
+      "days_in_belgium": 745,
+      "family_status": "unaccompanied_minor",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0181",
+      "age": 18,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "mental_health",
+        "disability"
+      ],
+      "days_in_belgium": 582,
+      "family_status": "with_single_parent",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0182",
+      "age": 9,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Turkish",
+        "Pashto",
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "disability"
+      ],
+      "days_in_belgium": 67,
+      "family_status": "with_family",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0183",
+      "age": 8,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Berber",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "trauma",
+        "trafficking"
+      ],
+      "days_in_belgium": 459,
+      "family_status": "with_relatives",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0184",
+      "age": 8,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "malnutrition",
+        "trafficking"
+      ],
+      "days_in_belgium": 949,
+      "family_status": "with_single_parent",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0185",
+      "age": 15,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Arabic"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 318,
+      "family_status": "with_relatives",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0186",
+      "age": 9,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Turkish",
+        "Arabic",
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 975,
+      "family_status": "with_single_parent",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0187",
+      "age": 5,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Pashto",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "health_issues"
+      ],
+      "days_in_belgium": 941,
+      "family_status": "with_single_parent",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0188",
+      "age": 13,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Arabic"
+      ],
+      "vulnerability_flags": [
+        "trafficking",
+        "trauma"
+      ],
+      "days_in_belgium": 495,
+      "family_status": "separated",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0189",
+      "age": 3,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Berber",
+        "Aramaic",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "health_issues",
+        "malnutrition"
+      ],
+      "days_in_belgium": 1004,
+      "family_status": "with_relatives",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0190",
+      "age": 10,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Arabic",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "trafficking",
+        "disability"
+      ],
+      "days_in_belgium": 1009,
+      "family_status": "unaccompanied_minor",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0191",
+      "age": 3,
+      "origin_country": "Jordan",
+      "languages_spoken": [
+        "Turkish",
+        "Kurdish",
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "trauma"
+      ],
+      "days_in_belgium": 95,
+      "family_status": "with_single_parent",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0192",
+      "age": 8,
+      "origin_country": "Algeria",
+      "languages_spoken": [
+        "Arabic",
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "mental_health",
+        "malnutrition"
+      ],
+      "days_in_belgium": 168,
+      "family_status": "unaccompanied_minor",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0193",
+      "age": 6,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Kurdish",
+        "Farsi",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "mental_health",
+        "disability"
+      ],
+      "days_in_belgium": 685,
+      "family_status": "with_single_parent",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0194",
+      "age": 4,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Arabic",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "trauma",
+        "malnutrition"
+      ],
+      "days_in_belgium": 552,
+      "family_status": "with_relatives",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0195",
+      "age": 3,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Berber",
+        "Arabic",
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "trauma",
+        "health_issues"
+      ],
+      "days_in_belgium": 1094,
+      "family_status": "separated",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0196",
+      "age": 4,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Arabic"
+      ],
+      "vulnerability_flags": [
+        "trafficking",
+        "mental_health"
+      ],
+      "days_in_belgium": 1015,
+      "family_status": "unaccompanied_minor",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0197",
+      "age": 15,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Dari",
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 963,
+      "family_status": "with_relatives",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0198",
+      "age": 3,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Dari",
+        "Arabic",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 849,
+      "family_status": "separated",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0199",
+      "age": 8,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "mental_health",
+        "disability"
+      ],
+      "days_in_belgium": 700,
+      "family_status": "with_family",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0200",
+      "age": 6,
+      "origin_country": "Jordan",
+      "languages_spoken": [
+        "Turkish",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "malnutrition",
+        "health_issues"
+      ],
+      "days_in_belgium": 557,
+      "family_status": "unaccompanied_minor",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0201",
+      "age": 6,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Pashto",
+        "Arabic",
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "health_issues"
+      ],
+      "days_in_belgium": 742,
+      "family_status": "unaccompanied_minor",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0202",
+      "age": 14,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "trauma"
+      ],
+      "days_in_belgium": 731,
+      "family_status": "separated",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0203",
+      "age": 11,
+      "origin_country": "Jordan",
+      "languages_spoken": [
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 633,
+      "family_status": "unaccompanied_minor",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0204",
+      "age": 5,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Arabic"
+      ],
+      "vulnerability_flags": [
+        "trafficking",
+        "malnutrition"
+      ],
+      "days_in_belgium": 862,
+      "family_status": "with_family",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0205",
+      "age": 8,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Pashto",
+        "Berber",
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 676,
+      "family_status": "with_single_parent",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0206",
+      "age": 16,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Arabic"
+      ],
+      "vulnerability_flags": [
+        "disability",
+        "health_issues"
+      ],
+      "days_in_belgium": 43,
+      "family_status": "with_single_parent",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0207",
+      "age": 15,
+      "origin_country": "Jordan",
+      "languages_spoken": [
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "trauma"
+      ],
+      "days_in_belgium": 642,
+      "family_status": "with_single_parent",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0208",
+      "age": 13,
+      "origin_country": "Palestine",
+      "languages_spoken": [
+        "Berber",
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "malnutrition"
+      ],
+      "days_in_belgium": 995,
+      "family_status": "with_single_parent",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0209",
+      "age": 7,
+      "origin_country": "Jordan",
+      "languages_spoken": [
+        "Dari"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 605,
+      "family_status": "separated",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0210",
+      "age": 8,
+      "origin_country": "Jordan",
+      "languages_spoken": [
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "trauma",
+        "mental_health"
+      ],
+      "days_in_belgium": 1095,
+      "family_status": "with_relatives",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0211",
+      "age": 9,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Dari",
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 355,
+      "family_status": "with_relatives",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0212",
+      "age": 7,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "disability",
+        "health_issues"
+      ],
+      "days_in_belgium": 215,
+      "family_status": "with_family",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0213",
+      "age": 18,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Dari",
+        "Kurdish",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 1077,
+      "family_status": "separated",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0214",
+      "age": 11,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Pashto",
+        "Kurdish",
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 374,
+      "family_status": "unaccompanied_minor",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0215",
+      "age": 8,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "trafficking"
+      ],
+      "days_in_belgium": 1035,
+      "family_status": "with_single_parent",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0216",
+      "age": 4,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Turkish",
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 758,
+      "family_status": "with_relatives",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0217",
+      "age": 14,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Pashto",
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "health_issues"
+      ],
+      "days_in_belgium": 53,
+      "family_status": "with_family",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0218",
+      "age": 8,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Aramaic",
+        "Berber",
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "mental_health"
+      ],
+      "days_in_belgium": 428,
+      "family_status": "unaccompanied_minor",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0219",
+      "age": 5,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 862,
+      "family_status": "with_single_parent",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0220",
+      "age": 4,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Berber",
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 1076,
+      "family_status": "unaccompanied_minor",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0221",
+      "age": 4,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Kurdish"
+      ],
+      "vulnerability_flags": [
+        "trauma"
+      ],
+      "days_in_belgium": 1003,
+      "family_status": "with_single_parent",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0222",
+      "age": 18,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 1023,
+      "family_status": "with_relatives",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0223",
+      "age": 18,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Arabic"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 1007,
+      "family_status": "with_relatives",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0224",
+      "age": 14,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Dari",
+        "Arabic",
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "trauma",
+        "trafficking"
+      ],
+      "days_in_belgium": 1070,
+      "family_status": "with_family",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0225",
+      "age": 3,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Kurdish"
+      ],
+      "vulnerability_flags": [
+        "health_issues",
+        "trauma"
+      ],
+      "days_in_belgium": 925,
+      "family_status": "with_relatives",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0226",
+      "age": 9,
+      "origin_country": "Palestine",
+      "languages_spoken": [
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 129,
+      "family_status": "separated",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0227",
+      "age": 7,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Dari",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 815,
+      "family_status": "with_single_parent",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0228",
+      "age": 13,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "trauma",
+        "disability"
+      ],
+      "days_in_belgium": 696,
+      "family_status": "with_relatives",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0229",
+      "age": 10,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Pashto",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "malnutrition"
+      ],
+      "days_in_belgium": 335,
+      "family_status": "with_family",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0230",
+      "age": 4,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Arabic",
+        "Berber",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "malnutrition",
+        "disability"
+      ],
+      "days_in_belgium": 178,
+      "family_status": "separated",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0231",
+      "age": 10,
+      "origin_country": "Algeria",
+      "languages_spoken": [
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "malnutrition"
+      ],
+      "days_in_belgium": 469,
+      "family_status": "with_family",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0232",
+      "age": 12,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Arabic",
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "disability",
+        "malnutrition"
+      ],
+      "days_in_belgium": 256,
+      "family_status": "with_family",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0233",
+      "age": 5,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Aramaic",
+        "Kurdish",
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "health_issues",
+        "mental_health"
+      ],
+      "days_in_belgium": 744,
+      "family_status": "with_relatives",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0234",
+      "age": 10,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Arabic"
+      ],
+      "vulnerability_flags": [
+        "trafficking"
+      ],
+      "days_in_belgium": 140,
+      "family_status": "with_relatives",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0235",
+      "age": 4,
+      "origin_country": "Palestine",
+      "languages_spoken": [
+        "Kurdish"
+      ],
+      "vulnerability_flags": [
+        "trauma"
+      ],
+      "days_in_belgium": 147,
+      "family_status": "with_single_parent",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0236",
+      "age": 14,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Dari",
+        "Arabic",
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "trafficking"
+      ],
+      "days_in_belgium": 881,
+      "family_status": "unaccompanied_minor",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0237",
+      "age": 4,
+      "origin_country": "Jordan",
+      "languages_spoken": [
+        "Turkish",
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 906,
+      "family_status": "with_single_parent",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0238",
+      "age": 6,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "disability",
+        "mental_health"
+      ],
+      "days_in_belgium": 818,
+      "family_status": "separated",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0239",
+      "age": 10,
+      "origin_country": "Palestine",
+      "languages_spoken": [
+        "Dari",
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "trafficking"
+      ],
+      "days_in_belgium": 342,
+      "family_status": "unaccompanied_minor",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0240",
+      "age": 15,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Pashto",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "health_issues"
+      ],
+      "days_in_belgium": 876,
+      "family_status": "unaccompanied_minor",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0241",
+      "age": 15,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Kurdish",
+        "Pashto",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "malnutrition",
+        "health_issues"
+      ],
+      "days_in_belgium": 298,
+      "family_status": "separated",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0242",
+      "age": 12,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Dari"
+      ],
+      "vulnerability_flags": [
+        "malnutrition"
+      ],
+      "days_in_belgium": 533,
+      "family_status": "with_single_parent",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0243",
+      "age": 7,
+      "origin_country": "Algeria",
+      "languages_spoken": [
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "mental_health",
+        "malnutrition"
+      ],
+      "days_in_belgium": 338,
+      "family_status": "with_family",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0244",
+      "age": 9,
+      "origin_country": "Palestine",
+      "languages_spoken": [
+        "Pashto",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "disability"
+      ],
+      "days_in_belgium": 1046,
+      "family_status": "with_family",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0245",
+      "age": 12,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Turkish",
+        "Kurdish",
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "disability"
+      ],
+      "days_in_belgium": 683,
+      "family_status": "with_family",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0246",
+      "age": 5,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 48,
+      "family_status": "separated",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0247",
+      "age": 5,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Aramaic",
+        "Dari",
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 336,
+      "family_status": "unaccompanied_minor",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0248",
+      "age": 11,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "malnutrition",
+        "trafficking"
+      ],
+      "days_in_belgium": 189,
+      "family_status": "unaccompanied_minor",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0249",
+      "age": 15,
+      "origin_country": "Palestine",
+      "languages_spoken": [
+        "Dari",
+        "Hebrew",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "disability",
+        "mental_health"
+      ],
+      "days_in_belgium": 722,
+      "family_status": "with_family",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0250",
+      "age": 3,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 383,
+      "family_status": "unaccompanied_minor",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0251",
+      "age": 10,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Berber",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "trauma",
+        "malnutrition"
+      ],
+      "days_in_belgium": 667,
+      "family_status": "separated",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0252",
+      "age": 5,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Turkish"
+      ],
+      "vulnerability_flags": [
+        "malnutrition"
+      ],
+      "days_in_belgium": 292,
+      "family_status": "with_family",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0253",
+      "age": 9,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Dari",
+        "Arabic",
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 515,
+      "family_status": "with_single_parent",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0254",
+      "age": 8,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Turkish"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 676,
+      "family_status": "with_family",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0255",
+      "age": 7,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Turkish",
+        "Aramaic",
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "malnutrition"
+      ],
+      "days_in_belgium": 423,
+      "family_status": "with_relatives",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0256",
+      "age": 14,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Arabic",
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "malnutrition"
+      ],
+      "days_in_belgium": 790,
+      "family_status": "separated",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0257",
+      "age": 18,
+      "origin_country": "Palestine",
+      "languages_spoken": [
+        "Pashto",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "health_issues"
+      ],
+      "days_in_belgium": 545,
+      "family_status": "unaccompanied_minor",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0258",
+      "age": 7,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Dari",
+        "Aramaic",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "health_issues"
+      ],
+      "days_in_belgium": 711,
+      "family_status": "with_relatives",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0259",
+      "age": 18,
+      "origin_country": "Palestine",
+      "languages_spoken": [
+        "Berber",
+        "Aramaic",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "trafficking"
+      ],
+      "days_in_belgium": 372,
+      "family_status": "separated",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0260",
+      "age": 3,
+      "origin_country": "Palestine",
+      "languages_spoken": [
+        "Aramaic",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "trafficking",
+        "disability"
+      ],
+      "days_in_belgium": 281,
+      "family_status": "with_single_parent",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0261",
+      "age": 18,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Pashto",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "health_issues"
+      ],
+      "days_in_belgium": 233,
+      "family_status": "with_single_parent",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0262",
+      "age": 5,
+      "origin_country": "Algeria",
+      "languages_spoken": [
+        "Arabic"
+      ],
+      "vulnerability_flags": [
+        "disability"
+      ],
+      "days_in_belgium": 465,
+      "family_status": "unaccompanied_minor",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0263",
+      "age": 8,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "health_issues"
+      ],
+      "days_in_belgium": 854,
+      "family_status": "unaccompanied_minor",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0264",
+      "age": 10,
+      "origin_country": "Palestine",
+      "languages_spoken": [
+        "Arabic",
+        "Aramaic",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "health_issues",
+        "malnutrition"
+      ],
+      "days_in_belgium": 562,
+      "family_status": "with_single_parent",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0265",
+      "age": 10,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Arabic"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 41,
+      "family_status": "separated",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0266",
+      "age": 11,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Turkish",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "mental_health",
+        "disability"
+      ],
+      "days_in_belgium": 722,
+      "family_status": "with_family",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0267",
+      "age": 11,
+      "origin_country": "Algeria",
+      "languages_spoken": [
+        "Arabic",
+        "Berber",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 237,
+      "family_status": "separated",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0268",
+      "age": 5,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "malnutrition"
+      ],
+      "days_in_belgium": 164,
+      "family_status": "with_relatives",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0269",
+      "age": 12,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Arabic"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 972,
+      "family_status": "with_single_parent",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0270",
+      "age": 4,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Berber",
+        "Aramaic",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "disability",
+        "trafficking"
+      ],
+      "days_in_belgium": 224,
+      "family_status": "with_family",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0271",
+      "age": 17,
+      "origin_country": "Jordan",
+      "languages_spoken": [
+        "Dari",
+        "Arabic",
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "trafficking"
+      ],
+      "days_in_belgium": 1061,
+      "family_status": "separated",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0272",
+      "age": 12,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Aramaic",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "disability",
+        "mental_health"
+      ],
+      "days_in_belgium": 374,
+      "family_status": "unaccompanied_minor",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0273",
+      "age": 13,
+      "origin_country": "Palestine",
+      "languages_spoken": [
+        "Turkish",
+        "Kurdish",
+        "Arabic"
+      ],
+      "vulnerability_flags": [
+        "trauma"
+      ],
+      "days_in_belgium": 721,
+      "family_status": "with_family",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0274",
+      "age": 10,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Arabic",
+        "Aramaic",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "health_issues"
+      ],
+      "days_in_belgium": 787,
+      "family_status": "with_relatives",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0275",
+      "age": 7,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Pashto",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "health_issues",
+        "trafficking"
+      ],
+      "days_in_belgium": 34,
+      "family_status": "with_single_parent",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0276",
+      "age": 15,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Pashto",
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 931,
+      "family_status": "unaccompanied_minor",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0277",
+      "age": 12,
+      "origin_country": "Jordan",
+      "languages_spoken": [
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "trafficking"
+      ],
+      "days_in_belgium": 710,
+      "family_status": "with_family",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0278",
+      "age": 14,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Kurdish",
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 1087,
+      "family_status": "with_relatives",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0279",
+      "age": 16,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Pashto",
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "trauma",
+        "health_issues"
+      ],
+      "days_in_belgium": 69,
+      "family_status": "with_family",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0280",
+      "age": 16,
+      "origin_country": "Palestine",
+      "languages_spoken": [
+        "Berber",
+        "Arabic",
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 501,
+      "family_status": "with_relatives",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0281",
+      "age": 16,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "malnutrition",
+        "mental_health"
+      ],
+      "days_in_belgium": 72,
+      "family_status": "separated",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0282",
+      "age": 6,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Hebrew",
+        "Arabic",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "disability",
+        "trauma"
+      ],
+      "days_in_belgium": 264,
+      "family_status": "with_family",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0283",
+      "age": 13,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Kurdish",
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 644,
+      "family_status": "with_relatives",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0284",
+      "age": 10,
+      "origin_country": "Palestine",
+      "languages_spoken": [
+        "Dari",
+        "Berber",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "trauma",
+        "disability"
+      ],
+      "days_in_belgium": 253,
+      "family_status": "unaccompanied_minor",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0285",
+      "age": 15,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Dari",
+        "Arabic"
+      ],
+      "vulnerability_flags": [
+        "trafficking"
+      ],
+      "days_in_belgium": 217,
+      "family_status": "with_family",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0286",
+      "age": 13,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Dari",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "health_issues"
+      ],
+      "days_in_belgium": 769,
+      "family_status": "unaccompanied_minor",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0287",
+      "age": 7,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "malnutrition"
+      ],
+      "days_in_belgium": 774,
+      "family_status": "with_relatives",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0288",
+      "age": 5,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Arabic"
+      ],
+      "vulnerability_flags": [
+        "disability",
+        "health_issues"
+      ],
+      "days_in_belgium": 1008,
+      "family_status": "with_relatives",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0289",
+      "age": 18,
+      "origin_country": "Algeria",
+      "languages_spoken": [
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "malnutrition"
+      ],
+      "days_in_belgium": 1008,
+      "family_status": "with_relatives",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0290",
+      "age": 14,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Kurdish",
+        "Arabic",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 116,
+      "family_status": "separated",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0291",
+      "age": 9,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Arabic"
+      ],
+      "vulnerability_flags": [
+        "malnutrition",
+        "trauma"
+      ],
+      "days_in_belgium": 254,
+      "family_status": "with_single_parent",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0292",
+      "age": 3,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Arabic",
+        "Pashto",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 71,
+      "family_status": "with_family",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0293",
+      "age": 8,
+      "origin_country": "Palestine",
+      "languages_spoken": [
+        "Dari",
+        "Kurdish"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 145,
+      "family_status": "unaccompanied_minor",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0294",
+      "age": 9,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Dari"
+      ],
+      "vulnerability_flags": [
+        "mental_health",
+        "trauma"
+      ],
+      "days_in_belgium": 777,
+      "family_status": "with_family",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0295",
+      "age": 12,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Kurdish",
+        "Arabic"
+      ],
+      "vulnerability_flags": [
+        "malnutrition",
+        "trafficking"
+      ],
+      "days_in_belgium": 844,
+      "family_status": "with_relatives",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0296",
+      "age": 13,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Arabic",
+        "Farsi",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "malnutrition",
+        "disability"
+      ],
+      "days_in_belgium": 31,
+      "family_status": "with_relatives",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0297",
+      "age": 6,
+      "origin_country": "Jordan",
+      "languages_spoken": [
+        "Turkish",
+        "Kurdish"
+      ],
+      "vulnerability_flags": [
+        "disability",
+        "mental_health"
+      ],
+      "days_in_belgium": 645,
+      "family_status": "unaccompanied_minor",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0298",
+      "age": 16,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Pashto",
+        "Aramaic",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "mental_health",
+        "trauma"
+      ],
+      "days_in_belgium": 51,
+      "family_status": "with_relatives",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0299",
+      "age": 14,
+      "origin_country": "Palestine",
+      "languages_spoken": [
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "disability",
+        "health_issues"
+      ],
+      "days_in_belgium": 400,
+      "family_status": "with_single_parent",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0300",
+      "age": 5,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 439,
+      "family_status": "with_relatives",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0301",
+      "age": 4,
+      "origin_country": "Algeria",
+      "languages_spoken": [
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "mental_health"
+      ],
+      "days_in_belgium": 604,
+      "family_status": "separated",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0302",
+      "age": 15,
+      "origin_country": "Algeria",
+      "languages_spoken": [
+        "Turkish",
+        "Arabic",
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 612,
+      "family_status": "unaccompanied_minor",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0303",
+      "age": 8,
+      "origin_country": "Algeria",
+      "languages_spoken": [
+        "Turkish",
+        "Kurdish",
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 90,
+      "family_status": "unaccompanied_minor",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0304",
+      "age": 18,
+      "origin_country": "Algeria",
+      "languages_spoken": [
+        "Dari",
+        "Pashto",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 860,
+      "family_status": "with_family",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0305",
+      "age": 9,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Turkish"
+      ],
+      "vulnerability_flags": [
+        "trafficking"
+      ],
+      "days_in_belgium": 721,
+      "family_status": "with_family",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0306",
+      "age": 11,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Kurdish",
+        "Berber",
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 1009,
+      "family_status": "separated",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0307",
+      "age": 16,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Turkish",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 613,
+      "family_status": "unaccompanied_minor",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0308",
+      "age": 17,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Turkish",
+        "Dari"
+      ],
+      "vulnerability_flags": [
+        "disability",
+        "trauma"
+      ],
+      "days_in_belgium": 53,
+      "family_status": "with_relatives",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0309",
+      "age": 4,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Turkish",
+        "Kurdish",
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "disability"
+      ],
+      "days_in_belgium": 962,
+      "family_status": "with_single_parent",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0310",
+      "age": 14,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Turkish",
+        "Kurdish",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "trafficking"
+      ],
+      "days_in_belgium": 445,
+      "family_status": "unaccompanied_minor",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0311",
+      "age": 11,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Kurdish",
+        "Aramaic",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 956,
+      "family_status": "with_family",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0312",
+      "age": 7,
+      "origin_country": "Jordan",
+      "languages_spoken": [
+        "Kurdish",
+        "Arabic",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "malnutrition"
+      ],
+      "days_in_belgium": 147,
+      "family_status": "with_relatives",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0313",
+      "age": 15,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Kurdish",
+        "Arabic",
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 739,
+      "family_status": "with_relatives",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0314",
+      "age": 12,
+      "origin_country": "Algeria",
+      "languages_spoken": [
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "health_issues"
+      ],
+      "days_in_belgium": 1054,
+      "family_status": "with_relatives",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0315",
+      "age": 7,
+      "origin_country": "Jordan",
+      "languages_spoken": [
+        "Dari"
+      ],
+      "vulnerability_flags": [
+        "health_issues",
+        "disability"
+      ],
+      "days_in_belgium": 559,
+      "family_status": "separated",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0316",
+      "age": 14,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Dari"
+      ],
+      "vulnerability_flags": [
+        "disability"
+      ],
+      "days_in_belgium": 1053,
+      "family_status": "separated",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0317",
+      "age": 18,
+      "origin_country": "Algeria",
+      "languages_spoken": [
+        "Kurdish",
+        "Pashto",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "trafficking",
+        "malnutrition"
+      ],
+      "days_in_belgium": 607,
+      "family_status": "with_relatives",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0318",
+      "age": 5,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "malnutrition",
+        "mental_health"
+      ],
+      "days_in_belgium": 130,
+      "family_status": "separated",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0319",
+      "age": 10,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Turkish",
+        "Pashto",
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 876,
+      "family_status": "separated",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0320",
+      "age": 15,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 215,
+      "family_status": "unaccompanied_minor",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0321",
+      "age": 15,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Dari",
+        "Kurdish",
+        "Arabic"
+      ],
+      "vulnerability_flags": [
+        "trauma",
+        "malnutrition"
+      ],
+      "days_in_belgium": 465,
+      "family_status": "with_relatives",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0322",
+      "age": 3,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 512,
+      "family_status": "with_family",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0323",
+      "age": 6,
+      "origin_country": "Algeria",
+      "languages_spoken": [
+        "Turkish"
+      ],
+      "vulnerability_flags": [
+        "disability"
+      ],
+      "days_in_belgium": 179,
+      "family_status": "with_family",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0324",
+      "age": 7,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "mental_health"
+      ],
+      "days_in_belgium": 353,
+      "family_status": "with_family",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0325",
+      "age": 4,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Arabic",
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "disability"
+      ],
+      "days_in_belgium": 340,
+      "family_status": "with_relatives",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0326",
+      "age": 6,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Berber",
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 959,
+      "family_status": "unaccompanied_minor",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0327",
+      "age": 11,
+      "origin_country": "Algeria",
+      "languages_spoken": [
+        "Berber",
+        "Aramaic",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "mental_health"
+      ],
+      "days_in_belgium": 31,
+      "family_status": "with_single_parent",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0328",
+      "age": 10,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Arabic"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 938,
+      "family_status": "separated",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0329",
+      "age": 12,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Turkish",
+        "Arabic",
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "mental_health"
+      ],
+      "days_in_belgium": 576,
+      "family_status": "with_single_parent",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0330",
+      "age": 16,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "malnutrition"
+      ],
+      "days_in_belgium": 308,
+      "family_status": "with_relatives",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0331",
+      "age": 4,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "trauma",
+        "disability"
+      ],
+      "days_in_belgium": 799,
+      "family_status": "with_single_parent",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0332",
+      "age": 4,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Turkish",
+        "Dari"
+      ],
+      "vulnerability_flags": [
+        "disability"
+      ],
+      "days_in_belgium": 953,
+      "family_status": "with_family",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0333",
+      "age": 3,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Aramaic",
+        "Pashto",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "trauma"
+      ],
+      "days_in_belgium": 363,
+      "family_status": "separated",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0334",
+      "age": 11,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Aramaic",
+        "Berber",
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "trafficking"
+      ],
+      "days_in_belgium": 32,
+      "family_status": "with_relatives",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0335",
+      "age": 16,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Arabic",
+        "Aramaic",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 750,
+      "family_status": "unaccompanied_minor",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0336",
+      "age": 4,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Arabic"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 954,
+      "family_status": "with_relatives",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0337",
+      "age": 3,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Dari",
+        "Pashto",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "malnutrition"
+      ],
+      "days_in_belgium": 40,
+      "family_status": "with_relatives",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0338",
+      "age": 6,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "trafficking"
+      ],
+      "days_in_belgium": 773,
+      "family_status": "separated",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0339",
+      "age": 5,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "disability"
+      ],
+      "days_in_belgium": 800,
+      "family_status": "with_relatives",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0340",
+      "age": 12,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Turkish",
+        "Arabic",
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "malnutrition"
+      ],
+      "days_in_belgium": 738,
+      "family_status": "unaccompanied_minor",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0341",
+      "age": 18,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Dari"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 124,
+      "family_status": "with_family",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0342",
+      "age": 11,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "malnutrition"
+      ],
+      "days_in_belgium": 738,
+      "family_status": "unaccompanied_minor",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0343",
+      "age": 16,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "health_issues",
+        "trauma"
+      ],
+      "days_in_belgium": 1076,
+      "family_status": "unaccompanied_minor",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0344",
+      "age": 12,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "disability"
+      ],
+      "days_in_belgium": 134,
+      "family_status": "with_single_parent",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0345",
+      "age": 15,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Dari",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 1039,
+      "family_status": "with_single_parent",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0346",
+      "age": 8,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Turkish",
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 791,
+      "family_status": "with_single_parent",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0347",
+      "age": 4,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Turkish",
+        "Aramaic",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 367,
+      "family_status": "with_relatives",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0348",
+      "age": 10,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Arabic"
+      ],
+      "vulnerability_flags": [
+        "malnutrition"
+      ],
+      "days_in_belgium": 917,
+      "family_status": "separated",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0349",
+      "age": 6,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Arabic",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "trafficking"
+      ],
+      "days_in_belgium": 448,
+      "family_status": "separated",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0350",
+      "age": 3,
+      "origin_country": "Jordan",
+      "languages_spoken": [
+        "Kurdish",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "health_issues",
+        "disability"
+      ],
+      "days_in_belgium": 265,
+      "family_status": "unaccompanied_minor",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0351",
+      "age": 16,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Dari"
+      ],
+      "vulnerability_flags": [
+        "trauma"
+      ],
+      "days_in_belgium": 624,
+      "family_status": "separated",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0352",
+      "age": 12,
+      "origin_country": "Algeria",
+      "languages_spoken": [
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "health_issues"
+      ],
+      "days_in_belgium": 906,
+      "family_status": "with_single_parent",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0353",
+      "age": 8,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 96,
+      "family_status": "with_family",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0354",
+      "age": 18,
+      "origin_country": "Algeria",
+      "languages_spoken": [
+        "Arabic",
+        "Pashto",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "trafficking",
+        "malnutrition"
+      ],
+      "days_in_belgium": 733,
+      "family_status": "with_family",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0355",
+      "age": 18,
+      "origin_country": "Algeria",
+      "languages_spoken": [
+        "Turkish",
+        "Kurdish",
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 1057,
+      "family_status": "separated",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0356",
+      "age": 11,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "trauma"
+      ],
+      "days_in_belgium": 764,
+      "family_status": "separated",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0357",
+      "age": 9,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Kurdish",
+        "Arabic",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 275,
+      "family_status": "with_single_parent",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0358",
+      "age": 9,
+      "origin_country": "Algeria",
+      "languages_spoken": [
+        "Aramaic",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 138,
+      "family_status": "with_family",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0359",
+      "age": 17,
+      "origin_country": "Algeria",
+      "languages_spoken": [
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 195,
+      "family_status": "unaccompanied_minor",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0360",
+      "age": 5,
+      "origin_country": "Algeria",
+      "languages_spoken": [
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "health_issues",
+        "malnutrition"
+      ],
+      "days_in_belgium": 721,
+      "family_status": "with_relatives",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0361",
+      "age": 13,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Kurdish"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 78,
+      "family_status": "separated",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0362",
+      "age": 10,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Arabic",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 979,
+      "family_status": "with_family",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0363",
+      "age": 14,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Arabic",
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "health_issues"
+      ],
+      "days_in_belgium": 1011,
+      "family_status": "with_family",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0364",
+      "age": 5,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Dari",
+        "Aramaic",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "trauma"
+      ],
+      "days_in_belgium": 42,
+      "family_status": "with_relatives",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0365",
+      "age": 13,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Turkish",
+        "Arabic"
+      ],
+      "vulnerability_flags": [
+        "mental_health",
+        "disability"
+      ],
+      "days_in_belgium": 302,
+      "family_status": "with_relatives",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0366",
+      "age": 10,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Dari",
+        "Arabic",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "trauma"
+      ],
+      "days_in_belgium": 263,
+      "family_status": "separated",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0367",
+      "age": 7,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Kurdish"
+      ],
+      "vulnerability_flags": [
+        "health_issues"
+      ],
+      "days_in_belgium": 1085,
+      "family_status": "unaccompanied_minor",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0368",
+      "age": 11,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Hebrew",
+        "Berber",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 296,
+      "family_status": "unaccompanied_minor",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0369",
+      "age": 7,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Dari",
+        "Kurdish"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 754,
+      "family_status": "unaccompanied_minor",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0370",
+      "age": 15,
+      "origin_country": "Algeria",
+      "languages_spoken": [
+        "Aramaic",
+        "Farsi",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 564,
+      "family_status": "with_family",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0371",
+      "age": 14,
+      "origin_country": "Algeria",
+      "languages_spoken": [
+        "Arabic",
+        "Pashto",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "malnutrition"
+      ],
+      "days_in_belgium": 425,
+      "family_status": "with_family",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0372",
+      "age": 11,
+      "origin_country": "Palestine",
+      "languages_spoken": [
+        "Turkish",
+        "Berber",
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "trafficking",
+        "malnutrition"
+      ],
+      "days_in_belgium": 640,
+      "family_status": "with_relatives",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0373",
+      "age": 18,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "mental_health",
+        "health_issues"
+      ],
+      "days_in_belgium": 489,
+      "family_status": "with_single_parent",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0374",
+      "age": 17,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "disability",
+        "trauma"
+      ],
+      "days_in_belgium": 601,
+      "family_status": "with_family",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0375",
+      "age": 8,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "health_issues"
+      ],
+      "days_in_belgium": 491,
+      "family_status": "with_relatives",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0376",
+      "age": 17,
+      "origin_country": "Algeria",
+      "languages_spoken": [
+        "Dari",
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "trafficking"
+      ],
+      "days_in_belgium": 31,
+      "family_status": "with_relatives",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0377",
+      "age": 6,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Arabic"
+      ],
+      "vulnerability_flags": [
+        "trafficking"
+      ],
+      "days_in_belgium": 466,
+      "family_status": "with_single_parent",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0378",
+      "age": 9,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Turkish",
+        "Pashto",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "trauma"
+      ],
+      "days_in_belgium": 757,
+      "family_status": "with_family",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0379",
+      "age": 18,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Turkish",
+        "Arabic"
+      ],
+      "vulnerability_flags": [
+        "mental_health",
+        "trafficking"
+      ],
+      "days_in_belgium": 838,
+      "family_status": "with_relatives",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0380",
+      "age": 17,
+      "origin_country": "Jordan",
+      "languages_spoken": [
+        "Kurdish",
+        "Aramaic",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "disability",
+        "trafficking"
+      ],
+      "days_in_belgium": 86,
+      "family_status": "separated",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0381",
+      "age": 18,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Kurdish"
+      ],
+      "vulnerability_flags": [
+        "disability",
+        "trauma"
+      ],
+      "days_in_belgium": 233,
+      "family_status": "unaccompanied_minor",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0382",
+      "age": 12,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "trafficking",
+        "trauma"
+      ],
+      "days_in_belgium": 352,
+      "family_status": "with_single_parent",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0383",
+      "age": 13,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Aramaic",
+        "Berber",
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "trauma",
+        "disability"
+      ],
+      "days_in_belgium": 882,
+      "family_status": "separated",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0384",
+      "age": 16,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Dari",
+        "Pashto",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "trafficking",
+        "disability"
+      ],
+      "days_in_belgium": 353,
+      "family_status": "with_single_parent",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0385",
+      "age": 12,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 373,
+      "family_status": "with_family",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0386",
+      "age": 9,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 472,
+      "family_status": "with_single_parent",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0387",
+      "age": 10,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Arabic",
+        "Berber",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "trauma",
+        "mental_health"
+      ],
+      "days_in_belgium": 1085,
+      "family_status": "separated",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0388",
+      "age": 10,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Dari",
+        "Kurdish"
+      ],
+      "vulnerability_flags": [
+        "trafficking",
+        "health_issues"
+      ],
+      "days_in_belgium": 791,
+      "family_status": "separated",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0389",
+      "age": 6,
+      "origin_country": "Algeria",
+      "languages_spoken": [
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 619,
+      "family_status": "unaccompanied_minor",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0390",
+      "age": 18,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Pashto",
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "mental_health",
+        "trauma"
+      ],
+      "days_in_belgium": 397,
+      "family_status": "separated",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0391",
+      "age": 8,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Berber",
+        "Farsi",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 107,
+      "family_status": "separated",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0392",
+      "age": 18,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Pashto",
+        "Kurdish",
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "trafficking"
+      ],
+      "days_in_belgium": 303,
+      "family_status": "unaccompanied_minor",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0393",
+      "age": 16,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Turkish"
+      ],
+      "vulnerability_flags": [
+        "health_issues"
+      ],
+      "days_in_belgium": 220,
+      "family_status": "separated",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0394",
+      "age": 6,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 1079,
+      "family_status": "with_single_parent",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0395",
+      "age": 7,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Aramaic",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "mental_health"
+      ],
+      "days_in_belgium": 1060,
+      "family_status": "unaccompanied_minor",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0396",
+      "age": 9,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Turkish"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 964,
+      "family_status": "unaccompanied_minor",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0397",
+      "age": 16,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Turkish",
+        "Dari"
+      ],
+      "vulnerability_flags": [
+        "trauma"
+      ],
+      "days_in_belgium": 428,
+      "family_status": "with_relatives",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0398",
+      "age": 6,
+      "origin_country": "Jordan",
+      "languages_spoken": [
+        "Berber",
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "malnutrition"
+      ],
+      "days_in_belgium": 346,
+      "family_status": "separated",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0399",
+      "age": 18,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Dari",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "trafficking",
+        "health_issues"
+      ],
+      "days_in_belgium": 540,
+      "family_status": "unaccompanied_minor",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0400",
+      "age": 17,
+      "origin_country": "Algeria",
+      "languages_spoken": [
+        "Turkish"
+      ],
+      "vulnerability_flags": [
+        "malnutrition"
+      ],
+      "days_in_belgium": 559,
+      "family_status": "with_family",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0401",
+      "age": 13,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Dari"
+      ],
+      "vulnerability_flags": [
+        "health_issues"
+      ],
+      "days_in_belgium": 180,
+      "family_status": "with_single_parent",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0402",
+      "age": 15,
+      "origin_country": "Jordan",
+      "languages_spoken": [
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 884,
+      "family_status": "separated",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0403",
+      "age": 5,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Kurdish",
+        "Berber",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "mental_health",
+        "trauma"
+      ],
+      "days_in_belgium": 903,
+      "family_status": "unaccompanied_minor",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0404",
+      "age": 10,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "trafficking"
+      ],
+      "days_in_belgium": 758,
+      "family_status": "with_relatives",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0405",
+      "age": 8,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "mental_health",
+        "malnutrition"
+      ],
+      "days_in_belgium": 937,
+      "family_status": "with_single_parent",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0406",
+      "age": 12,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Kurdish",
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "trauma"
+      ],
+      "days_in_belgium": 1056,
+      "family_status": "with_relatives",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0407",
+      "age": 18,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Dari",
+        "Kurdish",
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 148,
+      "family_status": "separated",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0408",
+      "age": 5,
+      "origin_country": "Jordan",
+      "languages_spoken": [
+        "Arabic",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 276,
+      "family_status": "separated",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0409",
+      "age": 6,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Dari"
+      ],
+      "vulnerability_flags": [
+        "malnutrition",
+        "trauma"
+      ],
+      "days_in_belgium": 444,
+      "family_status": "with_family",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0410",
+      "age": 16,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Dari"
+      ],
+      "vulnerability_flags": [
+        "disability",
+        "trafficking"
+      ],
+      "days_in_belgium": 762,
+      "family_status": "separated",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0411",
+      "age": 11,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Arabic",
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "malnutrition",
+        "disability"
+      ],
+      "days_in_belgium": 1003,
+      "family_status": "with_relatives",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0412",
+      "age": 4,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Turkish"
+      ],
+      "vulnerability_flags": [
+        "trauma",
+        "trafficking"
+      ],
+      "days_in_belgium": 1018,
+      "family_status": "separated",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0413",
+      "age": 8,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 990,
+      "family_status": "with_relatives",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0414",
+      "age": 15,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Dari",
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 326,
+      "family_status": "with_single_parent",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0415",
+      "age": 4,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Hebrew",
+        "Aramaic",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "health_issues",
+        "mental_health"
+      ],
+      "days_in_belgium": 455,
+      "family_status": "with_single_parent",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0416",
+      "age": 9,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Dari"
+      ],
+      "vulnerability_flags": [
+        "health_issues",
+        "mental_health"
+      ],
+      "days_in_belgium": 1018,
+      "family_status": "separated",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0417",
+      "age": 5,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Kurdish"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 70,
+      "family_status": "unaccompanied_minor",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0418",
+      "age": 12,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "trafficking"
+      ],
+      "days_in_belgium": 783,
+      "family_status": "with_family",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0419",
+      "age": 13,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Turkish",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 1027,
+      "family_status": "unaccompanied_minor",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0420",
+      "age": 12,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "mental_health",
+        "malnutrition"
+      ],
+      "days_in_belgium": 764,
+      "family_status": "with_single_parent",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0421",
+      "age": 17,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Farsi",
+        "Berber",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "disability",
+        "health_issues"
+      ],
+      "days_in_belgium": 1038,
+      "family_status": "with_family",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0422",
+      "age": 6,
+      "origin_country": "Palestine",
+      "languages_spoken": [
+        "Turkish",
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "health_issues",
+        "disability"
+      ],
+      "days_in_belgium": 60,
+      "family_status": "unaccompanied_minor",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0423",
+      "age": 5,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Dari"
+      ],
+      "vulnerability_flags": [
+        "trafficking",
+        "malnutrition"
+      ],
+      "days_in_belgium": 735,
+      "family_status": "unaccompanied_minor",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0424",
+      "age": 5,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Dari",
+        "Berber",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "malnutrition"
+      ],
+      "days_in_belgium": 54,
+      "family_status": "with_family",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0425",
+      "age": 14,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Arabic"
+      ],
+      "vulnerability_flags": [
+        "health_issues",
+        "disability"
+      ],
+      "days_in_belgium": 215,
+      "family_status": "with_single_parent",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0426",
+      "age": 14,
+      "origin_country": "Jordan",
+      "languages_spoken": [
+        "Arabic"
+      ],
+      "vulnerability_flags": [
+        "malnutrition"
+      ],
+      "days_in_belgium": 242,
+      "family_status": "separated",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0427",
+      "age": 8,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Dari",
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "mental_health"
+      ],
+      "days_in_belgium": 596,
+      "family_status": "unaccompanied_minor",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0428",
+      "age": 5,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Turkish",
+        "Kurdish",
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "health_issues"
+      ],
+      "days_in_belgium": 775,
+      "family_status": "with_family",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0429",
+      "age": 5,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Turkish"
+      ],
+      "vulnerability_flags": [
+        "trafficking",
+        "trauma"
+      ],
+      "days_in_belgium": 504,
+      "family_status": "unaccompanied_minor",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0430",
+      "age": 10,
+      "origin_country": "Palestine",
+      "languages_spoken": [
+        "Arabic",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 582,
+      "family_status": "separated",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0431",
+      "age": 16,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Turkish",
+        "Kurdish",
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 646,
+      "family_status": "with_family",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0432",
+      "age": 9,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Kurdish"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 968,
+      "family_status": "with_relatives",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0433",
+      "age": 7,
+      "origin_country": "Palestine",
+      "languages_spoken": [
+        "Turkish",
+        "Kurdish",
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "health_issues",
+        "trafficking"
+      ],
+      "days_in_belgium": 179,
+      "family_status": "unaccompanied_minor",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0434",
+      "age": 4,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "trafficking"
+      ],
+      "days_in_belgium": 920,
+      "family_status": "with_relatives",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0435",
+      "age": 4,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "mental_health",
+        "trafficking"
+      ],
+      "days_in_belgium": 784,
+      "family_status": "with_single_parent",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0436",
+      "age": 6,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Turkish",
+        "Kurdish"
+      ],
+      "vulnerability_flags": [
+        "malnutrition",
+        "disability"
+      ],
+      "days_in_belgium": 377,
+      "family_status": "with_family",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0437",
+      "age": 14,
+      "origin_country": "Algeria",
+      "languages_spoken": [
+        "Pashto",
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "trafficking"
+      ],
+      "days_in_belgium": 85,
+      "family_status": "unaccompanied_minor",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0438",
+      "age": 3,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Berber",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "health_issues"
+      ],
+      "days_in_belgium": 542,
+      "family_status": "with_single_parent",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0439",
+      "age": 12,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Hebrew",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 602,
+      "family_status": "with_relatives",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0440",
+      "age": 3,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Kurdish",
+        "Arabic"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 527,
+      "family_status": "with_single_parent",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0441",
+      "age": 3,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Pashto",
+        "Aramaic",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "mental_health",
+        "disability"
+      ],
+      "days_in_belgium": 857,
+      "family_status": "with_family",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0442",
+      "age": 4,
+      "origin_country": "Jordan",
+      "languages_spoken": [
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "disability",
+        "trauma"
+      ],
+      "days_in_belgium": 240,
+      "family_status": "unaccompanied_minor",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0443",
+      "age": 12,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Arabic"
+      ],
+      "vulnerability_flags": [
+        "trauma"
+      ],
+      "days_in_belgium": 967,
+      "family_status": "unaccompanied_minor",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0444",
+      "age": 11,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Kurdish",
+        "Arabic",
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 746,
+      "family_status": "unaccompanied_minor",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0445",
+      "age": 3,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Dari",
+        "Kurdish",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "health_issues",
+        "malnutrition"
+      ],
+      "days_in_belgium": 994,
+      "family_status": "unaccompanied_minor",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0446",
+      "age": 16,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Aramaic",
+        "Dari",
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "malnutrition"
+      ],
+      "days_in_belgium": 784,
+      "family_status": "unaccompanied_minor",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0447",
+      "age": 18,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Arabic",
+        "Berber",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "disability"
+      ],
+      "days_in_belgium": 318,
+      "family_status": "unaccompanied_minor",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0448",
+      "age": 4,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Kurdish",
+        "Aramaic",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 439,
+      "family_status": "separated",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0449",
+      "age": 14,
+      "origin_country": "Palestine",
+      "languages_spoken": [
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "mental_health",
+        "health_issues"
+      ],
+      "days_in_belgium": 365,
+      "family_status": "with_single_parent",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0450",
+      "age": 13,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Pashto",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "health_issues",
+        "trafficking"
+      ],
+      "days_in_belgium": 541,
+      "family_status": "with_single_parent",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0451",
+      "age": 4,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Turkish",
+        "Kurdish"
+      ],
+      "vulnerability_flags": [
+        "malnutrition",
+        "disability"
+      ],
+      "days_in_belgium": 514,
+      "family_status": "with_family",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0452",
+      "age": 17,
+      "origin_country": "Jordan",
+      "languages_spoken": [
+        "Turkish",
+        "Dari",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "health_issues"
+      ],
+      "days_in_belgium": 1086,
+      "family_status": "unaccompanied_minor",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0453",
+      "age": 4,
+      "origin_country": "Jordan",
+      "languages_spoken": [
+        "Dari",
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "trafficking",
+        "trauma"
+      ],
+      "days_in_belgium": 791,
+      "family_status": "separated",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0454",
+      "age": 10,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Kurdish",
+        "Berber",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "trafficking"
+      ],
+      "days_in_belgium": 485,
+      "family_status": "with_family",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0455",
+      "age": 9,
+      "origin_country": "Jordan",
+      "languages_spoken": [
+        "Arabic",
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "mental_health"
+      ],
+      "days_in_belgium": 707,
+      "family_status": "with_single_parent",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0456",
+      "age": 7,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "disability",
+        "malnutrition"
+      ],
+      "days_in_belgium": 890,
+      "family_status": "with_relatives",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0457",
+      "age": 13,
+      "origin_country": "Palestine",
+      "languages_spoken": [
+        "Turkish",
+        "Dari",
+        "Kurdish"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 300,
+      "family_status": "unaccompanied_minor",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0458",
+      "age": 4,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Aramaic",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "trafficking",
+        "malnutrition"
+      ],
+      "days_in_belgium": 976,
+      "family_status": "with_family",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0459",
+      "age": 13,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Dari"
+      ],
+      "vulnerability_flags": [
+        "malnutrition"
+      ],
+      "days_in_belgium": 696,
+      "family_status": "separated",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0460",
+      "age": 15,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Dari",
+        "Kurdish"
+      ],
+      "vulnerability_flags": [
+        "trauma",
+        "malnutrition"
+      ],
+      "days_in_belgium": 57,
+      "family_status": "with_single_parent",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0461",
+      "age": 11,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "trauma"
+      ],
+      "days_in_belgium": 878,
+      "family_status": "with_family",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0462",
+      "age": 9,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Dari",
+        "Berber",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "trafficking",
+        "trauma"
+      ],
+      "days_in_belgium": 183,
+      "family_status": "separated",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0463",
+      "age": 5,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Dari",
+        "Kurdish",
+        "Arabic"
+      ],
+      "vulnerability_flags": [
+        "disability",
+        "mental_health"
+      ],
+      "days_in_belgium": 810,
+      "family_status": "with_single_parent",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0464",
+      "age": 3,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Kurdish",
+        "Pashto",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "disability"
+      ],
+      "days_in_belgium": 969,
+      "family_status": "with_family",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0465",
+      "age": 4,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Dari",
+        "Kurdish",
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 169,
+      "family_status": "with_family",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0466",
+      "age": 12,
+      "origin_country": "Palestine",
+      "languages_spoken": [
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 1030,
+      "family_status": "with_relatives",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0467",
+      "age": 3,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Dari",
+        "Hebrew",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "disability",
+        "mental_health"
+      ],
+      "days_in_belgium": 750,
+      "family_status": "unaccompanied_minor",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0468",
+      "age": 8,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Kurdish"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 142,
+      "family_status": "with_single_parent",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0469",
+      "age": 16,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "trafficking",
+        "health_issues"
+      ],
+      "days_in_belgium": 962,
+      "family_status": "unaccompanied_minor",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0470",
+      "age": 17,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 867,
+      "family_status": "with_relatives",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0471",
+      "age": 10,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Turkish",
+        "Kurdish",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "health_issues",
+        "disability"
+      ],
+      "days_in_belgium": 915,
+      "family_status": "with_relatives",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0472",
+      "age": 12,
+      "origin_country": "Jordan",
+      "languages_spoken": [
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 336,
+      "family_status": "with_relatives",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0473",
+      "age": 15,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Turkish",
+        "Arabic",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "trafficking",
+        "mental_health"
+      ],
+      "days_in_belgium": 367,
+      "family_status": "unaccompanied_minor",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0474",
+      "age": 5,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Dari",
+        "Pashto",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "trauma"
+      ],
+      "days_in_belgium": 815,
+      "family_status": "with_family",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0475",
+      "age": 4,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Kurdish",
+        "Aramaic",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "trauma",
+        "trafficking"
+      ],
+      "days_in_belgium": 457,
+      "family_status": "with_relatives",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0476",
+      "age": 7,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Arabic"
+      ],
+      "vulnerability_flags": [
+        "health_issues",
+        "trafficking"
+      ],
+      "days_in_belgium": 931,
+      "family_status": "unaccompanied_minor",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0477",
+      "age": 8,
+      "origin_country": "Yemen",
+      "languages_spoken": [
+        "Farsi",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "malnutrition"
+      ],
+      "days_in_belgium": 1066,
+      "family_status": "with_single_parent",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0478",
+      "age": 17,
+      "origin_country": "Jordan",
+      "languages_spoken": [
+        "Turkish",
+        "Dari",
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 877,
+      "family_status": "with_single_parent",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0479",
+      "age": 18,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Kurdish",
+        "Aramaic",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "trafficking",
+        "malnutrition"
+      ],
+      "days_in_belgium": 335,
+      "family_status": "with_family",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0480",
+      "age": 6,
+      "origin_country": "Morocco",
+      "languages_spoken": [
+        "Berber",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "malnutrition",
+        "trafficking"
+      ],
+      "days_in_belgium": 329,
+      "family_status": "unaccompanied_minor",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0481",
+      "age": 11,
+      "origin_country": "Algeria",
+      "languages_spoken": [
+        "Arabic",
+        "Pashto",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "health_issues"
+      ],
+      "days_in_belgium": 519,
+      "family_status": "unaccompanied_minor",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0482",
+      "age": 9,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Turkish",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "trauma",
+        "mental_health"
+      ],
+      "days_in_belgium": 123,
+      "family_status": "with_relatives",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0483",
+      "age": 17,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "health_issues",
+        "mental_health"
+      ],
+      "days_in_belgium": 508,
+      "family_status": "separated",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0484",
+      "age": 14,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Pashto",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 559,
+      "family_status": "separated",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0485",
+      "age": 4,
+      "origin_country": "Algeria",
+      "languages_spoken": [
+        "Farsi",
+        "Hebrew"
+      ],
+      "vulnerability_flags": [
+        "health_issues"
+      ],
+      "days_in_belgium": 647,
+      "family_status": "with_family",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0486",
+      "age": 7,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "trauma"
+      ],
+      "days_in_belgium": 1071,
+      "family_status": "with_single_parent",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0487",
+      "age": 12,
+      "origin_country": "Palestine",
+      "languages_spoken": [
+        "Dari",
+        "Pashto"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 42,
+      "family_status": "with_single_parent",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0488",
+      "age": 11,
+      "origin_country": "Iraq",
+      "languages_spoken": [
+        "Turkish"
+      ],
+      "vulnerability_flags": [
+        "mental_health"
+      ],
+      "days_in_belgium": 502,
+      "family_status": "separated",
+      "education_level": "upper_secondary"
+    },
+    {
+      "cohort_id": "cohort-0489",
+      "age": 14,
+      "origin_country": "Tunisia",
+      "languages_spoken": [
+        "Dari",
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 355,
+      "family_status": "separated",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0490",
+      "age": 15,
+      "origin_country": "Algeria",
+      "languages_spoken": [
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "malnutrition"
+      ],
+      "days_in_belgium": 334,
+      "family_status": "separated",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0491",
+      "age": 12,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Kurdish",
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "trafficking",
+        "mental_health"
+      ],
+      "days_in_belgium": 41,
+      "family_status": "with_single_parent",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0492",
+      "age": 10,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 1061,
+      "family_status": "separated",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0493",
+      "age": 18,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Turkish"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 193,
+      "family_status": "with_relatives",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0494",
+      "age": 17,
+      "origin_country": "Afghanistan",
+      "languages_spoken": [
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 285,
+      "family_status": "separated",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0495",
+      "age": 8,
+      "origin_country": "Lebanon",
+      "languages_spoken": [
+        "Aramaic"
+      ],
+      "vulnerability_flags": [
+        "mental_health"
+      ],
+      "days_in_belgium": 59,
+      "family_status": "with_family",
+      "education_level": "lower_secondary"
+    },
+    {
+      "cohort_id": "cohort-0496",
+      "age": 14,
+      "origin_country": "Syria",
+      "languages_spoken": [
+        "Turkish",
+        "Berber"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 320,
+      "family_status": "with_relatives",
+      "education_level": "tertiary"
+    },
+    {
+      "cohort_id": "cohort-0497",
+      "age": 8,
+      "origin_country": "Jordan",
+      "languages_spoken": [
+        "Arabic"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 886,
+      "family_status": "with_single_parent",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0498",
+      "age": 17,
+      "origin_country": "Palestine",
+      "languages_spoken": [
+        "Turkish",
+        "Dari",
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "none"
+      ],
+      "days_in_belgium": 594,
+      "family_status": "with_family",
+      "education_level": "primary"
+    },
+    {
+      "cohort_id": "cohort-0499",
+      "age": 9,
+      "origin_country": "Palestine",
+      "languages_spoken": [
+        "Farsi"
+      ],
+      "vulnerability_flags": [
+        "trauma"
+      ],
+      "days_in_belgium": 758,
+      "family_status": "with_family",
+      "education_level": "none"
+    },
+    {
+      "cohort_id": "cohort-0500",
+      "age": 8,
+      "origin_country": "Algeria",
+      "languages_spoken": [
+        "Kurdish"
+      ],
+      "vulnerability_flags": [
+        "disability"
+      ],
+      "days_in_belgium": 873,
+      "family_status": "unaccompanied_minor",
+      "education_level": "upper_secondary"
+    }
+  ]
+}

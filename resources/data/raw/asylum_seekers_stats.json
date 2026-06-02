@@ -1,0 +1,117 @@
+{
+  "metadata": {
+    "source": "CGRA (Commissariat Général aux Réfugiés et Apatrides) - 2025",
+    "data_type": "aggregated_statistics",
+    "note": "Public statistics - aggregated data, no individual identifiers",
+    "last_updated": "2025-12-31",
+    "currency": "counts"
+  },
+  "overview": {
+    "total_pending_applications": 18000,
+    "total_mena_applicants": 3200,
+    "mena_percentage": 17.8,
+    "reporting_period": "2025"
+  },
+  "top_origin_countries": [
+    {
+      "rank": 1,
+      "country": "Afghanistan",
+      "count": 850,
+      "percentage": 4.7
+    },
+    {
+      "rank": 2,
+      "country": "Syria",
+      "count": 720,
+      "percentage": 4.0
+    },
+    {
+      "rank": 3,
+      "country": "Palestine",
+      "count": 580,
+      "percentage": 3.2
+    },
+    {
+      "rank": 4,
+      "country": "Ukraine",
+      "count": 2100,
+      "percentage": 11.7
+    },
+    {
+      "rank": 5,
+      "country": "Somalia",
+      "count": 420,
+      "percentage": 2.3
+    },
+    {
+      "rank": 6,
+      "country": "Eritrea",
+      "count": 380,
+      "percentage": 2.1
+    },
+    {
+      "rank": 7,
+      "country": "Democratic Republic of Congo",
+      "count": 350,
+      "percentage": 1.9
+    }
+  ],
+  "mena_cohort_statistics": {
+    "total_mena": 3200,
+    "age_distribution": {
+      "age_0_6": {
+        "count": 480,
+        "percentage": 15.0
+      },
+      "age_6_12": {
+        "count": 640,
+        "percentage": 20.0
+      },
+      "age_12_15": {
+        "count": 560,
+        "percentage": 17.5
+      },
+      "age_15_18": {
+        "count": 1520,
+        "percentage": 47.5
+      }
+    },
+    "gender_distribution": {
+      "male": {
+        "count": 1856,
+        "percentage": 58.0
+      },
+      "female": {
+        "count": 1344,
+        "percentage": 42.0
+      }
+    }
+  },
+  "decision_statistics": {
+    "total_decisions_2025": 8900,
+    "approved": {
+      "count": 3290,
+      "percentage": 36.9,
+      "refugee_status": 2100,
+      "subsidiary_protection": 1190
+    },
+    "rejected": {
+      "count": 5610,
+      "percentage": 63.1
+    },
+    "appeal_rate": 42.5
+  },
+  "processing_metrics": {
+    "average_processing_time_days": 285,
+    "median_processing_time_days": 240,
+    "fast_track_percentage": 8.2,
+    "expedited_cases_percentage": 15.1
+  },
+  "mena_specific_insights": {
+    "mena_approval_rate_percentage": 34.2,
+    "mena_average_processing_time_days": 310,
+    "unaccompanied_minors_mena": 620,
+    "families_mena": 1240,
+    "single_adults_mena": 1340
+  }
+}

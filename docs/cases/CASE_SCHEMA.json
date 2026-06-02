@@ -1,0 +1,521 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CGRA Case Schema",
+  "description": "Complete schema for child/guardian case documentation in the CGRA dossier system",
+  "type": "object",
+  "required": [
+    "id",
+    "caseType",
+    "ageGroup",
+    "title",
+    "summary",
+    "domains",
+    "story",
+    "problems",
+    "legalFramework",
+    "solutions",
+    "teurObligations",
+    "lessons",
+    "resources",
+    "metadata"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique case identifier (e.g., 'UNAC-001', 'FAM-042')",
+      "pattern": "^[A-Z]{3,4}-\\d{3}$"
+    },
+    "caseType": {
+      "type": "string",
+      "description": "Classification of case type",
+      "enum": [
+        "unaccompanied",
+        "family-conflict",
+        "trauma",
+        "shelter-runaway",
+        "work",
+        "justice-involved",
+        "health",
+        "reunification",
+        "readmission",
+        "mixed"
+      ]
+    },
+    "ageGroup": {
+      "type": "string",
+      "description": "Age category of the primary subject",
+      "enum": ["0-2", "2-6", "6-12", "12-18"]
+    },
+    "domains": {
+      "type": "array",
+      "description": "Primary domains addressed in this case",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "enum": [
+          "documents-asylum",
+          "health-medical",
+          "finances-banking",
+          "work-employment",
+          "family-reunion"
+        ]
+      }
+    },
+    "title": {
+      "type": "string",
+      "description": "Concise case title",
+      "minLength": 10,
+      "maxLength": 200
+    },
+    "summary": {
+      "type": "string",
+      "description": "Executive summary of the case (150-300 words)",
+      "minLength": 50,
+      "maxLength": 500
+    },
+    "story": {
+      "type": "object",
+      "description": "Narrative account of the child/guardian situation",
+      "required": ["narrative", "background", "currentSituation"],
+      "properties": {
+        "narrative": {
+          "type": "string",
+          "description": "Main case story in first or third person",
+          "minLength": 200
+        },
+        "background": {
+          "type": "string",
+          "description": "Historical context and family background",
+          "minLength": 100
+        },
+        "currentSituation": {
+          "type": "string",
+          "description": "Present status and immediate circumstances",
+          "minLength": 100
+        },
+        "timeline": {
+          "type": "array",
+          "description": "Key dates and events in chronological order",
+          "items": {
+            "type": "object",
+            "properties": {
+              "date": {
+                "type": "string",
+                "format": "date"
+              },
+              "event": {
+                "type": "string"
+              }
+            },
+            "required": ["date", "event"]
+          }
+        }
+      }
+    },
+    "problems": {
+      "type": "object",
+      "description": "Identification and analysis of core problems",
+      "required": ["primary", "secondary"],
+      "properties": {
+        "primary": {
+          "type": "array",
+          "description": "Main issues preventing resolution",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "properties": {
+              "issue": {
+                "type": "string"
+              },
+              "impact": {
+                "type": "string",
+                "description": "How this affects the child/guardian"
+              },
+              "severity": {
+                "type": "string",
+                "enum": ["critical", "high", "medium", "low"]
+              }
+            },
+            "required": ["issue", "impact", "severity"]
+          }
+        },
+        "secondary": {
+          "type": "array",
+          "description": "Contributing or downstream problems",
+          "items": {
+            "type": "object",
+            "properties": {
+              "issue": {
+                "type": "string"
+              },
+              "relatedTo": {
+                "type": "string",
+                "description": "Link to primary problem"
+              }
+            },
+            "required": ["issue"]
+          }
+        },
+        "rootCauses": {
+          "type": "array",
+          "description": "Underlying causes of the problems",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "legalFramework": {
+      "type": "object",
+      "description": "Applicable laws, conventions, and legal instruments",
+      "properties": {
+        "conventions": {
+          "type": "array",
+          "description": "International conventions (e.g., CRC, UNCRC)",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "relevantArticles": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "application": {
+                "type": "string"
+              }
+            },
+            "required": ["name", "application"]
+          }
+        },
+        "nationalLaws": {
+          "type": "array",
+          "description": "Applicable national legislation",
+          "items": {
+            "type": "object",
+            "properties": {
+              "jurisdiction": {
+                "type": "string"
+              },
+              "lawName": {
+                "type": "string"
+              },
+              "relevantSections": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "application": {
+                "type": "string"
+              }
+            },
+            "required": ["jurisdiction", "lawName", "application"]
+          }
+        },
+        "procedures": {
+          "type": "array",
+          "description": "Required procedures and processes",
+          "items": {
+            "type": "object",
+            "properties": {
+              "procedureName": {
+                "type": "string"
+              },
+              "requiredSteps": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "timeline": {
+                "type": "string"
+              }
+            },
+            "required": ["procedureName"]
+          }
+        }
+      }
+    },
+    "solutions": {
+      "type": "object",
+      "description": "Proposed and implemented solutions",
+      "required": ["approach", "actions"],
+      "properties": {
+        "approach": {
+          "type": "string",
+          "description": "Overall strategy and philosophy"
+        },
+        "actions": {
+          "type": "array",
+          "description": "Specific actions taken or recommended",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "properties": {
+              "action": {
+                "type": "string"
+              },
+              "objective": {
+                "type": "string"
+              },
+              "actors": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "timeline": {
+                "type": "string"
+              },
+              "expectedOutcome": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string",
+                "enum": ["planned", "in-progress", "completed", "paused"]
+              }
+            },
+            "required": ["action", "objective"]
+          }
+        },
+        "outcomes": {
+          "type": "array",
+          "description": "Results achieved or anticipated",
+          "items": {
+            "type": "object",
+            "properties": {
+              "outcome": {
+                "type": "string"
+              },
+              "indicator": {
+                "type": "string"
+              },
+              "achieved": {
+                "type": "boolean"
+              }
+            },
+            "required": ["outcome"]
+          }
+        }
+      }
+    },
+    "teurObligations": {
+      "type": "object",
+      "description": "Responsibilities of tuteur (guardian/advocate)",
+      "required": ["roles", "responsibilities"],
+      "properties": {
+        "roles": {
+          "type": "array",
+          "description": "Primary roles of tuteur in this case",
+          "items": {
+            "type": "string"
+          }
+        },
+        "responsibilities": {
+          "type": "array",
+          "description": "Specific obligations and duties",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "properties": {
+              "responsibility": {
+                "type": "string"
+              },
+              "legal_basis": {
+                "type": "string"
+              },
+              "frequency": {
+                "type": "string"
+              },
+              "critical": {
+                "type": "boolean"
+              }
+            },
+            "required": ["responsibility"]
+          }
+        },
+        "common_mistakes": {
+          "type": "array",
+          "description": "Frequent errors or oversights by tuteurs",
+          "items": {
+            "type": "string"
+          }
+        },
+        "best_practices": {
+          "type": "array",
+          "description": "Proven strategies and approaches",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "lessons": {
+      "type": "object",
+      "description": "Key learnings and insights from this case",
+      "required": ["learned"],
+      "properties": {
+        "learned": {
+          "type": "array",
+          "description": "Main lessons and takeaways",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "properties": {
+              "lesson": {
+                "type": "string"
+              },
+              "context": {
+                "type": "string"
+              },
+              "application": {
+                "type": "string",
+                "description": "How this applies to similar cases"
+              }
+            },
+            "required": ["lesson"]
+          }
+        },
+        "challenges": {
+          "type": "array",
+          "description": "Difficulties encountered and how they were addressed",
+          "items": {
+            "type": "string"
+          }
+        },
+        "bestOutcome": {
+          "type": "string",
+          "description": "What worked best in resolving this case"
+        }
+      }
+    },
+    "resources": {
+      "type": "object",
+      "description": "Tools, documents, and external resources",
+      "properties": {
+        "documents": {
+          "type": "array",
+          "description": "Essential documents and templates",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string",
+                "enum": ["form", "template", "guide", "legal", "reference"]
+              },
+              "url": {
+                "type": "string",
+                "format": "uri"
+              },
+              "relevance": {
+                "type": "string"
+              }
+            },
+            "required": ["name", "type"]
+          }
+        },
+        "organizations": {
+          "type": "array",
+          "description": "Relevant institutions and contacts",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "role": {
+                "type": "string"
+              },
+              "contact": {
+                "type": "string"
+              },
+              "relevance": {
+                "type": "string"
+              }
+            },
+            "required": ["name"]
+          }
+        },
+        "references": {
+          "type": "array",
+          "description": "Academic, legal, and policy references",
+          "items": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "string"
+              },
+              "author": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string",
+                "format": "uri"
+              },
+              "relevance": {
+                "type": "string"
+              }
+            },
+            "required": ["title"]
+          }
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Administrative and tracking information",
+      "required": ["created", "author", "status"],
+      "properties": {
+        "created": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Case document creation date"
+        },
+        "updated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last update date"
+        },
+        "author": {
+          "type": "string",
+          "description": "Person who documented the case"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["draft", "in-review", "published", "archived"],
+          "description": "Current status of the case document"
+        },
+        "version": {
+          "type": "string",
+          "description": "Document version number"
+        },
+        "tags": {
+          "type": "array",
+          "description": "Searchable tags and keywords",
+          "items": {
+            "type": "string"
+          }
+        },
+        "relatedCases": {
+          "type": "array",
+          "description": "IDs of related cases",
+          "items": {
+            "type": "string"
+          }
+        },
+        "confidentiality": {
+          "type": "string",
+          "enum": ["public", "internal", "restricted"],
+          "description": "Access level and confidentiality status"
+        }
+      }
+    }
+  }
+}

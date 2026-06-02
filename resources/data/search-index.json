@@ -1,0 +1,3737 @@
+{
+  "name": {
+    "cabinet": [
+      "LAW001"
+    ],
+    "juridique": [
+      "LAW001",
+      "cajm_001"
+    ],
+    "bruxelles": [
+      "LAW001",
+      "habitat_br_001"
+    ],
+    "sarl": [
+      "LAW001"
+    ],
+    "dr": [
+      "LAW002"
+    ],
+    "marie": [
+      "LAW002"
+    ],
+    "dupont": [
+      "LAW002"
+    ],
+    "avocat": [
+      "LAW003"
+    ],
+    "be": [
+      "LAW003"
+    ],
+    "brussels": [
+      "reg_int_001",
+      "MED_BXL_002",
+      "LAW021",
+      "psycho_001",
+      "bruxhealth_001",
+      "legal_001",
+      "LAW031",
+      "SHEL_BXL_001",
+      "lang_001",
+      "PSY_BXL_001",
+      "LAW003",
+      "cult_001",
+      "hous_001",
+      "employ_001",
+      "child_001",
+      "LAW019",
+      "LAW039",
+      "MED_BXL_001",
+      "LAW005",
+      "social_001",
+      "food_001"
+    ],
+    "office": [
+      "LAW023",
+      "LAW003"
+    ],
+    "michael": [
+      "LAW004"
+    ],
+    "verlaine": [
+      "LAW004"
+    ],
+    "legal": [
+      "LAW023",
+      "LAW005",
+      "LAW011",
+      "legal_001",
+      "LAW007",
+      "LAW017"
+    ],
+    "solutions": [
+      "LAW005",
+      "LAW017"
+    ],
+    "sophie": [
+      "LAW006"
+    ],
+    "lefevre": [
+      "LAW006"
+    ],
+    "walloon": [
+      "LAW007"
+    ],
+    "group": [
+      "LAW007"
+    ],
+    "pierre": [
+      "LAW008"
+    ],
+    "henault": [
+      "LAW008"
+    ],
+    "liege": [
+      "liege_001",
+      "LAW009",
+      "MED_LIE_001",
+      "LAW035",
+      "PSY_LIE_001",
+      "liege_health_001"
+    ],
+    "corporate": [
+      "LAW009"
+    ],
+    "law": [
+      "LAW031",
+      "LAW025",
+      "LAW037",
+      "LAW009",
+      "LAW019",
+      "LAW013",
+      "LAW021",
+      "LAW027",
+      "LAW035",
+      "LAW033"
+    ],
+    "carole": [
+      "LAW010"
+    ],
+    "mathieu": [
+      "LAW010"
+    ],
+    "flanders": [
+      "LAW011"
+    ],
+    "associates": [
+      "LAW011"
+    ],
+    "dirk": [
+      "LAW012"
+    ],
+    "vandeputte": [
+      "LAW012"
+    ],
+    "gent": [
+      "PSY_GENT_002",
+      "LAW013",
+      "gent_001",
+      "gent_health_001",
+      "PSY_GENT_001"
+    ],
+    "family": [
+      "SOC_BXL_001",
+      "LAW013",
+      "SOC_LEU_001"
+    ],
+    "center": [
+      "LAW013",
+      "LAW033"
+    ],
+    "inge": [
+      "LAW014"
+    ],
+    "wouters": [
+      "LAW014"
+    ],
+    "bruges": [
+      "LAW015",
+      "LAW027"
+    ],
+    "commercial": [
+      "LAW015"
+    ],
+    "attorneys": [
+      "LAW015"
+    ],
+    "luc": [
+      "LAW016"
+    ],
+    "de": [
+      "rcb_001",
+      "MED_BXL_001",
+      "LAW016",
+      "plateforme_001",
+      "charleroi_001",
+      "LAW032"
+    ],
+    "clercq": [
+      "LAW016"
+    ],
+    "multi": [
+      "LAW017"
+    ],
+    "regional": [
+      "reg_int_001",
+      "LAW023",
+      "LAW017"
+    ],
+    "judith": [
+      "LAW018"
+    ],
+    "vermeulen": [
+      "LAW018"
+    ],
+    "tax": [
+      "LAW019"
+    ],
+    "finance": [
+      "LAW019"
+    ],
+    "anita": [
+      "LAW020"
+    ],
+    "rossi": [
+      "LAW020"
+    ],
+    "healthcare": [
+      "LAW021"
+    ],
+    "medical": [
+      "charleroi_health_001",
+      "LAW021",
+      "MED_ANT_001"
+    ],
+    "thibault": [
+      "LAW022"
+    ],
+    "chevallier": [
+      "LAW022"
+    ],
+    "namur": [
+      "namur_001",
+      "LAW023",
+      "namur_health_001"
+    ],
+    "fabrice": [
+      "LAW024"
+    ],
+    "laurent": [
+      "LAW024"
+    ],
+    "tournai": [
+      "LAW025"
+    ],
+    "civil": [
+      "LAW025"
+    ],
+    "specialists": [
+      "LAW025"
+    ],
+    "sylvie": [
+      "LAW026"
+    ],
+    "daumerie": [
+      "LAW026"
+    ],
+    "international": [
+      "amnesty_001",
+      "oim_001",
+      "LAW027"
+    ],
+    "maxim": [
+      "LAW028"
+    ],
+    "petrov": [
+      "LAW028"
+    ],
+    "courtrai": [
+      "LAW029"
+    ],
+    "labor": [
+      "LAW029"
+    ],
+    "advocates": [
+      "LAW029"
+    ],
+    "cristina": [
+      "LAW030"
+    ],
+    "moretti": [
+      "LAW030"
+    ],
+    "urban": [
+      "LAW031"
+    ],
+    "development": [
+      "LAW031",
+      "PSY_BXL_003",
+      "PSY_LIE_001"
+    ],
+    "rene": [
+      "LAW032"
+    ],
+    "backer": [
+      "LAW032"
+    ],
+    "charleroi": [
+      "charleroi_health_001",
+      "EMPL_CHA_001",
+      "SOC_CHA_001",
+      "LAW033"
+    ],
+    "industrial": [
+      "LAW033"
+    ],
+    "veronique": [
+      "LAW034"
+    ],
+    "leroy": [
+      "LAW034"
+    ],
+    "environmental": [
+      "LAW035"
+    ],
+    "energy": [
+      "LAW035"
+    ],
+    "helmut": [
+      "LAW036"
+    ],
+    "schneider": [
+      "LAW036"
+    ],
+    "antwerp": [
+      "LAW037",
+      "antwerp_health_001",
+      "employ_ant_001",
+      "EMPL_ANT_001",
+      "MED_ANT_001",
+      "MED_ANT_002",
+      "lang_ant_001"
+    ],
+    "port": [
+      "LAW037"
+    ],
+    "shipping": [
+      "LAW037"
+    ],
+    "petra": [
+      "LAW038"
+    ],
+    "van": [
+      "LAW038"
+    ],
+    "dyck": [
+      "LAW038"
+    ],
+    "compliance": [
+      "LAW039"
+    ],
+    "regulatory": [
+      "LAW039"
+    ],
+    "elisabeth": [
+      "LAW040"
+    ],
+    "beaumont": [
+      "LAW040"
+    ],
+    "cgra": [
+      "cgra_001"
+    ],
+    "commissariat": [
+      "cgra_001"
+    ],
+    "general": [
+      "cgra_001",
+      "dgm_001",
+      "MED_LIE_001",
+      "MED_BXL_004"
+    ],
+    "aux": [
+      "plateforme_001",
+      "cgra_001",
+      "namur_001",
+      "cajm_001"
+    ],
+    "refugies": [
+      "plateforme_001",
+      "cgra_001",
+      "namur_001"
+    ],
+    "et": [
+      "cgra_001",
+      "charleroi_001"
+    ],
+    "apatrides": [
+      "cgra_001"
+    ],
+    "fedasil": [
+      "fedasil_001"
+    ],
+    "federal": [
+      "fedasil_001",
+      "ante_001"
+    ],
+    "agency": [
+      "unhcr_001",
+      "fedasil_001"
+    ],
+    "for": [
+      "habitat_br_001",
+      "ante_001",
+      "charleroi_health_001",
+      "fedasil_001",
+      "bruxhealth_001",
+      "gent_health_001",
+      "namur_health_001",
+      "fesn_001",
+      "employ_001",
+      "cesp_001"
+    ],
+    "the": [
+      "fedasil_001"
+    ],
+    "reception": [
+      "fedasil_001"
+    ],
+    "of": [
+      "fedasil_001"
+    ],
+    "asylum": [
+      "fedasil_001"
+    ],
+    "seekers": [
+      "fedasil_001"
+    ],
+    "dgm": [
+      "dgm_001"
+    ],
+    "migration": [
+      "dgm_001",
+      "oim_001"
+    ],
+    "directorate": [
+      "dgm_001"
+    ],
+    "red": [
+      "rcb_001"
+    ],
+    "cross": [
+      "rcb_001"
+    ],
+    "belgium": [
+      "habitat_br_001",
+      "oim_001",
+      "amnesty_001",
+      "rcb_001",
+      "unhcr_001",
+      "mdm_001"
+    ],
+    "croix": [
+      "rcb_001"
+    ],
+    "rouge": [
+      "rcb_001"
+    ],
+    "belgique": [
+      "rcb_001"
+    ],
+    "medecins": [
+      "mdm_001"
+    ],
+    "du": [
+      "mdm_001"
+    ],
+    "monde": [
+      "mdm_001"
+    ],
+    "ligue": [
+      "ldh_001"
+    ],
+    "des": [
+      "ldh_001"
+    ],
+    "droits": [
+      "ldh_001"
+    ],
+    "humains": [
+      "ldh_001"
+    ],
+    "human": [
+      "ldh_001"
+    ],
+    "rights": [
+      "child_001",
+      "ldh_001"
+    ],
+    "league": [
+      "ldh_001"
+    ],
+    "cajm": [
+      "cajm_001"
+    ],
+    "commission": [
+      "cajm_001"
+    ],
+    "aide": [
+      "namur_001",
+      "cajm_001"
+    ],
+    "migrants": [
+      "liege_001",
+      "elder_001",
+      "charleroi_health_001",
+      "gent_health_001",
+      "bruxhealth_001",
+      "namur_health_001",
+      "cajm_001",
+      "sem_001",
+      "employ_001",
+      "women_001"
+    ],
+    "amnesty": [
+      "amnesty_001"
+    ],
+    "oim": [
+      "oim_001"
+    ],
+    "organization": [
+      "oim_001"
+    ],
+    "unhcr": [
+      "unhcr_001"
+    ],
+    "un": [
+      "unhcr_001"
+    ],
+    "refugee": [
+      "unhcr_001"
+    ],
+    "cire": [
+      "cire_001"
+    ],
+    "collective": [
+      "cire_001"
+    ],
+    "against": [
+      "cire_001"
+    ],
+    "racism": [
+      "cire_001"
+    ],
+    "plateforme": [
+      "plateforme_001"
+    ],
+    "citoyenne": [
+      "plateforme_001",
+      "bruxact_001"
+    ],
+    "soutien": [
+      "plateforme_001"
+    ],
+    "praxis": [
+      "praxis_001"
+    ],
+    "integration": [
+      "ante_001",
+      "reg_int_001",
+      "LANG_LEU_001",
+      "LANG_BXL_001",
+      "LANG_WAL_001",
+      "social_001",
+      "praxis_001",
+      "SOC_CHA_001",
+      "SOC_BXL_002"
+    ],
+    "and": [
+      "ante_001",
+      "lang_001",
+      "adapt_001",
+      "trans_001",
+      "fesn_001",
+      "praxis_001",
+      "cesp_001",
+      "liege_health_001"
+    ],
+    "settlement": [
+      "praxis_001"
+    ],
+    "services": [
+      "namur_health_001",
+      "adapt_001",
+      "praxis_001",
+      "leuven_health_001"
+    ],
+    "bruxact": [
+      "bruxact_001"
+    ],
+    "action": [
+      "bruxact_001",
+      "fesn_001"
+    ],
+    "habitat": [
+      "habitat_br_001"
+    ],
+    "humanity": [
+      "habitat_br_001"
+    ],
+    "fesn": [
+      "fesn_001"
+    ],
+    "federation": [
+      "fesn_001"
+    ],
+    "social": [
+      "SOC_CHA_001",
+      "fesn_001",
+      "social_001",
+      "SOC_BXL_002",
+      "cesp_001",
+      "liege_health_001"
+    ],
+    "solidarity": [
+      "leuven_001",
+      "fesn_001"
+    ],
+    "cesp": [
+      "cesp_001"
+    ],
+    "centre": [
+      "ante_001",
+      "reg_int_001",
+      "MED_BXL_002",
+      "MED_LIE_001",
+      "psycho_001",
+      "trans_001",
+      "bruxhealth_001",
+      "legal_001",
+      "cesp_001",
+      "lang_001",
+      "PSY_BXL_001",
+      "gent_health_001",
+      "LANG_WAL_001",
+      "cult_001",
+      "antwerp_health_001",
+      "employ_ant_001",
+      "MED_BXL_005",
+      "PSY_GENT_001",
+      "employ_001",
+      "liege_health_001",
+      "child_001",
+      "PSY_LIE_001",
+      "MED_BXL_003",
+      "MED_BXL_001",
+      "MED_ANT_001",
+      "sante_001",
+      "charleroi_001",
+      "doc_001",
+      "SOC_BXL_002"
+    ],
+    "education": [
+      "cesp_001"
+    ],
+    "policy": [
+      "cesp_001"
+    ],
+    "sem": [
+      "sem_001"
+    ],
+    "solidarite": [
+      "sem_001",
+      "hous_001"
+    ],
+    "enfants": [
+      "sem_001"
+    ],
+    "ante": [
+      "ante_001"
+    ],
+    "active": [
+      "ante_001"
+    ],
+    "citizenship": [
+      "ante_001"
+    ],
+    "actions": [
+      "charleroi_001"
+    ],
+    "realisations": [
+      "charleroi_001"
+    ],
+    "pour": [
+      "charleroi_001"
+    ],
+    "immigrant": [
+      "charleroi_001"
+    ],
+    "collectif": [
+      "liege_001"
+    ],
+    "cml": [
+      "liege_001"
+    ],
+    "service": [
+      "SOC_BXL_001",
+      "namur_001"
+    ],
+    "dienst": [
+      "antwerp_001"
+    ],
+    "vreemdelingen": [
+      "antwerp_001"
+    ],
+    "antwerpen": [
+      "antwerp_001"
+    ],
+    "dva": [
+      "antwerp_001"
+    ],
+    "vluchtelingenwerk": [
+      "gent_001"
+    ],
+    "migrant": [
+      "leuven_001",
+      "adapt_001",
+      "leuven_health_001"
+    ],
+    "leuven": [
+      "leuven_001",
+      "LANG_LEU_001",
+      "leuven_health_001",
+      "SOC_LEU_001"
+    ],
+    "health": [
+      "leuven_health_001",
+      "MED_BXL_004",
+      "MED_BXL_002",
+      "MED_LIE_001",
+      "antwerp_health_001",
+      "gent_health_001",
+      "trans_001",
+      "bruxhealth_001",
+      "sante_001",
+      "namur_health_001",
+      "MED_ANT_002",
+      "liege_health_001"
+    ],
+    "psychosocial": [
+      "psycho_001"
+    ],
+    "support": [
+      "PSY_GENT_002",
+      "SOC_LEU_001",
+      "psycho_001",
+      "adapt_001",
+      "trans_001",
+      "women_001"
+    ],
+    "sante": [
+      "sante_001"
+    ],
+    "plus": [
+      "sante_001"
+    ],
+    "community": [
+      "antwerp_health_001",
+      "sante_001",
+      "SOC_LEU_001"
+    ],
+    "dent": [
+      "tooth_001"
+    ],
+    "solidaire": [
+      "tooth_001"
+    ],
+    "free": [
+      "tooth_001"
+    ],
+    "dental": [
+      "tooth_001"
+    ],
+    "clinic": [
+      "MED_BXL_004",
+      "charleroi_health_001",
+      "MED_ANT_002",
+      "tooth_001",
+      "PSY_BXL_003"
+    ],
+    "logement": [
+      "hous_001"
+    ],
+    "employment": [
+      "EMPL_ANT_001",
+      "employ_001",
+      "EMPL_CHA_001",
+      "employ_ant_001"
+    ],
+    "vdab": [
+      "employ_ant_001"
+    ],
+    "language": [
+      "lang_001",
+      "LANG_BXL_001",
+      "lang_ant_001"
+    ],
+    "culture": [
+      "lang_001"
+    ],
+    "academy": [
+      "LANG_BXL_001",
+      "lang_ant_001"
+    ],
+    "intercultural": [
+      "cult_001"
+    ],
+    "children": [
+      "child_001"
+    ],
+    "women": [
+      "women_001"
+    ],
+    "network": [
+      "elder_001",
+      "SHEL_WID_001",
+      "women_001"
+    ],
+    "aid": [
+      "legal_001"
+    ],
+    "documentation": [
+      "doc_001"
+    ],
+    "on": [
+      "doc_001"
+    ],
+    "refugees": [
+      "doc_001"
+    ],
+    "bureau": [
+      "social_001"
+    ],
+    "food": [
+      "food_001"
+    ],
+    "bank": [
+      "food_001"
+    ],
+    "transgender": [
+      "trans_001"
+    ],
+    "elderly": [
+      "elder_001"
+    ],
+    "care": [
+      "elder_001",
+      "MED_BXL_005"
+    ],
+    "disability": [
+      "adapt_001"
+    ],
+    "determination": [
+      "MED_BXL_001"
+    ],
+    "age": [
+      "MED_BXL_001"
+    ],
+    "mena": [
+      "MED_ANT_001",
+      "MED_BXL_001"
+    ],
+    "screening": [
+      "MED_BXL_002"
+    ],
+    "trauma": [
+      "MED_BXL_003",
+      "PSY_BXL_002",
+      "PSY_GENT_002"
+    ],
+    "psychosomatic": [
+      "MED_BXL_003"
+    ],
+    "medicine": [
+      "MED_BXL_003",
+      "MED_BXL_004"
+    ],
+    "multicultural": [
+      "MED_BXL_004"
+    ],
+    "pediatric": [
+      "MED_BXL_005"
+    ],
+    "emergency": [
+      "SHEL_WID_001",
+      "MED_BXL_005"
+    ],
+    "assessment": [
+      "MED_LIE_001",
+      "PSY_BXL_001",
+      "MED_ANT_001",
+      "SOC_BXL_001",
+      "PSY_GENT_001"
+    ],
+    "testing": [
+      "PSY_BXL_001",
+      "PSY_LIE_001"
+    ],
+    "resilience": [
+      "PSY_BXL_002"
+    ],
+    "recovery": [
+      "PSY_BXL_002"
+    ],
+    "programme": [
+      "SHEL_BXL_001",
+      "PSY_BXL_002",
+      "LANG_LEU_001"
+    ],
+    "child": [
+      "PSY_BXL_003",
+      "PSY_LIE_001"
+    ],
+    "adolescent": [
+      "PSY_BXL_003"
+    ],
+    "autonomy": [
+      "SOC_BXL_001"
+    ],
+    "inclusion": [
+      "SOC_BXL_002"
+    ],
+    "cultural": [
+      "LANG_BXL_001"
+    ],
+    "youth": [
+      "MED_ANT_002",
+      "EMPL_ANT_001",
+      "SHEL_WID_001"
+    ],
+    "psychological": [
+      "PSY_GENT_001"
+    ],
+    "counseling": [
+      "PSY_GENT_002"
+    ],
+    "dutch": [
+      "LANG_LEU_001"
+    ],
+    "housing": [
+      "SHEL_BXL_001",
+      "SOC_CHA_001"
+    ],
+    "skills": [
+      "EMPL_CHA_001"
+    ],
+    "training": [
+      "EMPL_ANT_001",
+      "EMPL_CHA_001"
+    ],
+    "shelter": [
+      "SHEL_WID_001"
+    ],
+    "wallonie": [
+      "SHEL_WID_001",
+      "LANG_WAL_001"
+    ],
+    "transitional": [
+      "SHEL_BXL_001"
+    ],
+    "hub": [
+      "EMPL_ANT_001"
+    ],
+    "french": [
+      "LANG_WAL_001"
+    ]
+  },
+  "specialty": {
+    "commercial": [
+      "LAW001",
+      "LAW026",
+      "LAW024",
+      "LAW015",
+      "LAW011"
+    ],
+    "law": [
+      "LAW037",
+      "LAW009",
+      "LAW004",
+      "LAW001",
+      "LAW021",
+      "LAW020",
+      "LAW029",
+      "LAW010",
+      "LAW036",
+      "LAW038",
+      "LAW026",
+      "LAW012",
+      "LAW027",
+      "LAW016",
+      "LAW018",
+      "LAW011",
+      "LAW003",
+      "LAW034",
+      "LAW013",
+      "LAW022",
+      "LAW030",
+      "LAW008",
+      "LAW033",
+      "LAW028",
+      "LAW019",
+      "LAW006",
+      "LAW023",
+      "LAW014",
+      "LAW002",
+      "LAW024",
+      "LAW005",
+      "LAW015",
+      "LAW035",
+      "LAW032"
+    ],
+    "contract": [
+      "LAW001",
+      "LAW024"
+    ],
+    "corporate": [
+      "LAW001",
+      "LAW009"
+    ],
+    "family": [
+      "LAW013",
+      "LAW002"
+    ],
+    "inheritance": [
+      "LAW002"
+    ],
+    "mediation": [
+      "LAW013",
+      "LAW002"
+    ],
+    "criminal": [
+      "LAW040",
+      "LAW003"
+    ],
+    "administrative": [
+      "LAW008",
+      "LAW036",
+      "LAW003"
+    ],
+    "civil": [
+      "LAW025",
+      "LAW003"
+    ],
+    "litigation": [
+      "LAW025",
+      "LAW003"
+    ],
+    "real": [
+      "LAW031",
+      "LAW004"
+    ],
+    "estate": [
+      "LAW031",
+      "LAW004",
+      "LAW007"
+    ],
+    "property": [
+      "LAW004",
+      "LAW006",
+      "LAW032"
+    ],
+    "conveyancing": [
+      "LAW004"
+    ],
+    "construction": [
+      "LAW004",
+      "LAW022"
+    ],
+    "employment": [
+      "LAW005",
+      "antwerp_001",
+      "praxis_001",
+      "LAW029"
+    ],
+    "labor": [
+      "LAW005",
+      "LAW029"
+    ],
+    "relations": [
+      "LAW005"
+    ],
+    "hr": [
+      "LAW005"
+    ],
+    "consulting": [
+      "LAW005"
+    ],
+    "intellectual": [
+      "LAW006"
+    ],
+    "patents": [
+      "LAW006"
+    ],
+    "trademark": [
+      "LAW006"
+    ],
+    "general": [
+      "LAW007",
+      "LAW017"
+    ],
+    "practice": [
+      "LAW007",
+      "LAW017"
+    ],
+    "notarial": [
+      "LAW032",
+      "LAW007"
+    ],
+    "services": [
+      "LAW007"
+    ],
+    "planning": [
+      "LAW031",
+      "LAW007"
+    ],
+    "municipal": [
+      "LAW031",
+      "LAW008"
+    ],
+    "compliance": [
+      "LAW031",
+      "LAW019",
+      "LAW021",
+      "LAW039",
+      "LAW008",
+      "LAW035"
+    ],
+    "public": [
+      "LAW036",
+      "LAW023",
+      "LAW008"
+    ],
+    "records": [
+      "LAW008"
+    ],
+    "business": [
+      "LAW015",
+      "LAW009"
+    ],
+    "restructuring": [
+      "LAW009"
+    ],
+    "social": [
+      "LAW010"
+    ],
+    "security": [
+      "LAW010"
+    ],
+    "disability": [
+      "LAW010"
+    ],
+    "rights": [
+      "LAW034",
+      "LAW022",
+      "LAW030",
+      "LAW012",
+      "LAW029",
+      "LAW010",
+      "LAW040",
+      "LAW038"
+    ],
+    "welfare": [
+      "LAW010"
+    ],
+    "trade": [
+      "LAW011"
+    ],
+    "supply": [
+      "LAW011"
+    ],
+    "chain": [
+      "LAW011"
+    ],
+    "bankruptcy": [
+      "LAW012"
+    ],
+    "creditor": [
+      "LAW012"
+    ],
+    "insolvency": [
+      "LAW012"
+    ],
+    "child": [
+      "LAW013"
+    ],
+    "custody": [
+      "LAW013"
+    ],
+    "divorce": [
+      "LAW013"
+    ],
+    "immigration": [
+      "LAW014"
+    ],
+    "asylum": [
+      "LAW014"
+    ],
+    "work": [
+      "LAW014"
+    ],
+    "permits": [
+      "LAW014"
+    ],
+    "tourism": [
+      "LAW015"
+    ],
+    "contracts": [
+      "LAW029",
+      "LAW015"
+    ],
+    "licensing": [
+      "LAW015",
+      "LAW030"
+    ],
+    "environmental": [
+      "LAW016",
+      "LAW035"
+    ],
+    "building": [
+      "LAW016",
+      "LAW022"
+    ],
+    "code": [
+      "LAW016"
+    ],
+    "zoning": [
+      "LAW016"
+    ],
+    "multiple": [
+      "LAW017"
+    ],
+    "jurisdictions": [
+      "LAW017"
+    ],
+    "dispute": [
+      "LAW017"
+    ],
+    "resolution": [
+      "LAW017"
+    ],
+    "consumer": [
+      "LAW018"
+    ],
+    "fraud": [
+      "LAW018"
+    ],
+    "protection": [
+      "LAW018"
+    ],
+    "data": [
+      "LAW018"
+    ],
+    "privacy": [
+      "LAW018"
+    ],
+    "gdpr": [
+      "LAW018"
+    ],
+    "tax": [
+      "LAW019"
+    ],
+    "vat": [
+      "LAW019"
+    ],
+    "international": [
+      "LAW019",
+      "LAW027"
+    ],
+    "insurance": [
+      "LAW020"
+    ],
+    "claims": [
+      "LAW025",
+      "LAW020"
+    ],
+    "handling": [
+      "LAW020"
+    ],
+    "liability": [
+      "LAW020"
+    ],
+    "medical": [
+      "LAW021"
+    ],
+    "healthcare": [
+      "leuven_health_001",
+      "LAW021",
+      "rcb_001",
+      "mdm_001",
+      "liege_health_001"
+    ],
+    "pharma": [
+      "LAW021"
+    ],
+    "disputes": [
+      "LAW026",
+      "LAW024",
+      "LAW022",
+      "LAW027"
+    ],
+    "contractor": [
+      "LAW022"
+    ],
+    "regional": [
+      "LAW023"
+    ],
+    "administration": [
+      "LAW023"
+    ],
+    "agriculture": [
+      "LAW023"
+    ],
+    "negotiation": [
+      "LAW024"
+    ],
+    "personal": [
+      "LAW025"
+    ],
+    "injury": [
+      "LAW025"
+    ],
+    "negligence": [
+      "LAW025"
+    ],
+    "debt": [
+      "LAW026"
+    ],
+    "collection": [
+      "LAW026"
+    ],
+    "recovery": [
+      "LAW026"
+    ],
+    "cross": [
+      "LAW027"
+    ],
+    "border": [
+      "LAW027"
+    ],
+    "eu": [
+      "LAW036",
+      "LAW027"
+    ],
+    "competition": [
+      "LAW028"
+    ],
+    "antitrust": [
+      "LAW028"
+    ],
+    "market": [
+      "LAW028"
+    ],
+    "regulation": [
+      "LAW028"
+    ],
+    "worker": [
+      "LAW029"
+    ],
+    "entertainment": [
+      "LAW030"
+    ],
+    "media": [
+      "LAW030"
+    ],
+    "urban": [
+      "LAW031"
+    ],
+    "development": [
+      "LAW031"
+    ],
+    "transfer": [
+      "LAW032"
+    ],
+    "succession": [
+      "LAW032"
+    ],
+    "industrial": [
+      "LAW033"
+    ],
+    "factory": [
+      "LAW033"
+    ],
+    "regulations": [
+      "LAW039",
+      "LAW033"
+    ],
+    "manufacturing": [
+      "LAW033"
+    ],
+    "educational": [
+      "LAW034"
+    ],
+    "student": [
+      "LAW034"
+    ],
+    "accreditation": [
+      "LAW034"
+    ],
+    "energy": [
+      "LAW035"
+    ],
+    "renewable": [
+      "LAW035"
+    ],
+    "european": [
+      "LAW036"
+    ],
+    "institutions": [
+      "LAW036"
+    ],
+    "procurement": [
+      "LAW036"
+    ],
+    "maritime": [
+      "LAW037"
+    ],
+    "shipping": [
+      "LAW037"
+    ],
+    "port": [
+      "LAW037"
+    ],
+    "operations": [
+      "LAW037"
+    ],
+    "non": [
+      "LAW038"
+    ],
+    "profit": [
+      "LAW038"
+    ],
+    "charity": [
+      "LAW038"
+    ],
+    "association": [
+      "LAW038"
+    ],
+    "regulatory": [
+      "LAW039"
+    ],
+    "aml": [
+      "LAW039"
+    ],
+    "kyc": [
+      "LAW039"
+    ],
+    "financial": [
+      "LAW039"
+    ],
+    "victim": [
+      "LAW040"
+    ],
+    "support": [
+      "LAW040"
+    ],
+    "rehabilitation": [
+      "LAW040"
+    ],
+    "asylum_processing": [
+      "cgra_001"
+    ],
+    "refugee_status": [
+      "cgra_001"
+    ],
+    "statelessness_determination": [
+      "cgra_001"
+    ],
+    "accommodation": [
+      "fedasil_001"
+    ],
+    "shelter": [
+      "fedasil_001"
+    ],
+    "integration_support": [
+      "fedasil_001"
+    ],
+    "documentation": [
+      "dgm_001"
+    ],
+    "residence_permits": [
+      "dgm_001"
+    ],
+    "immigration_law": [
+      "dgm_001",
+      "cajm_001"
+    ],
+    "emergency_assistance": [
+      "rcb_001"
+    ],
+    "humanitarian_aid": [
+      "unhcr_001",
+      "rcb_001"
+    ],
+    "medical_treatment": [
+      "mdm_001"
+    ],
+    "health_education": [
+      "namur_health_001",
+      "mdm_001",
+      "leuven_health_001"
+    ],
+    "human_rights": [
+      "ldh_001"
+    ],
+    "advocacy": [
+      "cire_001",
+      "liege_001",
+      "ldh_001"
+    ],
+    "legal_support": [
+      "antwerp_001",
+      "liege_001",
+      "ldh_001"
+    ],
+    "legal_aid": [
+      "cajm_001"
+    ],
+    "asylum_representation": [
+      "cajm_001"
+    ],
+    "human_rights_advocacy": [
+      "amnesty_001"
+    ],
+    "campaigns": [
+      "amnesty_001"
+    ],
+    "research": [
+      "doc_001",
+      "amnesty_001",
+      "oim_001"
+    ],
+    "migration_management": [
+      "oim_001"
+    ],
+    "humanitarian_assistance": [
+      "oim_001"
+    ],
+    "refugee_protection": [
+      "unhcr_001"
+    ],
+    "durable_solutions": [
+      "unhcr_001"
+    ],
+    "anti_racism": [
+      "cire_001"
+    ],
+    "education": [
+      "cire_001",
+      "praxis_001",
+      "cesp_001"
+    ],
+    "refugee_support": [
+      "plateforme_001",
+      "gent_001",
+      "namur_001"
+    ],
+    "integration": [
+      "antwerp_001",
+      "liege_001",
+      "plateforme_001",
+      "gent_001",
+      "charleroi_001"
+    ],
+    "community_programs": [
+      "plateforme_001"
+    ],
+    "integration_services": [
+      "praxis_001"
+    ],
+    "civic_participation": [
+      "bruxact_001"
+    ],
+    "housing_support": [
+      "bruxact_001"
+    ],
+    "community_organizing": [
+      "bruxact_001"
+    ],
+    "housing": [
+      "leuven_001",
+      "habitat_br_001",
+      "namur_001"
+    ],
+    "construction_training": [
+      "habitat_br_001"
+    ],
+    "home_improvement": [
+      "habitat_br_001"
+    ],
+    "social_services": [
+      "social_001",
+      "liege_health_001",
+      "fesn_001"
+    ],
+    "family_support": [
+      "child_001",
+      "sem_001",
+      "fesn_001"
+    ],
+    "vulnerable_populations": [
+      "fesn_001"
+    ],
+    "literacy": [
+      "lang_001",
+      "cesp_001"
+    ],
+    "skill_development": [
+      "cesp_001"
+    ],
+    "child_protection": [
+      "sem_001"
+    ],
+    "unaccompanied_minors": [
+      "child_001",
+      "sem_001"
+    ],
+    "integration_policy": [
+      "ante_001"
+    ],
+    "language_training": [
+      "ante_001",
+      "lang_001",
+      "leuven_001",
+      "charleroi_001",
+      "lang_ant_001"
+    ],
+    "civic_education": [
+      "ante_001"
+    ],
+    "employment_support": [
+      "charleroi_001"
+    ],
+    "basic_needs": [
+      "namur_001"
+    ],
+    "community_building": [
+      "gent_001"
+    ],
+    "migrant_support": [
+      "leuven_001"
+    ],
+    "primary_healthcare": [
+      "antwerp_health_001",
+      "gent_health_001",
+      "bruxhealth_001",
+      "namur_health_001",
+      "sante_001"
+    ],
+    "sexual_health": [
+      "antwerp_health_001",
+      "bruxhealth_001"
+    ],
+    "mental_health": [
+      "gent_health_001",
+      "trans_001",
+      "bruxhealth_001",
+      "psycho_001"
+    ],
+    "trauma_counseling": [
+      "psycho_001"
+    ],
+    "psychological_support": [
+      "psycho_001"
+    ],
+    "vaccination": [
+      "leuven_health_001",
+      "sante_001"
+    ],
+    "health_screening": [
+      "charleroi_health_001",
+      "gent_health_001",
+      "sante_001"
+    ],
+    "dental_care": [
+      "tooth_001"
+    ],
+    "emergency_dental": [
+      "tooth_001"
+    ],
+    "oral_health": [
+      "tooth_001"
+    ],
+    "housing_provision": [
+      "hous_001"
+    ],
+    "landlord_liaison": [
+      "hous_001"
+    ],
+    "housing_rights": [
+      "hous_001"
+    ],
+    "job_placement": [
+      "employ_001",
+      "employ_ant_001"
+    ],
+    "skills_training": [
+      "employ_001"
+    ],
+    "career_counseling": [
+      "employ_001"
+    ],
+    "vocational_training": [
+      "employ_ant_001"
+    ],
+    "skills_assessment": [
+      "employ_ant_001"
+    ],
+    "cultural_integration": [
+      "lang_001"
+    ],
+    "integration_classes": [
+      "lang_ant_001"
+    ],
+    "vocational_language": [
+      "lang_ant_001"
+    ],
+    "cultural_exchange": [
+      "cult_001"
+    ],
+    "integration_activities": [
+      "cult_001"
+    ],
+    "community_events": [
+      "cult_001"
+    ],
+    "integration_coordination": [
+      "reg_int_001"
+    ],
+    "settlement_support": [
+      "reg_int_001"
+    ],
+    "pathway_guidance": [
+      "reg_int_001"
+    ],
+    "child_rights": [
+      "child_001"
+    ],
+    "women_support": [
+      "women_001"
+    ],
+    "gender_issues": [
+      "women_001"
+    ],
+    "domestic_violence_support": [
+      "women_001"
+    ],
+    "legal_advice": [
+      "legal_001"
+    ],
+    "representation": [
+      "legal_001"
+    ],
+    "rights_education": [
+      "legal_001"
+    ],
+    "information_provision": [
+      "doc_001"
+    ],
+    "policy_advocacy": [
+      "doc_001"
+    ],
+    "benefits_counseling": [
+      "social_001"
+    ],
+    "case_management": [
+      "social_001"
+    ],
+    "food_assistance": [
+      "food_001"
+    ],
+    "nutrition_support": [
+      "food_001"
+    ],
+    "emergency_aid": [
+      "food_001"
+    ],
+    "transgender_health": [
+      "trans_001"
+    ],
+    "community_support": [
+      "trans_001"
+    ],
+    "elderly_care": [
+      "elder_001"
+    ],
+    "health_services": [
+      "elder_001"
+    ],
+    "social_engagement": [
+      "elder_001"
+    ],
+    "disability_support": [
+      "adapt_001"
+    ],
+    "accessibility_advocacy": [
+      "adapt_001"
+    ],
+    "care_coordination": [
+      "adapt_001"
+    ],
+    "addiction_support": [
+      "antwerp_health_001"
+    ],
+    "community_health": [
+      "namur_health_001",
+      "liege_health_001"
+    ],
+    "general_medicine": [
+      "charleroi_health_001"
+    ],
+    "occupational_health": [
+      "charleroi_health_001"
+    ]
+  },
+  "region": {
+    "brussels": [
+      "LAW031",
+      "LAW019",
+      "LAW004",
+      "LAW001",
+      "LAW006",
+      "LAW021",
+      "LAW022",
+      "LAW002",
+      "LAW020",
+      "LAW005",
+      "LAW039",
+      "LAW036",
+      "LAW040",
+      "LAW032",
+      "LAW003"
+    ],
+    "wallonia": [
+      "LAW025",
+      "LAW009",
+      "LAW034",
+      "LAW023",
+      "LAW024",
+      "LAW026",
+      "LAW008",
+      "LAW010",
+      "LAW035",
+      "LAW033",
+      "LAW007"
+    ],
+    "flanders": [
+      "LAW028",
+      "LAW037",
+      "LAW013",
+      "LAW014",
+      "LAW012",
+      "LAW027",
+      "LAW016",
+      "LAW015",
+      "LAW029",
+      "LAW030",
+      "LAW011",
+      "LAW038"
+    ],
+    "mixed": [
+      "LAW018",
+      "LAW017"
+    ],
+    "bruxelles": [
+      "ante_001",
+      "MED_BXL_004",
+      "PSY_BXL_002",
+      "reg_int_001",
+      "MED_BXL_002",
+      "psycho_001",
+      "trans_001",
+      "bruxhealth_001",
+      "legal_001",
+      "SOC_BXL_001",
+      "praxis_001",
+      "cesp_001",
+      "habitat_br_001",
+      "SHEL_BXL_001",
+      "lang_001",
+      "PSY_BXL_001",
+      "unhcr_001",
+      "adapt_001",
+      "cajm_001",
+      "ldh_001",
+      "sem_001",
+      "PSY_BXL_003",
+      "women_001",
+      "LANG_BXL_001",
+      "dgm_001",
+      "cult_001",
+      "hous_001",
+      "fedasil_001",
+      "bruxact_001",
+      "MED_BXL_005",
+      "cire_001",
+      "amnesty_001",
+      "mdm_001",
+      "employ_001",
+      "child_001",
+      "elder_001",
+      "MED_BXL_003",
+      "oim_001",
+      "rcb_001",
+      "MED_BXL_001",
+      "plateforme_001",
+      "cgra_001",
+      "sante_001",
+      "fesn_001",
+      "social_001",
+      "food_001",
+      "tooth_001",
+      "doc_001",
+      "SOC_BXL_002"
+    ],
+    "wallonie": [
+      "SHEL_WID_001",
+      "liege_001",
+      "charleroi_health_001",
+      "MED_LIE_001",
+      "namur_001",
+      "EMPL_CHA_001",
+      "namur_health_001",
+      "LANG_WAL_001",
+      "charleroi_001",
+      "SOC_CHA_001",
+      "PSY_LIE_001",
+      "liege_health_001"
+    ],
+    "flandre": [
+      "antwerp_001",
+      "leuven_health_001",
+      "PSY_GENT_002",
+      "SOC_LEU_001",
+      "LANG_LEU_001",
+      "MED_ANT_002",
+      "antwerp_health_001",
+      "employ_ant_001",
+      "gent_001",
+      "EMPL_ANT_001",
+      "gent_health_001",
+      "MED_ANT_001",
+      "leuven_001",
+      "PSY_GENT_001",
+      "lang_ant_001"
+    ]
+  },
+  "language": {
+    "french": [
+      "LAW037",
+      "LAW009",
+      "LAW004",
+      "LAW001",
+      "LAW021",
+      "LAW020",
+      "LAW029",
+      "LAW010",
+      "LAW036",
+      "LAW007",
+      "LAW017",
+      "LAW031",
+      "LAW026",
+      "LAW027",
+      "LAW016",
+      "LAW018",
+      "LAW040",
+      "LAW011",
+      "LAW003",
+      "LAW034",
+      "LAW013",
+      "LAW022",
+      "LAW008",
+      "LAW033",
+      "LAW025",
+      "LAW019",
+      "LAW006",
+      "LAW023",
+      "LAW014",
+      "LAW002",
+      "LAW024",
+      "LAW005",
+      "LAW015",
+      "LAW035",
+      "LAW039",
+      "LAW032"
+    ],
+    "english": [
+      "LAW037",
+      "LAW009",
+      "LAW004",
+      "LAW001",
+      "LAW021",
+      "LAW020",
+      "LAW029",
+      "LAW036",
+      "LAW007",
+      "LAW017",
+      "LAW031",
+      "LAW038",
+      "LAW012",
+      "LAW027",
+      "LAW018",
+      "LAW040",
+      "LAW011",
+      "LAW003",
+      "LAW013",
+      "LAW022",
+      "LAW030",
+      "LAW033",
+      "LAW028",
+      "LAW025",
+      "LAW019",
+      "LAW006",
+      "LAW023",
+      "LAW014",
+      "LAW002",
+      "LAW024",
+      "LAW005",
+      "LAW015",
+      "LAW035",
+      "LAW039"
+    ],
+    "dutch": [
+      "LAW037",
+      "LAW001",
+      "LAW021",
+      "LAW029",
+      "LAW038",
+      "LAW017",
+      "LAW031",
+      "LAW012",
+      "LAW027",
+      "LAW016",
+      "LAW018",
+      "LAW011",
+      "LAW003",
+      "LAW013",
+      "LAW030",
+      "LAW028",
+      "LAW019",
+      "LAW014",
+      "LAW039",
+      "LAW005",
+      "LAW015",
+      "LAW032"
+    ],
+    "german": [
+      "LAW009",
+      "LAW019",
+      "LAW006",
+      "LAW014",
+      "LAW027",
+      "LAW015",
+      "LAW035",
+      "LAW036",
+      "LAW017",
+      "LAW003"
+    ],
+    "italian": [
+      "LAW020",
+      "LAW030",
+      "LAW017"
+    ],
+    "spanish": [
+      "LAW040",
+      "LAW027"
+    ],
+    "russian": [
+      "LAW028"
+    ],
+    "nl": [
+      "ante_001",
+      "MED_BXL_004",
+      "reg_int_001",
+      "charleroi_health_001",
+      "MED_BXL_002",
+      "namur_001",
+      "psycho_001",
+      "EMPL_ANT_001",
+      "trans_001",
+      "bruxhealth_001",
+      "legal_001",
+      "leuven_001",
+      "SOC_BXL_001",
+      "praxis_001",
+      "cesp_001",
+      "LANG_LEU_001",
+      "habitat_br_001",
+      "SHEL_BXL_001",
+      "lang_001",
+      "tooth_001",
+      "PSY_BXL_001",
+      "EMPL_CHA_001",
+      "unhcr_001",
+      "gent_001",
+      "adapt_001",
+      "gent_health_001",
+      "namur_health_001",
+      "cajm_001",
+      "ldh_001",
+      "MED_ANT_002",
+      "sem_001",
+      "PSY_BXL_003",
+      "women_001",
+      "LANG_BXL_001",
+      "SHEL_WID_001",
+      "dgm_001",
+      "liege_001",
+      "cult_001",
+      "SOC_LEU_001",
+      "hous_001",
+      "antwerp_health_001",
+      "employ_ant_001",
+      "fedasil_001",
+      "bruxact_001",
+      "MED_BXL_005",
+      "cire_001",
+      "amnesty_001",
+      "mdm_001",
+      "employ_001",
+      "PSY_GENT_001",
+      "lang_ant_001",
+      "child_001",
+      "antwerp_001",
+      "liege_health_001",
+      "leuven_health_001",
+      "PSY_GENT_002",
+      "elder_001",
+      "oim_001",
+      "rcb_001",
+      "plateforme_001",
+      "cgra_001",
+      "MED_ANT_001",
+      "sante_001",
+      "fesn_001",
+      "social_001",
+      "food_001",
+      "charleroi_001",
+      "doc_001",
+      "SOC_BXL_002"
+    ],
+    "fr": [
+      "ante_001",
+      "MED_BXL_004",
+      "PSY_BXL_002",
+      "reg_int_001",
+      "charleroi_health_001",
+      "MED_BXL_002",
+      "namur_001",
+      "psycho_001",
+      "MED_LIE_001",
+      "EMPL_ANT_001",
+      "trans_001",
+      "bruxhealth_001",
+      "legal_001",
+      "leuven_001",
+      "SOC_BXL_001",
+      "praxis_001",
+      "cesp_001",
+      "SOC_CHA_001",
+      "LANG_LEU_001",
+      "habitat_br_001",
+      "SHEL_BXL_001",
+      "lang_001",
+      "tooth_001",
+      "PSY_BXL_001",
+      "EMPL_CHA_001",
+      "unhcr_001",
+      "gent_001",
+      "adapt_001",
+      "gent_health_001",
+      "namur_health_001",
+      "cajm_001",
+      "ldh_001",
+      "MED_ANT_002",
+      "sem_001",
+      "LANG_WAL_001",
+      "PSY_BXL_003",
+      "women_001",
+      "LANG_BXL_001",
+      "SHEL_WID_001",
+      "dgm_001",
+      "liege_001",
+      "cult_001",
+      "SOC_LEU_001",
+      "hous_001",
+      "antwerp_health_001",
+      "employ_ant_001",
+      "fedasil_001",
+      "bruxact_001",
+      "MED_BXL_005",
+      "cire_001",
+      "amnesty_001",
+      "mdm_001",
+      "employ_001",
+      "PSY_GENT_001",
+      "lang_ant_001",
+      "child_001",
+      "antwerp_001",
+      "liege_health_001",
+      "PSY_LIE_001",
+      "leuven_health_001",
+      "PSY_GENT_002",
+      "elder_001",
+      "MED_BXL_003",
+      "oim_001",
+      "rcb_001",
+      "MED_BXL_001",
+      "plateforme_001",
+      "cgra_001",
+      "sante_001",
+      "fesn_001",
+      "social_001",
+      "food_001",
+      "charleroi_001",
+      "doc_001",
+      "SOC_BXL_002"
+    ],
+    "en": [
+      "ante_001",
+      "MED_BXL_004",
+      "PSY_BXL_002",
+      "reg_int_001",
+      "charleroi_health_001",
+      "MED_BXL_002",
+      "namur_001",
+      "psycho_001",
+      "MED_LIE_001",
+      "EMPL_ANT_001",
+      "trans_001",
+      "bruxhealth_001",
+      "legal_001",
+      "leuven_001",
+      "SOC_BXL_001",
+      "praxis_001",
+      "cesp_001",
+      "SOC_CHA_001",
+      "LANG_LEU_001",
+      "habitat_br_001",
+      "SHEL_BXL_001",
+      "lang_001",
+      "tooth_001",
+      "PSY_BXL_001",
+      "EMPL_CHA_001",
+      "unhcr_001",
+      "gent_001",
+      "adapt_001",
+      "gent_health_001",
+      "namur_health_001",
+      "cajm_001",
+      "ldh_001",
+      "MED_ANT_002",
+      "sem_001",
+      "LANG_WAL_001",
+      "PSY_BXL_003",
+      "women_001",
+      "LANG_BXL_001",
+      "SHEL_WID_001",
+      "dgm_001",
+      "liege_001",
+      "cult_001",
+      "SOC_LEU_001",
+      "hous_001",
+      "antwerp_health_001",
+      "employ_ant_001",
+      "fedasil_001",
+      "bruxact_001",
+      "MED_BXL_005",
+      "cire_001",
+      "amnesty_001",
+      "mdm_001",
+      "employ_001",
+      "PSY_GENT_001",
+      "lang_ant_001",
+      "child_001",
+      "antwerp_001",
+      "liege_health_001",
+      "PSY_LIE_001",
+      "leuven_health_001",
+      "PSY_GENT_002",
+      "elder_001",
+      "MED_BXL_003",
+      "oim_001",
+      "rcb_001",
+      "MED_BXL_001",
+      "plateforme_001",
+      "cgra_001",
+      "MED_ANT_001",
+      "sante_001",
+      "fesn_001",
+      "social_001",
+      "food_001",
+      "charleroi_001",
+      "doc_001",
+      "SOC_BXL_002"
+    ],
+    "ar": [
+      "PSY_BXL_002",
+      "MED_BXL_004",
+      "reg_int_001",
+      "MED_BXL_002",
+      "MED_LIE_001",
+      "namur_001",
+      "psycho_001",
+      "EMPL_ANT_001",
+      "bruxhealth_001",
+      "legal_001",
+      "leuven_001",
+      "SOC_BXL_001",
+      "praxis_001",
+      "cesp_001",
+      "SOC_CHA_001",
+      "LANG_LEU_001",
+      "SHEL_BXL_001",
+      "PSY_BXL_001",
+      "EMPL_CHA_001",
+      "gent_001",
+      "gent_health_001",
+      "cajm_001",
+      "MED_ANT_002",
+      "LANG_WAL_001",
+      "sem_001",
+      "PSY_BXL_003",
+      "women_001",
+      "LANG_BXL_001",
+      "SHEL_WID_001",
+      "liege_001",
+      "SOC_LEU_001",
+      "antwerp_health_001",
+      "employ_ant_001",
+      "fedasil_001",
+      "MED_BXL_005",
+      "mdm_001",
+      "employ_001",
+      "PSY_GENT_001",
+      "PSY_LIE_001",
+      "child_001",
+      "antwerp_001",
+      "PSY_GENT_002",
+      "elder_001",
+      "MED_BXL_003",
+      "rcb_001",
+      "MED_BXL_001",
+      "plateforme_001",
+      "cgra_001",
+      "MED_ANT_001",
+      "sante_001",
+      "social_001",
+      "charleroi_001",
+      "SOC_BXL_002"
+    ],
+    "am": [
+      "child_001",
+      "antwerp_001",
+      "liege_001",
+      "PSY_BXL_002",
+      "psycho_001",
+      "antwerp_health_001",
+      "MED_BXL_001",
+      "plateforme_001",
+      "cgra_001",
+      "fedasil_001",
+      "bruxhealth_001",
+      "employ_001",
+      "sante_001",
+      "cajm_001",
+      "mdm_001",
+      "praxis_001",
+      "sem_001",
+      "women_001"
+    ],
+    "ti": [
+      "SHEL_WID_001",
+      "MED_LIE_001",
+      "LANG_BXL_001",
+      "cgra_001",
+      "fedasil_001",
+      "bruxhealth_001",
+      "LANG_WAL_001",
+      "mdm_001",
+      "PSY_LIE_001",
+      "SOC_BXL_002"
+    ],
+    "fa": [
+      "fedasil_001",
+      "MED_BXL_004"
+    ],
+    "so": [
+      "PSY_BXL_002",
+      "MED_BXL_002",
+      "SHEL_BXL_001",
+      "bruxhealth_001",
+      "praxis_001",
+      "women_001"
+    ],
+    "ku": [
+      "MED_BXL_003",
+      "psycho_001"
+    ],
+    "tr": [
+      "MED_ANT_001",
+      "MED_BXL_001"
+    ],
+    "da": [
+      "MED_BXL_003"
+    ],
+    "ur": [
+      "MED_BXL_004"
+    ],
+    "pl": [
+      "PSY_BXL_003"
+    ],
+    "ro": [
+      "SOC_BXL_001",
+      "LANG_WAL_001"
+    ],
+    "sw": [
+      "LANG_BXL_001"
+    ]
+  },
+  "postal_code": {
+    "1050": [
+      "PSY_BXL_002",
+      "sem_001",
+      "reg_int_001",
+      "MED_BXL_002",
+      "LAW001",
+      "LAW006",
+      "oim_001",
+      "PSY_BXL_001",
+      "mdm_001",
+      "LAW040",
+      "LANG_BXL_001"
+    ],
+    "1000": [
+      "ante_001",
+      "psycho_001",
+      "trans_001",
+      "bruxhealth_001",
+      "legal_001",
+      "SOC_BXL_001",
+      "praxis_001",
+      "LAW017",
+      "LAW031",
+      "habitat_br_001",
+      "lang_001",
+      "LAW018",
+      "cajm_001",
+      "ldh_001",
+      "PSY_BXL_003",
+      "LAW003",
+      "women_001",
+      "cult_001",
+      "hous_001",
+      "bruxact_001",
+      "cire_001",
+      "employ_001",
+      "child_001",
+      "MED_BXL_003",
+      "LAW002",
+      "MED_BXL_001",
+      "LAW005",
+      "plateforme_001",
+      "social_001",
+      "doc_001"
+    ],
+    "1210": [
+      "LAW004",
+      "MED_BXL_004",
+      "LAW032",
+      "fesn_001"
+    ],
+    "5000": [
+      "namur_health_001",
+      "namur_001",
+      "LAW023",
+      "LAW007"
+    ],
+    "6000": [
+      "charleroi_health_001",
+      "EMPL_CHA_001",
+      "LAW008",
+      "charleroi_001",
+      "SOC_CHA_001",
+      "LAW033"
+    ],
+    "4000": [
+      "liege_001",
+      "LAW009",
+      "MED_LIE_001",
+      "LAW010",
+      "LAW035",
+      "LANG_WAL_001",
+      "PSY_LIE_001",
+      "liege_health_001"
+    ],
+    "2000": [
+      "antwerp_001",
+      "LAW037",
+      "antwerp_health_001",
+      "LAW012",
+      "employ_ant_001",
+      "EMPL_ANT_001",
+      "MED_ANT_001",
+      "MED_ANT_002",
+      "lang_ant_001",
+      "LAW011",
+      "LAW038"
+    ],
+    "9000": [
+      "PSY_GENT_002",
+      "LAW013",
+      "LAW030",
+      "LAW014",
+      "gent_001",
+      "gent_health_001",
+      "PSY_GENT_001"
+    ],
+    "8000": [
+      "LAW016",
+      "LAW015",
+      "LAW028",
+      "LAW027"
+    ],
+    "1040": [
+      "LAW019",
+      "LAW021",
+      "LAW022",
+      "LAW039",
+      "rcb_001",
+      "unhcr_001",
+      "LAW036",
+      "MED_BXL_005",
+      "amnesty_001"
+    ],
+    "1200": [
+      "LAW020"
+    ],
+    "5100": [
+      "LAW024"
+    ],
+    "7500": [
+      "LAW025"
+    ],
+    "5500": [
+      "LAW026"
+    ],
+    "8500": [
+      "LAW029"
+    ],
+    "7000": [
+      "LAW034",
+      "SHEL_WID_001"
+    ],
+    "1060": [
+      "dgm_001",
+      "elder_001",
+      "SHEL_BXL_001",
+      "cgra_001",
+      "cesp_001",
+      "SOC_BXL_002"
+    ],
+    "1080": [
+      "fedasil_001",
+      "tooth_001"
+    ],
+    "3000": [
+      "leuven_001",
+      "LANG_LEU_001",
+      "leuven_health_001",
+      "SOC_LEU_001"
+    ],
+    "1070": [
+      "adapt_001",
+      "sante_001"
+    ],
+    "1030": [
+      "food_001"
+    ]
+  },
+  "case_type": {
+    "business": [
+      "LAW001"
+    ],
+    "disputes": [
+      "LAW037",
+      "LAW019",
+      "LAW034",
+      "LAW004",
+      "LAW001",
+      "LAW006",
+      "LAW013",
+      "LAW022",
+      "LAW024",
+      "LAW020",
+      "LAW005",
+      "LAW016",
+      "LAW027",
+      "LAW029",
+      "LAW038",
+      "LAW033",
+      "LAW011",
+      "LAW017"
+    ],
+    "contracts": [
+      "LAW037",
+      "LAW001",
+      "LAW030",
+      "LAW035",
+      "LAW036",
+      "LAW017"
+    ],
+    "company": [
+      "LAW001",
+      "LAW009"
+    ],
+    "formation": [
+      "LAW001"
+    ],
+    "divorce": [
+      "LAW013",
+      "LAW002"
+    ],
+    "child": [
+      "LAW002"
+    ],
+    "custody": [
+      "LAW013",
+      "LAW002"
+    ],
+    "succession": [
+      "LAW032",
+      "LAW002"
+    ],
+    "planning": [
+      "LAW031",
+      "MED_BXL_004",
+      "LAW002",
+      "SOC_CHA_001",
+      "LAW032",
+      "SOC_BXL_002"
+    ],
+    "criminal": [
+      "LAW040",
+      "LAW003"
+    ],
+    "defense": [
+      "LAW003"
+    ],
+    "administrative": [
+      "LAW008",
+      "LAW036",
+      "LAW003"
+    ],
+    "appeals": [
+      "LAW014",
+      "LAW008",
+      "LAW016",
+      "LAW010",
+      "LAW003"
+    ],
+    "litigation": [
+      "LAW027",
+      "LAW025",
+      "LAW003"
+    ],
+    "property": [
+      "LAW004",
+      "LAW032",
+      "LAW007"
+    ],
+    "purchase": [
+      "LAW004"
+    ],
+    "construction": [
+      "LAW004",
+      "LAW022"
+    ],
+    "easements": [
+      "LAW004"
+    ],
+    "wrongful": [
+      "LAW005"
+    ],
+    "termination": [
+      "LAW005"
+    ],
+    "workplace": [
+      "LAW005"
+    ],
+    "contract": [
+      "LAW005",
+      "LAW024",
+      "LAW029",
+      "LAW011"
+    ],
+    "review": [
+      "LAW005",
+      "LAW029",
+      "LAW011"
+    ],
+    "patent": [
+      "LAW006"
+    ],
+    "registration": [
+      "LAW006"
+    ],
+    "trademark": [
+      "LAW006"
+    ],
+    "copyright": [
+      "LAW006"
+    ],
+    "wills": [
+      "LAW032",
+      "LAW007"
+    ],
+    "general": [
+      "MED_BXL_004",
+      "LAW007"
+    ],
+    "advice": [
+      "LAW007"
+    ],
+    "municipal": [
+      "LAW031",
+      "LAW008"
+    ],
+    "permits": [
+      "LAW031",
+      "LAW023",
+      "LAW014",
+      "LAW008",
+      "LAW016",
+      "LAW035"
+    ],
+    "public": [
+      "LAW036",
+      "LAW023",
+      "LAW008"
+    ],
+    "services": [
+      "SHEL_BXL_001",
+      "SOC_CHA_001",
+      "LAW008"
+    ],
+    "mergers": [
+      "LAW009"
+    ],
+    "acquisitions": [
+      "LAW009"
+    ],
+    "restructuring": [
+      "LAW009",
+      "LAW012"
+    ],
+    "social": [
+      "LAW010"
+    ],
+    "security": [
+      "LAW010"
+    ],
+    "disability": [
+      "LAW010",
+      "PSY_BXL_001"
+    ],
+    "benefits": [
+      "LAW010"
+    ],
+    "welfare": [
+      "LAW010"
+    ],
+    "rights": [
+      "LAW029",
+      "LAW010",
+      "LAW026",
+      "LAW030"
+    ],
+    "trade": [
+      "LAW011"
+    ],
+    "supply": [
+      "LAW011"
+    ],
+    "chain": [
+      "LAW011"
+    ],
+    "law": [
+      "LAW031",
+      "LAW037",
+      "LAW023",
+      "LAW021",
+      "LAW039",
+      "LAW011",
+      "LAW036",
+      "LAW033",
+      "LAW038"
+    ],
+    "bankruptcy": [
+      "LAW012"
+    ],
+    "debt": [
+      "LAW026",
+      "LAW012"
+    ],
+    "settlement": [
+      "LAW012"
+    ],
+    "family": [
+      "SOC_BXL_001",
+      "LAW013",
+      "MED_BXL_004",
+      "SOC_LEU_001"
+    ],
+    "mediation": [
+      "LAW013",
+      "LAW024",
+      "bruxact_001"
+    ],
+    "work": [
+      "LAW014"
+    ],
+    "asylum": [
+      "LAW014"
+    ],
+    "residency": [
+      "LAW014"
+    ],
+    "tourism": [
+      "LAW015"
+    ],
+    "hospitality": [
+      "LAW015"
+    ],
+    "commerce": [
+      "LAW015"
+    ],
+    "environmental": [
+      "LAW016",
+      "LAW035"
+    ],
+    "building": [
+      "LAW016",
+      "LAW022"
+    ],
+    "zoning": [
+      "LAW016"
+    ],
+    "multi": [
+      "LAW017"
+    ],
+    "regional": [
+      "LAW023",
+      "LAW017"
+    ],
+    "cross": [
+      "LAW027",
+      "LAW017"
+    ],
+    "border": [
+      "LAW027",
+      "LAW017"
+    ],
+    "arbitration": [
+      "LAW017"
+    ],
+    "consumer": [
+      "LAW018"
+    ],
+    "protection": [
+      "LAW018"
+    ],
+    "data": [
+      "LAW018"
+    ],
+    "privacy": [
+      "LAW018"
+    ],
+    "fraud": [
+      "LAW018"
+    ],
+    "claims": [
+      "LAW018",
+      "LAW025",
+      "LAW020"
+    ],
+    "tax": [
+      "LAW019"
+    ],
+    "vat": [
+      "LAW019"
+    ],
+    "issues": [
+      "LAW019"
+    ],
+    "transfer": [
+      "LAW019",
+      "LAW032"
+    ],
+    "pricing": [
+      "LAW019"
+    ],
+    "insurance": [
+      "LAW020"
+    ],
+    "liability": [
+      "LAW020"
+    ],
+    "coverage": [
+      "LAW020"
+    ],
+    "medical": [
+      "MED_LIE_001",
+      "LAW021",
+      "MED_ANT_001",
+      "MED_BXL_001"
+    ],
+    "malpractice": [
+      "LAW021"
+    ],
+    "regulatory": [
+      "LAW021",
+      "LAW039"
+    ],
+    "compliance": [
+      "LAW034",
+      "LAW028",
+      "LAW021",
+      "LAW039"
+    ],
+    "pharmaceutical": [
+      "LAW021"
+    ],
+    "contractor": [
+      "LAW022"
+    ],
+    "agreements": [
+      "LAW022"
+    ],
+    "defects": [
+      "LAW022"
+    ],
+    "agricultural": [
+      "LAW023"
+    ],
+    "administration": [
+      "LAW023"
+    ],
+    "commercial": [
+      "LAW026",
+      "LAW024"
+    ],
+    "negotiation": [
+      "LAW024"
+    ],
+    "accident": [
+      "LAW025"
+    ],
+    "civil": [
+      "LAW025"
+    ],
+    "personal": [
+      "LAW025"
+    ],
+    "injury": [
+      "LAW025",
+      "MED_BXL_005"
+    ],
+    "recovery": [
+      "LAW026"
+    ],
+    "collections": [
+      "LAW026"
+    ],
+    "creditor": [
+      "LAW026"
+    ],
+    "international": [
+      "LAW027"
+    ],
+    "eu": [
+      "LAW036",
+      "LAW027"
+    ],
+    "matters": [
+      "LAW028",
+      "LAW027"
+    ],
+    "antitrust": [
+      "LAW028"
+    ],
+    "competition": [
+      "LAW028"
+    ],
+    "cartels": [
+      "LAW028"
+    ],
+    "employment": [
+      "LAW029",
+      "EMPL_CHA_001"
+    ],
+    "worker": [
+      "LAW029"
+    ],
+    "music": [
+      "LAW030"
+    ],
+    "licensing": [
+      "LAW030"
+    ],
+    "media": [
+      "LAW030"
+    ],
+    "entertainment": [
+      "LAW030"
+    ],
+    "urban": [
+      "LAW031"
+    ],
+    "development": [
+      "LAW031"
+    ],
+    "factory": [
+      "LAW033"
+    ],
+    "regulations": [
+      "LAW033"
+    ],
+    "industrial": [
+      "LAW033"
+    ],
+    "manufacturing": [
+      "LAW033"
+    ],
+    "student": [
+      "LAW034"
+    ],
+    "educational": [
+      "LAW034"
+    ],
+    "accreditation": [
+      "LAW034"
+    ],
+    "energy": [
+      "LAW035"
+    ],
+    "renewable": [
+      "LAW035"
+    ],
+    "procurement": [
+      "LAW036"
+    ],
+    "shipping": [
+      "LAW037"
+    ],
+    "port": [
+      "LAW037"
+    ],
+    "maritime": [
+      "LAW037"
+    ],
+    "non": [
+      "LAW038"
+    ],
+    "profit": [
+      "LAW038"
+    ],
+    "governance": [
+      "LAW038"
+    ],
+    "charity": [
+      "LAW038"
+    ],
+    "association": [
+      "LAW038"
+    ],
+    "aml": [
+      "LAW039"
+    ],
+    "audit": [
+      "LAW039"
+    ],
+    "financial": [
+      "LAW039"
+    ],
+    "victim": [
+      "LAW040"
+    ],
+    "compensation": [
+      "LAW040"
+    ],
+    "support": [
+      "SHEL_WID_001",
+      "SHEL_BXL_001",
+      "LAW040",
+      "SOC_CHA_001",
+      "SOC_BXL_002"
+    ],
+    "rehabilitation": [
+      "LAW040"
+    ],
+    "asylum_application": [
+      "cgra_001"
+    ],
+    "family_reunification": [
+      "cgra_001",
+      "sem_001",
+      "cajm_001"
+    ],
+    "stateless_persons": [
+      "cgra_001"
+    ],
+    "emergency_shelter": [
+      "fedasil_001"
+    ],
+    "asylum_seeker_accommodation": [
+      "fedasil_001"
+    ],
+    "family_housing": [
+      "fedasil_001"
+    ],
+    "residence_permit_application": [
+      "dgm_001"
+    ],
+    "travel_documents": [
+      "dgm_001"
+    ],
+    "status_change": [
+      "dgm_001"
+    ],
+    "emergency_care": [
+      "tooth_001",
+      "rcb_001"
+    ],
+    "health_screening": [
+      "rcb_001",
+      "namur_health_001"
+    ],
+    "psychosocial_support": [
+      "rcb_001"
+    ],
+    "medical_consultation": [
+      "leuven_health_001",
+      "charleroi_health_001",
+      "mdm_001",
+      "sante_001"
+    ],
+    "dental_care": [
+      "mdm_001"
+    ],
+    "mental_health": [
+      "mdm_001",
+      "gent_health_001",
+      "bruxhealth_001"
+    ],
+    "rights_violation": [
+      "ldh_001"
+    ],
+    "advocacy": [
+      "child_001",
+      "habitat_br_001",
+      "unhcr_001",
+      "ldh_001",
+      "cire_001",
+      "amnesty_001",
+      "doc_001"
+    ],
+    "policy_review": [
+      "ldh_001"
+    ],
+    "asylum_appeal": [
+      "cajm_001"
+    ],
+    "documentation": [
+      "liege_001",
+      "cajm_001"
+    ],
+    "policy_input": [
+      "amnesty_001"
+    ],
+    "awareness": [
+      "amnesty_001"
+    ],
+    "assisted_return": [
+      "oim_001"
+    ],
+    "integration_support": [
+      "oim_001"
+    ],
+    "research": [
+      "oim_001"
+    ],
+    "protection_assessment": [
+      "unhcr_001"
+    ],
+    "resettlement": [
+      "unhcr_001"
+    ],
+    "discrimination_cases": [
+      "cire_001"
+    ],
+    "training": [
+      "PSY_BXL_002",
+      "EMPL_CHA_001",
+      "LANG_BXL_001",
+      "EMPL_ANT_001",
+      "LANG_WAL_001",
+      "cire_001",
+      "LANG_LEU_001"
+    ],
+    "basic_support": [
+      "plateforme_001"
+    ],
+    "language_classes": [
+      "plateforme_001",
+      "gent_001",
+      "leuven_001",
+      "charleroi_001",
+      "cesp_001"
+    ],
+    "job_training": [
+      "plateforme_001",
+      "charleroi_001"
+    ],
+    "job_placement": [
+      "antwerp_001",
+      "praxis_001"
+    ],
+    "language_training": [
+      "praxis_001"
+    ],
+    "skills_assessment": [
+      "praxis_001"
+    ],
+    "housing_advocacy": [
+      "bruxact_001"
+    ],
+    "community_projects": [
+      "bruxact_001"
+    ],
+    "housing_renovation": [
+      "habitat_br_001"
+    ],
+    "capacity_building": [
+      "habitat_br_001"
+    ],
+    "family_counseling": [
+      "fesn_001"
+    ],
+    "childcare_support": [
+      "fesn_001"
+    ],
+    "poverty_alleviation": [
+      "fesn_001"
+    ],
+    "literacy_training": [
+      "cesp_001"
+    ],
+    "vocational_education": [
+      "cesp_001"
+    ],
+    "child_asylum": [
+      "sem_001"
+    ],
+    "guardianship": [
+      "sem_001"
+    ],
+    "civic_education": [
+      "ante_001"
+    ],
+    "integration_planning": [
+      "reg_int_001",
+      "ante_001"
+    ],
+    "language_assessment": [
+      "ante_001"
+    ],
+    "social_integration": [
+      "charleroi_001"
+    ],
+    "legal_advice": [
+      "liege_001"
+    ],
+    "accompaniment": [
+      "liege_001"
+    ],
+    "emergency_assistance": [
+      "namur_001"
+    ],
+    "housing_support": [
+      "namur_001"
+    ],
+    "food_security": [
+      "namur_001"
+    ],
+    "legal_counseling": [
+      "antwerp_001"
+    ],
+    "education_support": [
+      "antwerp_001"
+    ],
+    "buddy_programs": [
+      "gent_001"
+    ],
+    "social_activities": [
+      "elder_001",
+      "gent_001"
+    ],
+    "housing_assistance": [
+      "leuven_001"
+    ],
+    "skills_training": [
+      "leuven_001",
+      "women_001"
+    ],
+    "general_practice": [
+      "gent_health_001",
+      "bruxhealth_001",
+      "antwerp_health_001"
+    ],
+    "gynecology": [
+      "bruxhealth_001"
+    ],
+    "dental": [
+      "bruxhealth_001"
+    ],
+    "individual_therapy": [
+      "psycho_001"
+    ],
+    "group_therapy": [
+      "psycho_001"
+    ],
+    "trauma_support": [
+      "psycho_001"
+    ],
+    "immunization": [
+      "leuven_health_001",
+      "sante_001"
+    ],
+    "preventive_care": [
+      "gent_health_001",
+      "sante_001"
+    ],
+    "dental_treatment": [
+      "tooth_001"
+    ],
+    "prevention": [
+      "tooth_001"
+    ],
+    "housing_access": [
+      "hous_001"
+    ],
+    "landlord_issues": [
+      "hous_001"
+    ],
+    "housing_education": [
+      "hous_001"
+    ],
+    "job_matching": [
+      "employ_001"
+    ],
+    "cv_preparation": [
+      "employ_001"
+    ],
+    "interview_training": [
+      "employ_001"
+    ],
+    "job_search_support": [
+      "employ_ant_001"
+    ],
+    "training_programs": [
+      "employ_ant_001"
+    ],
+    "employer_liaison": [
+      "employ_ant_001"
+    ],
+    "dutch_courses": [
+      "lang_001"
+    ],
+    "french_courses": [
+      "lang_001"
+    ],
+    "cultural_classes": [
+      "lang_001"
+    ],
+    "dutch_for_migrants": [
+      "lang_ant_001"
+    ],
+    "professional_dutch": [
+      "lang_ant_001"
+    ],
+    "cultural_orientation": [
+      "lang_ant_001"
+    ],
+    "cultural_programs": [
+      "cult_001"
+    ],
+    "community_events": [
+      "cult_001"
+    ],
+    "mentorship": [
+      "cult_001"
+    ],
+    "referral_coordination": [
+      "reg_int_001"
+    ],
+    "long_term_support": [
+      "reg_int_001"
+    ],
+    "legal_support": [
+      "child_001",
+      "women_001"
+    ],
+    "care_coordination": [
+      "child_001"
+    ],
+    "counseling": [
+      "MED_BXL_003",
+      "trans_001",
+      "PSY_GENT_002",
+      "women_001"
+    ],
+    "shelter": [
+      "SHEL_WID_001",
+      "women_001"
+    ],
+    "legal_consultation": [
+      "legal_001"
+    ],
+    "court_representation": [
+      "legal_001"
+    ],
+    "documentation_support": [
+      "legal_001"
+    ],
+    "research_support": [
+      "doc_001"
+    ],
+    "information_provision": [
+      "doc_001"
+    ],
+    "benefits_application": [
+      "social_001"
+    ],
+    "case_management": [
+      "social_001"
+    ],
+    "welfare_support": [
+      "social_001"
+    ],
+    "food_distribution": [
+      "food_001"
+    ],
+    "nutrition_education": [
+      "food_001"
+    ],
+    "emergency_relief": [
+      "food_001"
+    ],
+    "health_services": [
+      "trans_001"
+    ],
+    "community_programs": [
+      "trans_001"
+    ],
+    "health_monitoring": [
+      "elder_001"
+    ],
+    "home_support": [
+      "elder_001"
+    ],
+    "disability_assessment": [
+      "adapt_001"
+    ],
+    "accommodation_arrangements": [
+      "adapt_001"
+    ],
+    "support_coordination": [
+      "adapt_001"
+    ],
+    "health_coaching": [
+      "namur_health_001",
+      "leuven_health_001"
+    ],
+    "sexual_health": [
+      "antwerp_health_001"
+    ],
+    "harm_reduction": [
+      "antwerp_health_001"
+    ],
+    "health_consultation": [
+      "namur_health_001",
+      "liege_health_001"
+    ],
+    "social_support": [
+      "liege_health_001"
+    ],
+    "health_education": [
+      "liege_health_001"
+    ],
+    "occupational_medicine": [
+      "charleroi_health_001"
+    ],
+    "preventive_health": [
+      "charleroi_health_001"
+    ],
+    "age": [
+      "MED_LIE_001",
+      "MED_ANT_001",
+      "MED_BXL_001"
+    ],
+    "assessment": [
+      "SOC_LEU_001",
+      "MED_LIE_001",
+      "PSY_BXL_001",
+      "MED_BXL_001",
+      "MED_ANT_001",
+      "SOC_BXL_001",
+      "PSY_GENT_001",
+      "SOC_CHA_001",
+      "PSY_LIE_001",
+      "SOC_BXL_002"
+    ],
+    "evaluation": [
+      "MED_LIE_001",
+      "MED_BXL_001",
+      "MED_ANT_001",
+      "SOC_BXL_001",
+      "PSY_LIE_001"
+    ],
+    "forensic": [
+      "MED_BXL_001"
+    ],
+    "health": [
+      "MED_BXL_002",
+      "MED_LIE_001",
+      "MED_ANT_001",
+      "MED_ANT_002",
+      "PSY_GENT_001"
+    ],
+    "screening": [
+      "MED_BXL_002",
+      "MED_LIE_001",
+      "MED_ANT_001",
+      "MED_ANT_002",
+      "PSY_BXL_003"
+    ],
+    "infectious": [
+      "MED_BXL_002"
+    ],
+    "disease": [
+      "MED_BXL_002",
+      "MED_BXL_004"
+    ],
+    "testing": [
+      "MED_BXL_002",
+      "PSY_GENT_001",
+      "PSY_BXL_001",
+      "PSY_LIE_001"
+    ],
+    "vaccination": [
+      "MED_BXL_002"
+    ],
+    "ptsd": [
+      "MED_BXL_003"
+    ],
+    "treatment": [
+      "MED_BXL_003",
+      "MED_BXL_005"
+    ],
+    "trauma": [
+      "MED_BXL_003",
+      "PSY_GENT_002"
+    ],
+    "pain": [
+      "MED_BXL_003"
+    ],
+    "management": [
+      "MED_BXL_003",
+      "MED_BXL_004"
+    ],
+    "checkup": [
+      "MED_BXL_004"
+    ],
+    "chronic": [
+      "MED_BXL_004"
+    ],
+    "emergency": [
+      "SHEL_WID_001",
+      "MED_BXL_005"
+    ],
+    "care": [
+      "MED_BXL_005",
+      "SOC_LEU_001"
+    ],
+    "acute": [
+      "MED_BXL_005"
+    ],
+    "illness": [
+      "MED_BXL_005"
+    ],
+    "iq": [
+      "PSY_GENT_001",
+      "PSY_BXL_001",
+      "PSY_LIE_001"
+    ],
+    "learning": [
+      "PSY_GENT_001",
+      "PSY_BXL_001"
+    ],
+    "personality": [
+      "PSY_BXL_001"
+    ],
+    "resilience": [
+      "PSY_BXL_002"
+    ],
+    "group": [
+      "PSY_BXL_002"
+    ],
+    "therapy": [
+      "PSY_BXL_002",
+      "PSY_GENT_002"
+    ],
+    "mindfulness": [
+      "PSY_BXL_002"
+    ],
+    "programs": [
+      "PSY_BXL_002"
+    ],
+    "developmental": [
+      "PSY_BXL_003",
+      "PSY_LIE_001"
+    ],
+    "behavioral": [
+      "PSY_BXL_003",
+      "PSY_LIE_001"
+    ],
+    "disorders": [
+      "PSY_BXL_003"
+    ],
+    "speech": [
+      "PSY_BXL_003"
+    ],
+    "language": [
+      "PSY_BXL_003"
+    ],
+    "autonomy": [
+      "SOC_BXL_001"
+    ],
+    "kinship": [
+      "SOC_BXL_001",
+      "SOC_LEU_001"
+    ],
+    "integration": [
+      "LANG_LEU_001",
+      "SOC_LEU_001",
+      "SOC_CHA_001",
+      "SOC_BXL_002"
+    ],
+    "housing": [
+      "SHEL_WID_001",
+      "SHEL_BXL_001",
+      "SOC_CHA_001",
+      "SOC_BXL_002"
+    ],
+    "french": [
+      "LANG_WAL_001",
+      "LANG_BXL_001"
+    ],
+    "dutch": [
+      "LANG_LEU_001",
+      "LANG_BXL_001"
+    ],
+    "cultural": [
+      "LANG_WAL_001",
+      "LANG_BXL_001"
+    ],
+    "orientation": [
+      "LANG_WAL_001",
+      "LANG_BXL_001"
+    ],
+    "sexual": [
+      "MED_ANT_002"
+    ],
+    "vaccinations": [
+      "MED_ANT_002"
+    ],
+    "mental": [
+      "PSY_GENT_001"
+    ],
+    "disabilities": [
+      "PSY_GENT_001"
+    ],
+    "crisis": [
+      "PSY_GENT_002"
+    ],
+    "intervention": [
+      "PSY_GENT_002"
+    ],
+    "community": [
+      "SOC_LEU_001"
+    ],
+    "program": [
+      "LANG_LEU_001"
+    ],
+    "job": [
+      "LANG_WAL_001",
+      "EMPL_ANT_001",
+      "EMPL_CHA_001",
+      "LANG_LEU_001"
+    ],
+    "preparation": [
+      "LANG_WAL_001",
+      "LANG_LEU_001"
+    ],
+    "skills": [
+      "SHEL_BXL_001",
+      "EMPL_CHA_001"
+    ],
+    "coaching": [
+      "EMPL_CHA_001"
+    ],
+    "placement": [
+      "EMPL_CHA_001"
+    ],
+    "temporary": [
+      "SHEL_WID_001"
+    ],
+    "transition": [
+      "SHEL_WID_001"
+    ],
+    "transitional": [
+      "SHEL_BXL_001"
+    ],
+    "independent": [
+      "SHEL_BXL_001"
+    ],
+    "living": [
+      "SHEL_BXL_001"
+    ],
+    "apprenticeships": [
+      "EMPL_ANT_001"
+    ],
+    "matching": [
+      "EMPL_ANT_001"
+    ]
+  }
+}

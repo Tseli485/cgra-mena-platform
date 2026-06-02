@@ -1,0 +1,698 @@
+﻿[
+    {
+        "description":  null,
+        "name":  "Cabinet Juridique Bruxelles SARL",
+        "location":  null,
+        "type":  "firm"
+    },
+    {
+        "description":  null,
+        "name":  "Dr. Marie Dupont",
+        "location":  null,
+        "type":  "individual"
+    },
+    {
+        "description":  null,
+        "name":  "Avocat.be - Brussels Office",
+        "location":  null,
+        "type":  "firm"
+    },
+    {
+        "description":  null,
+        "name":  "MichaÃ«l Verlaine",
+        "location":  null,
+        "type":  "individual"
+    },
+    {
+        "description":  null,
+        "name":  "Legal Solutions Brussels",
+        "location":  null,
+        "type":  "firm"
+    },
+    {
+        "description":  null,
+        "name":  "Sophie Lefevre",
+        "location":  null,
+        "type":  "individual"
+    },
+    {
+        "description":  null,
+        "name":  "Walloon Legal Group",
+        "location":  null,
+        "type":  "firm"
+    },
+    {
+        "description":  null,
+        "name":  "Pierre Henault",
+        "location":  null,
+        "type":  "individual"
+    },
+    {
+        "description":  null,
+        "name":  "LiÃ¨ge Corporate Law",
+        "location":  null,
+        "type":  "firm"
+    },
+    {
+        "description":  null,
+        "name":  "Carole Mathieu",
+        "location":  null,
+        "type":  "individual"
+    },
+    {
+        "description":  null,
+        "name":  "Flanders Legal Associates",
+        "location":  null,
+        "type":  "firm"
+    },
+    {
+        "description":  null,
+        "name":  "Dirk Vandeputte",
+        "location":  null,
+        "type":  "individual"
+    },
+    {
+        "description":  null,
+        "name":  "Gent Family Law Center",
+        "location":  null,
+        "type":  "firm"
+    },
+    {
+        "description":  null,
+        "name":  "Inge Wouters",
+        "location":  null,
+        "type":  "individual"
+    },
+    {
+        "description":  null,
+        "name":  "Bruges Commercial Attorneys",
+        "location":  null,
+        "type":  "firm"
+    },
+    {
+        "description":  null,
+        "name":  "Luc De Clercq",
+        "location":  null,
+        "type":  "individual"
+    },
+    {
+        "description":  null,
+        "name":  "Multi-Regional Legal Solutions",
+        "location":  null,
+        "type":  "firm"
+    },
+    {
+        "description":  null,
+        "name":  "Judith Vermeulen",
+        "location":  null,
+        "type":  "individual"
+    },
+    {
+        "description":  null,
+        "name":  "Brussels Tax \u0026 Finance Law",
+        "location":  null,
+        "type":  "firm"
+    },
+    {
+        "description":  null,
+        "name":  "Anita Rossi",
+        "location":  null,
+        "type":  "individual"
+    },
+    {
+        "description":  null,
+        "name":  "Brussels Healthcare \u0026 Medical Law",
+        "location":  null,
+        "type":  "firm"
+    },
+    {
+        "description":  null,
+        "name":  "Thibault Chevallier",
+        "location":  null,
+        "type":  "individual"
+    },
+    {
+        "description":  null,
+        "name":  "Namur Regional Legal Office",
+        "location":  null,
+        "type":  "firm"
+    },
+    {
+        "description":  null,
+        "name":  "Fabrice Laurent",
+        "location":  null,
+        "type":  "individual"
+    },
+    {
+        "description":  null,
+        "name":  "Tournai Civil Law Specialists",
+        "location":  null,
+        "type":  "firm"
+    },
+    {
+        "description":  null,
+        "name":  "Sylvie Daumerie",
+        "location":  null,
+        "type":  "individual"
+    },
+    {
+        "description":  null,
+        "name":  "Bruges International Law",
+        "location":  null,
+        "type":  "firm"
+    },
+    {
+        "description":  null,
+        "name":  "Maxim Petrov",
+        "location":  null,
+        "type":  "individual"
+    },
+    {
+        "description":  null,
+        "name":  "Courtrai Labor Advocates",
+        "location":  null,
+        "type":  "firm"
+    },
+    {
+        "description":  null,
+        "name":  "Cristina Moretti",
+        "location":  null,
+        "type":  "individual"
+    },
+    {
+        "description":  null,
+        "name":  "Brussels Urban Development Law",
+        "location":  null,
+        "type":  "firm"
+    },
+    {
+        "description":  null,
+        "name":  "Rene De Backer",
+        "location":  null,
+        "type":  "individual"
+    },
+    {
+        "description":  null,
+        "name":  "Charleroi Industrial Law Center",
+        "location":  null,
+        "type":  "firm"
+    },
+    {
+        "description":  null,
+        "name":  "VÃ©ronique Leroy",
+        "location":  null,
+        "type":  "individual"
+    },
+    {
+        "description":  null,
+        "name":  "LiÃ¨ge Environmental \u0026 Energy Law",
+        "location":  null,
+        "type":  "firm"
+    },
+    {
+        "description":  null,
+        "name":  "Helmut Schneider",
+        "location":  null,
+        "type":  "individual"
+    },
+    {
+        "description":  null,
+        "name":  "Antwerp Port \u0026 Shipping Law",
+        "location":  null,
+        "type":  "firm"
+    },
+    {
+        "description":  null,
+        "name":  "Petra Van Dyck",
+        "location":  null,
+        "type":  "individual"
+    },
+    {
+        "description":  null,
+        "name":  "Brussels Compliance \u0026 Regulatory",
+        "location":  null,
+        "type":  "firm"
+    },
+    {
+        "description":  null,
+        "name":  "Elisabeth Beaumont",
+        "location":  null,
+        "type":  "individual"
+    },
+    {
+        "description":  null,
+        "name":  "CGRA - Commissariat GÃ©nÃ©ral aux RÃ©fugiÃ©s et Apatrides",
+        "location":  null,
+        "type":  "government_agency"
+    },
+    {
+        "description":  null,
+        "name":  "Fedasil - Federal Agency for the Reception of Asylum Seekers",
+        "location":  null,
+        "type":  "government_agency"
+    },
+    {
+        "description":  null,
+        "name":  "DGM - General Migration Directorate",
+        "location":  null,
+        "type":  "government_agency"
+    },
+    {
+        "description":  null,
+        "name":  "Red Cross Belgium (Croix-Rouge de Belgique)",
+        "location":  null,
+        "type":  "ngo"
+    },
+    {
+        "description":  null,
+        "name":  "MÃ©decins du Monde Belgium",
+        "location":  null,
+        "type":  "ngo"
+    },
+    {
+        "description":  null,
+        "name":  "Ligue des Droits Humains (Human Rights League)",
+        "location":  null,
+        "type":  "ngo"
+    },
+    {
+        "description":  null,
+        "name":  "CAJM - Commission d\u0027Aide Juridique aux Migrants",
+        "location":  null,
+        "type":  "ngo"
+    },
+    {
+        "description":  null,
+        "name":  "Amnesty International Belgium",
+        "location":  null,
+        "type":  "ngo"
+    },
+    {
+        "description":  null,
+        "name":  "OIM Belgium - International Migration Organization",
+        "location":  null,
+        "type":  "international_org"
+    },
+    {
+        "description":  null,
+        "name":  "UNHCR Belgium - UN Refugee Agency",
+        "location":  null,
+        "type":  "international_org"
+    },
+    {
+        "description":  null,
+        "name":  "CIRE - Collective Against Racism",
+        "location":  null,
+        "type":  "ngo"
+    },
+    {
+        "description":  null,
+        "name":  "Plateforme Citoyenne de Soutien aux RÃ©fugiÃ©s",
+        "location":  null,
+        "type":  "ngo"
+    },
+    {
+        "description":  null,
+        "name":  "PRAXIS - Integration and Settlement Services",
+        "location":  null,
+        "type":  "ngo"
+    },
+    {
+        "description":  null,
+        "name":  "BruxAct - Action Citoyenne",
+        "location":  null,
+        "type":  "ngo"
+    },
+    {
+        "description":  null,
+        "name":  "Habitat for Humanity Belgium - Bruxelles",
+        "location":  null,
+        "type":  "ngo"
+    },
+    {
+        "description":  null,
+        "name":  "FESN - Federation for Social Action and Solidarity",
+        "location":  null,
+        "type":  "ngo"
+    },
+    {
+        "description":  null,
+        "name":  "CESP - Centre for Education and Social Policy",
+        "location":  null,
+        "type":  "ngo"
+    },
+    {
+        "description":  null,
+        "name":  "SEM - SolidaritÃ© Enfants Migrants",
+        "location":  null,
+        "type":  "ngo"
+    },
+    {
+        "description":  null,
+        "name":  "ANTE - Federal Centre for Integration and Active Citizenship",
+        "location":  null,
+        "type":  "government_agency"
+    },
+    {
+        "description":  null,
+        "name":  "Centre d\u0027Actions et de RÃ©alisations pour l\u0027Immigrant",
+        "location":  null,
+        "type":  "ngo"
+    },
+    {
+        "description":  null,
+        "name":  "Collectif Migrants LiÃ¨ge (CML)",
+        "location":  null,
+        "type":  "ngo"
+    },
+    {
+        "description":  null,
+        "name":  "Service d\u0027Aide aux RÃ©fugiÃ©s Namur",
+        "location":  null,
+        "type":  "ngo"
+    },
+    {
+        "description":  null,
+        "name":  "Dienst Vreemdelingen Antwerpen (DVA)",
+        "location":  null,
+        "type":  "ngo"
+    },
+    {
+        "description":  null,
+        "name":  "Vluchtelingenwerk Gent",
+        "location":  null,
+        "type":  "ngo"
+    },
+    {
+        "description":  null,
+        "name":  "Migrant Solidarity Leuven",
+        "location":  null,
+        "type":  "ngo"
+    },
+    {
+        "description":  null,
+        "name":  "Brussels Health Centre for Migrants",
+        "location":  null,
+        "type":  "healthcare_center"
+    },
+    {
+        "description":  null,
+        "name":  "Psychosocial Support Centre Brussels",
+        "location":  null,
+        "type":  "healthcare_center"
+    },
+    {
+        "description":  null,
+        "name":  "SantÃ© Plus - Community Health Centre",
+        "location":  null,
+        "type":  "healthcare_center"
+    },
+    {
+        "description":  null,
+        "name":  "Dent Solidaire - Free Dental Clinic",
+        "location":  null,
+        "type":  "healthcare_center"
+    },
+    {
+        "description":  null,
+        "name":  "SolidaritÃ© Logement Brussels",
+        "location":  null,
+        "type":  "housing_association"
+    },
+    {
+        "description":  null,
+        "name":  "Employment Centre for Migrants Brussels",
+        "location":  null,
+        "type":  "employment_center"
+    },
+    {
+        "description":  null,
+        "name":  "VDAB - Antwerp Employment Centre",
+        "location":  null,
+        "type":  "employment_center"
+    },
+    {
+        "description":  null,
+        "name":  "Brussels Language and Culture Centre",
+        "location":  null,
+        "type":  "language_center"
+    },
+    {
+        "description":  null,
+        "name":  "Antwerp Language Academy",
+        "location":  null,
+        "type":  "language_center"
+    },
+    {
+        "description":  null,
+        "name":  "Brussels Intercultural Centre",
+        "location":  null,
+        "type":  "culture_center"
+    },
+    {
+        "description":  null,
+        "name":  "Brussels Regional Integration Centre",
+        "location":  null,
+        "type":  "integration_center"
+    },
+    {
+        "description":  null,
+        "name":  "Children\u0027s Rights Centre Brussels",
+        "location":  null,
+        "type":  "ngo"
+    },
+    {
+        "description":  null,
+        "name":  "Women Migrants Support Network",
+        "location":  null,
+        "type":  "ngo"
+    },
+    {
+        "description":  null,
+        "name":  "Legal Aid Centre Brussels",
+        "location":  null,
+        "type":  "legal_aid"
+    },
+    {
+        "description":  null,
+        "name":  "Documentation Centre on Refugees",
+        "location":  null,
+        "type":  "ngo"
+    },
+    {
+        "description":  null,
+        "name":  "Social Integration Bureau Brussels",
+        "location":  null,
+        "type":  "social_services"
+    },
+    {
+        "description":  null,
+        "name":  "Food Bank Brussels",
+        "location":  null,
+        "type":  "ngo"
+    },
+    {
+        "description":  null,
+        "name":  "Transgender Support and Health Centre",
+        "location":  null,
+        "type":  "ngo"
+    },
+    {
+        "description":  null,
+        "name":  "Elderly Migrants Care Network",
+        "location":  null,
+        "type":  "ngo"
+    },
+    {
+        "description":  null,
+        "name":  "Disability and Migrant Support Services",
+        "location":  null,
+        "type":  "ngo"
+    },
+    {
+        "description":  null,
+        "name":  "Gent Health Centre for Migrants",
+        "location":  null,
+        "type":  "healthcare_center"
+    },
+    {
+        "description":  null,
+        "name":  "Leuven Migrant Health Services",
+        "location":  null,
+        "type":  "healthcare_center"
+    },
+    {
+        "description":  null,
+        "name":  "Antwerp Community Health Centre",
+        "location":  null,
+        "type":  "healthcare_center"
+    },
+    {
+        "description":  null,
+        "name":  "LiÃ¨ge Health and Social Centre",
+        "location":  null,
+        "type":  "healthcare_center"
+    },
+    {
+        "description":  null,
+        "name":  "Charleroi Medical Clinic for Migrants",
+        "location":  null,
+        "type":  "healthcare_center"
+    },
+    {
+        "description":  null,
+        "name":  "Namur Health Services for Migrants",
+        "location":  null,
+        "type":  "healthcare_center"
+    },
+    {
+        "description":  null,
+        "name":  null,
+        "location":  null,
+        "type":  null
+    },
+    {
+        "description":  null,
+        "name":  null,
+        "location":  null,
+        "type":  null
+    },
+    {
+        "description":  null,
+        "name":  null,
+        "location":  null,
+        "type":  null
+    },
+    {
+        "description":  null,
+        "name":  null,
+        "location":  null,
+        "type":  null
+    },
+    {
+        "description":  null,
+        "name":  null,
+        "location":  null,
+        "type":  null
+    },
+    {
+        "description":  null,
+        "name":  null,
+        "location":  null,
+        "type":  null
+    },
+    {
+        "description":  null,
+        "name":  null,
+        "location":  null,
+        "type":  null
+    },
+    {
+        "description":  null,
+        "name":  null,
+        "location":  null,
+        "type":  null
+    },
+    {
+        "description":  null,
+        "name":  null,
+        "location":  null,
+        "type":  null
+    },
+    {
+        "description":  null,
+        "name":  null,
+        "location":  null,
+        "type":  null
+    },
+    {
+        "description":  null,
+        "name":  null,
+        "location":  null,
+        "type":  null
+    },
+    {
+        "description":  null,
+        "name":  null,
+        "location":  null,
+        "type":  null
+    },
+    {
+        "description":  null,
+        "name":  null,
+        "location":  null,
+        "type":  null
+    },
+    {
+        "description":  null,
+        "name":  null,
+        "location":  null,
+        "type":  null
+    },
+    {
+        "description":  null,
+        "name":  null,
+        "location":  null,
+        "type":  null
+    },
+    {
+        "description":  null,
+        "name":  null,
+        "location":  null,
+        "type":  null
+    },
+    {
+        "description":  null,
+        "name":  null,
+        "location":  null,
+        "type":  null
+    },
+    {
+        "description":  null,
+        "name":  null,
+        "location":  null,
+        "type":  null
+    },
+    {
+        "description":  null,
+        "name":  null,
+        "location":  null,
+        "type":  null
+    },
+    {
+        "description":  null,
+        "name":  null,
+        "location":  null,
+        "type":  null
+    },
+    {
+        "description":  null,
+        "name":  null,
+        "location":  null,
+        "type":  null
+    },
+    {
+        "description":  null,
+        "name":  null,
+        "location":  null,
+        "type":  null
+    },
+    {
+        "description":  null,
+        "name":  null,
+        "location":  null,
+        "type":  null
+    },
+    {
+        "description":  null,
+        "name":  null,
+        "location":  null,
+        "type":  null
+    },
+    {
+        "description":  null,
+        "name":  null,
+        "location":  null,
+        "type":  null
+    }
+]

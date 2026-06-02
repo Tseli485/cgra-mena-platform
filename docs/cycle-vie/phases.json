@@ -1,0 +1,553 @@
+{
+  "schema_version": "1.0",
+  "framework_name": "CYCLE-VIE: MENA Lifecycle Phases",
+  "description": "Comprehensive JSON schema for lifecycle phase management across 0-18 age groups",
+  "created_date": "2026-06-02",
+  "last_updated": "2026-06-02",
+  "total_age_groups": 4,
+  "total_phases": 22,
+  "field_structure": {
+    "phase_core": {
+      "phase_id": "string (format: X.Y, e.g., 1.1)",
+      "phase_name": "string",
+      "age_group_id": "integer (1-4)",
+      "age_group_name": "string (Infancy|Early Childhood|Middle Childhood|Adolescence)",
+      "phase_number": "integer",
+      "duration_months": "integer",
+      "start_age_months": "integer",
+      "end_age_months": "integer"
+    },
+    "phase_metadata": {
+      "phase_status": "enum (active|archived|upcoming)",
+      "version": "string (semantic versioning)",
+      "last_reviewed_date": "ISO 8601 date",
+      "review_frequency_months": "integer",
+      "phase_order": "integer (sequential order within age group)",
+      "is_terminal_phase": "boolean (true for final phase of age group)"
+    },
+    "legal_obligations": {
+      "obligations": "array of objects",
+      "obligation_item": {
+        "obligation_id": "string",
+        "description": "string",
+        "jurisdiction": "string (MENA region or specific country)",
+        "applicable_law": "string (reference to legal statute)",
+        "enforcement_body": "string",
+        "deadline_days": "integer or null",
+        "penalty_non_compliance": "string"
+      },
+      "compliance_tracking": "boolean",
+      "audit_frequency": "string"
+    },
+    "financial_requirements": {
+      "total_estimated_cost_usd": "number",
+      "currency": "enum (USD|EUR|AED|SAR|EGP)",
+      "cost_breakdown": [
+        {
+          "cost_item_id": "string",
+          "description": "string",
+          "category": "enum (Healthcare|Education|Legal|Nutrition|Equipment|Services|Other)",
+          "min_cost": "number",
+          "max_cost": "number",
+          "currency": "string",
+          "frequency": "enum (one-time|monthly|yearly|as-needed)",
+          "covered_by_insurance": "boolean",
+          "subsidy_available": "boolean",
+          "subsidy_amount": "number or null"
+        }
+      ],
+      "payment_methods_accepted": "array of strings",
+      "financial_assistance_options": "array of strings",
+      "cost_verification_date": "ISO 8601 date"
+    },
+    "rights_and_protections": {
+      "rights": [
+        {
+          "right_id": "string",
+          "title": "string",
+          "description": "string",
+          "international_covenant": "string (reference to international law)",
+          "mena_legal_basis": "string",
+          "enforcement_mechanism": "string",
+          "appeal_process": "string or null"
+        }
+      ],
+      "protections": [
+        {
+          "protection_id": "string",
+          "type": "enum (Physical|Emotional|Financial|Educational|Legal|Social)",
+          "description": "string",
+          "responsible_authority": "string",
+          "monitoring_frequency": "enum (continuous|weekly|monthly|yearly)"
+        }
+      ],
+      "vulnerability_factors": "array of strings",
+      "safeguarding_policy_reference": "string"
+    },
+    "resources_and_materials": {
+      "required_resources": [
+        {
+          "resource_id": "string",
+          "name": "string",
+          "type": "enum (Document|Form|Certificate|Material|Equipment|Service|Facility)",
+          "description": "string",
+          "source": "string (issuing authority)",
+          "required": "boolean",
+          "obtaining_process": "string",
+          "typical_timeline_days": "integer",
+          "cost": "number",
+          "digital_available": "boolean",
+          "physical_required": "boolean"
+        }
+      ],
+      "recommended_resources": [
+        {
+          "resource_id": "string",
+          "name": "string",
+          "type": "string",
+          "description": "string",
+          "provider": "string",
+          "benefit": "string"
+        }
+      ],
+      "resource_access_barriers": "array of strings",
+      "alternative_resources": "array of objects"
+    },
+    "documents_and_records": {
+      "documents_generated": [
+        {
+          "document_id": "string",
+          "name": "string",
+          "type": "enum (Certificate|Record|Permit|Agreement|Assessment|Report|Transcript|Other)",
+          "issuing_authority": "string",
+          "required": "boolean",
+          "digital_format": "boolean",
+          "physical_format": "boolean",
+          "retention_period_years": "integer",
+          "access_restrictions": "string or null",
+          "template_available": "boolean",
+          "language_requirements": "array of strings"
+        }
+      ],
+      "records_to_maintain": [
+        {
+          "record_id": "string",
+          "name": "string",
+          "category": "enum (Health|Education|Legal|Financial|Behavioral|Social|Other)",
+          "retention_months": "integer",
+          "accessibility": "enum (Private|Semi-private|Public)",
+          "archival_required": "boolean",
+          "digital_backup_required": "boolean"
+        }
+      ],
+      "documentation_standards": {
+        "languages_required": "array of strings",
+        "format_specifications": "string",
+        "digital_standards": "string",
+        "security_requirements": "string"
+      },
+      "record_sharing_policy": "string"
+    },
+    "implementation_checklist": {
+      "checklist_items": [
+        {
+          "item_id": "string",
+          "task": "string",
+          "priority": "enum (Critical|High|Medium|Low)",
+          "responsibility": "string (role/entity)",
+          "target_completion_date": "ISO 8601 date or string (relative)",
+          "verification_method": "string",
+          "dependencies": "array of item_ids",
+          "estimated_effort_hours": "number"
+        }
+      ],
+      "completion_criteria": "string",
+      "success_metrics": "array of strings"
+    },
+    "stakeholders": {
+      "primary_stakeholders": [
+        {
+          "stakeholder_id": "string",
+          "role": "string (Parent|Guardian|Healthcare Provider|Educator|Administrator|Government Official|Other)",
+          "responsibilities": "array of strings",
+          "decision_authority": "boolean",
+          "contact_method": "string or null"
+        }
+      ],
+      "secondary_stakeholders": "array of objects (same structure)",
+      "communication_protocol": "string",
+      "escalation_path": "string"
+    },
+    "assessment_and_monitoring": {
+      "assessment_type": "enum (Health|Educational|Behavioral|Developmental|Financial|Legal|Multi-dimensional)",
+      "assessment_tools": [
+        {
+          "tool_id": "string",
+          "name": "string",
+          "purpose": "string",
+          "validated": "boolean",
+          "cost": "number",
+          "time_required_minutes": "integer",
+          "interpreter_needed": "boolean"
+        }
+      ],
+      "monitoring_frequency": "string",
+      "data_collection_method": "string",
+      "reporting_schedule": "string",
+      "quality_assurance_process": "string"
+    },
+    "transition_planning": {
+      "transition_to_next_phase": "string (reference to next phase ID)",
+      "transition_timeline_weeks": "integer",
+      "transition_requirements": "array of strings",
+      "preparation_activities": "array of strings",
+      "transition_support_services": "array of strings",
+      "continuity_of_care_plan": "string"
+    },
+    "phase_outcomes": {
+      "expected_outcomes": [
+        {
+          "outcome_id": "string",
+          "description": "string",
+          "domain": "enum (Health|Education|Social|Emotional|Legal|Financial|Developmental)",
+          "measurable": "boolean",
+          "success_indicator": "string"
+        }
+      ],
+      "success_metrics": "array of strings",
+      "outcome_tracking_method": "string",
+      "remediation_if_not_met": "string"
+    },
+    "special_circumstances": {
+      "special_needs_accommodations": "array of strings",
+      "at_risk_indicators": "array of strings",
+      "intervention_triggers": "array of strings",
+      "escalation_criteria": "array of strings",
+      "exemptions_possible": "boolean",
+      "exemption_criteria": "array of strings"
+    },
+    "quality_metrics": {
+      "compliance_rate_target": "number (percentage)",
+      "completion_rate_target": "number (percentage)",
+      "stakeholder_satisfaction_target": "number (percentage 0-100)",
+      "audit_frequency_months": "integer",
+      "key_performance_indicators": "array of strings",
+      "feedback_mechanisms": "array of strings"
+    },
+    "references_and_links": {
+      "related_phases": "array of phase IDs",
+      "legal_references": "array of strings",
+      "international_standards": "array of strings",
+      "templates_and_forms": "array of URLs",
+      "contact_information": "array of objects"
+    }
+  },
+  "age_groups": [
+    {
+      "age_group_id": 1,
+      "name": "Infancy",
+      "duration_months": 24,
+      "start_months": 0,
+      "end_months": 24,
+      "phase_count": 5,
+      "primary_focus": "Survival, health, bonding, foundational care",
+      "key_stakeholders": ["Parents", "Midwives", "Pediatricians", "Guardians"],
+      "phases": [
+        {
+          "phase_id": "1.1",
+          "phase_name": "Birth & Registration",
+          "duration_months": 1,
+          "legal_obligations_count": 3,
+          "financial_items_count": 3,
+          "rights_count": 4,
+          "resources_count": 4,
+          "documents_count": 4,
+          "checklist_items_count": 6
+        },
+        {
+          "phase_id": "1.2",
+          "phase_name": "Newborn Health & Immunization",
+          "duration_months": 2,
+          "legal_obligations_count": 3,
+          "financial_items_count": 3,
+          "rights_count": 4,
+          "resources_count": 4,
+          "documents_count": 4,
+          "checklist_items_count": 6
+        },
+        {
+          "phase_id": "1.3",
+          "phase_name": "Early Bonding & Development",
+          "duration_months": 3,
+          "legal_obligations_count": 3,
+          "financial_items_count": 3,
+          "rights_count": 4,
+          "resources_count": 4,
+          "documents_count": 4,
+          "checklist_items_count": 6
+        },
+        {
+          "phase_id": "1.4",
+          "phase_name": "Mobility & Language Development",
+          "duration_months": 6,
+          "legal_obligations_count": 3,
+          "financial_items_count": 3,
+          "rights_count": 4,
+          "resources_count": 4,
+          "documents_count": 4,
+          "checklist_items_count": 6
+        },
+        {
+          "phase_id": "1.5",
+          "phase_name": "Transition to Toddlerhood",
+          "duration_months": 12,
+          "legal_obligations_count": 3,
+          "financial_items_count": 4,
+          "rights_count": 4,
+          "resources_count": 4,
+          "documents_count": 5,
+          "checklist_items_count": 6
+        }
+      ]
+    },
+    {
+      "age_group_id": 2,
+      "name": "Early Childhood",
+      "duration_months": 48,
+      "start_months": 24,
+      "end_months": 72,
+      "phase_count": 5,
+      "primary_focus": "Development, language, socialization, preschool preparation",
+      "key_stakeholders": ["Parents", "Caregivers", "Educators", "Health Workers"],
+      "phases": [
+        {
+          "phase_id": "2.1",
+          "phase_name": "Preschool Entry & Socialization",
+          "duration_months": 12,
+          "legal_obligations_count": 3,
+          "financial_items_count": 4,
+          "rights_count": 5,
+          "resources_count": 5,
+          "documents_count": 5,
+          "checklist_items_count": 6
+        },
+        {
+          "phase_id": "2.2",
+          "phase_name": "Language & Cognitive Development",
+          "duration_months": 12,
+          "legal_obligations_count": 3,
+          "financial_items_count": 4,
+          "rights_count": 5,
+          "resources_count": 5,
+          "documents_count": 4,
+          "checklist_items_count": 6
+        },
+        {
+          "phase_id": "2.3",
+          "phase_name": "Social-Emotional & Play Development",
+          "duration_months": 12,
+          "legal_obligations_count": 3,
+          "financial_items_count": 4,
+          "rights_count": 5,
+          "resources_count": 5,
+          "documents_count": 4,
+          "checklist_items_count": 6
+        },
+        {
+          "phase_id": "2.4",
+          "phase_name": "Pre-Kindergarten Skills & Independence",
+          "duration_months": 12,
+          "legal_obligations_count": 3,
+          "financial_items_count": 4,
+          "rights_count": 5,
+          "resources_count": 5,
+          "documents_count": 4,
+          "checklist_items_count": 6
+        },
+        {
+          "phase_id": "2.5",
+          "phase_name": "Age Group 2 Completion & Transition",
+          "duration_months": 0,
+          "legal_obligations_count": 3,
+          "financial_items_count": 4,
+          "rights_count": 5,
+          "resources_count": 5,
+          "documents_count": 5,
+          "checklist_items_count": 6
+        }
+      ]
+    },
+    {
+      "age_group_id": 3,
+      "name": "Middle Childhood",
+      "duration_months": 72,
+      "start_months": 72,
+      "end_months": 144,
+      "phase_count": 5,
+      "primary_focus": "Education, skill development, peer relationships, independence",
+      "key_stakeholders": ["Parents", "Teachers", "School Administrators", "Mentors"],
+      "phases": [
+        {
+          "phase_id": "3.1",
+          "phase_name": "Primary School Entry & Adaptation",
+          "duration_months": 12,
+          "legal_obligations_count": 3,
+          "financial_items_count": 4,
+          "rights_count": 5,
+          "resources_count": 5,
+          "documents_count": 5,
+          "checklist_items_count": 6
+        },
+        {
+          "phase_id": "3.2",
+          "phase_name": "Academic Foundation & Early Learning",
+          "duration_months": 24,
+          "legal_obligations_count": 3,
+          "financial_items_count": 4,
+          "rights_count": 5,
+          "resources_count": 5,
+          "documents_count": 4,
+          "checklist_items_count": 6
+        },
+        {
+          "phase_id": "3.3",
+          "phase_name": "Skill Development & Peer Relationships",
+          "duration_months": 12,
+          "legal_obligations_count": 3,
+          "financial_items_count": 4,
+          "rights_count": 5,
+          "resources_count": 5,
+          "documents_count": 4,
+          "checklist_items_count": 6
+        },
+        {
+          "phase_id": "3.4",
+          "phase_name": "Independence & Responsibility",
+          "duration_months": 24,
+          "legal_obligations_count": 3,
+          "financial_items_count": 4,
+          "rights_count": 5,
+          "resources_count": 5,
+          "documents_count": 4,
+          "checklist_items_count": 6
+        },
+        {
+          "phase_id": "3.5",
+          "phase_name": "Age Group 3 Completion & Secondary Transition",
+          "duration_months": 0,
+          "legal_obligations_count": 3,
+          "financial_items_count": 4,
+          "rights_count": 5,
+          "resources_count": 5,
+          "documents_count": 5,
+          "checklist_items_count": 6
+        }
+      ]
+    },
+    {
+      "age_group_id": 4,
+      "name": "Adolescence",
+      "duration_months": 72,
+      "start_months": 144,
+      "end_months": 216,
+      "phase_count": 6,
+      "primary_focus": "Identity formation, vocational exploration, legal rights, adult transition",
+      "key_stakeholders": ["Parents", "Teachers", "Counselors", "Employers", "Legal Guardians"],
+      "phases": [
+        {
+          "phase_id": "4.1",
+          "phase_name": "Secondary School Entry & Identity Formation",
+          "duration_months": 12,
+          "legal_obligations_count": 3,
+          "financial_items_count": 4,
+          "rights_count": 5,
+          "resources_count": 5,
+          "documents_count": 5,
+          "checklist_items_count": 6
+        },
+        {
+          "phase_id": "4.2",
+          "phase_name": "Academic & Vocational Exploration",
+          "duration_months": 24,
+          "legal_obligations_count": 3,
+          "financial_items_count": 4,
+          "rights_count": 5,
+          "resources_count": 5,
+          "documents_count": 4,
+          "checklist_items_count": 6
+        },
+        {
+          "phase_id": "4.3",
+          "phase_name": "Skill Development & Social Responsibility",
+          "duration_months": 12,
+          "legal_obligations_count": 3,
+          "financial_items_count": 4,
+          "rights_count": 5,
+          "resources_count": 5,
+          "documents_count": 4,
+          "checklist_items_count": 6
+        },
+        {
+          "phase_id": "4.4",
+          "phase_name": "Pre-Adulthood Preparation & Rights Education",
+          "duration_months": 12,
+          "legal_obligations_count": 3,
+          "financial_items_count": 4,
+          "rights_count": 5,
+          "resources_count": 5,
+          "documents_count": 4,
+          "checklist_items_count": 6
+        },
+        {
+          "phase_id": "4.5",
+          "phase_name": "Transition to Adulthood & Graduations",
+          "duration_months": 12,
+          "legal_obligations_count": 3,
+          "financial_items_count": 4,
+          "rights_count": 5,
+          "resources_count": 5,
+          "documents_count": 4,
+          "checklist_items_count": 6
+        },
+        {
+          "phase_id": "4.6",
+          "phase_name": "Age Group 4 Completion & Full Adult Transition",
+          "duration_months": 0,
+          "legal_obligations_count": 3,
+          "financial_items_count": 4,
+          "rights_count": 5,
+          "resources_count": 5,
+          "documents_count": 5,
+          "checklist_items_count": 6
+        }
+      ]
+    }
+  ],
+  "global_settings": {
+    "default_language": "en",
+    "supported_languages": ["en", "ar", "fr"],
+    "default_currency": "USD",
+    "supported_currencies": ["USD", "EUR", "AED", "SAR", "EGP"],
+    "data_retention_years": 18,
+    "audit_frequency_months": 12,
+    "compliance_framework": "Islamic Law & MENA National Standards",
+    "framework_version": "1.0",
+    "framework_status": "Active",
+    "last_updated": "2026-06-02",
+    "maintenance_schedule": "Quarterly Review",
+    "contact_email": "governance@cycle-vie.mena",
+    "contact_phone": "+1-XXX-XXX-XXXX"
+  },
+  "metadata": {
+    "framework_id": "CYCLE-VIE-2026-v1.0",
+    "total_fields_per_phase": 22,
+    "minimum_fields_per_phase": 10,
+    "maximum_phases_per_age_group": 6,
+    "total_checklist_items": 150,
+    "total_documents_managed": 110,
+    "estimated_implementation_months": 12,
+    "framework_creator": "CYCLE-VIE Development Team",
+    "last_validation_date": "2026-06-02",
+    "validation_status": "Current"
+  }
+}

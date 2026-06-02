@@ -1,0 +1,198 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Lawyer Record Schema",
+  "type": "object",
+  "required": ["id", "name", "address", "phone", "email", "specialty", "region"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the lawyer"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["individual", "firm", "organization"],
+      "description": "Type of legal entity"
+    },
+    "name": {
+      "type": "string",
+      "description": "Full name or firm name"
+    },
+    "address": {
+      "type": "string",
+      "description": "Physical street address"
+    },
+    "postal_code": {
+      "type": "string",
+      "description": "Postal/ZIP code"
+    },
+    "region": {
+      "type": "string",
+      "enum": ["Brussels", "Wallonia", "Flanders", "Mixed"],
+      "description": "Geographic region served"
+    },
+    "phone": {
+      "type": "string",
+      "description": "Primary phone number"
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "Contact email address"
+    },
+    "website": {
+      "type": ["string", "null"],
+      "format": "uri",
+      "description": "Professional website URL"
+    },
+    "specialty": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Areas of legal specialization"
+    },
+    "hours": {
+      "type": "object",
+      "properties": {
+        "monday_friday": {
+          "type": "string",
+          "description": "Weekday hours (e.g., 09:00-17:00)"
+        },
+        "saturday": {
+          "type": ["string", "null"],
+          "description": "Saturday hours if available"
+        },
+        "sunday": {
+          "type": ["string", "null"],
+          "description": "Sunday hours if available"
+        }
+      },
+      "description": "Operating hours"
+    },
+    "languages": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Languages spoken"
+    },
+    "fees": {
+      "type": "object",
+      "properties": {
+        "consultation": {
+          "type": ["number", "null"],
+          "description": "Hourly rate in EUR or null if not disclosed"
+        },
+        "initial_contact": {
+          "type": ["string", "null"],
+          "description": "Cost of initial consultation"
+        },
+        "payment_plans": {
+          "type": "boolean",
+          "description": "Whether payment plans are offered"
+        }
+      },
+      "description": "Fee structure information"
+    },
+    "accessibility": {
+      "type": "object",
+      "properties": {
+        "wheelchair": {
+          "type": "boolean",
+          "description": "Wheelchair accessible office"
+        },
+        "virtual_consultation": {
+          "type": "boolean",
+          "description": "Virtual/remote consultation available"
+        },
+        "phone_consultation": {
+          "type": "boolean",
+          "description": "Phone consultation available"
+        }
+      },
+      "description": "Accessibility features"
+    },
+    "reviews": {
+      "type": "object",
+      "properties": {
+        "rating": {
+          "type": ["number", "null"],
+          "minimum": 1,
+          "maximum": 5,
+          "description": "Average rating out of 5"
+        },
+        "count": {
+          "type": "integer",
+          "description": "Number of reviews"
+        },
+        "source": {
+          "type": "string",
+          "description": "Review platform (Google, Avocats.be, etc.)"
+        }
+      },
+      "description": "Review and rating information"
+    },
+    "case_types": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Types of cases handled"
+    },
+    "capacity": {
+      "type": "string",
+      "enum": ["accepting_clients", "limited_availability", "not_accepting"],
+      "description": "Current client capacity status"
+    },
+    "wait_time": {
+      "type": ["string", "null"],
+      "description": "Typical wait time for consultation"
+    },
+    "referral_contacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "relationship": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Professional referral contacts"
+    },
+    "founding_date": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "Year or date the practice was established"
+    },
+    "staff": {
+      "type": "integer",
+      "description": "Number of staff members"
+    },
+    "accreditation": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Professional accreditations and certifications"
+    },
+    "regions_served": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Geographic regions where services are offered"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes or observations"
+    },
+    "source": {
+      "type": "string",
+      "description": "Data source (directory, website, etc.)"
+    }
+  }
+}

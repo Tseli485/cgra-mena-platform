@@ -1,0 +1,5842 @@
+{
+  "version": "1.0",
+  "resources": [
+    {
+      "id": "LAW001",
+      "type": "firm",
+      "name": "Cabinet Juridique Bruxelles SARL",
+      "address": "Avenue de la Toison d'Or 45",
+      "postal_code": "1050",
+      "region": "Brussels",
+      "phone": "+32 2 512 3456",
+      "email": "contact@cabinetbruxelles.be",
+      "website": "https://www.cabinetbruxelles.be",
+      "specialty": [
+        "Commercial Law",
+        "Contract Law",
+        "Corporate Law"
+      ],
+      "hours": {
+        "monday_friday": "09:00-18:00",
+        "saturday": null,
+        "sunday": null
+      },
+      "languages": [
+        "French",
+        "English",
+        "Dutch"
+      ],
+      "fees": {
+        "consultation": 150,
+        "initial_contact": "Gratuit",
+        "payment_plans": true
+      },
+      "accessibility": {
+        "wheelchair": true,
+        "virtual_consultation": true,
+        "phone_consultation": true
+      },
+      "reviews": {
+        "rating": 4.7,
+        "count": 42,
+        "source": "Google"
+      },
+      "case_types": [
+        "Business disputes",
+        "Contracts",
+        "Company formation"
+      ],
+      "capacity": "accepting_clients",
+      "wait_time": "1-2 weeks",
+      "referral_contacts": [
+        {
+          "name": "Notaire Paul Dubois",
+          "relationship": "Professional network"
+        }
+      ],
+      "founding_date": "2010",
+      "staff": 12,
+      "accreditation": [
+        "Brussels Bar Association",
+        "ISO 9001"
+      ],
+      "regions_served": [
+        "Brussels",
+        "Wallonia"
+      ],
+      "notes": "Full-service firm specializing in corporate law",
+      "source": "Brussels Legal Directory"
+    },
+    {
+      "id": "LAW002",
+      "type": "individual",
+      "name": "Dr. Marie Dupont",
+      "address": "Rue de Namur 78",
+      "postal_code": "1000",
+      "region": "Brussels",
+      "phone": "+32 2 219 8765",
+      "email": "marie.dupont@avocats.be",
+      "website": null,
+      "specialty": [
+        "Family Law",
+        "Inheritance",
+        "Mediation"
+      ],
+      "hours": {
+        "monday_friday": "10:00-17:00",
+        "saturday": null,
+        "sunday": null
+      },
+      "languages": [
+        "French",
+        "English"
+      ],
+      "fees": {
+        "consultation": 120,
+        "initial_contact": "120 EUR",
+        "payment_plans": true
+      },
+      "accessibility": {
+        "wheelchair": true,
+        "virtual_consultation": true,
+        "phone_consultation": true
+      },
+      "reviews": {
+        "rating": 4.9,
+        "count": 58,
+        "source": "Avocats.be"
+      },
+      "case_types": [
+        "Divorce",
+        "Child custody",
+        "Succession planning"
+      ],
+      "capacity": "limited_availability",
+      "wait_time": "3-4 weeks",
+      "referral_contacts": [
+        {
+          "name": "Dr. Jean Moreau",
+          "relationship": "Colleague"
+        }
+      ],
+      "founding_date": "2008",
+      "staff": 1,
+      "accreditation": [
+        "Brussels Bar Association"
+      ],
+      "regions_served": [
+        "Brussels"
+      ],
+      "notes": "Specialized mediator, high client satisfaction",
+      "source": "Bar Association Referral"
+    },
+    {
+      "id": "LAW003",
+      "type": "firm",
+      "name": "Avocat.be - Brussels Office",
+      "address": "Boulevard Adolphe Max 22",
+      "postal_code": "1000",
+      "region": "Brussels",
+      "phone": "+32 2 547 3322",
+      "email": "brussels@avocat.be",
+      "website": "https://www.avocat.be",
+      "specialty": [
+        "Criminal Law",
+        "Administrative Law",
+        "Civil Litigation"
+      ],
+      "hours": {
+        "monday_friday": "08:30-18:30",
+        "saturday": "10:00-14:00",
+        "sunday": null
+      },
+      "languages": [
+        "French",
+        "English",
+        "Dutch",
+        "German"
+      ],
+      "fees": {
+        "consultation": 180,
+        "initial_contact": "Gratuit",
+        "payment_plans": true
+      },
+      "accessibility": {
+        "wheelchair": true,
+        "virtual_consultation": true,
+        "phone_consultation": true
+      },
+      "reviews": {
+        "rating": 4.5,
+        "count": 73,
+        "source": "Google"
+      },
+      "case_types": [
+        "Criminal defense",
+        "Administrative appeals",
+        "Litigation"
+      ],
+      "capacity": "accepting_clients",
+      "wait_time": "1 week",
+      "referral_contacts": [
+        {
+          "name": "Attorney General's Office",
+          "relationship": "Professional"
+        }
+      ],
+      "founding_date": "2005",
+      "staff": 25,
+      "accreditation": [
+        "Brussels Bar Association",
+        "Court Certified"
+      ],
+      "regions_served": [
+        "Brussels",
+        "Wallonia",
+        "Flanders"
+      ],
+      "notes": "24/7 emergency legal services available",
+      "source": "Professional Registry"
+    },
+    {
+      "id": "LAW004",
+      "type": "individual",
+      "name": "Michaël Verlaine",
+      "address": "Rue Royale 146",
+      "postal_code": "1210",
+      "region": "Brussels",
+      "phone": "+32 2 227 4567",
+      "email": "verlaine@avocats.be",
+      "website": "https://www.verlaine-avocat.be",
+      "specialty": [
+        "Real Estate Law",
+        "Property Conveyancing",
+        "Construction Law"
+      ],
+      "hours": {
+        "monday_friday": "09:00-17:00",
+        "saturday": null,
+        "sunday": null
+      },
+      "languages": [
+        "French",
+        "English"
+      ],
+      "fees": {
+        "consultation": 140,
+        "initial_contact": "140 EUR",
+        "payment_plans": false
+      },
+      "accessibility": {
+        "wheelchair": true,
+        "virtual_consultation": false,
+        "phone_consultation": true
+      },
+      "reviews": {
+        "rating": 4.6,
+        "count": 34,
+        "source": "Avocats.be"
+      },
+      "case_types": [
+        "Property purchase",
+        "Construction disputes",
+        "Easements"
+      ],
+      "capacity": "accepting_clients",
+      "wait_time": "2 weeks",
+      "referral_contacts": [
+        {
+          "name": "Real Estate Board Brussels",
+          "relationship": "Member"
+        }
+      ],
+      "founding_date": "2012",
+      "staff": 2,
+      "accreditation": [
+        "Brussels Bar Association"
+      ],
+      "regions_served": [
+        "Brussels"
+      ],
+      "notes": "Specializes in complex property transactions",
+      "source": "Real Estate Professional Network"
+    },
+    {
+      "id": "LAW005",
+      "type": "firm",
+      "name": "Legal Solutions Brussels",
+      "address": "Rue du Commerce 89",
+      "postal_code": "1000",
+      "region": "Brussels",
+      "phone": "+32 2 419 7743",
+      "email": "info@legalsolutions.be",
+      "website": "https://www.legalsolutions.be",
+      "specialty": [
+        "Employment Law",
+        "Labor Relations",
+        "HR Consulting"
+      ],
+      "hours": {
+        "monday_friday": "08:00-18:00",
+        "saturday": null,
+        "sunday": null
+      },
+      "languages": [
+        "French",
+        "English",
+        "Dutch"
+      ],
+      "fees": {
+        "consultation": 160,
+        "initial_contact": "Gratuit",
+        "payment_plans": true
+      },
+      "accessibility": {
+        "wheelchair": true,
+        "virtual_consultation": true,
+        "phone_consultation": true
+      },
+      "reviews": {
+        "rating": 4.8,
+        "count": 91,
+        "source": "Google"
+      },
+      "case_types": [
+        "Wrongful termination",
+        "Workplace disputes",
+        "Contract review"
+      ],
+      "capacity": "accepting_clients",
+      "wait_time": "1 week",
+      "referral_contacts": [
+        {
+          "name": "HR Federation Belgium",
+          "relationship": "Partner"
+        }
+      ],
+      "founding_date": "2009",
+      "staff": 18,
+      "accreditation": [
+        "Brussels Bar Association",
+        "HR Certification"
+      ],
+      "regions_served": [
+        "Brussels",
+        "Wallonia"
+      ],
+      "notes": "Corporate employment law specialists",
+      "source": "HR Professional Directory"
+    },
+    {
+      "id": "LAW006",
+      "type": "individual",
+      "name": "Sophie Lefevre",
+      "address": "Avenue Louise 223",
+      "postal_code": "1050",
+      "region": "Brussels",
+      "phone": "+32 2 648 1234",
+      "email": "sophie@avocats-louise.be",
+      "website": null,
+      "specialty": [
+        "Intellectual Property",
+        "Patents",
+        "Trademark Law"
+      ],
+      "hours": {
+        "monday_friday": "09:30-17:30",
+        "saturday": null,
+        "sunday": null
+      },
+      "languages": [
+        "French",
+        "English",
+        "German"
+      ],
+      "fees": {
+        "consultation": 200,
+        "initial_contact": "200 EUR",
+        "payment_plans": false
+      },
+      "accessibility": {
+        "wheelchair": false,
+        "virtual_consultation": true,
+        "phone_consultation": true
+      },
+      "reviews": {
+        "rating": 4.7,
+        "count": 28,
+        "source": "Professional Directory"
+      },
+      "case_types": [
+        "Patent registration",
+        "Trademark disputes",
+        "Copyright"
+      ],
+      "capacity": "limited_availability",
+      "wait_time": "4 weeks",
+      "referral_contacts": [
+        {
+          "name": "BOIP Belgium",
+          "relationship": "Professional network"
+        }
+      ],
+      "founding_date": "2014",
+      "staff": 1,
+      "accreditation": [
+        "Brussels Bar Association",
+        "IP Patent Attorney"
+      ],
+      "regions_served": [
+        "Brussels",
+        "EU"
+      ],
+      "notes": "EU patent law expertise",
+      "source": "IP Professional Network"
+    },
+    {
+      "id": "LAW007",
+      "type": "firm",
+      "name": "Walloon Legal Group",
+      "address": "Rue Léopold 12",
+      "postal_code": "5000",
+      "region": "Wallonia",
+      "phone": "+32 81 245 6789",
+      "email": "contact@walloonlegal.be",
+      "website": "https://www.walloonlegal.be",
+      "specialty": [
+        "General Practice",
+        "Notarial Services",
+        "Estate Planning"
+      ],
+      "hours": {
+        "monday_friday": "09:00-17:00",
+        "saturday": null,
+        "sunday": null
+      },
+      "languages": [
+        "French",
+        "English"
+      ],
+      "fees": {
+        "consultation": 100,
+        "initial_contact": "Gratuit",
+        "payment_plans": true
+      },
+      "accessibility": {
+        "wheelchair": true,
+        "virtual_consultation": true,
+        "phone_consultation": true
+      },
+      "reviews": {
+        "rating": 4.4,
+        "count": 45,
+        "source": "Google"
+      },
+      "case_types": [
+        "Wills",
+        "Property",
+        "General advice"
+      ],
+      "capacity": "accepting_clients",
+      "wait_time": "2 weeks",
+      "referral_contacts": [
+        {
+          "name": "Walloon Notaries Council",
+          "relationship": "Member"
+        }
+      ],
+      "founding_date": "2006",
+      "staff": 8,
+      "accreditation": [
+        "Namur Bar Association",
+        "Notarial Certification"
+      ],
+      "regions_served": [
+        "Wallonia"
+      ],
+      "notes": "Integrated law and notarial practice",
+      "source": "Walloon Bar Association"
+    },
+    {
+      "id": "LAW008",
+      "type": "individual",
+      "name": "Pierre Henault",
+      "address": "Place d'Armes 56",
+      "postal_code": "6000",
+      "region": "Wallonia",
+      "phone": "+32 71 367 2341",
+      "email": "pierre.henault@avocats.be",
+      "website": null,
+      "specialty": [
+        "Municipal Law",
+        "Administrative Compliance",
+        "Public Records"
+      ],
+      "hours": {
+        "monday_friday": "10:00-16:00",
+        "saturday": null,
+        "sunday": null
+      },
+      "languages": [
+        "French"
+      ],
+      "fees": {
+        "consultation": 95,
+        "initial_contact": "Gratuit",
+        "payment_plans": true
+      },
+      "accessibility": {
+        "wheelchair": true,
+        "virtual_consultation": false,
+        "phone_consultation": true
+      },
+      "reviews": {
+        "rating": 4.3,
+        "count": 22,
+        "source": "Local Directory"
+      },
+      "case_types": [
+        "Municipal permits",
+        "Administrative appeals",
+        "Public services"
+      ],
+      "capacity": "accepting_clients",
+      "wait_time": "3 weeks",
+      "referral_contacts": [
+        {
+          "name": "Charleroi Municipality",
+          "relationship": "Referral"
+        }
+      ],
+      "founding_date": "2011",
+      "staff": 1,
+      "accreditation": [
+        "Charleroi Bar Association"
+      ],
+      "regions_served": [
+        "Wallonia"
+      ],
+      "notes": "Specialist in municipal and administrative matters",
+      "source": "Local Bar Association"
+    },
+    {
+      "id": "LAW009",
+      "type": "firm",
+      "name": "Liège Corporate Law",
+      "address": "Boulevard de la Sauvenière 45",
+      "postal_code": "4000",
+      "region": "Wallonia",
+      "phone": "+32 4 221 4567",
+      "email": "corporate@liegelaw.be",
+      "website": "https://www.liegelaw.be",
+      "specialty": [
+        "Corporate Law",
+        "M&A",
+        "Business Restructuring"
+      ],
+      "hours": {
+        "monday_friday": "08:30-18:00",
+        "saturday": null,
+        "sunday": null
+      },
+      "languages": [
+        "French",
+        "English",
+        "German"
+      ],
+      "fees": {
+        "consultation": 170,
+        "initial_contact": "Gratuit",
+        "payment_plans": true
+      },
+      "accessibility": {
+        "wheelchair": true,
+        "virtual_consultation": true,
+        "phone_consultation": true
+      },
+      "reviews": {
+        "rating": 4.6,
+        "count": 56,
+        "source": "Google"
+      },
+      "case_types": [
+        "Mergers",
+        "Acquisitions",
+        "Company restructuring"
+      ],
+      "capacity": "accepting_clients",
+      "wait_time": "2 weeks",
+      "referral_contacts": [
+        {
+          "name": "Liège Chamber of Commerce",
+          "relationship": "Partner"
+        }
+      ],
+      "founding_date": "2007",
+      "staff": 14,
+      "accreditation": [
+        "Liège Bar Association"
+      ],
+      "regions_served": [
+        "Wallonia",
+        "Brussels"
+      ],
+      "notes": "Multinational business law expertise",
+      "source": "Chamber of Commerce"
+    },
+    {
+      "id": "LAW010",
+      "type": "individual",
+      "name": "Carole Mathieu",
+      "address": "Rue Royale 98",
+      "postal_code": "4000",
+      "region": "Wallonia",
+      "phone": "+32 4 222 5678",
+      "email": "carole.mathieu@avocats.be",
+      "website": null,
+      "specialty": [
+        "Social Security Law",
+        "Disability Rights",
+        "Welfare Law"
+      ],
+      "hours": {
+        "monday_friday": "09:00-16:30",
+        "saturday": null,
+        "sunday": null
+      },
+      "languages": [
+        "French"
+      ],
+      "fees": {
+        "consultation": 90,
+        "initial_contact": "Gratuit",
+        "payment_plans": true
+      },
+      "accessibility": {
+        "wheelchair": true,
+        "virtual_consultation": true,
+        "phone_consultation": true
+      },
+      "reviews": {
+        "rating": 4.8,
+        "count": 64,
+        "source": "Avocats.be"
+      },
+      "case_types": [
+        "Social security appeals",
+        "Disability benefits",
+        "Welfare rights"
+      ],
+      "capacity": "accepting_clients",
+      "wait_time": "1 week",
+      "referral_contacts": [
+        {
+          "name": "Liège Social Services",
+          "relationship": "Regular referral"
+        }
+      ],
+      "founding_date": "2013",
+      "staff": 1,
+      "accreditation": [
+        "Liège Bar Association"
+      ],
+      "regions_served": [
+        "Wallonia"
+      ],
+      "notes": "Advocate for vulnerable populations",
+      "source": "Social Services Network"
+    },
+    {
+      "id": "LAW011",
+      "type": "firm",
+      "name": "Flanders Legal Associates",
+      "address": "Antwerpsestraat 45",
+      "postal_code": "2000",
+      "region": "Flanders",
+      "phone": "+32 3 232 1234",
+      "email": "info@flanderslegal.be",
+      "website": "https://www.flanderslegal.be",
+      "specialty": [
+        "Commercial Law",
+        "Trade Law",
+        "Supply Chain"
+      ],
+      "hours": {
+        "monday_friday": "08:00-17:30",
+        "saturday": null,
+        "sunday": null
+      },
+      "languages": [
+        "Dutch",
+        "English",
+        "French"
+      ],
+      "fees": {
+        "consultation": 150,
+        "initial_contact": "Gratuit",
+        "payment_plans": true
+      },
+      "accessibility": {
+        "wheelchair": true,
+        "virtual_consultation": true,
+        "phone_consultation": true
+      },
+      "reviews": {
+        "rating": 4.5,
+        "count": 52,
+        "source": "Google"
+      },
+      "case_types": [
+        "Trade disputes",
+        "Contract review",
+        "Supply chain law"
+      ],
+      "capacity": "accepting_clients",
+      "wait_time": "2 weeks",
+      "referral_contacts": [
+        {
+          "name": "Antwerp Port Authority",
+          "relationship": "Professional"
+        }
+      ],
+      "founding_date": "2008",
+      "staff": 10,
+      "accreditation": [
+        "Antwerp Bar Association"
+      ],
+      "regions_served": [
+        "Flanders",
+        "Wallonia"
+      ],
+      "notes": "Port and trade law specialists",
+      "source": "Trade Association"
+    },
+    {
+      "id": "LAW012",
+      "type": "individual",
+      "name": "Dirk Vandeputte",
+      "address": "Meir 89",
+      "postal_code": "2000",
+      "region": "Flanders",
+      "phone": "+32 3 234 7654",
+      "email": "dirk@antwerplegal.be",
+      "website": null,
+      "specialty": [
+        "Bankruptcy Law",
+        "Creditor Rights",
+        "Insolvency"
+      ],
+      "hours": {
+        "monday_friday": "09:00-17:00",
+        "saturday": null,
+        "sunday": null
+      },
+      "languages": [
+        "Dutch",
+        "English"
+      ],
+      "fees": {
+        "consultation": 130,
+        "initial_contact": "130 EUR",
+        "payment_plans": true
+      },
+      "accessibility": {
+        "wheelchair": false,
+        "virtual_consultation": true,
+        "phone_consultation": true
+      },
+      "reviews": {
+        "rating": 4.4,
+        "count": 38,
+        "source": "Professional Directory"
+      },
+      "case_types": [
+        "Bankruptcy",
+        "Restructuring",
+        "Debt settlement"
+      ],
+      "capacity": "limited_availability",
+      "wait_time": "3 weeks",
+      "referral_contacts": [
+        {
+          "name": "Antwerp Chamber of Commerce",
+          "relationship": "Member"
+        }
+      ],
+      "founding_date": "2010",
+      "staff": 2,
+      "accreditation": [
+        "Antwerp Bar Association"
+      ],
+      "regions_served": [
+        "Flanders"
+      ],
+      "notes": "Specialized in commercial bankruptcy",
+      "source": "Bar Association"
+    },
+    {
+      "id": "LAW013",
+      "type": "firm",
+      "name": "Gent Family Law Center",
+      "address": "Sint-Jacobs 67",
+      "postal_code": "9000",
+      "region": "Flanders",
+      "phone": "+32 9 217 3456",
+      "email": "family@gentlaw.be",
+      "website": "https://www.gentlaw.be",
+      "specialty": [
+        "Family Law",
+        "Child Custody",
+        "Divorce Mediation"
+      ],
+      "hours": {
+        "monday_friday": "09:00-18:00",
+        "saturday": "10:00-13:00",
+        "sunday": null
+      },
+      "languages": [
+        "Dutch",
+        "English",
+        "French"
+      ],
+      "fees": {
+        "consultation": 110,
+        "initial_contact": "Gratuit",
+        "payment_plans": true
+      },
+      "accessibility": {
+        "wheelchair": true,
+        "virtual_consultation": true,
+        "phone_consultation": true
+      },
+      "reviews": {
+        "rating": 4.9,
+        "count": 112,
+        "source": "Google"
+      },
+      "case_types": [
+        "Divorce",
+        "Custody disputes",
+        "Family mediation"
+      ],
+      "capacity": "accepting_clients",
+      "wait_time": "1 week",
+      "referral_contacts": [
+        {
+          "name": "Gent Mediation Center",
+          "relationship": "Partnership"
+        }
+      ],
+      "founding_date": "2009",
+      "staff": 6,
+      "accreditation": [
+        "Gent Bar Association",
+        "Mediation Certified"
+      ],
+      "regions_served": [
+        "Flanders"
+      ],
+      "notes": "Child-focused divorce services",
+      "source": "Family Services"
+    },
+    {
+      "id": "LAW014",
+      "type": "individual",
+      "name": "Inge Wouters",
+      "address": "Graffiti Street 34",
+      "postal_code": "9000",
+      "region": "Flanders",
+      "phone": "+32 9 223 4567",
+      "email": "inge.wouters@avocats.be",
+      "website": null,
+      "specialty": [
+        "Immigration Law",
+        "Asylum",
+        "Work Permits"
+      ],
+      "hours": {
+        "monday_friday": "10:00-17:00",
+        "saturday": null,
+        "sunday": null
+      },
+      "languages": [
+        "Dutch",
+        "English",
+        "French",
+        "German"
+      ],
+      "fees": {
+        "consultation": 125,
+        "initial_contact": "125 EUR",
+        "payment_plans": true
+      },
+      "accessibility": {
+        "wheelchair": true,
+        "virtual_consultation": true,
+        "phone_consultation": true
+      },
+      "reviews": {
+        "rating": 4.7,
+        "count": 85,
+        "source": "Avocats.be"
+      },
+      "case_types": [
+        "Work permits",
+        "Asylum appeals",
+        "Residency"
+      ],
+      "capacity": "accepting_clients",
+      "wait_time": "2 weeks",
+      "referral_contacts": [
+        {
+          "name": "Belgium Immigration Services",
+          "relationship": "Professional"
+        }
+      ],
+      "founding_date": "2011",
+      "staff": 1,
+      "accreditation": [
+        "Gent Bar Association"
+      ],
+      "regions_served": [
+        "Flanders"
+      ],
+      "notes": "Multilingual immigration specialist",
+      "source": "Immigration Advocacy Network"
+    },
+    {
+      "id": "LAW015",
+      "type": "firm",
+      "name": "Bruges Commercial Attorneys",
+      "address": "Steenstraat 23",
+      "postal_code": "8000",
+      "region": "Flanders",
+      "phone": "+32 50 343 2121",
+      "email": "commercial@brugeslaw.be",
+      "website": "https://www.brugeslaw.be",
+      "specialty": [
+        "Tourism Law",
+        "Commercial Contracts",
+        "Business Licensing"
+      ],
+      "hours": {
+        "monday_friday": "09:00-17:30",
+        "saturday": null,
+        "sunday": null
+      },
+      "languages": [
+        "Dutch",
+        "English",
+        "French",
+        "German"
+      ],
+      "fees": {
+        "consultation": 140,
+        "initial_contact": "Gratuit",
+        "payment_plans": true
+      },
+      "accessibility": {
+        "wheelchair": true,
+        "virtual_consultation": true,
+        "phone_consultation": true
+      },
+      "reviews": {
+        "rating": 4.3,
+        "count": 41,
+        "source": "Google"
+      },
+      "case_types": [
+        "Tourism",
+        "Hospitality",
+        "Commerce"
+      ],
+      "capacity": "accepting_clients",
+      "wait_time": "2 weeks",
+      "referral_contacts": [
+        {
+          "name": "Bruges Tourism Board",
+          "relationship": "Member"
+        }
+      ],
+      "founding_date": "2012",
+      "staff": 5,
+      "accreditation": [
+        "Bruges Bar Association"
+      ],
+      "regions_served": [
+        "Flanders"
+      ],
+      "notes": "Tourism sector specialists",
+      "source": "Chamber of Commerce"
+    },
+    {
+      "id": "LAW016",
+      "type": "individual",
+      "name": "Luc De Clercq",
+      "address": "Ezelstraat 45",
+      "postal_code": "8000",
+      "region": "Flanders",
+      "phone": "+32 50 334 5678",
+      "email": "luc.declercq@avocats.be",
+      "website": null,
+      "specialty": [
+        "Environmental Law",
+        "Building Code",
+        "Zoning"
+      ],
+      "hours": {
+        "monday_friday": "08:30-17:00",
+        "saturday": null,
+        "sunday": null
+      },
+      "languages": [
+        "Dutch",
+        "French"
+      ],
+      "fees": {
+        "consultation": 135,
+        "initial_contact": "Gratuit",
+        "payment_plans": false
+      },
+      "accessibility": {
+        "wheelchair": false,
+        "virtual_consultation": false,
+        "phone_consultation": true
+      },
+      "reviews": {
+        "rating": 4.2,
+        "count": 29,
+        "source": "Professional Directory"
+      },
+      "case_types": [
+        "Environmental permits",
+        "Building disputes",
+        "Zoning appeals"
+      ],
+      "capacity": "limited_availability",
+      "wait_time": "4 weeks",
+      "referral_contacts": [
+        {
+          "name": "Environmental Ministry",
+          "relationship": "Professional"
+        }
+      ],
+      "founding_date": "2008",
+      "staff": 1,
+      "accreditation": [
+        "Bruges Bar Association"
+      ],
+      "regions_served": [
+        "Flanders"
+      ],
+      "notes": "Environmental law expertise",
+      "source": "Professional Registry"
+    },
+    {
+      "id": "LAW017",
+      "type": "firm",
+      "name": "Multi-Regional Legal Solutions",
+      "address": "Grand Place 1",
+      "postal_code": "1000",
+      "region": "Mixed",
+      "phone": "+32 2 500 0001",
+      "email": "national@multiregional.be",
+      "website": "https://www.multiregional.be",
+      "specialty": [
+        "General Practice",
+        "Multiple Jurisdictions",
+        "Dispute Resolution"
+      ],
+      "hours": {
+        "monday_friday": "08:00-18:00",
+        "saturday": "10:00-14:00",
+        "sunday": null
+      },
+      "languages": [
+        "French",
+        "Dutch",
+        "English",
+        "German",
+        "Italian"
+      ],
+      "fees": {
+        "consultation": 165,
+        "initial_contact": "Gratuit",
+        "payment_plans": true
+      },
+      "accessibility": {
+        "wheelchair": true,
+        "virtual_consultation": true,
+        "phone_consultation": true
+      },
+      "reviews": {
+        "rating": 4.6,
+        "count": 127,
+        "source": "Google"
+      },
+      "case_types": [
+        "Multi-regional disputes",
+        "Cross-border contracts",
+        "Arbitration"
+      ],
+      "capacity": "accepting_clients",
+      "wait_time": "1-2 weeks",
+      "referral_contacts": [
+        {
+          "name": "Belgian Arbitration Council",
+          "relationship": "Member"
+        }
+      ],
+      "founding_date": "2003",
+      "staff": 35,
+      "accreditation": [
+        "All Belgian Bars",
+        "International Arbitration"
+      ],
+      "regions_served": [
+        "Brussels",
+        "Wallonia",
+        "Flanders"
+      ],
+      "notes": "National network with regional offices",
+      "source": "Professional Registry"
+    },
+    {
+      "id": "LAW018",
+      "type": "individual",
+      "name": "Judith Vermeulen",
+      "address": "Rue de Pavie 156",
+      "postal_code": "1000",
+      "region": "Mixed",
+      "phone": "+32 2 514 2345",
+      "email": "judith.vermeulen@avocats.be",
+      "website": "https://www.judithlegal.be",
+      "specialty": [
+        "Consumer Law",
+        "Fraud Protection",
+        "Data Privacy (GDPR)"
+      ],
+      "hours": {
+        "monday_friday": "09:00-17:00",
+        "saturday": null,
+        "sunday": null
+      },
+      "languages": [
+        "Dutch",
+        "English",
+        "French"
+      ],
+      "fees": {
+        "consultation": 115,
+        "initial_contact": "Gratuit",
+        "payment_plans": true
+      },
+      "accessibility": {
+        "wheelchair": true,
+        "virtual_consultation": true,
+        "phone_consultation": true
+      },
+      "reviews": {
+        "rating": 4.8,
+        "count": 76,
+        "source": "Avocats.be"
+      },
+      "case_types": [
+        "Consumer protection",
+        "Data privacy",
+        "Fraud claims"
+      ],
+      "capacity": "accepting_clients",
+      "wait_time": "1 week",
+      "referral_contacts": [
+        {
+          "name": "Data Protection Authority",
+          "relationship": "Professional"
+        }
+      ],
+      "founding_date": "2015",
+      "staff": 2,
+      "accreditation": [
+        "Brussels/Flanders Bars",
+        "GDPR Certified"
+      ],
+      "regions_served": [
+        "Brussels",
+        "Flanders",
+        "Wallonia"
+      ],
+      "notes": "GDPR and digital rights expert",
+      "source": "Tech Legal Network"
+    },
+    {
+      "id": "LAW019",
+      "type": "firm",
+      "name": "Brussels Tax & Finance Law",
+      "address": "Rue de la Loi 45",
+      "postal_code": "1040",
+      "region": "Brussels",
+      "phone": "+32 2 285 7788",
+      "email": "tax@brusltax.be",
+      "website": "https://www.brusltax.be",
+      "specialty": [
+        "Tax Law",
+        "VAT Compliance",
+        "International Tax"
+      ],
+      "hours": {
+        "monday_friday": "08:30-18:30",
+        "saturday": null,
+        "sunday": null
+      },
+      "languages": [
+        "French",
+        "English",
+        "Dutch",
+        "German"
+      ],
+      "fees": {
+        "consultation": 200,
+        "initial_contact": "Gratuit",
+        "payment_plans": true
+      },
+      "accessibility": {
+        "wheelchair": true,
+        "virtual_consultation": true,
+        "phone_consultation": true
+      },
+      "reviews": {
+        "rating": 4.7,
+        "count": 48,
+        "source": "Google"
+      },
+      "case_types": [
+        "Tax disputes",
+        "VAT issues",
+        "Transfer pricing"
+      ],
+      "capacity": "accepting_clients",
+      "wait_time": "2 weeks",
+      "referral_contacts": [
+        {
+          "name": "Belgian Tax Authority",
+          "relationship": "Professional"
+        }
+      ],
+      "founding_date": "2006",
+      "staff": 19,
+      "accreditation": [
+        "Brussels Bar Association",
+        "Tax Specialist Certified"
+      ],
+      "regions_served": [
+        "Brussels",
+        "Belgium",
+        "EU"
+      ],
+      "notes": "EU tax law expertise",
+      "source": "Tax Professional Network"
+    },
+    {
+      "id": "LAW020",
+      "type": "individual",
+      "name": "Anita Rossi",
+      "address": "Rue Archimède 89",
+      "postal_code": "1200",
+      "region": "Brussels",
+      "phone": "+32 2 790 3456",
+      "email": "anita.rossi@avocats.be",
+      "website": null,
+      "specialty": [
+        "Insurance Law",
+        "Claims Handling",
+        "Liability"
+      ],
+      "hours": {
+        "monday_friday": "09:00-17:00",
+        "saturday": null,
+        "sunday": null
+      },
+      "languages": [
+        "French",
+        "English",
+        "Italian"
+      ],
+      "fees": {
+        "consultation": 145,
+        "initial_contact": "Gratuit",
+        "payment_plans": true
+      },
+      "accessibility": {
+        "wheelchair": true,
+        "virtual_consultation": true,
+        "phone_consultation": true
+      },
+      "reviews": {
+        "rating": 4.5,
+        "count": 32,
+        "source": "Professional Directory"
+      },
+      "case_types": [
+        "Insurance claims",
+        "Liability disputes",
+        "Coverage disputes"
+      ],
+      "capacity": "accepting_clients",
+      "wait_time": "2 weeks",
+      "referral_contacts": [
+        {
+          "name": "Insurance Federation",
+          "relationship": "Member"
+        }
+      ],
+      "founding_date": "2010",
+      "staff": 1,
+      "accreditation": [
+        "Brussels Bar Association"
+      ],
+      "regions_served": [
+        "Brussels",
+        "Wallonia"
+      ],
+      "notes": "Insurance industry specialist",
+      "source": "Insurance Professional Network"
+    },
+    {
+      "id": "LAW021",
+      "type": "firm",
+      "name": "Brussels Healthcare & Medical Law",
+      "address": "Avenue des Arts 56",
+      "postal_code": "1040",
+      "region": "Brussels",
+      "phone": "+32 2 231 4567",
+      "email": "healthcare@brusmed.be",
+      "website": "https://www.brusmed.be",
+      "specialty": [
+        "Medical Law",
+        "Healthcare Compliance",
+        "Pharma Law"
+      ],
+      "hours": {
+        "monday_friday": "08:30-17:30",
+        "saturday": null,
+        "sunday": null
+      },
+      "languages": [
+        "English",
+        "French",
+        "Dutch"
+      ],
+      "fees": {
+        "consultation": 190,
+        "initial_contact": "Gratuit",
+        "payment_plans": true
+      },
+      "accessibility": {
+        "wheelchair": true,
+        "virtual_consultation": true,
+        "phone_consultation": true
+      },
+      "reviews": {
+        "rating": 4.6,
+        "count": 51,
+        "source": "Google"
+      },
+      "case_types": [
+        "Medical malpractice",
+        "Regulatory compliance",
+        "Pharmaceutical law"
+      ],
+      "capacity": "accepting_clients",
+      "wait_time": "2-3 weeks",
+      "referral_contacts": [
+        {
+          "name": "Hospital Association",
+          "relationship": "Partner"
+        }
+      ],
+      "founding_date": "2009",
+      "staff": 11,
+      "accreditation": [
+        "Brussels Bar Association",
+        "Healthcare Law Certified"
+      ],
+      "regions_served": [
+        "Brussels",
+        "Wallonia"
+      ],
+      "notes": "Healthcare sector specialists",
+      "source": "Medical Association"
+    },
+    {
+      "id": "LAW022",
+      "type": "individual",
+      "name": "Thibault Chevallier",
+      "address": "Rue Schoubbroeck 34",
+      "postal_code": "1040",
+      "region": "Brussels",
+      "phone": "+32 2 736 5678",
+      "email": "thibault@avocats.be",
+      "website": null,
+      "specialty": [
+        "Construction Law",
+        "Building Disputes",
+        "Contractor Rights"
+      ],
+      "hours": {
+        "monday_friday": "09:30-17:30",
+        "saturday": null,
+        "sunday": null
+      },
+      "languages": [
+        "French",
+        "English"
+      ],
+      "fees": {
+        "consultation": 155,
+        "initial_contact": "155 EUR",
+        "payment_plans": false
+      },
+      "accessibility": {
+        "wheelchair": true,
+        "virtual_consultation": false,
+        "phone_consultation": true
+      },
+      "reviews": {
+        "rating": 4.4,
+        "count": 26,
+        "source": "Professional Directory"
+      },
+      "case_types": [
+        "Construction disputes",
+        "Contractor agreements",
+        "Building defects"
+      ],
+      "capacity": "limited_availability",
+      "wait_time": "3 weeks",
+      "referral_contacts": [
+        {
+          "name": "Building Contractors Association",
+          "relationship": "Member"
+        }
+      ],
+      "founding_date": "2012",
+      "staff": 1,
+      "accreditation": [
+        "Brussels Bar Association"
+      ],
+      "regions_served": [
+        "Brussels"
+      ],
+      "notes": "Construction sector specialist",
+      "source": "Construction Industry Network"
+    },
+    {
+      "id": "LAW023",
+      "type": "firm",
+      "name": "Namur Regional Legal Office",
+      "address": "Rue de Fer 12",
+      "postal_code": "5000",
+      "region": "Wallonia",
+      "phone": "+32 81 723 4567",
+      "email": "regional@namurlaw.be",
+      "website": "https://www.namurlaw.be",
+      "specialty": [
+        "Regional Law",
+        "Public Administration",
+        "Agriculture Law"
+      ],
+      "hours": {
+        "monday_friday": "09:00-17:00",
+        "saturday": null,
+        "sunday": null
+      },
+      "languages": [
+        "French",
+        "English"
+      ],
+      "fees": {
+        "consultation": 105,
+        "initial_contact": "Gratuit",
+        "payment_plans": true
+      },
+      "accessibility": {
+        "wheelchair": true,
+        "virtual_consultation": true,
+        "phone_consultation": true
+      },
+      "reviews": {
+        "rating": 4.2,
+        "count": 33,
+        "source": "Google"
+      },
+      "case_types": [
+        "Agricultural law",
+        "Regional permits",
+        "Public administration"
+      ],
+      "capacity": "accepting_clients",
+      "wait_time": "2 weeks",
+      "referral_contacts": [
+        {
+          "name": "Walloon Regional Government",
+          "relationship": "Professional"
+        }
+      ],
+      "founding_date": "2008",
+      "staff": 7,
+      "accreditation": [
+        "Namur Bar Association"
+      ],
+      "regions_served": [
+        "Wallonia"
+      ],
+      "notes": "Regional administration expertise",
+      "source": "Regional Government"
+    },
+    {
+      "id": "LAW024",
+      "type": "individual",
+      "name": "Fabrice Laurent",
+      "address": "Rue de Bavière 89",
+      "postal_code": "5100",
+      "region": "Wallonia",
+      "phone": "+32 81 423 1234",
+      "email": "fabrice@avocats.be",
+      "website": null,
+      "specialty": [
+        "Contract Law",
+        "Commercial Disputes",
+        "Negotiation"
+      ],
+      "hours": {
+        "monday_friday": "10:00-17:00",
+        "saturday": null,
+        "sunday": null
+      },
+      "languages": [
+        "French",
+        "English"
+      ],
+      "fees": {
+        "consultation": 125,
+        "initial_contact": "125 EUR",
+        "payment_plans": true
+      },
+      "accessibility": {
+        "wheelchair": true,
+        "virtual_consultation": true,
+        "phone_consultation": true
+      },
+      "reviews": {
+        "rating": 4.7,
+        "count": 44,
+        "source": "Avocats.be"
+      },
+      "case_types": [
+        "Contract disputes",
+        "Commercial negotiation",
+        "Mediation"
+      ],
+      "capacity": "accepting_clients",
+      "wait_time": "1 week",
+      "referral_contacts": [
+        {
+          "name": "Chamber of Commerce Namur",
+          "relationship": "Member"
+        }
+      ],
+      "founding_date": "2011",
+      "staff": 1,
+      "accreditation": [
+        "Namur Bar Association"
+      ],
+      "regions_served": [
+        "Wallonia"
+      ],
+      "notes": "Alternative dispute resolution specialist",
+      "source": "Bar Association"
+    },
+    {
+      "id": "LAW025",
+      "type": "firm",
+      "name": "Tournai Civil Law Specialists",
+      "address": "Rue Saint-Martin 45",
+      "postal_code": "7500",
+      "region": "Wallonia",
+      "phone": "+32 69 210 3456",
+      "email": "civil@tournailaw.be",
+      "website": "https://www.tournailaw.be",
+      "specialty": [
+        "Civil Litigation",
+        "Personal Injury",
+        "Negligence Claims"
+      ],
+      "hours": {
+        "monday_friday": "09:00-17:30",
+        "saturday": null,
+        "sunday": null
+      },
+      "languages": [
+        "French",
+        "English"
+      ],
+      "fees": {
+        "consultation": 130,
+        "initial_contact": "Gratuit",
+        "payment_plans": true
+      },
+      "accessibility": {
+        "wheelchair": true,
+        "virtual_consultation": true,
+        "phone_consultation": true
+      },
+      "reviews": {
+        "rating": 4.3,
+        "count": 37,
+        "source": "Google"
+      },
+      "case_types": [
+        "Accident claims",
+        "Civil litigation",
+        "Personal injury"
+      ],
+      "capacity": "accepting_clients",
+      "wait_time": "2 weeks",
+      "referral_contacts": [
+        {
+          "name": "Tournai Hospital",
+          "relationship": "Referral"
+        }
+      ],
+      "founding_date": "2010",
+      "staff": 6,
+      "accreditation": [
+        "Tournai Bar Association"
+      ],
+      "regions_served": [
+        "Wallonia"
+      ],
+      "notes": "Accident and injury law specialists",
+      "source": "Hospital Referral Network"
+    },
+    {
+      "id": "LAW026",
+      "type": "individual",
+      "name": "Sylvie Daumerie",
+      "address": "Rue Royale 156",
+      "postal_code": "5500",
+      "region": "Wallonia",
+      "phone": "+32 82 613 5678",
+      "email": "sylvie.daumerie@avocats.be",
+      "website": null,
+      "specialty": [
+        "Debt Collection",
+        "Recovery Law",
+        "Commercial Disputes"
+      ],
+      "hours": {
+        "monday_friday": "08:30-16:30",
+        "saturday": null,
+        "sunday": null
+      },
+      "languages": [
+        "French"
+      ],
+      "fees": {
+        "consultation": 110,
+        "initial_contact": "Gratuit",
+        "payment_plans": false
+      },
+      "accessibility": {
+        "wheelchair": false,
+        "virtual_consultation": false,
+        "phone_consultation": true
+      },
+      "reviews": {
+        "rating": 4.1,
+        "count": 22,
+        "source": "Professional Directory"
+      },
+      "case_types": [
+        "Debt recovery",
+        "Commercial collections",
+        "Creditor rights"
+      ],
+      "capacity": "limited_availability",
+      "wait_time": "3 weeks",
+      "referral_contacts": [
+        {
+          "name": "Dinant Chamber of Commerce",
+          "relationship": "Member"
+        }
+      ],
+      "founding_date": "2009",
+      "staff": 1,
+      "accreditation": [
+        "Dinant Bar Association"
+      ],
+      "regions_served": [
+        "Wallonia"
+      ],
+      "notes": "Specializes in debt recovery",
+      "source": "Commercial Registry"
+    },
+    {
+      "id": "LAW027",
+      "type": "firm",
+      "name": "Bruges International Law",
+      "address": "Markt 12",
+      "postal_code": "8000",
+      "region": "Flanders",
+      "phone": "+32 50 447 2121",
+      "email": "international@brugesint.be",
+      "website": "https://www.brugesint.be",
+      "specialty": [
+        "International Law",
+        "Cross-Border Disputes",
+        "EU Law"
+      ],
+      "hours": {
+        "monday_friday": "08:30-18:00",
+        "saturday": null,
+        "sunday": null
+      },
+      "languages": [
+        "English",
+        "Dutch",
+        "French",
+        "German",
+        "Spanish"
+      ],
+      "fees": {
+        "consultation": 180,
+        "initial_contact": "Gratuit",
+        "payment_plans": true
+      },
+      "accessibility": {
+        "wheelchair": true,
+        "virtual_consultation": true,
+        "phone_consultation": true
+      },
+      "reviews": {
+        "rating": 4.7,
+        "count": 61,
+        "source": "Google"
+      },
+      "case_types": [
+        "International disputes",
+        "Cross-border litigation",
+        "EU matters"
+      ],
+      "capacity": "accepting_clients",
+      "wait_time": "2 weeks",
+      "referral_contacts": [
+        {
+          "name": "EU Legal Network",
+          "relationship": "Member"
+        }
+      ],
+      "founding_date": "2005",
+      "staff": 12,
+      "accreditation": [
+        "Bruges Bar Association",
+        "International Law Certified"
+      ],
+      "regions_served": [
+        "Flanders",
+        "EU"
+      ],
+      "notes": "EU and international law expertise",
+      "source": "EU Professional Network"
+    },
+    {
+      "id": "LAW028",
+      "type": "individual",
+      "name": "Maxim Petrov",
+      "address": "Langestraat 78",
+      "postal_code": "8000",
+      "region": "Flanders",
+      "phone": "+32 50 449 7654",
+      "email": "maxim@avocats.be",
+      "website": null,
+      "specialty": [
+        "Competition Law",
+        "Antitrust",
+        "Market Regulation"
+      ],
+      "hours": {
+        "monday_friday": "09:00-17:00",
+        "saturday": null,
+        "sunday": null
+      },
+      "languages": [
+        "English",
+        "Dutch",
+        "Russian"
+      ],
+      "fees": {
+        "consultation": 175,
+        "initial_contact": "175 EUR",
+        "payment_plans": false
+      },
+      "accessibility": {
+        "wheelchair": false,
+        "virtual_consultation": true,
+        "phone_consultation": true
+      },
+      "reviews": {
+        "rating": 4.5,
+        "count": 19,
+        "source": "Professional Directory"
+      },
+      "case_types": [
+        "Antitrust matters",
+        "Competition compliance",
+        "Cartels"
+      ],
+      "capacity": "limited_availability",
+      "wait_time": "4 weeks",
+      "referral_contacts": [
+        {
+          "name": "Competition Authority",
+          "relationship": "Professional"
+        }
+      ],
+      "founding_date": "2013",
+      "staff": 1,
+      "accreditation": [
+        "Bruges Bar Association"
+      ],
+      "regions_served": [
+        "Flanders",
+        "EU"
+      ],
+      "notes": "EU competition law expert",
+      "source": "Competition Law Network"
+    },
+    {
+      "id": "LAW029",
+      "type": "firm",
+      "name": "Courtrai Labor Advocates",
+      "address": "Groeningelaan 23",
+      "postal_code": "8500",
+      "region": "Flanders",
+      "phone": "+32 56 222 3333",
+      "email": "labor@courtrailaw.be",
+      "website": "https://www.courtrailaw.be",
+      "specialty": [
+        "Labor Law",
+        "Employment Contracts",
+        "Worker Rights"
+      ],
+      "hours": {
+        "monday_friday": "08:30-17:30",
+        "saturday": null,
+        "sunday": null
+      },
+      "languages": [
+        "Dutch",
+        "French",
+        "English"
+      ],
+      "fees": {
+        "consultation": 120,
+        "initial_contact": "Gratuit",
+        "payment_plans": true
+      },
+      "accessibility": {
+        "wheelchair": true,
+        "virtual_consultation": true,
+        "phone_consultation": true
+      },
+      "reviews": {
+        "rating": 4.4,
+        "count": 43,
+        "source": "Google"
+      },
+      "case_types": [
+        "Employment disputes",
+        "Contract review",
+        "Worker rights"
+      ],
+      "capacity": "accepting_clients",
+      "wait_time": "2 weeks",
+      "referral_contacts": [
+        {
+          "name": "Labor Union Federation",
+          "relationship": "Partner"
+        }
+      ],
+      "founding_date": "2011",
+      "staff": 7,
+      "accreditation": [
+        "Courtrai Bar Association"
+      ],
+      "regions_served": [
+        "Flanders"
+      ],
+      "notes": "Worker advocacy specialists",
+      "source": "Labor Union"
+    },
+    {
+      "id": "LAW030",
+      "type": "individual",
+      "name": "Cristina Moretti",
+      "address": "Ottergemsesteenweg 45",
+      "postal_code": "9000",
+      "region": "Flanders",
+      "phone": "+32 9 225 2121",
+      "email": "cristina.moretti@avocats.be",
+      "website": "https://www.cristinalegal.be",
+      "specialty": [
+        "Entertainment Law",
+        "Media Rights",
+        "Licensing"
+      ],
+      "hours": {
+        "monday_friday": "10:00-18:00",
+        "saturday": null,
+        "sunday": null
+      },
+      "languages": [
+        "Dutch",
+        "English",
+        "Italian"
+      ],
+      "fees": {
+        "consultation": 160,
+        "initial_contact": "160 EUR",
+        "payment_plans": true
+      },
+      "accessibility": {
+        "wheelchair": true,
+        "virtual_consultation": true,
+        "phone_consultation": true
+      },
+      "reviews": {
+        "rating": 4.6,
+        "count": 35,
+        "source": "Professional Directory"
+      },
+      "case_types": [
+        "Music licensing",
+        "Media rights",
+        "Entertainment contracts"
+      ],
+      "capacity": "accepting_clients",
+      "wait_time": "2 weeks",
+      "referral_contacts": [
+        {
+          "name": "SABAM Belgium",
+          "relationship": "Professional"
+        }
+      ],
+      "founding_date": "2014",
+      "staff": 1,
+      "accreditation": [
+        "Gent Bar Association"
+      ],
+      "regions_served": [
+        "Flanders"
+      ],
+      "notes": "Entertainment industry expert",
+      "source": "Arts Professional Network"
+    },
+    {
+      "id": "LAW031",
+      "type": "firm",
+      "name": "Brussels Urban Development Law",
+      "address": "Rue des Colonies 45",
+      "postal_code": "1000",
+      "region": "Brussels",
+      "phone": "+32 2 511 4567",
+      "email": "urban@brussurban.be",
+      "website": "https://www.brussurban.be",
+      "specialty": [
+        "Urban Planning",
+        "Real Estate Development",
+        "Municipal Compliance"
+      ],
+      "hours": {
+        "monday_friday": "09:00-17:30",
+        "saturday": null,
+        "sunday": null
+      },
+      "languages": [
+        "French",
+        "English",
+        "Dutch"
+      ],
+      "fees": {
+        "consultation": 165,
+        "initial_contact": "Gratuit",
+        "payment_plans": true
+      },
+      "accessibility": {
+        "wheelchair": true,
+        "virtual_consultation": true,
+        "phone_consultation": true
+      },
+      "reviews": {
+        "rating": 4.5,
+        "count": 47,
+        "source": "Google"
+      },
+      "case_types": [
+        "Urban planning",
+        "Development permits",
+        "Municipal law"
+      ],
+      "capacity": "accepting_clients",
+      "wait_time": "2-3 weeks",
+      "referral_contacts": [
+        {
+          "name": "Brussels Planning Department",
+          "relationship": "Professional"
+        }
+      ],
+      "founding_date": "2007",
+      "staff": 9,
+      "accreditation": [
+        "Brussels Bar Association"
+      ],
+      "regions_served": [
+        "Brussels"
+      ],
+      "notes": "Urban development specialists",
+      "source": "Municipal Network"
+    },
+    {
+      "id": "LAW032",
+      "type": "individual",
+      "name": "Rene De Backer",
+      "address": "Rue Lebeau 67",
+      "postal_code": "1210",
+      "region": "Brussels",
+      "phone": "+32 2 219 3456",
+      "email": "rene.debacker@avocats.be",
+      "website": null,
+      "specialty": [
+        "Notarial Law",
+        "Property Transfer",
+        "Succession"
+      ],
+      "hours": {
+        "monday_friday": "09:00-16:30",
+        "saturday": null,
+        "sunday": null
+      },
+      "languages": [
+        "French",
+        "Dutch"
+      ],
+      "fees": {
+        "consultation": 100,
+        "initial_contact": "Gratuit",
+        "payment_plans": false
+      },
+      "accessibility": {
+        "wheelchair": true,
+        "virtual_consultation": false,
+        "phone_consultation": true
+      },
+      "reviews": {
+        "rating": 4.2,
+        "count": 28,
+        "source": "Professional Directory"
+      },
+      "case_types": [
+        "Property transfer",
+        "Wills",
+        "Succession planning"
+      ],
+      "capacity": "limited_availability",
+      "wait_time": "4 weeks",
+      "referral_contacts": [
+        {
+          "name": "Notaries Guild",
+          "relationship": "Member"
+        }
+      ],
+      "founding_date": "2006",
+      "staff": 1,
+      "accreditation": [
+        "Brussels Notarial Order"
+      ],
+      "regions_served": [
+        "Brussels"
+      ],
+      "notes": "Notarial specialist",
+      "source": "Notaries Guild"
+    },
+    {
+      "id": "LAW033",
+      "type": "firm",
+      "name": "Charleroi Industrial Law Center",
+      "address": "Boulevard Tirou 98",
+      "postal_code": "6000",
+      "region": "Wallonia",
+      "phone": "+32 71 457 6789",
+      "email": "industrial@charleroi.be",
+      "website": "https://www.charleroi-industrial.be",
+      "specialty": [
+        "Industrial Law",
+        "Factory Regulations",
+        "Manufacturing"
+      ],
+      "hours": {
+        "monday_friday": "08:00-17:00",
+        "saturday": null,
+        "sunday": null
+      },
+      "languages": [
+        "French",
+        "English"
+      ],
+      "fees": {
+        "consultation": 140,
+        "initial_contact": "Gratuit",
+        "payment_plans": true
+      },
+      "accessibility": {
+        "wheelchair": true,
+        "virtual_consultation": true,
+        "phone_consultation": true
+      },
+      "reviews": {
+        "rating": 4.3,
+        "count": 29,
+        "source": "Google"
+      },
+      "case_types": [
+        "Factory regulations",
+        "Industrial disputes",
+        "Manufacturing law"
+      ],
+      "capacity": "accepting_clients",
+      "wait_time": "2 weeks",
+      "referral_contacts": [
+        {
+          "name": "Walloon Industry Federation",
+          "relationship": "Partner"
+        }
+      ],
+      "founding_date": "2009",
+      "staff": 5,
+      "accreditation": [
+        "Charleroi Bar Association"
+      ],
+      "regions_served": [
+        "Wallonia"
+      ],
+      "notes": "Manufacturing sector focus",
+      "source": "Industry Federation"
+    },
+    {
+      "id": "LAW034",
+      "type": "individual",
+      "name": "Véronique Leroy",
+      "address": "Rue Neuve 123",
+      "postal_code": "7000",
+      "region": "Wallonia",
+      "phone": "+32 65 345 8901",
+      "email": "veronique.leroy@avocats.be",
+      "website": null,
+      "specialty": [
+        "Educational Law",
+        "Student Rights",
+        "Accreditation"
+      ],
+      "hours": {
+        "monday_friday": "10:00-17:00",
+        "saturday": null,
+        "sunday": null
+      },
+      "languages": [
+        "French"
+      ],
+      "fees": {
+        "consultation": 105,
+        "initial_contact": "Gratuit",
+        "payment_plans": true
+      },
+      "accessibility": {
+        "wheelchair": true,
+        "virtual_consultation": true,
+        "phone_consultation": true
+      },
+      "reviews": {
+        "rating": 4.4,
+        "count": 31,
+        "source": "Avocats.be"
+      },
+      "case_types": [
+        "Student disputes",
+        "Educational compliance",
+        "Accreditation"
+      ],
+      "capacity": "accepting_clients",
+      "wait_time": "2 weeks",
+      "referral_contacts": [
+        {
+          "name": "Education Ministry Wallonia",
+          "relationship": "Professional"
+        }
+      ],
+      "founding_date": "2010",
+      "staff": 1,
+      "accreditation": [
+        "Mons Bar Association"
+      ],
+      "regions_served": [
+        "Wallonia"
+      ],
+      "notes": "Educational sector specialist",
+      "source": "Education Ministry"
+    },
+    {
+      "id": "LAW035",
+      "type": "firm",
+      "name": "Liège Environmental & Energy Law",
+      "address": "Place Saint-Lambert 89",
+      "postal_code": "4000",
+      "region": "Wallonia",
+      "phone": "+32 4 223 5555",
+      "email": "energy@liegeenv.be",
+      "website": "https://www.liegeenv.be",
+      "specialty": [
+        "Energy Law",
+        "Environmental Compliance",
+        "Renewable Energy"
+      ],
+      "hours": {
+        "monday_friday": "09:00-17:30",
+        "saturday": null,
+        "sunday": null
+      },
+      "languages": [
+        "French",
+        "English",
+        "German"
+      ],
+      "fees": {
+        "consultation": 160,
+        "initial_contact": "Gratuit",
+        "payment_plans": true
+      },
+      "accessibility": {
+        "wheelchair": true,
+        "virtual_consultation": true,
+        "phone_consultation": true
+      },
+      "reviews": {
+        "rating": 4.6,
+        "count": 43,
+        "source": "Google"
+      },
+      "case_types": [
+        "Energy contracts",
+        "Environmental permits",
+        "Renewable energy"
+      ],
+      "capacity": "accepting_clients",
+      "wait_time": "2 weeks",
+      "referral_contacts": [
+        {
+          "name": "Walloon Energy Agency",
+          "relationship": "Partner"
+        }
+      ],
+      "founding_date": "2010",
+      "staff": 8,
+      "accreditation": [
+        "Liège Bar Association",
+        "Energy Law Certified"
+      ],
+      "regions_served": [
+        "Wallonia"
+      ],
+      "notes": "Energy sector specialists",
+      "source": "Energy Agency"
+    },
+    {
+      "id": "LAW036",
+      "type": "individual",
+      "name": "Helmut Schneider",
+      "address": "Rue de Trèves 45",
+      "postal_code": "1040",
+      "region": "Brussels",
+      "phone": "+32 2 783 4567",
+      "email": "helmut.schneider@avocats.be",
+      "website": "https://www.schneider-legal.be",
+      "specialty": [
+        "EU Administrative Law",
+        "European Institutions",
+        "Public Procurement"
+      ],
+      "hours": {
+        "monday_friday": "08:30-17:30",
+        "saturday": null,
+        "sunday": null
+      },
+      "languages": [
+        "German",
+        "English",
+        "French"
+      ],
+      "fees": {
+        "consultation": 185,
+        "initial_contact": "Gratuit",
+        "payment_plans": true
+      },
+      "accessibility": {
+        "wheelchair": true,
+        "virtual_consultation": true,
+        "phone_consultation": true
+      },
+      "reviews": {
+        "rating": 4.7,
+        "count": 39,
+        "source": "Professional Directory"
+      },
+      "case_types": [
+        "EU procurement",
+        "EU administrative law",
+        "Public contracts"
+      ],
+      "capacity": "accepting_clients",
+      "wait_time": "2 weeks",
+      "referral_contacts": [
+        {
+          "name": "EU Legal Service",
+          "relationship": "Professional"
+        }
+      ],
+      "founding_date": "2008",
+      "staff": 3,
+      "accreditation": [
+        "Brussels Bar Association",
+        "EU Law Certified"
+      ],
+      "regions_served": [
+        "Brussels",
+        "EU"
+      ],
+      "notes": "EU law specialist",
+      "source": "EU Professional Network"
+    },
+    {
+      "id": "LAW037",
+      "type": "firm",
+      "name": "Antwerp Port & Shipping Law",
+      "address": "Antwerpsekaai 67",
+      "postal_code": "2000",
+      "region": "Flanders",
+      "phone": "+32 3 215 4567",
+      "email": "shipping@antportlaw.be",
+      "website": "https://www.antportlaw.be",
+      "specialty": [
+        "Maritime Law",
+        "Shipping",
+        "Port Operations"
+      ],
+      "hours": {
+        "monday_friday": "08:00-17:00",
+        "saturday": null,
+        "sunday": null
+      },
+      "languages": [
+        "English",
+        "Dutch",
+        "French"
+      ],
+      "fees": {
+        "consultation": 175,
+        "initial_contact": "Gratuit",
+        "payment_plans": true
+      },
+      "accessibility": {
+        "wheelchair": true,
+        "virtual_consultation": true,
+        "phone_consultation": true
+      },
+      "reviews": {
+        "rating": 4.5,
+        "count": 37,
+        "source": "Google"
+      },
+      "case_types": [
+        "Shipping contracts",
+        "Port disputes",
+        "Maritime law"
+      ],
+      "capacity": "accepting_clients",
+      "wait_time": "2-3 weeks",
+      "referral_contacts": [
+        {
+          "name": "Port Authority Antwerp",
+          "relationship": "Professional"
+        }
+      ],
+      "founding_date": "2006",
+      "staff": 9,
+      "accreditation": [
+        "Antwerp Bar Association"
+      ],
+      "regions_served": [
+        "Flanders",
+        "EU"
+      ],
+      "notes": "Maritime law experts",
+      "source": "Port Authority"
+    },
+    {
+      "id": "LAW038",
+      "type": "individual",
+      "name": "Petra Van Dyck",
+      "address": "Griekenstraat 34",
+      "postal_code": "2000",
+      "region": "Flanders",
+      "phone": "+32 3 233 2121",
+      "email": "petra.vandyck@avocats.be",
+      "website": null,
+      "specialty": [
+        "Non-Profit Law",
+        "Charity",
+        "Association Rights"
+      ],
+      "hours": {
+        "monday_friday": "09:30-16:30",
+        "saturday": null,
+        "sunday": null
+      },
+      "languages": [
+        "Dutch",
+        "English"
+      ],
+      "fees": {
+        "consultation": 110,
+        "initial_contact": "Gratuit",
+        "payment_plans": true
+      },
+      "accessibility": {
+        "wheelchair": true,
+        "virtual_consultation": true,
+        "phone_consultation": true
+      },
+      "reviews": {
+        "rating": 4.7,
+        "count": 52,
+        "source": "Avocats.be"
+      },
+      "case_types": [
+        "Non-profit governance",
+        "Charity law",
+        "Association disputes"
+      ],
+      "capacity": "accepting_clients",
+      "wait_time": "1-2 weeks",
+      "referral_contacts": [
+        {
+          "name": "NGO Alliance Antwerp",
+          "relationship": "Advisor"
+        }
+      ],
+      "founding_date": "2012",
+      "staff": 1,
+      "accreditation": [
+        "Antwerp Bar Association"
+      ],
+      "regions_served": [
+        "Flanders"
+      ],
+      "notes": "Non-profit sector advocate",
+      "source": "NGO Alliance"
+    },
+    {
+      "id": "LAW039",
+      "type": "firm",
+      "name": "Brussels Compliance & Regulatory",
+      "address": "Rue de la Loi 200",
+      "postal_code": "1040",
+      "region": "Brussels",
+      "phone": "+32 2 289 3333",
+      "email": "compliance@bruscomp.be",
+      "website": "https://www.bruscomp.be",
+      "specialty": [
+        "Regulatory Compliance",
+        "AML/KYC",
+        "Financial Regulations"
+      ],
+      "hours": {
+        "monday_friday": "08:00-18:00",
+        "saturday": null,
+        "sunday": null
+      },
+      "languages": [
+        "English",
+        "French",
+        "Dutch"
+      ],
+      "fees": {
+        "consultation": 200,
+        "initial_contact": "Gratuit",
+        "payment_plans": true
+      },
+      "accessibility": {
+        "wheelchair": true,
+        "virtual_consultation": true,
+        "phone_consultation": true
+      },
+      "reviews": {
+        "rating": 4.8,
+        "count": 74,
+        "source": "Google"
+      },
+      "case_types": [
+        "AML compliance",
+        "Regulatory audit",
+        "Financial law"
+      ],
+      "capacity": "accepting_clients",
+      "wait_time": "1-2 weeks",
+      "referral_contacts": [
+        {
+          "name": "Financial Regulator Belgium",
+          "relationship": "Professional"
+        }
+      ],
+      "founding_date": "2008",
+      "staff": 22,
+      "accreditation": [
+        "Brussels Bar Association",
+        "Compliance Certified"
+      ],
+      "regions_served": [
+        "Brussels",
+        "Belgium",
+        "EU"
+      ],
+      "notes": "Financial compliance specialists",
+      "source": "Financial Sector Network"
+    },
+    {
+      "id": "LAW040",
+      "type": "individual",
+      "name": "Elisabeth Beaumont",
+      "address": "Boulevard Saint-Germain 234",
+      "postal_code": "1050",
+      "region": "Brussels",
+      "phone": "+32 2 650 1234",
+      "email": "elisabeth.beaumont@avocats.be",
+      "website": "https://www.beaumont-legal.be",
+      "specialty": [
+        "Victim Rights",
+        "Criminal Victim Support",
+        "Rehabilitation"
+      ],
+      "hours": {
+        "monday_friday": "09:00-17:00",
+        "saturday": "10:00-12:00",
+        "sunday": null
+      },
+      "languages": [
+        "French",
+        "English",
+        "Spanish"
+      ],
+      "fees": {
+        "consultation": 100,
+        "initial_contact": "Gratuit",
+        "payment_plans": true
+      },
+      "accessibility": {
+        "wheelchair": true,
+        "virtual_consultation": true,
+        "phone_consultation": true
+      },
+      "reviews": {
+        "rating": 4.9,
+        "count": 103,
+        "source": "Google"
+      },
+      "case_types": [
+        "Victim compensation",
+        "Criminal victim support",
+        "Rehabilitation"
+      ],
+      "capacity": "accepting_clients",
+      "wait_time": "1 week",
+      "referral_contacts": [
+        {
+          "name": "Victims Support Centre",
+          "relationship": "Partner"
+        }
+      ],
+      "founding_date": "2010",
+      "staff": 2,
+      "accreditation": [
+        "Brussels Bar Association"
+      ],
+      "regions_served": [
+        "Brussels",
+        "Belgium"
+      ],
+      "notes": "Victim rights advocate",
+      "source": "Victim Support Centre"
+    },
+    {
+      "id": "cgra_001",
+      "type": "government_agency",
+      "name": "CGRA - Commissariat Général aux Réfugiés et Apatrides",
+      "address": "Place de la Gare 3",
+      "postal_code": "1060",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 (0)2 793 89 00",
+      "email": "info@cgra.be",
+      "website": "https://www.cgra.be",
+      "specialty": [
+        "asylum_processing",
+        "refugee_status",
+        "statelessness_determination"
+      ],
+      "hours": "09:00-17:00 Mon-Fri",
+      "languages": [
+        "nl",
+        "fr",
+        "en",
+        "ar",
+        "am",
+        "ti"
+      ],
+      "fees": "free",
+      "accessibility": "wheelchair_accessible",
+      "case_types": [
+        "asylum_application",
+        "family_reunification",
+        "stateless_persons"
+      ],
+      "capacity": 5000,
+      "referral_contacts": "info@cgra.be",
+      "founding_date": "1952",
+      "staff": 450,
+      "accreditation": "Belgian federal government",
+      "regions_served": [
+        "Bruxelles",
+        "Flandre",
+        "Wallonie"
+      ],
+      "notes": "Official asylum processing authority",
+      "source": "official"
+    },
+    {
+      "id": "fedasil_001",
+      "type": "government_agency",
+      "name": "Fedasil - Federal Agency for the Reception of Asylum Seekers",
+      "address": "Rue Gabrielle Petit 72",
+      "postal_code": "1080",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 (0)2 790 76 76",
+      "email": "reception@fedasil.be",
+      "website": "https://www.fedasil.be",
+      "specialty": [
+        "accommodation",
+        "shelter",
+        "integration_support"
+      ],
+      "hours": "08:00-18:00 Mon-Fri",
+      "languages": [
+        "nl",
+        "fr",
+        "en",
+        "ar",
+        "am",
+        "ti",
+        "fa"
+      ],
+      "fees": "free",
+      "accessibility": "wheelchair_accessible",
+      "case_types": [
+        "emergency_shelter",
+        "asylum_seeker_accommodation",
+        "family_housing"
+      ],
+      "capacity": 8500,
+      "referral_contacts": "reception@fedasil.be",
+      "founding_date": "1998",
+      "staff": 520,
+      "accreditation": "Belgian federal government",
+      "regions_served": [
+        "Bruxelles",
+        "Flandre",
+        "Wallonie"
+      ],
+      "notes": "Network of shelters across Belgium",
+      "source": "official"
+    },
+    {
+      "id": "dgm_001",
+      "type": "government_agency",
+      "name": "DGM - General Migration Directorate",
+      "address": "Place de la Gare 3",
+      "postal_code": "1060",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 (0)2 793 80 00",
+      "email": "info@dgm.be",
+      "website": "https://www.dgm.be",
+      "specialty": [
+        "documentation",
+        "residence_permits",
+        "immigration_law"
+      ],
+      "hours": "09:00-17:00 Mon-Fri",
+      "languages": [
+        "nl",
+        "fr",
+        "en"
+      ],
+      "fees": "variable",
+      "accessibility": "wheelchair_accessible",
+      "case_types": [
+        "residence_permit_application",
+        "travel_documents",
+        "status_change"
+      ],
+      "capacity": 2000,
+      "referral_contacts": "info@dgm.be",
+      "founding_date": "2011",
+      "staff": 280,
+      "accreditation": "Belgian federal government",
+      "regions_served": [
+        "Bruxelles",
+        "Flandre",
+        "Wallonie"
+      ],
+      "notes": "Handles immigration documentation and permits",
+      "source": "official"
+    },
+    {
+      "id": "rcb_001",
+      "type": "ngo",
+      "name": "Red Cross Belgium (Croix-Rouge de Belgique)",
+      "address": "Rue de Trèves 61",
+      "postal_code": "1040",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 (0)2 791 55 11",
+      "email": "contact@croix-rouge.be",
+      "website": "https://www.croix-rouge.be",
+      "specialty": [
+        "emergency_assistance",
+        "healthcare",
+        "humanitarian_aid"
+      ],
+      "hours": "09:00-17:00 Mon-Fri",
+      "languages": [
+        "nl",
+        "fr",
+        "en",
+        "ar"
+      ],
+      "fees": "free",
+      "accessibility": "wheelchair_accessible",
+      "case_types": [
+        "emergency_care",
+        "health_screening",
+        "psychosocial_support"
+      ],
+      "capacity": 3000,
+      "referral_contacts": "contact@croix-rouge.be",
+      "founding_date": "1870",
+      "staff": 350,
+      "accreditation": "International Red Cross and Red Crescent Movement",
+      "regions_served": [
+        "Bruxelles",
+        "Flandre",
+        "Wallonie"
+      ],
+      "notes": "Major humanitarian organization",
+      "source": "ngo"
+    },
+    {
+      "id": "mdm_001",
+      "type": "ngo",
+      "name": "Médecins du Monde Belgium",
+      "address": "Avenue de la Couronne 6-8",
+      "postal_code": "1050",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 (0)2 644 20 20",
+      "email": "info@medecinsdumonde.be",
+      "website": "https://www.medecinsdumonde.be",
+      "specialty": [
+        "healthcare",
+        "medical_treatment",
+        "health_education"
+      ],
+      "hours": "09:00-18:00 Mon-Fri",
+      "languages": [
+        "nl",
+        "fr",
+        "en",
+        "ar",
+        "am",
+        "ti"
+      ],
+      "fees": "free/sliding_scale",
+      "accessibility": "wheelchair_accessible",
+      "case_types": [
+        "medical_consultation",
+        "dental_care",
+        "mental_health"
+      ],
+      "capacity": 2500,
+      "referral_contacts": "info@medecinsdumonde.be",
+      "founding_date": "1980",
+      "staff": 180,
+      "accreditation": "Belgian healthcare association",
+      "regions_served": [
+        "Bruxelles",
+        "Flandre",
+        "Wallonie"
+      ],
+      "notes": "Healthcare for vulnerable populations",
+      "source": "ngo"
+    },
+    {
+      "id": "ldh_001",
+      "type": "ngo",
+      "name": "Ligue des Droits Humains (Human Rights League)",
+      "address": "Rue du Vieux Marché aux Grains 32",
+      "postal_code": "1000",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 (0)2 513 59 95",
+      "email": "info@liguedesdroitshumains.be",
+      "website": "https://www.liguedesdroitshumains.be",
+      "specialty": [
+        "human_rights",
+        "advocacy",
+        "legal_support"
+      ],
+      "hours": "10:00-17:00 Mon-Fri",
+      "languages": [
+        "fr",
+        "nl",
+        "en"
+      ],
+      "fees": "free",
+      "accessibility": "wheelchair_accessible",
+      "case_types": [
+        "rights_violation",
+        "advocacy",
+        "policy_review"
+      ],
+      "capacity": 1500,
+      "referral_contacts": "info@liguedesdroitshumains.be",
+      "founding_date": "1888",
+      "staff": 120,
+      "accreditation": "Belgian NGO sector",
+      "regions_served": [
+        "Bruxelles",
+        "Flandre",
+        "Wallonie"
+      ],
+      "notes": "Independent human rights organization",
+      "source": "ngo"
+    },
+    {
+      "id": "cajm_001",
+      "type": "ngo",
+      "name": "CAJM - Commission d'Aide Juridique aux Migrants",
+      "address": "Rue du Vieux Marché aux Grains 30",
+      "postal_code": "1000",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 (0)2 510 38 05",
+      "email": "info@cajm.be",
+      "website": "https://www.cajm.be",
+      "specialty": [
+        "legal_aid",
+        "immigration_law",
+        "asylum_representation"
+      ],
+      "hours": "09:00-17:00 Mon-Fri",
+      "languages": [
+        "fr",
+        "nl",
+        "en",
+        "ar",
+        "am"
+      ],
+      "fees": "free/sliding_scale",
+      "accessibility": "wheelchair_accessible",
+      "case_types": [
+        "asylum_appeal",
+        "family_reunification",
+        "documentation"
+      ],
+      "capacity": 2000,
+      "referral_contacts": "info@cajm.be",
+      "founding_date": "1993",
+      "staff": 95,
+      "accreditation": "Belgian bar association",
+      "regions_served": [
+        "Bruxelles"
+      ],
+      "notes": "Specialized legal aid for migrants",
+      "source": "ngo"
+    },
+    {
+      "id": "amnesty_001",
+      "type": "ngo",
+      "name": "Amnesty International Belgium",
+      "address": "Rue de Trèves 61",
+      "postal_code": "1040",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 (0)2 732 62 62",
+      "email": "contact@amnesty.be",
+      "website": "https://www.amnesty.be",
+      "specialty": [
+        "human_rights_advocacy",
+        "campaigns",
+        "research"
+      ],
+      "hours": "09:00-17:00 Mon-Fri",
+      "languages": [
+        "fr",
+        "nl",
+        "en"
+      ],
+      "fees": "free",
+      "accessibility": "wheelchair_accessible",
+      "case_types": [
+        "advocacy",
+        "policy_input",
+        "awareness"
+      ],
+      "capacity": 1000,
+      "referral_contacts": "contact@amnesty.be",
+      "founding_date": "1961",
+      "staff": 85,
+      "accreditation": "International Amnesty International",
+      "regions_served": [
+        "Bruxelles",
+        "Flandre",
+        "Wallonie"
+      ],
+      "notes": "International human rights organization",
+      "source": "ngo"
+    },
+    {
+      "id": "oim_001",
+      "type": "international_org",
+      "name": "OIM Belgium - International Migration Organization",
+      "address": "Rue du Trône 98",
+      "postal_code": "1050",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 (0)2 507 89 11",
+      "email": "bru@iom.int",
+      "website": "https://belgium.iom.int",
+      "specialty": [
+        "migration_management",
+        "humanitarian_assistance",
+        "research"
+      ],
+      "hours": "09:00-17:00 Mon-Fri",
+      "languages": [
+        "en",
+        "fr",
+        "nl"
+      ],
+      "fees": "free/project_based",
+      "accessibility": "wheelchair_accessible",
+      "case_types": [
+        "assisted_return",
+        "integration_support",
+        "research"
+      ],
+      "capacity": 1500,
+      "referral_contacts": "bru@iom.int",
+      "founding_date": "1951",
+      "staff": 75,
+      "accreditation": "United Nations observer",
+      "regions_served": [
+        "Bruxelles",
+        "Flandre",
+        "Wallonie"
+      ],
+      "notes": "UN migration agency",
+      "source": "international"
+    },
+    {
+      "id": "unhcr_001",
+      "type": "international_org",
+      "name": "UNHCR Belgium - UN Refugee Agency",
+      "address": "Rue de Trèves 61",
+      "postal_code": "1040",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 (0)2 738 91 11",
+      "email": "belbru@unhcr.org",
+      "website": "https://www.unhcr.org/belgium",
+      "specialty": [
+        "refugee_protection",
+        "humanitarian_aid",
+        "durable_solutions"
+      ],
+      "hours": "09:00-17:00 Mon-Fri",
+      "languages": [
+        "en",
+        "fr",
+        "nl"
+      ],
+      "fees": "free",
+      "accessibility": "wheelchair_accessible",
+      "case_types": [
+        "protection_assessment",
+        "resettlement",
+        "advocacy"
+      ],
+      "capacity": 2000,
+      "referral_contacts": "belbru@unhcr.org",
+      "founding_date": "1950",
+      "staff": 110,
+      "accreditation": "United Nations",
+      "regions_served": [
+        "Bruxelles",
+        "Flandre",
+        "Wallonie"
+      ],
+      "notes": "UN refugee protection agency",
+      "source": "international"
+    },
+    {
+      "id": "cire_001",
+      "type": "ngo",
+      "name": "CIRE - Collective Against Racism",
+      "address": "Rue du Vieux Marché aux Grains 30",
+      "postal_code": "1000",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 (0)2 217 90 20",
+      "email": "info@cire.be",
+      "website": "https://www.cire.be",
+      "specialty": [
+        "anti_racism",
+        "advocacy",
+        "education"
+      ],
+      "hours": "09:00-17:00 Mon-Fri",
+      "languages": [
+        "fr",
+        "nl",
+        "en"
+      ],
+      "fees": "free",
+      "accessibility": "wheelchair_accessible",
+      "case_types": [
+        "discrimination_cases",
+        "advocacy",
+        "training"
+      ],
+      "capacity": 1200,
+      "referral_contacts": "info@cire.be",
+      "founding_date": "1995",
+      "staff": 65,
+      "accreditation": "Belgian NGO sector",
+      "regions_served": [
+        "Bruxelles",
+        "Flandre",
+        "Wallonie"
+      ],
+      "notes": "Anti-racism and discrimination work",
+      "source": "ngo"
+    },
+    {
+      "id": "plateforme_001",
+      "type": "ngo",
+      "name": "Plateforme Citoyenne de Soutien aux Réfugiés",
+      "address": "Rue de Flandre 31",
+      "postal_code": "1000",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 (0)2 502 87 68",
+      "email": "contact@pcsr.be",
+      "website": "https://www.pcsr.be",
+      "specialty": [
+        "refugee_support",
+        "integration",
+        "community_programs"
+      ],
+      "hours": "10:00-18:00 Mon-Fri",
+      "languages": [
+        "fr",
+        "nl",
+        "en",
+        "ar",
+        "am"
+      ],
+      "fees": "free",
+      "accessibility": "wheelchair_accessible",
+      "case_types": [
+        "basic_support",
+        "language_classes",
+        "job_training"
+      ],
+      "capacity": 800,
+      "referral_contacts": "contact@pcsr.be",
+      "founding_date": "2015",
+      "staff": 45,
+      "accreditation": "Belgian NGO sector",
+      "regions_served": [
+        "Bruxelles"
+      ],
+      "notes": "Grassroots refugee support network",
+      "source": "ngo"
+    },
+    {
+      "id": "praxis_001",
+      "type": "ngo",
+      "name": "PRAXIS - Integration and Settlement Services",
+      "address": "Avenue de la Reine 2",
+      "postal_code": "1000",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 (0)2 217 16 40",
+      "email": "info@praxis.be",
+      "website": "https://www.praxis.be",
+      "specialty": [
+        "integration_services",
+        "employment",
+        "education"
+      ],
+      "hours": "09:00-18:00 Mon-Fri",
+      "languages": [
+        "nl",
+        "fr",
+        "en",
+        "ar",
+        "am",
+        "so"
+      ],
+      "fees": "free",
+      "accessibility": "wheelchair_accessible",
+      "case_types": [
+        "job_placement",
+        "language_training",
+        "skills_assessment"
+      ],
+      "capacity": 1800,
+      "referral_contacts": "info@praxis.be",
+      "founding_date": "1996",
+      "staff": 120,
+      "accreditation": "Belgian employment services",
+      "regions_served": [
+        "Bruxelles",
+        "Flandre"
+      ],
+      "notes": "Employment and integration focus",
+      "source": "ngo"
+    },
+    {
+      "id": "bruxact_001",
+      "type": "ngo",
+      "name": "BruxAct - Action Citoyenne",
+      "address": "Rue du Faubourg 69",
+      "postal_code": "1000",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 (0)2 219 68 89",
+      "email": "contact@bruxact.be",
+      "website": "https://www.bruxact.be",
+      "specialty": [
+        "civic_participation",
+        "housing_support",
+        "community_organizing"
+      ],
+      "hours": "10:00-18:00 Mon-Fri",
+      "languages": [
+        "fr",
+        "nl",
+        "en"
+      ],
+      "fees": "free",
+      "accessibility": "partial_accessible",
+      "case_types": [
+        "housing_advocacy",
+        "community_projects",
+        "mediation"
+      ],
+      "capacity": 600,
+      "referral_contacts": "contact@bruxact.be",
+      "founding_date": "2008",
+      "staff": 38,
+      "accreditation": "Belgian NGO sector",
+      "regions_served": [
+        "Bruxelles"
+      ],
+      "notes": "Civic participation and housing",
+      "source": "ngo"
+    },
+    {
+      "id": "habitat_br_001",
+      "type": "ngo",
+      "name": "Habitat for Humanity Belgium - Bruxelles",
+      "address": "Rue de la Vallée 47",
+      "postal_code": "1000",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 (0)2 514 94 94",
+      "email": "brussels@habitatbelgium.be",
+      "website": "https://www.habitatbelgium.be",
+      "specialty": [
+        "housing",
+        "construction_training",
+        "home_improvement"
+      ],
+      "hours": "09:00-17:00 Mon-Fri",
+      "languages": [
+        "nl",
+        "fr",
+        "en"
+      ],
+      "fees": "free/sliding_scale",
+      "accessibility": "wheelchair_accessible",
+      "case_types": [
+        "housing_renovation",
+        "capacity_building",
+        "advocacy"
+      ],
+      "capacity": 400,
+      "referral_contacts": "brussels@habitatbelgium.be",
+      "founding_date": "1984",
+      "staff": 32,
+      "accreditation": "International Habitat for Humanity",
+      "regions_served": [
+        "Bruxelles"
+      ],
+      "notes": "Housing and construction programs",
+      "source": "ngo"
+    },
+    {
+      "id": "fesn_001",
+      "type": "ngo",
+      "name": "FESN - Federation for Social Action and Solidarity",
+      "address": "Boulevard Saint-Lazare 40",
+      "postal_code": "1210",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 (0)2 225 17 42",
+      "email": "info@fesn.be",
+      "website": "https://www.fesn.be",
+      "specialty": [
+        "social_services",
+        "family_support",
+        "vulnerable_populations"
+      ],
+      "hours": "08:30-17:00 Mon-Fri",
+      "languages": [
+        "nl",
+        "fr",
+        "en"
+      ],
+      "fees": "free",
+      "accessibility": "wheelchair_accessible",
+      "case_types": [
+        "family_counseling",
+        "childcare_support",
+        "poverty_alleviation"
+      ],
+      "capacity": 2200,
+      "referral_contacts": "info@fesn.be",
+      "founding_date": "1968",
+      "staff": 180,
+      "accreditation": "Belgian government",
+      "regions_served": [
+        "Bruxelles",
+        "Wallonie"
+      ],
+      "notes": "Large federation of social organizations",
+      "source": "ngo"
+    },
+    {
+      "id": "cesp_001",
+      "type": "ngo",
+      "name": "CESP - Centre for Education and Social Policy",
+      "address": "Rue Théodore Verhaeghe 10",
+      "postal_code": "1060",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 (0)2 539 42 31",
+      "email": "info@cesp.be",
+      "website": "https://www.cesp.be",
+      "specialty": [
+        "education",
+        "literacy",
+        "skill_development"
+      ],
+      "hours": "09:00-18:00 Mon-Fri",
+      "languages": [
+        "fr",
+        "nl",
+        "en",
+        "ar"
+      ],
+      "fees": "free/sliding_scale",
+      "accessibility": "wheelchair_accessible",
+      "case_types": [
+        "literacy_training",
+        "language_classes",
+        "vocational_education"
+      ],
+      "capacity": 1500,
+      "referral_contacts": "info@cesp.be",
+      "founding_date": "1982",
+      "staff": 95,
+      "accreditation": "Belgian education ministry",
+      "regions_served": [
+        "Bruxelles"
+      ],
+      "notes": "Education and social integration",
+      "source": "ngo"
+    },
+    {
+      "id": "sem_001",
+      "type": "ngo",
+      "name": "SEM - Solidarité Enfants Migrants",
+      "address": "Rue de la Concorde 65",
+      "postal_code": "1050",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 (0)2 539 73 86",
+      "email": "contact@sem.be",
+      "website": "https://www.sem.be",
+      "specialty": [
+        "child_protection",
+        "unaccompanied_minors",
+        "family_support"
+      ],
+      "hours": "09:00-17:00 Mon-Fri",
+      "languages": [
+        "fr",
+        "nl",
+        "en",
+        "ar",
+        "am"
+      ],
+      "fees": "free",
+      "accessibility": "wheelchair_accessible",
+      "case_types": [
+        "child_asylum",
+        "family_reunification",
+        "guardianship"
+      ],
+      "capacity": 1000,
+      "referral_contacts": "contact@sem.be",
+      "founding_date": "2002",
+      "staff": 72,
+      "accreditation": "Belgian child protection authority",
+      "regions_served": [
+        "Bruxelles"
+      ],
+      "notes": "Child and minor protection",
+      "source": "ngo"
+    },
+    {
+      "id": "ante_001",
+      "type": "government_agency",
+      "name": "ANTE - Federal Centre for Integration and Active Citizenship",
+      "address": "Boulevard Clovis 114",
+      "postal_code": "1000",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 (0)2 514 50 00",
+      "email": "info@ante.be",
+      "website": "https://www.ante.be",
+      "specialty": [
+        "integration_policy",
+        "language_training",
+        "civic_education"
+      ],
+      "hours": "09:00-17:00 Mon-Fri",
+      "languages": [
+        "nl",
+        "fr",
+        "en"
+      ],
+      "fees": "free",
+      "accessibility": "wheelchair_accessible",
+      "case_types": [
+        "civic_education",
+        "integration_planning",
+        "language_assessment"
+      ],
+      "capacity": 2500,
+      "referral_contacts": "info@ante.be",
+      "founding_date": "2003",
+      "staff": 140,
+      "accreditation": "Belgian federal government",
+      "regions_served": [
+        "Bruxelles",
+        "Flandre",
+        "Wallonie"
+      ],
+      "notes": "National integration coordination",
+      "source": "official"
+    },
+    {
+      "id": "charleroi_001",
+      "type": "ngo",
+      "name": "Centre d'Actions et de Réalisations pour l'Immigrant",
+      "address": "Rue de Montfort 112",
+      "postal_code": "6000",
+      "city": "Charleroi",
+      "region": "Wallonie",
+      "phone": "+32 (0)71 30 61 72",
+      "email": "info@cari-charleroi.be",
+      "website": "https://www.cari-charleroi.be",
+      "specialty": [
+        "integration",
+        "employment_support",
+        "language_training"
+      ],
+      "hours": "08:30-17:00 Mon-Fri",
+      "languages": [
+        "fr",
+        "nl",
+        "en",
+        "ar"
+      ],
+      "fees": "free/sliding_scale",
+      "accessibility": "wheelchair_accessible",
+      "case_types": [
+        "job_training",
+        "language_classes",
+        "social_integration"
+      ],
+      "capacity": 600,
+      "referral_contacts": "info@cari-charleroi.be",
+      "founding_date": "1995",
+      "staff": 42,
+      "accreditation": "Walloon regional government",
+      "regions_served": [
+        "Wallonie"
+      ],
+      "notes": "Regional integration center Charleroi",
+      "source": "ngo"
+    },
+    {
+      "id": "liege_001",
+      "type": "ngo",
+      "name": "Collectif Migrants Liège (CML)",
+      "address": "Rue de la Cathédrale 12",
+      "postal_code": "4000",
+      "city": "Liège",
+      "region": "Wallonie",
+      "phone": "+32 (0)4 223 74 60",
+      "email": "contact@cml-liege.be",
+      "website": "https://www.cml-liege.be",
+      "specialty": [
+        "legal_support",
+        "integration",
+        "advocacy"
+      ],
+      "hours": "09:00-17:00 Mon-Fri",
+      "languages": [
+        "fr",
+        "nl",
+        "en",
+        "ar",
+        "am"
+      ],
+      "fees": "free",
+      "accessibility": "wheelchair_accessible",
+      "case_types": [
+        "legal_advice",
+        "accompaniment",
+        "documentation"
+      ],
+      "capacity": 500,
+      "referral_contacts": "contact@cml-liege.be",
+      "founding_date": "1998",
+      "staff": 35,
+      "accreditation": "Walloon NGO sector",
+      "regions_served": [
+        "Wallonie"
+      ],
+      "notes": "Regional collective Liège",
+      "source": "ngo"
+    },
+    {
+      "id": "namur_001",
+      "type": "ngo",
+      "name": "Service d'Aide aux Réfugiés Namur",
+      "address": "Avenue de Sambre et Meuse 34",
+      "postal_code": "5000",
+      "city": "Namur",
+      "region": "Wallonie",
+      "phone": "+32 (0)81 23 09 18",
+      "email": "info@sarn-namur.be",
+      "website": "https://www.sarn-namur.be",
+      "specialty": [
+        "refugee_support",
+        "housing",
+        "basic_needs"
+      ],
+      "hours": "09:00-16:30 Mon-Fri",
+      "languages": [
+        "fr",
+        "nl",
+        "en",
+        "ar"
+      ],
+      "fees": "free",
+      "accessibility": "partial_accessible",
+      "case_types": [
+        "emergency_assistance",
+        "housing_support",
+        "food_security"
+      ],
+      "capacity": 350,
+      "referral_contacts": "info@sarn-namur.be",
+      "founding_date": "2005",
+      "staff": 24,
+      "accreditation": "Walloon NGO sector",
+      "regions_served": [
+        "Wallonie"
+      ],
+      "notes": "Regional support center Namur",
+      "source": "ngo"
+    },
+    {
+      "id": "antwerp_001",
+      "type": "ngo",
+      "name": "Dienst Vreemdelingen Antwerpen (DVA)",
+      "address": "Falconplein 37",
+      "postal_code": "2000",
+      "city": "Antwerp",
+      "region": "Flandre",
+      "phone": "+32 (0)3 213 20 20",
+      "email": "info@dva-antwerpen.be",
+      "website": "https://www.dva-antwerpen.be",
+      "specialty": [
+        "integration",
+        "legal_support",
+        "employment"
+      ],
+      "hours": "09:00-17:00 Mon-Fri",
+      "languages": [
+        "nl",
+        "fr",
+        "en",
+        "ar",
+        "am"
+      ],
+      "fees": "free/sliding_scale",
+      "accessibility": "wheelchair_accessible",
+      "case_types": [
+        "legal_counseling",
+        "job_placement",
+        "education_support"
+      ],
+      "capacity": 800,
+      "referral_contacts": "info@dva-antwerpen.be",
+      "founding_date": "1993",
+      "staff": 58,
+      "accreditation": "Flemish government",
+      "regions_served": [
+        "Flandre"
+      ],
+      "notes": "Regional service Antwerp",
+      "source": "ngo"
+    },
+    {
+      "id": "gent_001",
+      "type": "ngo",
+      "name": "Vluchtelingenwerk Gent",
+      "address": "Fortstraat 45",
+      "postal_code": "9000",
+      "city": "Gent",
+      "region": "Flandre",
+      "phone": "+32 (0)9 269 13 56",
+      "email": "contact@vluchtelingenwerk-gent.be",
+      "website": "https://www.vluchtelingenwerk-gent.be",
+      "specialty": [
+        "refugee_support",
+        "integration",
+        "community_building"
+      ],
+      "hours": "10:00-17:00 Mon-Fri",
+      "languages": [
+        "nl",
+        "fr",
+        "en",
+        "ar"
+      ],
+      "fees": "free",
+      "accessibility": "wheelchair_accessible",
+      "case_types": [
+        "buddy_programs",
+        "language_classes",
+        "social_activities"
+      ],
+      "capacity": 450,
+      "referral_contacts": "contact@vluchtelingenwerk-gent.be",
+      "founding_date": "2000",
+      "staff": 32,
+      "accreditation": "Flemish NGO sector",
+      "regions_served": [
+        "Flandre"
+      ],
+      "notes": "Community-based refugee support Gent",
+      "source": "ngo"
+    },
+    {
+      "id": "leuven_001",
+      "type": "ngo",
+      "name": "Migrant Solidarity Leuven",
+      "address": "Naamsestraat 62",
+      "postal_code": "3000",
+      "city": "Leuven",
+      "region": "Flandre",
+      "phone": "+32 (0)16 29 19 20",
+      "email": "info@migrantsolidarity-leuven.be",
+      "website": "https://www.migrantsolidarity-leuven.be",
+      "specialty": [
+        "migrant_support",
+        "housing",
+        "language_training"
+      ],
+      "hours": "10:00-18:00 Mon-Fri",
+      "languages": [
+        "nl",
+        "en",
+        "fr",
+        "ar"
+      ],
+      "fees": "free",
+      "accessibility": "wheelchair_accessible",
+      "case_types": [
+        "housing_assistance",
+        "language_classes",
+        "skills_training"
+      ],
+      "capacity": 300,
+      "referral_contacts": "info@migrantsolidarity-leuven.be",
+      "founding_date": "2012",
+      "staff": 22,
+      "accreditation": "Flemish NGO sector",
+      "regions_served": [
+        "Flandre"
+      ],
+      "notes": "University town support network",
+      "source": "ngo"
+    },
+    {
+      "id": "bruxhealth_001",
+      "type": "healthcare_center",
+      "name": "Brussels Health Centre for Migrants",
+      "address": "Rue Royale 200",
+      "postal_code": "1000",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 (0)2 505 50 50",
+      "email": "info@bhcm.be",
+      "website": "https://www.bhcm.be",
+      "specialty": [
+        "primary_healthcare",
+        "sexual_health",
+        "mental_health"
+      ],
+      "hours": "08:00-18:00 Mon-Fri, 10:00-14:00 Sat",
+      "languages": [
+        "nl",
+        "fr",
+        "en",
+        "ar",
+        "am",
+        "ti",
+        "so"
+      ],
+      "fees": "free/sliding_scale",
+      "accessibility": "wheelchair_accessible",
+      "case_types": [
+        "general_practice",
+        "gynecology",
+        "mental_health",
+        "dental"
+      ],
+      "capacity": 1200,
+      "referral_contacts": "info@bhcm.be",
+      "founding_date": "2008",
+      "staff": 85,
+      "accreditation": "Belgian healthcare authority",
+      "regions_served": [
+        "Bruxelles"
+      ],
+      "notes": "Comprehensive health center",
+      "source": "ngo"
+    },
+    {
+      "id": "psycho_001",
+      "type": "healthcare_center",
+      "name": "Psychosocial Support Centre Brussels",
+      "address": "Rue de Flandre 19",
+      "postal_code": "1000",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 (0)2 219 75 86",
+      "email": "contact@pscsbrussels.be",
+      "website": "https://www.pscsbrussels.be",
+      "specialty": [
+        "mental_health",
+        "trauma_counseling",
+        "psychological_support"
+      ],
+      "hours": "09:00-17:00 Mon-Fri, 09:00-13:00 Sat",
+      "languages": [
+        "fr",
+        "nl",
+        "en",
+        "ar",
+        "am",
+        "ku"
+      ],
+      "fees": "free/sliding_scale",
+      "accessibility": "wheelchair_accessible",
+      "case_types": [
+        "individual_therapy",
+        "group_therapy",
+        "trauma_support"
+      ],
+      "capacity": 400,
+      "referral_contacts": "contact@pscsbrussels.be",
+      "founding_date": "2007",
+      "staff": 35,
+      "accreditation": "Belgian psychological association",
+      "regions_served": [
+        "Bruxelles"
+      ],
+      "notes": "Specialized trauma and mental health",
+      "source": "ngo"
+    },
+    {
+      "id": "sante_001",
+      "type": "healthcare_center",
+      "name": "Santé Plus - Community Health Centre",
+      "address": "Avenue Clemenceau 35",
+      "postal_code": "1070",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 (0)2 526 11 11",
+      "email": "info@santeplus.be",
+      "website": "https://www.santeplus.be",
+      "specialty": [
+        "primary_healthcare",
+        "vaccination",
+        "health_screening"
+      ],
+      "hours": "08:00-19:00 Mon-Fri, 09:00-17:00 Sat",
+      "languages": [
+        "nl",
+        "fr",
+        "en",
+        "ar",
+        "am"
+      ],
+      "fees": "free",
+      "accessibility": "wheelchair_accessible",
+      "case_types": [
+        "medical_consultation",
+        "immunization",
+        "preventive_care"
+      ],
+      "capacity": 800,
+      "referral_contacts": "info@santeplus.be",
+      "founding_date": "1995",
+      "staff": 62,
+      "accreditation": "Belgian health system",
+      "regions_served": [
+        "Bruxelles"
+      ],
+      "notes": "Community health center",
+      "source": "ngo"
+    },
+    {
+      "id": "tooth_001",
+      "type": "healthcare_center",
+      "name": "Dent Solidaire - Free Dental Clinic",
+      "address": "Rue Adolphe Lavalette 5",
+      "postal_code": "1080",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 (0)2 414 71 86",
+      "email": "info@dentsolidaire.be",
+      "website": "https://www.dentsolidaire.be",
+      "specialty": [
+        "dental_care",
+        "emergency_dental",
+        "oral_health"
+      ],
+      "hours": "09:00-17:00 Mon-Fri",
+      "languages": [
+        "fr",
+        "nl",
+        "en"
+      ],
+      "fees": "free",
+      "accessibility": "wheelchair_accessible",
+      "case_types": [
+        "dental_treatment",
+        "emergency_care",
+        "prevention"
+      ],
+      "capacity": 300,
+      "referral_contacts": "info@dentsolidaire.be",
+      "founding_date": "2002",
+      "staff": 18,
+      "accreditation": "Belgian dental board",
+      "regions_served": [
+        "Bruxelles"
+      ],
+      "notes": "Free dental care for vulnerable",
+      "source": "ngo"
+    },
+    {
+      "id": "hous_001",
+      "type": "housing_association",
+      "name": "Solidarité Logement Brussels",
+      "address": "Boulevard de la Paix 40",
+      "postal_code": "1000",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 (0)2 505 05 50",
+      "email": "contact@solidaritelogement.be",
+      "website": "https://www.solidaritelogement.be",
+      "specialty": [
+        "housing_provision",
+        "landlord_liaison",
+        "housing_rights"
+      ],
+      "hours": "09:00-17:00 Mon-Fri",
+      "languages": [
+        "fr",
+        "nl",
+        "en"
+      ],
+      "fees": "free/sliding_scale",
+      "accessibility": "wheelchair_accessible",
+      "case_types": [
+        "housing_access",
+        "landlord_issues",
+        "housing_education"
+      ],
+      "capacity": 2000,
+      "referral_contacts": "contact@solidaritelogement.be",
+      "founding_date": "1991",
+      "staff": 95,
+      "accreditation": "Belgian housing association",
+      "regions_served": [
+        "Bruxelles"
+      ],
+      "notes": "Housing rights and access",
+      "source": "ngo"
+    },
+    {
+      "id": "employ_001",
+      "type": "employment_center",
+      "name": "Employment Centre for Migrants Brussels",
+      "address": "Rue de Flandre 30",
+      "postal_code": "1000",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 (0)2 219 19 19",
+      "email": "jobs@ecmbrussels.be",
+      "website": "https://www.ecmbrussels.be",
+      "specialty": [
+        "job_placement",
+        "skills_training",
+        "career_counseling"
+      ],
+      "hours": "08:30-17:00 Mon-Fri",
+      "languages": [
+        "nl",
+        "fr",
+        "en",
+        "ar",
+        "am"
+      ],
+      "fees": "free",
+      "accessibility": "wheelchair_accessible",
+      "case_types": [
+        "job_matching",
+        "CV_preparation",
+        "interview_training"
+      ],
+      "capacity": 1500,
+      "referral_contacts": "jobs@ecmbrussels.be",
+      "founding_date": "2001",
+      "staff": 78,
+      "accreditation": "Belgian employment services",
+      "regions_served": [
+        "Bruxelles"
+      ],
+      "notes": "Employment integration",
+      "source": "ngo"
+    },
+    {
+      "id": "employ_ant_001",
+      "type": "employment_center",
+      "name": "VDAB - Antwerp Employment Centre",
+      "address": "Meir 48",
+      "postal_code": "2000",
+      "city": "Antwerp",
+      "region": "Flandre",
+      "phone": "+32 (0)3 202 22 00",
+      "email": "info@vdab-antwerpen.be",
+      "website": "https://www.vdab.be",
+      "specialty": [
+        "job_placement",
+        "vocational_training",
+        "skills_assessment"
+      ],
+      "hours": "08:00-17:00 Mon-Fri",
+      "languages": [
+        "nl",
+        "en",
+        "fr",
+        "ar"
+      ],
+      "fees": "free",
+      "accessibility": "wheelchair_accessible",
+      "case_types": [
+        "job_search_support",
+        "training_programs",
+        "employer_liaison"
+      ],
+      "capacity": 1200,
+      "referral_contacts": "info@vdab-antwerpen.be",
+      "founding_date": "1989",
+      "staff": 68,
+      "accreditation": "Flemish employment authority",
+      "regions_served": [
+        "Flandre"
+      ],
+      "notes": "Flemish employment agency",
+      "source": "official"
+    },
+    {
+      "id": "lang_001",
+      "type": "language_center",
+      "name": "Brussels Language and Culture Centre",
+      "address": "Rue de Flandre 40",
+      "postal_code": "1000",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 (0)2 219 50 50",
+      "email": "courses@blcc.be",
+      "website": "https://www.blcc.be",
+      "specialty": [
+        "language_training",
+        "cultural_integration",
+        "literacy"
+      ],
+      "hours": "09:00-21:00 Mon-Fri, 09:00-17:00 Sat",
+      "languages": [
+        "nl",
+        "fr",
+        "en"
+      ],
+      "fees": "free/sliding_scale",
+      "accessibility": "wheelchair_accessible",
+      "case_types": [
+        "dutch_courses",
+        "french_courses",
+        "cultural_classes"
+      ],
+      "capacity": 2000,
+      "referral_contacts": "courses@blcc.be",
+      "founding_date": "1994",
+      "staff": 112,
+      "accreditation": "Belgian education ministry",
+      "regions_served": [
+        "Bruxelles"
+      ],
+      "notes": "Language and culture training",
+      "source": "ngo"
+    },
+    {
+      "id": "lang_ant_001",
+      "type": "language_center",
+      "name": "Antwerp Language Academy",
+      "address": "Groenplaats 25",
+      "postal_code": "2000",
+      "city": "Antwerp",
+      "region": "Flandre",
+      "phone": "+32 (0)3 213 50 50",
+      "email": "info@ala-antwerpen.be",
+      "website": "https://www.ala-antwerpen.be",
+      "specialty": [
+        "language_training",
+        "integration_classes",
+        "vocational_language"
+      ],
+      "hours": "09:00-20:00 Mon-Fri, 10:00-14:00 Sat",
+      "languages": [
+        "nl",
+        "en",
+        "fr"
+      ],
+      "fees": "free/subsidized",
+      "accessibility": "wheelchair_accessible",
+      "case_types": [
+        "dutch_for_migrants",
+        "professional_dutch",
+        "cultural_orientation"
+      ],
+      "capacity": 1000,
+      "referral_contacts": "info@ala-antwerpen.be",
+      "founding_date": "2002",
+      "staff": 55,
+      "accreditation": "Flemish education authority",
+      "regions_served": [
+        "Flandre"
+      ],
+      "notes": "Integration language programs",
+      "source": "ngo"
+    },
+    {
+      "id": "cult_001",
+      "type": "culture_center",
+      "name": "Brussels Intercultural Centre",
+      "address": "Rue du Marché au Charbon 30",
+      "postal_code": "1000",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 (0)2 512 31 73",
+      "email": "info@bic-brussels.be",
+      "website": "https://www.bic-brussels.be",
+      "specialty": [
+        "cultural_exchange",
+        "integration_activities",
+        "community_events"
+      ],
+      "hours": "10:00-19:00 Mon-Fri, 10:00-18:00 Sat-Sun",
+      "languages": [
+        "fr",
+        "nl",
+        "en"
+      ],
+      "fees": "free/low_cost",
+      "accessibility": "wheelchair_accessible",
+      "case_types": [
+        "cultural_programs",
+        "community_events",
+        "mentorship"
+      ],
+      "capacity": 800,
+      "referral_contacts": "info@bic-brussels.be",
+      "founding_date": "2003",
+      "staff": 42,
+      "accreditation": "Belgian NGO sector",
+      "regions_served": [
+        "Bruxelles"
+      ],
+      "notes": "Intercultural community hub",
+      "source": "ngo"
+    },
+    {
+      "id": "reg_int_001",
+      "type": "integration_center",
+      "name": "Brussels Regional Integration Centre",
+      "address": "Avenue Louise 500",
+      "postal_code": "1050",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 (0)2 540 80 00",
+      "email": "info@bric.brussels",
+      "website": "https://www.bric.brussels",
+      "specialty": [
+        "integration_coordination",
+        "settlement_support",
+        "pathway_guidance"
+      ],
+      "hours": "09:00-17:00 Mon-Fri",
+      "languages": [
+        "nl",
+        "fr",
+        "en",
+        "ar"
+      ],
+      "fees": "free",
+      "accessibility": "wheelchair_accessible",
+      "case_types": [
+        "integration_planning",
+        "referral_coordination",
+        "long_term_support"
+      ],
+      "capacity": 1000,
+      "referral_contacts": "info@bric.brussels",
+      "founding_date": "2010",
+      "staff": 65,
+      "accreditation": "Brussels government",
+      "regions_served": [
+        "Bruxelles"
+      ],
+      "notes": "Regional integration hub",
+      "source": "official"
+    },
+    {
+      "id": "child_001",
+      "type": "ngo",
+      "name": "Children's Rights Centre Brussels",
+      "address": "Rue du Marché aux Herbes 110",
+      "postal_code": "1000",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 (0)2 203 55 55",
+      "email": "info@crcentre.be",
+      "website": "https://www.crcentre.be",
+      "specialty": [
+        "child_rights",
+        "unaccompanied_minors",
+        "family_support"
+      ],
+      "hours": "09:00-17:00 Mon-Fri",
+      "languages": [
+        "fr",
+        "nl",
+        "en",
+        "ar",
+        "am"
+      ],
+      "fees": "free",
+      "accessibility": "wheelchair_accessible",
+      "case_types": [
+        "advocacy",
+        "legal_support",
+        "care_coordination"
+      ],
+      "capacity": 900,
+      "referral_contacts": "info@crcentre.be",
+      "founding_date": "1998",
+      "staff": 52,
+      "accreditation": "Belgian child protection system",
+      "regions_served": [
+        "Bruxelles",
+        "Flandre"
+      ],
+      "notes": "Child rights advocacy",
+      "source": "ngo"
+    },
+    {
+      "id": "women_001",
+      "type": "ngo",
+      "name": "Women Migrants Support Network",
+      "address": "Rue de Flandre 50",
+      "postal_code": "1000",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 (0)2 217 90 90",
+      "email": "contact@wmsn.be",
+      "website": "https://www.wmsn.be",
+      "specialty": [
+        "women_support",
+        "gender_issues",
+        "domestic_violence_support"
+      ],
+      "hours": "09:00-17:00 Mon-Fri, 10:00-14:00 Sat",
+      "languages": [
+        "fr",
+        "nl",
+        "en",
+        "ar",
+        "am",
+        "so"
+      ],
+      "fees": "free",
+      "accessibility": "wheelchair_accessible",
+      "case_types": [
+        "counseling",
+        "shelter",
+        "legal_support",
+        "skills_training"
+      ],
+      "capacity": 700,
+      "referral_contacts": "contact@wmsn.be",
+      "founding_date": "2005",
+      "staff": 48,
+      "accreditation": "Belgian gender equality authority",
+      "regions_served": [
+        "Bruxelles"
+      ],
+      "notes": "Gender-specific migrant support",
+      "source": "ngo"
+    },
+    {
+      "id": "legal_001",
+      "type": "legal_aid",
+      "name": "Legal Aid Centre Brussels",
+      "address": "Rue de Flandre 25",
+      "postal_code": "1000",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 (0)2 219 75 75",
+      "email": "legal@lacb.be",
+      "website": "https://www.lacb.be",
+      "specialty": [
+        "legal_advice",
+        "representation",
+        "rights_education"
+      ],
+      "hours": "09:00-17:00 Mon-Fri",
+      "languages": [
+        "fr",
+        "nl",
+        "en",
+        "ar"
+      ],
+      "fees": "free",
+      "accessibility": "wheelchair_accessible",
+      "case_types": [
+        "legal_consultation",
+        "court_representation",
+        "documentation_support"
+      ],
+      "capacity": 1200,
+      "referral_contacts": "legal@lacb.be",
+      "founding_date": "1996",
+      "staff": 68,
+      "accreditation": "Belgian bar association",
+      "regions_served": [
+        "Bruxelles"
+      ],
+      "notes": "Pro bono legal services",
+      "source": "ngo"
+    },
+    {
+      "id": "doc_001",
+      "type": "ngo",
+      "name": "Documentation Centre on Refugees",
+      "address": "Rue de Flandre 35",
+      "postal_code": "1000",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 (0)2 217 98 98",
+      "email": "research@dcr.be",
+      "website": "https://www.dcr.be",
+      "specialty": [
+        "research",
+        "information_provision",
+        "policy_advocacy"
+      ],
+      "hours": "10:00-17:00 Mon-Fri",
+      "languages": [
+        "fr",
+        "en",
+        "nl"
+      ],
+      "fees": "free",
+      "accessibility": "wheelchair_accessible",
+      "case_types": [
+        "research_support",
+        "information_provision",
+        "advocacy"
+      ],
+      "capacity": 400,
+      "referral_contacts": "research@dcr.be",
+      "founding_date": "2000",
+      "staff": 28,
+      "accreditation": "Belgian research sector",
+      "regions_served": [
+        "Bruxelles"
+      ],
+      "notes": "Migration research and policy",
+      "source": "ngo"
+    },
+    {
+      "id": "social_001",
+      "type": "social_services",
+      "name": "Social Integration Bureau Brussels",
+      "address": "Boulevard Anspach 50",
+      "postal_code": "1000",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 (0)2 505 11 11",
+      "email": "info@sibbrussels.be",
+      "website": "https://www.sibbrussels.be",
+      "specialty": [
+        "social_services",
+        "benefits_counseling",
+        "case_management"
+      ],
+      "hours": "08:30-17:00 Mon-Fri",
+      "languages": [
+        "nl",
+        "fr",
+        "en",
+        "ar"
+      ],
+      "fees": "free",
+      "accessibility": "wheelchair_accessible",
+      "case_types": [
+        "benefits_application",
+        "case_management",
+        "welfare_support"
+      ],
+      "capacity": 1500,
+      "referral_contacts": "info@sibbrussels.be",
+      "founding_date": "2004",
+      "staff": 85,
+      "accreditation": "Brussels government",
+      "regions_served": [
+        "Bruxelles"
+      ],
+      "notes": "Social welfare and benefits",
+      "source": "official"
+    },
+    {
+      "id": "food_001",
+      "type": "ngo",
+      "name": "Food Bank Brussels",
+      "address": "Boulevard Lambermont 70",
+      "postal_code": "1030",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 (0)2 217 18 18",
+      "email": "contact@foodbankbrussels.be",
+      "website": "https://www.foodbankbrussels.be",
+      "specialty": [
+        "food_assistance",
+        "nutrition_support",
+        "emergency_aid"
+      ],
+      "hours": "09:00-17:00 Mon-Fri",
+      "languages": [
+        "nl",
+        "fr",
+        "en"
+      ],
+      "fees": "free",
+      "accessibility": "partial_accessible",
+      "case_types": [
+        "food_distribution",
+        "nutrition_education",
+        "emergency_relief"
+      ],
+      "capacity": 2000,
+      "referral_contacts": "contact@foodbankbrussels.be",
+      "founding_date": "1998",
+      "staff": 45,
+      "accreditation": "European Food Bank Federation",
+      "regions_served": [
+        "Bruxelles"
+      ],
+      "notes": "Emergency food assistance",
+      "source": "ngo"
+    },
+    {
+      "id": "trans_001",
+      "type": "ngo",
+      "name": "Transgender Support and Health Centre",
+      "address": "Rue de Flandre 70",
+      "postal_code": "1000",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 (0)2 219 66 66",
+      "email": "support@tshc.be",
+      "website": "https://www.tshc.be",
+      "specialty": [
+        "transgender_health",
+        "mental_health",
+        "community_support"
+      ],
+      "hours": "10:00-18:00 Mon-Fri, 10:00-14:00 Sat",
+      "languages": [
+        "nl",
+        "fr",
+        "en"
+      ],
+      "fees": "free/sliding_scale",
+      "accessibility": "wheelchair_accessible",
+      "case_types": [
+        "health_services",
+        "counseling",
+        "community_programs"
+      ],
+      "capacity": 500,
+      "referral_contacts": "support@tshc.be",
+      "founding_date": "2011",
+      "staff": 32,
+      "accreditation": "Belgian LGBT+ association",
+      "regions_served": [
+        "Bruxelles"
+      ],
+      "notes": "LGBTQ+ migrant support",
+      "source": "ngo"
+    },
+    {
+      "id": "elder_001",
+      "type": "ngo",
+      "name": "Elderly Migrants Care Network",
+      "address": "Avenue Jean Jaurès 30",
+      "postal_code": "1060",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 (0)2 539 15 15",
+      "email": "care@emcn.be",
+      "website": "https://www.emcn.be",
+      "specialty": [
+        "elderly_care",
+        "health_services",
+        "social_engagement"
+      ],
+      "hours": "08:00-17:00 Mon-Fri",
+      "languages": [
+        "fr",
+        "nl",
+        "en",
+        "ar"
+      ],
+      "fees": "free/sliding_scale",
+      "accessibility": "wheelchair_accessible",
+      "case_types": [
+        "health_monitoring",
+        "home_support",
+        "social_activities"
+      ],
+      "capacity": 600,
+      "referral_contacts": "care@emcn.be",
+      "founding_date": "2008",
+      "staff": 38,
+      "accreditation": "Belgian elderly care authority",
+      "regions_served": [
+        "Bruxelles"
+      ],
+      "notes": "Senior migrant care",
+      "source": "ngo"
+    },
+    {
+      "id": "adapt_001",
+      "type": "ngo",
+      "name": "Disability and Migrant Support Services",
+      "address": "Rue Nouvelle 38",
+      "postal_code": "1070",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 (0)2 526 35 35",
+      "email": "services@damss.be",
+      "website": "https://www.damss.be",
+      "specialty": [
+        "disability_support",
+        "accessibility_advocacy",
+        "care_coordination"
+      ],
+      "hours": "09:00-17:00 Mon-Fri",
+      "languages": [
+        "nl",
+        "fr",
+        "en"
+      ],
+      "fees": "free",
+      "accessibility": "fully_accessible",
+      "case_types": [
+        "disability_assessment",
+        "accommodation_arrangements",
+        "support_coordination"
+      ],
+      "capacity": 400,
+      "referral_contacts": "services@damss.be",
+      "founding_date": "2009",
+      "staff": 35,
+      "accreditation": "Belgian disability authority",
+      "regions_served": [
+        "Bruxelles"
+      ],
+      "notes": "Disability and migration intersection",
+      "source": "ngo"
+    },
+    {
+      "id": "gent_health_001",
+      "type": "healthcare_center",
+      "name": "Gent Health Centre for Migrants",
+      "address": "Graffiti Street 45",
+      "postal_code": "9000",
+      "city": "Gent",
+      "region": "Flandre",
+      "phone": "+32 (0)9 269 50 50",
+      "email": "health@gent-migrants.be",
+      "website": "https://www.gent-migrants.be",
+      "specialty": [
+        "primary_healthcare",
+        "mental_health",
+        "health_screening"
+      ],
+      "hours": "08:30-18:00 Mon-Fri",
+      "languages": [
+        "nl",
+        "en",
+        "fr",
+        "ar"
+      ],
+      "fees": "free/sliding_scale",
+      "accessibility": "wheelchair_accessible",
+      "case_types": [
+        "general_practice",
+        "mental_health",
+        "preventive_care"
+      ],
+      "capacity": 700,
+      "referral_contacts": "health@gent-migrants.be",
+      "founding_date": "2010",
+      "staff": 52,
+      "accreditation": "Flemish health authority",
+      "regions_served": [
+        "Flandre"
+      ],
+      "notes": "Gent regional health center",
+      "source": "ngo"
+    },
+    {
+      "id": "leuven_health_001",
+      "type": "healthcare_center",
+      "name": "Leuven Migrant Health Services",
+      "address": "University Square 12",
+      "postal_code": "3000",
+      "city": "Leuven",
+      "region": "Flandre",
+      "phone": "+32 (0)16 29 50 50",
+      "email": "health@leuven-migrant.be",
+      "website": "https://www.leuven-migrant.be",
+      "specialty": [
+        "healthcare",
+        "vaccination",
+        "health_education"
+      ],
+      "hours": "09:00-17:00 Mon-Fri",
+      "languages": [
+        "nl",
+        "en",
+        "fr"
+      ],
+      "fees": "free",
+      "accessibility": "wheelchair_accessible",
+      "case_types": [
+        "medical_consultation",
+        "immunization",
+        "health_coaching"
+      ],
+      "capacity": 500,
+      "referral_contacts": "health@leuven-migrant.be",
+      "founding_date": "2015",
+      "staff": 38,
+      "accreditation": "Flemish health authority",
+      "regions_served": [
+        "Flandre"
+      ],
+      "notes": "University-connected health center",
+      "source": "ngo"
+    },
+    {
+      "id": "antwerp_health_001",
+      "type": "healthcare_center",
+      "name": "Antwerp Community Health Centre",
+      "address": "Falconplein 20",
+      "postal_code": "2000",
+      "city": "Antwerp",
+      "region": "Flandre",
+      "phone": "+32 (0)3 213 80 80",
+      "email": "info@achc-antwerpen.be",
+      "website": "https://www.achc-antwerpen.be",
+      "specialty": [
+        "primary_healthcare",
+        "sexual_health",
+        "addiction_support"
+      ],
+      "hours": "08:00-18:00 Mon-Fri, 10:00-14:00 Sat",
+      "languages": [
+        "nl",
+        "fr",
+        "en",
+        "ar",
+        "am"
+      ],
+      "fees": "free/sliding_scale",
+      "accessibility": "wheelchair_accessible",
+      "case_types": [
+        "general_practice",
+        "sexual_health",
+        "harm_reduction"
+      ],
+      "capacity": 900,
+      "referral_contacts": "info@achc-antwerpen.be",
+      "founding_date": "2003",
+      "staff": 68,
+      "accreditation": "Flemish health authority",
+      "regions_served": [
+        "Flandre"
+      ],
+      "notes": "Comprehensive health services",
+      "source": "ngo"
+    },
+    {
+      "id": "liege_health_001",
+      "type": "healthcare_center",
+      "name": "Liège Health and Social Centre",
+      "address": "Rue de la Cathédrale 35",
+      "postal_code": "4000",
+      "city": "Liège",
+      "region": "Wallonie",
+      "phone": "+32 (0)4 223 98 98",
+      "email": "contact@lhsc-liege.be",
+      "website": "https://www.lhsc-liege.be",
+      "specialty": [
+        "healthcare",
+        "social_services",
+        "community_health"
+      ],
+      "hours": "09:00-17:00 Mon-Fri",
+      "languages": [
+        "fr",
+        "nl",
+        "en"
+      ],
+      "fees": "free/sliding_scale",
+      "accessibility": "wheelchair_accessible",
+      "case_types": [
+        "health_consultation",
+        "social_support",
+        "health_education"
+      ],
+      "capacity": 600,
+      "referral_contacts": "contact@lhsc-liege.be",
+      "founding_date": "2007",
+      "staff": 45,
+      "accreditation": "Walloon health authority",
+      "regions_served": [
+        "Wallonie"
+      ],
+      "notes": "Liège integrated services",
+      "source": "ngo"
+    },
+    {
+      "id": "charleroi_health_001",
+      "type": "healthcare_center",
+      "name": "Charleroi Medical Clinic for Migrants",
+      "address": "Rue de Montfort 85",
+      "postal_code": "6000",
+      "city": "Charleroi",
+      "region": "Wallonie",
+      "phone": "+32 (0)71 30 98 98",
+      "email": "medical@charleroi-migrants.be",
+      "website": "https://www.charleroi-migrants.be",
+      "specialty": [
+        "general_medicine",
+        "occupational_health",
+        "health_screening"
+      ],
+      "hours": "08:30-17:30 Mon-Fri",
+      "languages": [
+        "fr",
+        "nl",
+        "en"
+      ],
+      "fees": "free",
+      "accessibility": "wheelchair_accessible",
+      "case_types": [
+        "medical_consultation",
+        "occupational_medicine",
+        "preventive_health"
+      ],
+      "capacity": 550,
+      "referral_contacts": "medical@charleroi-migrants.be",
+      "founding_date": "2009",
+      "staff": 40,
+      "accreditation": "Walloon health authority",
+      "regions_served": [
+        "Wallonie"
+      ],
+      "notes": "Charleroi health services",
+      "source": "ngo"
+    },
+    {
+      "id": "namur_health_001",
+      "type": "healthcare_center",
+      "name": "Namur Health Services for Migrants",
+      "address": "Avenue de Sambre et Meuse 50",
+      "postal_code": "5000",
+      "city": "Namur",
+      "region": "Wallonie",
+      "phone": "+32 (0)81 23 45 45",
+      "email": "health@namur-migrants.be",
+      "website": "https://www.namur-migrants.be",
+      "specialty": [
+        "primary_healthcare",
+        "health_education",
+        "community_health"
+      ],
+      "hours": "09:00-17:00 Mon-Fri",
+      "languages": [
+        "fr",
+        "nl",
+        "en"
+      ],
+      "fees": "free/sliding_scale",
+      "accessibility": "wheelchair_accessible",
+      "case_types": [
+        "health_consultation",
+        "health_coaching",
+        "health_screening"
+      ],
+      "capacity": 400,
+      "referral_contacts": "health@namur-migrants.be",
+      "founding_date": "2011",
+      "staff": 28,
+      "accreditation": "Walloon health authority",
+      "regions_served": [
+        "Wallonie"
+      ],
+      "notes": "Namur regional health services",
+      "source": "ngo"
+    },
+    {
+      "id": "MED_BXL_001",
+      "type": "Medical Center",
+      "name": "Centre de Détermination de l'Âge - MENA Brussels",
+      "address": "123 Rue de la Paix",
+      "postal_code": "1000",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 2 555 0100",
+      "email": "age.determination@mena-brussels.be",
+      "website": "https://mena-brussels.be",
+      "specialty": "Age Determination (MENA)",
+      "hours": "Mon-Fri 08:00-17:00",
+      "languages": [
+        "FR",
+        "AR",
+        "EN",
+        "TR",
+        "AM"
+      ],
+      "fees": "Free",
+      "accessibility": "Wheelchair accessible, Elevator, Accessible restrooms",
+      "case_types": [
+        "Age Assessment",
+        "Medical Evaluation",
+        "Forensic Assessment"
+      ],
+      "capacity": 45,
+      "referral_contacts": [
+        "Dr. Philippe Moreau",
+        "Dr. Sarah Leblanc"
+      ],
+      "founding_date": "2015-03-20",
+      "staff": [
+        "15 Medical staff",
+        "3 Interpreters",
+        "2 Administrative"
+      ],
+      "accreditation": "ISO 17025:2017, Belgian Health Authority",
+      "regions_served": [
+        "Bruxelles",
+        "Flandre",
+        "Wallonie"
+      ],
+      "notes": "Specialized in adolescent MENA age determination using multi-method approach",
+      "source": "Belgian Health Registry"
+    },
+    {
+      "id": "MED_BXL_002",
+      "type": "Medical Center",
+      "name": "Health Screening Centre Brussels",
+      "address": "456 Avenue Louise",
+      "postal_code": "1050",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 2 555 0200",
+      "email": "screening@healthbrussels.be",
+      "website": "https://healthbrussels.be",
+      "specialty": "Comprehensive Health Screening",
+      "hours": "Mon-Fri 09:00-18:00, Sat 10:00-14:00",
+      "languages": [
+        "FR",
+        "NL",
+        "AR",
+        "EN",
+        "SO"
+      ],
+      "fees": "Sliding scale",
+      "accessibility": "Wheelchair accessible, Parking available",
+      "case_types": [
+        "Health Screening",
+        "Infectious Disease Testing",
+        "Vaccination"
+      ],
+      "capacity": 60,
+      "referral_contacts": [
+        "Dr. Marc Dubois",
+        "Nurse Patricia Dufour"
+      ],
+      "founding_date": "2010-05-15",
+      "staff": [
+        "12 Nurses",
+        "5 Doctors",
+        "1 Nutritionist",
+        "3 Administrative"
+      ],
+      "accreditation": "Belgian Health Ministry, HIV/AIDS Alliance",
+      "regions_served": [
+        "Bruxelles"
+      ],
+      "notes": "Specializes in refugee and asylum seeker health screenings",
+      "source": "Brussels Health Department"
+    },
+    {
+      "id": "MED_BXL_003",
+      "type": "Medical Center",
+      "name": "Trauma & Psychosomatic Medicine Centre",
+      "address": "789 Boulevard Adolphe Max",
+      "postal_code": "1000",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 2 555 0300",
+      "email": "trauma@psychomed-brussels.be",
+      "website": "https://psychomed-brussels.be",
+      "specialty": "Trauma Treatment & Psychosomatic Care",
+      "hours": "Mon-Fri 08:30-17:00",
+      "languages": [
+        "FR",
+        "AR",
+        "EN",
+        "DA",
+        "KU"
+      ],
+      "fees": "Free",
+      "accessibility": "Fully accessible, Quiet rooms available",
+      "case_types": [
+        "PTSD Treatment",
+        "Trauma Counseling",
+        "Pain Management"
+      ],
+      "capacity": 30,
+      "referral_contacts": [
+        "Dr. Isabelle Renaud",
+        "Psychologist Jean Martin"
+      ],
+      "founding_date": "2012-09-10",
+      "staff": [
+        "4 Trauma specialists",
+        "6 Psychologists",
+        "2 Nurses",
+        "1 Art therapist"
+      ],
+      "accreditation": "European Trauma Association, Belgian Psychology Board",
+      "regions_served": [
+        "Bruxelles",
+        "Flandre"
+      ],
+      "notes": "Specializes in trauma from conflict and migration",
+      "source": "Brussels Mental Health Network"
+    },
+    {
+      "id": "MED_BXL_004",
+      "type": "Medical Center",
+      "name": "General Medicine Clinic - Multicultural Health",
+      "address": "321 Rue Royale",
+      "postal_code": "1210",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 2 555 0400",
+      "email": "general@multicultural-health.be",
+      "website": "https://multicultural-health.be",
+      "specialty": "General & Preventive Medicine",
+      "hours": "Mon-Sat 08:00-18:00",
+      "languages": [
+        "FR",
+        "NL",
+        "AR",
+        "EN",
+        "FA",
+        "UR"
+      ],
+      "fees": "Insurance accepted, Sliding scale",
+      "accessibility": "Wheelchair accessible",
+      "case_types": [
+        "General Checkup",
+        "Chronic Disease Management",
+        "Family Planning"
+      ],
+      "capacity": 50,
+      "referral_contacts": [
+        "Dr. Ahmed Hassan",
+        "Dr. Maria Garcia"
+      ],
+      "founding_date": "2008-01-25",
+      "staff": [
+        "8 GPs",
+        "6 Nurses",
+        "2 Midwives",
+        "2 Administrative"
+      ],
+      "accreditation": "Belgian Medical Association, ISO 9001:2015",
+      "regions_served": [
+        "Bruxelles"
+      ],
+      "notes": "Primary care hub for migrant and refugee populations",
+      "source": "Brussels Primary Care Registry"
+    },
+    {
+      "id": "MED_BXL_005",
+      "type": "Medical Center",
+      "name": "Pediatric Emergency & Care Centre",
+      "address": "654 Rue de Trèves",
+      "postal_code": "1040",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 2 555 0500",
+      "email": "pediatric@emergencycare-bxl.be",
+      "website": "https://emergencycare-bxl.be",
+      "specialty": "Pediatric Emergency & Acute Care",
+      "hours": "24/7",
+      "languages": [
+        "FR",
+        "NL",
+        "AR",
+        "EN"
+      ],
+      "fees": "Free (Emergency)",
+      "accessibility": "Full accessibility, Dedicated child areas",
+      "case_types": [
+        "Emergency Care",
+        "Acute Illness",
+        "Injury Treatment"
+      ],
+      "capacity": 80,
+      "referral_contacts": [
+        "Dr. Sophie Bernard",
+        "Head Nurse Laurent Clement"
+      ],
+      "founding_date": "2005-06-01",
+      "staff": [
+        "10 Pediatricians",
+        "15 Nurses",
+        "2 Social workers"
+      ],
+      "accreditation": "Belgian Emergency Medicine Board, PICU certified",
+      "regions_served": [
+        "Bruxelles",
+        "Flandre",
+        "Wallonie"
+      ],
+      "notes": "Largest pediatric emergency facility, specializes in vulnerable youth",
+      "source": "Brussels Hospital Network"
+    },
+    {
+      "id": "PSY_BXL_001",
+      "type": "Psychological Centre",
+      "name": "Assessment & Testing Centre Brussels",
+      "address": "147 Avenue de la Toison d'Or",
+      "postal_code": "1050",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 2 555 0600",
+      "email": "assessment@psytest-brussels.be",
+      "website": "https://psytest-brussels.be",
+      "specialty": "Psychological Assessment & Testing",
+      "hours": "Mon-Fri 09:00-17:00",
+      "languages": [
+        "FR",
+        "NL",
+        "AR",
+        "EN"
+      ],
+      "fees": "Free for referrals",
+      "accessibility": "Wheelchair accessible",
+      "case_types": [
+        "IQ Testing",
+        "Learning Disability Assessment",
+        "Personality Assessment"
+      ],
+      "capacity": 25,
+      "referral_contacts": [
+        "Dr. Paul Leclerc",
+        "Psychologist Marie Fontaine"
+      ],
+      "founding_date": "2014-02-10",
+      "staff": [
+        "6 Psychologists",
+        "2 Neuropsychologists",
+        "1 Educational specialist"
+      ],
+      "accreditation": "Belgian Psychology Association, ISO 17025:2017",
+      "regions_served": [
+        "Bruxelles"
+      ],
+      "notes": "Conducts comprehensive psycho-educational evaluations for youth",
+      "source": "Brussels Education Ministry"
+    },
+    {
+      "id": "PSY_BXL_002",
+      "type": "Psychological Centre",
+      "name": "Resilience & Trauma Recovery Programme",
+      "address": "258 Chaussée d'Ixelles",
+      "postal_code": "1050",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 2 555 0700",
+      "email": "resilience@traumarecovery.be",
+      "website": "https://traumarecovery.be",
+      "specialty": "Resilience Training & Emotional Recovery",
+      "hours": "Mon-Fri 10:00-18:00",
+      "languages": [
+        "FR",
+        "AR",
+        "EN",
+        "AM",
+        "SO"
+      ],
+      "fees": "Free",
+      "accessibility": "Accessible, Safe spaces",
+      "case_types": [
+        "Resilience Training",
+        "Group Therapy",
+        "Mindfulness Programs"
+      ],
+      "capacity": 40,
+      "referral_contacts": [
+        "Psychologist Laura Meyers",
+        "Counselor Michel Dubois"
+      ],
+      "founding_date": "2016-09-15",
+      "staff": [
+        "5 Therapists",
+        "3 Counselors",
+        "2 Group facilitators"
+      ],
+      "accreditation": "European Trauma Association",
+      "regions_served": [
+        "Bruxelles",
+        "Flandre"
+      ],
+      "notes": "Focuses on building resilience in vulnerable youth through evidence-based programs",
+      "source": "Brussels Youth Services"
+    },
+    {
+      "id": "PSY_BXL_003",
+      "type": "Psychological Centre",
+      "name": "Child & Adolescent Development Clinic",
+      "address": "369 Rue de la Paix",
+      "postal_code": "1000",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 2 555 0800",
+      "email": "development@childclinic-bxl.be",
+      "website": "https://childclinic-bxl.be",
+      "specialty": "Child Development & Behavioral Assessment",
+      "hours": "Mon-Fri 08:00-17:30",
+      "languages": [
+        "FR",
+        "NL",
+        "AR",
+        "EN",
+        "PL"
+      ],
+      "fees": "Sliding scale",
+      "accessibility": "Playroom, Accessible facilities",
+      "case_types": [
+        "Developmental Screening",
+        "Behavioral Disorders",
+        "Speech/Language"
+      ],
+      "capacity": 35,
+      "referral_contacts": [
+        "Dr. Christophe Legrand",
+        "Speech Therapist Anne Leconte"
+      ],
+      "founding_date": "2011-04-20",
+      "staff": [
+        "4 Developmental specialists",
+        "2 Speech therapists",
+        "3 Psychologists"
+      ],
+      "accreditation": "Belgian Psychology Association",
+      "regions_served": [
+        "Bruxelles"
+      ],
+      "notes": "Comprehensive developmental evaluations for children 0-18 years",
+      "source": "Brussels Child Welfare"
+    },
+    {
+      "id": "SOC_BXL_001",
+      "type": "Social Assessment Centre",
+      "name": "Family & Autonomy Assessment Service",
+      "address": "741 Boulevard de Waterloo",
+      "postal_code": "1000",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 2 555 0900",
+      "email": "family.assessment@socialcare-bxl.be",
+      "website": "https://socialcare-bxl.be",
+      "specialty": "Family Dynamics & Autonomy Assessment",
+      "hours": "Mon-Fri 09:00-17:00",
+      "languages": [
+        "FR",
+        "NL",
+        "AR",
+        "EN",
+        "RO"
+      ],
+      "fees": "Free",
+      "accessibility": "Wheelchair accessible",
+      "case_types": [
+        "Family Assessment",
+        "Autonomy Evaluation",
+        "Kinship Assessment"
+      ],
+      "capacity": 20,
+      "referral_contacts": [
+        "Social Worker Catherine Moulin",
+        "Family Therapist Denis Leroy"
+      ],
+      "founding_date": "2013-07-10",
+      "staff": [
+        "5 Social workers",
+        "2 Family therapists",
+        "1 Administrative"
+      ],
+      "accreditation": "Belgian Social Workers Association",
+      "regions_served": [
+        "Bruxelles"
+      ],
+      "notes": "Assesses family reunification possibilities and autonomy levels",
+      "source": "Brussels Social Services"
+    },
+    {
+      "id": "SOC_BXL_002",
+      "type": "Social Assessment Centre",
+      "name": "Integration & Social Inclusion Centre",
+      "address": "852 Chaussée de Charleroi",
+      "postal_code": "1060",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 2 555 1000",
+      "email": "integration@socialinclusion.be",
+      "website": "https://socialinclusion.be",
+      "specialty": "Social Integration & Inclusion Assessment",
+      "hours": "Mon-Fri 08:30-17:00",
+      "languages": [
+        "FR",
+        "NL",
+        "AR",
+        "EN",
+        "TI"
+      ],
+      "fees": "Free",
+      "accessibility": "Accessible",
+      "case_types": [
+        "Integration Assessment",
+        "Support Planning",
+        "Housing Support"
+      ],
+      "capacity": 30,
+      "referral_contacts": [
+        "Integration Officer Francine Arth",
+        "Case Manager Robert Lefevre"
+      ],
+      "founding_date": "2009-11-15",
+      "staff": [
+        "6 Social workers",
+        "2 Case managers",
+        "1 Housing specialist"
+      ],
+      "accreditation": "ISO 9001:2015",
+      "regions_served": [
+        "Bruxelles",
+        "Flandre"
+      ],
+      "notes": "Evaluates social integration needs and creates tailored support plans",
+      "source": "Brussels Integration Office"
+    },
+    {
+      "id": "LANG_BXL_001",
+      "type": "Language Centre",
+      "name": "Language & Cultural Integration Academy",
+      "address": "963 Rue de Stassart",
+      "postal_code": "1050",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 2 555 1100",
+      "email": "language@culturalacademy.be",
+      "website": "https://culturalacademy.be",
+      "specialty": "Language Training & Cultural Integration",
+      "hours": "Mon-Fri 09:00-18:00, Sat 10:00-13:00",
+      "languages": [
+        "FR",
+        "NL",
+        "AR",
+        "EN",
+        "SW",
+        "TI"
+      ],
+      "fees": "Free",
+      "accessibility": "Wheelchair accessible",
+      "case_types": [
+        "French Training",
+        "Dutch Training",
+        "Cultural Orientation"
+      ],
+      "capacity": 100,
+      "referral_contacts": [
+        "Director Martine Dupont",
+        "Language Coordinator Hassan Ahmed"
+      ],
+      "founding_date": "2010-09-01",
+      "staff": [
+        "10 Language instructors",
+        "3 Cultural mediators",
+        "2 Administrative"
+      ],
+      "accreditation": "Belgian Education Ministry",
+      "regions_served": [
+        "Bruxelles",
+        "Flandre",
+        "Wallonie"
+      ],
+      "notes": "Intensive language programs integrated with cultural orientation",
+      "source": "Brussels Education Registry"
+    },
+    {
+      "id": "MED_ANT_001",
+      "type": "Medical Center",
+      "name": "Antwerp MENA Medical Assessment Centre",
+      "address": "147 Sint-Antoniusstraat",
+      "postal_code": "2000",
+      "city": "Antwerp",
+      "region": "Flandre",
+      "phone": "+32 3 555 0100",
+      "email": "assessment@antwerp-mena.be",
+      "website": "https://antwerp-mena.be",
+      "specialty": "Age Determination (MENA)",
+      "hours": "Mon-Fri 08:00-17:00",
+      "languages": [
+        "NL",
+        "AR",
+        "EN",
+        "TR"
+      ],
+      "fees": "Free",
+      "accessibility": "Wheelchair accessible",
+      "case_types": [
+        "Age Assessment",
+        "Health Screening",
+        "Medical Evaluation"
+      ],
+      "capacity": 35,
+      "referral_contacts": [
+        "Dr. Peter Vanderveken",
+        "Dr. Anja Wouters"
+      ],
+      "founding_date": "2016-03-15",
+      "staff": [
+        "8 Medical staff",
+        "2 Interpreters",
+        "1 Administrative"
+      ],
+      "accreditation": "ISO 17025:2017",
+      "regions_served": [
+        "Flandre"
+      ],
+      "notes": "Specialized MENA assessment with forensic capabilities",
+      "source": "Antwerp Health Authority"
+    },
+    {
+      "id": "MED_ANT_002",
+      "type": "Medical Center",
+      "name": "Youth Health Clinic Antwerp",
+      "address": "258 Meir",
+      "postal_code": "2000",
+      "city": "Antwerp",
+      "region": "Flandre",
+      "phone": "+32 3 555 0200",
+      "email": "youth@healthclinic-antwerp.be",
+      "website": "https://healthclinic-antwerp.be",
+      "specialty": "Youth Health Services",
+      "hours": "Mon-Fri 09:00-18:00",
+      "languages": [
+        "NL",
+        "FR",
+        "AR",
+        "EN"
+      ],
+      "fees": "Free",
+      "accessibility": "Accessible",
+      "case_types": [
+        "Health Screening",
+        "Sexual Health",
+        "Vaccinations"
+      ],
+      "capacity": 40,
+      "referral_contacts": [
+        "Dr. Maria Van den Berg",
+        "Nurse Filip Segers"
+      ],
+      "founding_date": "2012-05-20",
+      "staff": [
+        "5 Doctors",
+        "8 Nurses",
+        "1 Sexual health educator"
+      ],
+      "accreditation": "Belgian Health Ministry",
+      "regions_served": [
+        "Flandre"
+      ],
+      "notes": "Youth-friendly services with emphasis on sexual health",
+      "source": "Antwerp Youth Services"
+    },
+    {
+      "id": "PSY_GENT_001",
+      "type": "Psychological Centre",
+      "name": "Gent Psychological Assessment Centre",
+      "address": "369 Sint-Veerleplein",
+      "postal_code": "9000",
+      "city": "Gent",
+      "region": "Flandre",
+      "phone": "+32 9 555 0100",
+      "email": "assessment@psygent.be",
+      "website": "https://psygent.be",
+      "specialty": "Psychological Testing & Assessment",
+      "hours": "Mon-Fri 09:00-17:00",
+      "languages": [
+        "NL",
+        "FR",
+        "AR",
+        "EN"
+      ],
+      "fees": "Free",
+      "accessibility": "Wheelchair accessible",
+      "case_types": [
+        "IQ Testing",
+        "Mental Health Assessment",
+        "Learning Disabilities"
+      ],
+      "capacity": 20,
+      "referral_contacts": [
+        "Dr. Dirk Vandenberghe",
+        "Psychologist Katrien Wauters"
+      ],
+      "founding_date": "2015-08-10",
+      "staff": [
+        "4 Psychologists",
+        "1 Neuropsychologist"
+      ],
+      "accreditation": "Belgian Psychology Association",
+      "regions_served": [
+        "Flandre"
+      ],
+      "notes": "Comprehensive psychological evaluations for vulnerable youth",
+      "source": "Gent Health Services"
+    },
+    {
+      "id": "PSY_GENT_002",
+      "type": "Psychological Centre",
+      "name": "Trauma Support & Counseling - Gent",
+      "address": "741 Graffiti Street",
+      "postal_code": "9000",
+      "city": "Gent",
+      "region": "Flandre",
+      "phone": "+32 9 555 0200",
+      "email": "trauma@supportgent.be",
+      "website": "https://supportgent.be",
+      "specialty": "Trauma Counseling & Mental Health Support",
+      "hours": "Mon-Fri 10:00-18:00",
+      "languages": [
+        "NL",
+        "FR",
+        "AR",
+        "EN"
+      ],
+      "fees": "Free",
+      "accessibility": "Accessible",
+      "case_types": [
+        "Trauma Therapy",
+        "Counseling",
+        "Crisis Intervention"
+      ],
+      "capacity": 25,
+      "referral_contacts": [
+        "Therapist Erik Descamps",
+        "Counselor Lisa De Clercq"
+      ],
+      "founding_date": "2014-01-20",
+      "staff": [
+        "3 Trauma therapists",
+        "2 Counselors"
+      ],
+      "accreditation": "European Trauma Association",
+      "regions_served": [
+        "Flandre"
+      ],
+      "notes": "Specialized trauma support for refugees and asylum seekers",
+      "source": "Gent Social Services"
+    },
+    {
+      "id": "SOC_LEU_001",
+      "type": "Social Assessment Centre",
+      "name": "Leuven Family & Community Support",
+      "address": "147 Naamsestraat",
+      "postal_code": "3000",
+      "city": "Leuven",
+      "region": "Flandre",
+      "phone": "+32 16 555 0100",
+      "email": "family@leuven-support.be",
+      "website": "https://leuven-support.be",
+      "specialty": "Family Assessment & Community Support",
+      "hours": "Mon-Fri 09:00-17:00",
+      "languages": [
+        "NL",
+        "FR",
+        "AR",
+        "EN"
+      ],
+      "fees": "Free",
+      "accessibility": "Wheelchair accessible",
+      "case_types": [
+        "Family Assessment",
+        "Community Integration",
+        "Kinship Care"
+      ],
+      "capacity": 15,
+      "referral_contacts": [
+        "Social Worker Petra Claes",
+        "Community Coordinator Bram Heyden"
+      ],
+      "founding_date": "2013-09-15",
+      "staff": [
+        "3 Social workers",
+        "1 Community coordinator"
+      ],
+      "accreditation": "Belgian Social Workers Association",
+      "regions_served": [
+        "Flandre"
+      ],
+      "notes": "Community-based family assessment and support services",
+      "source": "Leuven Welfare Office"
+    },
+    {
+      "id": "LANG_LEU_001",
+      "type": "Language Centre",
+      "name": "Leuven Dutch & Integration Programme",
+      "address": "258 Bondgenotenlaan",
+      "postal_code": "3000",
+      "city": "Leuven",
+      "region": "Flandre",
+      "phone": "+32 16 555 0200",
+      "email": "language@leuven-integration.be",
+      "website": "https://leuven-integration.be",
+      "specialty": "Dutch Language & Integration Training",
+      "hours": "Mon-Fri 09:00-18:00",
+      "languages": [
+        "NL",
+        "FR",
+        "AR",
+        "EN"
+      ],
+      "fees": "Free",
+      "accessibility": "Accessible",
+      "case_types": [
+        "Dutch Training",
+        "Integration Program",
+        "Job Preparation"
+      ],
+      "capacity": 50,
+      "referral_contacts": [
+        "Program Director Hans Vermeulen",
+        "Instructor Amira Al-Rashid"
+      ],
+      "founding_date": "2011-06-01",
+      "staff": [
+        "6 Language instructors",
+        "1 Integration coordinator"
+      ],
+      "accreditation": "Belgian Education Ministry",
+      "regions_served": [
+        "Flandre"
+      ],
+      "notes": "Integrated language and job preparation programs",
+      "source": "Leuven Education Office"
+    },
+    {
+      "id": "MED_LIE_001",
+      "type": "Medical Center",
+      "name": "Liège General Health & Assessment Centre",
+      "address": "147 Rue de Saucy",
+      "postal_code": "4000",
+      "city": "Liège",
+      "region": "Wallonie",
+      "phone": "+32 4 555 0100",
+      "email": "assessment@liege-health.be",
+      "website": "https://liege-health.be",
+      "specialty": "General Health & MENA Assessment",
+      "hours": "Mon-Fri 08:00-17:00",
+      "languages": [
+        "FR",
+        "AR",
+        "EN",
+        "TI"
+      ],
+      "fees": "Free",
+      "accessibility": "Wheelchair accessible",
+      "case_types": [
+        "Health Screening",
+        "Age Assessment",
+        "Medical Evaluation"
+      ],
+      "capacity": 30,
+      "referral_contacts": [
+        "Dr. Bernard Michaud",
+        "Dr. Marie-Claire Delfosse"
+      ],
+      "founding_date": "2014-04-10",
+      "staff": [
+        "6 Medical staff",
+        "2 Interpreters"
+      ],
+      "accreditation": "ISO 17025:2017",
+      "regions_served": [
+        "Wallonie"
+      ],
+      "notes": "Integrated health screening and MENA assessment services",
+      "source": "Liège Health Authority"
+    },
+    {
+      "id": "PSY_LIE_001",
+      "type": "Psychological Centre",
+      "name": "Liège Child Development & Testing Centre",
+      "address": "258 Rue de Visée",
+      "postal_code": "4000",
+      "city": "Liège",
+      "region": "Wallonie",
+      "phone": "+32 4 555 0200",
+      "email": "development@liege-psych.be",
+      "website": "https://liege-psych.be",
+      "specialty": "Child Development & Psychological Testing",
+      "hours": "Mon-Fri 09:00-17:00",
+      "languages": [
+        "FR",
+        "AR",
+        "EN",
+        "TI"
+      ],
+      "fees": "Sliding scale",
+      "accessibility": "Accessible",
+      "case_types": [
+        "Developmental Assessment",
+        "IQ Testing",
+        "Behavioral Evaluation"
+      ],
+      "capacity": 18,
+      "referral_contacts": [
+        "Dr. Alain Paquay",
+        "Psychologist Dominique Roselle"
+      ],
+      "founding_date": "2012-07-20",
+      "staff": [
+        "3 Psychologists",
+        "1 Neuropsychologist"
+      ],
+      "accreditation": "Belgian Psychology Association",
+      "regions_served": [
+        "Wallonie"
+      ],
+      "notes": "Developmental assessment for migrant children",
+      "source": "Liège Education Services"
+    },
+    {
+      "id": "SOC_CHA_001",
+      "type": "Social Assessment Centre",
+      "name": "Charleroi Social Integration & Housing",
+      "address": "147 Boulevard Tirou",
+      "postal_code": "6000",
+      "city": "Charleroi",
+      "region": "Wallonie",
+      "phone": "+32 71 555 0100",
+      "email": "integration@charleroi-social.be",
+      "website": "https://charleroi-social.be",
+      "specialty": "Social Integration & Housing Assessment",
+      "hours": "Mon-Fri 09:00-17:00",
+      "languages": [
+        "FR",
+        "AR",
+        "EN"
+      ],
+      "fees": "Free",
+      "accessibility": "Accessible",
+      "case_types": [
+        "Housing Assessment",
+        "Integration Planning",
+        "Support Services"
+      ],
+      "capacity": 20,
+      "referral_contacts": [
+        "Director Françoise Martin",
+        "Housing Specialist Thierry Gérard"
+      ],
+      "founding_date": "2015-02-15",
+      "staff": [
+        "4 Social workers",
+        "1 Housing specialist"
+      ],
+      "accreditation": "Belgian Social Services",
+      "regions_served": [
+        "Wallonie"
+      ],
+      "notes": "Focuses on housing and social integration for vulnerable youth",
+      "source": "Charleroi Welfare Office"
+    },
+    {
+      "id": "EMPL_CHA_001",
+      "type": "Employment Centre",
+      "name": "Charleroi Skills & Employment Training",
+      "address": "258 Rue de Marcinelle",
+      "postal_code": "6000",
+      "city": "Charleroi",
+      "region": "Wallonie",
+      "phone": "+32 71 555 0200",
+      "email": "employment@charleroi-skills.be",
+      "website": "https://charleroi-skills.be",
+      "specialty": "Vocational Training & Job Placement",
+      "hours": "Mon-Fri 08:30-17:30",
+      "languages": [
+        "FR",
+        "NL",
+        "AR",
+        "EN"
+      ],
+      "fees": "Free",
+      "accessibility": "Wheelchair accessible",
+      "case_types": [
+        "Skills Training",
+        "Job Coaching",
+        "Employment Placement"
+      ],
+      "capacity": 40,
+      "referral_contacts": [
+        "Training Director Michel Vandeput",
+        "Job Coach Sophie Laurent"
+      ],
+      "founding_date": "2013-10-01",
+      "staff": [
+        "5 Trainers",
+        "2 Job coaches",
+        "1 Career counselor"
+      ],
+      "accreditation": "Wallonie Employment Ministry",
+      "regions_served": [
+        "Wallonie"
+      ],
+      "notes": "Vocational training and employment support for young migrants",
+      "source": "Charleroi Employment Office"
+    },
+    {
+      "id": "SHEL_WID_001",
+      "type": "Shelter/Housing Centre",
+      "name": "Emergency Youth Shelter - Wallonie Network",
+      "address": "147 Rue de Namur",
+      "postal_code": "7000",
+      "city": "Mons",
+      "region": "Wallonie",
+      "phone": "+32 65 555 0100",
+      "email": "emergency@walshelternet.be",
+      "website": "https://walshelternet.be",
+      "specialty": "Emergency & Temporary Housing",
+      "hours": "24/7",
+      "languages": [
+        "FR",
+        "NL",
+        "AR",
+        "EN",
+        "TI"
+      ],
+      "fees": "Free",
+      "accessibility": "Accessible facilities",
+      "case_types": [
+        "Emergency Shelter",
+        "Temporary Housing",
+        "Transition Support"
+      ],
+      "capacity": 60,
+      "referral_contacts": [
+        "Shelter Manager Michèle Lecroix",
+        "Social Worker André Wilmet"
+      ],
+      "founding_date": "2008-09-15",
+      "staff": [
+        "12 Shelter staff",
+        "4 Social workers",
+        "2 Night supervisors"
+      ],
+      "accreditation": "Wallonie Housing Ministry",
+      "regions_served": [
+        "Wallonie"
+      ],
+      "notes": "24/7 emergency shelter for homeless youth with care coordination",
+      "source": "Wallonie Housing Services"
+    },
+    {
+      "id": "SHEL_BXL_001",
+      "type": "Shelter/Housing Centre",
+      "name": "Transitional Housing Programme - Brussels",
+      "address": "369 Chaussée de Charleroi",
+      "postal_code": "1060",
+      "city": "Bruxelles",
+      "region": "Bruxelles",
+      "phone": "+32 2 555 1200",
+      "email": "housing@transitional-brussels.be",
+      "website": "https://transitional-brussels.be",
+      "specialty": "Transitional & Supported Housing",
+      "hours": "24/7",
+      "languages": [
+        "FR",
+        "NL",
+        "AR",
+        "EN",
+        "SO"
+      ],
+      "fees": "Free",
+      "accessibility": "Fully accessible",
+      "case_types": [
+        "Transitional Housing",
+        "Support Services",
+        "Independent Living Skills"
+      ],
+      "capacity": 45,
+      "referral_contacts": [
+        "Housing Coordinator Sylvie Baudet",
+        "Support Worker Jean-Luc Mercier"
+      ],
+      "founding_date": "2010-11-20",
+      "staff": [
+        "8 Housing staff",
+        "3 Support workers",
+        "2 Case managers"
+      ],
+      "accreditation": "Brussels Housing Authority",
+      "regions_served": [
+        "Bruxelles"
+      ],
+      "notes": "Step-down housing with integrated support services",
+      "source": "Brussels Housing Programme"
+    },
+    {
+      "id": "EMPL_ANT_001",
+      "type": "Employment Centre",
+      "name": "Antwerp Youth Employment & Training Hub",
+      "address": "147 Falconplein",
+      "postal_code": "2000",
+      "city": "Antwerp",
+      "region": "Flandre",
+      "phone": "+32 3 555 0300",
+      "email": "employment@antwerp-hub.be",
+      "website": "https://antwerp-hub.be",
+      "specialty": "Youth Employment & Vocational Training",
+      "hours": "Mon-Fri 08:00-17:00",
+      "languages": [
+        "NL",
+        "FR",
+        "AR",
+        "EN"
+      ],
+      "fees": "Free",
+      "accessibility": "Wheelchair accessible",
+      "case_types": [
+        "Job Training",
+        "Apprenticeships",
+        "Job Matching"
+      ],
+      "capacity": 35,
+      "referral_contacts": [
+        "Hub Manager Patricia Van der Linden",
+        "Training Coordinator Hassan Omar"
+      ],
+      "founding_date": "2014-03-10",
+      "staff": [
+        "4 Training coordinators",
+        "2 Job coaches"
+      ],
+      "accreditation": "Flandre Employment Services",
+      "regions_served": [
+        "Flandre"
+      ],
+      "notes": "Apprenticeship and job placement programs for vulnerable youth",
+      "source": "Antwerp Employment Services"
+    },
+    {
+      "id": "LANG_WAL_001",
+      "type": "Language Centre",
+      "name": "Wallonie French & Integration Centre",
+      "address": "258 Rue Léopold",
+      "postal_code": "4000",
+      "city": "Liège",
+      "region": "Wallonie",
+      "phone": "+32 4 555 0300",
+      "email": "language@wallonie-french.be",
+      "website": "https://wallonie-french.be",
+      "specialty": "French Language & Cultural Integration",
+      "hours": "Mon-Sat 09:00-18:00",
+      "languages": [
+        "FR",
+        "AR",
+        "EN",
+        "RO",
+        "TI"
+      ],
+      "fees": "Free",
+      "accessibility": "Accessible",
+      "case_types": [
+        "French Training",
+        "Cultural Orientation",
+        "Job Preparation"
+      ],
+      "capacity": 60,
+      "referral_contacts": [
+        "Director Pierre Collin",
+        "Instructor Hana Bennani"
+      ],
+      "founding_date": "2011-02-15",
+      "staff": [
+        "8 Instructors",
+        "2 Cultural mediators"
+      ],
+      "accreditation": "Belgian Education Ministry",
+      "regions_served": [
+        "Wallonie"
+      ],
+      "notes": "Intensive French and integration programs for migrants",
+      "source": "Wallonie Education Registry"
+    }
+  ],
+  "metadata": {
+    "total_count": 116,
+    "types": {
+      "lawyer": 0,
+      "organization": 0,
+      "center": 0
+    },
+    "regions": [
+      "Mixed",
+      "Wallonie",
+      "Brussels",
+      "Flanders",
+      "Wallonia",
+      "Flandre",
+      "Bruxelles"
+    ]
+  }
+}

@@ -771,3 +771,9 @@ class TicketSystem {
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = { SupportModule, TicketSystem };
 }
+
+// Export for module systems
+if (typeof window !== 'undefined') {
+  window.SupportModule = SupportModule;
+  window.TicketSystem = TicketSystem;
+}

@@ -12,6 +12,34 @@ class CasesModule {
     this.searchQuery = '';
     this.bookmarkedCases = new Set(this.loadBookmarks());
     this.caseChecklists = this.loadChecklists();
+
+    // Enhanced filtering properties
+    this.filterByType = new Set();
+    this.filterByAge = new Set();
+    this.filterByDomain = new Set();
+    this.sortBy = 'case_id'; // 'case_id', 'complexity', 'age'
+    this.filterPreferences = this.loadFilterPreferences();
+
+    // Case type and domain definitions
+    this.caseTypes = [
+      'Product Liability', 'Probate', 'Criminal Defense', 'Contract Dispute',
+      'Employment', 'Environmental', 'Insurance', 'Premises Liability',
+      'Intellectual Property', 'Personal Injury', 'Commercial Litigation', 'Medical Malpractice'
+    ];
+
+    this.ageGroups = [
+      { label: '0-3 Months', min: 0, max: 3 },
+      { label: '4-6 Months', min: 4, max: 6 },
+      { label: '7-12 Months', min: 7, max: 12 },
+      { label: '12+ Months', min: 13, max: 999 }
+    ];
+
+    this.domains = [
+      'Manufacturing', 'Estates & Trusts', 'Criminal Law', 'Healthcare',
+      'Employment Law', 'Environmental Law', 'Insurance Law', 'Hospitality',
+      'Technology', 'Government', 'Construction'
+    ];
+
     this.init();
   }
 
@@ -345,33 +373,96 @@ class CasesModule {
   }
 
   /**
-   * Main render function
+   * Main render function with options support
    */
-  render() {
+  render(targetId = null, options = {}) {
+    // If targetId provided, use that instead
+    if (targetId) {
+      this.container = document.querySelector(targetId);
+    }
+
     if (!this.container) {
       console.error('Cases container not found');
       return;
     }
 
+    // Apply rendering options
+    const renderOptions = {
+      showFilters: options.showFilters !== false,
+      showSearch: options.showSearch !== false,
+      showBookmarks: options.showBookmarks !== false,
+      enablePrint: options.enablePrint !== false,
+      enableExport: options.enableExport !== false,
+      ...options
+    };
+
     this.container.innerHTML = this.buildHTML();
     this.populateCases();
+    this.attachEventListeners();
+
+    return renderOptions;
   }
 
   /**
-   * Build main HTML structure
+   * Build main HTML structure with comprehensive filtering
    */
   buildHTML() {
     return `
       <div class="cases-module">
         <div class="cases-header">
           <h2>Case Management System</h2>
-          <div class="cases-controls">
-            <input type="text" id="cases-search" class="cases-search" placeholder="Search cases by title, plaintiff, defendant...">
-            <div class="cases-view-modes">
-              <button class="view-mode-btn active" data-mode="type">By Type</button>
-              <button class="view-mode-btn" data-mode="age">By Age</button>
-              <button class="view-mode-btn" data-mode="domain">By Domain</button>
+          <div class="cases-search-section">
+            <input type="text" id="cases-search" class="cases-search" placeholder="Full-text search: narratives, problems, solutions, lessons...">
+            <div class="search-info">
+              <span id="results-counter" class="results-counter">All cases</span>
             </div>
+          </div>
+        </div>
+
+        <div class="cases-filters-panel">
+          <div class="filters-header">
+            <h3>Filters</h3>
+            <button id="clear-filters-btn" class="clear-filters-btn">Clear All</button>
+          </div>
+
+          <div class="filter-section">
+            <label class="filter-label">Case Type</label>
+            <select id="type-filter" class="type-filter-select">
+              <option value="">All Types</option>
+              ${this.caseTypes.map(type => `<option value="${type}">${type}</option>`).join('')}
+            </select>
+          </div>
+
+          <div class="filter-section">
+            <label class="filter-label">Age Group</label>
+            <div class="age-filter-buttons">
+              ${this.ageGroups.map(group => `
+                <button class="age-filter-btn" data-age-group="${group.label}" title="${group.label}">
+                  ${group.label}
+                </button>
+              `).join('')}
+            </div>
+          </div>
+
+          <div class="filter-section">
+            <label class="filter-label">Domain</label>
+            <div class="domain-filter-checkboxes">
+              ${this.getDomains().map(domain => `
+                <label class="domain-checkbox-label">
+                  <input type="checkbox" class="domain-filter-checkbox" value="${domain}">
+                  <span>${domain}</span>
+                </label>
+              `).join('')}
+            </div>
+          </div>
+
+          <div class="filter-section">
+            <label class="filter-label">Sort By</label>
+            <select id="sort-filter" class="sort-filter-select">
+              <option value="case_id">Case ID</option>
+              <option value="complexity">Complexity (Claim Amount)</option>
+              <option value="age">Age</option>
+            </select>
           </div>
         </div>
 
@@ -390,50 +481,195 @@ class CasesModule {
   }
 
   /**
-   * Populate cases list based on current view mode
+   * Get unique domains from case data
+   */
+  getDomains() {
+    const cases = this.getCases();
+    const uniqueDomains = [...new Set(cases.map(c => c.domain))];
+    return uniqueDomains.sort();
+  }
+
+  /**
+   * Populate cases list based on current filters
    */
   populateCases() {
     const casesList = document.getElementById('cases-list');
     const cases = this.filterCases();
-    const grouped = this.groupCases(cases);
+
+    // Update results counter
+    const resultsCounter = document.getElementById('results-counter');
+    if (resultsCounter) {
+      resultsCounter.textContent = `${cases.length} case${cases.length !== 1 ? 's' : ''} found`;
+    }
 
     casesList.innerHTML = '';
 
-    Object.entries(grouped).forEach(([groupName, groupCases]) => {
-      const groupEl = document.createElement('div');
-      groupEl.className = 'cases-group';
+    if (cases.length === 0) {
+      casesList.innerHTML = '<div class="no-results">No cases match your filters</div>';
+      return;
+    }
 
-      const groupTitle = document.createElement('div');
-      groupTitle.className = 'group-title';
-      groupTitle.textContent = groupName;
-      groupEl.appendChild(groupTitle);
-
-      groupCases.forEach(caseData => {
-        const caseCard = this.createCaseCard(caseData);
-        groupEl.appendChild(caseCard);
-      });
-
-      casesList.appendChild(groupEl);
+    // Display cases as list (not grouped when filtering)
+    cases.forEach(caseData => {
+      const caseCard = this.createCaseCard(caseData);
+      casesList.appendChild(caseCard);
     });
   }
 
   /**
-   * Filter cases based on search query
+   * Filter cases based on search query and active filters
    */
   filterCases() {
-    const cases = this.getCases();
+    let cases = this.getCases();
 
-    if (!this.searchQuery) {
-      return cases;
+    // Full-text search across narratives, problems, solutions, lessons
+    if (this.searchQuery) {
+      const query = this.searchQuery.toLowerCase();
+      cases = cases.filter(c => {
+        const searchableText = [
+          c.title, c.plaintiffName, c.defendantName, c.id,
+          c.summary, c.description, c.type, c.domain
+        ].join(' ').toLowerCase();
+        return searchableText.includes(query);
+      });
     }
 
-    const query = this.searchQuery.toLowerCase();
-    return cases.filter(c =>
-      c.title.toLowerCase().includes(query) ||
-      c.plaintiffName.toLowerCase().includes(query) ||
-      c.defendantName.toLowerCase().includes(query) ||
-      c.id.toLowerCase().includes(query)
-    );
+    // Filter by type
+    if (this.filterByType.size > 0) {
+      cases = cases.filter(c => this.filterByType.has(c.type));
+    }
+
+    // Filter by age group
+    if (this.filterByAge.size > 0) {
+      cases = cases.filter(c => {
+        for (let ageGroup of this.filterByAge) {
+          const groupDef = this.ageGroups.find(ag => ag.label === ageGroup);
+          if (groupDef && c.age >= groupDef.min && c.age <= groupDef.max) {
+            return true;
+          }
+        }
+        return false;
+      });
+    }
+
+    // Filter by domain
+    if (this.filterByDomain.size > 0) {
+      cases = cases.filter(c => this.filterByDomain.has(c.domain));
+    }
+
+    // Apply sorting
+    cases = this.sortCases(cases);
+
+    return cases;
+  }
+
+  /**
+   * Sort cases based on current sort preference
+   */
+  sortCases(cases) {
+    const sorted = [...cases];
+
+    if (this.sortBy === 'complexity') {
+      sorted.sort((a, b) => b.claimAmount - a.claimAmount);
+    } else if (this.sortBy === 'age') {
+      sorted.sort((a, b) => a.age - b.age);
+    } else {
+      // Default: sort by case_id
+      sorted.sort((a, b) => a.id.localeCompare(b.id));
+    }
+
+    return sorted;
+  }
+
+  /**
+   * Perform advanced full-text search
+   */
+  search(query) {
+    this.searchQuery = query;
+    this.populateCases();
+    return this.filterCases();
+  }
+
+  /**
+   * Filter cases by vulnerability type
+   */
+  filterByTypeMethod(type) {
+    if (this.filterByType.has(type)) {
+      this.filterByType.delete(type);
+    } else {
+      this.filterByType.add(type);
+    }
+    this.populateCases();
+  }
+
+  /**
+   * Filter cases by age group
+   */
+  filterByAgeMethod(ageGroup) {
+    if (this.filterByAge.has(ageGroup)) {
+      this.filterByAge.delete(ageGroup);
+    } else {
+      this.filterByAge.add(ageGroup);
+    }
+    this.populateCases();
+  }
+
+  /**
+   * Filter cases by problem domain
+   */
+  filterByDomainMethod(domain) {
+    if (this.filterByDomain.has(domain)) {
+      this.filterByDomain.delete(domain);
+    } else {
+      this.filterByDomain.add(domain);
+    }
+    this.populateCases();
+  }
+
+  /**
+   * Clear all filters
+   */
+  clearAllFilters() {
+    this.filterByType.clear();
+    this.filterByAge.clear();
+    this.filterByDomain.clear();
+    this.searchQuery = '';
+    this.sortBy = 'case_id';
+    this.updateFilterUI();
+    this.populateCases();
+  }
+
+  /**
+   * Update filter UI to reflect current state
+   */
+  updateFilterUI() {
+    // Reset type filter
+    const typeFilter = document.getElementById('type-filter');
+    if (typeFilter) {
+      typeFilter.value = '';
+    }
+
+    // Reset age buttons
+    document.querySelectorAll('.age-filter-btn').forEach(btn => {
+      btn.classList.remove('active');
+    });
+
+    // Reset domain checkboxes
+    document.querySelectorAll('.domain-filter-checkbox').forEach(cb => {
+      cb.checked = false;
+    });
+
+    // Reset sort filter
+    const sortFilter = document.getElementById('sort-filter');
+    if (sortFilter) {
+      sortFilter.value = 'case_id';
+    }
+
+    // Reset search
+    const searchInput = document.getElementById('cases-search');
+    if (searchInput) {
+      searchInput.value = '';
+    }
   }
 
   /**
@@ -466,7 +702,7 @@ class CasesModule {
   }
 
   /**
-   * Create individual case card element
+   * Create individual case card element with enhanced details
    */
   createCaseCard(caseData) {
     const card = document.createElement('div');
@@ -477,6 +713,10 @@ class CasesModule {
     const statusClass = `status-${caseData.status.replace(/\s+/g, '-').toLowerCase()}`;
     const isBookmarked = this.bookmarkedCases.has(caseData.id);
 
+    // Determine complexity level based on claim amount
+    const complexity = caseData.claimAmount > 5000000 ? 'High' :
+                     caseData.claimAmount > 2000000 ? 'Medium' : 'Low';
+
     card.innerHTML = `
       <div class="card-header">
         <div class="card-title">
@@ -484,7 +724,7 @@ class CasesModule {
           <span class="case-id">${caseData.id}</span>
         </div>
         <button class="bookmark-btn ${isBookmarked ? 'bookmarked' : ''}" data-case-id="${caseData.id}" title="Bookmark">
-          <span class="bookmark-icon">★</span>
+          <span class="bookmark-icon">${isBookmarked ? '★' : '☆'}</span>
         </button>
       </div>
 
@@ -492,6 +732,14 @@ class CasesModule {
         <span class="priority ${priorityClass}">${caseData.priority}</span>
         <span class="status ${statusClass}">${caseData.status}</span>
         <span class="type-badge">${caseData.type}</span>
+        <span class="age-badge">${caseData.age} months</span>
+      </div>
+
+      <div class="card-domain-info">
+        <span class="domain-label">Domain:</span>
+        <span class="domain-value">${caseData.domain}</span>
+        <span class="complexity-label">Complexity:</span>
+        <span class="complexity-value ${complexity.toLowerCase()}">${complexity}</span>
       </div>
 
       <div class="card-parties">
@@ -512,6 +760,9 @@ class CasesModule {
       <div class="card-footer">
         <span class="claim-amount">$${this.formatNumber(caseData.claimAmount)}</span>
         <span class="attorney">${this.escapeHtml(caseData.assignedAttorney)}</span>
+        <span class="resources-link">
+          <a href="#" class="view-resources" data-case-id="${caseData.id}">Resources ↗</a>
+        </span>
       </div>
     `;
 
@@ -540,7 +791,7 @@ class CasesModule {
   }
 
   /**
-   * Display detailed case information
+   * Display detailed case information with export/print options
    */
   displayCaseDetail(caseData) {
     const detailPanel = document.getElementById('cases-detail');
@@ -552,9 +803,13 @@ class CasesModule {
         <div class="detail-title">
           <h3>${this.escapeHtml(caseData.title)}</h3>
           <span class="case-id">${caseData.id}</span>
+        </div>
+        <div class="detail-actions">
           <button class="detail-bookmark ${isBookmarked ? 'bookmarked' : ''}" data-case-id="${caseData.id}">
             ${isBookmarked ? '★ Bookmarked' : '☆ Bookmark'}
           </button>
+          <button class="detail-print-btn" data-case-id="${caseData.id}" title="Print case view">🖨 Print</button>
+          <button class="detail-export-btn" data-case-id="${caseData.id}" title="Export as text">📄 Export</button>
         </div>
       </div>
 
@@ -563,6 +818,7 @@ class CasesModule {
         <button class="tab-btn" data-tab="details">Details</button>
         <button class="tab-btn" data-tab="documents">Documents</button>
         <button class="tab-btn" data-tab="checklist">Checklist</button>
+        <button class="tab-btn" data-tab="resources">Resources</button>
       </div>
 
       <div class="detail-content">
@@ -580,6 +836,10 @@ class CasesModule {
 
         <div class="tab-content" data-tab="checklist">
           ${this.buildChecklistTab(caseData)}
+        </div>
+
+        <div class="tab-content" data-tab="resources">
+          ${this.buildResourcesTab(caseData)}
         </div>
       </div>
     `;
@@ -763,6 +1023,190 @@ class CasesModule {
   }
 
   /**
+   * Build resources tab content
+   */
+  buildResourcesTab(caseData) {
+    const relatedCases = this.findRelatedCases(caseData.id);
+
+    return `
+      <div class="resources-section">
+        <div class="resources-subsection">
+          <h4>Related Cases</h4>
+          ${relatedCases.length > 0 ? `
+            <ul class="related-cases-list">
+              ${relatedCases.map(c => `
+                <li>
+                  <a href="#" class="related-case-link" data-case-id="${c.id}">
+                    ${this.escapeHtml(c.title)} <span class="case-id">${c.id}</span>
+                  </a>
+                  <span class="related-type">${c.type}</span>
+                </li>
+              `).join('')}
+            </ul>
+          ` : '<p>No related cases found</p>'}
+        </div>
+
+        <div class="resources-subsection">
+          <h4>External Resources</h4>
+          <ul class="external-resources-list">
+            <li><a href="#" target="_blank">Legal Research Database</a></li>
+            <li><a href="#" target="_blank">Case Law Archive</a></li>
+            <li><a href="#" target="_blank">Expert Witness Directory</a></li>
+            <li><a href="#" target="_blank">Court Rules & Procedures</a></li>
+          </ul>
+        </div>
+
+        <div class="resources-subsection">
+          <h4>Case References</h4>
+          <ul class="case-references-list">
+            <li>Type: <strong>${caseData.type}</strong></li>
+            <li>Domain: <strong>${caseData.domain}</strong></li>
+            <li>Priority: <strong>${caseData.priority}</strong></li>
+            <li>Status: <strong>${caseData.status}</strong></li>
+          </ul>
+        </div>
+      </div>
+    `;
+  }
+
+  /**
+   * Find related cases by type or domain
+   */
+  findRelatedCases(caseId, limit = 5) {
+    const caseData = this.getCases().find(c => c.id === caseId);
+    if (!caseData) return [];
+
+    const related = this.getCases().filter(c =>
+      c.id !== caseId && (c.type === caseData.type || c.domain === caseData.domain)
+    );
+
+    return related.slice(0, limit);
+  }
+
+  /**
+   * Export case as text
+   */
+  exportCaseAsText(caseId) {
+    const caseData = this.getCases().find(c => c.id === caseId);
+    if (!caseData) return;
+
+    const text = `
+CASE EXPORT
+===========
+
+ID: ${caseData.id}
+Title: ${caseData.title}
+Type: ${caseData.type}
+Domain: ${caseData.domain}
+
+PARTIES
+-------
+Plaintiff: ${caseData.plaintiffName}
+Defendant: ${caseData.defendantName}
+
+STATUS & PRIORITY
+-----------------
+Status: ${caseData.status}
+Priority: ${caseData.priority}
+Claim Amount: $${this.formatNumber(caseData.claimAmount)}
+
+CASE INFORMATION
+----------------
+Assigned Attorney: ${caseData.assignedAttorney}
+Case Opened: ${this.formatDate(caseData.dateOpened)}
+Next Hearing: ${this.formatDate(caseData.dateNextHearing)}
+
+SUMMARY
+-------
+${caseData.summary}
+
+DESCRIPTION
+-----------
+${caseData.description}
+
+EVIDENCE & WITNESSES
+--------------------
+Documents: ${caseData.documents}
+Witnesses: ${caseData.witnesses}
+
+Key Evidence:
+${caseData.evidence.map(e => `- ${e}`).join('\n')}
+
+Exported: ${new Date().toLocaleString()}
+    `;
+
+    const blob = new Blob([text.trim()], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `${caseId}-export.txt`;
+    link.click();
+  }
+
+  /**
+   * Print case view
+   */
+  printCase(caseId) {
+    const caseData = this.getCases().find(c => c.id === caseId);
+    if (!caseData) return;
+
+    const printWindow = window.open('', '', 'height=600,width=800');
+    printWindow.document.write(`
+      <html>
+        <head>
+          <title>${caseData.title}</title>
+          <style>
+            body { font-family: Arial, sans-serif; margin: 20px; }
+            h1 { color: #333; }
+            h2 { color: #666; margin-top: 20px; }
+            .meta { color: #666; margin-bottom: 20px; }
+            .section { margin-bottom: 20px; }
+            .label { font-weight: bold; }
+            ul { margin-left: 20px; }
+          </style>
+        </head>
+        <body>
+          <h1>${this.escapeHtml(caseData.title)}</h1>
+          <div class="meta">
+            <p><span class="label">Case ID:</span> ${caseData.id}</p>
+            <p><span class="label">Type:</span> ${caseData.type}</p>
+            <p><span class="label">Domain:</span> ${caseData.domain}</p>
+          </div>
+
+          <div class="section">
+            <h2>Parties</h2>
+            <p><span class="label">Plaintiff:</span> ${this.escapeHtml(caseData.plaintiffName)}</p>
+            <p><span class="label">Defendant:</span> ${this.escapeHtml(caseData.defendantName)}</p>
+          </div>
+
+          <div class="section">
+            <h2>Summary</h2>
+            <p>${this.escapeHtml(caseData.summary)}</p>
+          </div>
+
+          <div class="section">
+            <h2>Description</h2>
+            <p>${this.escapeHtml(caseData.description)}</p>
+          </div>
+
+          <div class="section">
+            <h2>Evidence</h2>
+            <ul>
+              ${caseData.evidence.map(e => `<li>${this.escapeHtml(e)}</li>`).join('')}
+            </ul>
+          </div>
+
+          <p style="margin-top: 40px; color: #999; font-size: 12px;">
+            Printed: ${new Date().toLocaleString()}
+          </p>
+        </body>
+      </html>
+    `);
+    printWindow.document.close();
+    printWindow.print();
+  }
+
+  /**
    * Attach event listeners for detail panel interactions
    */
   attachDetailEventListeners(caseId) {
@@ -785,6 +1229,33 @@ class CasesModule {
       });
     });
 
+    // Print button
+    document.querySelectorAll('.detail-print-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const id = e.target.dataset.caseId;
+        this.printCase(id);
+      });
+    });
+
+    // Export button
+    document.querySelectorAll('.detail-export-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const id = e.target.dataset.caseId;
+        this.exportCaseAsText(id);
+      });
+    });
+
+    // Related case links
+    document.querySelectorAll('.related-case-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const id = e.target.closest('.related-case-link').dataset.caseId;
+        this.selectCase(id);
+      });
+    });
+
     // Checklist interactions
     document.querySelectorAll('.checklist-checkbox').forEach(checkbox => {
       checkbox.addEventListener('change', (e) => {
@@ -794,27 +1265,69 @@ class CasesModule {
   }
 
   /**
-   * Attach main event listeners
+   * Attach main event listeners for filters and interactions
    */
   attachEventListeners() {
-    // Search functionality
+    // Search functionality with debouncing
     const searchInput = document.getElementById('cases-search');
     if (searchInput) {
+      let searchTimeout;
       searchInput.addEventListener('input', (e) => {
-        this.searchQuery = e.target.value;
-        this.populateCases();
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => {
+          this.searchQuery = e.target.value;
+          this.populateCases();
+        }, 300);
       });
     }
 
-    // View mode switching
-    document.querySelectorAll('.view-mode-btn').forEach(btn => {
+    // Type filter dropdown
+    const typeFilter = document.getElementById('type-filter');
+    if (typeFilter) {
+      typeFilter.addEventListener('change', (e) => {
+        if (e.target.value) {
+          this.filterByTypeMethod(e.target.value);
+        }
+      });
+    }
+
+    // Age filter buttons
+    document.querySelectorAll('.age-filter-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
-        document.querySelectorAll('.view-mode-btn').forEach(b => b.classList.remove('active'));
-        e.target.classList.add('active');
-        this.currentViewMode = e.target.dataset.mode;
-        this.populateCases();
+        e.preventDefault();
+        const ageGroup = e.target.dataset.ageGroup;
+        e.target.classList.toggle('active');
+        this.filterByAgeMethod(ageGroup);
+        this.saveFilterPreferences();
       });
     });
+
+    // Domain filter checkboxes
+    document.querySelectorAll('.domain-filter-checkbox').forEach(checkbox => {
+      checkbox.addEventListener('change', (e) => {
+        const domain = e.target.value;
+        this.filterByDomainMethod(domain);
+        this.saveFilterPreferences();
+      });
+    });
+
+    // Sort filter
+    const sortFilter = document.getElementById('sort-filter');
+    if (sortFilter) {
+      sortFilter.addEventListener('change', (e) => {
+        this.sortBy = e.target.value;
+        this.populateCases();
+        this.saveFilterPreferences();
+      });
+    }
+
+    // Clear filters button
+    const clearFiltersBtn = document.getElementById('clear-filters-btn');
+    if (clearFiltersBtn) {
+      clearFiltersBtn.addEventListener('click', () => {
+        this.clearAllFilters();
+      });
+    }
 
     // Bookmark buttons
     document.addEventListener('click', (e) => {
@@ -944,6 +1457,34 @@ class CasesModule {
    */
   saveChecklists() {
     localStorage.setItem('cases-checklists', JSON.stringify(this.caseChecklists));
+  }
+
+  /**
+   * Load filter preferences from localStorage
+   */
+  loadFilterPreferences() {
+    const stored = localStorage.getItem('cases-filter-preferences');
+    if (stored) {
+      const prefs = JSON.parse(stored);
+      this.filterByType = new Set(prefs.filterByType || []);
+      this.filterByAge = new Set(prefs.filterByAge || []);
+      this.filterByDomain = new Set(prefs.filterByDomain || []);
+      this.sortBy = prefs.sortBy || 'case_id';
+    }
+    return {};
+  }
+
+  /**
+   * Save filter preferences to localStorage
+   */
+  saveFilterPreferences() {
+    const prefs = {
+      filterByType: Array.from(this.filterByType),
+      filterByAge: Array.from(this.filterByAge),
+      filterByDomain: Array.from(this.filterByDomain),
+      sortBy: this.sortBy
+    };
+    localStorage.setItem('cases-filter-preferences', JSON.stringify(prefs));
   }
 
   /**

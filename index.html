@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Progressive Web App for competitive gaming research and analysis">
+    <meta name="theme-color" content="#2563eb">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="CGRA">
+
+    <title>Competitive Gaming Research Assistant</title>
+
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%232563eb' width='192' height='192'/><text x='50%' y='50%' font-size='100' fill='white' text-anchor='middle' dy='.3em' font-weight='bold'>CGRA</text></svg>">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%232563eb' width='192' height='192'/><text x='50%' y='50%' font-size='100' fill='white' text-anchor='middle' dy='.3em' font-weight='bold'>CGRA</text></svg>">
+
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div id="app">
+        <header class="app-header">
+            <h1>Competitive Gaming Research Assistant</h1>
+            <div class="header-actions">
+                <button id="install-btn" class="btn btn-primary" style="display: none;">Install App</button>
+                <button id="share-btn" class="btn btn-secondary" style="display: none;">Share</button>
+            </div>
+        </header>
+
+        <main class="app-main">
+            <section class="offline-notice" id="offline-notice" style="display: none;">
+                <p>You are currently offline. Some features may be limited.</p>
+            </section>
+
+            <section class="app-content">
+                <h2>Welcome to CGRA</h2>
+                <p>Your progressive web app is ready to use offline and on any device.</p>
+
+                <div class="features">
+                    <div class="feature-card">
+                        <h3>Offline Support</h3>
+                        <p>Works seamlessly even without an internet connection.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Fast Loading</h3>
+                        <p>Service Worker caching ensures instant app launch.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Installable</h3>
+                        <p>Add directly to your home screen or app drawer.</p>
+                    </div>
+                </div>
+
+                <div id="status-info" class="status-info">
+                    <p><strong>App Status:</strong> <span id="app-status">Initializing...</span></p>
+                    <p><strong>Service Worker:</strong> <span id="sw-status">Checking...</span></p>
+                    <p><strong>Connection:</strong> <span id="connection-status">Online</span></p>
+                </div>
+            </section>
+        </main>
+
+        <footer class="app-footer">
+            <p>&copy; 2026 Competitive Gaming Research Assistant. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

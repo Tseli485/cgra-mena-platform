@@ -1,9 +1,14 @@
-// PWA App Initialization and Management
+// PWA App Initialization and Management with Module Integration
 class PWAApp {
   constructor() {
     this.swRegistration = null;
     this.deferredPrompt = null;
     this.isOnline = navigator.onLine;
+    this.currentModule = 'dashboard';
+    this.modules = {};
+    this.lifecycleModule = null;
+    this.casesModule = null;
+    this.dashboardModule = null;
     this.init();
   }
 
@@ -16,6 +21,15 @@ class PWAApp {
     // Setup UI
     this.setupUI();
 
+    // Initialize modules
+    await this.initializeModules();
+
+    // Setup navigation
+    this.setupNavigation();
+
+    // Setup search functionality
+    this.setupGlobalSearch();
+
     // Setup event listeners
     this.setupEventListeners();
 
@@ -24,6 +38,223 @@ class PWAApp {
 
     // Update app status
     this.updateAppStatus();
+
+    console.log('[App] PWA initialization complete');
+  }
+
+  async initializeModules() {
+    console.log('[App] Initializing modules');
+
+    try {
+      // Initialize Dashboard Module
+      this.dashboardModule = new DashboardModule();
+      await this.dashboardModule.init();
+      await this.dashboardModule.render('#dashboard-container');
+      console.log('[App] Dashboard module initialized');
+
+      // Initialize Lifecycle Module with mock data
+      const lifecycleData = {
+        phases: []
+      };
+      this.lifecycleModule = new LifecycleModule(null, lifecycleData);
+      console.log('[App] Lifecycle module initialized');
+
+      // Initialize Cases Module
+      this.casesModule = new CasesModule('#cases-container');
+      console.log('[App] Cases module initialized');
+
+      // Store modules for easy access
+      this.modules = {
+        dashboard: this.dashboardModule,
+        lifecycle: this.lifecycleModule,
+        cases: this.casesModule
+      };
+    } catch (error) {
+      console.error('[App] Error initializing modules:', error);
+    }
+  }
+
+  setupNavigation() {
+    console.log('[App] Setting up navigation');
+
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const moduleId = link.dataset.module;
+        this.switchModule(moduleId);
+      });
+    });
+  }
+
+  switchModule(moduleId) {
+    console.log('[App] Switching to module:', moduleId);
+
+    // Hide all containers
+    document.querySelectorAll('.module-container').forEach(container => {
+      container.classList.remove('active');
+    });
+
+    // Show selected module
+    const containerSelector = `#${moduleId}-container`;
+    const container = document.querySelector(containerSelector);
+    if (container) {
+      container.classList.add('active');
+    }
+
+    // Update navigation active state
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.classList.remove('active');
+      if (link.dataset.module === moduleId) {
+        link.classList.add('active');
+      }
+    });
+
+    // Update breadcrumb
+    this.updateBreadcrumb(moduleId);
+
+    // Load module content if needed
+    this.loadModuleContent(moduleId);
+
+    this.currentModule = moduleId;
+  }
+
+  updateBreadcrumb(moduleId) {
+    const breadcrumb = document.getElementById('breadcrumb');
+    const breadcrumbContent = document.getElementById('breadcrumb-content');
+
+    const breadcrumbLabels = {
+      dashboard: 'Dashboard',
+      role: 'Mon Rôle',
+      lifecycle: 'Cycle de Vie',
+      procedure: 'Procédure',
+      rights: 'Droits',
+      cases: 'Cas Pratiques',
+      resources: 'Ressources',
+      support: 'Support'
+    };
+
+    if (moduleId !== 'dashboard') {
+      breadcrumbContent.textContent = breadcrumbLabels[moduleId] || moduleId;
+      breadcrumb.style.display = 'block';
+    } else {
+      breadcrumb.style.display = 'none';
+    }
+  }
+
+  loadModuleContent(moduleId) {
+    const container = document.querySelector(`#${moduleId}-container`);
+    if (!container) return;
+
+    // Skip if already loaded
+    if (container.children.length > 0) return;
+
+    console.log('[App] Loading content for module:', moduleId);
+
+    switch (moduleId) {
+      case 'lifecycle':
+        if (this.lifecycleModule) {
+          this.lifecycleModule.render(container.id);
+        }
+        break;
+      case 'cases':
+        if (this.casesModule) {
+          this.casesModule.render(`#${moduleId}-container`);
+        }
+        break;
+      // Other modules will be loaded similarly
+    }
+  }
+
+  setupGlobalSearch() {
+    console.log('[App] Setting up global search');
+
+    const searchInput = document.getElementById('global-search');
+    const searchModal = document.getElementById('search-results-modal');
+    const searchClose = document.getElementById('search-close');
+
+    searchInput?.addEventListener('input', (e) => {
+      const query = e.target.value.trim();
+      if (query.length > 1) {
+        this.performGlobalSearch(query);
+      }
+    });
+
+    searchClose?.addEventListener('click', () => {
+      searchModal.classList.remove('active');
+    });
+
+    searchModal?.addEventListener('click', (e) => {
+      if (e.target === searchModal) {
+        searchModal.classList.remove('active');
+      }
+    });
+  }
+
+  performGlobalSearch(query) {
+    console.log('[App] Searching for:', query);
+
+    const results = [];
+    const lowerQuery = query.toLowerCase();
+
+    // Search in Lifecycle Module
+    if (this.lifecycleModule) {
+      const lifecycleResults = this.lifecycleModule.searchPhases(query);
+      lifecycleResults.forEach(result => {
+        results.push({
+          type: 'Lifecycle Phase',
+          title: result.title,
+          description: result.description,
+          module: 'lifecycle',
+          data: result
+        });
+      });
+    }
+
+    // Search in Cases Module
+    if (this.casesModule) {
+      const caseResults = this.casesModule.search(query);
+      caseResults.forEach(result => {
+        results.push({
+          type: 'Case',
+          title: result.title,
+          description: result.summary,
+          module: 'cases',
+          data: result
+        });
+      });
+    }
+
+    // Display results
+    this.displaySearchResults(results);
+  }
+
+  displaySearchResults(results) {
+    const modal = document.getElementById('search-results-modal');
+    const resultsList = document.getElementById('search-results-list');
+
+    resultsList.innerHTML = '';
+
+    if (results.length === 0) {
+      resultsList.innerHTML = '<p style="text-align: center; color: #6b7280;">No results found</p>';
+    } else {
+      results.forEach(result => {
+        const resultItem = document.createElement('div');
+        resultItem.className = 'search-result-item';
+        resultItem.innerHTML = `
+          <strong>${result.type}: ${result.title}</strong>
+          <p>${result.description}</p>
+          <small>Module: ${result.module}</small>
+        `;
+        resultItem.addEventListener('click', () => {
+          this.switchModule(result.module);
+          modal.classList.remove('active');
+        });
+        resultsList.appendChild(resultItem);
+      });
+    }
+
+    modal.classList.add('active');
   }
 
   async registerServiceWorker() {

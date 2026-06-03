@@ -1,278 +1,476 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Progressive Web App for competitive gaming research and analysis">
+    <meta name="description" content="Plateforme de Formation MENA Tuteur">
     <meta name="theme-color" content="#2563eb">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="CGRA">
+    <title>CGRA - Plateforme MENA Tuteur</title>
 
-    <title>Competitive Gaming Research Assistant</title>
-
-    <link rel="manifest" href="manifest.json">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%232563eb' width='192' height='192'/><text x='50%' y='50%' font-size='100' fill='white' text-anchor='middle' dy='.3em' font-weight='bold'>CGRA</text></svg>">
-    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%232563eb' width='192' height='192'/><text x='50%' y='50%' font-size='100' fill='white' text-anchor='middle' dy='.3em' font-weight='bold'>CGRA</text></svg>">
-
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/accessibility.css">
     <style>
-        /* Navigation styles */
-        .app-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0;
-            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-        }
-
-        .header-branding {
-            flex: 1;
-            padding: 1rem;
-        }
-
-        .header-branding h1 {
+        * {
             margin: 0;
-            color: white;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f9fafb;
+            color: #374151;
+        }
+
+        /* Password Modal */
+        .password-modal {
+            display: flex;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+        }
+
+        .password-modal.hidden {
+            display: none;
+        }
+
+        .password-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 20px 25px rgba(0,0,0,0.15);
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .password-box h1 {
+            margin: 0 0 1rem 0;
+            color: #2563eb;
+            text-align: center;
             font-size: 1.5rem;
         }
 
-        .global-search-bar {
-            flex: 2;
-            padding: 0 1rem;
+        .password-box p {
+            margin: 0 0 1.5rem 0;
+            color: #6b7280;
+            text-align: center;
         }
 
-        .global-search-bar input {
+        .password-box input {
             width: 100%;
-            padding: 0.5rem 1rem;
+            padding: 0.75rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.25rem;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .password-box button {
+            width: 100%;
+            padding: 0.75rem;
+            background: #2563eb;
+            color: white;
             border: none;
             border-radius: 0.25rem;
+            font-size: 1rem;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .password-box button:hover {
+            background: #1e40af;
+        }
+
+        .password-error {
+            display: none;
+            margin: 1rem 0 0 0;
+            color: #ef4444;
+            text-align: center;
             font-size: 0.9rem;
         }
 
-        .header-actions {
-            display: flex;
-            gap: 0.5rem;
-            padding: 1rem;
+        .password-error.show {
+            display: block;
         }
 
-        .main-navigation {
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* Navigation */
+        .nav {
             background: white;
             border-bottom: 1px solid #e5e7eb;
-            overflow-x: auto;
-        }
-
-        .nav-menu {
             display: flex;
             gap: 0;
-            margin: 0;
-            padding: 0;
             list-style: none;
+            overflow-x: auto;
+            padding: 0;
+            margin: 0;
         }
 
-        .nav-menu li {
+        .nav li {
             border-right: 1px solid #e5e7eb;
         }
 
-        .nav-menu a {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+        .nav a {
+            display: block;
             padding: 1rem 1.5rem;
             color: #374151;
             text-decoration: none;
             font-weight: 500;
             white-space: nowrap;
-            transition: all 0.3s ease;
+            cursor: pointer;
+            transition: all 0.3s;
         }
 
-        .nav-menu a:hover {
+        .nav a:hover {
             background: #f3f4f6;
             color: #2563eb;
         }
 
-        .nav-menu a.active {
+        .nav a.active {
             background: #2563eb;
             color: white;
             border-bottom: 3px solid #1e40af;
         }
 
-        .nav-icon {
-            font-size: 1.2rem;
-        }
-
-        .breadcrumb {
-            background: #f9fafb;
-            padding: 0.5rem 1rem;
-            font-size: 0.85rem;
-            color: #6b7280;
-            border-bottom: 1px solid #e5e7eb;
-        }
-
-        .breadcrumb a {
-            color: #2563eb;
-            text-decoration: none;
-            margin: 0 0.25rem;
-        }
-
-        .breadcrumb a:hover {
-            text-decoration: underline;
-        }
-
-        .module-container {
-            display: none;
-            animation: fadeIn 0.3s ease-in;
-        }
-
-        .module-container.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .search-results-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
+        /* Content */
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
             padding: 2rem;
         }
 
-        .search-results-modal.active {
-            display: flex;
-            align-items: flex-start;
-            justify-content: center;
+        .module {
+            display: none;
         }
 
-        .search-results-content {
-            background: white;
-            border-radius: 0.5rem;
-            max-width: 600px;
-            width: 100%;
-            max-height: 80vh;
-            overflow-y: auto;
-            padding: 1.5rem;
-            box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
-        }
-
-        .search-results-close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: white;
-        }
-
-        .search-result-item {
-            padding: 1rem;
-            border-bottom: 1px solid #e5e7eb;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .search-result-item:hover {
-            background: #f3f4f6;
-        }
-
-        .search-result-item strong {
+        .module.active {
             display: block;
-            color: #2563eb;
-            margin-bottom: 0.25rem;
         }
 
-        .search-result-item small {
+        .module h2 {
+            color: #2563eb;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .module-section {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .module-section h3 {
+            color: #374151;
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+        }
+
+        .module-section p, .module-section li {
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+
+        .module-section ul {
+            margin-left: 1.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            border: none;
+            margin-top: 1rem;
+            font-weight: 500;
+        }
+
+        .btn:hover {
+            background: #1e40af;
+        }
+
+        /* Footer */
+        .footer {
+            background: #f3f4f6;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+            border-top: 1px solid #e5e7eb;
             color: #6b7280;
+            font-size: 0.9rem;
         }
 
         @media (max-width: 768px) {
-            .app-header {
-                flex-direction: column;
-                gap: 0.5rem;
+            .header h1 {
+                font-size: 1.5rem;
             }
 
-            .header-branding,
-            .global-search-bar,
-            .header-actions {
-                width: 100%;
-                padding: 0.5rem;
-            }
-
-            .global-search-bar input {
-                font-size: 1rem;
-            }
-
-            .nav-menu a {
+            .nav a {
                 padding: 0.75rem 1rem;
                 font-size: 0.9rem;
             }
 
-            .nav-icon {
-                font-size: 1rem;
+            .content {
+                padding: 1rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Password Protection Modal -->
-    <div id="password-modal" style="display: flex; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%); align-items: center; justify-content: center; z-index: 10000;">
-        <div style="background: white; padding: 2rem; border-radius: 0.5rem; box-shadow: 0 20px 25px rgba(0,0,0,0.15); max-width: 400px; width: 90%;">
-            <h1 style="margin: 0 0 1rem 0; color: #2563eb; text-align: center; font-size: 1.5rem;">CGRA Platform</h1>
-            <p style="margin: 0 0 1.5rem 0; color: #6b7280; text-align: center;">Entrez le mot de passe pour accéder à la plateforme</p>
-            <input type="password" id="password-input" placeholder="Mot de passe" style="width: 100%; padding: 0.75rem; border: 1px solid #e5e7eb; border-radius: 0.25rem; font-size: 1rem; box-sizing: border-box; margin-bottom: 1rem;">
-            <button id="password-submit" style="width: 100%; padding: 0.75rem; background: #2563eb; color: white; border: none; border-radius: 0.25rem; font-size: 1rem; cursor: pointer; font-weight: 500;">Accéder</button>
-            <p id="password-error" style="margin: 1rem 0 0 0; color: #ef4444; text-align: center; display: none; font-size: 0.9rem;">Mot de passe incorrect</p>
+    <!-- Password Protection -->
+    <div class="password-modal" id="passwordModal">
+        <div class="password-box">
+            <h1>🔐 CGRA</h1>
+            <p>Entrez le mot de passe pour accéder à la plateforme</p>
+            <input type="password" id="passwordInput" placeholder="Mot de passe" />
+            <button id="passwordBtn">Accéder</button>
+            <div class="password-error" id="passwordError">Mot de passe incorrect</div>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div id="app" style="display: none;">
+        <!-- Header -->
+        <div class="header">
+            <h1>🏫 Plateforme MENA Tuteur</h1>
+            <p>Formation complète pour les tuteurs travaillant avec les enfants</p>
+        </div>
+
+        <!-- Navigation -->
+        <ul class="nav">
+            <li><a class="nav-link active" data-module="accueil">🏠 Accueil</a></li>
+            <li><a class="nav-link" data-module="lifecycle">🔄 Cycle de Vie</a></li>
+            <li><a class="nav-link" data-module="cases">📚 Cas Pratiques</a></li>
+            <li><a class="nav-link" data-module="resources">📁 Ressources</a></li>
+            <li><a class="nav-link" data-module="docs">📄 Documents</a></li>
+        </ul>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Accueil -->
+            <div class="module active" id="accueil">
+                <h2>Bienvenue sur la Plateforme MENA Tuteur</h2>
+
+                <div class="module-section">
+                    <h3>✨ À propos</h3>
+                    <p>Cette plateforme offre une formation complète pour les tuteurs travaillant avec les enfants MENA (Mineurs Étrangers Non Accompagnés).</p>
+                    <p>Vous trouverez ici :</p>
+                    <ul>
+                        <li>📖 Guides complets en français</li>
+                        <li>🔍 Études de cas détaillées</li>
+                        <li>👥 Répertoire d'avocats et d'organisations</li>
+                        <li>📋 Documents et formulaires</li>
+                        <li>⚖️ Informations sur les droits</li>
+                    </ul>
+                </div>
+
+                <div class="module-section">
+                    <h3>🚀 Comment utiliser</h3>
+                    <p><strong>1. Cycle de Vie :</strong> Découvrez les phases de développement (0-2, 2-6, 6-12, 12-18 ans)</p>
+                    <p><strong>2. Cas Pratiques :</strong> Consultez 15 études de cas détaillées</p>
+                    <p><strong>3. Ressources :</strong> Accédez à 30+ avocats et 50+ organisations</p>
+                    <p><strong>4. Documents :</strong> Téléchargez les syllabus complets en PDF</p>
+                </div>
+
+                <div class="module-section">
+                    <h3>📊 Contenu disponible</h3>
+                    <ul>
+                        <li>✅ Syllabus court (20 pages)</li>
+                        <li>✅ Syllabus complet (80 pages)</li>
+                        <li>✅ 6 dossiers organisés</li>
+                        <li>✅ 15 cas d'étude</li>
+                        <li>✅ Répertoire complet de ressources</li>
+                        <li>✅ Mode hors ligne</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Cycle de Vie -->
+            <div class="module" id="lifecycle">
+                <h2>🔄 Cycle de Vie de l'Enfant</h2>
+
+                <div class="module-section">
+                    <h3>0-2 ans : Nourrissons et Tout-petits</h3>
+                    <p><strong>Développement clé :</strong> Attachement, reconnaissance des émotions, premiers mots</p>
+                    <p><strong>Rôle du tuteur :</strong> Fournir des soins attentifs, créer un environnement sécurisé, favoriser l'attachement</p>
+                    <p><strong>Défis spécifiques :</strong> Barrière linguistique, traumatisme initial, besoins de santé</p>
+                </div>
+
+                <div class="module-section">
+                    <h3>2-6 ans : Enfants d'Âge Préscolaire</h3>
+                    <p><strong>Développement clé :</strong> Langage, autonomie, jeu, socialisation</p>
+                    <p><strong>Rôle du tuteur :</strong> Encourager l'apprentissage par le jeu, développer les compétences sociales</p>
+                    <p><strong>Défis spécifiques :</strong> Intégration scolaire, développement du langage, jeu traumatique</p>
+                </div>
+
+                <div class="module-section">
+                    <h3>6-12 ans : Enfants d'Âge Scolaire</h3>
+                    <p><strong>Développement clé :</strong> Compétences académiques, amitié, identité</p>
+                    <p><strong>Rôle du tuteur :</strong> Soutien scolaire, développement des amitiés, construction de l'identité</p>
+                    <p><strong>Défis spécifiques :</strong> Performance scolaire, santé mentale, intégration sociale</p>
+                </div>
+
+                <div class="module-section">
+                    <h3>12-18 ans : Adolescents</h3>
+                    <p><strong>Développement clé :</strong> Identité, autonomie, relations, planification d'avenir</p>
+                    <p><strong>Rôle du tuteur :</strong> Guidance, soutien émotionnel, planification de l'avenir</p>
+                    <p><strong>Défis spécifiques :</strong> Trauma, identité culturelle, planning du statut legal</p>
+                </div>
+            </div>
+
+            <!-- Cas Pratiques -->
+            <div class="module" id="cases">
+                <h2>📚 Cas Pratiques</h2>
+
+                <div class="module-section">
+                    <h3>📖 15 Études de Cas Disponibles</h3>
+                    <p>La plateforme contient 15 cas d'étude détaillés couvrant :</p>
+                    <ul>
+                        <li>🏃 Enfants non accompagnés</li>
+                        <li>😢 Enfants avec traumatisme</li>
+                        <li>👨‍👩‍👧 Enfants avec famille</li>
+                        <li>📚 Cas éducatifs</li>
+                        <li>⚖️ Cas légaux</li>
+                        <li>💼 Cas professionnels</li>
+                    </ul>
+                    <p style="margin-top: 1rem; color: #6b7280; font-size: 0.9rem;">💡 Pour voir les cas complets, consultez le PDF du syllabus (80 pages)</p>
+                </div>
+
+                <div class="module-section">
+                    <h3>🎯 Objectif des Cas</h3>
+                    <p>Ces cas pratiques vous permettent de :</p>
+                    <ul>
+                        <li>Comprendre les situations réelles</li>
+                        <li>Identifier les défis majeurs</li>
+                        <li>Appliquer les bonnes pratiques</li>
+                        <li>Développer vos compétences</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Ressources -->
+            <div class="module" id="resources">
+                <h2>📁 Ressources et Contacts</h2>
+
+                <div class="module-section">
+                    <h3>👨‍⚖️ Avocats Spécialisés</h3>
+                    <p>Répertoire de 30+ avocats spécialisés en :</p>
+                    <ul>
+                        <li>⚖️ Droit de l'asile</li>
+                        <li>👨‍👩‍👧‍👦 Droit familial</li>
+                        <li>💼 Droit du travail</li>
+                        <li>🏠 Droit du logement</li>
+                    </ul>
+                </div>
+
+                <div class="module-section">
+                    <h3>🏢 Organisations</h3>
+                    <p>Répertoire de 50+ organisations offrant :</p>
+                    <ul>
+                        <li>🏥 Services de santé</li>
+                        <li>🏠 Logement</li>
+                        <li>📚 Éducation</li>
+                        <li>⚖️ Soutien légal</li>
+                        <li>🍎 Services sociaux</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Documents -->
+            <div class="module" id="docs">
+                <h2>📄 Documents Téléchargeables</h2>
+
+                <div class="module-section">
+                    <h3>📖 Syllabus Disponibles</h3>
+                    <div style="margin: 1rem 0;">
+                        <p><strong>1. Syllabus Court (20 pages)</strong></p>
+                        <p style="color: #6b7280; margin-bottom: 1rem;">Référence rapide avec les points clés</p>
+                        <a href="#" class="btn">📥 Télécharger (20 pages)</a>
+                    </div>
+                    <hr style="margin: 1.5rem 0; border: none; border-top: 1px solid #e5e7eb;">
+                    <div style="margin: 1rem 0;">
+                        <p><strong>2. Syllabus Complet (80 pages)</strong></p>
+                        <p style="color: #6b7280; margin-bottom: 1rem;">Manuel complet avec tous les cas et ressources</p>
+                        <a href="#" class="btn">📥 Télécharger (80 pages)</a>
+                    </div>
+                </div>
+
+                <div class="module-section">
+                    <h3>📋 Autres Documents</h3>
+                    <ul>
+                        <li>📝 Formulaires CGRA</li>
+                        <li>📖 Guides de procédure</li>
+                        <li>✉️ Templates de lettres</li>
+                        <li>📋 Checklist tuteur</li>
+                    </ul>
+                    <p style="margin-top: 1rem; color: #6b7280; font-size: 0.9rem;">💡 Tous les documents sont inclus dans les syllabus PDF</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>&copy; 2026 Plateforme MENA Tuteur. Tous droits réservés. | Version 1.0</p>
         </div>
     </div>
 
     <script>
-        // Password protection
+        // Password Protection
         const PASSWORD = 'Triasake 001';
         const PASSWORD_SESSION_KEY = 'cgra_auth';
 
         function checkPasswordProtection() {
             if (sessionStorage.getItem(PASSWORD_SESSION_KEY) === 'true') {
-                document.getElementById('password-modal').style.display = 'none';
+                document.getElementById('passwordModal').classList.add('hidden');
                 document.getElementById('app').style.display = 'block';
             }
         }
 
         function setupPasswordForm() {
-            const input = document.getElementById('password-input');
-            const submit = document.getElementById('password-submit');
-            const error = document.getElementById('password-error');
+            const input = document.getElementById('passwordInput');
+            const btn = document.getElementById('passwordBtn');
+            const error = document.getElementById('passwordError');
 
             function attemptPassword() {
                 if (input.value === PASSWORD) {
                     sessionStorage.setItem(PASSWORD_SESSION_KEY, 'true');
-                    error.style.display = 'none';
-                    document.getElementById('password-modal').style.display = 'none';
+                    error.classList.remove('show');
+                    document.getElementById('passwordModal').classList.add('hidden');
                     document.getElementById('app').style.display = 'block';
                 } else {
-                    error.style.display = 'block';
+                    error.classList.add('show');
                     input.value = '';
                     input.focus();
                 }
             }
 
-            submit.addEventListener('click', attemptPassword);
+            btn.addEventListener('click', attemptPassword);
             input.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') attemptPassword();
             });
@@ -280,117 +478,41 @@
             input.focus();
         }
 
-        // Check on load
+        // Navigation
+        function setupNavigation() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const modules = document.querySelectorAll('.module');
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const moduleId = link.dataset.module;
+
+                    // Update active nav
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    link.classList.add('active');
+
+                    // Update active module
+                    modules.forEach(m => m.classList.remove('active'));
+                    document.getElementById(moduleId).classList.add('active');
+                });
+            });
+        }
+
+        // Initialize
         window.addEventListener('load', () => {
             checkPasswordProtection();
             if (sessionStorage.getItem(PASSWORD_SESSION_KEY) !== 'true') {
                 setupPasswordForm();
+            } else {
+                setupNavigation();
             }
         });
+
+        // Setup nav when app loads
+        if (sessionStorage.getItem(PASSWORD_SESSION_KEY) === 'true') {
+            setTimeout(setupNavigation, 100);
+        }
     </script>
-
-    <!-- Skip Link for Keyboard Navigation -->
-    <a href="#main-content" class="skip-link">Skip to main content</a>
-
-    <div id="app" style="display: none;">
-        <header class="app-header">
-            <div class="header-branding">
-                <h1>CGRA</h1>
-            </div>
-            <div class="global-search-bar">
-                <input type="text" id="global-search" placeholder="Search lifecycle phases, cases, resources...">
-            </div>
-            <div class="header-actions">
-                <div class="status-indicators">
-                    <span id="sync-status" style="font-size: 0.9rem; color: #10b981; margin-right: 1rem;">Synced</span>
-                    <span id="connection-status" style="font-size: 0.9rem; color: #10b981; margin-right: 1rem;">Online</span>
-                </div>
-                <button id="install-btn" class="btn btn-primary" style="display: none;">Install App</button>
-                <button id="share-btn" class="btn btn-secondary" style="display: none;">Share</button>
-            </div>
-        </header>
-
-        <nav class="main-navigation" role="navigation" aria-label="Main Navigation">
-            <ul class="nav-menu">
-                <li><a href="#dashboard" class="nav-link active" data-module="dashboard"><span class="nav-icon">🏠</span> Dashboard</a></li>
-                <li><a href="#role" class="nav-link" data-module="role"><span class="nav-icon">👤</span> Mon Rôle</a></li>
-                <li><a href="#lifecycle" class="nav-link" data-module="lifecycle"><span class="nav-icon">🔄</span> Cycle de Vie</a></li>
-                <li><a href="#procedure" class="nav-link" data-module="procedure"><span class="nav-icon">📋</span> Procédure</a></li>
-                <li><a href="#rights" class="nav-link" data-module="rights"><span class="nav-icon">⚖️</span> Droits</a></li>
-                <li><a href="#cases" class="nav-link" data-module="cases"><span class="nav-icon">📚</span> Cas Pratiques</a></li>
-                <li><a href="#resources" class="nav-link" data-module="resources"><span class="nav-icon">📁</span> Ressources</a></li>
-                <li><a href="#support" class="nav-link" data-module="support"><span class="nav-icon">❓</span> Support</a></li>
-            </ul>
-        </nav>
-
-        <div class="breadcrumb" id="breadcrumb" style="display: none;">
-            <a href="#dashboard">Dashboard</a> <span>›</span> <span id="breadcrumb-content"></span>
-        </div>
-
-        <section class="offline-notice" id="offline-notice" role="alert" aria-live="polite" style="display: none;">
-            <p>You are currently offline. Some features may be limited.</p>
-        </section>
-
-        <main class="app-main" id="main-content" role="main">
-            <!-- Dashboard Module -->
-            <div id="dashboard-container" class="module-container active"></div>
-
-            <!-- Role Module -->
-            <div id="role-container" class="module-container"></div>
-
-            <!-- Lifecycle Module -->
-            <div id="lifecycle-container" class="module-container"></div>
-
-            <!-- Procedure Module -->
-            <div id="procedure-container" class="module-container"></div>
-
-            <!-- Rights Module -->
-            <div id="rights-container" class="module-container"></div>
-
-            <!-- Cases Module -->
-            <div id="cases-container" class="module-container"></div>
-
-            <!-- Resources Module -->
-            <div id="resources-container" class="module-container"></div>
-
-            <!-- Support Module -->
-            <div id="support-container" class="module-container"></div>
-
-            <!-- Search Results Modal -->
-            <div id="search-results-modal" class="search-results-modal">
-                <button class="search-results-close" id="search-close">&times;</button>
-                <div class="search-results-content" id="search-results-content">
-                    <h2>Search Results</h2>
-                    <div id="search-results-list"></div>
-                </div>
-            </div>
-        </main>
-
-        <footer class="app-footer">
-            <p>&copy; 2026 Competitive Gaming Research Assistant. All rights reserved.</p>
-        </footer>
-    </div>
-
-    <!-- Database (load FIRST!) -->
-    <script src="js/db.js"></script>
-
-    <!-- Module Scripts (before app.js!) -->
-    <script src="js/modules/dashboard.js"></script>
-    <script src="js/modules/lifecycle.js"></script>
-    <script src="js/modules/cases.js"></script>
-    <script src="js/modules/role.js"></script>
-    <script src="js/modules/procedure.js"></script>
-    <script src="js/modules/rights.js"></script>
-    <script src="js/modules/resources.js"></script>
-    <script src="js/modules/support.js"></script>
-    <script src="js/modules/export.js"></script>
-    <script src="js/modules/search.js"></script>
-    <script src="js/modules/discover.js"></script>
-
-    <!-- Main App Script (load LAST!) -->
-    <script src="js/app.js"></script>
-
-    <!-- PDF Library (jsPDF) for export functionality -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </body>
 </html>

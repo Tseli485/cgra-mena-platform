@@ -17,6 +17,7 @@
     <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%232563eb' width='192' height='192'/><text x='50%' y='50%' font-size='100' fill='white' text-anchor='middle' dy='.3em' font-weight='bold'>CGRA</text></svg>">
 
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/accessibility.css">
     <style>
         /* Navigation styles */
         .app-header {
@@ -230,6 +231,9 @@
     </style>
 </head>
 <body>
+    <!-- Skip Link for Keyboard Navigation -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <div id="app">
         <header class="app-header">
             <div class="header-branding">
@@ -248,7 +252,7 @@
             </div>
         </header>
 
-        <nav class="main-navigation">
+        <nav class="main-navigation" role="navigation" aria-label="Main Navigation">
             <ul class="nav-menu">
                 <li><a href="#dashboard" class="nav-link active" data-module="dashboard"><span class="nav-icon">🏠</span> Dashboard</a></li>
                 <li><a href="#role" class="nav-link" data-module="role"><span class="nav-icon">👤</span> Mon Rôle</a></li>
@@ -265,11 +269,11 @@
             <a href="#dashboard">Dashboard</a> <span>›</span> <span id="breadcrumb-content"></span>
         </div>
 
-        <section class="offline-notice" id="offline-notice" style="display: none;">
+        <section class="offline-notice" id="offline-notice" role="alert" aria-live="polite" style="display: none;">
             <p>You are currently offline. Some features may be limited.</p>
         </section>
 
-        <main class="app-main">
+        <main class="app-main" id="main-content" role="main">
             <!-- Dashboard Module -->
             <div id="dashboard-container" class="module-container active"></div>
 

@@ -1,0 +1,2165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MENA Tuteur - Guide de Référence Rapide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @page {
+            size: A4;
+            margin: 25mm 25mm 35mm 25mm;
+
+            @bottom-center {
+                content: counter(page);
+                font-size: 10pt;
+                color: #333;
+            }
+
+            @top-center {
+                content: "MENA Tuteur - Guide de Référence Rapide";
+                font-size: 9pt;
+                color: #666;
+            }
+        }
+
+        @page :first {
+            @bottom-center { content: ""; }
+            @top-center { content: ""; }
+        }
+
+        @page toc {
+            @bottom-center { content: counter(page); }
+            @top-center { content: ""; }
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: white;
+        }
+
+        .page-break {
+            page-break-after: always;
+            page-break-inside: avoid;
+        }
+
+        /* Cover Page */
+        .cover-page {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, #0066cc 0%, #004499 100%);
+            color: white;
+            page-break-after: always;
+        }
+
+        .cover-page h1 {
+            font-size: 48pt;
+            font-weight: bold;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .cover-page .subtitle {
+            font-size: 24pt;
+            font-style: italic;
+            margin-bottom: 60px;
+            opacity: 0.95;
+        }
+
+        .cover-page .logo-placeholder {
+            font-size: 72pt;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .cover-page .date {
+            font-size: 18pt;
+            margin-top: 80px;
+        }
+
+        .cover-page .tagline {
+            font-size: 14pt;
+            margin-top: 20px;
+            font-weight: 300;
+            max-width: 400px;
+        }
+
+        .cover-page .footer-note {
+            position: absolute;
+            bottom: 40px;
+            left: 0;
+            right: 0;
+            font-size: 12pt;
+            opacity: 0.8;
+        }
+
+        /* TOC */
+        .toc-page {
+            page-break-after: always;
+        }
+
+        .toc-page h1 {
+            font-size: 28pt;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: #0066cc;
+            border-bottom: 3px solid #0066cc;
+            padding-bottom: 15px;
+        }
+
+        .toc-list {
+            list-style: none;
+            font-size: 11pt;
+            line-height: 1.8;
+        }
+
+        .toc-list li {
+            margin-bottom: 8px;
+        }
+
+        .toc-list .section-title {
+            font-weight: bold;
+            margin-top: 15px;
+            margin-bottom: 8px;
+            color: #0066cc;
+        }
+
+        .toc-list a {
+            text-decoration: none;
+            color: #333;
+            border-bottom: 1px dotted #ccc;
+        }
+
+        .toc-page-num {
+            float: right;
+            margin-left: 10px;
+        }
+
+        /* Section Headings */
+        h1 {
+            font-size: 26pt;
+            font-weight: bold;
+            color: #0066cc;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #0066cc;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 18pt;
+            font-weight: bold;
+            color: #004499;
+            margin-top: 20px;
+            margin-bottom: 12px;
+        }
+
+        h3 {
+            font-size: 13pt;
+            font-weight: bold;
+            color: #333;
+            margin-top: 12px;
+            margin-bottom: 8px;
+        }
+
+        p {
+            margin-bottom: 10px;
+            font-size: 11pt;
+            text-align: justify;
+        }
+
+        ul, ol {
+            margin: 15px 0 15px 25px;
+            font-size: 11pt;
+        }
+
+        li {
+            margin-bottom: 6px;
+            line-height: 1.5;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 10pt;
+            page-break-inside: avoid;
+        }
+
+        table th {
+            background-color: #0066cc;
+            color: white;
+            padding: 10px;
+            text-align: left;
+            font-weight: bold;
+            border: 1px solid #004499;
+        }
+
+        table td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        table tr:hover {
+            background-color: #f0f4ff;
+        }
+
+        /* Content Box */
+        .content-box {
+            background-color: #f0f4ff;
+            border-left: 4px solid #0066cc;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 3px;
+            page-break-inside: avoid;
+        }
+
+        .content-box.important {
+            background-color: #fff3cd;
+            border-left-color: #ff9800;
+        }
+
+        .content-box.critical {
+            background-color: #ffebee;
+            border-left-color: #f44336;
+            font-weight: bold;
+        }
+
+        /* Checklist */
+        .checklist {
+            margin: 15px 0;
+            page-break-inside: avoid;
+        }
+
+        .checklist-item {
+            margin: 8px 0;
+            font-size: 10pt;
+            line-height: 1.4;
+        }
+
+        .checklist-item::before {
+            content: "☐ ";
+            margin-right: 8px;
+            color: #0066cc;
+            font-weight: bold;
+        }
+
+        /* Definition List */
+        dl {
+            margin: 15px 0;
+            font-size: 10pt;
+        }
+
+        dt {
+            font-weight: bold;
+            margin-top: 10px;
+            color: #004499;
+        }
+
+        dd {
+            margin-left: 20px;
+            margin-bottom: 8px;
+        }
+
+        /* Back Cover */
+        .back-cover {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, #004499 0%, #003366 100%);
+            color: white;
+        }
+
+        .back-cover h2 {
+            font-size: 32pt;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .back-cover p {
+            font-size: 14pt;
+            margin-bottom: 20px;
+            color: white;
+            text-align: center;
+        }
+
+        .back-cover .contact-info {
+            background-color: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 40px;
+            font-size: 13pt;
+        }
+
+        .back-cover .version {
+            position: absolute;
+            bottom: 30px;
+            font-size: 10pt;
+            opacity: 0.8;
+        }
+
+        /* Page markers for printing */
+        .section-marker {
+            color: #0066cc;
+            font-size: 10pt;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        /* Highlight */
+        .highlight {
+            background-color: #ffeb3b;
+            padding: 2px 4px;
+            border-radius: 2px;
+        }
+
+        /* Responsive spacing */
+        .spacer {
+            height: 15px;
+        }
+
+        .large-spacer {
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- PAGE 1: COVER -->
+<div class="cover-page">
+    <div class="logo-placeholder">📚</div>
+    <h1>MENA Tuteur</h1>
+    <div class="subtitle">Guide de Référence Rapide</div>
+    <div class="logo-placeholder" style="font-size: 36pt; margin-bottom: 20px; margin-top: 0;">🛡️</div>
+    <p class="tagline">Votre compagnon essentiel pour la tutelle au quotidien</p>
+    <p class="tagline" style="margin-top: 15px; font-size: 16pt; font-weight: bold;">Réponses rapides. Conformité assurée. Enfants protégés.</p>
+    <p class="date">Juin 2026</p>
+    <div class="footer-note">20 pages | Référence rapide à conserver | CGRA - Belgique</div>
+</div>
+
+<!-- PAGE 2: TABLE OF CONTENTS -->
+<div class="toc-page page-break">
+    <h1>Table des Matières</h1>
+
+    <div class="content-box">
+        <strong>Utilisez cette table pour naviguer rapidement vers les informations dont vous avez besoin.</strong>
+    </div>
+
+    <ul class="toc-list">
+        <li class="section-title">FONDAMENTAUX</li>
+        <li>Page 1: Couverture</li>
+        <li>Page 2: Table des matières (cette page)</li>
+        <li>Page 3: Définition MENA - Qui est un MENA?</li>
+        <li>Pages 4-5: Votre Rôle en tant que Tuteur</li>
+
+        <li class="section-title">OBLIGATIONS LÉGALES ET FINANCIÈRES</li>
+        <li>Page 6: Obligations légales essentielles</li>
+        <li>Page 7: Obligations financières et fiscalité</li>
+
+        <li class="section-title">CHECKLISTS PAR ÂGE</li>
+        <li>Page 8: Enfants 0-3 ans (Nourrissons et tout-petits)</li>
+        <li>Page 9: Enfants 4-6 ans (Préscolaire et école élémentaire)</li>
+        <li>Page 10: Enfants 7-12 ans (Âge scolaire)</li>
+        <li>Page 11: Adolescents 13+ ans</li>
+
+        <li class="section-title">PROCÉDURES ESSENTIELLES</li>
+        <li>Page 12: Procédure 1 - Démarrer une nouvelle relation de tutelle</li>
+        <li>Page 13: Procédure 2 - Signaler un abus ou négligence</li>
+
+        <li class="section-title">RESSOURCES ET CONTACTS</li>
+        <li>Page 14: Ressources légales et de conformité</li>
+        <li>Page 15: Ressources de soutien et développement professionnel</li>
+
+        <li class="section-title">DOCUMENTS ET URGENCES</li>
+        <li>Page 16: Checklist des documents requis</li>
+        <li>Page 17: Contacts d'urgence - Numéros critiques</li>
+        <li>Page 18: Définitions clés (Glossaire)</li>
+        <li>Page 19: Arbres de décision rapide</li>
+        <li>Page 20: Couverture arrière</li>
+    </ul>
+
+    <div class="large-spacer"></div>
+
+    <div class="content-box important">
+        <strong>Pages les plus consultées:</strong><br>
+        ⭐ Page 3 (Définition MENA) | ⭐ Page 6-7 (Obligations) | ⭐ Page 17 (Urgences)
+    </div>
+</div>
+
+<!-- PAGE 3: MENA DEFINITION -->
+<div class="page-break">
+    <h1>Qui est un MENA? - Définition et Contexte</h1>
+
+    <h2>Qu'est-ce que MENA?</h2>
+    <p><strong>MENA</strong> signifie <em>Mineur Étranger Non Accompagné</em> (Unaccompanied Foreign Minor).</p>
+
+    <div class="content-box">
+        <strong>Définition légale:</strong>
+        <ul>
+            <li>Moins de 18 ans</li>
+            <li>En dehors de leur pays d'origine ou de résidence habituelle</li>
+            <li>Sans parent, tuteur légal, ou adulte responsable présent</li>
+            <li>Bénéficiant de protections juridiques spéciales sous le droit international</li>
+        </ul>
+    </div>
+
+    <h2>Statut légal en Belgique</h2>
+    <table>
+        <tr>
+            <th>Catégorie</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td><strong>Classification</strong></td>
+            <td>Mineur en situation vulnérable</td>
+        </tr>
+        <tr>
+            <td><strong>Protections</strong></td>
+            <td>Convention sur les droits de l'enfant (CRC) + Loi belge de protection de l'enfance</td>
+        </tr>
+        <tr>
+            <td><strong>Tuteur requis</strong></td>
+            <td>Nommé par tribunal dans les 72 heures de l'identification</td>
+        </tr>
+        <tr>
+            <td><strong>Autorité de supervision</strong></td>
+            <td>SPF Intérieur (questions d'asile) + Services de protection de l'enfance (régionaux)</td>
+        </tr>
+    </table>
+
+    <h2>Droits fondamentaux des MENA</h2>
+    <div class="content-box">
+        <strong>Sous la Convention des droits de l'enfant:</strong>
+        <ul>
+            <li>✓ Droit à la vie et au développement</li>
+            <li>✓ Droit à l'identité et aux relations familiales</li>
+            <li>✓ Protection contre la violence, l'exploitation, l'abus</li>
+            <li>✓ Droit à l'éducation (obligatoire jusqu'à 18 ans)</li>
+            <li>✓ Droit à la santé (soins physiques et mentaux)</li>
+            <li>✓ Droit de participation (être entendu dans les décisions)</li>
+        </ul>
+    </div>
+
+    <h2>Droits spécifiques en Belgique</h2>
+    <ul>
+        <li><strong>Droit à un tuteur:</strong> Tuteur légal nommé par la cour</li>
+        <li><strong>Droit à l'assistance sociale:</strong> Logement, nourriture, vêtements (si en charge)</li>
+        <li><strong>Droit à la représentation légale:</strong> Assistance gratuite si nécessaire</li>
+        <li><strong>Droit à l'information:</strong> Dans une langue compréhensible</li>
+        <li><strong>Droit à l'évaluation d'asile:</strong> Si en fuite de persécution</li>
+        <li><strong>Droit à un sursis à l'expulsion:</strong> Généralement jusqu'à 18 ans</li>
+    </ul>
+
+    <h2>Statistiques Belgique 2025</h2>
+    <table>
+        <tr>
+            <th>Métrique</th>
+            <th>Chiffre</th>
+        </tr>
+        <tr>
+            <td>MENA estimés en Belgique</td>
+            <td>~8,000–10,000</td>
+        </tr>
+        <tr>
+            <td>Nationalités principales</td>
+            <td>Afghan, Syrien, Vénézuélien, Érythréen, Somalien</td>
+        </tr>
+        <tr>
+            <td>Âge moyen</td>
+            <td>16–17 ans</td>
+        </tr>
+        <tr>
+            <td>Répartition par sexe</td>
+            <td>~75% masculin, ~25% féminin</td>
+        </tr>
+        <tr>
+            <td>Demandes d'asile/an</td>
+            <td>~2,800 (approx.)</td>
+        </tr>
+        <tr>
+            <td>Taux de reconnaissance</td>
+            <td>~45–55%</td>
+        </tr>
+    </table>
+</div>
+
+<!-- PAGE 4-5: YOUR ROLE AS TUTEUR -->
+<div class="page-break">
+    <h1>Votre Rôle en tant que Tuteur MENA (Page 4 de 5)</h1>
+
+    <h2>Vue générale du rôle</h2>
+    <p>Un <strong>tuteur</strong> (tuteur légal) est un adulte nommé par le tribunal responsable du bien-être juridique et pratique d'un MENA en Belgique.</p>
+
+    <div class="content-box">
+        <strong>Base légale:</strong>
+        <ul>
+            <li>Nommé par le tribunal de la jeunesse</li>
+            <li>Basé sur la loi de tutelle (Code Civil - Articles 389-412)</li>
+            <li>Représentant légal dans toutes les affaires administratives, éducatives, médicales et sociales</li>
+            <li>Autorité complète jusqu'à 18 ans (ou changement de statut)</li>
+            <li>Responsable devant le tribunal et les autorités de protection de l'enfance</li>
+        </ul>
+    </div>
+
+    <h2>Qui peut être tuteur?</h2>
+    <ul>
+        <li><strong>Tuteurs professionnels:</strong> Travailleurs sociaux formés, employés par ONG ou organismes publics</li>
+        <li><strong>Membres de la famille:</strong> Si approprié et approuvé par le tribunal</li>
+        <li><strong>Tuteurs bénévoles:</strong> Citoyens formés (moins courant en Belgique)</li>
+        <li><strong>Tuteurs nommés par l'État:</strong> Par défaut pour les mineurs non accompagnés</li>
+    </ul>
+
+    <h2>Vos responsabilités principales</h2>
+    <table>
+        <tr>
+            <th>Domaine</th>
+            <th>Responsabilités clés</th>
+        </tr>
+        <tr>
+            <td><strong>Représentation légale</strong></td>
+            <td>Signer les documents, assister aux audiences, gérer les permis</td>
+        </tr>
+        <tr>
+            <td><strong>Bien-être de l'enfant</strong></td>
+            <td>Assurer la sécurité, la santé, l'éducation, le soutien émotionnel</td>
+        </tr>
+        <tr>
+            <td><strong>Prise de décision</strong></td>
+            <td>Consentir au traitement médical, à l'inscription scolaire, aux activités</td>
+        </tr>
+        <tr>
+            <td><strong>Communication</strong></td>
+            <td>Tenir l'enfant informé, liaison avec les autorités et la famille</td>
+        </tr>
+        <tr>
+            <td><strong>Rapport</strong></td>
+            <td>Soumettre les mises à jour régulières aux tribunaux et services de protection</td>
+        </tr>
+    </table>
+
+    <h2>Tâches quotidiennes</h2>
+    <div class="content-box">
+        <strong>Bien-être et sécurité de l'enfant:</strong>
+        <ul>
+            <li>Assurer que les besoins fondamentaux sont satisfaits (nourriture, vêtements, abri, hygiène)</li>
+            <li>Surveiller la santé physique et l'état émotionnel</li>
+            <li>Répondre aux urgences (médicales, comportementales, sécurité)</li>
+            <li>Maintenir une communication sécurisée et accessible</li>
+        </ul>
+    </div>
+
+    <div class="content-box">
+        <strong>Documentation et administration:</strong>
+        <ul>
+            <li>Maintenir des dossiers complets (santé, école, documents juridiques)</li>
+            <li>Mettre à jour les informations de contact</li>
+            <li>Suivre les délais importants (dates d'asile, inscriptions scolaires, rendez-vous médicaux)</li>
+            <li>Classer les rapports d'incidents et garder les éléments de preuve organisés</li>
+        </ul>
+    </div>
+</div>
+
+<div class="page-break">
+    <h1>Votre Rôle en tant que Tuteur MENA (Page 5 de 5)</h1>
+
+    <h2>Tâches éducatives et de développement</h2>
+    <ul>
+        <li><strong>Faciliter la scolarisation:</strong> Transport, matériel, uniformes</li>
+        <li><strong>Soutenir l'apprentissage des langues:</strong> Encourager l'utilisation de la langue maternelle et locale</li>
+        <li><strong>Surveiller les progrès scolaires:</strong> Notes, rapports de comportement, assiduité</li>
+        <li><strong>Organiser un soutien supplémentaire:</strong> Tutorat si nécessaire</li>
+        <li><strong>Planifier l'orientation professionnelle:</strong> Discuter des intérêts, options d'apprentissage</li>
+    </ul>
+
+    <h2>Santé et bien-être</h2>
+    <div class="content-box">
+        <ul>
+            <li>Planifier les rendez-vous médicaux (médecin généraliste, vaccinations, contrôles)</li>
+            <li>Assister aux consultations médicales et comprendre les besoins de santé</li>
+            <li>Organiser un soutien en santé mentale (conseil, thérapie si nécessaire)</li>
+            <li>Gérer les prescriptions et assurer une bonne observance</li>
+            <li>Promouvoir des habitudes saines (nutrition, exercice, sommeil, hygiène)</li>
+        </ul>
+    </div>
+
+    <h2>Tâches hebdomadaires essentielles</h2>
+    <table>
+        <tr>
+            <th>Tâche</th>
+            <th>Fréquence</th>
+            <th>Détails</th>
+        </tr>
+        <tr>
+            <td><strong>Entretiens</strong></td>
+            <td>Au moins 2/semaine</td>
+            <td>Rencontres en personne, observation du bien-être, résolution des préoccupations</td>
+        </tr>
+        <tr>
+            <td><strong>Coordination avec le centre</strong></td>
+            <td>Hebdomadaire</td>
+            <td>Communication avec le personnel, examen des rapports, clarification des règles</td>
+        </tr>
+        <tr>
+            <td><strong>Soutien éducatif</strong></td>
+            <td>Hebdomadaire</td>
+            <td>Rencontres scolaires si problèmes, révision des notes et présence</td>
+        </tr>
+        <tr>
+            <td><strong>Besoins financiers</strong></td>
+            <td>Hebdomadaire/Mensuelle</td>
+            <td>Traitement de l'argent de poche, organisation des vêtements et articles essentiels</td>
+        </tr>
+        <tr>
+            <td><strong>Obligations légales</strong></td>
+            <td>Hebdomadaire</td>
+            <td>Suivi des demandes en attente, réponse aux communications des autorités</td>
+        </tr>
+    </table>
+
+    <h2>Tâches mensuelles</h2>
+    <div class="content-box">
+        <strong>Rapport formel et gestion de cas:</strong>
+        <ul>
+            <li>Soumettre un rapport mensuel à l'autorité de protection de l'enfance</li>
+            <li>Documenter la santé, l'éducation, les progrès, les incidents significatifs</li>
+            <li>Examiner et mettre à jour le plan de soins</li>
+            <li>Évaluer le bien-être global de l'enfant</li>
+            <li>Tenter un contact familial (si sûr et approprié)</li>
+        </ul>
+    </div>
+
+    <h2>Défis courants et solutions</h2>
+    <table>
+        <tr>
+            <th>Défi</th>
+            <th>Signes</th>
+            <th>Solutions suggérées</th>
+        </tr>
+        <tr>
+            <td><strong>Refus d'aller à l'école</strong></td>
+            <td>Absentéisme, prétextes de maladie, mauvaises notes</td>
+            <td>Identifier le problème spécifique; soutien linguistique; médiation; support psychologique</td>
+        </tr>
+        <tr>
+            <td><strong>Problèmes de santé non divulgués</strong></td>
+            <td>Changements comportementaux, symptômes apparaissant tardivement</td>
+            <td>Construire la confiance; utiliser un interprète; soutien psychologique simultané</td>
+        </tr>
+        <tr>
+            <td><strong>Contact familial compliqué</strong></td>
+            <td>Enfant veut du contact mais famille peu sûre; absence de localisation</td>
+            <td>Évaluation de la sécurité; services de recherche familiale Croix-Rouge; communication supervisée</td>
+        </tr>
+        <tr>
+            <td><strong>Problèmes comportementaux</strong></td>
+            <td>Agressivité, rupture, fugue</td>
+            <td>De-escalade; écoute; investigation des causes profondes; médiation; support comportemental</td>
+        </tr>
+    </table>
+</div>
+
+<!-- PAGE 6: LEGAL OBLIGATIONS -->
+<div class="page-break">
+    <h1>Obligations légales essentielles</h1>
+
+    <h2>Enregistrement et conformité</h2>
+    <div class="content-box critical">
+        <strong>Vous DEVEZ:</strong>
+        <ul>
+            <li>Vous conformer aux lois de protection de l'enfance de votre région</li>
+            <li>Signaler tout abus ou négligence soupçonnés</li>
+            <li>Maintenir la sécurité et la confidentialité de l'enfant</li>
+            <li>Conserver les dossiers requis pendant [durée minimale selon région]</li>
+            <li>Obtenir une approbation de sûreté appropriée</li>
+            <li>Communiquer honnêtement sur vos qualifications</li>
+            <li>Respecter les normes de confidentialité et de vie privée</li>
+        </ul>
+    </div>
+
+    <h2>Vous NE DEVEZ PAS:</h2>
+    <div class="content-box important">
+        <ul>
+            <li>✗ Recourir à la punition physique ou à des traitements dégradants</li>
+            <li>✗ Violer la confidentialité de l'enfant (sauf si sécurité en jeu)</li>
+            <li>✗ Travailler au-delà de vos compétences sans divulgation</li>
+            <li>✗ Accepter des paiements sans documentation appropriée</li>
+            <li>✗ Avoir un contact inapproprié en dehors du contexte de tutelle</li>
+            <li>✗ Faire des promesses que vous ne pouvez pas tenir</li>
+            <li>✗ Discriminer en fonction de caractéristiques protégées</li>
+        </ul>
+    </div>
+
+    <h2>Obligations de rapport</h2>
+    <table>
+        <tr>
+            <th>Type de rapport</th>
+            <th>Fréquence</th>
+            <th>Contenu</th>
+        </tr>
+        <tr>
+            <td><strong>Enregistrement initial</strong></td>
+            <td>Dans les 30 jours</td>
+            <td>Décision de tutelle, documents d'identification, évaluation des services sociaux</td>
+        </tr>
+        <tr>
+            <td><strong>Rapport mensuel</strong></td>
+            <td>Mensuel</td>
+            <td>Santé, éducation, progrès, incidents, recommandations</td>
+        </tr>
+        <tr>
+            <td><strong>Rapports financiers</strong></td>
+            <td>Trimestriel</td>
+            <td>Relevés détaillés des revenus vs dépenses, reçus justificatifs</td>
+        </tr>
+        <tr>
+            <td><strong>Rapport d'incident</strong></td>
+            <td>Dans les 48 heures</td>
+            <td>Description exacte de l'accident ou du problème comportemental</td>
+        </tr>
+        <tr>
+            <td><strong>Rapport annuel</strong></td>
+            <td>Annuel (avant révision de tutelle)</td>
+            <td>Résumé complet des progrès, défis, besoins, plans d'avenir</td>
+        </tr>
+    </table>
+
+    <h2>Procédures de signalement obligatoires</h2>
+    <div class="content-box critical">
+        <strong>Si vous soupçonnez un abus ou une négligence:</strong>
+        <ul class="checklist">
+            <li>Signalez immédiatement (si danger de vie) ou dans les 24 heures</li>
+            <li>Contactez les services de protection de l'enfance locaux</li>
+            <li>Documentez exactement ce que vous avez observé (date, heure, description)</li>
+            <li>Conservez une copie de votre rapport</li>
+            <li>Ne contactez PAS le parent/tuteur avant le rapport</li>
+            <li>Coopérez avec les enquêtes de CPS</li>
+            <li>Maintenez la confidentialité (pas de discussion avec d'autres familles)</li>
+        </ul>
+    </div>
+
+    <h2>Vérification des exigences locales</h2>
+    <p>Les lois varient selon la juridiction. Vérifiez auprès de [Autorité locale] pour:</p>
+    <ul>
+        <li>Certifications ou formations requises</li>
+        <li>Exigences d'assurance responsabilité civile</li>
+        <li>Procédures de signalement spécifiques</li>
+        <li>Obligations fiscales et d'enregistrement</li>
+        <li>Restrictions concernant les heures de travail</li>
+    </ul>
+</div>
+
+<!-- PAGE 7: FINANCIAL OBLIGATIONS -->
+<div class="page-break">
+    <h1>Obligations financières et fiscales</h1>
+
+    <h2>Documentation des revenus</h2>
+    <ul>
+        <li><strong>Déclarez tous les revenus:</strong> Aux autorités fiscales appropriées</li>
+        <li><strong>Conservez les reçus:</strong> Pour tous les paiements reçus</li>
+        <li><strong>Tenez des registres:</strong> Minimum [durée selon région] ans</li>
+        <li><strong>Déclarez les revenus en espèces:</strong> Même si payé informellement</li>
+    </ul>
+
+    <h2>Méthodes de paiement recommandées</h2>
+    <table>
+        <tr>
+            <th>Méthode</th>
+            <th>Avantages</th>
+            <th>Considérations</th>
+        </tr>
+        <tr>
+            <td><strong>Virement bancaire</strong></td>
+            <td>Trace audit complète, documentation automatique</td>
+            <td>Peut nécessiter un compte commercial</td>
+        </tr>
+        <tr>
+            <td><strong>Chèque</strong></td>
+            <td>Documenté, traçable, enregistrement facile</td>
+            <td>Délais de compensation plus lents</td>
+        </tr>
+        <tr>
+            <td><strong>Système de reçus formels</strong></td>
+            <td>Preuve de paiement, organisation simplifiée</td>
+            <td>Nécessite processus administratif</td>
+        </tr>
+        <tr>
+            <td><strong>Espèces uniquement (NON RECOMMANDÉ)</strong></td>
+            <td>Immédiat</td>
+            <td>Pas de preuve, risque d'audit, problèmes fiscaux</td>
+        </tr>
+    </table>
+
+    <h2>Dépenses déductibles (si travailleur indépendant)</h2>
+    <div class="content-box">
+        <ul>
+            <li>✓ Matériel pédagogique et manuels scolaires</li>
+            <li>✓ Formation professionnelle et développement continu</li>
+            <li>✓ Fournitures de bureau et équipement (pour travail à domicile)</li>
+            <li>✓ Déplacements pour les sessions de tutelle</li>
+            <li>✓ Assurance responsabilité civile professionnelle</li>
+        </ul>
+        <strong>Conservez TOUS les reçus!</strong>
+    </div>
+
+    <h2>Obligations fiscales</h2>
+    <ul>
+        <li><strong>Enregistrement:</strong> Inscrivez-vous comme travailleur indépendant (si applicable)</li>
+        <li><strong>Déclaration annuelle:</strong> Déposez la déclaration de revenus</li>
+        <li><strong>Impôts trimestriels:</strong> Versez les estimations fiscales (si requis)</li>
+        <li><strong>Sécurité sociale:</strong> Déclarez auprès du régime de sécurité sociale</li>
+        <li><strong>Tenue des dossiers:</strong> Organisation complète à des fins de vérification</li>
+    </ul>
+
+    <h2>Outils organisationnels recommandés</h2>
+    <div class="content-box">
+        <ul>
+            <li>Feuille de calcul simple pour revenus/dépenses</li>
+            <li>Compte bancaire dédié pour les revenus de tutelle</li>
+            <li>Dossier pour reçus et factures (organisé par mois/catégorie)</li>
+            <li>Résumé annuel pour la déclaration fiscale</li>
+            <li>Système de suivi des clients et des horaires</li>
+        </ul>
+    </div>
+
+    <h2>Questions ou aide fiscale</h2>
+    <p><strong>Contactez:</strong> [Autorité fiscale locale - Nom et numéro]</p>
+    <p>Pour des questions fiscales complexes, consultez un comptable ou conseiller fiscal.</p>
+</div>
+
+<!-- PAGE 8: CHECKLIST AGES 0-3 -->
+<div class="page-break">
+    <h1>Checklist: Enfants 0-3 ans (Nourrissons et tout-petits)</h1>
+
+    <h2>Priorité: IMMÉDIATE (Jours 1-30) | CONTINU (Mois 1-24)</h2>
+
+    <h2>Actions immédiates (Dans les 30 jours)</h2>
+    <div class="checklist">
+        <div class="checklist-item">Enregistrer la décision de tutelle auprès de l'autorité judiciaire locale</div>
+        <div class="checklist-item">Obtenir le certificat de naissance (si non disponible)</div>
+        <div class="checklist-item">Planifier l'examen médical initial avec un pédiatre</div>
+        <div class="checklist-item">Enregistrer l'enfant auprès de l'assurance maladie (nationale ou privée)</div>
+        <div class="checklist-item">Mettre à jour les informations de contact avec les autorités</div>
+        <div class="checklist-item">Ouvrir un compte bancaire dédié pour les fonds de l'enfant</div>
+        <div class="checklist-item">Créer un système de classement des documents (papier + sauvegarde numérique)</div>
+        <div class="checklist-item">Notifier les anciens tuteurs du changement de tutelle</div>
+    </div>
+
+    <h2>Actions des 3 premiers mois</h2>
+    <div class="checklist">
+        <div class="checklist-item">Établir une documentation régulière du sommeil et de l'alimentation</div>
+        <div class="checklist-item">Compléter le calendrier de vaccination initial</div>
+        <div class="checklist-item">Enregistrer le bébé à la garderie ou la maternelle si nécessaire</div>
+        <div class="checklist-item">Planifier l'évaluation du développement (contrôle de 12 semaines)</div>
+        <div class="checklist-item">Prendre des photos de documentation (santé, conditions de vie)</div>
+        <div class="checklist-item">Ouvrir un journal de communication familiale (visites, appels)</div>
+        <div class="checklist-item">Terminer la formation en tutelle (si requise par la juridiction)</div>
+        <div class="checklist-item">Mettre en place le suivi budgétaire mensuel</div>
+    </div>
+
+    <h2>Actions continues (Mois 3-24)</h2>
+    <ul>
+        <li>Rendez-vous médicaux mensuels (suivi et vaccinations)</li>
+        <li>Calendrier de vaccination à jour (mettre à jour les dossiers)</li>
+        <li>Documentation nutrition/alimentation (suivi de croissance)</li>
+        <li>Réconciliation budgétaire mensuelle (nourriture, soins de santé, vêtements)</li>
+        <li>Visites familiales planifiées (minimale mensuelle si applicable)</li>
+        <li>Suivi des étapes du développement (mises à jour régulières)</li>
+        <li>Informations d'urgence à jour (vérification trimestrielle)</li>
+        <li>Rapport médical annuel préparé pour les autorités</li>
+        <li>Conditions de vie inspectées (propreté, sécurité, température)</li>
+        <li>Fondations éducatives commençant (exposition, développement du langage)</li>
+    </ul>
+
+    <h2>Documents à rassembler</h2>
+    <ul>
+        <li>✓ Certificat de naissance (copie certifiée)</li>
+        <li>✓ Rapport d'examen médical</li>
+        <li>✓ Carnet de vaccinations</li>
+        <li>✓ Documentation d'assurance maladie</li>
+        <li>✓ Relevés de compte bancaire (mensuels)</li>
+        <li>✓ Dossier de reçus (organisé par catégorie)</li>
+        <li>✓ Journal de communication familiale</li>
+        <li>✓ Copie de la décision de tutelle</li>
+    </ul>
+
+    <h2>Fréquence de révision</h2>
+    <p><strong>Révisions mensuelles | Mises à jour trimestrielles des autorités</strong></p>
+</div>
+
+<!-- PAGE 9: CHECKLIST AGES 4-6 -->
+<div class="page-break">
+    <h1>Checklist: Enfants 4-6 ans (Préscolaire et école élémentaire)</h1>
+
+    <h2>Priorité: IMMÉDIATE (Mois 1-2) | CONTINU (Mois 3-48)</h2>
+
+    <h2>Inscription à l'école maternelle (Avant 3 ans)</h2>
+    <div class="checklist">
+        <div class="checklist-item">Évaluer les options éducatives (école publique, privée, besoins spéciaux)</div>
+        <div class="checklist-item">Compléter le processus d'inscription scolaire (obtenir lettre d'acceptation)</div>
+        <div class="checklist-item">Fournir les documents requis à l'école (certificat de naissance, preuves de vaccination, ID)</div>
+        <div class="checklist-item">Planifier une visite d'orientation scolaire</div>
+        <div class="checklist-item">Organiser les transports (transit, bus scolaire, ou personnel)</div>
+        <div class="checklist-item">Confirmer la structure des frais scolaires (ajuster le budget si nécessaire)</div>
+        <div class="checklist-item">Discuter des besoins spéciaux avec l'administration scolaire</div>
+    </div>
+
+    <h2>Santé et développement (4-6 ans)</h2>
+    <div class="checklist">
+        <div class="checklist-item">Terminer les vaccinations obligatoires (vérification du mandat préscolaire)</div>
+        <div class="checklist-item">Planifier le premier contrôle dentaire (avant 3 ans)</div>
+        <div class="checklist-item">Effectuer un dépistage du développement (parole, motricité, cognition)</div>
+        <div class="checklist-item">Obtenir une évaluation vision/audition (niveau de base à 3-4 ans)</div>
+        <div class="checklist-item">Mettre à jour les courbes de croissance mensuellement</div>
+        <div class="checklist-item">Adresser immédiatement tout problème de santé (infections, allergies, handicaps)</div>
+        <div class="checklist-item">Maintenir les horaires de médicaments (le cas échéant)</div>
+        <div class="checklist-item">Documenter les besoins alimentaires spéciaux (allergies, préférences)</div>
+    </div>
+
+    <h2>Intégration sociale et comportementale</h2>
+    <ul>
+        <li>Surveiller les interactions entre pairs (observer les schémas de jeu)</li>
+        <li>Fixer des attentes comportementales (règles appropriées à l'âge)</li>
+        <li>Établir une routine quotidienne (réveil, repas, coucher cohérents)</li>
+        <li>Introduire la régulation émotionnelle (stratégies de calme, nommage des sentiments)</li>
+        <li>Enregistrer les incidents comportementaux (crises, agressivité, peurs)</li>
+        <li>Planifier une évaluation comportementale (si préoccupations)</li>
+        <li>Faciliter les relations familiales (visites, appels selon les circonstances)</li>
+        <li>Documenter le développement du langage (jalons, exposition linguistique)</li>
+    </ul>
+
+    <h2>Fondation éducative</h2>
+    <div class="checklist">
+        <div class="checklist-item">Soutenir l'apprentissage des langues (exposition à la langue scolaire si différente)</div>
+        <div class="checklist-item">Fournir du matériel d'apprentissage (livres, jouets, activités appropriés)</div>
+        <div class="checklist-item">Établir une routine de lecture (15-20 minutes minimum quotidien)</div>
+        <div class="checklist-item">Encourager l'expression artistique (dessin, peinture, musique)</div>
+        <div class="checklist-item">Suivre la performance scolaire (assiduité, réactions des enseignants)</div>
+        <div class="checklist-item">Organiser un tutorat si nécessaire (intervention précoce pour les retards)</div>
+        <div class="checklist-item">Mettre à jour les dossiers scolaires (changements de contact, urgences)</div>
+    </div>
+
+    <h2>Gestion financière (4-6 ans)</h2>
+    <ul>
+        <li>Suivi mensuel du budget alimentaire (besoins nutritionnels de la garderie augmentent)</li>
+        <li>Paiements des frais scolaires à jour (pas d'arriérés)</li>
+        <li>Budget pour matériel éducatif (livres, fournitures, uniformes)</li>
+        <li>Documentation des frais de santé (dentaire, vision, visites spécialisées)</li>
+        <li>Ajustement du budget vêtements (croissance, remplacement saisonnier)</li>
+        <li>Suivi des frais d'activités (sports, arts, programmes d'enrichissement)</li>
+        <li>Réconciliation financière trimestrielle avec autorité</li>
+        <li>Maintien du fonds de réserve (coussin d'urgence mis à jour)</li>
+    </ul>
+
+    <h2>Surveillance continue</h2>
+    <ul>
+        <li>Révisions des progrès scolaires (au moins trimestrielles avec les enseignants)</li>
+        <li>Rendez-vous médicaux tenus (contrôles annuels + visites selon les besoins)</li>
+        <li>Contact familial maintenu (minimale mensuel)</li>
+        <li>Journal d'incidents mis à jour (préoccupations comportementales, de santé, éducatives)</li>
+        <li>Rapports à l'autorité soumis (annuel ou selon les exigences)</li>
+        <li>Stockage des documents organisé (fichiers faciles à localiser)</li>
+    </ul>
+</div>
+
+<!-- PAGE 10: CHECKLIST AGES 7-12 -->
+<div class="page-break">
+    <h1>Checklist: Enfants 7-12 ans (Âge scolaire)</h1>
+
+    <h2>Priorité: IMMÉDIATE (Mois 1) | CONTINU (Mois 2-132)</h2>
+
+    <h2>Planification et suivi éducatifs</h2>
+    <div class="checklist">
+        <div class="checklist-item">Confirmer l'inscription à l'école élémentaire publique/privée</div>
+        <div class="checklist-item">Introduire le soutien académique (tutorat, clubs de lecture si besoin)</div>
+        <div class="checklist-item">Obtenir le dossier académique (évaluation initiale, rapports d'école antérieurs)</div>
+        <div class="checklist-item">Établir une routine de devoirs (temps d'étude planifié, suivi parental)</div>
+        <div class="checklist-item">Surveiller les progrès académiques (notes, scores de tests, retours enseignants)</div>
+        <div class="checklist-item">Planifier les réunions parent-enseignant (minimum 2 par an)</div>
+        <div class="checklist-item">Adresser les lacunes d'apprentissage (plan d'intervention si en retard)</div>
+        <div class="checklist-item">Identifier les forces/intérêts (évaluation des aptitudes à 8-9 ans)</div>
+        <div class="checklist-item">Préparer la transition scolaire secondaire (à 11-12 ans)</div>
+        <div class="checklist-item">Suivre l'assiduité (explication des absences, prévention de l'absentéisme)</div>
+    </div>
+
+    <h2>Santé et développement physique</h2>
+    <table>
+        <tr>
+            <th>Domaine de santé</th>
+            <th>Action requis</th>
+            <th>Fréquence</th>
+        </tr>
+        <tr>
+            <td><strong>Examen physique</strong></td>
+            <td>Contrôle de santé complet</td>
+            <td>Annuel</td>
+        </tr>
+        <tr>
+            <td><strong>Soins dentaires</strong></td>
+            <td>Nettoyage, évaluation d'orthodontie</td>
+            <td>Annuel</td>
+        </tr>
+        <tr>
+            <td><strong>Vision/Audition</strong></td>
+            <td>Dépistage régulier</td>
+            <td>Prés scolaire/milieu enfance</td>
+        </tr>
+        <tr>
+            <td><strong>Croissance</strong></td>
+            <td>Suivi poids/taille</td>
+            <td>Mensuel</td>
+        </tr>
+        <tr>
+            <td><strong>Puberté</strong></td>
+            <td>Éducation appropriée à l'âge (10-11 ans)</td>
+            <td>Une fois</td>
+        </tr>
+        <tr>
+            <td><strong>Prévention abus sexuel</strong></td>
+            <td>Éducation de prévention selon l'âge</td>
+            <td>Une fois</td>
+        </tr>
+        <tr>
+            <td><strong>Documentation des accidents</strong></td>
+            <td>Incidents scolaires ou domestiques</td>
+            <td>Au besoin</td>
+        </tr>
+        <tr>
+            <td><strong>Santé mentale</strong></td>
+            <td>Conseil, thérapie si problèmes comportementaux</td>
+            <td>Au besoin</td>
+        </tr>
+        <tr>
+            <td><strong>Mises à jour vaccins</strong></td>
+            <td>Doses de rappel selon calendrier</td>
+            <td>Selon calendrier</td>
+        </tr>
+        <tr>
+            <td><strong>Conformité aux médicaments</strong></td>
+            <td>Suivi si applicable, documentation</td>
+            <td>Continu si prescrit</td>
+        </tr>
+    </table>
+
+    <h2>Développement social et émotionnel</h2>
+    <ul>
+        <li>Surveiller les amitiés (relations entre pairs, inclusion sociale)</li>
+        <li>Soutenir la participation aux activités (sports, clubs, arts)</li>
+        <li>Enseigner la résolution de conflits (stratégies d'âge approprié)</li>
+        <li>Maintenir les connexions familiales (visites/appels mensuels minimum)</li>
+        <li>Documenter les étapes significatives (réalisations, défis)</li>
+        <li>Adresser les problèmes comportementaux (intimidation, agressivité, isolement)</li>
+        <li>Fournir un soutien émotionnel (conseil si traumatisme-lié)</li>
+        <li>Encourager l'identité culturelle (activités de patrimoine, célébrations)</li>
+        <li>Promouvoir l'indépendance (responsabilités adaptées à l'âge)</li>
+    </ul>
+
+    <h2>Formation aux compétences de vie</h2>
+    <div class="content-box">
+        <strong>Ages 7-8: Soins de base</strong> (s'habiller, hygiène, alimentation)
+        <br><strong>Ages 8-10: Tâches ménagères</strong> (corvées, organisation, responsabilité)
+        <br><strong>Ages 10-12: Compétences de sécurité</strong> (piéton, internet, numéros d'urgence)
+        <br><strong>Ages 11-12: Bases monétaires</strong> (argent de poche, épargne, budgétisation simple)
+    </div>
+
+    <h2>Status légal et administratif</h2>
+    <ul>
+        <li>Mettre à jour les documents d'identification (renouveler si expirés)</li>
+        <li>Confirmer le statut de tutelle auprès des autorités (annuellement)</li>
+        <li>Déposer le rapport légal annuel (progrès, besoins, défis)</li>
+        <li>Maintenir la communication avec les autorités (répondre aux demandes)</li>
+        <li>Adresser les changements de circonstances (nouvelle situation de vie, statut familial)</li>
+        <li>Consentements à jour (médical, école, voyage)</li>
+        <li>Couverture d'assurance vérifiée (responsabilité, santé, éducation)</li>
+    </ul>
+
+    <h2>Responsabilité financière (7-12 ans)</h2>
+    <ul>
+        <li>Paiements des frais scolaires à jour (pas d'arriérés)</li>
+        <li>Fournitures éducatives fournies (livres, uniformes, matériel)</li>
+        <li>Activités parascolaires budgétisées (sports, musique, clubs)</li>
+        <li>Dépenses de santé/médicales suivies (dentaire, vision, thérapie)</li>
+        <li>Budget vêtements ajusté (croissance, remplacement saisonnier)</li>
+        <li>Réconciliation budgétaire mensuelle (dépenses vs allocations)</li>
+        <li>Compte d'épargne jeune maintenu (cadeaux d'anniversaire, argent gagné)</li>
+        <li>Rapports trimestriels aux autorités soumis</li>
+    </ul>
+
+    <h2>Surveillance et documentation permanentes</h2>
+    <ul>
+        <li>Performance scolaire revue (minimum trimestriel)</li>
+        <li>Rendez-vous médicaux tenus (contrôles annuels + visites spécialistes)</li>
+        <li>Relations familiales suivies (journal de contact, fréquence visite)</li>
+        <li>Documentation des incidents (académique, comportemental, lié à la santé)</li>
+        <li>Coopération avec les inspections d'autorité (documents prêts, accès complet)</li>
+        <li>Fichiers de documents organisés (localisation facile, sauvegarde à jour)</li>
+    </ul>
+
+    <p style="margin-top: 20px; font-weight: bold;">Fréquence de révision: Contact mensuel avec la famille | Réunions scolaires trimestrielles | Examen médical bisannuel | Rapports aux autorités annuels</p>
+</div>
+
+<!-- PAGE 11: CHECKLIST AGES 13+ -->
+<div class="page-break">
+    <h1>Checklist: Adolescents 13+ ans (Transition à l'indépendance)</h1>
+
+    <h2>Priorité: IMMÉDIATE (Mois 1) | CONTINU (Mois 2-72) | CRITIQUE (Ages 17-18)</h2>
+
+    <h2>Éducation secondaire et planification de carrière</h2>
+    <div class="checklist">
+        <div class="checklist-item">Inscrire à l'école secondaire (confirmer la placement, obtenir lettre d'acceptation)</div>
+        <div class="checklist-item">Examiner les antécédents académiques (évaluation du rendement de base)</div>
+        <div class="checklist-item">Établir le soutien académique (tutorat, mentorat si besoin)</div>
+        <div class="checklist-item">Identifier les intérêts de carrière (évaluation professionnelle à 14 ans)</div>
+        <div class="checklist-item">Explorer les options professionnelles (stages, apprentissages à partir de 15 ans)</div>
+        <div class="checklist-item">Surveiller l'assiduité scolaire (prévention de l'absentéisme, engagement)</div>
+        <div class="checklist-item">Maintenir un rendement académique solide (notes, préparation aux examens)</div>
+        <div class="checklist-item">Planifier la voie post-secondaire (université, professionnel, emploi)</div>
+        <div class="checklist-item">Obtenir les certifications nécessaires (permis de conduire, permis de travail si applicable)</div>
+        <div class="checklist-item">Préparer les transitions scolaires (nouvelle entrée d'école, planification de graduation)</div>
+    </div>
+
+    <h2>Travail et indépendance économique (14 ans+)</h2>
+    <div class="content-box">
+        <ul>
+            <li>Obtenir un permis de travail (si dépendant de la juridiction, demander avant 15-16 ans)</li>
+            <li>Organiser un emploi sûr (employeurs d'âge appropriés et autorisés)</li>
+            <li>Surveiller les heures de travail (conformité à la loi du travail, équilibre scolaire)</li>
+            <li>Enseigner les compétences en milieu de travail (ponctualité, professionnalisme, sécurité)</li>
+            <li>Suivre les revenus (documentation des revenus, considérations fiscales)</li>
+            <li>Développer l'alphabétisation financière (budgétisation, épargne, avenir)</li>
+            <li>Construire le dossier d'emploi (références, documentation d'expérience)</li>
+            <li>Planifier l'indépendance économique (stratégie d'emploi post-18)</li>
+        </ul>
+    </div>
+
+    <h2>Santé et développement physique</h2>
+    <ul>
+        <li>Examen de santé annuel (contrôle global)</li>
+        <li>Éducation en santé sexuelle (âge approprié, soins préventifs)</li>
+        <li>Soutien en santé mentale (conseil, thérapie si besoin)</li>
+        <li>Soins dentaires maintenus (nettoyage régulier, achèvement de l'orthodontie)</li>
+        <li>Dépistage vision/audition (mise à jour si nécessaire)</li>
+        <li>Calendrier de rappel de vaccins (tétanos, VPH, méningite si applicable)</li>
+        <li>Santé reproductive (éducation contraceptive si applicable)</li>
+        <li>Gestion des conditions chroniques (plan de traitement, conformité aux médicaments)</li>
+        <li>Prévention de l'abus de substances (éducation, surveillance des signes d'avertissement)</li>
+        <li>Documentation sanitaire de base (pour historique médical futur)</li>
+    </ul>
+
+    <h2>Maturité sociale et émotionnelle</h2>
+    <ul>
+        <li>Soutenir les relations entre pairs (amitiés saines, inclusion sociale)</li>
+        <li>Adresser les problèmes comportementaux (agressivité, prise de risque, isolement)</li>
+        <li>Fournir un soutien en santé mentale (conseil pour traumatisme, dépression, anxiété)</li>
+        <li>Maintenir les connexions familiales (contact fréquent, relation de confiance)</li>
+        <li>Préparer à l'anxiété de séparation (fin imminente de la tutelle)</li>
+        <li>Encourager le développement identitaire (culture, valeurs personnelles, croyances)</li>
+        <li>Promouvoir la responsabilité (compréhension des conséquences, prise de décision)</li>
+        <li>Construire la résilience (compétences d'adaptation, résolution de problèmes)</li>
+    </ul>
+
+    <h2>Formation aux compétences de vie (16-18 ans)</h2>
+    <table>
+        <tr>
+            <th>Âge</th>
+            <th>Compétences clés</th>
+            <th>Application pratique</th>
+        </tr>
+        <tr>
+            <td><strong>12-14</strong></td>
+            <td>Cuisine basique, ménage</td>
+            <td>Repas simples, lessives, nettoyage de chambre</td>
+        </tr>
+        <tr>
+            <td><strong>14-16</strong></td>
+            <td>Gestion financière, soins de santé</td>
+            <td>Budgétisation, prise de RDV, gestion des médicaments</td>
+        </tr>
+        <tr>
+            <td><strong>16-18</strong></td>
+            <td>Premiers secours, réponse d'urgence</td>
+            <td>CPR, gestion de crise, appels d'urgence</td>
+        </tr>
+        <tr>
+            <td><strong>16-18</strong></td>
+            <td>Sensibilisation juridique, connaissances des droits</td>
+            <td>Contrats, responsabilités, systèmes légaux</td>
+        </tr>
+        <tr>
+            <td><strong>17-18</strong></td>
+            <td>Compétences de logement</td>
+            <td>Recherche d'appartement, compréhension du bail</td>
+        </tr>
+        <tr>
+            <td><strong>17-18</strong></td>
+            <td>Compétences en emploi</td>
+            <td>CV, entretiens, navigation en milieu de travail</td>
+        </tr>
+        <tr>
+            <td><strong>17-18</strong></td>
+            <td>Navigation communautaire</td>
+            <td>Services publics, transports, ressources</td>
+        </tr>
+    </table>
+
+    <h2>Planification de transition (16-18 ans) - CRITIQUE</h2>
+    <div class="content-box critical">
+        <ul>
+            <li>Réaliser une évaluation complète des compétences de vie (à 16 ans)</li>
+            <li>Développer un plan de transition vers l'indépendance (avec la participation du jeune, 16-17 ans)</li>
+            <li>Identifier le soutien post-tutelle (logement, éducation, emploi, santé mentale)</li>
+            <li>Connecter aux services pour adultes (services sociaux, programmes professionnels, aide au logement)</li>
+            <li>Établir un plan de sécurité financière (compte d'épargne, fonds d'urgence, revenus gagnés)</li>
+            <li>Mettre à jour les documents juridiques (documents d'émancipation, POA si applicable)</li>
+            <li>Finaliser la voie éducative/professionnelle (demande d'université, placement en emploi, apprentissage)</li>
+            <li>Préparer une stratégie de sortie (indépendance graduelle, continuation du mentorat)</li>
+            <li>Documenter les réalisations (certificats, compétences, accomplissements)</li>
+        </ul>
+    </div>
+
+    <h2>Status légal et administratif</h2>
+    <ul>
+        <li>Confirmer le statut de tutelle (mise à jour annuelle auprès des autorités)</li>
+        <li>Déposer les rapports légaux annuels (progrès, défis, planification de transition)</li>
+        <li>Adresser les renouvellements de documents (carte d'identité, passeport, permis de travail)</li>
+        <li>Maintenir la communication avec les autorités (répondre aux demandes, assister aux réunions)</li>
+        <li>Mettre à jour les coordonnées d'urgence (vérifié et à jour annuellement)</li>
+        <li>Comprendre les droits et les obligations (alphabétisation juridique)</li>
+        <li>Préparer la résiliation de tutelle (à 18 ans ou antérieurement si applicable)</li>
+        <li>Établir une relation post-tutelle (mentorat continu, soutien optionnel)</li>
+    </ul>
+
+    <h2>Responsabilité financière (13-18 ans)</h2>
+    <ul>
+        <li>Coûts scolaires couverts (frais de scolarité, matériel, activités, transports)</li>
+        <li>Revenus gagnés suivis (emploi/permis de travail, gestion d'argent de poche)</li>
+        <li>Compte d'épargne jeunesse maintenu (fonds pour indépendance)</li>
+        <li>Réconciliation budgétaire trimestrielle (rapport à l'autorité)</li>
+        <li>Éducation au coût de la vie (estimations loyer, services publics, nourriture, transports)</li>
+        <li>Coûts de formation professionnelle budgétisés (frais d'apprentissage si applicable)</li>
+        <li>Dépenses de santé/médicales documentées (soins spécialisés, thérapie)</li>
+        <li>Fonds d'urgence établi (pour l'indépendance post-18)</li>
+    </ul>
+
+    <h2>Surveillance et documentation intensives (17-18 ans - PÉRIODE CRITIQUE)</h2>
+    <div class="content-box critical">
+        <ul>
+            <li>Performance scolaire suivie (notes, assiduité, comportement)</li>
+            <li>Rendez-vous de santé tenus (examens annuels + visites spécialistes)</li>
+            <li>Emploi/emploi documenté (heures, revenus, superviseurs)</li>
+            <li>Reconnaissance des réalisations (scolaires, athlétiques, artistiques)</li>
+            <li>Documentation des incidents (comportemental, santé, discipline)</li>
+            <li>Coopération avec inspection d'autorité (accès complet aux documents, transparence)</li>
+            <li>Évaluation de la préparation à la transition (à 17-18 ans, évaluation formelle)</li>
+            <li>Contact mensuel avec la famille maintenu (au moins mensuel, fréquence augmentée à 17+)</li>
+            <li>Révisions trimestrielles de l'école (notes, comportement, progression)</li>
+            <li>Examen annuel de santé (documentation pour antécédents médicaux futurs)</li>
+            <li>Rapports annuels aux autorités (avancement, planification finale, préparation à la résiliation)</li>
+        </ul>
+    </div>
+
+    <p style="margin-top: 20px; font-weight: bold;">Fréquence de révision: Contact mensuel avec la famille | Révisions scolaires trimestrielles | Examens de santé annuels | Rapports aux autorités annuels | Surveillance intensive des 17-18 ans</p>
+</div>
+
+<!-- PAGE 12-13: PROCEDURES -->
+<div class="page-break">
+    <h1>Procédures essentielles (Page 1 de 2)</h1>
+
+    <h2>Procédure 1: Démarrer une nouvelle relation de tutelle</h2>
+
+    <h3>Étape 1: Contact initial avec le parent/tuteur</h3>
+    <div class="checklist">
+        <div class="checklist-item">Vous présenter et expliquer vos qualifications (être honnête)</div>
+        <div class="checklist-item">Discuter des besoins de l'enfant, style d'apprentissage et objectifs</div>
+        <div class="checklist-item">Clarifier votre expertise et tout limitation</div>
+        <div class="checklist-item">Expliquer l'approche de tutelle et les méthodes</div>
+        <div class="checklist-item">Discuter de la fréquence, durée et lieu</div>
+        <div class="checklist-item">Répondre aux questions sur confidentialité et communication</div>
+    </div>
+
+    <h3>Étape 2: Contrat/Accord (informel ou formel)</h3>
+    <div class="checklist">
+        <div class="checklist-item">Convenir des frais et méthode de paiement</div>
+        <div class="checklist-item">Clarifier la politique d'annulation</div>
+        <div class="checklist-item">Spécifier les attentes de confidentialité et de vie privée</div>
+        <div class="checklist-item">Documenter la date de début et durée prévue</div>
+        <div class="checklist-item">Confirmer les informations de contact d'urgence</div>
+        <div class="checklist-item">Obtenir le consentement écrit pour la méthode de communication (appels, textos, emails)</div>
+    </div>
+
+    <h3>Étape 3: Première session - Rencontrer l'enfant</h3>
+    <div class="checklist">
+        <div class="checklist-item">Accueil chaleureux; créer un sentiment de sécurité et confort</div>
+        <div class="checklist-item">Évaluer le niveau actuel et le style d'apprentissage</div>
+        <div class="checklist-item">Expliquer ce à quoi s'attendre de la tutelle</div>
+        <div class="checklist-item">Commencer par une activité à faible enjeu pour construire la relation</div>
+        <div class="checklist-item">Documenter les observations initiales</div>
+        <div class="checklist-item">Clarifier avec l'enfant les sujets sur lesquels vous allez travailler</div>
+    </div>
+
+    <h3>Étape 4: Établir une routine</h3>
+    <div class="checklist">
+        <div class="checklist-item">Fixer le temps et le lieu de réunion cohérents</div>
+        <div class="checklist-item">Créer un système simple de suivi des progrès</div>
+        <div class="checklist-item">Établir un plan de communication avec le parent (mises à jour hebdomadaires?)</div>
+        <div class="checklist-item">Revoir les objectifs avec le parent après les 2-3 premières sessions</div>
+        <div class="checklist-item">Documenter brièvement toutes les sessions par écrit</div>
+    </div>
+</div>
+
+<div class="page-break">
+    <h1>Procédures essentielles (Page 2 de 2)</h1>
+
+    <h2>Procédure 2: Signaler un abus ou une négligence soupçonnée</h2>
+
+    <h2>ÉTAPES IMMÉDIATES (Si l'enfant est en danger)</h2>
+    <div class="content-box critical">
+        <div class="checklist">
+            <div class="checklist-item">Retirer l'enfant du danger immédiatement</div>
+            <div class="checklist-item">Appeler les services d'urgence (police/ambulance)</div>
+            <div class="checklist-item">Fournir les premiers secours si nécessaire</div>
+            <div class="checklist-item">Informer l'enfant que vous l'aidez</div>
+            <div class="checklist-item">NE PAS interroger l'enfant sur l'abus</div>
+            <div class="checklist-item">NE PAS poser de questions suggestives</div>
+        </div>
+    </div>
+
+    <h2>DANS LES 24 HEURES (Après sécurité immédiate assurée)</h2>
+    <div class="content-box critical">
+        <strong>Signaler aux Services de Protection de l'Enfance:</strong>
+        <ul>
+            <li>Contactez: [Autorité locale - Nom, Téléphone, Site Web]</li>
+            <li>Ayez prêt: Nom/âge de l'enfant, info du parent/tuteur, observations spécifiques</li>
+        </ul>
+
+        <strong>Documenter exactement ce que vous avez observé:</strong>
+        <ul>
+            <li>Date, heure, description des blessures/comportement</li>
+            <li>Mots exacts de l'enfant (le cas échéant)</li>
+            <li>Contexte de l'observation</li>
+            <li>Vos informations de contact pour suivi</li>
+        </ul>
+
+        <strong>Actions de suivi:</strong>
+        <ul>
+            <li>Conservez une copie de votre rapport pour vos dossiers</li>
+            <li>NE contactez PAS le parent/tuteur en premier (CPS gérera)</li>
+            <li>Maintenez la sécurité de l'enfant dans les sessions suivantes</li>
+            <li>N'en discutez pas avec l'enfant (enquête en cours)</li>
+            <li>Coopérez si CPS vous contacte</li>
+            <li>Maintenez la confidentialité (pas de discussion avec autres familles)</li>
+            <li>Documentez tout problème supplémentaire</li>
+            <li>Cherchez de l'aide d'un superviseur si surchargé</li>
+        </strong>
+    </div>
+
+    <div class="content-box critical">
+        <strong>CRITIQUE: Vous êtes un signalant mandataire.</strong>
+        <p style="margin-top: 10px;">Le rapport est votre obligation légale, non optionnel. Le signalement est un acte de protection, pas de traîtrise envers la famille.</p>
+    </div>
+
+    <h2>Considérations spéciales</h2>
+    <table>
+        <tr>
+            <th>Situation</th>
+            <th>Réponse requise</th>
+            <th>Délai</th>
+        </tr>
+        <tr>
+            <td><strong>Blessures évidentes (fractures, brûlures, hématomes répétés)</strong></td>
+            <td>Appeler les services d'urgence + rapporter à CPS</td>
+            <td>Immédiat</td>
+        </tr>
+        <tr>
+            <td><strong>Divulgation d'abus par l'enfant</strong></td>
+            <td>Écouter sans juger; documenter les mots exacts; rapporter à CPS</td>
+            <td>24 heures</td>
+        </tr>
+        <tr>
+            <td><strong>Changements comportementaux suspects (crainte des adultes, connaissance sexuelle inadaptée à l'âge)</strong></td>
+            <td>Observer le modèle; documenter; rapporter à CPS</td>
+            <td>24 heures</td>
+        </tr>
+        <tr>
+            <td><strong>Négligence (malnutrition, hygiène extrême, absence d'accès au soin médical)</strong></td>
+            <td>Documenter les conditions; rapporter à CPS</td>
+            <td>24-48 heures</td>
+        </tr>
+        <tr>
+            <td><strong>Danger immédiat pour la vie</strong></td>
+            <td>Appeler 911 en premier; puis rapporter à CPS</td>
+            <td>Immédiat</td>
+        </tr>
+    </table>
+
+    <h2>Ressources de soutien personnel</h2>
+    <p>Signaler un abus peut être émotionnellement difficile. Si vous vous sentez dépassé:</p>
+    <ul>
+        <li>Parlez à un superviseur ou mentor</li>
+        <li>Contactez une ligne d'écoute psychologique (nombres fournis à la page 17)</li>
+        <li>Cherchez du soutien par des pairs (autres tuteurs, groupes de soutien)</li>
+        <li>Consultez un conseiller si nécessaire</li>
+        <li>Rappelez-vous que signaler est l'acte correct</li>
+    </ul>
+</div>
+
+<!-- PAGE 14: RESOURCES -->
+<div class="page-break">
+    <h1>Ressources essentielles et contacts (Page 14 de 15)</h1>
+
+    <h2>Spécialistes légaux clés</h2>
+    <table>
+        <tr>
+            <th>Spécialiste</th>
+            <th>Expertise</th>
+            <th>Contact</th>
+            <th>Délai de réponse</th>
+        </tr>
+        <tr>
+            <td><strong>Avocats spécialisés en droit de l'asile</strong></td>
+            <td>Réclamations réfugiés/asile, appels</td>
+            <td>+32 2 514 1500</td>
+            <td>24 heures</td>
+        </tr>
+        <tr>
+            <td><strong>Conseil belge des réfugiés</strong></td>
+            <td>Détermination de statut, logement</td>
+            <td>+32 2 230 6350</td>
+            <td>48 heures</td>
+        </tr>
+        <tr>
+            <td><strong>Centre international de justice</strong></td>
+            <td>Protection internationale</td>
+            <td>+32 2 219 0920</td>
+            <td>48 heures</td>
+        </tr>
+        <tr>
+            <td><strong>Défenseurs des droits de l'enfant</strong></td>
+            <td>Mineurs, réclamations non accompagnées</td>
+            <td>+32 2 673 2891</td>
+            <td>24 heures</td>
+        </tr>
+        <tr>
+            <td><strong>Aide juridique gratuite</strong></td>
+            <td>Consultations et représentation gratuites</td>
+            <td>+32 2 500 5000</td>
+            <td>1 semaine</td>
+        </tr>
+    </table>
+
+    <h2>Organisations clés</h2>
+    <table>
+        <tr>
+            <th>Organisation</th>
+            <th>Service</th>
+            <th>Contact</th>
+            <th>Notes</th>
+        </tr>
+        <tr>
+            <td><strong>Secrétariat d'État pour l'Asile</strong></td>
+            <td>Traitement du statut officiel</td>
+            <td>+32 2 793 8793</td>
+            <td>Français/Néerlandais/Anglais</td>
+        </tr>
+        <tr>
+            <td><strong>Conseil belge des réfugiés</strong></td>
+            <td>Accueil, conseil, plaidoyer</td>
+            <td>+32 2 230 6350</td>
+            <td>Largest refugee org</td>
+        </tr>
+        <tr>
+            <td><strong>Médecins sans frontières</strong></td>
+            <td>Aide médicale, cas vulnérables</td>
+            <td>+32 2 474 7474</td>
+            <td>Urgences médicales</td>
+        </tr>
+        <tr>
+            <td><strong>Caritas Belgique</strong></td>
+            <td>Logement, services sociaux</td>
+            <td>+32 2 515 8888</td>
+            <td>Réseau catholique</td>
+        </tr>
+        <tr>
+            <td><strong>Croix-Rouge Belgique</strong></td>
+            <td>Aide d'urgence, recherche familiale</td>
+            <td>+32 2 734 1211</td>
+            <td>Soutien humanitaire</td>
+        </tr>
+    </table>
+
+    <h2>Lignes d'accueil nationales</h2>
+    <table>
+        <tr>
+            <th>Ligne d'accueil</th>
+            <th>Service</th>
+            <th>Numéro</th>
+            <th>Disponibilité</th>
+        </tr>
+        <tr>
+            <td><strong>Urgence nationale</strong></td>
+            <td>Police, pompiers, ambulance</td>
+            <td>112</td>
+            <td>24/7</td>
+        </tr>
+        <tr>
+            <td><strong>Support d'urgence CGRA</strong></td>
+            <td>Problèmes d'asile urgent</td>
+            <td>+32 2 793 9911</td>
+            <td>24/7, 4 langues</td>
+        </tr>
+        <tr>
+            <td><strong>Crise santé mentale</strong></td>
+            <td>Soutien psychologique</td>
+            <td>+32 2 648 4014</td>
+            <td>24/7</td>
+        </tr>
+        <tr>
+            <td><strong>Violence domestique</strong></td>
+            <td>Abri pour victimes d'abus</td>
+            <td>+32 800 90 100</td>
+            <td>24/7</td>
+        </tr>
+        <tr>
+            <td><strong>Ligne agressions sexuelles</strong></td>
+            <td>Soutien aux victimes</td>
+            <td>+32 2 534 3636</td>
+            <td>24/7, 4 langues</td>
+        </tr>
+        <tr>
+            <td><strong>Prévention suicide</strong></td>
+            <td>Crise santé mentale</td>
+            <td>+32 2 649 9595</td>
+            <td>24/7</td>
+        </tr>
+        <tr>
+            <td><strong>Protection de l'enfance</strong></td>
+            <td>Enfants à risque</td>
+            <td>+32 800 15 300</td>
+            <td>24/7</td>
+        </tr>
+        <tr>
+            <td><strong>Conseil juridique d'urgence</strong></td>
+            <td>Aide juridique gratuite</td>
+            <td>+32 2 500 5099</td>
+            <td>Cas urgents uniquement</td>
+        </tr>
+    </table>
+
+    <h2>Sites Web importants</h2>
+    <div class="content-box">
+        <strong>Gouvernement et officiels:</strong>
+        <ul>
+            <li>Secrétariat d'État: www.ibz.be/asile</li>
+            <li>Justice Belgique: www.justitie.belgium.be</li>
+            <li>Portail Bruxelles: www.bruxelles.be</li>
+            <li>Gouvernement fédéral: www.belgium.be</li>
+        </ul>
+
+        <strong>ONG et organisations de soutien:</strong>
+        <ul>
+            <li>Conseil des réfugiés: www.vluchteling.be</li>
+            <li>Amnesty Belgique: www.amnesty.be</li>
+            <li>Médecins du monde: www.mdm.be</li>
+            <li>Répertoire aide juridique: www.aide-juridique.be</li>
+        </ul>
+    </div>
+</div>
+
+<!-- PAGE 15: RESOURCES CONTINUED -->
+<div class="page-break">
+    <h1>Ressources de soutien et développement professionnel (Page 15)</h1>
+
+    <h2>Services organisés par type</h2>
+
+    <h3>Services juridiques et d'asile</h3>
+    <table>
+        <tr>
+            <th>Service</th>
+            <th>Contact principal</th>
+            <th>Spécialité</th>
+        </tr>
+        <tr>
+            <td><strong>Bureau du statut d'asile</strong></td>
+            <td>+32 2 793 8793</td>
+            <td>Réclamations officielles</td>
+        </tr>
+        <tr>
+            <td><strong>Aide juridique</strong></td>
+            <td>+32 2 500 5000</td>
+            <td>Représentation gratuite</td>
+        </tr>
+        <tr>
+            <td><strong>Registre de la cour d'appel</strong></td>
+            <td>+32 2 508 6000</td>
+            <td>Tribunaux supérieurs</td>
+        </tr>
+        <tr>
+            <td><strong>Centre international de justice</strong></td>
+            <td>+32 2 219 0920</td>
+            <td>Protection internationale</td>
+        </tr>
+        <tr>
+            <td><strong>Groupe spécialistes appels</strong></td>
+            <td>+32 2 502 9999</td>
+            <td>Appels et contentieux</td>
+        </tr>
+    </table>
+
+    <h3>Services médicaux et psychologiques</h3>
+    <table>
+        <tr>
+            <th>Service</th>
+            <th>Contact</th>
+            <th>Spécialité</th>
+        </tr>
+        <tr>
+            <td><strong>Urgence médicale</strong></td>
+            <td>112</td>
+            <td>Hospitalisations urgentes</td>
+        </tr>
+        <tr>
+            <td><strong>Clinique d'urgence</strong></td>
+            <td>+32 2 405 0405</td>
+            <td>Soins sans urgence vitale</td>
+        </tr>
+        <tr>
+            <td><strong>Support psychologique urgence</strong></td>
+            <td>+32 2 648 4014</td>
+            <td>Intervention en crise</td>
+        </tr>
+        <tr>
+            <td><strong>Médecins du monde</strong></td>
+            <td>+32 2 225 1800</td>
+            <td>Soins/counseling trauma</td>
+        </tr>
+        <tr>
+            <td><strong>Clinique santé mentale</strong></td>
+            <td>+32 2 773 8888</td>
+            <td>Évaluation psychiatrique</td>
+        </tr>
+    </table>
+
+    <h3>Services éducatifs</h3>
+    <ul>
+        <li><strong>Formation en langue:</strong> Centre intégration éducation +32 2 556 7890</li>
+        <li><strong>Inscription scolaire:</strong> Bureau scolaire communal</li>
+        <li><strong>Soutien besoins spéciaux:</strong> Défenseurs droits de l'enfant +32 2 673 2891</li>
+        <li><strong>Formation professionnelle:</strong> +32 2 556 7890 (16 ans+)</li>
+    </ul>
+
+    <h3>Services familiaux</h3>
+    <ul>
+        <li><strong>Bien-être de l'enfant:</strong> Ligne d'accueil +32 800 15 300 (24/7)</li>
+        <li><strong>Conseil familial:</strong> +32 2 534 3333 (sessions hebdomadaires)</li>
+        <li><strong>Réunification familiale:</strong> +32 2 793 8793</li>
+        <li><strong>Nomination de tuteur:</strong> +32 2 673 2891</li>
+    </ul>
+
+    <h3>Services financiers et avantages</h3>
+    <ul>
+        <li><strong>Aide sociale:</strong> Bureau +32 2 790 4444</li>
+        <li><strong>Aide au logement:</strong> +32 2 509 8000</li>
+        <li><strong>Soutien à l'emploi:</strong> www.emploi-asile.be</li>
+        <li><strong>Fonds d'urgence:</strong> Caritas Belgique +32 2 515 8888</li>
+    </ul>
+
+    <h2>Formation et développement professionnel</h2>
+    <table>
+        <tr>
+            <th>Ressource</th>
+            <th>Objectif</th>
+            <th>Contact/Site</th>
+        </tr>
+        <tr>
+            <td><strong>Formation en tutelle</strong></td>
+            <td>Certifications, DCP en psychologie de l'enfant</td>
+            <td>[Fournisseurs de formation]</td>
+        </tr>
+        <tr>
+            <td><strong>Matériaux pédagogiques</strong></td>
+            <td>Ressources curriculaires par âge/sujet</td>
+            <td>[Éditeurs éducatifs]</td>
+        </tr>
+        <tr>
+            <td><strong>Troubles apprentissage</strong></td>
+            <td>Référal, évaluation, méthodes spécialisées</td>
+            <td>[Centre diagnostic/association]</td>
+        </tr>
+        <tr>
+            <td><strong>Réseau pairs</strong></td>
+            <td>Connexion, mentorat, partage ressources</td>
+            <td>[Association tuteurs/forum]</td>
+        </tr>
+    </table>
+</div>
+
+<!-- PAGE 16: REQUIRED DOCUMENTS -->
+<div class="page-break">
+    <h1>Checklist des documents requis</h1>
+
+    <h2>AVANT DE COMMENCER LA TUTELLE</h2>
+    <div class="content-box critical">
+        <div class="checklist">
+            <div class="checklist-item">Preuve d'identité (permis de conduire, passeport)</div>
+            <div class="checklist-item">Dégagement antécédents (si requis par juridiction)</div>
+            <div class="checklist-item">Enregistrement fiscal (si travailleur indépendant)</div>
+            <div class="checklist-item">Assurance responsabilité civile (si requis/recommandé)</div>
+            <div class="checklist-item">Certification RCP/Premiers secours (si travail avec jeunes enfants)</div>
+        </div>
+    </div>
+
+    <h2>POUR CHAQUE ENFANT/FAMILLE</h2>
+    <div class="checklist">
+        <div class="checklist-item">Accord écrit/contrat avec parent (frais, conditions, confidentialité)</div>
+        <div class="checklist-item">Formulaire consentement parental (coordonnées urgence, prefs communication, consentement média)</div>
+        <div class="checklist-item">Information médicale/apprentissage enfant (allergies, médicaments, IEP, profil apprentissage)</div>
+        <div class="checklist-item">Information de contact (parents, urgence, pédiatre)</div>
+        <div class="checklist-item">Autorisation partage d'information (communication scolaire, références évaluations)</div>
+    </div>
+
+    <h2>À MAINTENIR EN CONTINU</h2>
+    <table>
+        <tr>
+            <th>Type de document</th>
+            <th>Description</th>
+            <th>Fréquence</th>
+        </tr>
+        <tr>
+            <td><strong>Notes de session</strong></td>
+            <td>Date, heure, sujets, progrès, observations comportementales</td>
+            <td>Après chaque session</td>
+        </tr>
+        <tr>
+            <td><strong>Journal communication parent</strong></td>
+            <td>Emails, appels, vérifications, documentés</td>
+            <td>Continu</td>
+        </tr>
+        <tr>
+            <td><strong>Journal incidents</strong></td>
+            <td>Accidents, préoccupations comportementales, plaintes parent</td>
+            <td>Au besoin</td>
+        </tr>
+        <tr>
+            <td><strong>Suivi des progrès</strong></td>
+            <td>Résultats évaluations, jalons compétences, progrès objectifs</td>
+            <td>Mensuel/trimestriel</td>
+        </tr>
+        <tr>
+            <td><strong>Dossiers financiers</strong></td>
+            <td>Factures, paiements reçus, reçus dépenses</td>
+            <td>Mensuel</td>
+        </tr>
+        <tr>
+            <td><strong>Reconnaissance confidentialité</strong></td>
+            <td>Signé, renouvelé annuellement</td>
+            <td>Annuel</td>
+        </tr>
+    </table>
+
+    <h2>SI ABUS SOUPÇONNÉ</h2>
+    <div class="content-box critical">
+        <ul>
+            <li>Documentation incident (date, observations exactes, mots de l'enfant)</li>
+            <li>Rapport à CPS (copie conservée en dossier)</li>
+            <li>Communication suiv CPS (si ils vous contactent)</li>
+        </ul>
+    </div>
+
+    <h2>RÉTENTION ET STOCKAGE</h2>
+    <div class="content-box">
+        <strong>Durée minimale:</strong> Conserver minimum 7 ans (ou selon loi locale)
+
+        <strong>Rangement physique:</strong>
+        <ul>
+            <li>Armoire fermée à clé avec organisation alphabétique</li>
+            <li>Accès limité au tuteur, famille, autorités</li>
+        </ul>
+
+        <strong>Sauvegarde numérique:</strong>
+        <ul>
+            <li>Dossier chiffré sur lecteur sécurisé ou cloud (mot de passe protégé)</li>
+            <li>Copies de tous les documents clés</li>
+            <li>Accès immédiat au dossier (dans 24 heures sur demande)</li>
+        </ul>
+
+        <strong>Confidentialité:</strong>
+        <ul>
+            <li>Aucun partage sans permission (sauf obligation légale)</li>
+            <li>Information sensible restreinte (seul personnel autorisé)</li>
+            <li>Destruction après rétention minimale (selon loi)</li>
+        </ul>
+    </div>
+</div>
+
+<!-- PAGE 17: EMERGENCY CONTACTS -->
+<div class="page-break">
+    <h1>Contacts d'urgence - Numéros critiques</h1>
+
+    <h2>ENFANT EN DANGER IMMÉDIAT</h2>
+    <div class="content-box critical">
+        <ul>
+            <li><strong>Urgence nationale: 112</strong> (police, pompiers, ambulance)</li>
+            <li><strong>Urgence asile CGRA: +32 2 793 9911</strong> (24/7, menace/violence/urgence asile)</li>
+            <li><strong>Ligne d'accueil enfants:</strong> +32 800 15 300 (enfants à risque, 24/7)</li>
+        </ul>
+    </div>
+
+    <h2>PROTECTION DE L'ENFANCE ET SIGNALEMENT</h2>
+    <table>
+        <tr>
+            <th>Service</th>
+            <th>Numéro</th>
+            <th>Disponibilité</th>
+            <th>But</th>
+        </tr>
+        <tr>
+            <td><strong>Services protection enfance</strong></td>
+            <td>[Autorité locale]</td>
+            <td>Heures de bureau + urgences</td>
+            <td>Supervision tutelle, signalement</td>
+        </tr>
+        <tr>
+            <td><strong>Ligne d'accueil anonyme abus</strong></td>
+            <td>[Numéro local]</td>
+            <td>24/7</td>
+            <td>Signalement abus (anonyme)</td>
+        </tr>
+        <tr>
+            <td><strong>Ombudsman enfance</strong></td>
+            <td>[Numéro local]</td>
+            <td>Heures de bureau</td>
+            <td>Plaintes contre CPS</td>
+        </tr>
+    </table>
+
+    <h2>VOTRE SOUTIEN PERSONNEL</h2>
+    <table>
+        <tr>
+            <th>Service</th>
+            <th>Numéro</th>
+            <th>But</th>
+        </tr>
+        <tr>
+            <td><strong>Ligne crise santé mentale</strong></td>
+            <td>+32 2 648 4014</td>
+            <td>Support personnel en situation difficile</td>
+        </tr>
+        <tr>
+            <td><strong>Aide juridique (vos questions)</strong></td>
+            <td>+32 2 500 5000</td>
+            <td>Conseil juridique gratuit</td>
+        </tr>
+        <tr>
+            <td><strong>Association professionnelle</strong></td>
+            <td>[Numéro local]</td>
+            <td>Soutien par les pairs</td>
+        </tr>
+    </table>
+
+    <h2>SOUTIEN FAMILIAL (À OFFRIR AUX FAMILLES)</h2>
+    <div class="content-box">
+        <ul>
+            <li><strong>Crise santé mentale:</strong> +32 2 648 4014 (24/7)</li>
+            <li><strong>Violence domestique:</strong> +32 800 90 100 (abri, ressources)</li>
+            <li><strong>Agression sexuelle:</strong> +32 2 534 3636 (support victimes)</li>
+            <li><strong>Abus de substances:</strong> +32 2 557 8888 (conseil dépendance)</li>
+            <li><strong>Aide financière:</strong> +32 2 790 4444 (services sociaux)</li>
+        </ul>
+    </div>
+
+    <h2>COORDINATEURS LOCAUX (SI PARTIE D'UN PROGRAMME)</h2>
+    <div class="content-box">
+        <ul>
+            <li><strong>Coordinateur programme:</strong> [Nom, Téléphone]</li>
+            <li><strong>Superviseur/Mentor:</strong> [Nom, Téléphone]</li>
+            <li><strong>Responsable formation:</strong> [Nom, Téléphone]</li>
+        </ul>
+    </div>
+
+    <h2>AFFICHAGE RECOMMANDÉ</h2>
+    <p style="font-weight: bold; text-align: center;">Imprimez et affichezthis page in your workspace for quick reference!</p>
+
+    <h2>Détails de matrice de contact rapide</h2>
+    <table>
+        <tr>
+            <th>Catégorie</th>
+            <th>Contact primaire</th>
+            <th>Sauvegarde</th>
+            <th>Urgence</th>
+        </tr>
+        <tr>
+            <td><strong>Asile</strong></td>
+            <td>CGRA +32 2 793 8793</td>
+            <td>Aide juridique +32 2 500 5000</td>
+            <td>+32 2 793 9911</td>
+        </tr>
+        <tr>
+            <td><strong>Aide juridique</strong></td>
+            <td>+32 2 500 5000</td>
+            <td>Pro Bono +32 2 809 7777</td>
+            <td>+32 2 745 1234</td>
+        </tr>
+        <tr>
+            <td><strong>Médical</strong></td>
+            <td>Clinique +32 2 405 0405</td>
+            <td>Appel médecin +32 2 648 4014</td>
+            <td>112</td>
+        </tr>
+        <tr>
+            <td><strong>Santé mentale</strong></td>
+            <td>Crise +32 2 648 4014</td>
+            <td>Counsel +32 2 534 3333</td>
+            <td>+32 2 649 9595</td>
+        </tr>
+        <tr>
+            <td><strong>Logement</strong></td>
+            <td>Caritas +32 2 515 8888</td>
+            <td>Services sociaux +32 2 790 4444</td>
+            <td>+32 800 90 100</td>
+        </tr>
+        <tr>
+            <td><strong>Violence</strong></td>
+            <td>Domestique +32 800 90 100</td>
+            <td>Femmes protect +32 2 891 4567</td>
+            <td>112</td>
+        </tr>
+        <tr>
+            <td><strong>Bien-être enfant</strong></td>
+            <td>Protection +32 800 15 300</td>
+            <td>Tuteur +32 2 673 2891</td>
+            <td>112</td>
+        </tr>
+        <tr>
+            <td><strong>Soutien général</strong></td>
+            <td>Conseil réfugiés +32 2 230 6350</td>
+            <td>Amnesty +32 2 538 8138</td>
+            <td>112</td>
+        </tr>
+    </table>
+</div>
+
+<!-- PAGE 18: GLOSSARY -->
+<div class="page-break">
+    <h1>Définitions clés (Glossaire de référence rapide)</h1>
+
+    <dl>
+        <dt><strong>Abus</strong></dt>
+        <dd>Préjudice physique, abus sexuel, ou préjudice émotionnel infligé par un tuteur/personne responsable</dd>
+
+        <dt><strong>Négligence</strong></dt>
+        <dd>Défaut de fournir nourriture, abri, soins médicaux, supervision, ou éducation</dd>
+
+        <dt><strong>Devoir de diligence</strong></dt>
+        <dd>Obligation légale d'assurer la sécurité et le bien-être de l'enfant</dd>
+
+        <dt><strong>Confidentialité</strong></dt>
+        <dd>Garder l'information sur l'enfant/famille privée (sauf signalement obligatoire)</dd>
+
+        <dt><strong>Signalant mandataire</strong></dt>
+        <dd>Personne légalement requise de signaler tout abus soupçonné</dd>
+
+        <dt><strong>Services protection enfance</strong></dt>
+        <dd>Agence gouvernementale enquêtant sur les rapports d'abus/négligence</dd>
+
+        <dt><strong>Travailleur indépendant</strong></dt>
+        <dd>Travail pour soi-même, responsable des impôts et assurance</dd>
+
+        <dt><strong>Limites professionnelles</strong></dt>
+        <dd>Distance/relation appropriée entre tuteur et enfant/famille</dd>
+
+        <dt><strong>Conflit d'intérêts</strong></dt>
+        <dd>Situation où intérêts personnels/financiers pourraient biaiser jugement professionnel</dd>
+
+        <dt><strong>Consentement informé</strong></dt>
+        <dd>Parent/tuteur comprenant et acceptant l'approche de tutelle</dd>
+
+        <dt><strong>IEP (Plan d'éducation individualisé)</strong></dt>
+        <dd>Document légal décrivant les services éducation spécialisée</dd>
+
+        <dt><strong>Étape développementale</strong></dt>
+        <dd>Compétence/capacité attendue à un âge particulier</dd>
+
+        <dt><strong>Trouble apprentissage</strong></dt>
+        <dd>Différence neurologique affectant apprentissage malgré instruction appropriée</dd>
+
+        <dt><strong>Sauvegarde</strong></dt>
+        <dd>Mesures préventives pour assurer sécurité et bien-être enfant</dd>
+
+        <dt><strong>Tribunal de la jeunesse</strong></dt>
+        <dd>Cour judiciaire gérant les matières concernant les mineurs et tutelle</dd>
+
+        <dt><strong>MENA</strong></dt>
+        <dd>Mineur Étranger Non Accompagné (enfant refuge/asile sans adulte responsable)</dd>
+
+        <dt><strong>Statut asile</strong></dt>
+        <dd>Protection légale accordée aux réfugiés et personnes protégées subsidiaires</dd>
+
+        <dt><strong>CGRA</strong></dt>
+        <dd>Commissariat général aux réfugiés et apatrides (Belgique autorité asile)</dd>
+
+        <dt><strong>Juge de la jeunesse</strong></dt>
+        <dd>Magistrat présidant tribunal jeunesse, nomme tuteurs</dd>
+
+        <dt><strong>Rapport d'abus</strong></dt>
+        <dd>Documentation formelle des abus/négligence soupçonnés soumis à CPS</dd>
+    </dl>
+</div>
+
+<!-- PAGE 19: DECISION TREES -->
+<div class="page-break">
+    <h1>Arbre de décision: "Que devrais-je faire?"</h1>
+
+    <h2>Scénario 1: L'enfant divulgue un préjudice</h2>
+    <div class="content-box">
+        <pre>
+Enfant divulgue préjudice
+    ↓
+L'enfant est en danger immédiat?
+    ├─ OUI → Appeler 911 immédiatement
+    └─ NON → Écouter sans jugement
+              ↓
+              Ne pas interroger; juste écouter
+              ↓
+              Rapporter à CPS dans 24 heures
+              ↓
+              Documenter: mots exacts de l'enfant, date, heure, contexte
+              ↓
+              Informer l'enfant que vous devez le signaler pour l'aider
+              ↓
+              Coopérer avec enquête CPS
+        </pre>
+    </div>
+
+    <h2>Scénario 2: Vous remarquez des signes d'abus/négligence</h2>
+    <div class="content-box">
+        <pre>
+Vous observez signes suspects
+(hématomes, négligence, peur)
+    ↓
+Documenter: date, heure, observations exactes
+    ↓
+C'est grave/menaçant pour la vie?
+    ├─ OUI → Appeler 911
+    └─ NON → Rapporter à CPS dans 24 heures
+              ↓
+              NE PAS contacter parent en premier
+              ↓
+              Avoir documentation prête
+              ↓
+              Garder confidentialité
+              ↓
+              Continuer tutelle; surveiller situation
+        </pre>
+    </div>
+
+    <h2>Scénario 3: Changements comportementaux préoccupants</h2>
+    <div class="content-box">
+        <pre>
+Enfant montre changement comportemental
+(agressivité, peur, isolement)
+    ↓
+Danger immédiat?
+    ├─ OUI → Intervenir; assurer sécurité
+    └─ NON → Observer le schéma sur 2-3 sessions
+              ↓
+              Documenter comportements spécifiques, déclencheurs, fréquence
+              ↓
+              Pourrait être:
+              ├─ Normal développement? → Surveiller; communiquer parent
+              ├─ Difficulté apprentissage? → Évaluer; recommander évaluation
+              ├─ Stress/anxiété? → Communiquer parent; suggérer soutien
+              └─ Lié à abus? → Suspecter abus; rapporter à CPS
+        </pre>
+    </div>
+
+    <h2>Scénario 4: Parent demande confidentialité envers autre parent</h2>
+    <div class="content-box">
+        <pre>
+Parent demande confidentialité
+envers autre parent
+    ↓
+C'est à propos d'abus ou sécurité enfant?
+    ├─ OUI → Vous ne pouvez pas honorer confidentialité
+              Expliquer que vous devez signaler abus
+    └─ NON → Vous pouvez respecter discrétion
+              MAIS clarifier vos limites:
+              vous devrez peut-être partager avec autre parent
+              si affecte sécurité/tutelle de l'enfant
+              ↓
+              Documenter la demande
+              ↓
+              Informer coordinateur/superviseur si applicable
+        </pre>
+    </div>
+</div>
+
+<!-- PAGE 20: BACK COVER -->
+<div class="back-cover page-break">
+    <h2>Vos 5 responsabilités principales</h2>
+
+    <div style="background-color: rgba(255,255,255,0.15); padding: 30px; border-radius: 10px; margin-top: 30px;">
+        <div style="font-size: 20pt; margin-bottom: 20px; font-weight: bold;">1. Assurer la sécurité de l'enfant</div>
+        <p>dans chaque session</p>
+
+        <div style="font-size: 20pt; margin: 30px 0 20px 0; font-weight: bold;">2. Signaler les abus soupçonnés</div>
+        <p>immédiatement</p>
+
+        <div style="font-size: 20pt; margin: 30px 0 20px 0; font-weight: bold;">3. Tenir des registres précis</div>
+        <p>et la documentation</p>
+
+        <div style="font-size: 20pt; margin: 30px 0 20px 0; font-weight: bold;">4. Maintenir limites professionnelles</div>
+        <p>et confidentialité</p>
+
+        <div style="font-size: 20pt; margin: 30px 0 20px 0; font-weight: bold;">5. Respecter obligations légales</div>
+        <p>et financières</p>
+    </div>
+
+    <div style="margin-top: 60px; font-size: 18pt;">
+        <strong style="color: #ffeb3b;">Numéro le plus important:</strong><br>
+        Services Protection Enfance - [Num local]
+    </div>
+
+    <div style="margin-top: 40px; font-size: 13pt;">
+        <strong>Conservez ce guide:</strong>
+        <ul style="text-align: left; display: inline-block;">
+            <li>Dans votre sac pour référence rapide</li>
+            <li>Affiché dans votre espace tutelle</li>
+            <li>Accessible sur téléphone/tablette</li>
+            <li>Examiné annuellement pour mises à jour</li>
+        </ul>
+    </div>
+
+    <div class="contact-info">
+        <strong>Questions ou préoccupations?</strong><br>
+        Contactez votre coordinateur de programme ou consultant juridique pour questions légales spécifiques.
+    </div>
+
+    <div class="version">
+        Version: 1.0 | Date: 2026-06-03 | Prochaine révision: 2027-06-03<br>
+        Guide de référence rapide MENA Tuteur - Belgique
+    </div>
+</div>
+
+</body>
+</html>

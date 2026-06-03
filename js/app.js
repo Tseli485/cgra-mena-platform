@@ -1,3 +1,249 @@
+/**
+ * Offline Sync Manager
+ * Handles queuing, retry logic, and synchronization of operations when offline
+ */
+class OfflineSyncManager {
+  constructor() {
+    this.syncQueue = [];
+    this.isSyncing = false;
+    this.syncStatus = 'idle'; // idle, syncing, offline, error
+    this.lastSyncTime = null;
+    this.syncHistoryLimit = 50;
+    this.syncHistory = [];
+    this.retryAttempts = {};
+    this.maxRetries = 3;
+    this.retryDelay = 1000; // 1 second
+    this.loadQueueFromStorage();
+  }
+
+  /**
+   * Load sync queue from localStorage on initialization
+   */
+  loadQueueFromStorage() {
+    try {
+      const stored = localStorage.getItem('sync_queue');
+      if (stored) {
+        this.syncQueue = JSON.parse(stored);
+        console.log('[SyncManager] Loaded', this.syncQueue.length, 'queued operations from storage');
+      }
+      const history = localStorage.getItem('sync_history');
+      if (history) {
+        this.syncHistory = JSON.parse(history).slice(-this.syncHistoryLimit);
+      }
+    } catch (error) {
+      console.error('[SyncManager] Error loading queue from storage:', error);
+    }
+  }
+
+  /**
+   * Add operation to sync queue
+   */
+  queueOperation(operation) {
+    const queueItem = {
+      id: 'op_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9),
+      operation,
+      timestamp: Date.now(),
+      attempts: 0,
+      status: 'pending'
+    };
+
+    this.syncQueue.push(queueItem);
+    this.saveQueueToStorage();
+
+    console.log('[SyncManager] Queued operation:', queueItem.id, operation.type);
+    this.updateSyncStatus('queued');
+
+    return queueItem.id;
+  }
+
+  /**
+   * Save sync queue to localStorage
+   */
+  saveQueueToStorage() {
+    try {
+      localStorage.setItem('sync_queue', JSON.stringify(this.syncQueue));
+    } catch (error) {
+      console.error('[SyncManager] Error saving queue to storage:', error);
+    }
+  }
+
+  /**
+   * Save sync history to localStorage
+   */
+  saveSyncHistoryToStorage() {
+    try {
+      localStorage.setItem('sync_history', JSON.stringify(this.syncHistory.slice(-this.syncHistoryLimit)));
+    } catch (error) {
+      console.error('[SyncManager] Error saving sync history:', error);
+    }
+  }
+
+  /**
+   * Sync queued operations when connection restored
+   */
+  async syncQueuedOperations() {
+    if (this.isSyncing || !navigator.onLine || this.syncQueue.length === 0) {
+      return false;
+    }
+
+    this.isSyncing = true;
+    this.updateSyncStatus('syncing');
+    const startTime = Date.now();
+    let successCount = 0;
+    let failureCount = 0;
+
+    console.log('[SyncManager] Starting sync of', this.syncQueue.length, 'operations');
+
+    for (let i = 0; i < this.syncQueue.length; i++) {
+      const queueItem = this.syncQueue[i];
+
+      try {
+        const success = await this.executeSyncOperation(queueItem);
+
+        if (success) {
+          queueItem.status = 'completed';
+          this.syncQueue.splice(i, 1);
+          i--;
+          successCount++;
+          this.retryAttempts[queueItem.id] = 0;
+        } else {
+          queueItem.attempts++;
+          if (queueItem.attempts >= this.maxRetries) {
+            queueItem.status = 'failed';
+            failureCount++;
+            console.error('[SyncManager] Operation failed after', this.maxRetries, 'retries:', queueItem.id);
+          } else {
+            await this.delay(this.retryDelay);
+          }
+        }
+      } catch (error) {
+        console.error('[SyncManager] Error processing queue item:', error);
+        queueItem.attempts++;
+        if (queueItem.attempts >= this.maxRetries) {
+          queueItem.status = 'failed';
+          failureCount++;
+        }
+      }
+    }
+
+    this.isSyncing = false;
+    this.lastSyncTime = Date.now();
+    this.saveQueueToStorage();
+
+    const syncRecord = {
+      timestamp: this.lastSyncTime,
+      duration: Date.now() - startTime,
+      successCount,
+      failureCount,
+      queuedCount: this.syncQueue.length
+    };
+    this.syncHistory.push(syncRecord);
+    this.saveSyncHistoryToStorage();
+
+    const status = failureCount === 0 ? 'idle' : 'error';
+    this.updateSyncStatus(status);
+
+    console.log('[SyncManager] Sync complete:', successCount, 'success,', failureCount, 'failed');
+    return failureCount === 0;
+  }
+
+  /**
+   * Execute a single sync operation
+   */
+  async executeSyncOperation(queueItem) {
+    const { operation } = queueItem;
+
+    try {
+      switch (operation.type) {
+        case 'save_checklist_progress':
+          if (window.pwaApp?.lifecycleModule) {
+            await window.pwaApp.lifecycleModule.saveChecklistProgress(
+              operation.phaseId,
+              operation.items
+            );
+            return true;
+          }
+          break;
+
+        case 'save_bookmark':
+          if (cgraDB) {
+            await cgraDB.put('case_bookmarks', operation.data);
+            return true;
+          }
+          break;
+
+        case 'remove_bookmark':
+          if (cgraDB) {
+            await cgraDB.delete('case_bookmarks', operation.id);
+            return true;
+          }
+          break;
+
+        case 'save_filter_preferences':
+          if (cgraDB) {
+            await cgraDB.put('filter_preferences', operation.data);
+            return true;
+          }
+          break;
+
+        default:
+          console.warn('[SyncManager] Unknown operation type:', operation.type);
+          return false;
+      }
+    } catch (error) {
+      console.error('[SyncManager] Error executing operation:', error);
+      return false;
+    }
+
+    return false;
+  }
+
+  /**
+   * Simple delay utility for retry logic
+   */
+  delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  /**
+   * Update sync status and notify UI
+   */
+  updateSyncStatus(status) {
+    this.syncStatus = status;
+    window.dispatchEvent(new CustomEvent('sync-status-changed', {
+      detail: { status, queueLength: this.syncQueue.length }
+    }));
+  }
+
+  /**
+   * Get current sync status
+   */
+  getStatus() {
+    return {
+      status: this.syncStatus,
+      queueLength: this.syncQueue.length,
+      isSyncing: this.isSyncing,
+      lastSyncTime: this.lastSyncTime,
+      syncHistory: this.syncHistory.slice(-5)
+    };
+  }
+
+  /**
+   * Clear sync history
+   */
+  clearSyncHistory() {
+    this.syncHistory = [];
+    this.saveSyncHistoryToStorage();
+  }
+
+  /**
+   * Get full sync history
+   */
+  getSyncHistory() {
+    return [...this.syncHistory];
+  }
+}
+
 // PWA App Initialization and Management with Module Integration
 class PWAApp {
   constructor() {
@@ -9,6 +255,7 @@ class PWAApp {
     this.lifecycleModule = null;
     this.casesModule = null;
     this.dashboardModule = null;
+    this.syncManager = new OfflineSyncManager();
     this.init();
   }
 
@@ -38,6 +285,9 @@ class PWAApp {
 
     // Update app status
     this.updateAppStatus();
+
+    // Update sync status UI
+    this.updateSyncStatusUI();
 
     console.log('[App] PWA initialization complete');
   }
@@ -69,6 +319,12 @@ class PWAApp {
         lifecycle: this.lifecycleModule,
         cases: this.casesModule
       };
+
+      // Initialize export module with app and database references
+      if (window.exportModule && cgraDB) {
+        window.exportModule.init(cgraDB, this);
+        console.log('[App] Export module initialized');
+      }
     } catch (error) {
       console.error('[App] Error initializing modules:', error);
     }
@@ -352,11 +608,15 @@ class PWAApp {
     console.log('[App] Setting up event listeners');
 
     // Online/Offline events
-    window.addEventListener('online', () => {
+    window.addEventListener('online', async () => {
       console.log('[App] Back online');
       this.isOnline = true;
       this.updateConnectionStatus();
       this.hideOfflineNotice();
+
+      // Trigger sync of queued operations
+      await this.syncManager.syncQueuedOperations();
+      this.updateSyncStatusUI();
     });
 
     window.addEventListener('offline', () => {
@@ -364,6 +624,12 @@ class PWAApp {
       this.isOnline = false;
       this.updateConnectionStatus();
       this.showOfflineNotice();
+      this.updateSyncStatusUI();
+    });
+
+    // Listen for sync status changes
+    window.addEventListener('sync-status-changed', (event) => {
+      this.updateSyncStatusUI();
     });
 
     // Handle visibility changes
@@ -484,6 +750,36 @@ class PWAApp {
           new Notification(title, { body: message });
         }
       });
+    }
+  }
+
+  /**
+   * Update sync status indicator in UI
+   */
+  updateSyncStatusUI() {
+    const syncStatus = this.syncManager.getStatus();
+    const syncIndicator = document.getElementById('sync-status');
+
+    if (syncIndicator) {
+      let statusText = '';
+      let statusColor = '';
+
+      if (!this.isOnline) {
+        statusText = 'Offline Mode';
+        statusColor = '#ef4444'; // red
+      } else if (this.syncManager.isSyncing) {
+        statusText = 'Syncing...';
+        statusColor = '#f59e0b'; // amber
+      } else if (this.syncManager.syncQueue.length > 0) {
+        statusText = `${this.syncManager.syncQueue.length} Pending`;
+        statusColor = '#f59e0b'; // amber
+      } else {
+        statusText = 'Synced';
+        statusColor = '#10b981'; // green
+      }
+
+      syncIndicator.textContent = statusText;
+      syncIndicator.style.color = statusColor;
     }
   }
 

@@ -239,6 +239,10 @@
                 <input type="text" id="global-search" placeholder="Search lifecycle phases, cases, resources...">
             </div>
             <div class="header-actions">
+                <div class="status-indicators">
+                    <span id="sync-status" style="font-size: 0.9rem; color: #10b981; margin-right: 1rem;">Synced</span>
+                    <span id="connection-status" style="font-size: 0.9rem; color: #10b981; margin-right: 1rem;">Online</span>
+                </div>
                 <button id="install-btn" class="btn btn-primary" style="display: none;">Install App</button>
                 <button id="share-btn" class="btn btn-secondary" style="display: none;">Share</button>
             </div>
@@ -314,8 +318,12 @@
     <script src="js/modules/rights.js"></script>
     <script src="js/modules/resources.js"></script>
     <script src="js/modules/support.js"></script>
+    <script src="js/modules/export.js"></script>
 
     <!-- Main App Script -->
     <script src="js/app.js"></script>
+
+    <!-- PDF Library (jsPDF) for export functionality -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </body>
 </html>

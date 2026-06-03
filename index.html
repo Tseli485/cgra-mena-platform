@@ -3,247 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Plateforme de Formation MENA Tuteur">
+    <meta name="description" content="Plateforme MENA Tuteur">
     <meta name="theme-color" content="#2563eb">
     <title>CGRA - Plateforme MENA Tuteur</title>
+    <link rel="manifest" href="manifest.json">
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: #f9fafb;
-            color: #374151;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f9fafb; color: #374151; }
+        
         /* Password Modal */
-        .password-modal {
-            display: flex;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-            align-items: center;
-            justify-content: center;
-            z-index: 10000;
-        }
-
-        .password-modal.hidden {
-            display: none;
-        }
-
-        .password-box {
-            background: white;
-            padding: 2rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 20px 25px rgba(0,0,0,0.15);
-            max-width: 400px;
-            width: 90%;
-        }
-
-        .password-box h1 {
-            margin: 0 0 1rem 0;
-            color: #2563eb;
-            text-align: center;
-            font-size: 1.5rem;
-        }
-
-        .password-box p {
-            margin: 0 0 1.5rem 0;
-            color: #6b7280;
-            text-align: center;
-        }
-
-        .password-box input {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #e5e7eb;
-            border-radius: 0.25rem;
-            font-size: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .password-box button {
-            width: 100%;
-            padding: 0.75rem;
-            background: #2563eb;
-            color: white;
-            border: none;
-            border-radius: 0.25rem;
-            font-size: 1rem;
-            cursor: pointer;
-            font-weight: 500;
-        }
-
-        .password-box button:hover {
-            background: #1e40af;
-        }
-
-        .password-error {
-            display: none;
-            margin: 1rem 0 0 0;
-            color: #ef4444;
-            text-align: center;
-            font-size: 0.9rem;
-        }
-
-        .password-error.show {
-            display: block;
-        }
+        .password-modal { display: flex; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%); align-items: center; justify-content: center; z-index: 10000; }
+        .password-modal.hidden { display: none; }
+        .password-box { background: white; padding: 2rem; border-radius: 0.5rem; box-shadow: 0 20px 25px rgba(0,0,0,0.15); max-width: 400px; width: 90%; }
+        .password-box h1 { margin: 0 0 1rem 0; color: #2563eb; text-align: center; font-size: 1.5rem; }
+        .password-box p { margin: 0 0 1.5rem 0; color: #6b7280; text-align: center; }
+        .password-box input { width: 100%; padding: 0.75rem; border: 1px solid #e5e7eb; border-radius: 0.25rem; font-size: 1rem; margin-bottom: 1rem; }
+        .password-box button { width: 100%; padding: 0.75rem; background: #2563eb; color: white; border: none; border-radius: 0.25rem; font-size: 1rem; cursor: pointer; font-weight: 500; }
+        .password-box button:hover { background: #1e40af; }
+        .password-error { display: none; margin: 1rem 0 0 0; color: #ef4444; text-align: center; }
+        .password-error.show { display: block; }
 
         /* Header */
-        .header {
-            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-            color: white;
-            padding: 1.5rem;
-            text-align: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
+        .header { background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%); color: white; padding: 1.5rem; text-align: center; }
+        .header h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+        .header p { font-size: 1rem; opacity: 0.9; }
 
-        .header h1 {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .header p {
-            font-size: 1rem;
-            opacity: 0.9;
-        }
-
-        /* Navigation */
-        .nav {
-            background: white;
-            border-bottom: 1px solid #e5e7eb;
-            display: flex;
-            gap: 0;
-            list-style: none;
-            overflow-x: auto;
-            padding: 0;
-            margin: 0;
-        }
-
-        .nav li {
-            border-right: 1px solid #e5e7eb;
-        }
-
-        .nav a {
-            display: block;
-            padding: 1rem 1.5rem;
-            color: #374151;
-            text-decoration: none;
-            font-weight: 500;
-            white-space: nowrap;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .nav a:hover {
-            background: #f3f4f6;
-            color: #2563eb;
-        }
-
-        .nav a.active {
-            background: #2563eb;
-            color: white;
-            border-bottom: 3px solid #1e40af;
-        }
+        /* Nav */
+        .nav-container { background: white; border-bottom: 1px solid #e5e7eb; overflow-x: auto; }
+        .nav { display: flex; list-style: none; }
+        .nav li { border-right: 1px solid #e5e7eb; }
+        .nav a { display: block; padding: 1rem 1.5rem; color: #374151; text-decoration: none; font-weight: 500; white-space: nowrap; cursor: pointer; }
+        .nav a:hover { background: #f3f4f6; color: #2563eb; }
+        .nav a.active { background: #2563eb; color: white; }
 
         /* Content */
-        .content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        .module {
-            display: none;
-        }
-
-        .module.active {
-            display: block;
-        }
-
-        .module h2 {
-            color: #2563eb;
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-        }
-
-        .module-section {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 0.5rem;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-
-        .module-section h3 {
-            color: #374151;
-            margin-bottom: 0.75rem;
-            font-size: 1.1rem;
-        }
-
-        .module-section p, .module-section li {
-            line-height: 1.6;
-            margin-bottom: 0.5rem;
-        }
-
-        .module-section ul {
-            margin-left: 1.5rem;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            background: #2563eb;
-            color: white;
-            text-decoration: none;
-            border-radius: 0.25rem;
-            cursor: pointer;
-            border: none;
-            margin-top: 1rem;
-            font-weight: 500;
-        }
-
-        .btn:hover {
-            background: #1e40af;
-        }
-
-        /* Footer */
-        .footer {
-            background: #f3f4f6;
-            text-align: center;
-            padding: 1rem;
-            margin-top: 2rem;
-            border-top: 1px solid #e5e7eb;
-            color: #6b7280;
-            font-size: 0.9rem;
-        }
-
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 1.5rem;
-            }
-
-            .nav a {
-                padding: 0.75rem 1rem;
-                font-size: 0.9rem;
-            }
-
-            .content {
-                padding: 1rem;
-            }
-        }
+        .main-content { max-width: 1400px; margin: 0 auto; padding: 2rem; min-height: calc(100vh - 200px); }
+        .module { display: none; }
+        .module.active { display: block; }
+        .module h2 { color: #2563eb; margin-bottom: 1.5rem; font-size: 1.8rem; }
+        .section-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .card { background: white; padding: 1.5rem; border-radius: 0.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .card h3 { color: #374151; margin-bottom: 0.75rem; }
+        .card p { color: #6b7280; line-height: 1.6; margin-bottom: 0.5rem; }
+        .card ul { margin-left: 1.5rem; color: #6b7280; }
+        .btn { display: inline-block; padding: 0.75rem 1.5rem; background: #2563eb; color: white; border: none; border-radius: 0.25rem; cursor: pointer; margin-top: 1rem; }
+        .btn:hover { background: #1e40af; }
+        .footer { background: #f3f4f6; text-align: center; padding: 1rem; border-top: 1px solid #e5e7eb; color: #6b7280; }
     </style>
 </head>
 <body>
-    <!-- Password Protection -->
+    <!-- Password Modal -->
     <div class="password-modal" id="passwordModal">
         <div class="password-box">
             <h1>🔐 CGRA</h1>
@@ -254,265 +64,92 @@
         </div>
     </div>
 
-    <!-- Main App -->
+    <!-- App -->
     <div id="app" style="display: none;">
-        <!-- Header -->
         <div class="header">
             <h1>🏫 Plateforme MENA Tuteur</h1>
-            <p>Formation complète pour les tuteurs travaillant avec les enfants</p>
+            <p>Formation complète pour les tuteurs</p>
         </div>
 
-        <!-- Navigation -->
-        <ul class="nav">
-            <li><a class="nav-link active" data-module="accueil">🏠 Accueil</a></li>
-            <li><a class="nav-link" data-module="lifecycle">🔄 Cycle de Vie</a></li>
-            <li><a class="nav-link" data-module="cases">📚 Cas Pratiques</a></li>
-            <li><a class="nav-link" data-module="resources">📁 Ressources</a></li>
-            <li><a class="nav-link" data-module="docs">📄 Documents</a></li>
-        </ul>
-
-        <!-- Content -->
-        <div class="content">
-            <!-- Accueil -->
-            <div class="module active" id="accueil">
-                <h2>Bienvenue sur la Plateforme MENA Tuteur</h2>
-
-                <div class="module-section">
-                    <h3>✨ À propos</h3>
-                    <p>Cette plateforme offre une formation complète pour les tuteurs travaillant avec les enfants MENA (Mineurs Étrangers Non Accompagnés).</p>
-                    <p>Vous trouverez ici :</p>
-                    <ul>
-                        <li>📖 Guides complets en français</li>
-                        <li>🔍 Études de cas détaillées</li>
-                        <li>👥 Répertoire d'avocats et d'organisations</li>
-                        <li>📋 Documents et formulaires</li>
-                        <li>⚖️ Informations sur les droits</li>
-                    </ul>
-                </div>
-
-                <div class="module-section">
-                    <h3>🚀 Comment utiliser</h3>
-                    <p><strong>1. Cycle de Vie :</strong> Découvrez les phases de développement (0-2, 2-6, 6-12, 12-18 ans)</p>
-                    <p><strong>2. Cas Pratiques :</strong> Consultez 15 études de cas détaillées</p>
-                    <p><strong>3. Ressources :</strong> Accédez à 30+ avocats et 50+ organisations</p>
-                    <p><strong>4. Documents :</strong> Téléchargez les syllabus complets en PDF</p>
-                </div>
-
-                <div class="module-section">
-                    <h3>📊 Contenu disponible</h3>
-                    <ul>
-                        <li>✅ Syllabus court (20 pages)</li>
-                        <li>✅ Syllabus complet (80 pages)</li>
-                        <li>✅ 6 dossiers organisés</li>
-                        <li>✅ 15 cas d'étude</li>
-                        <li>✅ Répertoire complet de ressources</li>
-                        <li>✅ Mode hors ligne</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Cycle de Vie -->
-            <div class="module" id="lifecycle">
-                <h2>🔄 Cycle de Vie de l'Enfant</h2>
-
-                <div class="module-section">
-                    <h3>0-2 ans : Nourrissons et Tout-petits</h3>
-                    <p><strong>Développement clé :</strong> Attachement, reconnaissance des émotions, premiers mots</p>
-                    <p><strong>Rôle du tuteur :</strong> Fournir des soins attentifs, créer un environnement sécurisé, favoriser l'attachement</p>
-                    <p><strong>Défis spécifiques :</strong> Barrière linguistique, traumatisme initial, besoins de santé</p>
-                </div>
-
-                <div class="module-section">
-                    <h3>2-6 ans : Enfants d'Âge Préscolaire</h3>
-                    <p><strong>Développement clé :</strong> Langage, autonomie, jeu, socialisation</p>
-                    <p><strong>Rôle du tuteur :</strong> Encourager l'apprentissage par le jeu, développer les compétences sociales</p>
-                    <p><strong>Défis spécifiques :</strong> Intégration scolaire, développement du langage, jeu traumatique</p>
-                </div>
-
-                <div class="module-section">
-                    <h3>6-12 ans : Enfants d'Âge Scolaire</h3>
-                    <p><strong>Développement clé :</strong> Compétences académiques, amitié, identité</p>
-                    <p><strong>Rôle du tuteur :</strong> Soutien scolaire, développement des amitiés, construction de l'identité</p>
-                    <p><strong>Défis spécifiques :</strong> Performance scolaire, santé mentale, intégration sociale</p>
-                </div>
-
-                <div class="module-section">
-                    <h3>12-18 ans : Adolescents</h3>
-                    <p><strong>Développement clé :</strong> Identité, autonomie, relations, planification d'avenir</p>
-                    <p><strong>Rôle du tuteur :</strong> Guidance, soutien émotionnel, planification de l'avenir</p>
-                    <p><strong>Défis spécifiques :</strong> Trauma, identité culturelle, planning du statut legal</p>
-                </div>
-            </div>
-
-            <!-- Cas Pratiques -->
-            <div class="module" id="cases">
-                <h2>📚 Cas Pratiques</h2>
-
-                <div class="module-section">
-                    <h3>📖 15 Études de Cas Disponibles</h3>
-                    <p>La plateforme contient 15 cas d'étude détaillés couvrant :</p>
-                    <ul>
-                        <li>🏃 Enfants non accompagnés</li>
-                        <li>😢 Enfants avec traumatisme</li>
-                        <li>👨‍👩‍👧 Enfants avec famille</li>
-                        <li>📚 Cas éducatifs</li>
-                        <li>⚖️ Cas légaux</li>
-                        <li>💼 Cas professionnels</li>
-                    </ul>
-                    <p style="margin-top: 1rem; color: #6b7280; font-size: 0.9rem;">💡 Pour voir les cas complets, consultez le PDF du syllabus (80 pages)</p>
-                </div>
-
-                <div class="module-section">
-                    <h3>🎯 Objectif des Cas</h3>
-                    <p>Ces cas pratiques vous permettent de :</p>
-                    <ul>
-                        <li>Comprendre les situations réelles</li>
-                        <li>Identifier les défis majeurs</li>
-                        <li>Appliquer les bonnes pratiques</li>
-                        <li>Développer vos compétences</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Ressources -->
-            <div class="module" id="resources">
-                <h2>📁 Ressources et Contacts</h2>
-
-                <div class="module-section">
-                    <h3>👨‍⚖️ Avocats Spécialisés</h3>
-                    <p>Répertoire de 30+ avocats spécialisés en :</p>
-                    <ul>
-                        <li>⚖️ Droit de l'asile</li>
-                        <li>👨‍👩‍👧‍👦 Droit familial</li>
-                        <li>💼 Droit du travail</li>
-                        <li>🏠 Droit du logement</li>
-                    </ul>
-                </div>
-
-                <div class="module-section">
-                    <h3>🏢 Organisations</h3>
-                    <p>Répertoire de 50+ organisations offrant :</p>
-                    <ul>
-                        <li>🏥 Services de santé</li>
-                        <li>🏠 Logement</li>
-                        <li>📚 Éducation</li>
-                        <li>⚖️ Soutien légal</li>
-                        <li>🍎 Services sociaux</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Documents -->
-            <div class="module" id="docs">
-                <h2>📄 Documents Téléchargeables</h2>
-
-                <div class="module-section">
-                    <h3>📖 Syllabus Disponibles</h3>
-                    <div style="margin: 1rem 0;">
-                        <p><strong>1. Syllabus Court (20 pages)</strong></p>
-                        <p style="color: #6b7280; margin-bottom: 1rem;">Référence rapide avec les points clés</p>
-                        <a href="#" class="btn">📥 Télécharger (20 pages)</a>
-                    </div>
-                    <hr style="margin: 1.5rem 0; border: none; border-top: 1px solid #e5e7eb;">
-                    <div style="margin: 1rem 0;">
-                        <p><strong>2. Syllabus Complet (80 pages)</strong></p>
-                        <p style="color: #6b7280; margin-bottom: 1rem;">Manuel complet avec tous les cas et ressources</p>
-                        <a href="#" class="btn">📥 Télécharger (80 pages)</a>
-                    </div>
-                </div>
-
-                <div class="module-section">
-                    <h3>📋 Autres Documents</h3>
-                    <ul>
-                        <li>📝 Formulaires CGRA</li>
-                        <li>📖 Guides de procédure</li>
-                        <li>✉️ Templates de lettres</li>
-                        <li>📋 Checklist tuteur</li>
-                    </ul>
-                    <p style="margin-top: 1rem; color: #6b7280; font-size: 0.9rem;">💡 Tous les documents sont inclus dans les syllabus PDF</p>
-                </div>
-            </div>
+        <div class="nav-container">
+            <ul class="nav" id="navigation">
+                <li><a class="nav-link active" data-module="dashboard">🏠 Accueil</a></li>
+                <li><a class="nav-link" data-module="lifecycle">🔄 Cycle de Vie</a></li>
+                <li><a class="nav-link" data-module="cases">📚 Cas Pratiques</a></li>
+                <li><a class="nav-link" data-module="resources">📁 Ressources</a></li>
+                <li><a class="nav-link" data-module="role">👤 Mon Rôle</a></li>
+                <li><a class="nav-link" data-module="procedure">⚖️ Procédure</a></li>
+                <li><a class="nav-link" data-module="rights">✋ Droits</a></li>
+                <li><a class="nav-link" data-module="support">🆘 Support</a></li>
+            </ul>
         </div>
 
-        <!-- Footer -->
+        <div class="main-content" id="modules-container">
+            <!-- Modules loaded here -->
+        </div>
+
         <div class="footer">
-            <p>&copy; 2026 Plateforme MENA Tuteur. Tous droits réservés. | Version 1.0</p>
+            <p>&copy; 2026 Plateforme MENA Tuteur. Tous droits réservés. | Version 2.0</p>
         </div>
     </div>
 
-    <script>
-        // Password Protection
-        const PASSWORD = 'Triasake 001';
-        const PASSWORD_SESSION_KEY = 'cgra_auth';
+    <!-- Database -->
+    <script src="js/db.js"></script>
 
-        function checkPasswordProtection() {
-            if (sessionStorage.getItem(PASSWORD_SESSION_KEY) === 'true') {
+    <!-- Modules -->
+    <script src="js/modules/dashboard.js"></script>
+    <script src="js/modules/lifecycle.js"></script>
+    <script src="js/modules/cases.js"></script>
+    <script src="js/modules/resources.js"></script>
+    <script src="js/modules/role.js"></script>
+    <script src="js/modules/procedure.js"></script>
+    <script src="js/modules/rights.js"></script>
+    <script src="js/modules/support.js"></script>
+    <script src="js/modules/search.js"></script>
+    <script src="js/modules/export.js"></script>
+
+    <!-- App -->
+    <script src="js/app.js"></script>
+
+    <script>
+        const PASSWORD = 'Triasake 001';
+        const KEY = 'cgra_auth';
+
+        function checkAuth() {
+            if (sessionStorage.getItem(KEY) === 'true') {
                 document.getElementById('passwordModal').classList.add('hidden');
                 document.getElementById('app').style.display = 'block';
+                if (window.PWAApp) window.PWAApp.init();
             }
         }
 
-        function setupPasswordForm() {
+        function setupPassword() {
             const input = document.getElementById('passwordInput');
             const btn = document.getElementById('passwordBtn');
             const error = document.getElementById('passwordError');
 
-            function attemptPassword() {
+            function check() {
                 if (input.value === PASSWORD) {
-                    sessionStorage.setItem(PASSWORD_SESSION_KEY, 'true');
+                    sessionStorage.setItem(KEY, 'true');
                     error.classList.remove('show');
                     document.getElementById('passwordModal').classList.add('hidden');
                     document.getElementById('app').style.display = 'block';
+                    if (window.PWAApp) window.PWAApp.init();
                 } else {
                     error.classList.add('show');
                     input.value = '';
-                    input.focus();
                 }
             }
 
-            btn.addEventListener('click', attemptPassword);
-            input.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') attemptPassword();
-            });
-
+            btn.addEventListener('click', check);
+            input.addEventListener('keypress', (e) => { if (e.key === 'Enter') check(); });
             input.focus();
         }
 
-        // Navigation
-        function setupNavigation() {
-            const navLinks = document.querySelectorAll('.nav-link');
-            const modules = document.querySelectorAll('.module');
-
-            navLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const moduleId = link.dataset.module;
-
-                    // Update active nav
-                    navLinks.forEach(l => l.classList.remove('active'));
-                    link.classList.add('active');
-
-                    // Update active module
-                    modules.forEach(m => m.classList.remove('active'));
-                    document.getElementById(moduleId).classList.add('active');
-                });
-            });
-        }
-
-        // Initialize
         window.addEventListener('load', () => {
-            checkPasswordProtection();
-            if (sessionStorage.getItem(PASSWORD_SESSION_KEY) !== 'true') {
-                setupPasswordForm();
-            } else {
-                setupNavigation();
-            }
+            checkAuth();
+            if (sessionStorage.getItem(KEY) !== 'true') setupPassword();
         });
-
-        // Setup nav when app loads
-        if (sessionStorage.getItem(PASSWORD_SESSION_KEY) === 'true') {
-            setTimeout(setupNavigation, 100);
-        }
     </script>
 </body>
 </html>

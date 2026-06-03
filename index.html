@@ -3,31 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CGRA - Test (Sans Mot de Passe)</title>
+    <title>CGRA - Plateforme MENA Tuteur</title>
     <link rel="manifest" href="manifest.json">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f9fafb; }
-        .header { background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%); color: white; padding: 1.5rem; text-align: center; }
-        .header h1 { font-size: 2rem; margin-bottom: 0.5rem; }
-        .nav-container { background: white; border-bottom: 1px solid #e5e7eb; overflow-x: auto; }
-        .nav { display: flex; list-style: none; }
-        .nav li { border-right: 1px solid #e5e7eb; }
-        .nav a { display: block; padding: 1rem 1.5rem; color: #374151; text-decoration: none; font-weight: 500; white-space: nowrap; cursor: pointer; }
-        .nav a:hover { background: #f3f4f6; color: #2563eb; }
-        .nav a.active { background: #2563eb; color: white; }
-        .main-content { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f9fafb;
+            color: #333;
+        }
+        .header {
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        .header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .header p { font-size: 1.1rem; opacity: 0.9; }
+
+        .nav-container {
+            background: white;
+            border-bottom: 2px solid #2563eb;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .nav {
+            display: flex;
+            list-style: none;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .nav li { border-right: 1px solid #e5e7eb; flex: 1; }
+        .nav li:last-child { border-right: none; }
+        .nav a {
+            display: block;
+            padding: 1.2rem 1rem;
+            color: #374151;
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        .nav a:hover {
+            background: #f3f4f6;
+            color: #2563eb;
+        }
+        .nav a.active {
+            background: #2563eb;
+            color: white;
+            border-bottom: 3px solid #1e40af;
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
         .module { display: none; }
         .module.active { display: block; }
-        .module h2 { color: #2563eb; margin-bottom: 1.5rem; }
-        .error { background: #fee2e2; border: 1px solid #fecaca; color: #991b1b; padding: 1rem; margin: 1rem 0; border-radius: 0.5rem; }
-        .info { background: #dbeafe; border: 1px solid #bfdbfe; color: #1e40af; padding: 1rem; margin: 1rem 0; border-radius: 0.5rem; }
+
+        .module h2 {
+            color: #2563eb;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            border-bottom: 3px solid #2563eb;
+            padding-bottom: 0.5rem;
+        }
+
+        .info {
+            background: #dbeafe;
+            border: 2px solid #2563eb;
+            color: #1e40af;
+            padding: 1.5rem;
+            margin: 1rem 0 2rem 0;
+            border-radius: 0.5rem;
+        }
+
+        .content-section {
+            background: white;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 0.5rem;
+            border-left: 4px solid #2563eb;
+        }
+
+        .phase-list, .case-list, .resource-list {
+            list-style: none;
+        }
+
+        .phase-list li, .case-list li, .resource-list li {
+            padding: 1rem;
+            margin: 0.5rem 0;
+            background: #f9fafb;
+            border-left: 3px solid #2563eb;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .phase-list li:hover, .case-list li:hover, .resource-list li:hover {
+            background: #eff6ff;
+            padding-left: 1.5rem;
+        }
+
+        .loading {
+            color: #6b7280;
+            font-style: italic;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 1.8rem; }
+            .nav a { padding: 0.8rem 0.5rem; font-size: 0.9rem; }
+            .main-content { padding: 1rem; }
+            .module h2 { font-size: 1.5rem; }
+        }
     </style>
 </head>
 <body>
     <div class="header">
-        <h1>🏫 Plateforme MENA Tuteur - TEST VERSION</h1>
-        <p>Version sans mot de passe pour tester les modules</p>
+        <h1>🏫 Plateforme MENA Tuteur</h1>
+        <p>Plateforme complète de formation pour tuteurs</p>
     </div>
 
     <div class="nav-container">
@@ -36,37 +136,92 @@
             <li><a class="nav-link" data-module="lifecycle">🔄 Cycle de Vie</a></li>
             <li><a class="nav-link" data-module="cases">📚 Cas Pratiques</a></li>
             <li><a class="nav-link" data-module="resources">📁 Ressources</a></li>
+            <li><a class="nav-link" data-module="role">👤 Mon Rôle</a></li>
+            <li><a class="nav-link" data-module="procedure">⚙️ Procédure</a></li>
         </ul>
     </div>
 
     <div class="main-content">
-        <div class="info">
-            ✅ <strong>Version de test:</strong> Mot de passe désactivé pour vérifier que les modules se chargent correctement
-        </div>
-
         <div id="modules-container">
+            <!-- Dashboard / Accueil -->
             <div class="module active" id="dashboard">
                 <h2>🏠 Accueil</h2>
-                <p>Bienvenue sur la Plateforme MENA Tuteur</p>
+                <div class="info">
+                    ✅ Bienvenue sur la Plateforme MENA Tuteur - Version complète
+                </div>
+                <div class="content-section">
+                    <h3>📖 Guide de Navigation</h3>
+                    <p>Utilisez les onglets ci-dessus pour accéder aux différents modules :</p>
+                    <ul style="margin-left: 2rem; margin-top: 1rem;">
+                        <li><strong>🔄 Cycle de Vie</strong> - Les différentes phases de développement de l'enfant (0-18 ans)</li>
+                        <li><strong>📚 Cas Pratiques</strong> - Études de cas réels pour la formation pratique</li>
+                        <li><strong>📁 Ressources</strong> - Ressources, contacts, et organisation d'aide</li>
+                        <li><strong>👤 Mon Rôle</strong> - Description et responsabilités du tuteur</li>
+                        <li><strong>⚙️ Procédure</strong> - Procédures et protocoles à suivre</li>
+                    </ul>
+                </div>
             </div>
 
+            <!-- Lifecycle -->
             <div class="module" id="lifecycle">
-                <h2>🔄 Cycle de Vie</h2>
-                <p>Module Cycle de Vie (à charger...)</p>
+                <h2>🔄 Cycle de Vie - Les Phases de Développement</h2>
+                <div class="info">
+                    Découvrez les différentes étapes du développement de l'enfant de 0 à 18 ans
+                </div>
+                <div id="lifecycle-content" class="content-section">
+                    <div class="loading">Chargement du contenu...</div>
+                </div>
             </div>
 
+            <!-- Cases -->
             <div class="module" id="cases">
                 <h2>📚 Cas Pratiques</h2>
-                <p>Module Cas Pratiques (à charger...)</p>
+                <div class="info">
+                    Études de cas réels pour l'apprentissage et la formation pratique
+                </div>
+                <div id="cases-content" class="content-section">
+                    <div class="loading">Chargement des cas...</div>
+                </div>
             </div>
 
+            <!-- Resources -->
             <div class="module" id="resources">
-                <h2>📁 Ressources</h2>
-                <p>Module Ressources (à charger...)</p>
+                <h2>📁 Ressources & Contacts</h2>
+                <div class="info">
+                    Répertoire des ressources, avocats, organismes, et contacts utiles
+                </div>
+                <div id="resources-content" class="content-section">
+                    <div class="loading">Chargement des ressources...</div>
+                </div>
+            </div>
+
+            <!-- Role -->
+            <div class="module" id="role">
+                <h2>👤 Mon Rôle - Le Tuteur</h2>
+                <div class="info">
+                    Responsabilités et description du rôle de tuteur
+                </div>
+                <div class="content-section">
+                    <p>Le tuteur joue un rôle essentiel dans la protection et le soutien de l'enfant...</p>
+                    <p style="margin-top: 1rem;"><em>Contenu détaillé à charger...</em></p>
+                </div>
+            </div>
+
+            <!-- Procedure -->
+            <div class="module" id="procedure">
+                <h2>⚙️ Procédure</h2>
+                <div class="info">
+                    Procédures et protocoles à suivre
+                </div>
+                <div class="content-section">
+                    <p>Suivez les procédures établies pour assurer la sécurité et le bien-être...</p>
+                    <p style="margin-top: 1rem;"><em>Procédures détaillées à charger...</em></p>
+                </div>
             </div>
         </div>
     </div>
 
+    <!-- Scripts de modules -->
     <script src="js/db.js"></script>
     <script src="js/modules/dashboard.js"></script>
     <script src="js/modules/lifecycle.js"></script>
@@ -74,34 +229,102 @@
     <script src="js/modules/resources.js"></script>
     <script src="js/modules/role.js"></script>
     <script src="js/modules/procedure.js"></script>
-    <script src="js/modules/rights.js"></script>
-    <script src="js/modules/support.js"></script>
     <script src="js/modules/search.js"></script>
     <script src="js/modules/export.js"></script>
     <script src="js/app.js"></script>
 
     <script>
-        // Simple navigation without password
+        // Navigation simple
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
                 const moduleId = link.dataset.module;
-                
-                // Hide all modules
+
+                // Cacher tous les modules
                 document.querySelectorAll('.module').forEach(m => m.classList.remove('active'));
                 document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-                
-                // Show selected
-                document.getElementById(moduleId).classList.add('active');
-                link.classList.add('active');
+
+                // Afficher le module sélectionné
+                const module = document.getElementById(moduleId);
+                if (module) {
+                    module.classList.add('active');
+                    link.classList.add('active');
+                }
             });
         });
 
-        // Log when app loads
+        // Charger les données si disponibles
         window.addEventListener('load', () => {
-            console.log('✅ Test page loaded');
-            if (window.pwaApp) console.log('✅ PWA App instance created');
-            if (window.cgraDB) console.log('✅ CGRA Database loaded');
+            console.log('✅ Page loaded');
+
+            // Essayer de charger les données de lifecycle
+            if (window.cgraDB) {
+                console.log('✅ Database loaded');
+
+                try {
+                    // Charger et afficher les données de cycle de vie si disponibles
+                    fetch('data/lifecycle-data.json')
+                        .then(r => r.json())
+                        .then(data => {
+                            const container = document.getElementById('lifecycle-content');
+                            if (data && data.phases) {
+                                let html = '<ul class="phase-list">';
+                                data.phases.forEach(phase => {
+                                    html += `<li><strong>${phase.age}</strong> - ${phase.title}<br><small>${phase.description}</small></li>`;
+                                });
+                                html += '</ul>';
+                                container.innerHTML = html;
+                            }
+                        })
+                        .catch(e => {
+                            console.log('Lifecycle data not found:', e);
+                            document.getElementById('lifecycle-content').innerHTML =
+                                '<p>Données non disponibles actuellement.</p>';
+                        });
+
+                    // Charger les données de cas
+                    fetch('js/data/cases-data.json')
+                        .then(r => r.json())
+                        .then(data => {
+                            const container = document.getElementById('cases-content');
+                            if (data && data.cases) {
+                                let html = '<ul class="case-list">';
+                                data.cases.slice(0, 10).forEach(caseItem => {
+                                    html += `<li><strong>${caseItem.title}</strong><br><small>${caseItem.type} | ${caseItem.age_group}</small></li>`;
+                                });
+                                html += '</ul>';
+                                container.innerHTML = html;
+                            }
+                        })
+                        .catch(e => {
+                            console.log('Cases data not found:', e);
+                            document.getElementById('cases-content').innerHTML =
+                                '<p>Cas pratiques non disponibles actuellement.</p>';
+                        });
+
+                    // Charger les ressources
+                    fetch('js/data/resources-data.json')
+                        .then(r => r.json())
+                        .then(data => {
+                            const container = document.getElementById('resources-content');
+                            if (data && data.resources) {
+                                let html = '<ul class="resource-list">';
+                                data.resources.slice(0, 10).forEach(resource => {
+                                    html += `<li><strong>${resource.name}</strong><br><small>${resource.type} | ${resource.region}</small></li>`;
+                                });
+                                html += '</ul>';
+                                container.innerHTML = html;
+                            }
+                        })
+                        .catch(e => {
+                            console.log('Resources data not found:', e);
+                            document.getElementById('resources-content').innerHTML =
+                                '<p>Ressources non disponibles actuellement.</p>';
+                        });
+                } catch (e) {
+                    console.error('Error loading data:', e);
+                }
+            }
         });
     </script>
 </body>

@@ -119,7 +119,6 @@
             if (sessionStorage.getItem(KEY) === 'true') {
                 document.getElementById('passwordModal').classList.add('hidden');
                 document.getElementById('app').style.display = 'block';
-                if (window.PWAApp) window.PWAApp.init();
             }
         }
 
@@ -134,7 +133,7 @@
                     error.classList.remove('show');
                     document.getElementById('passwordModal').classList.add('hidden');
                     document.getElementById('app').style.display = 'block';
-                    if (window.PWAApp) window.PWAApp.init();
+                    // App initializes automatically when scripts load
                 } else {
                     error.classList.add('show');
                     input.value = '';

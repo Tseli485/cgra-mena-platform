@@ -17,47 +17,287 @@
     <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%232563eb' width='192' height='192'/><text x='50%' y='50%' font-size='100' fill='white' text-anchor='middle' dy='.3em' font-weight='bold'>CGRA</text></svg>">
 
     <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Navigation styles */
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0;
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+        }
+
+        .header-branding {
+            flex: 1;
+            padding: 1rem;
+        }
+
+        .header-branding h1 {
+            margin: 0;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .global-search-bar {
+            flex: 2;
+            padding: 0 1rem;
+        }
+
+        .global-search-bar input {
+            width: 100%;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 0.25rem;
+            font-size: 0.9rem;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 0.5rem;
+            padding: 1rem;
+        }
+
+        .main-navigation {
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            overflow-x: auto;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 0;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .nav-menu li {
+            border-right: 1px solid #e5e7eb;
+        }
+
+        .nav-menu a {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 1.5rem;
+            color: #374151;
+            text-decoration: none;
+            font-weight: 500;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            background: #f3f4f6;
+            color: #2563eb;
+        }
+
+        .nav-menu a.active {
+            background: #2563eb;
+            color: white;
+            border-bottom: 3px solid #1e40af;
+        }
+
+        .nav-icon {
+            font-size: 1.2rem;
+        }
+
+        .breadcrumb {
+            background: #f9fafb;
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            color: #6b7280;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .breadcrumb a {
+            color: #2563eb;
+            text-decoration: none;
+            margin: 0 0.25rem;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .module-container {
+            display: none;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .module-container.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .search-results-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            padding: 2rem;
+        }
+
+        .search-results-modal.active {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+        }
+
+        .search-results-content {
+            background: white;
+            border-radius: 0.5rem;
+            max-width: 600px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 1.5rem;
+            box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .search-results-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: white;
+        }
+
+        .search-result-item {
+            padding: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .search-result-item:hover {
+            background: #f3f4f6;
+        }
+
+        .search-result-item strong {
+            display: block;
+            color: #2563eb;
+            margin-bottom: 0.25rem;
+        }
+
+        .search-result-item small {
+            color: #6b7280;
+        }
+
+        @media (max-width: 768px) {
+            .app-header {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .header-branding,
+            .global-search-bar,
+            .header-actions {
+                width: 100%;
+                padding: 0.5rem;
+            }
+
+            .global-search-bar input {
+                font-size: 1rem;
+            }
+
+            .nav-menu a {
+                padding: 0.75rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .nav-icon {
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <div id="app">
         <header class="app-header">
-            <h1>Competitive Gaming Research Assistant</h1>
+            <div class="header-branding">
+                <h1>CGRA</h1>
+            </div>
+            <div class="global-search-bar">
+                <input type="text" id="global-search" placeholder="Search lifecycle phases, cases, resources...">
+            </div>
             <div class="header-actions">
                 <button id="install-btn" class="btn btn-primary" style="display: none;">Install App</button>
                 <button id="share-btn" class="btn btn-secondary" style="display: none;">Share</button>
             </div>
         </header>
 
+        <nav class="main-navigation">
+            <ul class="nav-menu">
+                <li><a href="#dashboard" class="nav-link active" data-module="dashboard"><span class="nav-icon">🏠</span> Dashboard</a></li>
+                <li><a href="#role" class="nav-link" data-module="role"><span class="nav-icon">👤</span> Mon Rôle</a></li>
+                <li><a href="#lifecycle" class="nav-link" data-module="lifecycle"><span class="nav-icon">🔄</span> Cycle de Vie</a></li>
+                <li><a href="#procedure" class="nav-link" data-module="procedure"><span class="nav-icon">📋</span> Procédure</a></li>
+                <li><a href="#rights" class="nav-link" data-module="rights"><span class="nav-icon">⚖️</span> Droits</a></li>
+                <li><a href="#cases" class="nav-link" data-module="cases"><span class="nav-icon">📚</span> Cas Pratiques</a></li>
+                <li><a href="#resources" class="nav-link" data-module="resources"><span class="nav-icon">📁</span> Ressources</a></li>
+                <li><a href="#support" class="nav-link" data-module="support"><span class="nav-icon">❓</span> Support</a></li>
+            </ul>
+        </nav>
+
+        <div class="breadcrumb" id="breadcrumb" style="display: none;">
+            <a href="#dashboard">Dashboard</a> <span>›</span> <span id="breadcrumb-content"></span>
+        </div>
+
+        <section class="offline-notice" id="offline-notice" style="display: none;">
+            <p>You are currently offline. Some features may be limited.</p>
+        </section>
+
         <main class="app-main">
-            <section class="offline-notice" id="offline-notice" style="display: none;">
-                <p>You are currently offline. Some features may be limited.</p>
-            </section>
+            <!-- Dashboard Module -->
+            <div id="dashboard-container" class="module-container active"></div>
 
-            <section class="app-content">
-                <h2>Welcome to CGRA</h2>
-                <p>Your progressive web app is ready to use offline and on any device.</p>
+            <!-- Role Module -->
+            <div id="role-container" class="module-container"></div>
 
-                <div class="features">
-                    <div class="feature-card">
-                        <h3>Offline Support</h3>
-                        <p>Works seamlessly even without an internet connection.</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3>Fast Loading</h3>
-                        <p>Service Worker caching ensures instant app launch.</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3>Installable</h3>
-                        <p>Add directly to your home screen or app drawer.</p>
-                    </div>
+            <!-- Lifecycle Module -->
+            <div id="lifecycle-container" class="module-container"></div>
+
+            <!-- Procedure Module -->
+            <div id="procedure-container" class="module-container"></div>
+
+            <!-- Rights Module -->
+            <div id="rights-container" class="module-container"></div>
+
+            <!-- Cases Module -->
+            <div id="cases-container" class="module-container"></div>
+
+            <!-- Resources Module -->
+            <div id="resources-container" class="module-container"></div>
+
+            <!-- Support Module -->
+            <div id="support-container" class="module-container"></div>
+
+            <!-- Search Results Modal -->
+            <div id="search-results-modal" class="search-results-modal">
+                <button class="search-results-close" id="search-close">&times;</button>
+                <div class="search-results-content" id="search-results-content">
+                    <h2>Search Results</h2>
+                    <div id="search-results-list"></div>
                 </div>
-
-                <div id="status-info" class="status-info">
-                    <p><strong>App Status:</strong> <span id="app-status">Initializing...</span></p>
-                    <p><strong>Service Worker:</strong> <span id="sw-status">Checking...</span></p>
-                    <p><strong>Connection:</strong> <span id="connection-status">Online</span></p>
-                </div>
-            </section>
+            </div>
         </main>
 
         <footer class="app-footer">
@@ -65,6 +305,17 @@
         </footer>
     </div>
 
+    <!-- Module Scripts -->
+    <script src="js/modules/dashboard.js"></script>
+    <script src="js/modules/lifecycle.js"></script>
+    <script src="js/modules/cases.js"></script>
+    <script src="js/modules/role.js"></script>
+    <script src="js/modules/procedure.js"></script>
+    <script src="js/modules/rights.js"></script>
+    <script src="js/modules/resources.js"></script>
+    <script src="js/modules/support.js"></script>
+
+    <!-- Main App Script -->
     <script src="js/app.js"></script>
 </body>
 </html>

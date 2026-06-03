@@ -1,0 +1,29 @@
+[build]
+  command = "npm run build"
+  publish = "pwa"
+  
+[build.environment]
+  NODE_VERSION = "20"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[[headers]]
+  for = "/pwa/index.html"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+    
+[[headers]]
+  for = "/pwa/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+[[headers]]
+  for = "/docs/syllabus/*.pdf"
+  [headers.values]
+    Content-Type = "application/pdf"
+
+[functions]
+  directory = "functions"

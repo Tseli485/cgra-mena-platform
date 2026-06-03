@@ -313,11 +313,10 @@
         </footer>
     </div>
 
-    <!-- Database & Core Scripts (load first!) -->
+    <!-- Database (load FIRST!) -->
     <script src="js/db.js"></script>
-    <script src="js/app.js"></script>
 
-    <!-- Module Scripts -->
+    <!-- Module Scripts (before app.js!) -->
     <script src="js/modules/dashboard.js"></script>
     <script src="js/modules/lifecycle.js"></script>
     <script src="js/modules/cases.js"></script>
@@ -327,6 +326,11 @@
     <script src="js/modules/resources.js"></script>
     <script src="js/modules/support.js"></script>
     <script src="js/modules/export.js"></script>
+    <script src="js/modules/search.js"></script>
+    <script src="js/modules/discover.js"></script>
+
+    <!-- Main App Script (load LAST!) -->
+    <script src="js/app.js"></script>
 
     <!-- PDF Library (jsPDF) for export functionality -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>

@@ -321,8 +321,8 @@ class PWAApp {
       };
 
       // Initialize export module with app and database references
-      if (window.exportModule && cgraDB) {
-        window.exportModule.init(cgraDB, this);
+      if (window.exportModule && window.cgraDB) {
+        window.exportModule.init(window.cgraDB, this);
         console.log('[App] Export module initialized');
       }
     } catch (error) {

@@ -11,12 +11,12 @@
   status = 200
 
 [[headers]]
-  for = "/pwa/index.html"
+  for = "/index.html"
   [headers.values]
     Cache-Control = "no-cache, no-store, must-revalidate"
-    
+
 [[headers]]
-  for = "/pwa/sw.js"
+  for = "/sw.js"
   [headers.values]
     Cache-Control = "no-cache, no-store, must-revalidate"
 

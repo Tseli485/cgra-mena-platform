@@ -1,0 +1,17 @@
+{
+  "resources": {
+    "emergency_contacts": [
+      {"type": "police", "number": "101", "name": "Police Emergency"},
+      {"type": "medical", "number": "112", "name": "Medical Emergency"},
+      {"type": "fire", "number": "100", "name": "Fire/Rescue"},
+      {"type": "domestic_violence", "number": "+32 800 90 090", "name": "Domestic Violence Hotline"},
+      {"type": "child_abuse", "number": "+32 2 773 7500", "name": "Child Abuse Reporting"},
+      {"type": "suicide", "number": "+32 2 649 9500", "name": "Suicide Prevention"}
+    ],
+    "search_enabled": true,
+    "indexed_lawyers": 30,
+    "indexed_organizations": 50,
+    "total_resources": 80,
+    "last_updated": "2026-06-03"
+  }
+}

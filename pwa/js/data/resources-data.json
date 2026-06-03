@@ -1,17 +1,74 @@
 {
-  "resources": {
-    "emergency_contacts": [
-      {"type": "police", "number": "101", "name": "Police Emergency"},
-      {"type": "medical", "number": "112", "name": "Medical Emergency"},
-      {"type": "fire", "number": "100", "name": "Fire/Rescue"},
-      {"type": "domestic_violence", "number": "+32 800 90 090", "name": "Domestic Violence Hotline"},
-      {"type": "child_abuse", "number": "+32 2 773 7500", "name": "Child Abuse Reporting"},
-      {"type": "suicide", "number": "+32 2 649 9500", "name": "Suicide Prevention"}
-    ],
-    "search_enabled": true,
-    "indexed_lawyers": 30,
-    "indexed_organizations": 50,
-    "total_resources": 80,
-    "last_updated": "2026-06-03"
-  }
+  "resources": [
+    {
+      "name": "Centre de Protection de l'Enfance - Nord",
+      "type": "Organisation",
+      "region": "Nord",
+      "phone": "+212 5 37 12 34 56",
+      "address": "Rabat"
+    },
+    {
+      "name": "Avocat Spécialisé - Droit Familial",
+      "type": "Service Juridique",
+      "region": "Casablanca",
+      "phone": "+212 5 22 45 67 89",
+      "address": "Casablanca"
+    },
+    {
+      "name": "Clinique Pédiatrique Nationale",
+      "type": "Santé",
+      "region": "Fès",
+      "phone": "+212 5 35 62 34 56",
+      "address": "Fès"
+    },
+    {
+      "name": "Direction de l'Aide Sociale",
+      "type": "Service Gouvernemental",
+      "region": "Marrakech",
+      "phone": "+212 5 24 43 21 09",
+      "address": "Marrakech"
+    },
+    {
+      "name": "Association de Défense des Droits de l'Enfant",
+      "type": "ONG",
+      "region": "Tanger",
+      "phone": "+212 5 39 93 29 29",
+      "address": "Tanger"
+    },
+    {
+      "name": "Bureau d'Aide Juridique Gratuite",
+      "type": "Service Juridique",
+      "region": "Agadir",
+      "phone": "+212 5 28 84 10 20",
+      "address": "Agadir"
+    },
+    {
+      "name": "Hôpital de l'Enfance",
+      "type": "Santé",
+      "region": "Rabat",
+      "phone": "+212 5 37 67 23 45",
+      "address": "Rabat"
+    },
+    {
+      "name": "Centre de Conseil Familial",
+      "type": "Service Social",
+      "region": "Salé",
+      "phone": "+212 5 37 89 34 56",
+      "address": "Salé"
+    },
+    {
+      "name": "Commission Nationale des Droits de l'Homme",
+      "type": "Institution",
+      "region": "Rabat",
+      "phone": "+212 5 37 21 09 20",
+      "address": "Rabat"
+    },
+    {
+      "name": "Service d'Urgence Enfance 24/7",
+      "type": "Service d'Urgence",
+      "region": "Casablanca",
+      "phone": "119",
+      "address": "Disponible 24h/24"
+    }
+  ]
 }

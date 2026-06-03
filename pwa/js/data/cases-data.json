@@ -1,6 +1,7 @@
-[
-  {
-    "case_id": "CASE_001",
+{
+  "cases": [
+    {
+      "case_id": "CASE_001",
     "title": "Unaccompanied Minor - Syrian Refugee",
     "case_type": "unaccompanied",
     "age_at_case": 14,
@@ -1586,5 +1587,6 @@
       "general"
     ],
     "case_status": "documented"
-  }
-]
+    }
+  ]
+}

@@ -362,8 +362,11 @@
     <button class="close" onclick="closeModal('ficheModal')">&times;</button>
     <h3 data-i18n="fiche.title">📄 Importer une fiche DVZ (nouveau MENA)</h3>
     <p class="muted" data-i18n="fiche.hint">Renseignez les champs de la fiche et ajoutez la photo du jeune. Le dossier sera créé avec un suivi complet.</p>
-    <div class="row" style="margin:.4rem 0 .8rem">
-      <button type="button" class="btn sec sm" onclick="fillAzizi()" data-i18n="fiche.example">⚡ Charger l'exemple (fiche AZIZI)</button>
+    <div class="card" style="background:var(--bleu-clair);margin:.4rem 0 .8rem">
+      <label data-i18n="fiche.pdf" style="margin-top:0">📎 Lire automatiquement une fiche PDF (DVZ)</label>
+      <input type="file" accept="application/pdf,.pdf" onchange="onPdfFile(this)">
+      <div id="pdfStatus" class="muted" style="font-size:.8rem;margin-top:.3rem"></div>
+      <button type="button" class="btn sec sm" style="margin-top:.5rem" onclick="fillAzizi()" data-i18n="fiche.example">⚡ Charger l'exemple (fiche AZIZI)</button>
     </div>
     <form id="ficheForm" onsubmit="saveFiche(event)">
       <input type="checkbox" id="ficheAziziFull" style="display:none">
@@ -414,6 +417,7 @@
   </div>
 </div>
 
+<script src="js/lib/pdf.min.js"></script>
 <script>
 /* ============ INTERNATIONALISATION (FR / NL) ============ */
 let LANG = localStorage.getItem('mena_lang') || 'fr';
@@ -431,7 +435,7 @@ const I18N = {
   "doss.title":"📂 Mes Dossiers","doss.search":"🔍 Rechercher un dossier...","doss.allstatus":"Tous les statuts",
   "doss.empty":"📭 Aucun dossier. Cliquez sur « ➕ Nouveau dossier » pour commencer.","doss.nomatch":"Aucun dossier ne correspond.","doss.origin":"Origine inconnue","doss.progress":"Progression","doss.steps":"étapes","doss.arrived":"arrivé(e) le",
   "st.nouveau":"Nouveau","st.cours":"En cours","st.urgent":"Urgent","st.clos":"Clos","u.ans":"ans",
-  "fiche.import":"📄 Importer une fiche DVZ","fiche.title":"📄 Importer une fiche DVZ (nouveau MENA)","fiche.hint":"Renseignez les champs de la fiche et ajoutez la photo du jeune. Le dossier sera créé avec un suivi complet.","fiche.example":"⚡ Charger l'exemple (fiche AZIZI)","fiche.create":"📁 Créer le dossier","fiche.f.nom":"Nom & prénom","fiche.f.ov":"N° OE (OV)","fiche.f.naissance":"Naissance (date / âge)","fiche.f.sexe":"Sexe","fiche.f.nat":"Nationalité","fiche.f.langue":"Langue parlée","fiche.f.adresseBE":"Adresse en Belgique","fiche.f.origine":"Adresse pays d'origine","fiche.f.motif":"Motif de l'immigration","fiche.f.notes":"Notes (parcours, scolarité, contacts…)","fiche.f.photo":"📷 Photo du jeune",
+  "fiche.import":"📄 Importer une fiche DVZ","fiche.title":"📄 Importer une fiche DVZ (nouveau MENA)","fiche.hint":"Renseignez les champs de la fiche et ajoutez la photo du jeune. Le dossier sera créé avec un suivi complet.","fiche.example":"⚡ Charger l'exemple (fiche AZIZI)","fiche.create":"📁 Créer le dossier","fiche.f.nom":"Nom & prénom","fiche.f.ov":"N° OE (OV)","fiche.f.naissance":"Naissance (date / âge)","fiche.f.sexe":"Sexe","fiche.f.nat":"Nationalité","fiche.f.langue":"Langue parlée","fiche.f.adresseBE":"Adresse en Belgique","fiche.f.origine":"Adresse pays d'origine","fiche.f.motif":"Motif de l'immigration","fiche.f.notes":"Notes (parcours, scolarité, contacts…)","fiche.f.photo":"📷 Photo du jeune","fiche.pdf":"📎 Lire automatiquement une fiche PDF (DVZ)",
   "det.checklist":"✅ Checklist de suivi","det.progress":"Progression globale :","det.modify":"✏️ Modifier","det.delete":"🗑️ Supprimer","det.confirmdel":"Supprimer définitivement ce dossier ?",
   "form.new":"Nouveau dossier","form.edit":"Modifier le dossier",
   "f.name":"Nom / Identifiant *","f.name.ph":"ex. Amira K.","f.age":"Âge","f.age.ph":"ex. 14","f.country":"Pays d'origine","f.country.ph":"ex. Syrie","f.arrival":"Date d'arrivée","f.statut":"Statut","f.lang":"Langue parlée","f.lang.ph":"ex. Arabe","f.notes":"Notes / Situation","f.notes.ph":"Résumé de la situation...",
@@ -460,7 +464,7 @@ const I18N = {
   "doss.title":"📂 Mijn dossiers","doss.search":"🔍 Een dossier zoeken...","doss.allstatus":"Alle statussen",
   "doss.empty":"📭 Geen dossier. Klik op « ➕ Nieuw dossier » om te beginnen.","doss.nomatch":"Geen overeenkomend dossier.","doss.origin":"Herkomst onbekend","doss.progress":"Voortgang","doss.steps":"stappen","doss.arrived":"aangekomen op",
   "st.nouveau":"Nieuw","st.cours":"Lopend","st.urgent":"Dringend","st.clos":"Afgesloten","u.ans":"jaar",
-  "fiche.import":"📄 DVZ-fiche importeren","fiche.title":"📄 DVZ-fiche importeren (nieuwe NBMV)","fiche.hint":"Vul de velden van de fiche in en voeg de foto van de jongere toe. Het dossier wordt aangemaakt met volledige opvolging.","fiche.example":"⚡ Voorbeeld laden (fiche AZIZI)","fiche.create":"📁 Dossier aanmaken","fiche.f.nom":"Naam & voornaam","fiche.f.ov":"OV-nr","fiche.f.naissance":"Geboorte (datum / leeftijd)","fiche.f.sexe":"Geslacht","fiche.f.nat":"Nationaliteit","fiche.f.langue":"Gesproken taal","fiche.f.adresseBE":"Adres in België","fiche.f.origine":"Adres land van herkomst","fiche.f.motif":"Motief voor de immigratie","fiche.f.notes":"Notities (traject, scholing, contacten…)","fiche.f.photo":"📷 Foto van de jongere",
+  "fiche.import":"📄 DVZ-fiche importeren","fiche.title":"📄 DVZ-fiche importeren (nieuwe NBMV)","fiche.hint":"Vul de velden van de fiche in en voeg de foto van de jongere toe. Het dossier wordt aangemaakt met volledige opvolging.","fiche.example":"⚡ Voorbeeld laden (fiche AZIZI)","fiche.create":"📁 Dossier aanmaken","fiche.f.nom":"Naam & voornaam","fiche.f.ov":"OV-nr","fiche.f.naissance":"Geboorte (datum / leeftijd)","fiche.f.sexe":"Geslacht","fiche.f.nat":"Nationaliteit","fiche.f.langue":"Gesproken taal","fiche.f.adresseBE":"Adres in België","fiche.f.origine":"Adres land van herkomst","fiche.f.motif":"Motief voor de immigratie","fiche.f.notes":"Notities (traject, scholing, contacten…)","fiche.f.photo":"📷 Foto van de jongere","fiche.pdf":"📎 Een PDF-fiche automatisch lezen (DVZ)",
   "det.checklist":"✅ Opvolgingschecklist","det.progress":"Totale voortgang:","det.modify":"✏️ Wijzigen","det.delete":"🗑️ Verwijderen","det.confirmdel":"Dit dossier definitief verwijderen?",
   "form.new":"Nieuw dossier","form.edit":"Dossier wijzigen",
   "f.name":"Naam / Identificatie *","f.name.ph":"bv. Amira K.","f.age":"Leeftijd","f.age.ph":"bv. 14","f.country":"Land van herkomst","f.country.ph":"bv. Syrië","f.arrival":"Aankomstdatum","f.statut":"Status","f.lang":"Gesproken taal","f.lang.ph":"bv. Arabisch","f.notes":"Notities / Situatie","f.notes.ph":"Samenvatting van de situatie...",
@@ -1295,7 +1299,56 @@ const FICHE_AZIZI={
 function openFicheImport(){
   document.getElementById('ficheForm').reset();FICHE_PHOTO='';
   document.getElementById('fichePhotoPreview').innerHTML='';
+  const ps=document.getElementById('pdfStatus');if(ps)ps.textContent='';
   openModal('ficheModal');
+}
+/* Lecture automatique d'une fiche PDF (texte + photo) via pdf.js, hors-ligne */
+async function onPdfFile(input){
+  const file=input.files&&input.files[0];if(!file)return;
+  const status=document.getElementById('pdfStatus');
+  if(!window.pdfjsLib){status.textContent='⚠️ pdf.js non chargé.';return;}
+  status.textContent=LANG==='nl'?'⏳ PDF wordt gelezen…':'⏳ Lecture du PDF…';
+  try{
+    pdfjsLib.GlobalWorkerOptions.workerSrc='js/lib/pdf.worker.min.js';
+    const buf=await file.arrayBuffer();
+    const pdf=await pdfjsLib.getDocument({data:buf}).promise;
+    let full='';
+    for(let i=1;i<=pdf.numPages;i++){const pg=await pdf.getPage(i);const tc=await pg.getTextContent();full+=tc.items.map(it=>it.str).join(' ')+'\n';}
+    parseFicheText(full);
+    // Photo : rendre la page 1 et extraire la zone photo de la fiche DVZ
+    try{
+      const pg1=await pdf.getPage(1);const vp=pg1.getViewport({scale:2});
+      const cv=document.createElement('canvas');cv.width=vp.width;cv.height=vp.height;
+      await pg1.render({canvasContext:cv.getContext('2d'),viewport:vp}).promise;
+      const sx=vp.width*0.36, sy=vp.height*0.10, sw=vp.width*0.28, sh=vp.height*0.255;
+      const cr=document.createElement('canvas');cr.width=sw;cr.height=sh;
+      cr.getContext('2d').drawImage(cv,sx,sy,sw,sh,0,0,sw,sh);
+      FICHE_PHOTO=cr.toDataURL('image/jpeg',0.85);
+      document.getElementById('fichePhotoPreview').innerHTML=`<img src="${FICHE_PHOTO}" style="max-width:120px;border-radius:.5rem;border:1px solid var(--bord)"><div class="muted" style="font-size:.75rem">${LANG==='nl'?'Foto automatisch uitgesneden (DVZ-zone) — vervang indien nodig.':'Photo auto-extraite (zone fiche DVZ) — remplacez si besoin.'}</div>`;
+    }catch(e){console.warn('photo crop',e);}
+    status.textContent=LANG==='nl'?'✅ PDF gelezen — controleer en vul aan.':'✅ PDF lu — vérifiez et complétez.';
+  }catch(e){console.error(e);status.textContent=(LANG==='nl'?'⚠️ Leesfout: ':'⚠️ Erreur de lecture : ')+e.message;}
+}
+function parseFicheText(txt){
+  const T=txt.replace(/\s+/g,' ');
+  const g=re=>{const m=T.match(re);return m?m[1].trim():'';};
+  const ov=g(/OV[-\s]?NR\.?\s*:?\s*(\d+)/i);
+  let nom=g(/NAAM EN VOORNAAM\s*:?\s*(.+?)\s+GESLACHT/i)||g(/NAAM EN VOORNAAM\s*:?\s*([A-ZÀ-Ÿ',\. ]{4,})/i);
+  const sexeNL=g(/GESLACHT\s*:?\s*(MANNELIJK|VROUWELIJK)/i);
+  const naissance=g(/GEBOORTEPLAATS EN\s*[–-]?\s*DATUM\s*:?\s*(.+?)\s+EU\s*:/i);
+  const nat=g(/NATIONALITEIT\s*:?\s*([A-Za-zÀ-ÿ ]+?)\s+TWIJFEL/i)||g(/NATIONALITEIT\s*:?\s*([A-Za-zÀ-ÿ]+)/i);
+  const langue=g(/Gesproken taal\s*:?\s*([A-Za-zÀ-ÿ]+)/i);
+  const adresseBE=g(/Adres in Belgi[eë]\s*:?\s*(.+?)\s+Adres in land/i);
+  const origine=g(/Adres in land van herkomst[^:]*:?\s*(.+?)\s+Andere gebruikte/i);
+  let motif=g(/Om welke reden\(?en\)?\s+is de jongere in Belgi[eë]\s*\??\s*(.+?)\s+(?:Kwetsbaarheid|Zijn er aanwijzingen)/i);
+  const set=(id,v)=>{if(v){const el=document.getElementById(id);if(el)el.value=v;}};
+  set('fi_ov',ov); set('fi_nom',nom); set('fi_naissance',naissance);
+  set('fi_sexe', sexeNL?(/^M/i.test(sexeNL)?(LANG==='nl'?'Mannelijk':'Masculin'):(LANG==='nl'?'Vrouwelijk':'Féminin')):'');
+  set('fi_nat',nat); set('fi_langue',langue); set('fi_adresseBE',adresseBE); set('fi_origine',origine);
+  set('fi_motif',motif);
+  // texte intégral conservé dans les notes (rien n'est perdu)
+  const notes=document.getElementById('fi_notes');
+  if(notes)notes.value=(LANG==='nl'?'[Volledige tekst van de PDF-fiche]\n':'[Texte intégral de la fiche PDF]\n')+txt.trim();
 }
 function fillAzizi(){
   const f=FICHE_AZIZI;

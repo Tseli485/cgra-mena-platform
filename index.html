@@ -125,6 +125,7 @@
     <li><a class="nav" data-view="dossiers">📂 Mes Dossiers</a></li>
     <li><a class="nav" data-view="lifecycle">🔄 Cycle de Vie</a></li>
     <li><a class="nav" data-view="legislation">⚖️ Législation &amp; Délais</a></li>
+    <li><a class="nav" data-view="conseil">🧭 Assistant Conseil</a></li>
     <li><a class="nav" data-view="cases">📚 Cas Pratiques</a></li>
     <li><a class="nav" data-view="resources">📁 Ressources</a></li>
   </ul>
@@ -182,6 +183,47 @@
     <h2 class="title">⚖️ Législation &amp; Délais</h2>
     <div class="banner">Cadre légal applicable à la tutelle d'un MENA et <strong>délais impératifs</strong> à respecter pour une gestion optimale du dossier.</div>
     <div id="legislationContent"></div>
+  </section>
+
+  <!-- ASSISTANT CONSEIL -->
+  <section class="view" id="conseil">
+    <h2 class="title">🧭 Assistant Conseil</h2>
+    <div class="banner">Décrivez la situation du mineur et le problème rencontré. L'assistant propose des <strong>solutions hiérarchisées</strong> (avantages/inconvénients) avec leurs <strong>références légales</strong>. Réponses fondées uniquement sur la réglementation MENA en vigueur — <strong>aucune spéculation</strong>.</div>
+
+    <div class="card" style="margin-bottom:1rem">
+      <h3>1. Profil du mineur (contexte)</h3>
+      <label>Lier un dossier existant (optionnel)</label>
+      <select id="conseilDossier" onchange="conseilFromDossier()"><option value="">— Saisie manuelle —</option></select>
+      <div class="grid cols-3" style="margin-top:.6rem">
+        <div><label>Âge</label><input id="conseilAge" type="number" min="0" max="18" placeholder="ex. 15"></div>
+        <div><label>Pays d'origine</label><input id="conseilPays" placeholder="ex. Syrie"></div>
+        <div><label>Statut de séjour</label>
+          <select id="conseilStatut">
+            <option value="">Non précisé</option>
+            <option value="demande">Demande d'asile en cours</option>
+            <option value="refugie">Réfugié reconnu</option>
+            <option value="subsidiaire">Protection subsidiaire</option>
+            <option value="refus">Demande refusée</option>
+            <option value="sans">Sans procédure / irrégulier</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:1rem">
+      <h3>2. Quel est le problème ?</h3>
+      <label>Décrivez le problème en quelques mots</label>
+      <input id="conseilSearch" placeholder="ex. l'école refuse l'inscription, risque de transfert Dublin, fugue..." oninput="conseilSuggest()">
+      <div id="conseilSuggestions" style="margin-top:.6rem"></div>
+      <label style="margin-top:.8rem">…ou choisissez dans la liste</label>
+      <select id="conseilScenario" onchange="conseilSelect(this.value)">
+        <option value="">— Sélectionnez un problème —</option>
+      </select>
+    </div>
+
+    <div id="conseilQuestions"></div>
+    <div id="conseilResult"></div>
+    <p class="muted" id="conseilDisclaimer" style="margin-top:1rem;display:none"></p>
   </section>
 
   <!-- CAS PRATIQUES -->
@@ -434,6 +476,7 @@ function go(view){
   if(view==='lifecycle')renderLifecycle();
   if(view==='cases')renderCases();
   if(view==='resources')renderResources();
+  if(view==='conseil')renderConseil();
 }
 document.querySelectorAll('nav a').forEach(a=>a.addEventListener('click',()=>go(a.dataset.view)));
 
@@ -682,6 +725,121 @@ async function renderResources(){
         ${r.website?`<br>🔗 <a href="${esc(r.website)}" target="_blank" rel="noopener">${esc(r.website)}</a>`:''}
       </div>
     </div>`).join('');
+}
+
+/* ============ ASSISTANT CONSEIL (système expert) ============ */
+let CONSEIL=null, CONSEIL_CURRENT=null;
+async function loadConseil(){
+  if(CONSEIL)return CONSEIL;
+  CONSEIL=await loadJSON('js/data/conseil-data.json');
+  if(CONSEIL&&CONSEIL.scenarios){
+    const byDom={};
+    CONSEIL.scenarios.forEach(s=>{(byDom[s.domaine]=byDom[s.domaine]||[]).push(s)});
+    document.getElementById('conseilScenario').innerHTML='<option value="">— Sélectionnez un problème —</option>'+
+      Object.entries(byDom).map(([d,arr])=>`<optgroup label="${esc(d)}">`+arr.map(s=>`<option value="${esc(s.id)}">${esc(s.probleme)}</option>`).join('')+'</optgroup>').join('');
+    const disc=document.getElementById('conseilDisclaimer');
+    disc.textContent='⚠️ '+CONSEIL.avertissement;disc.style.display='block';
+  }
+  return CONSEIL;
+}
+async function renderConseil(){
+  await loadConseil();
+  // peupler la liste des dossiers (contexte)
+  const arr=loadDossiers();
+  document.getElementById('conseilDossier').innerHTML='<option value="">— Saisie manuelle —</option>'+
+    arr.map(d=>`<option value="${esc(d.id)}">${esc(d.nom)}${d.age?' ('+d.age+' ans)':''}</option>`).join('');
+}
+function conseilFromDossier(){
+  const id=document.getElementById('conseilDossier').value;
+  if(!id)return;
+  const d=loadDossiers().find(x=>x.id===id);if(!d)return;
+  if(d.age)document.getElementById('conseilAge').value=d.age;
+  if(d.pays)document.getElementById('conseilPays').value=d.pays;
+}
+function conseilSuggest(){
+  const q=(document.getElementById('conseilSearch').value||'').toLowerCase().trim();
+  const box=document.getElementById('conseilSuggestions');
+  if(!q||!CONSEIL){box.innerHTML='';return;}
+  const mots=q.split(/\s+/).filter(w=>w.length>2);
+  const scored=CONSEIL.scenarios.map(s=>{
+    const hay=(s.probleme+' '+(s.motsCles||[]).join(' ')+' '+s.domaine).toLowerCase();
+    let score=0;mots.forEach(m=>{if(hay.includes(m))score++;});
+    return {s,score};
+  }).filter(x=>x.score>0).sort((a,b)=>b.score-a.score).slice(0,4);
+  if(!scored.length){box.innerHTML='<p class="muted">Aucune correspondance — choisissez dans la liste ci-dessous.</p>';return;}
+  box.innerHTML='<p class="muted" style="margin-bottom:.3rem">Problèmes correspondants :</p>'+scored.map(x=>
+    `<button class="btn sec sm" style="margin:.2rem" onclick="conseilSelect('${x.s.id}')">${esc(x.s.probleme)}</button>`).join('');
+}
+function conseilSelect(id){
+  if(!CONSEIL)return;
+  const s=CONSEIL.scenarios.find(x=>x.id===id);if(!s)return;
+  CONSEIL_CURRENT=s;
+  document.getElementById('conseilScenario').value=id;
+  document.getElementById('conseilSuggestions').innerHTML='';
+  // questions de précision
+  const qc=document.getElementById('conseilQuestions');
+  if((s.questions||[]).length){
+    qc.innerHTML=`<div class="card" style="margin-bottom:1rem"><h3>3. Questions de précision</h3>
+      <p class="muted">Répondez pour affiner les solutions proposées.</p>
+      ${s.questions.map(q=>`<label>${esc(q.texte)}</label>
+        <select id="cq_${esc(q.id)}" onchange="conseilAnalyser()">
+          <option value="">— choisir —</option>
+          ${q.options.map(o=>`<option value="${esc(o.val)}">${esc(o.label)}</option>`).join('')}
+        </select>`).join('')}
+    </div>`;
+  }else qc.innerHTML='';
+  conseilAnalyser();
+  document.getElementById('conseilResult').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function conseilAnalyser(){
+  const s=CONSEIL_CURRENT;if(!s)return;
+  const ans={};
+  (s.questions||[]).forEach(q=>{const v=document.getElementById('cq_'+q.id)?.value;if(v)ans[q.id]=v;});
+  // contexte mineur
+  const age=document.getElementById('conseilAge').value;
+  const pays=document.getElementById('conseilPays').value;
+  // filtrage des solutions selon conditions
+  let manquantes=0;
+  const visibles=s.solutions.filter(sol=>{
+    if(!sol.condition)return true;
+    const v=ans[sol.condition.q];
+    if(v==null){manquantes++;return false;}
+    return sol.condition.in.includes(v);
+  }).sort((a,b)=>(a.rang||9)-(b.rang||9));
+
+  const ctx=[age?age+' ans':'',pays].filter(Boolean).join(' · ');
+  let html=`<div class="card"><h3>📋 ${esc(s.probleme)}</h3>
+    ${ctx?`<p class="muted">Contexte : ${esc(ctx)}</p>`:''}`;
+  if(manquantes){
+    html+=`<div class="deadline" style="border-left-color:var(--bleu);background:var(--bleu-clair)">💬 <strong>Pour un conseil plus précis</strong>, répondez aux questions ci-dessus : ${manquantes} solution(s) supplémentaire(s) pourrai(en)t s'appliquer.</div>`;
+  }
+  html+='</div>';
+
+  if(!visibles.length){
+    html+='<div class="empty">Répondez aux questions de précision pour afficher les solutions adaptées.</div>';
+  }else{
+    visibles.forEach((sol,i)=>{
+      const legal=(sol.base_legale||[]).map(l=>`<li><strong>${esc(l.texte)}</strong>${l.ref?` <span class="muted">(${esc(l.ref)})</span>`:''}</li>`).join('');
+      const av=(sol.avantages||[]).map(a=>`<li>✅ ${esc(a)}</li>`).join('');
+      const inc=(sol.inconvenients||[]).map(a=>`<li>⚠️ ${esc(a)}</li>`).join('');
+      html+=`<div class="card" style="border-left:5px solid ${i===0?'var(--vert)':'var(--bleu)'};margin-top:.8rem">
+        <div class="row" style="justify-content:space-between">
+          <h3 style="margin:0">${i===0?'⭐ ':''}Solution ${sol.rang} — ${esc(sol.titre)}</h3>
+          ${sol.delai?`<span class="badge b-cours">⏰ ${esc(sol.delai)}</span>`:''}
+        </div>
+        <p style="margin:.5rem 0">${esc(sol.description)}</p>
+        ${legal?`<strong style="color:var(--bleu)">⚖️ Base légale</strong><ul class="clean">${legal}</ul>`:''}
+        <div class="grid cols-2" style="margin-top:.6rem">
+          ${av?`<div><strong style="color:var(--vert)">Avantages</strong><ul style="list-style:none">${av}</ul></div>`:''}
+          ${inc?`<div><strong style="color:var(--orange)">Inconvénients / points d'attention</strong><ul style="list-style:none">${inc}</ul></div>`:''}
+        </div>
+      </div>`;
+    });
+  }
+  if(s.note_precision){
+    html+=`<div class="card" style="margin-top:.8rem;background:#fffbeb"><strong>ℹ️ Précisions utiles</strong><p style="margin-top:.3rem">${esc(s.note_precision)}</p></div>`;
+  }
+  document.getElementById('conseilResult').innerHTML=html;
 }
 
 /* ============ UTIL ============ */

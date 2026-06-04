@@ -1,0 +1,194 @@
+{
+  "avertissement": "Cet assistant fournit une information juridique de première ligne fondée sur la réglementation MENA (Belgique/UE) en vigueur. Il ne remplace pas l'avis d'un avocat ni la décision du Service des Tutelles. Vérifiez toujours les délais auprès de la juridiction compétente.",
+  "scenarios": [
+    {
+      "id": "asile_refus",
+      "domaine": "Séjour & Asile",
+      "probleme": "La demande de protection internationale a été refusée",
+      "motsCles": ["refus", "asile", "cgra", "négatif", "débouté", "protection", "recours", "rejet"],
+      "questions": [
+        {"id": "delai", "texte": "Depuis combien de temps la décision de refus a-t-elle été notifiée ?", "options": [{"val": "moins30", "label": "Moins de 30 jours"}, {"val": "plus30", "label": "Plus de 30 jours"}]},
+        {"id": "nouveaux", "texte": "Disposez-vous d'éléments nouveaux qui n'ont pas été examinés ?", "options": [{"val": "oui", "label": "Oui, éléments nouveaux"}, {"val": "non", "label": "Non"}]}
+      ],
+      "solutions": [
+        {"rang": 1, "titre": "Introduire un recours au Conseil du Contentieux des Étrangers (CCE)", "condition": {"q": "delai", "in": ["moins30"]}, "description": "Recours de plein contentieux contre la décision du CGRA. Le juge réexamine le dossier en fait et en droit.", "base_legale": [{"texte": "Loi du 15/12/1980, recours au CCE", "ref": "art. 39/2 §1"}, {"texte": "Directive 2013/32/UE (procédures), droit à un recours effectif", "ref": "art. 46"}], "avantages": ["Effet suspensif : pas d'éloignement pendant le recours", "Réexamen complet du dossier"], "inconvenients": ["Délai strict de 30 jours", "Assistance d'un avocat fortement recommandée"], "delai": "30 jours à compter de la notification"},
+        {"rang": 1, "titre": "Introduire une demande ultérieure (nouveaux éléments)", "condition": {"q": "nouveaux", "in": ["oui"]}, "description": "Si le délai de recours est dépassé mais que des éléments nouveaux existent (nouvelles preuves, évolution de la situation au pays), une demande ultérieure peut être introduite.", "base_legale": [{"texte": "Loi du 15/12/1980, demande ultérieure", "ref": "art. 51/8"}, {"texte": "Directive 2013/32/UE", "ref": "art. 40-42"}], "avantages": ["Possible même après l'échéance du recours", "Permet de faire valoir des faits nouveaux"], "inconvenients": ["Les éléments doivent être réellement nouveaux", "Effet suspensif non automatique"], "delai": "Dès l'obtention des éléments nouveaux"},
+        {"rang": 2, "titre": "Réévaluer la solution durable avec le Service des Tutelles", "description": "Indépendamment de l'asile, l'autorité doit rechercher la solution durable conforme à l'intérêt supérieur du mineur (séjour, réunification, ou retour encadré).", "base_legale": [{"texte": "Loi-programme du 24/12/2002 (Tutelle MENA)", "ref": "Titre XIII, Ch. 6"}, {"texte": "CIDE", "ref": "art. 3"}], "avantages": ["Approche globale au-delà de l'asile", "Centrée sur l'intérêt de l'enfant"], "inconvenients": ["Procédure parallèle, pas un recours en soi"], "delai": "En continu"}
+      ],
+      "note_precision": "Le délai exact et l'effet suspensif dépendent du type de décision (recevabilité, fond, demande ultérieure). Faites confirmer par un avocat spécialisé."
+    },
+    {
+      "id": "dublin",
+      "domaine": "Séjour & Asile",
+      "probleme": "Le mineur risque un transfert Dublin vers un autre pays de l'UE",
+      "motsCles": ["dublin", "transfert", "eurodac", "empreintes", "autre pays", "responsable", "renvoi"],
+      "questions": [
+        {"id": "famille", "texte": "Le mineur a-t-il de la famille (parent, frère/sœur, oncle/tante) légalement présente dans un pays de l'UE ?", "options": [{"val": "ici", "label": "Oui, dans le pays actuel"}, {"val": "autre", "label": "Oui, dans un autre pays UE"}, {"val": "non", "label": "Non, aucune famille dans l'UE"}]}
+      ],
+      "solutions": [
+        {"rang": 1, "titre": "S'opposer au transfert : pour un MENA isolé, l'État responsable est celui où il se trouve", "condition": {"q": "famille", "in": ["non"]}, "description": "Pour un mineur non accompagné sans famille dans l'UE, l'État responsable de l'examen est en principe celui où il a introduit sa demande et où il se trouve, conformément à la jurisprudence européenne.", "base_legale": [{"texte": "Règlement Dublin III", "ref": "art. 8.4"}, {"texte": "CJUE, arrêt MA e.a.", "ref": "C-648/11"}, {"texte": "CIDE", "ref": "art. 3 (intérêt supérieur)"}], "avantages": ["Évite un transfert préjudiciable", "Fondé sur une jurisprudence claire"], "inconvenients": ["Nécessite de contester activement dans les délais"], "delai": "Délais Dublin courts : agir sans attendre"},
+        {"rang": 1, "titre": "Demander le rapprochement vers le membre de famille", "condition": {"q": "famille", "in": ["autre"]}, "description": "Quand un membre de famille est légalement présent dans un autre État membre, Dublin permet de désigner cet État comme responsable, dans l'intérêt de l'enfant (rapprochement familial).", "base_legale": [{"texte": "Règlement Dublin III", "ref": "art. 8, 9, 10"}, {"texte": "CIDE", "ref": "art. 10"}], "avantages": ["Favorise l'unité familiale", "Conforme à l'intérêt de l'enfant"], "inconvenients": ["Preuve du lien familial requise", "Délais de prise/reprise en charge stricts"], "delai": "Requête dans les délais Dublin"},
+        {"rang": 2, "titre": "Contester la décision de transfert et documenter les défaillances d'accueil", "description": "Si une décision de transfert est prise, elle peut être contestée, notamment en démontrant des défaillances systémiques dans l'État de destination.", "base_legale": [{"texte": "Règlement Dublin III, recours", "ref": "art. 27"}, {"texte": "Charte des droits fondamentaux de l'UE", "ref": "art. 4 & 24"}], "avantages": ["Recours prévu par le règlement", "Protection contre traitements inhumains"], "inconvenients": ["Délais très courts", "Charge de la preuve des défaillances"], "delai": "Délai de recours du règlement (très court)"}
+      ],
+      "note_precision": "Précisez si des empreintes ont été enregistrées (hit Eurodac) et dans quel État, ainsi que la composition familiale exacte."
+    },
+    {
+      "id": "age_conteste",
+      "domaine": "Identité & Âge",
+      "probleme": "L'âge du mineur est mis en doute par les autorités",
+      "motsCles": ["âge", "test", "minorité", "majeur", "doute", "os", "radiographie", "détermination"],
+      "questions": [
+        {"id": "tuteur", "texte": "Un tuteur provisoire a-t-il déjà été désigné ?", "options": [{"val": "oui", "label": "Oui"}, {"val": "non", "label": "Non / je ne sais pas"}]}
+      ],
+      "solutions": [
+        {"rang": 1, "titre": "Faire valoir la présomption de minorité et obtenir une tutelle provisoire", "description": "En cas de doute sur l'âge, la personne doit être présumée mineure et bénéficier de la protection jusqu'à ce que l'âge soit déterminé.", "base_legale": [{"texte": "Loi-programme du 24/12/2002 (Tutelle)", "ref": "art. 3 à 7"}, {"texte": "Principe du bénéfice du doute (CIDE art. 3)", "ref": "Comité des droits de l'enfant, Obs. gén. n°6"}], "avantages": ["Protection immédiate pendant la procédure", "Conforme au standard international"], "inconvenients": ["Provisoire jusqu'à détermination"], "delai": "Immédiat (saisir le Service des Tutelles)"},
+        {"rang": 2, "titre": "Encadrer le test médical d'âge (consentement + marge d'erreur)", "description": "Le test d'âge (examen médical triple) ne peut être réalisé qu'avec consentement éclairé ; sa marge d'erreur doit profiter au mineur.", "base_legale": [{"texte": "Loi-programme du 24/12/2002 (Tutelle), test d'âge", "ref": "art. 7"}, {"texte": "CIDE", "ref": "art. 8 (identité)"}], "avantages": ["Cadre légal du test garanti", "La marge d'erreur protège le jeune"], "inconvenients": ["Fiabilité scientifique limitée des tests osseux"], "delai": "Selon convocation, avec consentement"},
+        {"rang": 3, "titre": "Rassembler des preuves alternatives de minorité", "description": "Documents reconstitués, témoignages, actes d'état civil obtenus du pays d'origine peuvent étayer la minorité.", "base_legale": [{"texte": "CIDE", "ref": "art. 8"}], "avantages": ["Renforce le dossier", "Indépendant du test médical"], "inconvenients": ["Documents parfois difficiles à obtenir"], "delai": "En parallèle de la procédure"}
+      ],
+      "note_precision": "Indiquez si un test a déjà été réalisé et son résultat, et si le mineur dispose du moindre document d'état civil."
+    },
+    {
+      "id": "sante_couverture",
+      "domaine": "Santé",
+      "probleme": "Le mineur a besoin de soins mais n'a pas de couverture médicale",
+      "motsCles": ["soin", "médecin", "hôpital", "mutuelle", "amu", "couverture", "maladie", "santé", "remboursement"],
+      "questions": [
+        {"id": "urgence", "texte": "L'état de santé présente-t-il un caractère urgent ou vital ?", "options": [{"val": "oui", "label": "Oui, urgent/vital"}, {"val": "non", "label": "Non, soins courants"}]}
+      ],
+      "solutions": [
+        {"rang": 1, "titre": "Activer l'Aide Médicale Urgente (AMU) via le CPAS", "description": "L'AMU garantit l'accès aux soins (urgents et préventifs) quelle que soit la situation administrative. Une attestation d'un médecin est requise.", "base_legale": [{"texte": "AR du 12/12/1996 sur l'Aide Médicale Urgente", "ref": "AMU"}, {"texte": "CIDE", "ref": "art. 24 (droit à la santé)"}], "avantages": ["Accès garanti même sans séjour régulier", "Couvre l'urgence et le préventif"], "inconvenients": ["Démarche via le CPAS compétent", "Attestation médicale nécessaire"], "delai": "Sans délai (urgence : prise en charge immédiate)"},
+        {"rang": 2, "titre": "Affilier le mineur à une mutuelle si les conditions sont réunies", "description": "Selon le statut (demandeur de protection, séjour), une affiliation à l'assurance soins de santé peut être ouverte pour une couverture stable.", "base_legale": [{"texte": "Loi relative à l'assurance obligatoire soins de santé (AMI)", "ref": "loi coordonnée 14/07/1994"}, {"texte": "Directive 2013/33/UE (accueil)", "ref": "art. 19 (soins de santé)"}], "avantages": ["Couverture pérenne", "Accès au médecin traitant et au suivi"], "inconvenients": ["Conditions d'affiliation à vérifier"], "delai": "Dès que possible"},
+        {"rang": 3, "titre": "Mobiliser la prise en charge médicale de la structure d'accueil (Fedasil)", "description": "Les demandeurs hébergés par Fedasil bénéficient d'un accompagnement médical organisé par la structure.", "base_legale": [{"texte": "Loi du 12/01/2007 sur l'accueil", "ref": "art. 23-25"}], "avantages": ["Accès direct via le centre", "Coordination médicale assurée"], "inconvenients": ["Lié à l'hébergement en structure d'accueil"], "delai": "Pendant l'hébergement"}
+      ],
+      "note_precision": "Précisez le statut de séjour du mineur et s'il est hébergé par Fedasil, en famille ou de façon autonome."
+    },
+    {
+      "id": "detresse_psy",
+      "domaine": "Santé",
+      "probleme": "Le mineur présente une détresse psychologique ou un risque suicidaire",
+      "motsCles": ["suicide", "psy", "psychologique", "trauma", "dépression", "automutilation", "détresse", "urgence", "santé mentale"],
+      "questions": [
+        {"id": "imminent", "texte": "Y a-t-il un danger imminent (idées suicidaires actuelles, geste récent) ?", "options": [{"val": "oui", "label": "Oui, danger imminent"}, {"val": "non", "label": "Non, souffrance sans urgence vitale"}]}
+      ],
+      "solutions": [
+        {"rang": 1, "titre": "Évaluation psychiatrique en urgence et mise en sécurité", "condition": {"q": "imminent", "in": ["oui"]}, "description": "Un risque suicidaire imminent est une urgence vitale : orienter immédiatement vers les urgences psychiatriques ; une hospitalisation peut être nécessaire.", "base_legale": [{"texte": "CIDE", "ref": "art. 6 (droit à la vie) & 24"}, {"texte": "AMU", "ref": "soins urgents garantis"}], "avantages": ["Réponse à l'urgence vitale", "Protection immédiate"], "inconvenients": ["Mesure intensive, à accompagner humainement"], "delai": "Immédiat"},
+        {"rang": 1, "titre": "Mettre en place un suivi en santé mentale adapté", "description": "Orientation vers un centre de santé mentale ou un pédopsychiatre, avec interprète si besoin, et thérapie du trauma.", "base_legale": [{"texte": "Directive 2013/33/UE (accueil)", "ref": "art. 19 & 25 (besoins particuliers)"}, {"texte": "CIDE", "ref": "art. 39 (réadaptation)"}], "avantages": ["Prise en charge durable", "Adaptée au trauma de l'exil"], "inconvenients": ["Délais d'accès parfois longs", "Besoin d'interprétariat"], "delai": "Rapidement"},
+        {"rang": 2, "titre": "Élaborer un plan de sécurité et stabiliser le cadre de vie", "description": "Réduction des moyens, présence rapprochée, contacts d'urgence, et restauration d'un quotidien stable (sommeil, école, liens).", "base_legale": [{"texte": "CIDE", "ref": "art. 3 & 6"}], "avantages": ["Réduit le risque au quotidien", "Effet thérapeutique du cadre"], "inconvenients": ["Demande une coordination entre intervenants"], "delai": "Sans délai après l'évaluation"}
+      ],
+      "note_precision": "En cas de danger immédiat, contactez les services d'urgence sans attendre. Précisez l'âge et le contexte (deuil, isolement, antécédents)."
+    },
+    {
+      "id": "ecole_refus",
+      "domaine": "Scolarité",
+      "probleme": "L'inscription scolaire du mineur est refusée ou bloquée",
+      "motsCles": ["école", "scolarité", "inscription", "refus", "daspa", "classe", "enseignement"],
+      "questions": [],
+      "solutions": [
+        {"rang": 1, "titre": "Faire valoir le droit (et l'obligation) à l'enseignement, indépendamment du statut", "description": "Tout mineur, quel que soit son statut de séjour, a droit et est tenu à la scolarité. Un refus fondé sur l'absence de titre de séjour est illégal.", "base_legale": [{"texte": "Décret relatif à l'obligation scolaire", "ref": "scolarité obligatoire"}, {"texte": "CIDE", "ref": "art. 28 (droit à l'éducation)"}, {"texte": "Constitution belge", "ref": "art. 24 (enseignement)"}], "avantages": ["Droit clair et opposable", "S'applique sans condition de séjour"], "inconvenients": ["Peut nécessiter une intervention écrite/médiation"], "delai": "Inscription à viser dans les 60 jours de l'arrivée"},
+        {"rang": 2, "titre": "Orienter vers un dispositif d'accueil linguistique (DASPA / classe passerelle)", "description": "Pour un primo-arrivant non francophone, l'inscription en dispositif d'accueil et de scolarisation facilite l'intégration.", "base_legale": [{"texte": "Décret DASPA (dispositif d'accueil et de scolarisation des primo-arrivants)", "ref": "DASPA"}], "avantages": ["Apprentissage de la langue", "Intégration progressive"], "inconvenients": ["Disponibilité variable selon les établissements"], "delai": "Dès l'inscription"},
+        {"rang": 3, "titre": "Saisir le service de médiation scolaire ou l'administration compétente", "description": "En cas de refus persistant, solliciter la médiation scolaire ou l'administration de l'enseignement pour faire respecter le droit.", "base_legale": [{"texte": "Réglementation sur les inscriptions scolaires", "ref": "médiation scolaire"}], "avantages": ["Voie de recours administrative", "Souvent rapide"], "inconvenients": ["Démarche supplémentaire"], "delai": "Si le refus persiste"}
+      ],
+      "note_precision": "Précisez l'âge, la langue parlée et le motif invoqué par l'école pour le refus."
+    },
+    {
+      "id": "reunification",
+      "domaine": "Famille",
+      "probleme": "Un membre de la famille du mineur se trouve dans un autre pays (réunification)",
+      "motsCles": ["famille", "réunification", "regroupement", "parent", "frère", "rapprochement", "adn"],
+      "questions": [
+        {"id": "lieu", "texte": "Où se trouve le membre de famille ?", "options": [{"val": "ue", "label": "Dans un pays de l'UE"}, {"val": "horsue", "label": "Hors UE (pays tiers)"}]},
+        {"id": "preuve", "texte": "Disposez-vous de documents prouvant le lien familial ?", "options": [{"val": "oui", "label": "Oui"}, {"val": "non", "label": "Non / incomplets"}]}
+      ],
+      "solutions": [
+        {"rang": 1, "titre": "Activer le rapprochement familial via Dublin", "condition": {"q": "lieu", "in": ["ue"]}, "description": "Si le membre de famille est légalement présent dans l'UE, le règlement Dublin permet de désigner cet État comme responsable, dans l'intérêt de l'enfant.", "base_legale": [{"texte": "Règlement Dublin III", "ref": "art. 8 à 10"}, {"texte": "CIDE", "ref": "art. 10"}], "avantages": ["Procédure dédiée à l'unité familiale", "Priorité à l'intérêt de l'enfant"], "inconvenients": ["Délais stricts", "Preuve du lien requise"], "delai": "Requête dans les délais Dublin"},
+        {"rang": 1, "titre": "Demander le regroupement familial (membre hors UE)", "condition": {"q": "lieu", "in": ["horsue"]}, "description": "Pour un mineur réfugié, le regroupement avec les parents/famille restés hors UE peut être demandé selon la directive regroupement.", "base_legale": [{"texte": "Directive 2003/86/CE (regroupement familial)", "ref": "regroupement"}, {"texte": "Loi du 15/12/1980", "ref": "regroupement familial"}], "avantages": ["Droit renforcé pour les réfugiés", "Réunit la cellule familiale"], "inconvenients": ["Procédure longue", "Conditions de preuve et de délais"], "delai": "Délais favorables si demande rapide après reconnaissance"},
+        {"rang": 2, "titre": "Établir le lien familial par test ADN ou preuves alternatives", "condition": {"q": "preuve", "in": ["non"]}, "description": "À défaut de documents, un test ADN ou un faisceau de preuves (photos, témoignages) peut établir le lien.", "base_legale": [{"texte": "Pratique administrative en matière de preuve du lien (regroupement/Dublin)", "ref": "preuve du lien familial"}], "avantages": ["Surmonte l'absence de documents"], "inconvenients": ["Coût et délais du test ADN"], "delai": "En parallèle de la demande"}
+      ],
+      "note_precision": "Précisez le lien exact (parent, fratrie, autre), le statut du membre de famille et l'existence de documents."
+    },
+    {
+      "id": "pression_familiale",
+      "domaine": "Protection & Violences",
+      "probleme": "Risque de mariage forcé, de MGF ou de retour forcé imposé par la famille",
+      "motsCles": ["mariage forcé", "excision", "mgf", "mutilation", "voyage", "retour forcé", "pression", "famille"],
+      "questions": [
+        {"id": "imminent", "texte": "Un départ ou un événement (voyage, cérémonie) est-il imminent ?", "options": [{"val": "oui", "label": "Oui, imminent"}, {"val": "non", "label": "Non / incertain"}]}
+      ],
+      "solutions": [
+        {"rang": 1, "titre": "Mise en sécurité immédiate et signalement", "description": "Mettre le mineur en sécurité et signaler la situation aux autorités de protection de la jeunesse.", "base_legale": [{"texte": "Décret aide à la jeunesse (enfant en danger)", "ref": "protection de la jeunesse"}, {"texte": "CIDE", "ref": "art. 19"}, {"texte": "Convention d'Istanbul", "ref": "art. 37-38"}], "avantages": ["Protège immédiatement", "Active le réseau de protection"], "inconvenients": ["Peut tendre les relations familiales"], "delai": "Immédiat"},
+        {"rang": 1, "titre": "Empêcher le départ : mesure d'interdiction de sortie du territoire", "condition": {"q": "imminent", "in": ["oui"]}, "description": "En cas de risque imminent de mariage forcé ou de MGF lors d'un voyage, solliciter en urgence une mesure empêchant la sortie du territoire.", "base_legale": [{"texte": "Mesures de protection de la jeunesse (urgence)", "ref": "interdiction de sortie du territoire"}, {"texte": "Code pénal — mariage forcé / MGF", "ref": "art. 391sexies / art. 409"}], "avantages": ["Bloque le risque à la source", "Mesure d'urgence disponible"], "inconvenients": ["Nécessite une saisine rapide de l'autorité compétente"], "delai": "En urgence avant le départ"},
+        {"rang": 2, "titre": "Soutenir le parent protecteur et informer du caractère pénal", "description": "Quand un parent s'oppose à la pratique, le soutenir ; rappeler que mariage forcé et MGF sont des infractions, y compris commises à l'étranger.", "base_legale": [{"texte": "Code pénal — MGF", "ref": "art. 409 (applicable même à l'étranger)"}, {"texte": "Code pénal — mariage forcé", "ref": "art. 391sexies"}], "avantages": ["Renforce un allié dans la famille", "Effet dissuasif"], "inconvenients": ["Inopérant si aucun parent protecteur"], "delai": "Sans délai"}
+      ],
+      "note_precision": "Précisez la nature du risque (mariage / MGF / retour), son imminence et l'existence d'un parent protecteur."
+    },
+    {
+      "id": "disparition",
+      "domaine": "Protection & Sécurité",
+      "probleme": "Le mineur a disparu ou a fugué",
+      "motsCles": ["disparition", "fugue", "parti", "absent", "introuvable", "disparu", "fuite"],
+      "questions": [],
+      "solutions": [
+        {"rang": 1, "titre": "Signaler immédiatement la disparition (police + Service des Tutelles)", "description": "Toute disparition de MENA est traitée comme inquiétante. Signaler sans délai à la police et au Service des Tutelles ; un signalement de disparition de mineur est diffusé.", "base_legale": [{"texte": "Procédure « disparition inquiétante de mineur »", "ref": "directive disparitions"}, {"texte": "Loi-programme du 24/12/2002 (Tutelle)", "ref": "devoirs du tuteur"}], "avantages": ["Déclenche les recherches actives", "Réponse adaptée au risque"], "inconvenients": ["Aucun — l'inaction aggrave le danger"], "delai": "Immédiat dès le constat"},
+        {"rang": 1, "titre": "Évaluer et signaler le risque de traite", "description": "Les MENA en fugue sont des cibles privilégiées des réseaux d'exploitation : signaler ce risque et alerter les services spécialisés.", "base_legale": [{"texte": "Directive 2011/36/UE (traite)", "ref": "protection des victimes"}, {"texte": "Loi du 10/08/2005 (traite) — Belgique", "ref": "traite des êtres humains"}], "avantages": ["Anticipe l'exploitation", "Mobilise les services compétents"], "inconvenients": ["—"], "delai": "Dès le signalement"},
+        {"rang": 2, "titre": "À son retour, remobiliser et réorienter l'accueil", "description": "Écouter sans juger les motifs de la fugue, vérifier la sécurité d'une éventuelle piste familiale par canaux officiels, et réorienter vers un accueil plus adapté.", "base_legale": [{"texte": "Loi du 12/01/2007 (accueil)", "ref": "hébergement adapté"}], "avantages": ["Prévient la récidive", "Traite la cause de la fugue"], "inconvenients": ["Demande un travail de lien"], "delai": "Dès le retour"}
+      ],
+      "note_precision": "Indiquez depuis quand le mineur est absent, son âge, et toute destination ou contact présumé."
+    },
+    {
+      "id": "traite",
+      "domaine": "Protection & Sécurité",
+      "probleme": "Le mineur pourrait être victime de traite ou d'exploitation",
+      "motsCles": ["traite", "exploitation", "prostitution", "travail forcé", "réseau", "emprise", "victime", "dette"],
+      "questions": [],
+      "solutions": [
+        {"rang": 1, "titre": "Mise à l'abri confidentielle et orientation vers un centre spécialisé traite", "description": "Sécuriser le mineur dans un lieu tenu confidentiel face au réseau, et confier l'accompagnement à un centre spécialisé agréé.", "base_legale": [{"texte": "Directive 2011/36/UE (traite)", "ref": "identification & protection"}, {"texte": "Loi du 10/08/2005 — Belgique", "ref": "statut de protection des victimes"}, {"texte": "Protocole de Palerme", "ref": "définition de la traite"}], "avantages": ["Protège la victime", "Expertise spécialisée"], "inconvenients": ["Confidentialité à préserver strictement"], "delai": "Immédiat"},
+        {"rang": 1, "titre": "Appliquer le principe de non-sanction de la victime", "description": "La victime mineure ne doit pas être sanctionnée pour des faits commis sous contrainte (travail illégal, faux documents, etc.).", "base_legale": [{"texte": "Directive 2011/36/UE", "ref": "art. 8 (non-poursuite)"}, {"texte": "CIDE", "ref": "art. 34-36"}], "avantages": ["Protège la victime de la double peine"], "inconvenients": ["—"], "delai": "Tout au long de la procédure"},
+        {"rang": 2, "titre": "Activer le statut de protection sans conditionner l'aide à la dénonciation", "description": "Le statut de victime de traite offre séjour et accompagnement ; l'aide ne doit jamais être subordonnée à la coopération judiciaire.", "base_legale": [{"texte": "Loi du 10/08/2005 & circulaires traite", "ref": "statut victime"}], "avantages": ["Sécurise le séjour et le suivi", "Respecte le rythme de la victime"], "inconvenients": ["Période de réflexion à respecter"], "delai": "Dès l'identification"}
+      ],
+      "note_precision": "Précisez les indices d'exploitation (type de travail, contrôle, dette, menaces sur la famille) et l'état de l'emprise."
+    },
+    {
+      "id": "justice",
+      "domaine": "Justice",
+      "probleme": "Le mineur est en conflit avec la loi (interpellation, contact police)",
+      "motsCles": ["police", "arrestation", "vol", "délit", "justice", "juge", "interpellation", "infraction"],
+      "questions": [],
+      "solutions": [
+        {"rang": 1, "titre": "Être présent à l'audition et garantir l'assistance d'un avocat", "description": "Le tuteur doit être informé et présent ; l'assistance d'un avocat spécialisé en droit de la jeunesse est un droit du mineur.", "base_legale": [{"texte": "CIDE", "ref": "art. 40 (justice adaptée)"}, {"texte": "Loi/Décret protection de la jeunesse", "ref": "droits du mineur"}, {"texte": "Directive (UE) 2016/800 (garanties procédurales des enfants)", "ref": "assistance d'un avocat"}], "avantages": ["Protège les droits dès l'audition", "Évite les déclarations préjudiciables"], "inconvenients": ["Nécessite une réaction rapide"], "delai": "Dès l'interpellation"},
+        {"rang": 1, "titre": "Faire primer la mesure éducative sur la sanction", "description": "Le mineur relève de la logique de protection : privilégier mesures éducatives, réparation et alternatives à la détention.", "base_legale": [{"texte": "CIDE", "ref": "art. 37 & 40"}, {"texte": "Règles de Beijing (ONU)", "ref": "justice des mineurs"}], "avantages": ["Favorise la réinsertion", "Détention en dernier recours"], "inconvenients": ["Suivi éducatif à organiser"], "delai": "Devant le juge de la jeunesse"},
+        {"rang": 2, "titre": "Documenter une éventuelle instrumentalisation et réinsérer", "description": "Si le mineur a été instrumentalisé par des plus âgés, le documenter et le plaider ; éloigner du groupe à risque et réengager une formation.", "base_legale": [{"texte": "CIDE", "ref": "art. 3 & 39"}], "avantages": ["Contextualise les faits", "Prévient la récidive"], "inconvenients": ["Travail de fond nécessaire"], "delai": "Après la phase d'audition"}
+      ],
+      "note_precision": "Précisez la nature des faits, l'âge du mineur et s'il s'agit d'un premier contact avec la justice."
+    },
+    {
+      "id": "hebergement",
+      "domaine": "Hébergement",
+      "probleme": "L'hébergement du mineur est inadapté ou inexistant",
+      "motsCles": ["hébergement", "logement", "centre", "accueil", "sans solution", "fedasil", "rue", "inadapté"],
+      "questions": [
+        {"id": "sansabri", "texte": "Le mineur est-il actuellement sans solution d'hébergement ?", "options": [{"val": "oui", "label": "Oui, sans solution"}, {"val": "non", "label": "Non, mais inadapté"}]}
+      ],
+      "solutions": [
+        {"rang": 1, "titre": "Exiger une place d'accueil adaptée (urgence si sans solution)", "condition": {"q": "sansabri", "in": ["oui"]}, "description": "Tout MENA a droit à un accueil adapté à son âge et à son profil. En l'absence de solution, saisir Fedasil et le Service des Tutelles en urgence.", "base_legale": [{"texte": "Loi du 12/01/2007 sur l'accueil", "ref": "droit à l'accueil"}, {"texte": "Directive 2013/33/UE (accueil)", "ref": "art. 24 (mineurs non accompagnés)"}, {"texte": "CIDE", "ref": "art. 20 (enfant privé de milieu familial)"}], "avantages": ["Droit opposable à l'accueil", "Protection renforcée des MENA"], "inconvenients": ["Saturation possible du réseau"], "delai": "Urgent"},
+        {"rang": 2, "titre": "Demander une réorientation vers une structure adaptée au profil", "condition": {"q": "sansabri", "in": ["non"]}, "description": "Si l'hébergement actuel est inadapté (âge, vulnérabilité, sécurité), demander une réorientation vers une structure mieux ajustée.", "base_legale": [{"texte": "Loi du 12/01/2007 sur l'accueil", "ref": "adaptation de l'accueil"}, {"texte": "Directive 2013/33/UE", "ref": "art. 21-22 (besoins particuliers)"}], "avantages": ["Hébergement ajusté au profil", "Réduit les risques (fugue, conflits)"], "inconvenients": ["Délais de réorientation"], "delai": "Selon disponibilité"},
+        {"rang": 2, "titre": "Mobiliser l'aide du CPAS si le mineur n'est pas en réseau d'accueil", "description": "Hors réseau Fedasil, le CPAS peut intervenir pour l'aide sociale et l'hébergement.", "base_legale": [{"texte": "Loi organique des CPAS du 08/07/1976", "ref": "aide sociale"}], "avantages": ["Filet de sécurité complémentaire"], "inconvenients": ["Compétence territoriale à déterminer"], "delai": "Sans délai"}
+      ],
+      "note_precision": "Précisez l'âge, le statut (demandeur ou non), et la raison de l'inadaptation (sécurité, âge, vulnérabilité)."
+    },
+    {
+      "id": "transition18",
+      "domaine": "Transition vers la majorité",
+      "probleme": "Le mineur approche de 18 ans : préparer la fin de tutelle",
+      "motsCles": ["18 ans", "majorité", "fin de tutelle", "autonomie", "séjour", "logement adulte", "transition"],
+      "questions": [
+        {"id": "sejour", "texte": "Le mineur a-t-il un titre de séjour stable ?", "options": [{"val": "oui", "label": "Oui (séjour reconnu)"}, {"val": "non", "label": "Non / précaire"}]}
+      ],
+      "solutions": [
+        {"rang": 1, "titre": "Sécuriser le statut de séjour avant la majorité", "condition": {"q": "sejour", "in": ["non"]}, "description": "Avant 18 ans, finaliser autant que possible la procédure de séjour ; la majorité fragilise la protection. Anticiper recours et demandes.", "base_legale": [{"texte": "Loi du 15/12/1980", "ref": "séjour"}, {"texte": "CIDE / Comité, transition vers l'âge adulte", "ref": "Obs. gén. n°6"}], "avantages": ["Évite une bascule dans l'irrégularité à 18 ans", "Maximise les droits acquis mineur"], "inconvenients": ["Procédures parfois longues : anticiper tôt"], "delai": "Dès 16-17 ans, avant l'anniversaire"},
+        {"rang": 1, "titre": "Construire le projet d'autonomie (logement, formation, droits)", "description": "Préparer logement (autonome/supervisé), formation/emploi, ouverture des droits sociaux adultes et compréhension de leur fonctionnement.", "base_legale": [{"texte": "Loi-programme du 24/12/2002 (Tutelle)", "ref": "art. 24 (fin de tutelle à 18 ans)"}, {"texte": "Dispositifs jeunes adultes / aide à la jeunesse", "ref": "prolongation d'accompagnement"}], "avantages": ["Évite la rupture sèche", "Favorise l'insertion durable"], "inconvenients": ["Coordination de plusieurs acteurs"], "delai": "Démarrer dès 16-17 ans"},
+        {"rang": 2, "titre": "Organiser le relais vers les dispositifs adultes et transmettre le dossier", "description": "Avant la fin de tutelle, organiser le passage de relais et transmettre un dossier complet aux services qui prendront le suivi.", "base_legale": [{"texte": "Loi-programme du 24/12/2002 (Tutelle)", "ref": "art. 24"}], "avantages": ["Continuité de l'accompagnement", "Pas de perte d'information"], "inconvenients": ["Dépend des places disponibles côté adultes"], "delai": "Quelques mois avant 18 ans"}
+      ],
+      "note_precision": "Précisez la date des 18 ans, le statut de séjour actuel et le projet (études, formation, emploi)."
+    }
+  ]
+}

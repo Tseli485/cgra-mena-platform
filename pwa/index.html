@@ -731,7 +731,7 @@ function saveDossier(e){
     checklist:existing?existing.checklist:STD_CHECKLIST.map(t=>({t,done:false})),
     cree:existing?existing.cree:new Date().toISOString().slice(0,10)
   };
-  if(existing){Object.assign(existing,data)}else{arr.push(data)}
+  if(existing){Object.assign(existing,data)}else{initGestion(data);arr.push(data)}
   saveDossiers(arr);closeModal('dossierModal');renderDossiers();renderDashboard();
 }
 function deleteDossier(id){
@@ -771,6 +771,7 @@ function renderDossiers(){
 }
 function openDossierDetail(id){
   const d=loadDossiers().find(x=>x.id===id);if(!d)return;
+  initGestion(d);saveDossiers(loadDossiers());
   const p=progressOf(d);
   const f=d.jugePaix||{}; const tu=CONTACTS_OFFICIELS.tutelles, dv=CONTACTS_OFFICIELS.dvz;
   document.getElementById('detailContent').innerHTML=`
@@ -811,6 +812,7 @@ function openDossierDetail(id){
             <span class="muted">${LANG==='nl'?'Vervaldatum':'Échéance'}:</span>
             <input type="date" style="width:auto" value="${esc(r.echeance||'')}" onchange="setEcheance('${d.id}','${r.id}',this.value)">
             <button class="btn sec sm" onclick="prepRapport('${d.id}','${r.id}')">✉️ ${LANG==='nl'?'Verzending voorbereiden':"Préparer l'envoi"}</button>
+            <button class="btn sec sm" onclick="genReport('${d.id}','${r.id}')">🖨️ PDF</button>
             ${r.fait&&r.dateFait?`<span class="muted">✓ ${r.dateFait}</span>`:''}
           </div>
           <span class="muted" style="font-size:.75rem">📖 ${esc(rt.base)}</span>
@@ -833,7 +835,8 @@ function openDossierDetail(id){
       ${(d.banque&&d.banque.operations||[]).length?`<table style="margin-top:.6rem"><tr><th>Date</th><th>${LANG==='nl'?'Omschrijving':'Libellé'}</th><th style="text-align:right">€</th><th></th></tr>
         ${d.banque.operations.map((o,i)=>`<tr><td>${esc(o.date)}</td><td>${esc(o.lib)}</td><td style="text-align:right;color:${o.mt<0?'var(--rouge)':'var(--vert)'}">${(+o.mt).toFixed(2)}</td><td><button class="btn danger sm" onclick="delOp('${d.id}',${i})">×</button></td></tr>`).join('')}
         <tr><td colspan="2"><strong>${LANG==='nl'?'SALDO':'SOLDE'}</strong></td><td style="text-align:right"><strong>${soldeOf(d).toFixed(2)} €</strong></td><td></td></tr></table>
-        <button class="btn sec sm" style="margin-top:.5rem" onclick="exportReleve('${d.id}')">⬇️ ${LANG==='nl'?'Uittreksel exporteren':'Exporter le relevé'}</button>`:`<p class="muted">${LANG==='nl'?'Nog geen verrichting.':'Aucune opération.'}</p>`}
+        <button class="btn sec sm" style="margin-top:.5rem" onclick="exportReleve('${d.id}')">⬇️ ${LANG==='nl'?'Uittreksel (txt)':'Relevé (txt)'}</button>
+        <button class="btn sec sm" style="margin-top:.5rem" onclick="printReleve('${d.id}')">🖨️ ${LANG==='nl'?'Uittreksel (PDF)':'Relevé (PDF)'}</button>`:`<p class="muted">${LANG==='nl'?'Nog geen verrichting.':'Aucune opération.'}</p>`}
     </div></details>
 
     <h4 style="color:var(--accent);margin:.9rem 0 .3rem">${t('det.checklist')}</h4>
@@ -859,15 +862,23 @@ function renderDashboard(){
     <div class="stat" style="border-left-color:var(--rouge)"><div class="num" style="color:var(--rouge)">${urgents}</div><div class="lbl">${t('stat.urgents')}</div></div>
     <div class="stat" style="border-left-color:var(--vert)"><div class="num" style="color:var(--vert)">${avgP}%</div><div class="lbl">${t('stat.progmoy')}</div></div>
     <div class="stat"><div class="num">${LEGISLATION.reduce((s,c)=>s+c.items.length,0)}</div><div class="lbl">${t('stat.echeances')}</div></div>`;
-  // échéances : étapes non cochées des dossiers actifs
-  const pend=[];
+  // échéances : rapports obligatoires non faits (avec date) + prochaine étape de checklist
+  const today=nowISO();
+  const deadlines=[];
   arr.filter(d=>d.statut!=='clos').forEach(d=>{
+    (d.rapports||[]).forEach(r=>{
+      if(!r.fait&&r.echeance){const rt=RAPPORTS_TYPE.find(x=>x.id===r.id);
+        deadlines.push({nom:d.nom,label:rt?tr(rt.label):r.id,date:r.echeance,id:d.id,over:r.echeance<today});}
+    });
     const next=d.checklist.find(c=>!c.done);
-    if(next)pend.push({nom:d.nom,etape:next.t,statut:d.statut,id:d.id});
+    if(next)deadlines.push({nom:d.nom,label:t('dash.nextstep')+' '+next.t,date:'',id:d.id,over:false,etape:true});
   });
-  document.getElementById('dashDeadlines').innerHTML=pend.length?pend.slice(0,8).map(x=>`
-    <div class="deadline ${x.statut==='urgent'?'crit':''}" onclick="go('dossiers')" style="cursor:pointer">
-      <strong>${esc(x.nom)}</strong> ${statutBadge(x.statut)}<br><span class="muted">${t('dash.nextstep')} ${esc(x.etape)}</span>
+  deadlines.sort((a,b)=>{if(!a.date)return 1;if(!b.date)return -1;return a.date<b.date?-1:1;});
+  const lateLbl=LANG==='nl'?'⚠️ Te laat':'⚠️ En retard';
+  document.getElementById('dashDeadlines').innerHTML=deadlines.length?deadlines.slice(0,10).map(x=>`
+    <div class="deadline ${x.over?'crit':''}" onclick="openDossierDetail('${x.id}')" style="cursor:pointer">
+      <strong>${esc(x.nom)}</strong> ${x.date?`<span class="badge ${x.over?'b-urgent':'b-cours'}">${x.over?lateLbl+' · ':'⏰ '}${esc(x.date)}</span>`:''}<br>
+      <span class="muted">${esc(x.label)}</span>
     </div>`).join(''):`<p class="muted">${t('dash.uptodate')}</p>`;
 }
 
@@ -1250,6 +1261,14 @@ const RAPPORTS_TYPE=[
 ];
 function nowISO(){return new Date().toISOString().slice(0,10);}
 function addDays(iso,days){if(!iso)return '';const d=new Date(iso+'T00:00:00');d.setDate(d.getDate()+(+days||0));return d.toISOString().slice(0,10);}
+/* Initialise les rapports obligatoires avec échéances calculées depuis une date de base */
+function initRapports(base){return RAPPORTS_TYPE.map(r=>({id:r.id,echeance:addDays(base||nowISO(),r.defJours),fait:false,dateFait:''}));}
+function initGestion(d){
+  if(!d.jugePaix)d.jugePaix={cp:'',canton:'',adresse:'',tel:'',email:''};
+  if(!d.rapports||!d.rapports.length)d.rapports=initRapports(d.arrivee||d.cree);
+  if(!d.banque)d.banque={operations:[]};
+  return d;
+}
 
 /* Photo -> data URL compressée (reste chiffrée dans le dossier, jamais dans le dépôt) */
 function readPhoto(input,cb){
@@ -1373,7 +1392,7 @@ function saveFiche(e){
       adresseBE:fi_adresseBE.value.trim(), adresseOrigine:fi_origine.value.trim(), motif:fi_motif.value.trim()
     },
     jugePaix:{cp:'',canton:'',adresse:'',tel:'',email:''},
-    rapports:RAPPORTS_TYPE.map(r=>({id:r.id,echeance:'',fait:false,dateFait:''})),
+    rapports:initRapports(nowISO()),
     banque:{operations:[]},
     checklist:STD_CHECKLIST.map(t=>({t,done:false})),
     cree:nowISO()
@@ -1436,6 +1455,37 @@ function exportReleve(id){
   txt+=`\n${LANG==='nl'?'SALDO':'SOLDE'} : ${soldeOf(d).toFixed(2)} €\n`;
   const blob=new Blob([txt],{type:'text/plain'});const a=document.createElement('a');
   a.href=URL.createObjectURL(blob);a.download='releve_'+d.nom.replace(/\W+/g,'_')+'.txt';a.click();
+}
+/* Documents imprimables (PDF via impression navigateur) */
+function printDoc(title,html){
+  const w=window.open('','_blank','width=820,height=920');
+  if(!w){const n=document.getElementById('op_note');if(n)n.textContent=(LANG==='nl'?'Pop-up geblokkeerd — sta pop-ups toe.':'Pop-up bloquée — autorisez les pop-ups.');return;}
+  w.document.write('<!doctype html><html><head><meta charset="utf-8"><title>'+esc(title)+'</title><style>body{font-family:-apple-system,Segoe UI,sans-serif;padding:2.5cm;color:#111;line-height:1.55}h1{font-size:1.25rem;color:#1e40af;margin-bottom:.2rem}table{width:100%;border-collapse:collapse;margin-top:1rem}td,th{border-bottom:1px solid #ccc;padding:.4rem;text-align:left}.r{text-align:right}@media print{.noprint{display:none}}</style></head><body>'+html+'<p class="noprint" style="margin-top:1.5rem"><button onclick="window.print()" style="padding:.5rem 1rem;font-size:1rem">🖨️ Imprimer / Enregistrer en PDF</button></p></body></html>');
+  w.document.close();w.focus();
+}
+function genReport(id,rid){
+  const d=loadDossiers().find(x=>x.id===id);const rt=RAPPORTS_TYPE.find(x=>x.id===rid);if(!d||!rt)return;
+  const destNom=rt.dest==='juge'?((d.jugePaix&&d.jugePaix.canton)||(LANG==='nl'?'Vrederechter':'Juge de paix')):tr(CONTACTS_OFFICIELS[rt.dest].nom);
+  const destAdr=rt.dest==='juge'?((d.jugePaix&&d.jugePaix.adresse)||''):CONTACTS_OFFICIELS[rt.dest].adresse;
+  const html=`<h1>${esc(tr(rt.label))}</h1><p>${nowISO()}</p>
+    <p><strong>${LANG==='nl'?'Aan':'À'} :</strong> ${esc(destNom)}${destAdr?'<br>'+esc(destAdr):''}</p>
+    <p><strong>${LANG==='nl'?'Betreft de minderjarige':'Concernant le mineur'} :</strong> ${esc(d.nom)}${d.fiche&&d.fiche.ov?' (OE '+esc(d.fiche.ov)+')':''}${d.age?' — '+d.age+' '+t('u.ans'):''}${d.pays?' — '+esc(paysLabel(d.pays)):''}</p>
+    <p class="muted">📖 ${esc(rt.base)}</p><hr>
+    <p><strong>${LANG==='nl'?'Situatie / notities':'Situation / notes'} :</strong></p><p>${esc(d.notes||'…')}</p>
+    <p style="margin-top:.6rem"><em>${LANG==='nl'?'(Vul de inhoud van het verslag aan.)':'(Complétez le contenu du rapport.)'}</em></p>
+    <br><br><p>${LANG==='nl'?'De voogd,':'Le tuteur,'}</p>`;
+  printDoc(tr(rt.label),html);
+}
+function printReleve(id){
+  const d=loadDossiers().find(x=>x.id===id);if(!d)return;const ops=(d.banque&&d.banque.operations)||[];
+  const html=`<h1>${LANG==='nl'?'Rekeninguittreksel':'Relevé de compte'}</h1><p>${nowISO()}</p>
+    <p><strong>${LANG==='nl'?'Minderjarige':'Mineur'} :</strong> ${esc(d.nom)}${d.fiche&&d.fiche.ov?' (OE '+esc(d.fiche.ov)+')':''}</p>
+    <p class="muted">${LANG==='nl'?'Voor de vrederechter':'À destination du juge de paix'}${d.jugePaix&&d.jugePaix.canton?' — '+esc(d.jugePaix.canton):''}</p>
+    <table><tr><th>Date</th><th>${LANG==='nl'?'Omschrijving':'Libellé'}</th><th class="r">€</th></tr>
+    ${ops.map(o=>`<tr><td>${esc(o.date)}</td><td>${esc(o.lib)}</td><td class="r">${(+o.mt).toFixed(2)}</td></tr>`).join('')}
+    <tr><td colspan="2"><strong>${LANG==='nl'?'SALDO':'SOLDE'}</strong></td><td class="r"><strong>${soldeOf(d).toFixed(2)} €</strong></td></tr></table>
+    <br><br><p>${LANG==='nl'?'De voogd,':'Le tuteur,'}</p>`;
+  printDoc((LANG==='nl'?'Rekeninguittreksel':'Relevé')+' '+d.nom,html);
 }
 
 /* ============ UTIL ============ */

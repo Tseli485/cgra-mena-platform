@@ -1,2792 +1,370 @@
 {
-  "schema_version": "1.0",
-  "framework_name": "CYCLE-VIE: MENA Lifecycle Phases",
-  "description": "Comprehensive JSON structure for lifecycle phase management across 0-18 age groups",
-  "created_date": "2026-06-02",
-  "last_updated": "2026-06-02",
-  "total_age_groups": 4,
-  "total_phases": 22,
-  "age_groups": [
-    {
-      "age_group_id": 1,
-      "name": "Infancy",
-      "description": "Birth through early toddlerhood with focus on survival, health, bonding, and foundational care",
-      "age_min": 0,
-      "age_max": 2,
-      "duration_months": 24,
-      "phases_count": 5
-    },
-    {
-      "age_group_id": 2,
-      "name": "Early Childhood",
-      "description": "Preschool years focused on development, language acquisition, socialization, and school preparation",
-      "age_min": 2,
-      "age_max": 6,
-      "duration_months": 48,
-      "phases_count": 5
-    },
-    {
-      "age_group_id": 3,
-      "name": "Middle Childhood",
-      "description": "Primary school years emphasizing education, skill development, peer relationships, and independence",
-      "age_min": 6,
-      "age_max": 12,
-      "duration_months": 72,
-      "phases_count": 5
-    },
-    {
-      "age_group_id": 4,
-      "name": "Adolescence",
-      "description": "Secondary school years focused on identity formation, vocational exploration, legal rights, and transition to adulthood",
-      "age_min": 12,
-      "age_max": 18,
-      "duration_months": 72,
-      "phases_count": 6
-    }
-  ],
+  "schema": "bilingue-2.0",
   "phases": [
     {
-      "phase_id": "1.1",
-      "age_group_id": 1,
-      "age_group_name": "Infancy",
-      "phase_number": 1,
-      "title": "Birth & Registration",
-      "description": "Legal registration, religious naming ceremony, and foundational identity establishment",
-      "age_min": 0,
-      "age_max": 1,
-      "duration_months": 1,
-      "start_age_months": 0,
-      "end_age_months": 1,
-      "legal_obligations": [
-        {
-          "obligation_id": "1.1.1",
-          "obligation": "Birth registration with civil authorities",
-          "deadline": "30-60 days",
-          "responsible_party": "Parents/Guardians",
-          "consequence": "Loss of nationality rights, educational enrollment restrictions"
-        },
-        {
-          "obligation_id": "1.1.2",
-          "obligation": "Religious naming ceremony (Aqiqah)",
-          "deadline": "Within 7 days",
-          "responsible_party": "Family/Religious Authority",
-          "consequence": "Cultural/religious non-compliance"
-        },
-        {
-          "obligation_id": "1.1.3",
-          "obligation": "Notification to family and community",
-          "deadline": "Within 30 days",
-          "responsible_party": "Parents",
-          "consequence": "Social/family relation consequences"
-        }
+      "id": "1.1", "g": {"fr": "Petite enfance (0-2 ans)", "nl": "Vroege kindertijd (0-2 jaar)"},
+      "age_min": 0, "age_max": 1,
+      "title": {"fr": "Naissance & Enregistrement", "nl": "Geboorte & Registratie"},
+      "desc": {"fr": "Établissement de l'identité légale et premiers soins du nourrisson.", "nl": "Vaststelling van de wettelijke identiteit en eerste zorg voor de zuigeling."},
+      "cost": {"min": 320, "max": 2100, "monthly": 320},
+      "obligations": [
+        {"txt": {"fr": "Déclaration de naissance à l'état civil", "nl": "Aangifte van geboorte bij de burgerlijke stand"}, "delai": {"fr": "15 jours", "nl": "15 dagen"}, "resp": {"fr": "Parents / Tuteur", "nl": "Ouders / Voogd"}},
+        {"txt": {"fr": "Affiliation à une mutuelle / couverture santé", "nl": "Aansluiting bij een ziekenfonds / zorgdekking"}, "delai": {"fr": "Premières semaines", "nl": "Eerste weken"}, "resp": {"fr": "Tuteur", "nl": "Voogd"}}
       ],
-      "financial_breakdown": {
-        "total_monthly": 320,
-        "total_min": 320,
-        "total_max": 2100,
-        "components": [
-          {
-            "category": "Healthcare",
-            "item": "Hospital/midwife fees",
-            "min": 200,
-            "max": 1500,
-            "frequency": "one-time",
-            "currency": "USD"
-          },
-          {
-            "category": "Legal",
-            "item": "Registration fees",
-            "min": 20,
-            "max": 100,
-            "frequency": "one-time",
-            "currency": "USD"
-          },
-          {
-            "category": "Social",
-            "item": "Celebration/ceremony costs",
-            "min": 100,
-            "max": 500,
-            "frequency": "one-time",
-            "currency": "USD"
-          }
-        ]
-      },
       "checklist": [
-        "Hospital birth completed",
-        "Registration application submitted to civil authorities",
-        "Naming ceremony conducted",
-        "Initial vaccinations scheduled",
-        "Birth certificate received and verified",
-        "Health insurance enrollment initiated",
-        "Family notification completed",
-        "Religious documentation filed",
-        "Guardian identification confirmed",
-        "Medical records initiated",
-        "Parental leave arrangements made",
-        "Home preparation completed",
-        "Emergency contacts established",
-        "Pediatrician selected",
-        "Vaccination booklet obtained",
-        "Birth announcement distributed",
-        "Legal documentation filed",
-        "Cultural ceremonies completed",
-        "Social security registration initiated",
-        "Healthcare provider assigned"
+        {"fr": "Acte de naissance obtenu", "nl": "Geboorteakte verkregen"},
+        {"fr": "Premier examen pédiatrique réalisé", "nl": "Eerste pediatrisch onderzoek uitgevoerd"},
+        {"fr": "Calendrier vaccinal initié", "nl": "Vaccinatieschema gestart"}
       ],
-      "resources": [
-        {
-          "resource_name": "Valid parental ID documents",
-          "type": "Document",
-          "responsible_provider": "Government Authority"
-        },
-        {
-          "resource_name": "Marriage certificate of parents",
-          "type": "Document",
-          "responsible_provider": "Government Authority"
-        },
-        {
-          "resource_name": "Hospital discharge papers",
-          "type": "Document",
-          "responsible_provider": "Healthcare Provider"
-        },
-        {
-          "resource_name": "Witness attestations (2-4 witnesses)",
-          "type": "Service",
-          "responsible_provider": "Family/Religious Authority"
-        }
-      ],
-      "documents_needed": [
-        "Birth certificate (civil)",
-        "Islamic birth registry",
-        "Hospital discharge summary",
-        "Vaccination record initiation",
-        "Parent identification copies",
-        "Marriage certificate",
-        "Witness statements"
+      "documents": [
+        {"fr": "Acte de naissance", "nl": "Geboorteakte"},
+        {"fr": "Carnet de santé de l'enfant", "nl": "Gezondheidsboekje van het kind"}
       ]
     },
     {
-      "phase_id": "1.2",
-      "age_group_id": 1,
-      "age_group_name": "Infancy",
-      "phase_number": 2,
-      "title": "Newborn Health & Immunization",
-      "description": "Mandatory vaccinations, health checkups, and nutritional assessment",
-      "age_min": 1,
-      "age_max": 3,
-      "duration_months": 2,
-      "start_age_months": 1,
-      "end_age_months": 3,
-      "legal_obligations": [
-        {
-          "obligation_id": "1.2.1",
-          "obligation": "Mandatory vaccination compliance per national health codes",
-          "deadline": "Per vaccination schedule",
-          "responsible_party": "Healthcare Provider/Parents",
-          "consequence": "Health risks, school enrollment restrictions"
-        },
-        {
-          "obligation_id": "1.2.2",
-          "obligation": "Regular health checkups",
-          "deadline": "6 appointments minimum",
-          "responsible_party": "Healthcare Provider",
-          "consequence": "Undetected health issues, developmental delays"
-        },
-        {
-          "obligation_id": "1.2.3",
-          "obligation": "Nutritional assessment and dietary guidance",
-          "deadline": "Within 3 months",
-          "responsible_party": "Healthcare Provider/Nutritionist",
-          "consequence": "Malnutrition, developmental issues"
-        }
+      "id": "1.2", "g": {"fr": "Petite enfance (0-2 ans)", "nl": "Vroege kindertijd (0-2 jaar)"},
+      "age_min": 0, "age_max": 1,
+      "title": {"fr": "Santé du nouveau-né & Vaccination", "nl": "Gezondheid van de pasgeborene & Vaccinatie"},
+      "desc": {"fr": "Suivi médical rapproché et primo-vaccinations.", "nl": "Nauwe medische opvolging en eerste vaccinaties."},
+      "cost": {"min": 150, "max": 800, "monthly": 150},
+      "obligations": [
+        {"txt": {"fr": "Vaccinations obligatoires selon le calendrier", "nl": "Verplichte vaccinaties volgens het schema"}, "delai": {"fr": "Selon calendrier (ONE/Kind&Gezin)", "nl": "Volgens schema (ONE/Kind&Gezin)"}, "resp": {"fr": "Médecin / Tuteur", "nl": "Arts / Voogd"}}
       ],
-      "financial_breakdown": {
-        "total_monthly": 150,
-        "total_min": 150,
-        "total_max": 900,
-        "components": [
-          {
-            "category": "Healthcare",
-            "item": "Vaccination costs",
-            "min": 100,
-            "max": 300,
-            "frequency": "per month",
-            "currency": "USD"
-          },
-          {
-            "category": "Healthcare",
-            "item": "Pediatric checkups",
-            "min": 50,
-            "max": 200,
-            "frequency": "per visit (6 visits)",
-            "currency": "USD"
-          },
-          {
-            "category": "Healthcare",
-            "item": "Basic health screening",
-            "min": 100,
-            "max": 400,
-            "frequency": "one-time",
-            "currency": "USD"
-          }
-        ]
-      },
       "checklist": [
-        "Vaccination schedule initiated per national guidelines",
-        "Monthly pediatric visits scheduled",
-        "Health insurance active and verified",
-        "Feeding plan documented with healthcare provider",
-        "Emergency protocols established",
-        "Family health history recorded",
-        "Immunization card obtained and maintained",
-        "Growth tracking system started",
-        "Feeding milestones monitored",
-        "Health emergency contacts documented",
-        "Vaccination reactions monitored",
-        "Nutritional status assessed",
-        "Pediatrician follow-up scheduled",
-        "Parental education provided",
-        "Healthcare communication plan established",
-        "Breastfeeding support arranged if needed",
-        "Formula safety guidelines provided",
-        "Infection prevention measures implemented",
-        "Home health safety check completed",
-        "Healthcare provider contact information secured"
+        {"fr": "Vaccins du 2e/3e mois administrés", "nl": "Vaccins van 2e/3e maand toegediend"},
+        {"fr": "Courbe de croissance suivie", "nl": "Groeicurve opgevolgd"},
+        {"fr": "Dépistages néonatals effectués", "nl": "Neonatale screenings uitgevoerd"}
       ],
-      "resources": [
-        {
-          "resource_name": "Health insurance documentation",
-          "type": "Document",
-          "responsible_provider": "Insurance Provider"
-        },
-        {
-          "resource_name": "Vaccination record booklet",
-          "type": "Document",
-          "responsible_provider": "Healthcare Provider"
-        },
-        {
-          "resource_name": "Feeding guidance materials",
-          "type": "Material",
-          "responsible_provider": "Healthcare Provider"
-        },
-        {
-          "resource_name": "Emergency contact information",
-          "type": "Document",
-          "responsible_provider": "Family"
-        }
-      ],
-      "documents_needed": [
-        "Immunization card",
-        "Health checkup records",
-        "Growth tracking charts",
-        "Feeding recommendation letters",
-        "Vaccination status documentation",
-        "Pediatrician contact information"
+      "documents": [
+        {"fr": "Carnet de vaccination", "nl": "Vaccinatieboekje"}
       ]
     },
     {
-      "phase_id": "1.3",
-      "age_group_id": 1,
-      "age_group_name": "Infancy",
-      "phase_number": 3,
-      "title": "Early Bonding & Development",
-      "description": "Parental guardianship establishment, medical consent, and inheritance planning",
-      "age_min": 3,
-      "age_max": 6,
-      "duration_months": 3,
-      "start_age_months": 3,
-      "end_age_months": 6,
-      "legal_obligations": [
-        {
-          "obligation_id": "1.3.1",
-          "obligation": "Parental guardianship formally established",
-          "deadline": "Immediately after birth",
-          "responsible_party": "Legal Authority",
-          "consequence": "Loss of custody rights, legal disputes"
-        },
-        {
-          "obligation_id": "1.3.2",
-          "obligation": "Consent for medical treatments documented",
-          "deadline": "Before any procedure",
-          "responsible_party": "Parents/Guardians",
-          "consequence": "Unauthorized medical intervention"
-        },
-        {
-          "obligation_id": "1.3.3",
-          "obligation": "Inheritance and succession planning initiated",
-          "deadline": "Within 6 months",
-          "responsible_party": "Legal Advisor",
-          "consequence": "Financial uncertainty, legal complications"
-        }
+      "id": "1.3", "g": {"fr": "Petite enfance (0-2 ans)", "nl": "Vroege kindertijd (0-2 jaar)"},
+      "age_min": 0, "age_max": 1,
+      "title": {"fr": "Attachement précoce & Développement", "nl": "Vroege hechting & Ontwikkeling"},
+      "desc": {"fr": "Lien d'attachement, éveil sensoriel et stabilité affective.", "nl": "Hechtingsband, zintuiglijke ontwikkeling en emotionele stabiliteit."},
+      "cost": {"min": 100, "max": 500, "monthly": 100},
+      "obligations": [
+        {"txt": {"fr": "Environnement de soins stable et sécurisant", "nl": "Stabiele en veilige zorgomgeving"}, "delai": {"fr": "Continu", "nl": "Doorlopend"}, "resp": {"fr": "Tuteur / Famille d'accueil", "nl": "Voogd / Pleeggezin"}}
       ],
-      "financial_breakdown": {
-        "total_monthly": 300,
-        "total_min": 300,
-        "total_max": 1550,
-        "components": [
-          {
-            "category": "Childcare",
-            "item": "Childcare/daycare exploration",
-            "min": 200,
-            "max": 800,
-            "frequency": "per month",
-            "currency": "USD"
-          },
-          {
-            "category": "Equipment",
-            "item": "Developmental toys and equipment",
-            "min": 100,
-            "max": 300,
-            "frequency": "one-time",
-            "currency": "USD"
-          },
-          {
-            "category": "Healthcare",
-            "item": "Continued health checkups",
-            "min": 50,
-            "max": 150,
-            "frequency": "per visit",
-            "currency": "USD"
-          }
-        ]
-      },
       "checklist": [
-        "Guardianship formalized with legal documentation",
-        "Development assessments completed",
-        "Childcare options evaluated",
-        "Feeding milestones tracked",
-        "Immunization updates current",
-        "Family support systems activated",
-        "Medical consent forms completed",
-        "Inheritance planning initiated",
-        "Guardianship certificate obtained",
-        "Developmental assessment reports filed",
-        "Childcare agreements signed",
-        "Health milestone records maintained",
-        "Emergency guardianship plans established",
-        "Legal documentation stored securely",
-        "Family communication plan updated",
-        "Parental role clarity established",
-        "Support network identified",
-        "Financial planning for guardianship started",
-        "Medical decision-making protocols established",
-        "Risk mitigation plans created"
+        {"fr": "Référent affectif stable identifié", "nl": "Stabiele affectieve referentiepersoon aangeduid"},
+        {"fr": "Éveil et interactions stimulés", "nl": "Ontwikkeling en interacties gestimuleerd"}
       ],
-      "resources": [
-        {
-          "resource_name": "Guardianship documentation",
-          "type": "Document",
-          "responsible_provider": "Legal Authority"
-        },
-        {
-          "resource_name": "Childcare facility options",
-          "type": "Service",
-          "responsible_provider": "Community/Private Providers"
-        },
-        {
-          "resource_name": "Early development assessment tools",
-          "type": "Service",
-          "responsible_provider": "Healthcare Provider"
-        },
-        {
-          "resource_name": "Parenting education materials",
-          "type": "Material",
-          "responsible_provider": "Community/Government"
-        }
-      ],
-      "documents_needed": [
-        "Guardianship certificate",
-        "Developmental assessment reports",
-        "Childcare agreements",
-        "Health milestone records",
-        "Medical consent forms",
-        "Inheritance planning documents",
-        "Family legal documentation"
+      "documents": [
+        {"fr": "Suivi médical à jour", "nl": "Medische opvolging bijgewerkt"}
       ]
     },
     {
-      "phase_id": "1.4",
-      "age_group_id": 1,
-      "age_group_name": "Infancy",
-      "phase_number": 4,
-      "title": "Mobility & Language Development",
-      "description": "Physical development support, language exposure, and home safety measures",
-      "age_min": 6,
-      "age_max": 12,
-      "duration_months": 6,
-      "start_age_months": 6,
-      "end_age_months": 12,
-      "legal_obligations": [
-        {
-          "obligation_id": "1.4.1",
-          "obligation": "Continuation of health surveillance",
-          "deadline": "Ongoing per health schedule",
-          "responsible_party": "Healthcare Provider",
-          "consequence": "Undetected health problems"
-        },
-        {
-          "obligation_id": "1.4.2",
-          "obligation": "Dietary guidelines compliance per health authority",
-          "deadline": "Ongoing",
-          "responsible_party": "Parents/Healthcare Provider",
-          "consequence": "Nutritional deficiencies, health complications"
-        },
-        {
-          "obligation_id": "1.4.3",
-          "obligation": "Safe environment standards for home",
-          "deadline": "Ongoing",
-          "responsible_party": "Parents/Guardians",
-          "consequence": "Injury risks, child welfare intervention"
-        }
+      "id": "1.4", "g": {"fr": "Petite enfance (0-2 ans)", "nl": "Vroege kindertijd (0-2 jaar)"},
+      "age_min": 1, "age_max": 2,
+      "title": {"fr": "Mobilité & Développement du langage", "nl": "Mobiliteit & Taalontwikkeling"},
+      "desc": {"fr": "Acquisition de la marche et des premiers mots.", "nl": "Verwerving van het lopen en de eerste woorden."},
+      "cost": {"min": 100, "max": 500, "monthly": 100},
+      "obligations": [
+        {"txt": {"fr": "Bilan de développement (psychomoteur, langage)", "nl": "Ontwikkelingsbalans (psychomotoriek, taal)"}, "delai": {"fr": "Vers 18 mois", "nl": "Rond 18 maanden"}, "resp": {"fr": "Médecin / ONE", "nl": "Arts / ONE"}}
       ],
-      "financial_breakdown": {
-        "total_monthly": 225,
-        "total_min": 225,
-        "total_max": 800,
-        "components": [
-          {
-            "category": "Equipment",
-            "item": "Developmental equipment",
-            "min": 150,
-            "max": 400,
-            "frequency": "one-time",
-            "currency": "USD"
-          },
-          {
-            "category": "Education",
-            "item": "Language/music classes",
-            "min": 50,
-            "max": 200,
-            "frequency": "per month",
-            "currency": "USD"
-          },
-          {
-            "category": "Healthcare",
-            "item": "Health monitoring",
-            "min": 75,
-            "max": 200,
-            "frequency": "per visit",
-            "currency": "USD"
-          }
-        ]
-      },
       "checklist": [
-        "Mobility support equipment obtained",
-        "Language exposure programs started",
-        "Home safety audited and compliant",
-        "Developmental milestones tracked",
-        "Immunization schedule on track",
-        "Fine/gross motor assessments conducted",
-        "Home hazards removed or secured",
-        "Safety equipment installed",
-        "Language development monitored",
-        "Music/sound exposure arranged",
-        "Mobility aids selected if needed",
-        "Healthcare provider monitoring active",
-        "Nutritional intake optimized",
-        "Sleep patterns established",
-        "Social interaction opportunities created",
-        "Parent training on safety completed",
-        "Emergency response protocols updated",
-        "Development progression documented",
-        "Early intervention services identified if needed",
-        "Community support groups joined"
+        {"fr": "Premiers pas et premiers mots observés", "nl": "Eerste stapjes en woorden waargenomen"},
+        {"fr": "Vaccins de rappel à jour", "nl": "Herhalingsvaccins bijgewerkt"}
       ],
-      "resources": [
-        {
-          "resource_name": "Age-appropriate toys and equipment lists",
-          "type": "Material",
-          "responsible_provider": "Community/Government"
-        },
-        {
-          "resource_name": "Language development guides",
-          "type": "Material",
-          "responsible_provider": "Educational Services"
-        },
-        {
-          "resource_name": "Home safety assessment checklists",
-          "type": "Material",
-          "responsible_provider": "Safety Authority"
-        },
-        {
-          "resource_name": "Early intervention service contacts",
-          "type": "Service",
-          "responsible_provider": "Healthcare/Government"
-        }
-      ],
-      "documents_needed": [
-        "Development progress records",
-        "Language milestone tracking",
-        "Home safety compliance certificates",
-        "Class attendance records",
-        "Healthcare visit summaries",
-        "Equipment purchase receipts"
+      "documents": [
+        {"fr": "Carnet de santé à jour", "nl": "Gezondheidsboekje bijgewerkt"}
       ]
     },
     {
-      "phase_id": "1.5",
-      "age_group_id": 1,
-      "age_group_name": "Infancy",
-      "phase_number": 5,
-      "title": "Transition to Toddlerhood",
-      "description": "Second-year health protocols and transition planning to early childhood",
-      "age_min": 12,
-      "age_max": 24,
-      "duration_months": 12,
-      "start_age_months": 12,
-      "end_age_months": 24,
-      "legal_obligations": [
-        {
-          "obligation_id": "1.5.1",
-          "obligation": "Second-year health protocol compliance",
-          "deadline": "Ongoing per health schedule",
-          "responsible_party": "Healthcare Provider",
-          "consequence": "Health risks, developmental delays"
-        },
-        {
-          "obligation_id": "1.5.2",
-          "obligation": "Transition planning to Age Group 2",
-          "deadline": "Before 24 months",
-          "responsible_party": "Parents/Healthcare Provider",
-          "consequence": "Disrupted educational continuity"
-        },
-        {
-          "obligation_id": "1.5.3",
-          "obligation": "Documentation of achievements and milestones",
-          "deadline": "By 24 months",
-          "responsible_party": "Healthcare Provider",
-          "consequence": "Lost developmental records"
-        }
+      "id": "1.5", "g": {"fr": "Petite enfance (0-2 ans)", "nl": "Vroege kindertijd (0-2 jaar)"},
+      "age_min": 1, "age_max": 2,
+      "title": {"fr": "Transition vers la petite enfance", "nl": "Overgang naar de peuterleeftijd"},
+      "desc": {"fr": "Autonomie naissante et préparation à l'accueil collectif.", "nl": "Beginnende zelfstandigheid en voorbereiding op collectieve opvang."},
+      "cost": {"min": 150, "max": 700, "monthly": 200},
+      "obligations": [
+        {"txt": {"fr": "Recherche d'un mode d'accueil (crèche)", "nl": "Zoeken naar opvang (kinderdagverblijf)"}, "delai": {"fr": "Selon disponibilité", "nl": "Volgens beschikbaarheid"}, "resp": {"fr": "Tuteur", "nl": "Voogd"}}
       ],
-      "financial_breakdown": {
-        "total_monthly": 275,
-        "total_min": 275,
-        "total_max": 1400,
-        "components": [
-          {
-            "category": "Education",
-            "item": "Toddler transition classes",
-            "min": 100,
-            "max": 300,
-            "frequency": "per month",
-            "currency": "USD"
-          },
-          {
-            "category": "Healthcare",
-            "item": "Nutrition assessment",
-            "min": 75,
-            "max": 200,
-            "frequency": "per assessment",
-            "currency": "USD"
-          },
-          {
-            "category": "Assessment",
-            "item": "Language and cognitive assessments",
-            "min": 150,
-            "max": 400,
-            "frequency": "one-time",
-            "currency": "USD"
-          },
-          {
-            "category": "Evaluation",
-            "item": "End-of-phase evaluation",
-            "min": 200,
-            "max": 500,
-            "frequency": "one-time",
-            "currency": "USD"
-          }
-        ]
-      },
       "checklist": [
-        "Transition programs reviewed and selected",
-        "24-month assessment completed",
-        "Developmental milestones recorded",
-        "Health records archived appropriately",
-        "Age Group 2 enrollment prepared",
-        "Parent guidance documentation provided",
-        "Language development assessed",
-        "Cognitive abilities evaluated",
-        "Social skills evaluated",
-        "Behavioral patterns documented",
-        "Nutrition status confirmed",
-        "Immunization updated",
-        "Transition plan finalized",
-        "Parent readiness assessed",
-        "Next phase requirements reviewed",
-        "Achievement certificates obtained",
-        "Medical records transferred",
-        "Developmental portfolio completed",
-        "Future support needs identified",
-        "Graduation ceremony/celebration arranged"
+        {"fr": "Place d'accueil identifiée", "nl": "Opvangplaats gevonden"},
+        {"fr": "Propreté en cours d'acquisition", "nl": "Zindelijkheid in ontwikkeling"}
       ],
-      "resources": [
-        {
-          "resource_name": "Transition program documentation",
-          "type": "Document",
-          "responsible_provider": "Educational Institution"
-        },
-        {
-          "resource_name": "Toddler-specific curricula materials",
-          "type": "Material",
-          "responsible_provider": "Educational Provider"
-        },
-        {
-          "resource_name": "Assessment report templates",
-          "type": "Material",
-          "responsible_provider": "Healthcare Provider"
-        },
-        {
-          "resource_name": "Age Group 2 onboarding materials",
-          "type": "Material",
-          "responsible_provider": "Next Educational Level"
-        }
-      ],
-      "documents_needed": [
-        "24-month health summary",
-        "Developmental achievement certificate",
-        "Transition plan document",
-        "Recommended interventions",
-        "Age Group 2 readiness assessment",
-        "Complete medical records",
-        "Developmental portfolio"
+      "documents": [
+        {"fr": "Attestation de vaccination pour l'accueil", "nl": "Vaccinatieattest voor de opvang"}
       ]
     },
     {
-      "phase_id": "2.1",
-      "age_group_id": 2,
-      "age_group_name": "Early Childhood",
-      "phase_number": 1,
-      "title": "Preschool Entry & Socialization",
-      "description": "School enrollment, health compliance, and initial social development",
-      "age_min": 2,
-      "age_max": 3,
-      "duration_months": 12,
-      "start_age_months": 24,
-      "end_age_months": 36,
-      "legal_obligations": [
-        {
-          "obligation_id": "2.1.1",
-          "obligation": "Preschool enrollment and regulatory compliance",
-          "deadline": "Before school start",
-          "responsible_party": "School/Parents",
-          "consequence": "Enrollment rejection, legal penalties"
-        },
-        {
-          "obligation_id": "2.1.2",
-          "obligation": "Continued health monitoring and vaccinations",
-          "deadline": "Ongoing per schedule",
-          "responsible_party": "Healthcare Provider",
-          "consequence": "Health risks, school exclusion"
-        },
-        {
-          "obligation_id": "2.1.3",
-          "obligation": "Parental consent for early education curriculum",
-          "deadline": "Before enrollment",
-          "responsible_party": "Parents",
-          "consequence": "Educational disruption"
-        }
+      "id": "2.1", "g": {"fr": "Enfance précoce (2-6 ans)", "nl": "Jonge kindertijd (2-6 jaar)"},
+      "age_min": 2, "age_max": 3,
+      "title": {"fr": "Entrée en maternelle & Socialisation", "nl": "Start kleuterschool & Socialisatie"},
+      "desc": {"fr": "Première scolarisation et apprentissage de la vie en groupe.", "nl": "Eerste schoolgang en leren leven in groep."},
+      "cost": {"min": 100, "max": 600, "monthly": 120},
+      "obligations": [
+        {"txt": {"fr": "Inscription en école maternelle", "nl": "Inschrijving in de kleuterschool"}, "delai": {"fr": "Avant la rentrée scolaire", "nl": "Voor het schooljaar begint"}, "resp": {"fr": "Tuteur", "nl": "Voogd"}}
       ],
-      "financial_breakdown": {
-        "total_monthly": 250,
-        "total_min": 250,
-        "total_max": 800,
-        "components": [
-          {
-            "category": "Education",
-            "item": "Preschool fees",
-            "min": 2000,
-            "max": 8000,
-            "frequency": "per year",
-            "currency": "USD"
-          },
-          {
-            "category": "Supplies",
-            "item": "Supplies and uniforms",
-            "min": 200,
-            "max": 400,
-            "frequency": "one-time",
-            "currency": "USD"
-          },
-          {
-            "category": "Healthcare",
-            "item": "Health checkup",
-            "min": 75,
-            "max": 150,
-            "frequency": "one-time",
-            "currency": "USD"
-          },
-          {
-            "category": "Healthcare",
-            "item": "Vaccination updates",
-            "min": 50,
-            "max": 150,
-            "frequency": "as needed",
-            "currency": "USD"
-          }
-        ]
-      },
       "checklist": [
-        "Preschool selected and enrolled",
-        "Health clearance obtained",
-        "Vaccinations current and documented",
-        "Uniforms and supplies purchased",
-        "Emergency protocols registered",
-        "Parental communication plan established",
-        "School handbook reviewed",
-        "Behavioral baseline assessment completed",
-        "Allergy information documented",
-        "Medication administration forms signed",
-        "Emergency contacts updated",
-        "Dietary restrictions documented",
-        "Attendance policy understood",
-        "Fee payment method established",
-        "Parent-teacher communication channels set",
-        "School policies acknowledged",
-        "Child adjustment plan created",
-        "Transportation arranged",
-        "Insurance information provided",
-        "Background check completed"
+        {"fr": "Inscription scolaire effectuée", "nl": "Schoolinschrijving uitgevoerd"},
+        {"fr": "Adaptation à la collectivité suivie", "nl": "Aanpassing aan de groep opgevolgd"}
       ],
-      "resources": [
-        {
-          "resource_name": "School enrollment documents",
-          "type": "Document",
-          "responsible_provider": "School"
-        },
-        {
-          "resource_name": "Medical clearance for group settings",
-          "type": "Document",
-          "responsible_provider": "Healthcare Provider"
-        },
-        {
-          "resource_name": "Vaccination status verification",
-          "type": "Document",
-          "responsible_provider": "Healthcare Provider"
-        },
-        {
-          "resource_name": "Emergency contact information",
-          "type": "Document",
-          "responsible_provider": "Family"
-        },
-        {
-          "resource_name": "Behavioral baseline assessment",
-          "type": "Service",
-          "responsible_provider": "School/Healthcare"
-        }
-      ],
-      "documents_needed": [
-        "Preschool enrollment contract",
-        "Health clearance certificate",
-        "Vaccination update records",
-        "Initial behavioral assessment",
-        "Parental handbook acknowledgment",
-        "Emergency contact forms",
-        "Medical information forms"
+      "documents": [
+        {"fr": "Certificat d'inscription scolaire", "nl": "Bewijs van schoolinschrijving"}
       ]
     },
     {
-      "phase_id": "2.2",
-      "age_group_id": 2,
-      "age_group_name": "Early Childhood",
-      "phase_number": 2,
-      "title": "Language & Cognitive Development",
-      "description": "Language assessments, cognitive development tracking, and educational support",
-      "age_min": 3,
-      "age_max": 4,
-      "duration_months": 12,
-      "start_age_months": 36,
-      "end_age_months": 48,
-      "legal_obligations": [
-        {
-          "obligation_id": "2.2.1",
-          "obligation": "Assessment of developmental progress per national standards",
-          "deadline": "Annually",
-          "responsible_party": "School/Healthcare",
-          "consequence": "Missed identification of delays"
-        },
-        {
-          "obligation_id": "2.2.2",
-          "obligation": "Speech and language screening if indicated",
-          "deadline": "If concerns identified",
-          "responsible_party": "Healthcare Provider",
-          "consequence": "Untreated speech disorders"
-        },
-        {
-          "obligation_id": "2.2.3",
-          "obligation": "Ongoing educational support planning",
-          "deadline": "Annually",
-          "responsible_party": "School",
-          "consequence": "Academic gaps"
-        }
+      "id": "2.2", "g": {"fr": "Enfance précoce (2-6 ans)", "nl": "Jonge kindertijd (2-6 jaar)"},
+      "age_min": 3, "age_max": 4,
+      "title": {"fr": "Développement langagier & cognitif", "nl": "Taal- en cognitieve ontwikkeling"},
+      "desc": {"fr": "Enrichissement du vocabulaire et de la pensée logique.", "nl": "Verrijking van woordenschat en logisch denken."},
+      "cost": {"min": 80, "max": 400, "monthly": 100},
+      "obligations": [
+        {"txt": {"fr": "Soutien à l'apprentissage de la langue", "nl": "Ondersteuning bij het leren van de taal"}, "delai": {"fr": "Continu", "nl": "Doorlopend"}, "resp": {"fr": "École / Tuteur", "nl": "School / Voogd"}}
       ],
-      "financial_breakdown": {
-        "total_monthly": 300,
-        "total_min": 300,
-        "total_max": 950,
-        "components": [
-          {
-            "category": "Education",
-            "item": "Preschool continuation",
-            "min": 2000,
-            "max": 8000,
-            "frequency": "per year",
-            "currency": "USD"
-          },
-          {
-            "category": "Assessment",
-            "item": "Language/cognitive assessments",
-            "min": 150,
-            "max": 400,
-            "frequency": "one-time",
-            "currency": "USD"
-          },
-          {
-            "category": "Education",
-            "item": "Tutoring (if needed)",
-            "min": 50,
-            "max": 150,
-            "frequency": "per month",
-            "currency": "USD"
-          },
-          {
-            "category": "Materials",
-            "item": "Educational materials",
-            "min": 100,
-            "max": 200,
-            "frequency": "one-time",
-            "currency": "USD"
-          }
-        ]
-      },
       "checklist": [
-        "Language assessments completed",
-        "Cognitive development tracked",
-        "Educational plan updated",
-        "Enrichment activities identified",
-        "Parental guidance provided",
-        "Progress monitoring system established",
-        "Speech/language assessment completed if needed",
-        "Bilingual support arranged if applicable",
-        "Learning style identified",
-        "Strengths and challenges documented",
-        "Parent-teacher conferences conducted",
-        "Educational goals set",
-        "Support services accessed if needed",
-        "Educational materials provided",
-        "Parent involvement activities scheduled",
-        "Community resources identified",
-        "Follow-up assessment scheduled",
-        "Progress reports reviewed",
-        "Developmental trajectory confirmed",
-        "Next phase preparation begun"
+        {"fr": "Progrès langagiers observés", "nl": "Taalvooruitgang waargenomen"},
+        {"fr": "Bilan de santé scolaire réalisé", "nl": "Schoolgezondheidsbalans uitgevoerd"}
       ],
-      "resources": [
-        {
-          "resource_name": "Language development assessment tools",
-          "type": "Service",
-          "responsible_provider": "Healthcare/School"
-        },
-        {
-          "resource_name": "Cognitive screening instruments",
-          "type": "Service",
-          "responsible_provider": "School Psychologist"
-        },
-        {
-          "resource_name": "Bilingual education support materials",
-          "type": "Material",
-          "responsible_provider": "School/Educational Provider"
-        },
-        {
-          "resource_name": "Intervention program directories",
-          "type": "Material",
-          "responsible_provider": "Government/Community"
-        },
-        {
-          "resource_name": "Assessment reports and recommendations",
-          "type": "Document",
-          "responsible_provider": "Healthcare/School"
-        }
-      ],
-      "documents_needed": [
-        "Language assessment reports",
-        "Cognitive evaluation results",
-        "Educational development plan",
-        "Recommended enrichment programs",
-        "Teacher observations and notes",
-        "Progress monitoring records",
-        "Parent communication logs"
+      "documents": [
+        {"fr": "Bulletin de suivi maternelle", "nl": "Opvolgrapport kleuterschool"}
       ]
     },
     {
-      "phase_id": "2.3",
-      "age_group_id": 2,
-      "age_group_name": "Early Childhood",
-      "phase_number": 3,
-      "title": "Social-Emotional & Play Development",
-      "description": "Behavioral assessment, social skills development, and kindergarten readiness",
-      "age_min": 4,
-      "age_max": 5,
-      "duration_months": 12,
-      "start_age_months": 48,
-      "end_age_months": 60,
-      "legal_obligations": [
-        {
-          "obligation_id": "2.3.1",
-          "obligation": "Behavioral and social development assessment",
-          "deadline": "Annually",
-          "responsible_party": "School/Healthcare",
-          "consequence": "Behavioral issues unaddressed"
-        },
-        {
-          "obligation_id": "2.3.2",
-          "obligation": "Kindergarten readiness evaluation per national standards",
-          "deadline": "Before kindergarten entry",
-          "responsible_party": "School",
-          "consequence": "Inappropriate grade placement"
-        },
-        {
-          "obligation_id": "2.3.3",
-          "obligation": "Parental engagement in educational planning",
-          "deadline": "Ongoing",
-          "responsible_party": "Parents/School",
-          "consequence": "Educational gaps"
-        }
+      "id": "2.3", "g": {"fr": "Enfance précoce (2-6 ans)", "nl": "Jonge kindertijd (2-6 jaar)"},
+      "age_min": 4, "age_max": 5,
+      "title": {"fr": "Développement social-émotionnel & jeu", "nl": "Sociaal-emotionele ontwikkeling & spel"},
+      "desc": {"fr": "Régulation des émotions et coopération avec les pairs.", "nl": "Emotieregulatie en samenwerking met leeftijdsgenoten."},
+      "cost": {"min": 80, "max": 400, "monthly": 100},
+      "obligations": [
+        {"txt": {"fr": "Repérage d'éventuelles difficultés (langage, comportement)", "nl": "Opsporen van eventuele moeilijkheden (taal, gedrag)"}, "delai": {"fr": "Si signe d'alerte", "nl": "Bij alarmsignaal"}, "resp": {"fr": "École / Médecin", "nl": "School / Arts"}}
       ],
-      "financial_breakdown": {
-        "total_monthly": 300,
-        "total_min": 300,
-        "total_max": 950,
-        "components": [
-          {
-            "category": "Education",
-            "item": "Preschool fees",
-            "min": 2000,
-            "max": 8000,
-            "frequency": "per year",
-            "currency": "USD"
-          },
-          {
-            "category": "Assessment",
-            "item": "Social-emotional assessments",
-            "min": 200,
-            "max": 400,
-            "frequency": "one-time",
-            "currency": "USD"
-          },
-          {
-            "category": "Therapy",
-            "item": "Play therapy (if indicated)",
-            "min": 50,
-            "max": 150,
-            "frequency": "per session",
-            "currency": "USD"
-          },
-          {
-            "category": "Assessment",
-            "item": "Kindergarten readiness testing",
-            "min": 150,
-            "max": 350,
-            "frequency": "one-time",
-            "currency": "USD"
-          }
-        ]
-      },
       "checklist": [
-        "Social-emotional assessment completed",
-        "Kindergarten readiness evaluated",
-        "Behavioral baseline established",
-        "Peer interaction monitored",
-        "Transition plan initiated",
-        "Parent-teacher collaboration active",
-        "Emotional regulation skills assessed",
-        "Social skills development tracked",
-        "Play behavior observed and documented",
-        "Friend relationships monitored",
-        "Conflict resolution skills developed",
-        "Bullying prevention education started",
-        "Parent-child bonding activities recommended",
-        "Self-esteem building activities provided",
-        "Classroom behavior expectations set",
-        "Emotional support resources identified",
-        "Fine/gross motor skills assessed",
-        "Self-care skills evaluated",
-        "School transition support planned",
-        "Kindergarten orientation scheduled"
+        {"fr": "Interactions sociales positives", "nl": "Positieve sociale interacties"},
+        {"fr": "Orientation vers un soutien si besoin", "nl": "Doorverwijzing naar ondersteuning indien nodig"}
       ],
-      "resources": [
-        {
-          "resource_name": "Social-emotional screening tools",
-          "type": "Service",
-          "responsible_provider": "School Psychologist"
-        },
-        {
-          "resource_name": "Kindergarten readiness assessment instruments",
-          "type": "Service",
-          "responsible_provider": "School"
-        },
-        {
-          "resource_name": "Play therapy resource directories",
-          "type": "Material",
-          "responsible_provider": "Healthcare/Community"
-        },
-        {
-          "resource_name": "Behavioral support plans",
-          "type": "Document",
-          "responsible_provider": "School"
-        },
-        {
-          "resource_name": "Parenting resources for emotional development",
-          "type": "Material",
-          "responsible_provider": "Community/Educational Provider"
-        }
-      ],
-      "documents_needed": [
-        "Social-emotional assessment report",
-        "Kindergarten readiness evaluation",
-        "Behavioral observation records",
-        "Play development summary",
-        "Transition to kindergarten plan",
-        "Peer interaction documentation",
-        "Parent-teacher conference notes"
+      "documents": [
+        {"fr": "Rapport de l'école", "nl": "Rapport van de school"}
       ]
     },
     {
-      "phase_id": "2.4",
-      "age_group_id": 2,
-      "age_group_name": "Early Childhood",
-      "phase_number": 4,
-      "title": "Pre-Kindergarten Skills & Independence",
-      "description": "Final preschool year, kindergarten registration, and school readiness",
-      "age_min": 5,
-      "age_max": 6,
-      "duration_months": 12,
-      "start_age_months": 60,
-      "end_age_months": 72,
-      "legal_obligations": [
-        {
-          "obligation_id": "2.4.1",
-          "obligation": "Final preschool compliance and graduation",
-          "deadline": "End of school year",
-          "responsible_party": "School/Parents",
-          "consequence": "Non-completion of preschool"
-        },
-        {
-          "obligation_id": "2.4.2",
-          "obligation": "Kindergarten registration and enrollment",
-          "deadline": "Per district timeline",
-          "responsible_party": "Parents/School",
-          "consequence": "Lost kindergarten placement"
-        },
-        {
-          "obligation_id": "2.4.3",
-          "obligation": "Health and vaccination requirements for primary school",
-          "deadline": "Before school start",
-          "responsible_party": "Healthcare Provider/Parents",
-          "consequence": "School enrollment rejection"
-        }
+      "id": "2.4", "g": {"fr": "Enfance précoce (2-6 ans)", "nl": "Jonge kindertijd (2-6 jaar)"},
+      "age_min": 5, "age_max": 6,
+      "title": {"fr": "Compétences pré-scolaires & Autonomie", "nl": "Voorschoolse vaardigheden & Zelfstandigheid"},
+      "desc": {"fr": "Préparation aux apprentissages de l'école primaire.", "nl": "Voorbereiding op het leren in de lagere school."},
+      "cost": {"min": 80, "max": 400, "monthly": 100},
+      "obligations": [
+        {"txt": {"fr": "Bilan préparatoire à l'entrée en primaire", "nl": "Voorbereidende balans voor start lagere school"}, "delai": {"fr": "Dernière année maternelle", "nl": "Laatste kleuterjaar"}, "resp": {"fr": "École", "nl": "School"}}
       ],
-      "financial_breakdown": {
-        "total_monthly": 350,
-        "total_min": 350,
-        "total_max": 1750,
-        "components": [
-          {
-            "category": "Education",
-            "item": "Final preschool year",
-            "min": 2000,
-            "max": 8000,
-            "frequency": "per year",
-            "currency": "USD"
-          },
-          {
-            "category": "Education",
-            "item": "Kindergarten registration",
-            "min": 300,
-            "max": 1000,
-            "frequency": "one-time",
-            "currency": "USD"
-          },
-          {
-            "category": "Healthcare",
-            "item": "School medical exam",
-            "min": 100,
-            "max": 250,
-            "frequency": "one-time",
-            "currency": "USD"
-          },
-          {
-            "category": "Supplies",
-            "item": "School supplies",
-            "min": 200,
-            "max": 500,
-            "frequency": "one-time",
-            "currency": "USD"
-          }
-        ]
-      },
       "checklist": [
-        "Preschool graduation completed",
-        "Kindergarten enrolled",
-        "Medical clearance received",
-        "School supplies acquired",
-        "Uniform obtained",
-        "School safety information reviewed",
-        "Academic readiness confirmed",
-        "Social readiness confirmed",
-        "Emotional readiness assessed",
-        "Physical readiness evaluated",
-        "Self-care skills mastered",
-        "School rules explained",
-        "Transportation arranged",
-        "Emergency procedures reviewed",
-        "Parent involvement opportunities identified",
-        "Special services arranged (if needed)",
-        "Kindergarten orientation attended",
-        "Teacher introduction completed",
-        "Friendship building activities arranged",
-        "Home preparation for kindergarten done"
+        {"fr": "Pré-requis scolaires acquis", "nl": "Schoolse basisvereisten verworven"},
+        {"fr": "Autonomie quotidienne renforcée", "nl": "Dagelijkse zelfstandigheid versterkt"}
       ],
-      "resources": [
-        {
-          "resource_name": "Kindergarten enrollment forms",
-          "type": "Document",
-          "responsible_provider": "School"
-        },
-        {
-          "resource_name": "Medical clearance for primary school",
-          "type": "Document",
-          "responsible_provider": "Healthcare Provider"
-        },
-        {
-          "resource_name": "Vaccination verification documents",
-          "type": "Document",
-          "responsible_provider": "Healthcare Provider"
-        },
-        {
-          "resource_name": "Preschool transition reports",
-          "type": "Document",
-          "responsible_provider": "Preschool"
-        },
-        {
-          "resource_name": "School uniform and supply lists",
-          "type": "Material",
-          "responsible_provider": "School"
-        }
-      ],
-      "documents_needed": [
-        "Preschool graduation certificate",
-        "Kindergarten enrollment confirmation",
-        "Medical clearance for school",
-        "Developmental summary report",
-        "Transition readiness assessment",
-        "Vaccination records",
-        "Emergency contact forms"
+      "documents": [
+        {"fr": "Avis de passage en primaire", "nl": "Advies overgang naar lagere school"}
       ]
     },
     {
-      "phase_id": "2.5",
-      "age_group_id": 2,
-      "age_group_name": "Early Childhood",
-      "phase_number": 5,
-      "title": "Age Group 2 Completion & Transition",
-      "description": "Comprehensive developmental assessment and transition to primary school",
-      "age_min": 5,
-      "age_max": 6,
-      "duration_months": 6,
-      "start_age_months": 66,
-      "end_age_months": 72,
-      "legal_obligations": [
-        {
-          "obligation_id": "2.5.1",
-          "obligation": "Comprehensive developmental assessment",
-          "deadline": "Before transition",
-          "responsible_party": "Healthcare/School",
-          "consequence": "Missed developmental issues"
-        },
-        {
-          "obligation_id": "2.5.2",
-          "obligation": "Documentation of early childhood phase completion",
-          "deadline": "Before transition",
-          "responsible_party": "School",
-          "consequence": "Lost educational records"
-        },
-        {
-          "obligation_id": "2.5.3",
-          "obligation": "Planning for primary school transition",
-          "deadline": "Minimum 3 months before",
-          "responsible_party": "School/Parents",
-          "consequence": "Disrupted educational continuity"
-        }
+      "id": "2.5", "g": {"fr": "Enfance précoce (2-6 ans)", "nl": "Jonge kindertijd (2-6 jaar)"},
+      "age_min": 5, "age_max": 6,
+      "title": {"fr": "Fin du groupe & Transition", "nl": "Einde van de groep & Overgang"},
+      "desc": {"fr": "Bilan global et passage vers l'enseignement primaire.", "nl": "Globale balans en overgang naar het lager onderwijs."},
+      "cost": {"min": 100, "max": 500, "monthly": 120},
+      "obligations": [
+        {"txt": {"fr": "Inscription en école primaire", "nl": "Inschrijving in de lagere school"}, "delai": {"fr": "Avant la rentrée (scolarité obligatoire dès 5 ans)", "nl": "Voor het schooljaar (leerplicht vanaf 5 jaar)"}, "resp": {"fr": "Tuteur", "nl": "Voogd"}}
       ],
-      "financial_breakdown": {
-        "total_monthly": 350,
-        "total_min": 350,
-        "total_max": 1400,
-        "components": [
-          {
-            "category": "Assessment",
-            "item": "Comprehensive assessments",
-            "min": 300,
-            "max": 800,
-            "frequency": "one-time",
-            "currency": "USD"
-          },
-          {
-            "category": "Services",
-            "item": "Transition coordination",
-            "min": 100,
-            "max": 300,
-            "frequency": "one-time",
-            "currency": "USD"
-          },
-          {
-            "category": "Healthcare",
-            "item": "Final health evaluation",
-            "min": 150,
-            "max": 300,
-            "frequency": "one-time",
-            "currency": "USD"
-          },
-          {
-            "category": "Documentation",
-            "item": "Documentation and archival",
-            "min": 50,
-            "max": 100,
-            "frequency": "one-time",
-            "currency": "USD"
-          }
-        ]
-      },
       "checklist": [
-        "Comprehensive assessment completed",
-        "All records compiled and archived",
-        "School transition plan finalized",
-        "Special services identified (if needed)",
-        "Parent briefing on primary school conducted",
-        "All Age Group 2 documentation complete",
-        "Academic achievement summarized",
-        "Developmental milestones recorded",
-        "Special needs assessments completed",
-        "IEP created (if applicable)",
-        "Health records organized",
-        "Educational materials selected",
-        "Primary school expectations reviewed",
-        "Classroom visit arranged",
-        "Teacher introduction scheduled",
-        "Peer relationships documented",
-        "Behavioral progress recorded",
-        "Social skills summary completed",
-        "Recommendations for next teacher provided",
-        "Closure ceremony/celebration held"
+        {"fr": "Inscription primaire confirmée", "nl": "Inschrijving lagere school bevestigd"},
+        {"fr": "Dossier scolaire transmis", "nl": "Schooldossier overgedragen"}
       ],
-      "resources": [
-        {
-          "resource_name": "Comprehensive assessment tools",
-          "type": "Service",
-          "responsible_provider": "School/Healthcare"
-        },
-        {
-          "resource_name": "School transition support materials",
-          "type": "Material",
-          "responsible_provider": "School"
-        },
-        {
-          "resource_name": "Special education resource directories",
-          "type": "Material",
-          "responsible_provider": "Government/Community"
-        },
-        {
-          "resource_name": "Individual Education Plan (IEP) templates if applicable",
-          "type": "Document",
-          "responsible_provider": "School"
-        },
-        {
-          "resource_name": "Parental guidance for school transition",
-          "type": "Material",
-          "responsible_provider": "School/Community"
-        }
-      ],
-      "documents_needed": [
-        "Comprehensive developmental assessment",
-        "Age Group 2 completion certificate",
-        "School transition plan",
-        "Educational records compilation",
-        "Recommendations for kindergarten teachers",
-        "Health records summary",
-        "Special education documentation (if applicable)"
+      "documents": [
+        {"fr": "Certificat d'inscription primaire", "nl": "Bewijs van inschrijving lagere school"}
       ]
     },
     {
-      "phase_id": "3.1",
-      "age_group_id": 3,
-      "age_group_name": "Middle Childhood",
-      "phase_number": 1,
-      "title": "Primary School Entry & Adaptation",
-      "description": "Compulsory education enrollment, school attendance compliance, and adaptation",
-      "age_min": 6,
-      "age_max": 7,
-      "duration_months": 12,
-      "start_age_months": 72,
-      "end_age_months": 84,
-      "legal_obligations": [
-        {
-          "obligation_id": "3.1.1",
-          "obligation": "Compulsory education enrollment per national law",
-          "deadline": "Age 6 or per national requirement",
-          "responsible_party": "Parents/School",
-          "consequence": "Legal penalties, fines"
-        },
-        {
-          "obligation_id": "3.1.2",
-          "obligation": "School attendance requirements and compliance",
-          "deadline": "Ongoing per school year",
-          "responsible_party": "Parents",
-          "consequence": "School truancy prosecution"
-        },
-        {
-          "obligation_id": "3.1.3",
-          "obligation": "Health and safety protocols for school",
-          "deadline": "Ongoing",
-          "responsible_party": "School/Parents",
-          "consequence": "Health risks, liability issues"
-        }
+      "id": "3.1", "g": {"fr": "Enfance moyenne (6-12 ans)", "nl": "Midden kindertijd (6-12 jaar)"},
+      "age_min": 6, "age_max": 7,
+      "title": {"fr": "Entrée à l'école primaire & Adaptation", "nl": "Start lagere school & Aanpassing"},
+      "desc": {"fr": "Apprentissages fondamentaux (lecture, écriture, calcul).", "nl": "Basisleerstof (lezen, schrijven, rekenen)."},
+      "cost": {"min": 150, "max": 700, "monthly": 130},
+      "obligations": [
+        {"txt": {"fr": "Scolarisation effective et régulière", "nl": "Effectieve en regelmatige schoolgang"}, "delai": {"fr": "Obligation scolaire", "nl": "Leerplicht"}, "resp": {"fr": "Tuteur", "nl": "Voogd"}}
       ],
-      "financial_breakdown": {
-        "total_monthly": 250,
-        "total_min": 250,
-        "total_max": 1100,
-        "components": [
-          {
-            "category": "Education",
-            "item": "Tuition",
-            "min": 1000,
-            "max": 5000,
-            "frequency": "per year",
-            "currency": "USD"
-          },
-          {
-            "category": "Supplies",
-            "item": "School supplies and uniforms",
-            "min": 300,
-            "max": 600,
-            "frequency": "per year",
-            "currency": "USD"
-          },
-          {
-            "category": "Transportation",
-            "item": "Transportation",
-            "min": 50,
-            "max": 200,
-            "frequency": "per month",
-            "currency": "USD"
-          },
-          {
-            "category": "Healthcare",
-            "item": "Health requirements",
-            "min": 100,
-            "max": 300,
-            "frequency": "one-time",
-            "currency": "USD"
-          }
-        ]
-      },
       "checklist": [
-        "School selected and enrolled",
-        "Health requirements met",
-        "Uniforms and supplies purchased",
-        "Transportation arranged",
-        "School policies reviewed",
-        "Baseline academic assessment completed",
-        "Emergency protocols registered",
-        "School handbook reviewed",
-        "Class assignment received",
-        "Teacher introduction completed",
-        "Parent-teacher conference scheduled",
-        "Academic expectations discussed",
-        "Behavioral expectations clarified",
-        "Communication plan established",
-        "Special services accessed (if needed)",
-        "Transportation payment arranged",
-        "School fees payment plan set",
-        "Attendance policy understood",
-        "Health/immunization records provided",
-        "Emergency contact information updated"
+        {"fr": "Fréquentation scolaire régulière", "nl": "Regelmatige schoolaanwezigheid"},
+        {"fr": "Soutien linguistique (DASPA) si primo-arrivant", "nl": "Taalondersteuning (OKAN) indien nieuwkomer"}
       ],
-      "resources": [
-        {
-          "resource_name": "School enrollment forms and contracts",
-          "type": "Document",
-          "responsible_provider": "School"
-        },
-        {
-          "resource_name": "Vaccination and health records verification",
-          "type": "Document",
-          "responsible_provider": "Healthcare Provider"
-        },
-        {
-          "resource_name": "Emergency contact information",
-          "type": "Document",
-          "responsible_provider": "Family"
-        },
-        {
-          "resource_name": "School uniform and supply lists",
-          "type": "Material",
-          "responsible_provider": "School"
-        },
-        {
-          "resource_name": "Attendance policy documentation",
-          "type": "Document",
-          "responsible_provider": "School"
-        }
-      ],
-      "documents_needed": [
-        "School enrollment confirmation",
-        "Attendance policy acknowledgment",
-        "Health clearance for school",
-        "Uniform and supply requisition records",
-        "Parent-teacher communication plan",
-        "Emergency protocols",
-        "Immunization records"
+      "documents": [
+        {"fr": "Bulletin scolaire", "nl": "Schoolrapport"}
       ]
     },
     {
-      "phase_id": "3.2",
-      "age_group_id": 3,
-      "age_group_name": "Middle Childhood",
-      "phase_number": 2,
-      "title": "Academic Foundation & Early Learning",
-      "description": "Attendance monitoring, academic progress tracking, and curriculum assessments",
-      "age_min": 7,
-      "age_max": 9,
-      "duration_months": 24,
-      "start_age_months": 84,
-      "end_age_months": 108,
-      "legal_obligations": [
-        {
-          "obligation_id": "3.2.1",
-          "obligation": "Attendance and academic progress monitoring",
-          "deadline": "Ongoing per school requirements",
-          "responsible_party": "School/Parents",
-          "consequence": "Academic decline, school exclusion"
-        },
-        {
-          "obligation_id": "3.2.2",
-          "obligation": "Assessment per national curriculum standards",
-          "deadline": "Per assessment schedule",
-          "responsible_party": "School",
-          "consequence": "Inaccurate grade placement"
-        },
-        {
-          "obligation_id": "3.2.3",
-          "obligation": "Documentation of learning outcomes",
-          "deadline": "Per school year",
-          "responsible_party": "School/Teachers",
-          "consequence": "Lost academic records"
-        }
+      "id": "3.2", "g": {"fr": "Enfance moyenne (6-12 ans)", "nl": "Midden kindertijd (6-12 jaar)"},
+      "age_min": 7, "age_max": 9,
+      "title": {"fr": "Fondations scolaires & Apprentissages", "nl": "Schoolse basis & Leren"},
+      "desc": {"fr": "Consolidation des savoirs de base.", "nl": "Consolidatie van de basiskennis."},
+      "cost": {"min": 150, "max": 700, "monthly": 130},
+      "obligations": [
+        {"txt": {"fr": "Suivi des résultats et soutien scolaire si besoin", "nl": "Opvolging van resultaten en bijles indien nodig"}, "delai": {"fr": "Par trimestre", "nl": "Per trimester"}, "resp": {"fr": "Tuteur / École", "nl": "Voogd / School"}}
       ],
-      "financial_breakdown": {
-        "total_monthly": 250,
-        "total_min": 250,
-        "total_max": 1200,
-        "components": [
-          {
-            "category": "Education",
-            "item": "Tuition continuation",
-            "min": 1000,
-            "max": 5000,
-            "frequency": "per year",
-            "currency": "USD"
-          },
-          {
-            "category": "Education",
-            "item": "Tutoring (if needed)",
-            "min": 50,
-            "max": 200,
-            "frequency": "per month",
-            "currency": "USD"
-          },
-          {
-            "category": "Assessment",
-            "item": "Testing and assessments",
-            "min": 100,
-            "max": 300,
-            "frequency": "per year",
-            "currency": "USD"
-          },
-          {
-            "category": "Activities",
-            "item": "Extracurricular activities",
-            "min": 100,
-            "max": 300,
-            "frequency": "per month",
-            "currency": "USD"
-          }
-        ]
-      },
       "checklist": [
-        "Academic baseline established",
-        "Progress monitored regularly",
-        "Assessments completed per schedule",
-        "Extracurriculars selected",
-        "Parent involvement active",
-        "Special support identified if needed",
-        "Report cards reviewed",
-        "Academic strengths identified",
-        "Academic challenges addressed",
-        "Tutoring arranged (if needed)",
-        "Reading level assessed",
-        "Math skills evaluated",
-        "Social skills development monitored",
-        "Physical education participation confirmed",
-        "Arts/music classes attended",
-        "Parent-teacher conferences held",
-        "Learning style identified",
-        "Behavioral progress tracked",
-        "Standardized testing completed",
-        "Academic growth documented"
+        {"fr": "Acquis de lecture et calcul vérifiés", "nl": "Lezen en rekenen gecontroleerd"},
+        {"fr": "Activités extrascolaires encouragées", "nl": "Buitenschoolse activiteiten aangemoedigd"}
       ],
-      "resources": [
-        {
-          "resource_name": "Curriculum standards and materials",
-          "type": "Material",
-          "responsible_provider": "School"
-        },
-        {
-          "resource_name": "Assessment tools and benchmarks",
-          "type": "Service",
-          "responsible_provider": "School"
-        },
-        {
-          "resource_name": "Tutoring resource directories",
-          "type": "Material",
-          "responsible_provider": "Community/Educational Provider"
-        },
-        {
-          "resource_name": "Extracurricular program options",
-          "type": "Service",
-          "responsible_provider": "School/Community"
-        },
-        {
-          "resource_name": "Parental involvement guidelines",
-          "type": "Material",
-          "responsible_provider": "School"
-        }
-      ],
-      "documents_needed": [
-        "Report cards and academic progress reports",
-        "Assessment results and evaluations",
-        "Extracurricular enrollment records",
-        "Teacher recommendations",
-        "Parent-teacher conference notes",
-        "Standardized test results",
-        "Academic achievement documentation"
+      "documents": [
+        {"fr": "Bulletins trimestriels", "nl": "Trimesterrapporten"}
       ]
     },
     {
-      "phase_id": "3.3",
-      "age_group_id": 3,
-      "age_group_name": "Middle Childhood",
-      "phase_number": 3,
-      "title": "Skill Development & Peer Relationships",
-      "description": "Talent development, anti-bullying measures, and peer relationship management",
-      "age_min": 9,
-      "age_max": 10,
-      "duration_months": 12,
-      "start_age_months": 108,
-      "end_age_months": 120,
-      "legal_obligations": [
-        {
-          "obligation_id": "3.3.1",
-          "obligation": "Continuation of educational progress documentation",
-          "deadline": "Ongoing per school year",
-          "responsible_party": "School",
-          "consequence": "Academic progress loss"
-        },
-        {
-          "obligation_id": "3.3.2",
-          "obligation": "Behavioral assessment and guidance",
-          "deadline": "Ongoing or per concerns",
-          "responsible_party": "School",
-          "consequence": "Behavior problems escalate"
-        },
-        {
-          "obligation_id": "3.3.3",
-          "obligation": "Inclusion in school decision-making processes",
-          "deadline": "Ongoing",
-          "responsible_party": "School/Student",
-          "consequence": "Lack of student voice"
-        }
+      "id": "3.3", "g": {"fr": "Enfance moyenne (6-12 ans)", "nl": "Midden kindertijd (6-12 jaar)"},
+      "age_min": 9, "age_max": 10,
+      "title": {"fr": "Développement des compétences & Pairs", "nl": "Vaardigheden & Leeftijdsgenoten"},
+      "desc": {"fr": "Renforcement des relations sociales et de l'estime de soi.", "nl": "Versterking van sociale relaties en zelfwaardering."},
+      "cost": {"min": 120, "max": 600, "monthly": 120},
+      "obligations": [
+        {"txt": {"fr": "Veille au bien-être psychosocial", "nl": "Waken over het psychosociaal welzijn"}, "delai": {"fr": "Continu", "nl": "Doorlopend"}, "resp": {"fr": "Tuteur", "nl": "Voogd"}}
       ],
-      "financial_breakdown": {
-        "total_monthly": 350,
-        "total_min": 350,
-        "total_max": 1250,
-        "components": [
-          {
-            "category": "Education",
-            "item": "Tuition",
-            "min": 1000,
-            "max": 5000,
-            "frequency": "per year",
-            "currency": "USD"
-          },
-          {
-            "category": "Development",
-            "item": "Skill-building programs",
-            "min": 100,
-            "max": 400,
-            "frequency": "per month",
-            "currency": "USD"
-          },
-          {
-            "category": "Activities",
-            "item": "Sports/arts programs",
-            "min": 100,
-            "max": 300,
-            "frequency": "per month",
-            "currency": "USD"
-          },
-          {
-            "category": "Assessment",
-            "item": "Assessment fees",
-            "min": 100,
-            "max": 250,
-            "frequency": "one-time",
-            "currency": "USD"
-          }
-        ]
-      },
       "checklist": [
-        "Skill development programs selected",
-        "Anti-bullying protocols in place",
-        "Peer relationships assessed",
-        "Leadership opportunities identified",
-        "Parent-child communication strengthened",
-        "Adolescence preparation begun",
-        "Talents and strengths developed",
-        "Sports/arts participation active",
-        "Club participation encouraged",
-        "Behavioral progress tracked",
-        "Conflict resolution skills developed",
-        "Friendship building supported",
-        "Student council exploration started",
-        "Leadership skills developed",
-        "Community service introduced",
-        "Self-esteem reinforced",
-        "Diversity and inclusion taught",
-        "Digital citizenship education provided",
-        "Emotional intelligence developed",
-        "Support network strengthened"
+        {"fr": "Relations entre pairs positives", "nl": "Positieve relaties met leeftijdsgenoten"},
+        {"fr": "Signes de harcèlement surveillés", "nl": "Tekenen van pesten in de gaten gehouden"}
       ],
-      "resources": [
-        {
-          "resource_name": "Skill development program directories",
-          "type": "Material",
-          "responsible_provider": "Community/School"
-        },
-        {
-          "resource_name": "Anti-bullying policies and resources",
-          "type": "Material",
-          "responsible_provider": "School"
-        },
-        {
-          "resource_name": "Peer mediation training materials",
-          "type": "Material",
-          "responsible_provider": "School"
-        },
-        {
-          "resource_name": "Parent guides for adolescence preparation",
-          "type": "Material",
-          "responsible_provider": "Community/Educational Provider"
-        },
-        {
-          "resource_name": "Student leadership opportunity lists",
-          "type": "Material",
-          "responsible_provider": "School"
-        }
-      ],
-      "documents_needed": [
-        "Skill development progress reports",
-        "Extracurricular achievement records",
-        "Behavioral assessment reports",
-        "Anti-bullying incident records (if applicable)",
-        "Leadership opportunity documentation",
-        "Talent/strength assessments",
-        "Community service participation records"
+      "documents": [
+        {"fr": "Suivi scolaire", "nl": "Schoolopvolging"}
       ]
     },
     {
-      "phase_id": "3.4",
-      "age_group_id": 3,
-      "age_group_name": "Middle Childhood",
-      "phase_number": 4,
-      "title": "Independence & Responsibility",
-      "description": "Academic accountability, secondary school preparation, and civic responsibility",
-      "age_min": 10,
-      "age_max": 12,
-      "duration_months": 24,
-      "start_age_months": 120,
-      "end_age_months": 144,
-      "legal_obligations": [
-        {
-          "obligation_id": "3.4.1",
-          "obligation": "Academic accountability and achievement monitoring",
-          "deadline": "Ongoing per school year",
-          "responsible_party": "School/Parents",
-          "consequence": "Academic decline"
-        },
-        {
-          "obligation_id": "3.4.2",
-          "obligation": "Preparation for secondary school transition",
-          "deadline": "12-18 months before transition",
-          "responsible_party": "School/Parents",
-          "consequence": "Disrupted secondary education"
-        },
-        {
-          "obligation_id": "3.4.3",
-          "obligation": "Civic and social responsibility education",
-          "deadline": "Ongoing per curriculum",
-          "responsible_party": "School",
-          "consequence": "Lack of civic engagement"
-        }
+      "id": "3.4", "g": {"fr": "Enfance moyenne (6-12 ans)", "nl": "Midden kindertijd (6-12 jaar)"},
+      "age_min": 10, "age_max": 12,
+      "title": {"fr": "Autonomie & Responsabilité", "nl": "Zelfstandigheid & Verantwoordelijkheid"},
+      "desc": {"fr": "Prise d'initiatives et responsabilités adaptées à l'âge.", "nl": "Initiatief nemen en leeftijdsgepaste verantwoordelijkheden."},
+      "cost": {"min": 120, "max": 600, "monthly": 120},
+      "obligations": [
+        {"txt": {"fr": "Préparation au passage au secondaire", "nl": "Voorbereiding op de overgang naar het secundair"}, "delai": {"fr": "Dernière année primaire", "nl": "Laatste jaar lagere school"}, "resp": {"fr": "École / Tuteur", "nl": "School / Voogd"}}
       ],
-      "financial_breakdown": {
-        "total_monthly": 350,
-        "total_min": 350,
-        "total_max": 1400,
-        "components": [
-          {
-            "category": "Education",
-            "item": "Tuition",
-            "min": 1000,
-            "max": 5000,
-            "frequency": "per year",
-            "currency": "USD"
-          },
-          {
-            "category": "Preparation",
-            "item": "Secondary school preparation",
-            "min": 200,
-            "max": 500,
-            "frequency": "per year",
-            "currency": "USD"
-          },
-          {
-            "category": "Assessment",
-            "item": "Assessments and testing",
-            "min": 150,
-            "max": 400,
-            "frequency": "per year",
-            "currency": "USD"
-          },
-          {
-            "category": "Activities",
-            "item": "Extracurricular continuation",
-            "min": 100,
-            "max": 300,
-            "frequency": "per month",
-            "currency": "USD"
-          }
-        ]
-      },
       "checklist": [
-        "Secondary school options evaluated",
-        "Entrance exam preparation started",
-        "Academic standing confirmed",
-        "Recommendation letters initiated",
-        "Application requirements reviewed",
-        "Transition support plan developed",
-        "Academic performance tracked",
-        "Leadership roles assumed",
-        "Civic responsibility projects completed",
-        "Community service hours logged",
-        "Mentor relationships developed",
-        "Decision-making skills practiced",
-        "Organizational skills improved",
-        "Time management skills developed",
-        "Study habits established",
-        "Test-taking skills improved",
-        "Career exploration started",
-        "Secondary school campus tours completed",
-        "Parent information sessions attended",
-        "Transition timeline established"
+        {"fr": "Autonomie dans le travail scolaire", "nl": "Zelfstandigheid in schoolwerk"},
+        {"fr": "Orientation discutée avec l'enfant", "nl": "Studiekeuze besproken met het kind"}
       ],
-      "resources": [
-        {
-          "resource_name": "Secondary school options and information",
-          "type": "Material",
-          "responsible_provider": "Government/School"
-        },
-        {
-          "resource_name": "Academic preparation materials",
-          "type": "Material",
-          "responsible_provider": "School"
-        },
-        {
-          "resource_name": "Entrance examination resources",
-          "type": "Material",
-          "responsible_provider": "Educational Provider"
-        },
-        {
-          "resource_name": "Character education programs",
-          "type": "Service",
-          "responsible_provider": "School"
-        },
-        {
-          "resource_name": "Transition planning guides",
-          "type": "Material",
-          "responsible_provider": "School/Community"
-        }
-      ],
-      "documents_needed": [
-        "Academic achievement summary",
-        "Secondary school readiness assessment",
-        "Examination preparation records",
-        "Behavioral and social development report",
-        "Secondary school application materials",
-        "Teacher recommendation letters",
-        "Entrance exam results",
-        "Transition plan documentation"
+      "documents": [
+        {"fr": "Bulletin de fin de primaire", "nl": "Eindrapport lagere school"}
       ]
     },
     {
-      "phase_id": "3.5",
-      "age_group_id": 3,
-      "age_group_name": "Middle Childhood",
-      "phase_number": 5,
-      "title": "Age Group 3 Completion & Secondary Transition",
-      "description": "Primary school completion, secondary school enrollment, and comprehensive assessment",
-      "age_min": 11,
-      "age_max": 12,
-      "duration_months": 12,
-      "start_age_months": 132,
-      "end_age_months": 144,
-      "legal_obligations": [
-        {
-          "obligation_id": "3.5.1",
-          "obligation": "Final primary school completion documentation",
-          "deadline": "End of final year",
-          "responsible_party": "School",
-          "consequence": "Lost academic records"
-        },
-        {
-          "obligation_id": "3.5.2",
-          "obligation": "Secondary school enrollment and registration",
-          "deadline": "Per secondary school timeline",
-          "responsible_party": "School/Parents",
-          "consequence": "Delayed secondary education"
-        },
-        {
-          "obligation_id": "3.5.3",
-          "obligation": "Comprehensive developmental assessment",
-          "deadline": "Before transition",
-          "responsible_party": "School/Healthcare",
-          "consequence": "Missed developmental issues"
-        }
+      "id": "3.5", "g": {"fr": "Enfance moyenne (6-12 ans)", "nl": "Midden kindertijd (6-12 jaar)"},
+      "age_min": 11, "age_max": 12,
+      "title": {"fr": "Fin du primaire & Transition secondaire", "nl": "Einde lager & Overgang secundair"},
+      "desc": {"fr": "Obtention du certificat et inscription au secondaire.", "nl": "Behalen van het getuigschrift en inschrijving secundair."},
+      "cost": {"min": 150, "max": 700, "monthly": 140},
+      "obligations": [
+        {"txt": {"fr": "Inscription en école secondaire", "nl": "Inschrijving in het secundair onderwijs"}, "delai": {"fr": "Avant la rentrée", "nl": "Voor het schooljaar"}, "resp": {"fr": "Tuteur", "nl": "Voogd"}}
       ],
-      "financial_breakdown": {
-        "total_monthly": 400,
-        "total_min": 400,
-        "total_max": 1800,
-        "components": [
-          {
-            "category": "Education",
-            "item": "Final primary year",
-            "min": 1000,
-            "max": 5000,
-            "frequency": "per year",
-            "currency": "USD"
-          },
-          {
-            "category": "Education",
-            "item": "Secondary school registration",
-            "min": 500,
-            "max": 2000,
-            "frequency": "one-time",
-            "currency": "USD"
-          },
-          {
-            "category": "Assessment",
-            "item": "Entrance exams",
-            "min": 100,
-            "max": 300,
-            "frequency": "one-time",
-            "currency": "USD"
-          },
-          {
-            "category": "Ceremony",
-            "item": "Graduation/transition ceremony",
-            "min": 200,
-            "max": 500,
-            "frequency": "one-time",
-            "currency": "USD"
-          }
-        ]
-      },
       "checklist": [
-        "Primary school graduation completed",
-        "Secondary school enrolled",
-        "All records compiled and transferred",
-        "Entrance assessments completed",
-        "Special services identified (if needed)",
-        "Parent briefing on secondary school conducted",
-        "Academic transcript obtained",
-        "Graduation ceremony attended",
-        "Secondary school orientation completed",
-        "New teacher introductions made",
-        "Secondary school policies reviewed",
-        "New schedule understood",
-        "Campus tour completed",
-        "Locker/classroom assignment received",
-        "Textbooks obtained",
-        "Student ID obtained",
-        "Extracurricular information reviewed",
-        "Parent communication plan established",
-        "Closure celebration completed",
-        "Transition documentation archived"
+        {"fr": "Certificat d'études de base (CEB) obtenu", "nl": "Getuigschrift basisonderwijs behaald"},
+        {"fr": "Inscription secondaire confirmée", "nl": "Inschrijving secundair bevestigd"}
       ],
-      "resources": [
-        {
-          "resource_name": "Primary school completion documentation",
-          "type": "Document",
-          "responsible_provider": "School"
-        },
-        {
-          "resource_name": "Secondary school enrollment forms",
-          "type": "Document",
-          "responsible_provider": "Secondary School"
-        },
-        {
-          "resource_name": "Educational records compilation",
-          "type": "Service",
-          "responsible_provider": "School"
-        },
-        {
-          "resource_name": "Special education assessment (if applicable)",
-          "type": "Service",
-          "responsible_provider": "Healthcare/School"
-        },
-        {
-          "resource_name": "Transition support resources",
-          "type": "Material",
-          "responsible_provider": "Secondary School/Community"
-        }
-      ],
-      "documents_needed": [
-        "Primary school completion certificate",
-        "Educational records transcript",
-        "Secondary school enrollment confirmation",
-        "Comprehensive development report",
-        "Recommendations for secondary teachers",
-        "Entrance exam results",
-        "Academic achievement documentation",
-        "Special services documentation (if applicable)"
+      "documents": [
+        {"fr": "CEB / Certificat de fin de primaire", "nl": "Getuigschrift basisonderwijs"}
       ]
     },
     {
-      "phase_id": "4.1",
-      "age_group_id": 4,
-      "age_group_name": "Adolescence",
-      "phase_number": 1,
-      "title": "Secondary School Entry & Identity Formation",
-      "description": "Secondary school enrollment, identity documentation updates, and religious/civic education",
-      "age_min": 12,
-      "age_max": 13,
-      "duration_months": 12,
-      "start_age_months": 144,
-      "end_age_months": 156,
-      "legal_obligations": [
-        {
-          "obligation_id": "4.1.1",
-          "obligation": "Secondary school enrollment and attendance compliance",
-          "deadline": "Age 12 or per national requirement",
-          "responsible_party": "Parents/Student",
-          "consequence": "Legal penalties for truancy"
-        },
-        {
-          "obligation_id": "4.1.2",
-          "obligation": "Identity documentation updates (ID card/passport)",
-          "deadline": "As documents expire",
-          "responsible_party": "Parents",
-          "consequence": "Invalid identification"
-        },
-        {
-          "obligation_id": "4.1.3",
-          "obligation": "Religious education and civic responsibility education",
-          "deadline": "Ongoing per curriculum",
-          "responsible_party": "School",
-          "consequence": "Cultural/civic knowledge gaps"
-        }
+      "id": "4.1", "g": {"fr": "Adolescence (12-18 ans)", "nl": "Adolescentie (12-18 jaar)"},
+      "age_min": 12, "age_max": 13,
+      "title": {"fr": "Entrée au secondaire & Construction identitaire", "nl": "Start secundair & Identiteitsvorming"},
+      "desc": {"fr": "Adaptation au secondaire et affirmation de soi.", "nl": "Aanpassing aan het secundair en zelfaffirmatie."},
+      "cost": {"min": 200, "max": 900, "monthly": 160},
+      "obligations": [
+        {"txt": {"fr": "Suivi de l'orientation et du décrochage", "nl": "Opvolging van studiekeuze en schooluitval"}, "delai": {"fr": "Continu", "nl": "Doorlopend"}, "resp": {"fr": "Tuteur / École", "nl": "Voogd / School"}}
       ],
-      "financial_breakdown": {
-        "total_monthly": 300,
-        "total_min": 300,
-        "total_max": 1400,
-        "components": [
-          {
-            "category": "Education",
-            "item": "Tuition",
-            "min": 2000,
-            "max": 8000,
-            "frequency": "per year",
-            "currency": "USD"
-          },
-          {
-            "category": "Documentation",
-            "item": "Identity documentation updates",
-            "min": 50,
-            "max": 200,
-            "frequency": "as needed",
-            "currency": "USD"
-          },
-          {
-            "category": "Supplies",
-            "item": "Uniforms and supplies",
-            "min": 300,
-            "max": 600,
-            "frequency": "per year",
-            "currency": "USD"
-          },
-          {
-            "category": "Healthcare",
-            "item": "Health screening",
-            "min": 150,
-            "max": 300,
-            "frequency": "one-time",
-            "currency": "USD"
-          }
-        ]
-      },
       "checklist": [
-        "Secondary school enrolled and attending",
-        "Identity documentation updated",
-        "Health screening completed",
-        "School policies reviewed and understood",
-        "Extracurricular interests identified",
-        "Student government participation explored",
-        "Class schedule managed",
-        "Locker setup completed",
-        "Teacher expectations learned",
-        "School safety procedures reviewed",
-        "Lunch/meal arrangements made",
-        "Transportation finalized",
-        "Parent-teacher meetings scheduled",
-        "Communication channels established",
-        "Academic goals set",
-        "Friendship building activities started",
-        "Homework schedule established",
-        "Study group formation encouraged",
-        "Religious/cultural education engaged",
-        "Civic responsibility introduced"
+        {"fr": "Intégration au secondaire suivie", "nl": "Integratie in het secundair opgevolgd"},
+        {"fr": "Soutien psychologique si besoin", "nl": "Psychologische ondersteuning indien nodig"}
       ],
-      "resources": [
-        {
-          "resource_name": "Secondary school enrollment documentation",
-          "type": "Document",
-          "responsible_provider": "Secondary School"
-        },
-        {
-          "resource_name": "Identity card/passport application forms",
-          "type": "Document",
-          "responsible_provider": "Government Authority"
-        },
-        {
-          "resource_name": "School policies and student handbook",
-          "type": "Material",
-          "responsible_provider": "School"
-        },
-        {
-          "resource_name": "Health screening and clearance forms",
-          "type": "Document",
-          "responsible_provider": "Healthcare Provider"
-        },
-        {
-          "resource_name": "Student government information",
-          "type": "Material",
-          "responsible_provider": "School"
-        }
-      ],
-      "documents_needed": [
-        "Secondary school enrollment confirmation",
-        "Updated identity card/passport",
-        "Health clearance for secondary school",
-        "Student handbook acknowledgment",
-        "Student government registration",
-        "Class schedule",
-        "Emergency contact forms"
+      "documents": [
+        {"fr": "Bulletin secondaire", "nl": "Rapport secundair"}
       ]
     },
     {
-      "phase_id": "4.2",
-      "age_group_id": 4,
-      "age_group_name": "Adolescence",
-      "phase_number": 2,
-      "title": "Academic & Vocational Exploration",
-      "description": "Career counseling, vocational programs exploration, and aptitude assessment",
-      "age_min": 13,
-      "age_max": 15,
-      "duration_months": 24,
-      "start_age_months": 156,
-      "end_age_months": 180,
-      "legal_obligations": [
-        {
-          "obligation_id": "4.2.1",
-          "obligation": "Academic progress documentation per national standards",
-          "deadline": "Per school reporting requirements",
-          "responsible_party": "School",
-          "consequence": "Academic progress loss"
-        },
-        {
-          "obligation_id": "4.2.2",
-          "obligation": "Career exploration and guidance initiation",
-          "deadline": "By age 14",
-          "responsible_party": "School/Career Counselor",
-          "consequence": "Limited career awareness"
-        },
-        {
-          "obligation_id": "4.2.3",
-          "obligation": "Aptitude and interest assessment",
-          "deadline": "Age 13-14",
-          "responsible_party": "School Counselor",
-          "consequence": "Inaccurate career direction"
-        }
+      "id": "4.2", "g": {"fr": "Adolescence (12-18 ans)", "nl": "Adolescentie (12-18 jaar)"},
+      "age_min": 13, "age_max": 15,
+      "title": {"fr": "Exploration scolaire & professionnelle", "nl": "School- en beroepsverkenning"},
+      "desc": {"fr": "Découverte des filières et des métiers.", "nl": "Verkenning van studierichtingen en beroepen."},
+      "cost": {"min": 200, "max": 900, "monthly": 160},
+      "obligations": [
+        {"txt": {"fr": "Accompagnement du choix d'orientation", "nl": "Begeleiding van de studiekeuze"}, "delai": {"fr": "Selon le cursus", "nl": "Volgens het traject"}, "resp": {"fr": "Tuteur / CPMS", "nl": "Voogd / CLB"}}
       ],
-      "financial_breakdown": {
-        "total_monthly": 400,
-        "total_min": 400,
-        "total_max": 1600,
-        "components": [
-          {
-            "category": "Education",
-            "item": "Tuition continuation",
-            "min": 2000,
-            "max": 8000,
-            "frequency": "per year",
-            "currency": "USD"
-          },
-          {
-            "category": "Career",
-            "item": "Career counseling",
-            "min": 100,
-            "max": 300,
-            "frequency": "per month",
-            "currency": "USD"
-          },
-          {
-            "category": "Exploration",
-            "item": "Vocational exploration programs",
-            "min": 200,
-            "max": 500,
-            "frequency": "per program",
-            "currency": "USD"
-          },
-          {
-            "category": "Assessment",
-            "item": "Aptitude testing",
-            "min": 150,
-            "max": 400,
-            "frequency": "one-time",
-            "currency": "USD"
-          }
-        ]
-      },
       "checklist": [
-        "Career counseling initiated",
-        "Aptitude assessments completed",
-        "Vocational programs explored",
-        "Mentors identified",
-        "Work-study programs researched",
-        "Educational pathway options discussed",
-        "Interest inventory completed",
-        "Career preferences identified",
-        "Shadowing opportunities explored",
-        "Internship options researched",
-        "Skill development prioritized",
-        "Academic strengths leveraged",
-        "Weakness areas addressed",
-        "Course selection aligned with goals",
-        "Extracurriculars aligned with interests",
-        "Parent involvement in career planning",
-        "Life skills development started",
-        "Financial literacy introduced",
-        "Career research projects completed",
-        "Career fair attendance"
+        {"fr": "Projet scolaire/professionnel esquissé", "nl": "School-/beroepsproject geschetst"},
+        {"fr": "Stages ou découvertes envisagés", "nl": "Stages of kennismakingen overwogen"}
       ],
-      "resources": [
-        {
-          "resource_name": "Career counseling resources",
-          "type": "Service",
-          "responsible_provider": "School Counselor"
-        },
-        {
-          "resource_name": "Vocational exploration program directories",
-          "type": "Material",
-          "responsible_provider": "Government/Community"
-        },
-        {
-          "resource_name": "Aptitude and interest assessment tools",
-          "type": "Service",
-          "responsible_provider": "School/Healthcare"
-        },
-        {
-          "resource_name": "Mentorship and shadowing opportunity lists",
-          "type": "Material",
-          "responsible_provider": "Community/Business"
-        },
-        {
-          "resource_name": "Child labor protection guidelines",
-          "type": "Material",
-          "responsible_provider": "Government Authority"
-        }
-      ],
-      "documents_needed": [
-        "Career counseling session notes",
-        "Aptitude assessment results",
-        "Interest inventory reports",
-        "Vocational exploration participation records",
-        "Mentorship agreements (if applicable)",
-        "Career preference documentation",
-        "Academic progress reports"
+      "documents": [
+        {"fr": "Bulletins et avis d'orientation", "nl": "Rapporten en studiekeuzeadvies"}
       ]
     },
     {
-      "phase_id": "4.3",
-      "age_group_id": 4,
-      "age_group_name": "Adolescence",
-      "phase_number": 3,
-      "title": "Skill Development & Social Responsibility",
-      "description": "Advanced academics, community service, and part-time work regulations",
-      "age_min": 15,
-      "age_max": 16,
-      "duration_months": 12,
-      "start_age_months": 180,
-      "end_age_months": 192,
-      "legal_obligations": [
-        {
-          "obligation_id": "4.3.1",
-          "obligation": "Advanced academic coursework planning",
-          "deadline": "Per academic calendar",
-          "responsible_party": "School/Student",
-          "consequence": "Limited academic options"
-        },
-        {
-          "obligation_id": "4.3.2",
-          "obligation": "Social service or community engagement requirement",
-          "deadline": "Ongoing per curriculum",
-          "responsible_party": "Student/School",
-          "consequence": "Lack of civic engagement"
-        },
-        {
-          "obligation_id": "4.3.3",
-          "obligation": "Part-time work regulations compliance (where applicable)",
-          "deadline": "If employment initiated",
-          "responsible_party": "Employer/Parents",
-          "consequence": "Labor law violations, child exploitation"
-        }
+      "id": "4.3", "g": {"fr": "Adolescence (12-18 ans)", "nl": "Adolescentie (12-18 jaar)"},
+      "age_min": 15, "age_max": 16,
+      "title": {"fr": "Compétences & Responsabilité sociale", "nl": "Vaardigheden & Sociale verantwoordelijkheid"},
+      "desc": {"fr": "Développement de l'autonomie et de la citoyenneté.", "nl": "Ontwikkeling van zelfstandigheid en burgerschap."},
+      "cost": {"min": 200, "max": 900, "monthly": 160},
+      "obligations": [
+        {"txt": {"fr": "Information sur les droits et devoirs", "nl": "Informatie over rechten en plichten"}, "delai": {"fr": "Continu", "nl": "Doorlopend"}, "resp": {"fr": "Tuteur", "nl": "Voogd"}}
       ],
-      "financial_breakdown": {
-        "total_monthly": 400,
-        "total_min": 400,
-        "total_max": 1400,
-        "components": [
-          {
-            "category": "Education",
-            "item": "Tuition",
-            "min": 2000,
-            "max": 8000,
-            "frequency": "per year",
-            "currency": "USD"
-          },
-          {
-            "category": "Education",
-            "item": "Advanced courses/certifications",
-            "min": 200,
-            "max": 600,
-            "frequency": "per program",
-            "currency": "USD"
-          },
-          {
-            "category": "Community",
-            "item": "Community service programs",
-            "min": 100,
-            "max": 300,
-            "frequency": "one-time",
-            "currency": "USD"
-          },
-          {
-            "category": "Work",
-            "item": "Part-time employment coordination",
-            "min": 0,
-            "max": 0,
-            "frequency": "varies",
-            "currency": "USD"
-          }
-        ]
-      },
       "checklist": [
-        "Advanced coursework selected",
-        "Community service planned",
-        "Work permit obtained (if needed)",
-        "Employment regulations understood",
-        "Social skills development tracked",
-        "Leadership opportunities pursued",
-        "Service learning projects completed",
-        "Work experience gained",
-        "Professional skills developed",
-        "Time management mastered",
-        "Responsibility demonstrated",
-        "Advanced certifications earned",
-        "Volunteer hours logged",
-        "Networking started",
-        "Mentorship continued",
-        "Financial independence planning started",
-        "Digital literacy improved",
-        "Decision-making skills practiced",
-        "Ethical framework developed",
-        "Personal goals refined"
+        {"fr": "Autonomie quotidienne renforcée", "nl": "Dagelijkse zelfstandigheid versterkt"},
+        {"fr": "Engagement social/associatif encouragé", "nl": "Sociaal engagement aangemoedigd"}
       ],
-      "resources": [
-        {
-          "resource_name": "Advanced curriculum options",
-          "type": "Material",
-          "responsible_provider": "School"
-        },
-        {
-          "resource_name": "Community service program directories",
-          "type": "Material",
-          "responsible_provider": "Government/Non-profit"
-        },
-        {
-          "resource_name": "Part-time employment regulations",
-          "type": "Material",
-          "responsible_provider": "Government Authority"
-        },
-        {
-          "resource_name": "Work safety guidelines",
-          "type": "Material",
-          "responsible_provider": "Government Authority"
-        },
-        {
-          "resource_name": "Social responsibility education materials",
-          "type": "Material",
-          "responsible_provider": "School/Community"
-        }
-      ],
-      "documents_needed": [
-        "Advanced course enrollment records",
-        "Community service participation certificates",
-        "Work permits (if applicable)",
-        "Employment contracts (if working)",
-        "Social responsibility progress reports",
-        "Certification documentation",
-        "Leadership achievement records"
+      "documents": [
+        {"fr": "Suivi scolaire et médical", "nl": "School- en medische opvolging"}
       ]
     },
     {
-      "phase_id": "4.4",
-      "age_group_id": 4,
-      "age_group_name": "Adolescence",
-      "phase_number": 4,
-      "title": "Pre-Adulthood Preparation & Rights Education",
-      "description": "Legal rights education, higher education planning, and adult status preparation",
-      "age_min": 16,
-      "age_max": 17,
-      "duration_months": 12,
-      "start_age_months": 192,
-      "end_age_months": 204,
-      "legal_obligations": [
-        {
-          "obligation_id": "4.4.1",
-          "obligation": "Legal rights and responsibilities education",
-          "deadline": "By age 16",
-          "responsible_party": "School/Community",
-          "consequence": "Lack of legal knowledge"
-        },
-        {
-          "obligation_id": "4.4.2",
-          "obligation": "Higher education planning (college/university/vocational)",
-          "deadline": "By age 17",
-          "responsible_party": "Student/School",
-          "consequence": "Delayed higher education"
-        },
-        {
-          "obligation_id": "4.4.3",
-          "obligation": "Preparation for adult legal status",
-          "deadline": "Before age 18",
-          "responsible_party": "Parents/Legal Authority",
-          "consequence": "Unprepared for adulthood"
-        }
+      "id": "4.4", "g": {"fr": "Adolescence (12-18 ans)", "nl": "Adolescentie (12-18 jaar)"},
+      "age_min": 16, "age_max": 17,
+      "title": {"fr": "Préparation à la majorité & Éducation aux droits", "nl": "Voorbereiding op meerderjarigheid & Rechteneducatie"},
+      "desc": {"fr": "Anticipation de la fin de tutelle et du statut adulte.", "nl": "Anticipatie op het einde van de voogdij en de volwassen status."},
+      "cost": {"min": 250, "max": 1000, "monthly": 180},
+      "obligations": [
+        {"txt": {"fr": "Sécurisation du titre de séjour avant 18 ans", "nl": "Verblijfstitel veiligstellen vóór 18 jaar"}, "delai": {"fr": "Avant la majorité", "nl": "Vóór de meerderjarigheid"}, "resp": {"fr": "Tuteur / Avocat", "nl": "Voogd / Advocaat"}},
+        {"txt": {"fr": "Lancement du projet d'autonomie (logement, formation)", "nl": "Start van het zelfstandigheidsproject (huisvesting, opleiding)"}, "delai": {"fr": "Dès 16-17 ans", "nl": "Vanaf 16-17 jaar"}, "resp": {"fr": "Tuteur", "nl": "Voogd"}}
       ],
-      "financial_breakdown": {
-        "total_monthly": 450,
-        "total_min": 450,
-        "total_max": 1900,
-        "components": [
-          {
-            "category": "Education",
-            "item": "Tuition",
-            "min": 2000,
-            "max": 8000,
-            "frequency": "per year",
-            "currency": "USD"
-          },
-          {
-            "category": "Assessment",
-            "item": "Higher education entrance exams",
-            "min": 200,
-            "max": 600,
-            "frequency": "per exam",
-            "currency": "USD"
-          },
-          {
-            "category": "Documentation",
-            "item": "Legal documentation",
-            "min": 100,
-            "max": 300,
-            "frequency": "one-time",
-            "currency": "USD"
-          },
-          {
-            "category": "Preparation",
-            "item": "University preparation programs",
-            "min": 300,
-            "max": 800,
-            "frequency": "per program",
-            "currency": "USD"
-          }
-        ]
-      },
       "checklist": [
-        "Legal rights education completed",
-        "Higher education options researched",
-        "Entrance exams completed",
-        "Applications submitted",
-        "Adult identification prepared",
-        "Financial independence plan started",
-        "Adult responsibilities understood",
-        "Legal obligations clarified",
-        "Financial planning taught",
-        "Medical decision-making skills developed",
-        "Educational pathway finalized",
-        "Vocational training researched",
-        "Scholarship applications submitted",
-        "College tours completed",
-        "Financial aid information gathered",
-        "Living arrangements explored",
-        "Time management perfected",
-        "Problem-solving skills advanced",
-        "Support systems identified for future",
-        "Transition to independence planned"
+        {"fr": "Statut de séjour consolidé", "nl": "Verblijfsstatus geconsolideerd"},
+        {"fr": "Projet logement/formation amorcé", "nl": "Project huisvesting/opleiding gestart"},
+        {"fr": "Information sur les droits adultes donnée", "nl": "Informatie over volwassenrechten gegeven"}
       ],
-      "resources": [
-        {
-          "resource_name": "Legal rights and responsibilities curriculum",
-          "type": "Material",
-          "responsible_provider": "School/Government"
-        },
-        {
-          "resource_name": "Higher education information and guides",
-          "type": "Material",
-          "responsible_provider": "Educational Institution"
-        },
-        {
-          "resource_name": "Legal documentation assistance services",
-          "type": "Service",
-          "responsible_provider": "Government Authority"
-        },
-        {
-          "resource_name": "Pre-adult counseling resources",
-          "type": "Service",
-          "responsible_provider": "School Counselor"
-        },
-        {
-          "resource_name": "Civic education materials",
-          "type": "Material",
-          "responsible_provider": "Government/School"
-        }
-      ],
-      "documents_needed": [
-        "Legal rights education completion certificate",
-        "Higher education application materials",
-        "Entrance examination scores",
-        "Adult identification documentation (preparation)",
-        "Transition to adulthood plan",
-        "Financial planning documentation",
-        "Educational pathway confirmation"
+      "documents": [
+        {"fr": "Titre de séjour", "nl": "Verblijfstitel"},
+        {"fr": "Dossier d'orientation post-18 ans", "nl": "Oriëntatiedossier na 18 jaar"}
       ]
     },
     {
-      "phase_id": "4.5",
-      "age_group_id": 4,
-      "age_group_name": "Adolescence",
-      "phase_number": 5,
-      "title": "Transition to Adulthood & Graduations",
-      "description": "Secondary school graduation and attainment of legal adulthood status",
-      "age_min": 17,
-      "age_max": 18,
-      "duration_months": 12,
-      "start_age_months": 204,
-      "end_age_months": 216,
-      "legal_obligations": [
-        {
-          "obligation_id": "4.5.1",
-          "obligation": "Secondary school completion and graduation",
-          "deadline": "End of final year",
-          "responsible_party": "Student/School",
-          "consequence": "No secondary diploma"
-        },
-        {
-          "obligation_id": "4.5.2",
-          "obligation": "Attainment of legal adulthood status",
-          "deadline": "Age 18",
-          "responsible_party": "Government/Legal Authority",
-          "consequence": "Continued minor status complications"
-        },
-        {
-          "obligation_id": "4.5.3",
-          "obligation": "Final health and developmental assessment",
-          "deadline": "Before graduation",
-          "responsible_party": "Healthcare Provider",
-          "consequence": "Undetected health issues"
-        }
+      "id": "4.5", "g": {"fr": "Adolescence (12-18 ans)", "nl": "Adolescentie (12-18 jaar)"},
+      "age_min": 17, "age_max": 18,
+      "title": {"fr": "Transition vers l'âge adulte & Diplômes", "nl": "Overgang naar volwassenheid & Diploma's"},
+      "desc": {"fr": "Finalisation de la formation et préparation à l'indépendance.", "nl": "Afronding van de opleiding en voorbereiding op zelfstandigheid."},
+      "cost": {"min": 250, "max": 1100, "monthly": 200},
+      "obligations": [
+        {"txt": {"fr": "Recherche de logement (autonome ou accompagné)", "nl": "Zoeken naar huisvesting (zelfstandig of begeleid)"}, "delai": {"fr": "Quelques mois avant 18 ans", "nl": "Enkele maanden vóór 18 jaar"}, "resp": {"fr": "Tuteur / Services logement", "nl": "Voogd / Huisvestingsdiensten"}}
       ],
-      "financial_breakdown": {
-        "total_monthly": 350,
-        "total_min": 350,
-        "total_max": 1650,
-        "components": [
-          {
-            "category": "Education",
-            "item": "Final tuition year",
-            "min": 2000,
-            "max": 8000,
-            "frequency": "per year",
-            "currency": "USD"
-          },
-          {
-            "category": "Ceremony",
-            "item": "Graduation ceremony",
-            "min": 300,
-            "max": 600,
-            "frequency": "one-time",
-            "currency": "USD"
-          },
-          {
-            "category": "Documentation",
-            "item": "Adult identification issuance",
-            "min": 50,
-            "max": 150,
-            "frequency": "one-time",
-            "currency": "USD"
-          },
-          {
-            "category": "Healthcare",
-            "item": "Final health evaluation",
-            "min": 150,
-            "max": 300,
-            "frequency": "one-time",
-            "currency": "USD"
-          }
-        ]
-      },
       "checklist": [
-        "Secondary school graduation completed",
-        "Adult identification obtained",
-        "Comprehensive assessment completed",
-        "Higher education/employment confirmed",
-        "Post-secondary transition plan finalized",
-        "CYCLE-VIE completion documented",
-        "Graduation ceremony attended",
-        "Diploma received",
-        "Academic transcripts obtained",
-        "Final health records completed",
-        "Adult rights/responsibilities confirmed",
-        "Financial independence established",
-        "Housing arrangements made",
-        "Employment started or education continued",
-        "Support systems identified",
-        "Adult healthcare established",
-        "Banking/financial accounts opened",
-        "Insurance coverage arranged",
-        "Long-term goals established",
-        "Family celebration completed"
+        {"fr": "Diplôme/qualification visé", "nl": "Diploma/kwalificatie beoogd"},
+        {"fr": "Solution de logement identifiée", "nl": "Huisvestingsoplossing gevonden"},
+        {"fr": "Droits sociaux adultes ouverts", "nl": "Sociale volwassenrechten geopend"}
       ],
-      "resources": [
-        {
-          "resource_name": "Graduation ceremony planning materials",
-          "type": "Material",
-          "responsible_provider": "School"
-        },
-        {
-          "resource_name": "Adult identification application forms",
-          "type": "Document",
-          "responsible_provider": "Government Authority"
-        },
-        {
-          "resource_name": "Secondary school completion documentation",
-          "type": "Document",
-          "responsible_provider": "School"
-        },
-        {
-          "resource_name": "Final health and developmental assessment tools",
-          "type": "Service",
-          "responsible_provider": "Healthcare Provider"
-        },
-        {
-          "resource_name": "Post-secondary transition resources",
-          "type": "Material",
-          "responsible_provider": "Government/Community"
-        }
-      ],
-      "documents_needed": [
-        "Secondary school graduation diploma/certificate",
-        "Official academic transcript",
-        "Adult identification card/passport",
-        "Final developmental assessment report",
-        "Post-secondary transition plan",
-        "Healthcare summary",
-        "Achievement documentation"
+      "documents": [
+        {"fr": "Diplôme / attestation de formation", "nl": "Diploma / opleidingsattest"}
       ]
     },
     {
-      "phase_id": "4.6",
-      "age_group_id": 4,
-      "age_group_name": "Adolescence",
-      "phase_number": 6,
-      "title": "Age Group 4 Completion & Full Adult Transition",
-      "description": "Legal adult rights/responsibilities, record archival, and program completion",
-      "age_min": 18,
-      "age_max": 18,
-      "duration_months": 0,
-      "start_age_months": 216,
-      "end_age_months": 216,
-      "legal_obligations": [
-        {
-          "obligation_id": "4.6.1",
-          "obligation": "Full legal adult rights and responsibilities",
-          "deadline": "Age 18",
-          "responsible_party": "Individual/Government",
-          "consequence": "Legal status complications"
-        },
-        {
-          "obligation_id": "4.6.2",
-          "obligation": "Completion of CYCLE-VIE program documentation",
-          "deadline": "Age 18",
-          "responsible_party": "School/Government",
-          "consequence": "Lost program records"
-        },
-        {
-          "obligation_id": "4.6.3",
-          "obligation": "Final archival of all records",
-          "deadline": "Age 18",
-          "responsible_party": "Government/Archive Authority",
-          "consequence": "Inaccessible records"
-        }
+      "id": "4.6", "g": {"fr": "Adolescence (12-18 ans)", "nl": "Adolescentie (12-18 jaar)"},
+      "age_min": 18, "age_max": 18,
+      "title": {"fr": "Fin de tutelle & Transition adulte complète", "nl": "Einde voogdij & Volledige overgang naar volwassenheid"},
+      "desc": {"fr": "Clôture de la tutelle et passage de relais vers les dispositifs adultes.", "nl": "Afsluiting van de voogdij en overdracht naar volwassenenvoorzieningen."},
+      "cost": {"min": 0, "max": 0, "monthly": 0},
+      "obligations": [
+        {"txt": {"fr": "Transmission organisée du dossier aux services adultes", "nl": "Georganiseerde overdracht van het dossier aan volwassendiensten"}, "delai": {"fr": "À 18 ans", "nl": "Op 18 jaar"}, "resp": {"fr": "Tuteur", "nl": "Voogd"}}
       ],
-      "financial_breakdown": {
-        "total_monthly": 200,
-        "total_min": 200,
-        "total_max": 950,
-        "components": [
-          {
-            "category": "Documentation",
-            "item": "Adult status documentation",
-            "min": 100,
-            "max": 200,
-            "frequency": "one-time",
-            "currency": "USD"
-          },
-          {
-            "category": "Archival",
-            "item": "Record archival and certification",
-            "min": 50,
-            "max": 150,
-            "frequency": "one-time",
-            "currency": "USD"
-          },
-          {
-            "category": "Support",
-            "item": "Transition support services",
-            "min": 200,
-            "max": 500,
-            "frequency": "as needed",
-            "currency": "USD"
-          },
-          {
-            "category": "Administration",
-            "item": "Administrative closure",
-            "min": 50,
-            "max": 100,
-            "frequency": "one-time",
-            "currency": "USD"
-          }
-        ]
-      },
       "checklist": [
-        "Legal adult status confirmed",
-        "All records archived and accessible",
-        "CYCLE-VIE completion certified",
-        "Final assessment completed",
-        "Transition to independent life confirmed",
-        "Post-program support identified (if needed)",
-        "Record access instructions provided",
-        "Adult documentation complete",
-        "Financial independence confirmed",
-        "Support network established",
-        "Healthcare continuity planned",
-        "Educational/employment path secured",
-        "Housing situation stable",
-        "Legal responsibilities understood",
-        "Financial obligations clear",
-        "Family relationships maintained",
-        "Community engagement planned",
-        "Future goal setting completed",
-        "Continuous improvement feedback given",
-        "Program closure documented"
+        {"fr": "Relais vers les dispositifs jeunes adultes assuré", "nl": "Doorverwijzing naar jongvolwassenenvoorzieningen verzekerd"},
+        {"fr": "Dossier complet transmis", "nl": "Volledig dossier overgedragen"}
       ],
-      "resources": [
-        {
-          "resource_name": "Adult rights and responsibilities information",
-          "type": "Material",
-          "responsible_provider": "Government Authority"
-        },
-        {
-          "resource_name": "Record access and management systems",
-          "type": "Service",
-          "responsible_provider": "Government Archive"
-        },
-        {
-          "resource_name": "Transition support resources",
-          "type": "Service",
-          "responsible_provider": "Community/Government"
-        },
-        {
-          "resource_name": "Employment and education guidance",
-          "type": "Service",
-          "responsible_provider": "Government/Community"
-        },
-        {
-          "resource_name": "Independent living skills resources",
-          "type": "Material",
-          "responsible_provider": "Community Organization"
-        }
-      ],
-      "documents_needed": [
-        "CYCLE-VIE completion certificate",
-        "Comprehensive lifecycle record summary",
-        "Adult status documentation",
-        "Record archival and access instructions",
-        "Recommendations for future support services",
-        "Final program evaluation",
-        "Achievement summary"
+      "documents": [
+        {"fr": "Dossier de transition complet", "nl": "Volledig overgangsdossier"}
       ]
     }
-  ],
-  "metadata": {
-    "author": "CYCLE-VIE Development Team",
-    "version": "1.0",
-    "last_updated": "2026-06-02",
-    "contact": "governance@cycle-vie.mena",
-    "notes": "Complete lifecycle framework covering 0-18 years with 22 phases, legal obligations, financial requirements, checklists, resources, and documentation needs for each phase."
-  }
+  ]
 }

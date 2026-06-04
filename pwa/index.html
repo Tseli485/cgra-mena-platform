@@ -481,35 +481,35 @@ const T_PHASE = {
 };
 const tg=s=>T_GROUP[s]||s, tp=s=>T_PHASE[s]||s;
 
-/* ============ LEGISLATION (FR, contexte MENA Belgique/UE) ============ */
+/* ============ LEGISLATION (bilingue FR/NL, contexte MENA Belgique/UE) ============ */
 const LEGISLATION = [
- {cat:"Désignation du tuteur",items:[
-   {titre:"Signalement du MENA",delai:"Immédiat (dès identification)",ref:"Loi-programme du 24/12/2002, Titre XIII, Ch. 6",desc:"Toute autorité qui constate la présence d'un mineur étranger non accompagné doit le signaler sans délai au Service des Tutelles."},
-   {titre:"Désignation d'un tuteur",delai:"Dans les jours suivant le signalement",ref:"Service des Tutelles (SPF Justice)",desc:"Le Service des Tutelles désigne un tuteur qui représente le mineur dans tous les actes juridiques et veille à son bien-être."},
-   {titre:"Identification & détermination de l'âge",delai:"3 jours ouvrables (test possible)",ref:"Art. 3-7 Loi Tutelle",desc:"En cas de doute sur la minorité, un test d'âge (examen médical triple) peut être réalisé. Le bénéfice du doute profite au mineur."},
+ {cat:{fr:"Désignation du tuteur",nl:"Aanstelling van de voogd"},items:[
+   {titre:{fr:"Signalement du MENA",nl:"Melding van de NBMV"},delai:{fr:"Immédiat (dès identification)",nl:"Onmiddellijk (bij identificatie)"},ref:"Loi-programme du 24/12/2002, Titre XIII, Ch. 6",desc:{fr:"Toute autorité qui constate la présence d'un mineur étranger non accompagné doit le signaler sans délai au Service des Tutelles.",nl:"Elke autoriteit die de aanwezigheid van een niet-begeleide buitenlandse minderjarige vaststelt, moet dit onverwijld melden aan de Dienst Voogdij."}},
+   {titre:{fr:"Désignation d'un tuteur",nl:"Aanstelling van een voogd"},delai:{fr:"Dans les jours suivant le signalement",nl:"Binnen enkele dagen na de melding"},ref:"Service des Tutelles (SPF Justice)",desc:{fr:"Le Service des Tutelles désigne un tuteur qui représente le mineur dans tous les actes juridiques et veille à son bien-être.",nl:"De Dienst Voogdij stelt een voogd aan die de minderjarige vertegenwoordigt in alle rechtshandelingen en over zijn welzijn waakt."}},
+   {titre:{fr:"Identification & détermination de l'âge",nl:"Identificatie & leeftijdsbepaling"},delai:{fr:"3 jours ouvrables (test possible)",nl:"3 werkdagen (test mogelijk)"},ref:"Art. 3-7 Loi Tutelle",desc:{fr:"En cas de doute sur la minorité, un test d'âge (examen médical triple) peut être réalisé. Le bénéfice du doute profite au mineur.",nl:"Bij twijfel over de minderjarigheid kan een leeftijdstest (drievoudig medisch onderzoek) worden uitgevoerd. Het voordeel van de twijfel komt de minderjarige ten goede."}},
  ]},
- {cat:"Séjour & Protection internationale",items:[
-   {titre:"Demande de protection internationale",delai:"Dès que possible après l'arrivée",ref:"CGRA / Office des Étrangers",desc:"Le tuteur accompagne le mineur pour introduire sa demande d'asile. Procédure adaptée aux mineurs (audition spécifique)."},
-   {titre:"Recherche de la solution durable",delai:"En continu durant la tutelle",ref:"Directive 2011/95/UE; Loi 15/12/1980",desc:"L'autorité doit rechercher la solution durable conforme à l'intérêt supérieur de l'enfant : réunification familiale, séjour, ou retour encadré."},
-   {titre:"Recours contre décision négative",delai:"30 jours (CCE)",ref:"Conseil du Contentieux des Étrangers",desc:"Délai de recours suspensif contre une décision de refus de séjour ou de protection."},
-   {titre:"Titre de séjour spécifique MENA",delai:"Après évaluation solution durable",ref:"Circulaire 15/09/2005",desc:"Délivrance d'un document de séjour adapté tant qu'une solution durable n'est pas trouvée."},
+ {cat:{fr:"Séjour & Protection internationale",nl:"Verblijf & Internationale bescherming"},items:[
+   {titre:{fr:"Demande de protection internationale",nl:"Verzoek om internationale bescherming"},delai:{fr:"Dès que possible après l'arrivée",nl:"Zo snel mogelijk na aankomst"},ref:"CGRA / Office des Étrangers",desc:{fr:"Le tuteur accompagne le mineur pour introduire sa demande d'asile. Procédure adaptée aux mineurs (audition spécifique).",nl:"De voogd begeleidt de minderjarige bij het indienen van zijn asielaanvraag. Aangepaste procedure voor minderjarigen (specifiek gehoor)."}},
+   {titre:{fr:"Recherche de la solution durable",nl:"Zoeken naar de duurzame oplossing"},delai:{fr:"En continu durant la tutelle",nl:"Doorlopend tijdens de voogdij"},ref:"Directive 2011/95/UE; Loi 15/12/1980",desc:{fr:"L'autorité doit rechercher la solution durable conforme à l'intérêt supérieur de l'enfant : réunification familiale, séjour, ou retour encadré.",nl:"De autoriteit moet de duurzame oplossing zoeken die in het belang van het kind is: gezinshereniging, verblijf of begeleide terugkeer."}},
+   {titre:{fr:"Recours contre décision négative",nl:"Beroep tegen negatieve beslissing"},delai:{fr:"30 jours (CCE)",nl:"30 dagen (RvV)"},ref:"Conseil du Contentieux des Étrangers",desc:{fr:"Délai de recours suspensif contre une décision de refus de séjour ou de protection.",nl:"Schorsende beroepstermijn tegen een beslissing tot weigering van verblijf of bescherming."}},
+   {titre:{fr:"Titre de séjour spécifique MENA",nl:"Specifieke verblijfstitel NBMV"},delai:{fr:"Après évaluation solution durable",nl:"Na beoordeling duurzame oplossing"},ref:"Circulaire 15/09/2005",desc:{fr:"Délivrance d'un document de séjour adapté tant qu'une solution durable n'est pas trouvée.",nl:"Afgifte van een aangepast verblijfsdocument zolang er geen duurzame oplossing is gevonden."}},
  ]},
- {cat:"État civil & Documents",items:[
-   {titre:"Enregistrement / inscription",delai:"30-60 jours",ref:"Code civil — état civil",desc:"Inscription au registre d'attente puis registre des étrangers selon l'évolution du dossier."},
-   {titre:"Ouverture compte bloqué / gestion des biens",delai:"Dès désignation",ref:"Art. 9-10 Loi Tutelle",desc:"Le tuteur gère les biens du mineur en bon père de famille et rend compte au Service des Tutelles."},
+ {cat:{fr:"État civil & Documents",nl:"Burgerlijke stand & Documenten"},items:[
+   {titre:{fr:"Enregistrement / inscription",nl:"Registratie / inschrijving"},delai:{fr:"30-60 jours",nl:"30-60 dagen"},ref:"Code civil — état civil",desc:{fr:"Inscription au registre d'attente puis registre des étrangers selon l'évolution du dossier.",nl:"Inschrijving in het wachtregister en vervolgens in het vreemdelingenregister naargelang de evolutie van het dossier."}},
+   {titre:{fr:"Ouverture compte bloqué / gestion des biens",nl:"Geblokkeerde rekening / beheer van de goederen"},delai:{fr:"Dès désignation",nl:"Vanaf de aanstelling"},ref:"Art. 9-10 Loi Tutelle",desc:{fr:"Le tuteur gère les biens du mineur en bon père de famille et rend compte au Service des Tutelles.",nl:"De voogd beheert de goederen van de minderjarige als een goede huisvader en legt verantwoording af aan de Dienst Voogdij."}},
  ]},
- {cat:"Scolarité & Santé",items:[
-   {titre:"Inscription scolaire obligatoire",delai:"60 jours après l'arrivée",ref:"Décret scolarité obligatoire",desc:"Tout mineur a droit et obligation à l'enseignement, indépendamment du statut de séjour (classes DASPA/passerelles)."},
-   {titre:"Affiliation mutuelle / couverture médicale",delai:"Dès que possible",ref:"AMU — Aide Médicale Urgente",desc:"Accès aux soins garanti. Le tuteur veille au bilan médical d'arrivée et au suivi vaccinal."},
-   {titre:"Bilan de santé d'arrivée",delai:"Premières semaines",ref:"Fedasil / ONE-Kind&Gezin",desc:"Dépistage (tuberculose), évaluation psychologique et plan de vaccination."},
+ {cat:{fr:"Scolarité & Santé",nl:"Onderwijs & Gezondheid"},items:[
+   {titre:{fr:"Inscription scolaire obligatoire",nl:"Verplichte schoolinschrijving"},delai:{fr:"60 jours après l'arrivée",nl:"60 dagen na aankomst"},ref:"Décret scolarité obligatoire",desc:{fr:"Tout mineur a droit et obligation à l'enseignement, indépendamment du statut de séjour (classes DASPA/passerelles).",nl:"Elke minderjarige heeft recht en plicht op onderwijs, ongeacht de verblijfsstatus (OKAN/onthaalklassen)."}},
+   {titre:{fr:"Affiliation mutuelle / couverture médicale",nl:"Aansluiting ziekenfonds / medische dekking"},delai:{fr:"Dès que possible",nl:"Zo snel mogelijk"},ref:"AMU — Aide Médicale Urgente",desc:{fr:"Accès aux soins garanti. Le tuteur veille au bilan médical d'arrivée et au suivi vaccinal.",nl:"Toegang tot zorg gegarandeerd. De voogd waakt over het medisch onthaalonderzoek en de vaccinatieopvolging."}},
+   {titre:{fr:"Bilan de santé d'arrivée",nl:"Medisch onthaalonderzoek"},delai:{fr:"Premières semaines",nl:"Eerste weken"},ref:"Fedasil / ONE-Kind&Gezin",desc:{fr:"Dépistage (tuberculose), évaluation psychologique et plan de vaccination.",nl:"Screening (tuberculose), psychologische evaluatie en vaccinatieplan."}},
  ]},
- {cat:"Accueil & Hébergement",items:[
-   {titre:"Hébergement adapté",delai:"Immédiat",ref:"Fedasil — Loi accueil 12/01/2007",desc:"Phase d'observation et d'orientation (centre OOC) puis hébergement en structure adaptée à l'âge et au profil."},
-   {titre:"Rapports périodiques au Service des Tutelles",delai:"Selon échéancier (ex. trimestriel)",ref:"Art. 11 Loi Tutelle",desc:"Le tuteur établit des rapports sur la situation du mineur et les démarches entreprises."},
+ {cat:{fr:"Accueil & Hébergement",nl:"Opvang & Huisvesting"},items:[
+   {titre:{fr:"Hébergement adapté",nl:"Aangepaste opvang"},delai:{fr:"Immédiat",nl:"Onmiddellijk"},ref:"Fedasil — Loi accueil 12/01/2007",desc:{fr:"Phase d'observation et d'orientation (centre OOC) puis hébergement en structure adaptée à l'âge et au profil.",nl:"Observatie- en oriëntatiefase (OOC-centrum) en vervolgens opvang in een structuur aangepast aan leeftijd en profiel."}},
+   {titre:{fr:"Rapports périodiques au Service des Tutelles",nl:"Periodieke verslagen aan de Dienst Voogdij"},delai:{fr:"Selon échéancier (ex. trimestriel)",nl:"Volgens schema (bv. driemaandelijks)"},ref:"Art. 11 Loi Tutelle",desc:{fr:"Le tuteur établit des rapports sur la situation du mineur et les démarches entreprises.",nl:"De voogd stelt verslagen op over de situatie van de minderjarige en de ondernomen stappen."}},
  ]},
- {cat:"Transition vers la majorité",items:[
-   {titre:"Préparation à l'autonomie",delai:"Dès 16-17 ans",ref:"Aide à la jeunesse",desc:"Anticiper la fin de tutelle : logement, formation, prolongation éventuelle de l'aide (jeune adulte)."},
-   {titre:"Fin de la tutelle",delai:"À 18 ans",ref:"Art. 24 Loi Tutelle",desc:"La tutelle prend fin à la majorité. Transmission du dossier et orientation vers les dispositifs adultes."},
+ {cat:{fr:"Transition vers la majorité",nl:"Overgang naar meerderjarigheid"},items:[
+   {titre:{fr:"Préparation à l'autonomie",nl:"Voorbereiding op zelfstandigheid"},delai:{fr:"Dès 16-17 ans",nl:"Vanaf 16-17 jaar"},ref:"Aide à la jeunesse",desc:{fr:"Anticiper la fin de tutelle : logement, formation, prolongation éventuelle de l'aide (jeune adulte).",nl:"Anticiperen op het einde van de voogdij: huisvesting, opleiding, eventuele verlenging van de hulp (jongvolwassene)."}},
+   {titre:{fr:"Fin de la tutelle",nl:"Einde van de voogdij"},delai:{fr:"À 18 ans",nl:"Op 18 jaar"},ref:"Art. 24 Loi Tutelle",desc:{fr:"La tutelle prend fin à la majorité. Transmission du dossier et orientation vers les dispositifs adultes.",nl:"De voogdij eindigt bij meerderjarigheid. Overdracht van het dossier en doorverwijzing naar volwassenenvoorzieningen."}},
  ]},
 ];
 
@@ -793,11 +793,11 @@ function showPhase(pid){
 /* ============ LEGISLATION ============ */
 function renderLegislation(){
   document.getElementById('legislationContent').innerHTML=LEGISLATION.map(c=>`
-    <details class="accordion" open><summary>${esc(c.cat)}</summary><div class="body">
+    <details class="accordion" open><summary>${esc(tr(c.cat))}</summary><div class="body">
       ${c.items.map(i=>`<div class="deadline">
-        <div class="row" style="justify-content:space-between"><strong>${esc(i.titre)}</strong>
-        <span class="badge b-cours">⏰ ${esc(i.delai)}</span></div>
-        <p style="margin:.3rem 0">${esc(i.desc)}</p>
+        <div class="row" style="justify-content:space-between"><strong>${esc(tr(i.titre))}</strong>
+        <span class="badge b-cours">⏰ ${esc(tr(i.delai))}</span></div>
+        <p style="margin:.3rem 0">${esc(tr(i.desc))}</p>
         <span class="muted">📖 ${esc(i.ref)}</span>
       </div>`).join('')}
     </div></details>`).join('');
@@ -809,46 +809,48 @@ async function renderCases(){
     const raw=await loadJSON('js/data/cases-data.json');
     CASES=Array.isArray(raw)?raw:(raw&&raw.cases?raw.cases:null);
     if(CASES){
-      const cats=[...new Set(CASES.map(c=>c.categorie).filter(Boolean))].sort();
-      document.getElementById('caseCat').innerHTML=`<option value="">${t('cases.allcat')}</option>`+cats.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join('');
+      const cats=[...new Map(CASES.filter(c=>c.categorie).map(c=>[tr(c.categorie),c.categorie])).values()];
+      const catKey=c=>(typeof c==='object'?c.fr:c);
+      document.getElementById('caseCat').innerHTML=`<option value="">${t('cases.allcat')}</option>`+cats.map(c=>`<option value="${esc(catKey(c))}">${esc(tr(c))}</option>`).join('');
     }
   }
   const el=document.getElementById('casesContent');
   if(!CASES||!CASES.length){el.innerHTML=`<div class="empty">${t('cases.unavailable')}</div>`;return;}
   const q=(document.getElementById('caseSearch')?.value||'').toLowerCase();
   const cat=document.getElementById('caseCat')?.value||'';
+  const catKey=c=>(c&&typeof c==='object'?c.fr:c);
   let arr=CASES.map((c,i)=>({c,i}));
-  if(cat)arr=arr.filter(x=>x.c.categorie===cat);
+  if(cat)arr=arr.filter(x=>catKey(x.c.categorie)===cat);
   if(q)arr=arr.filter(x=>JSON.stringify(x.c).toLowerCase().includes(q));
   if(!arr.length){el.innerHTML=`<div class="empty">${t('cases.nomatch')}</div>`;return;}
   el.innerHTML=`<p class="muted" style="margin-bottom:.6rem">${arr.length} ${t('cases.count')}</p>`+arr.map(({c,i})=>`
     <div class="list-item" onclick="showCase(${i})">
       <div class="row" style="justify-content:space-between">
-        <strong>${esc(c.titre)}</strong>${c.categorie?`<span class="badge b-nouveau">${esc(c.categorie)}</span>`:''}
+        <strong>${esc(tr(c.titre))}</strong>${c.categorie?`<span class="badge b-nouveau">${esc(tr(c.categorie))}</span>`:''}
       </div>
-      <div class="muted">${c.pays?'🌍 '+esc(c.pays):''}${c.age?' · '+c.age+' ans':''}${c.sexe?' · '+esc(c.sexe):''}</div>
-      ${(c.vulnerabilites||[]).length?`<div style="margin-top:.4rem">${c.vulnerabilites.slice(0,4).map(v=>`<span class="badge b-urgent" style="margin-right:.3rem;margin-bottom:.2rem;display:inline-block">${esc(v)}</span>`).join('')}</div>`:''}
+      <div class="muted">${c.pays?'🌍 '+esc(c.pays):''}${c.age?' · '+c.age+' '+t('u.ans'):''}${c.sexe?' · '+esc(tr(c.sexe)):''}</div>
+      ${(c.vulnerabilites||[]).length?`<div style="margin-top:.4rem">${c.vulnerabilites.slice(0,4).map(v=>`<span class="badge b-urgent" style="margin-right:.3rem;margin-bottom:.2rem;display:inline-block">${esc(tr(v))}</span>`).join('')}</div>`:''}
       <div class="muted" style="margin-top:.4rem">📋 ${(c.actions_tuteur||[]).length} ${t('case.actions_n')} · ⚖️ ${(c.cadre_legal||[]).length} ${t('case.refs_n')} · ⏰ ${(c.delais_cles||[]).length} ${t('case.delais_n')}</div>
     </div>`).join('');
 }
 function showCase(i){
   const c=CASES[i];if(!c)return;
-  const chrono=(c.chronologie||[]).map(t=>`<li><strong>${esc(t.date||'')}</strong> — ${esc(t.evenement||'')}</li>`).join('');
-  const legal=(c.cadre_legal||[]).map(l=>`<li><strong>${esc(l.texte)}</strong><br><span class="muted">${esc(l.application)}</span></li>`).join('');
-  const delais=(c.delais_cles||[]).map(d=>`<div class="deadline"><div class="row" style="justify-content:space-between"><span>${esc(d.action)}</span><span class="badge b-cours">⏰ ${esc(d.delai)}</span></div></div>`).join('');
-  const actions=(c.actions_tuteur||[]).map(a=>`<li>${esc(a)}</li>`).join('');
-  const lecons=(c.lecons||[]).map(l=>`<li>${esc(l)}</li>`).join('');
-  const ress=(c.ressources||[]).map(r=>`<span class="badge b-nouveau" style="margin:.15rem;display:inline-block">${esc(r)}</span>`).join('');
+  const chrono=(c.chronologie||[]).map(x=>`<li><strong>${esc(tr(x.date)||'')}</strong> — ${esc(tr(x.evenement)||'')}</li>`).join('');
+  const legal=(c.cadre_legal||[]).map(l=>`<li><strong>${esc(tr(l.texte))}</strong><br><span class="muted">${esc(tr(l.application))}</span></li>`).join('');
+  const delais=(c.delais_cles||[]).map(d=>`<div class="deadline"><div class="row" style="justify-content:space-between"><span>${esc(tr(d.action))}</span><span class="badge b-cours">⏰ ${esc(tr(d.delai))}</span></div></div>`).join('');
+  const actions=(c.actions_tuteur||[]).map(a=>`<li>${esc(tr(a))}</li>`).join('');
+  const lecons=(c.lecons||[]).map(l=>`<li>${esc(tr(l))}</li>`).join('');
+  const ress=(c.ressources||[]).map(r=>`<span class="badge b-nouveau" style="margin:.15rem;display:inline-block">${esc(tr(r))}</span>`).join('');
   document.getElementById('infoContent').innerHTML=`
-    <h3>${esc(c.titre)}</h3>
-    <p class="muted">${c.categorie?esc(c.categorie)+' · ':''}${c.pays?esc(c.pays):''}${c.age?' · '+c.age+' ans':''}${c.sexe?' · '+esc(c.sexe):''}</p>
-    ${(c.vulnerabilites||[]).length?`<div style="margin:.6rem 0">${c.vulnerabilites.map(v=>`<span class="badge b-urgent" style="margin:.15rem;display:inline-block">${esc(v)}</span>`).join('')}</div>`:''}
-    ${c.situation?`<h4 style="color:var(--accent);margin:.8rem 0 .3rem">${t('case.situation')}</h4><p>${esc(c.situation)}</p>`:''}
+    <h3>${esc(tr(c.titre))}</h3>
+    <p class="muted">${c.categorie?esc(tr(c.categorie))+' · ':''}${c.pays?esc(c.pays):''}${c.age?' · '+c.age+' '+t('u.ans'):''}${c.sexe?' · '+esc(tr(c.sexe)):''}</p>
+    ${(c.vulnerabilites||[]).length?`<div style="margin:.6rem 0">${c.vulnerabilites.map(v=>`<span class="badge b-urgent" style="margin:.15rem;display:inline-block">${esc(tr(v))}</span>`).join('')}</div>`:''}
+    ${c.situation?`<h4 style="color:var(--accent);margin:.8rem 0 .3rem">${t('case.situation')}</h4><p>${esc(tr(c.situation))}</p>`:''}
     ${chrono?`<h4 style="color:var(--accent);margin:.9rem 0 .3rem">${t('case.chrono')}</h4><ul class="clean">${chrono}</ul>`:''}
     ${legal?`<h4 style="color:var(--accent);margin:.9rem 0 .3rem">${t('case.legal')}</h4><ul class="clean">${legal}</ul>`:''}
     ${delais?`<h4 style="color:var(--accent);margin:.9rem 0 .3rem">${t('case.delais')}</h4>${delais}`:''}
     ${actions?`<h4 style="color:var(--accent);margin:.9rem 0 .3rem">${t('case.actions')}</h4><ul class="clean">${actions}</ul>`:''}
-    ${c.solution?`<h4 style="color:var(--accent);margin:.9rem 0 .3rem">${t('case.demarche')}</h4><p style="padding:.7rem;background:var(--ok-bg);border-left:4px solid var(--vert);border-radius:.4rem">${esc(c.solution)}</p>`:''}
+    ${c.solution?`<h4 style="color:var(--accent);margin:.9rem 0 .3rem">${t('case.demarche')}</h4><p style="padding:.7rem;background:var(--ok-bg);border-left:4px solid var(--vert);border-radius:.4rem">${esc(tr(c.solution))}</p>`:''}
     ${lecons?`<h4 style="color:var(--accent);margin:.9rem 0 .3rem">${t('case.lecons')}</h4><ul class="clean">${lecons}</ul>`:''}
     ${ress?`<h4 style="color:var(--accent);margin:.9rem 0 .3rem">${t('case.ressources')}</h4><div>${ress}</div>`:''}`;
   openModal('infoModal');
@@ -914,11 +916,11 @@ async function loadConseil(){
   CONSEIL=await loadJSON('js/data/conseil-data.json');
   if(CONSEIL&&CONSEIL.scenarios){
     const byDom={};
-    CONSEIL.scenarios.forEach(s=>{(byDom[s.domaine]=byDom[s.domaine]||[]).push(s)});
+    CONSEIL.scenarios.forEach(s=>{const d=tr(s.domaine);(byDom[d]=byDom[d]||[]).push(s)});
     document.getElementById('conseilScenario').innerHTML=`<option value="">${t('conseil.selectproblem')}</option>`+
-      Object.entries(byDom).map(([d,arr])=>`<optgroup label="${esc(tr(d))}">`+arr.map(s=>`<option value="${esc(s.id)}">${esc(tr(s.probleme))}</option>`).join('')+'</optgroup>').join('');
+      Object.entries(byDom).map(([d,arr])=>`<optgroup label="${esc(d)}">`+arr.map(s=>`<option value="${esc(s.id)}">${esc(tr(s.probleme))}</option>`).join('')+'</optgroup>').join('');
     const disc=document.getElementById('conseilDisclaimer');
-    disc.textContent='⚠️ '+CONSEIL.avertissement;disc.style.display='block';
+    disc.textContent='⚠️ '+tr(CONSEIL.avertissement);disc.style.display='block';
   }
   // fermer la liste pays au clic extérieur (une seule fois)
   if(!COMBO_OUTSIDE){COMBO_OUTSIDE=true;document.addEventListener('click',e=>{if(!e.target.closest('.combo'))document.getElementById('paysList')?.classList.remove('open');});}
@@ -1018,7 +1020,7 @@ function conseilSuggest(){
   if(!q||!CONSEIL){box.innerHTML='';return;}
   const mots=q.split(/\s+/).filter(w=>w.length>2);
   const scored=CONSEIL.scenarios.map(s=>{
-    const hay=(s.probleme+' '+(s.motsCles||[]).join(' ')+' '+s.domaine).toLowerCase();
+    const hay=(tr(s.probleme)+' '+(s.motsCles||[]).join(' ')+' '+tr(s.domaine)).toLowerCase();
     let score=0;mots.forEach(m=>{if(hay.includes(m))score++;});
     return {s,score};
   }).filter(x=>x.score>0).sort((a,b)=>b.score-a.score).slice(0,4);

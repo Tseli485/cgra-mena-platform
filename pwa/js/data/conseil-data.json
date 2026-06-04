@@ -1,5 +1,117 @@
 {
   "avertissement": "Cet assistant fournit une information juridique de première ligne fondée sur la réglementation MENA (Belgique/UE) en vigueur. Il ne remplace pas l'avis d'un avocat ni la décision du Service des Tutelles. Vérifiez toujours les délais auprès de la juridiction compétente.",
+  "pays_liste": ["Afghanistan", "Afrique du Sud", "Albanie", "Algérie", "Angola", "Arabie saoudite", "Arménie", "Azerbaïdjan", "Bangladesh", "Bénin", "Bhoutan", "Biélorussie", "Birmanie (Myanmar)", "Bolivie", "Bosnie-Herzégovine", "Burkina Faso", "Burundi", "Cambodge", "Cameroun", "Centrafrique", "Chine", "Colombie", "Comores", "Congo (Brazzaville)", "Côte d'Ivoire", "Cuba", "Djibouti", "Égypte", "Émirats arabes unis", "Équateur", "Érythrée", "Eswatini", "Éthiopie", "Gambie", "Géorgie", "Ghana", "Guinée", "Guinée équatoriale", "Guinée-Bissau", "Haïti", "Honduras", "Inde", "Indonésie", "Irak", "Iran", "Jordanie", "Kazakhstan", "Kenya", "Kosovo", "Koweït", "Laos", "Liban", "Liberia", "Libye", "Macédoine du Nord", "Madagascar", "Malaisie", "Mali", "Maroc", "Mauritanie", "Mexique", "Moldavie", "Mongolie", "Monténégro", "Mozambique", "Népal", "Nicaragua", "Niger", "Nigéria", "Ouganda", "Ouzbékistan", "Pakistan", "Palestine", "Philippines", "RD Congo", "Russie", "Rwanda", "Sénégal", "Serbie", "Sierra Leone", "Somalie", "Soudan", "Soudan du Sud", "Sri Lanka", "Syrie", "Tadjikistan", "Tanzanie", "Tchad", "Thaïlande", "Togo", "Tunisie", "Turkménistan", "Turquie", "Ukraine", "Venezuela", "Vietnam", "Yémen", "Zimbabwe", "Autre / non précisé"],
+  "pays_profils": {
+    "Afghanistan": {"considerations": [
+      {"theme": "Conflit armé & régime taliban", "texte": "Violence généralisée et persécutions documentées ; éléments pouvant fonder une protection internationale.", "scenario": "asile_refus", "base": "Convention de Genève ; Directive 2011/95/UE (protection subsidiaire)"},
+      {"theme": "Restriction de scolarisation des filles", "texte": "Pour une fille, l'interdiction d'accès à l'éducation au pays peut constituer un élément de persécution et un motif d'asile.", "scenario": "ecole_refus", "base": "Directive 2011/95/UE, art. 9-10 ; CIDE art. 28"},
+      {"theme": "Mariage précoce / forcé", "texte": "Risque documenté de mariage précoce ; vigilance en cas de projet de retour ou pression familiale.", "scenario": "pression_familiale", "base": "Convention d'Istanbul, art. 37"}
+    ]},
+    "Syrie": {"considerations": [
+      {"theme": "Conflit armé", "texte": "Violence généralisée documentée ; éléments pouvant fonder le statut de réfugié ou la protection subsidiaire.", "scenario": "asile_refus", "base": "Convention de Genève ; Directive 2011/95/UE, art. 15"},
+      {"theme": "Recrutement / conscription", "texte": "Risque de recrutement forcé des adolescents par des groupes armés.", "scenario": "asile_refus", "base": "Protocole facultatif CIDE (enfants & conflits armés)"}
+    ]},
+    "Érythrée": {"considerations": [
+      {"theme": "Service militaire à durée indéterminée", "texte": "La conscription nationale, de durée indéfinie et assortie de mauvais traitements documentés, est un motif d'asile largement reconnu, y compris pour les mineurs approchant l'âge d'enrôlement.", "scenario": "asile_refus", "base": "Convention de Genève ; jurisprudence asile constante"},
+      {"theme": "MGF", "texte": "Prévalence élevée de mutilations génitales féminines : vigilance pour les filles.", "scenario": "pression_familiale", "base": "Convention d'Istanbul, art. 38 ; Code pénal belge, art. 409"}
+    ]},
+    "Guinée": {"considerations": [
+      {"theme": "MGF (prévalence très élevée)", "texte": "La Guinée présente une des plus fortes prévalences de MGF au monde : risque sérieux pour une fille, notamment avant un voyage au pays.", "scenario": "pression_familiale", "base": "Convention d'Istanbul, art. 38 ; Code pénal belge, art. 409 (applicable même à l'étranger)"},
+      {"theme": "Mariage précoce", "texte": "Fréquence documentée des mariages précoces.", "scenario": "pression_familiale", "base": "Convention d'Istanbul, art. 37"}
+    ]},
+    "Somalie": {"considerations": [
+      {"theme": "MGF (quasi généralisée)", "texte": "Prévalence parmi les plus élevées au monde : risque majeur pour une fille.", "scenario": "pression_familiale", "base": "Convention d'Istanbul, art. 38 ; Code pénal belge, art. 409"},
+      {"theme": "Conflit & enfants soldats", "texte": "Conflit armé et recrutement d'enfants documentés.", "scenario": "asile_refus", "base": "Protocole facultatif CIDE ; Convention de Genève"},
+      {"theme": "Traite", "texte": "Pays d'origine/transit de réseaux de traite : vigilance.", "scenario": "traite", "base": "Directive 2011/36/UE"}
+    ]},
+    "Mali": {"considerations": [
+      {"theme": "MGF", "texte": "Prévalence élevée de MGF : vigilance pour les filles.", "scenario": "pression_familiale", "base": "Convention d'Istanbul ; Code pénal belge, art. 409"},
+      {"theme": "Conflit (nord & centre)", "texte": "Insécurité documentée selon les régions : élément de contexte pour la protection.", "scenario": "asile_refus", "base": "Directive 2011/95/UE, art. 15"}
+    ]},
+    "Égypte": {"considerations": [
+      {"theme": "MGF", "texte": "Prévalence élevée malgré l'interdiction légale : vigilance pour les filles.", "scenario": "pression_familiale", "base": "Convention d'Istanbul ; Code pénal belge, art. 409"}
+    ]},
+    "Soudan": {"considerations": [
+      {"theme": "MGF", "texte": "Prévalence élevée de MGF.", "scenario": "pression_familiale", "base": "Convention d'Istanbul ; Code pénal belge, art. 409"},
+      {"theme": "Conflit armé", "texte": "Violence généralisée documentée selon les régions.", "scenario": "asile_refus", "base": "Directive 2011/95/UE, art. 15"}
+    ]},
+    "Soudan du Sud": {"considerations": [
+      {"theme": "Conflit & enfants soldats", "texte": "Conflit armé et recrutement d'enfants documentés.", "scenario": "asile_refus", "base": "Protocole facultatif CIDE ; Convention de Genève"},
+      {"theme": "Mariage précoce", "texte": "Fréquence très élevée des mariages précoces.", "scenario": "pression_familiale", "base": "Convention d'Istanbul, art. 37"}
+    ]},
+    "Éthiopie": {"considerations": [
+      {"theme": "MGF", "texte": "Prévalence régionale de MGF.", "scenario": "pression_familiale", "base": "Convention d'Istanbul ; Code pénal belge, art. 409"},
+      {"theme": "Mariage précoce", "texte": "Mariages précoces documentés.", "scenario": "pression_familiale", "base": "Convention d'Istanbul, art. 37"}
+    ]},
+    "Sierra Leone": {"considerations": [
+      {"theme": "MGF", "texte": "Prévalence élevée de MGF.", "scenario": "pression_familiale", "base": "Convention d'Istanbul ; Code pénal belge, art. 409"}
+    ]},
+    "Côte d'Ivoire": {"considerations": [
+      {"theme": "MGF", "texte": "Prévalence régionale de MGF.", "scenario": "pression_familiale", "base": "Convention d'Istanbul ; Code pénal belge, art. 409"}
+    ]},
+    "Gambie": {"considerations": [
+      {"theme": "MGF", "texte": "Prévalence élevée de MGF.", "scenario": "pression_familiale", "base": "Convention d'Istanbul ; Code pénal belge, art. 409"}
+    ]},
+    "Guinée-Bissau": {"considerations": [
+      {"theme": "MGF", "texte": "Prévalence élevée de MGF.", "scenario": "pression_familiale", "base": "Convention d'Istanbul ; Code pénal belge, art. 409"}
+    ]},
+    "Djibouti": {"considerations": [
+      {"theme": "MGF", "texte": "Prévalence très élevée de MGF.", "scenario": "pression_familiale", "base": "Convention d'Istanbul ; Code pénal belge, art. 409"}
+    ]},
+    "Sénégal": {"considerations": [
+      {"theme": "MGF (régional)", "texte": "Prévalence de MGF dans certaines régions/communautés.", "scenario": "pression_familiale", "base": "Convention d'Istanbul ; Code pénal belge, art. 409"}
+    ]},
+    "Burkina Faso": {"considerations": [
+      {"theme": "Mariage précoce & MGF", "texte": "Mariages précoces et MGF documentés.", "scenario": "pression_familiale", "base": "Convention d'Istanbul, art. 37-38"},
+      {"theme": "Conflit (nord)", "texte": "Insécurité documentée selon les régions.", "scenario": "asile_refus", "base": "Directive 2011/95/UE, art. 15"}
+    ]},
+    "Niger": {"considerations": [
+      {"theme": "Mariage précoce (prévalence très élevée)", "texte": "Le Niger présente une des plus fortes prévalences de mariage précoce au monde.", "scenario": "pression_familiale", "base": "Convention d'Istanbul, art. 37"}
+    ]},
+    "Tchad": {"considerations": [
+      {"theme": "Mariage précoce & MGF", "texte": "Mariages précoces et MGF documentés.", "scenario": "pression_familiale", "base": "Convention d'Istanbul, art. 37-38"}
+    ]},
+    "Nigéria": {"considerations": [
+      {"theme": "Traite (exploitation sexuelle)", "texte": "Réseaux de traite documentés (recours fréquent à l'emprise, y compris rituelle) : vigilance accrue pour les filles.", "scenario": "traite", "base": "Directive 2011/36/UE ; Protocole de Palerme"},
+      {"theme": "MGF (régional)", "texte": "MGF présente dans certaines régions.", "scenario": "pression_familiale", "base": "Convention d'Istanbul ; Code pénal belge, art. 409"},
+      {"theme": "Conflit (nord-est)", "texte": "Insécurité documentée dans certaines régions.", "scenario": "asile_refus", "base": "Directive 2011/95/UE, art. 15"}
+    ]},
+    "RD Congo": {"considerations": [
+      {"theme": "Conflit & enfants soldats (est)", "texte": "Conflit armé et recrutement d'enfants documentés, notamment dans l'est.", "scenario": "asile_refus", "base": "Protocole facultatif CIDE ; Convention de Genève"},
+      {"theme": "Traite", "texte": "Réseaux d'exploitation documentés : vigilance.", "scenario": "traite", "base": "Directive 2011/36/UE"}
+    ]},
+    "Centrafrique": {"considerations": [
+      {"theme": "Conflit & enfants soldats", "texte": "Conflit armé et recrutement d'enfants documentés.", "scenario": "asile_refus", "base": "Protocole facultatif CIDE ; Convention de Genève"}
+    ]},
+    "Yémen": {"considerations": [
+      {"theme": "Conflit armé", "texte": "Violence généralisée documentée.", "scenario": "asile_refus", "base": "Directive 2011/95/UE, art. 15"},
+      {"theme": "Mariage précoce", "texte": "Fréquence des mariages précoces.", "scenario": "pression_familiale", "base": "Convention d'Istanbul, art. 37"}
+    ]},
+    "Irak": {"considerations": [
+      {"theme": "Conflit / insécurité régionale", "texte": "Insécurité documentée selon les régions : élément de contexte pour la protection.", "scenario": "asile_refus", "base": "Directive 2011/95/UE, art. 15"}
+    ]},
+    "Ouganda": {"considerations": [
+      {"theme": "Criminalisation de l'homosexualité", "texte": "L'homosexualité est criminalisée (législation aggravée en 2023) : un mineur LGBTQ+ peut relever de l'asile au titre de l'appartenance à un groupe social.", "scenario": "asile_refus", "base": "Convention de Genève ; Directive 2011/95/UE, art. 10 ; CJUE C-148/13"}
+    ]},
+    "Iran": {"considerations": [
+      {"theme": "Criminalisation de l'homosexualité", "texte": "L'homosexualité est sévèrement réprimée : motif possible de protection internationale.", "scenario": "asile_refus", "base": "Convention de Genève ; Directive 2011/95/UE, art. 10"}
+    ]},
+    "Cameroun": {"considerations": [
+      {"theme": "Criminalisation de l'homosexualité", "texte": "L'homosexualité est pénalisée : motif possible de protection.", "scenario": "asile_refus", "base": "Convention de Genève ; Directive 2011/95/UE, art. 10"},
+      {"theme": "Conflit (régions anglophones)", "texte": "Insécurité documentée dans certaines régions.", "scenario": "asile_refus", "base": "Directive 2011/95/UE, art. 15"}
+    ]},
+    "Bangladesh": {"considerations": [
+      {"theme": "Mariage précoce", "texte": "Fréquence élevée des mariages précoces.", "scenario": "pression_familiale", "base": "Convention d'Istanbul, art. 37"},
+      {"theme": "Traite (travail)", "texte": "Réseaux d'exploitation par le travail documentés (servitude pour dette).", "scenario": "traite", "base": "Directive 2011/36/UE ; OIT n°182"}
+    ]},
+    "Pakistan": {"considerations": [
+      {"theme": "Mariage précoce", "texte": "Mariages précoces documentés.", "scenario": "pression_familiale", "base": "Convention d'Istanbul, art. 37"},
+      {"theme": "Insécurité régionale", "texte": "Insécurité documentée selon les régions.", "scenario": "asile_refus", "base": "Directive 2011/95/UE, art. 15"}
+    ]},
+    "Libye": {"considerations": [
+      {"theme": "Conditions sur la route migratoire", "texte": "Violences, détention et traite documentées sur le parcours : pertinent pour l'évaluation du trauma et de la traite.", "scenario": "traite", "base": "Directive 2011/36/UE ; CIDE art. 39"}
+    ]}
+  },
   "scenarios": [
     {
       "id": "asile_refus",

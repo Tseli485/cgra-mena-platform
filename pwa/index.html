@@ -8,97 +8,133 @@
 <link rel="manifest" href="manifest.json">
 <style>
   :root{
-    --bleu:#1e40af; --bleu2:#2563eb; --bleu-clair:#dbeafe;
+    --bleu:#1e40af; --bleu2:#2563eb; --bleu-clair:#dbeafe; --bleu-fonce:#1e3a8a;
     --vert:#059669; --orange:#d97706; --rouge:#dc2626;
     --gris:#6b7280; --gris-clair:#f3f4f6; --bord:#e5e7eb;
+    --bg:#f9fafb; --surface:#fff; --surface2:#fafafa; --surface3:#f9fafb;
+    --text:#1f2937; --text2:#374151;
+    --banner-bg:#dbeafe; --banner-text:#1e3a8a;
+    --accent:var(--bleu); --accent-strong:#1e3a8a;
+    --warn-bg:#fffbeb; --crit-bg:#fef2f2;
+    --b-nouveau-bg:#dbeafe; --b-nouveau-tx:#1e40af;
+    --b-cours-bg:#fef3c7; --b-cours-tx:#92400e;
+    --b-urgent-bg:#fee2e2; --b-urgent-tx:#991b1b;
+    --b-clos-bg:#d1fae5; --b-clos-tx:#065f46;
+    --ok-bg:#ecfdf5;
+    --shadow:0 1px 3px rgba(0,0,0,.05); --shadow-lg:0 20px 40px rgba(0,0,0,.2);
+  }
+  [data-theme="dark"]{
+    --bleu:#3b82f6; --bleu2:#60a5fa; --bleu-clair:#1e3a5f; --bleu-fonce:#1d4ed8;
+    --vert:#34d399; --orange:#fbbf24; --rouge:#f87171;
+    --gris:#94a3b8; --gris-clair:#273449; --bord:#334155;
+    --bg:#0b1220; --surface:#1e293b; --surface2:#273449; --surface3:#172033;
+    --text:#e8edf4; --text2:#cbd5e1;
+    --banner-bg:#172a46; --banner-text:#bfdbfe;
+    --accent:#60a5fa; --accent-strong:#93c5fd;
+    --warn-bg:#3a2f12; --crit-bg:#3a1d1d;
+    --b-nouveau-bg:#1e3a5f; --b-nouveau-tx:#bfdbfe;
+    --b-cours-bg:#3a2f12; --b-cours-tx:#fcd34d;
+    --b-urgent-bg:#3a1d1d; --b-urgent-tx:#fca5a5;
+    --b-clos-bg:#0f3d2e; --b-clos-tx:#6ee7b7;
+    --ok-bg:#0f3d2e;
+    --shadow:0 1px 3px rgba(0,0,0,.4); --shadow-lg:0 20px 40px rgba(0,0,0,.6);
   }
   *{margin:0;padding:0;box-sizing:border-box}
-  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f9fafb;color:#1f2937;line-height:1.55}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.55;transition:background .25s,color .25s}
   .header{background:linear-gradient(135deg,var(--bleu2),var(--bleu));color:#fff;padding:1.4rem 2rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
   .header h1{font-size:1.5rem}
   .header .sub{opacity:.9;font-size:.9rem}
   .header .status{margin-left:auto;font-size:.8rem;background:rgba(255,255,255,.15);padding:.4rem .8rem;border-radius:1rem}
-  nav{background:#fff;border-bottom:2px solid var(--bleu);position:sticky;top:0;z-index:50;overflow-x:auto}
+  nav{background:var(--surface);border-bottom:2px solid var(--bleu);position:sticky;top:0;z-index:50;overflow-x:auto}
   nav ul{display:flex;list-style:none;max-width:1200px;margin:0 auto}
   nav li{flex:1;min-width:120px}
-  nav a{display:block;padding:1rem .8rem;text-align:center;color:#374151;text-decoration:none;font-weight:500;cursor:pointer;font-size:.9rem;border-bottom:3px solid transparent;transition:.2s;white-space:nowrap}
+  nav a{display:block;padding:1rem .8rem;text-align:center;color:var(--text2);text-decoration:none;font-weight:500;cursor:pointer;font-size:.9rem;border-bottom:3px solid transparent;transition:.2s;white-space:nowrap}
   nav a:hover{background:var(--gris-clair);color:var(--bleu)}
-  nav a.active{background:var(--bleu);color:#fff;border-bottom-color:#1e3a8a}
+  nav a.active{background:var(--bleu);color:#fff;border-bottom-color:var(--bleu-fonce)}
   main{max-width:1200px;margin:0 auto;padding:1.5rem 2rem}
   .view{display:none;animation:fade .25s}
   .view.active{display:block}
   @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-  h2.title{color:var(--bleu);font-size:1.6rem;border-bottom:3px solid var(--bleu);padding-bottom:.5rem;margin-bottom:1.2rem}
-  .banner{background:var(--bleu-clair);border-left:5px solid var(--bleu);padding:1rem 1.2rem;border-radius:.4rem;margin-bottom:1.4rem;color:#1e3a8a}
+  h2.title{color:var(--accent);font-size:1.6rem;border-bottom:3px solid var(--bleu);padding-bottom:.5rem;margin-bottom:1.2rem}
+  .banner{background:var(--banner-bg);border-left:5px solid var(--bleu);padding:1rem 1.2rem;border-radius:.4rem;margin-bottom:1.4rem;color:var(--banner-text)}
   .grid{display:grid;gap:1rem}
   .grid.cols-3{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
   .grid.cols-2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
-  .card{background:#fff;border:1px solid var(--bord);border-radius:.6rem;padding:1.2rem;box-shadow:0 1px 3px rgba(0,0,0,.05)}
-  .card h3{color:var(--bleu);margin-bottom:.6rem;font-size:1.1rem}
-  .stat{background:#fff;border:1px solid var(--bord);border-left:5px solid var(--bleu);border-radius:.6rem;padding:1.2rem}
-  .stat .num{font-size:2.2rem;font-weight:700;color:var(--bleu)}
+  .card{background:var(--surface);border:1px solid var(--bord);border-radius:.6rem;padding:1.2rem;box-shadow:var(--shadow)}
+  .card h3{color:var(--accent);margin-bottom:.6rem;font-size:1.1rem}
+  .stat{background:var(--surface);border:1px solid var(--bord);border-left:5px solid var(--bleu);border-radius:.6rem;padding:1.2rem}
+  .stat .num{font-size:2.2rem;font-weight:700;color:var(--accent)}
   .stat .lbl{color:var(--gris);font-size:.9rem}
   .btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--bleu);color:#fff;border:none;padding:.6rem 1.1rem;border-radius:.4rem;font-size:.9rem;font-weight:600;cursor:pointer;text-decoration:none;transition:.2s}
   .btn:hover{background:var(--bleu2)}
-  .btn.sec{background:#fff;color:var(--bleu);border:1px solid var(--bleu)}
-  .btn.danger{background:var(--rouge)}
+  .btn.sec{background:var(--surface);color:var(--accent);border:1px solid var(--bleu)}
+  .btn.danger{background:var(--rouge);color:#fff}
   .btn.sm{padding:.35rem .7rem;font-size:.8rem}
   .row{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center}
   .badge{display:inline-block;padding:.2rem .6rem;border-radius:1rem;font-size:.75rem;font-weight:600}
-  .b-nouveau{background:#dbeafe;color:#1e40af}.b-cours{background:#fef3c7;color:#92400e}
-  .b-urgent{background:#fee2e2;color:#991b1b}.b-clos{background:#d1fae5;color:#065f46}
-  input,select,textarea{width:100%;padding:.6rem;border:1px solid var(--bord);border-radius:.4rem;font-size:.9rem;font-family:inherit}
-  label{display:block;font-weight:600;font-size:.85rem;margin:.7rem 0 .25rem;color:#374151}
-  .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:100;align-items:flex-start;justify-content:center;padding:2rem 1rem;overflow-y:auto}
+  .b-nouveau{background:var(--b-nouveau-bg);color:var(--b-nouveau-tx)}.b-cours{background:var(--b-cours-bg);color:var(--b-cours-tx)}
+  .b-urgent{background:var(--b-urgent-bg);color:var(--b-urgent-tx)}.b-clos{background:var(--b-clos-bg);color:var(--b-clos-tx)}
+  input,select,textarea{width:100%;padding:.6rem;border:1px solid var(--bord);border-radius:.4rem;font-size:.9rem;font-family:inherit;background:var(--surface);color:var(--text)}
+  input::placeholder,textarea::placeholder{color:var(--gris)}
+  label{display:block;font-weight:600;font-size:.85rem;margin:.7rem 0 .25rem;color:var(--text2)}
+  .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:100;align-items:flex-start;justify-content:center;padding:2rem 1rem;overflow-y:auto}
   .modal.open{display:flex}
-  .modal-box{background:#fff;border-radius:.8rem;max-width:640px;width:100%;padding:1.6rem;box-shadow:0 20px 40px rgba(0,0,0,.2)}
-  .modal-box h3{color:var(--bleu);margin-bottom:1rem;font-size:1.3rem}
+  .modal-box{background:var(--surface);color:var(--text);border-radius:.8rem;max-width:640px;width:100%;padding:1.6rem;box-shadow:var(--shadow-lg)}
+  .modal-box h3{color:var(--accent);margin-bottom:1rem;font-size:1.3rem}
   .close{float:right;background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--gris)}
-  .list-item{padding:1rem;border:1px solid var(--bord);border-radius:.5rem;margin-bottom:.7rem;background:#fff;cursor:pointer;transition:.15s}
-  .list-item:hover{border-color:var(--bleu);box-shadow:0 2px 8px rgba(37,99,235,.12)}
+  .list-item{padding:1rem;border:1px solid var(--bord);border-radius:.5rem;margin-bottom:.7rem;background:var(--surface);cursor:pointer;transition:.15s}
+  .list-item:hover{border-color:var(--bleu);box-shadow:0 2px 8px rgba(37,99,235,.18)}
   .progress{height:9px;background:var(--gris-clair);border-radius:5px;overflow:hidden;margin-top:.5rem}
   .progress span{display:block;height:100%;background:var(--vert);transition:width .3s}
   .check-line{display:flex;align-items:flex-start;gap:.6rem;padding:.5rem;border-radius:.3rem}
   .check-line:hover{background:var(--gris-clair)}
   .check-line input{width:auto;margin-top:.25rem}
-  .deadline{border-left:4px solid var(--orange);padding:.7rem 1rem;background:#fffbeb;border-radius:.3rem;margin-bottom:.6rem}
-  .deadline.crit{border-left-color:var(--rouge);background:#fef2f2}
+  .deadline{border-left:4px solid var(--orange);padding:.7rem 1rem;background:var(--warn-bg);border-radius:.3rem;margin-bottom:.6rem}
+  .deadline.crit{border-left-color:var(--rouge);background:var(--crit-bg)}
   table{width:100%;border-collapse:collapse;font-size:.88rem}
   th,td{text-align:left;padding:.6rem;border-bottom:1px solid var(--bord)}
-  th{background:var(--gris-clair);color:#374151}
+  th{background:var(--gris-clair);color:var(--text2)}
   .filters{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1rem}
   .filters input,.filters select{width:auto;flex:1;min-width:160px}
   .empty{text-align:center;color:var(--gris);padding:3rem 1rem}
   .loading{text-align:center;color:var(--gris);padding:2rem;font-style:italic}
   .accordion{border:1px solid var(--bord);border-radius:.5rem;margin-bottom:.6rem;overflow:hidden}
-  .accordion>summary{padding:.9rem 1.1rem;cursor:pointer;font-weight:600;background:#fff;color:var(--bleu);list-style:none}
+  .accordion>summary{padding:.9rem 1.1rem;cursor:pointer;font-weight:600;background:var(--surface);color:var(--accent);list-style:none}
   .accordion>summary::-webkit-details-marker{display:none}
   .accordion>summary:before{content:"▸ ";color:var(--bleu2)}
   .accordion[open]>summary:before{content:"▾ "}
-  .accordion .body{padding:1rem 1.1rem;border-top:1px solid var(--bord);background:#fafafa}
+  .accordion .body{padding:1rem 1.1rem;border-top:1px solid var(--bord);background:var(--surface2)}
   .muted{color:var(--gris);font-size:.85rem}
   ul.clean{list-style:none}ul.clean li{padding:.35rem 0;border-bottom:1px dashed var(--bord)}
   /* Écran de sécurité */
   .auth-gate{position:fixed;inset:0;z-index:1000;background:linear-gradient(135deg,#1e3a8a,#1e40af);display:flex;align-items:center;justify-content:center;padding:1.5rem}
+  [data-theme="dark"] .auth-gate{background:linear-gradient(135deg,#0b1220,#1e293b)}
   .auth-gate.hidden{display:none}
-  .auth-box{background:#fff;border-radius:1rem;padding:2.2rem;max-width:420px;width:100%;box-shadow:0 25px 50px rgba(0,0,0,.3);text-align:center}
+  .auth-box{background:var(--surface);border-radius:1rem;padding:2.2rem;max-width:420px;width:100%;box-shadow:0 25px 50px rgba(0,0,0,.4);text-align:center}
   .auth-box .lock-ico{font-size:3rem}
-  .auth-box h2{color:var(--bleu);margin:.6rem 0 .3rem;font-size:1.5rem}
+  .auth-box h2{color:var(--accent);margin:.6rem 0 .3rem;font-size:1.5rem}
   .auth-box p{color:var(--gris);font-size:.9rem;margin-bottom:1.2rem}
   .auth-box input{text-align:center;font-size:1.1rem;letter-spacing:.1em;margin-bottom:.6rem}
   .auth-box .err{color:var(--rouge);font-size:.85rem;min-height:1.2em;margin-bottom:.4rem}
   .auth-box .hint{font-size:.78rem;color:var(--gris);margin-top:1rem;line-height:1.4}
-  .lock-btn{background:rgba(255,255,255,.15);border:none;color:#fff;cursor:pointer;padding:.4rem .8rem;border-radius:1rem;font-size:.8rem;margin-left:.6rem}
+  .lock-btn{background:rgba(255,255,255,.15);border:none;color:#fff;cursor:pointer;padding:.4rem .8rem;border-radius:1rem;font-size:.8rem}
   .lock-btn:hover{background:rgba(255,255,255,.28)}
+  /* Contrôles d'en-tête : langue + thème */
+  .hdr-ctrl{display:flex;align-items:center;gap:.4rem;margin-left:auto;flex-wrap:wrap}
+  .lang-switch{display:inline-flex;border:1px solid rgba(255,255,255,.4);border-radius:1rem;overflow:hidden}
+  .lang-switch button{background:transparent;border:none;color:#fff;padding:.35rem .7rem;cursor:pointer;font-size:.8rem;font-weight:600}
+  .lang-switch button.active{background:#fff;color:var(--bleu)}
+  .icon-btn{background:rgba(255,255,255,.15);border:none;color:#fff;cursor:pointer;padding:.4rem .7rem;border-radius:1rem;font-size:.85rem}
+  .icon-btn:hover{background:rgba(255,255,255,.28)}
   /* Combobox pays (recherche) */
   .combo{position:relative}
-  .combo-list{position:absolute;left:0;right:0;top:100%;z-index:30;background:#fff;border:1px solid var(--bleu);border-top:none;border-radius:0 0 .4rem .4rem;max-height:240px;overflow-y:auto;box-shadow:0 8px 20px rgba(0,0,0,.12);display:none}
+  .combo-list{position:absolute;left:0;right:0;top:100%;z-index:30;background:var(--surface);border:1px solid var(--bleu);border-top:none;border-radius:0 0 .4rem .4rem;max-height:240px;overflow-y:auto;box-shadow:0 8px 20px rgba(0,0,0,.18);display:none}
   .combo-list.open{display:block}
-  .combo-list div{padding:.55rem .7rem;cursor:pointer;font-size:.9rem}
-  .combo-list div:hover,.combo-list div.hl{background:var(--bleu-clair);color:var(--bleu)}
+  .combo-list div{padding:.55rem .7rem;cursor:pointer;font-size:.9rem;color:var(--text)}
+  .combo-list div:hover,.combo-list div.hl{background:var(--bleu-clair);color:var(--accent)}
   /* Sélecteur de mode */
   .mode-row{display:flex;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap}
-  .mode-btn{flex:1;min-width:160px;padding:.8rem;border:2px solid var(--bord);background:#fff;border-radius:.5rem;cursor:pointer;font-weight:600;color:#374151;transition:.2s}
+  .mode-btn{flex:1;min-width:160px;padding:.8rem;border:2px solid var(--bord);background:var(--surface);border-radius:.5rem;cursor:pointer;font-weight:600;color:var(--text2);transition:.2s}
   .mode-btn:hover{border-color:var(--bleu)}
   .mode-btn.active{border-color:var(--bleu);background:var(--bleu);color:#fff}
   @media(max-width:768px){main{padding:1rem}.header{padding:1rem}.header h1{font-size:1.2rem}}
@@ -123,60 +159,67 @@
 
 <div class="header">
   <div>
-    <h1>🛡️ Plateforme MENA Tuteur</h1>
-    <div class="sub">Gestion de dossiers de mineurs étrangers non accompagnés</div>
+    <h1 data-i18n="app.title">🛡️ Plateforme MENA Tuteur</h1>
+    <div class="sub" data-i18n="app.sub">Gestion de dossiers de mineurs étrangers non accompagnés</div>
   </div>
-  <div class="status" id="appStatus">● Hors ligne — données locales</div>
-  <button class="lock-btn" onclick="lockApp()" title="Verrouiller">🔒 Verrouiller</button>
+  <div class="hdr-ctrl">
+    <div class="status" id="appStatus"></div>
+    <div class="lang-switch">
+      <button id="langFr" onclick="setLang('fr')">FR</button>
+      <button id="langNl" onclick="setLang('nl')">NL</button>
+    </div>
+    <button class="icon-btn" id="themeBtn" onclick="toggleTheme()" title="Thème">🌙</button>
+    <button class="lock-btn" onclick="lockApp()" data-i18n="btn.lock">🔒 Verrouiller</button>
+  </div>
 </div>
 
 <nav>
   <ul>
-    <li><a class="nav active" data-view="dashboard">🏠 Tableau de bord</a></li>
-    <li><a class="nav" data-view="dossiers">📂 Mes Dossiers</a></li>
-    <li><a class="nav" data-view="lifecycle">🔄 Cycle de Vie</a></li>
-    <li><a class="nav" data-view="legislation">⚖️ Législation &amp; Délais</a></li>
-    <li><a class="nav" data-view="conseil">🧭 Assistant Conseil</a></li>
-    <li><a class="nav" data-view="cases">📚 Cas Pratiques</a></li>
-    <li><a class="nav" data-view="resources">📁 Ressources</a></li>
+    <li><a class="nav active" data-view="dashboard" data-i18n="nav.dashboard">🏠 Tableau de bord</a></li>
+    <li><a class="nav" data-view="dossiers" data-i18n="nav.dossiers">📂 Mes Dossiers</a></li>
+    <li><a class="nav" data-view="lifecycle" data-i18n="nav.lifecycle">🔄 Cycle de Vie</a></li>
+    <li><a class="nav" data-view="legislation" data-i18n="nav.legislation">⚖️ Législation &amp; Délais</a></li>
+    <li><a class="nav" data-view="conseil" data-i18n="nav.conseil">🧭 Assistant Conseil</a></li>
+    <li><a class="nav" data-view="cases" data-i18n="nav.cases">📚 Cas Pratiques</a></li>
+    <li><a class="nav" data-view="resources" data-i18n="nav.resources">📁 Ressources</a></li>
   </ul>
 </nav>
 
 <main>
   <!-- TABLEAU DE BORD -->
   <section class="view active" id="dashboard">
-    <h2 class="title">🏠 Tableau de bord</h2>
-    <div class="banner">Bienvenue. Cette plateforme vous permet de <strong>gérer vos dossiers MENA en temps réel</strong> et de rester informé sur la <strong>législation</strong> et les <strong>délais</strong> applicables.</div>
+    <h2 class="title" data-i18n="dash.title">🏠 Tableau de bord</h2>
+    <div class="banner" data-html="dash.welcome"></div>
     <div class="grid cols-3" id="statCards"></div>
     <div class="grid cols-2" style="margin-top:1.4rem">
       <div class="card">
-        <h3>⏰ Échéances à venir</h3>
-        <div id="dashDeadlines"><p class="muted">Aucun dossier actif.</p></div>
+        <h3 data-i18n="dash.deadlines">⏰ Échéances à venir</h3>
+        <div id="dashDeadlines"></div>
       </div>
       <div class="card">
-        <h3>🚀 Actions rapides</h3>
+        <h3 data-i18n="dash.quick">🚀 Actions rapides</h3>
         <div class="row" style="margin-top:.4rem">
-          <button class="btn" onclick="openDossierForm()">➕ Nouveau dossier</button>
-          <button class="btn sec" onclick="go('legislation')">⚖️ Consulter la législation</button>
-          <button class="btn sec" onclick="go('lifecycle')">🔄 Cycle de vie</button>
+          <button class="btn" onclick="openDossierForm()" data-i18n="dash.new">➕ Nouveau dossier</button>
+          <button class="btn sec" onclick="go('legislation')" data-i18n="dash.viewleg">⚖️ Consulter la législation</button>
+          <button class="btn sec" onclick="go('lifecycle')" data-i18n="dash.viewlife">🔄 Cycle de vie</button>
         </div>
-        <p class="muted" style="margin-top:1rem">Les dossiers sont enregistrés localement sur cet appareil (fonctionne hors ligne).</p>
+        <p class="muted" style="margin-top:1rem" data-i18n="dash.localnote">Les dossiers sont enregistrés localement sur cet appareil (fonctionne hors ligne).</p>
       </div>
     </div>
   </section>
 
   <!-- MES DOSSIERS -->
   <section class="view" id="dossiers">
-    <h2 class="title">📂 Mes Dossiers</h2>
+    <h2 class="title" data-i18n="doss.title">📂 Mes Dossiers</h2>
     <div class="row" style="margin-bottom:1rem">
-      <button class="btn" onclick="openDossierForm()">➕ Nouveau dossier</button>
-      <input id="dossierSearch" placeholder="🔍 Rechercher un dossier..." style="flex:1;min-width:200px" oninput="renderDossiers()">
+      <button class="btn" onclick="openDossierForm()" data-i18n="dash.new">➕ Nouveau dossier</button>
+      <input id="dossierSearch" data-ph="doss.search" style="flex:1;min-width:200px" oninput="renderDossiers()">
       <select id="dossierFilter" onchange="renderDossiers()" style="width:auto">
-        <option value="">Tous les statuts</option>
-        <option value="nouveau">Nouveau</option>
-        <option value="cours">En cours</option>
-        <option value="urgent">Urgent</option>
-        <option value="clos">Clos</option>
+        <option value="" data-i18n="doss.allstatus">Tous les statuts</option>
+        <option value="nouveau" data-i18n="st.nouveau">Nouveau</option>
+        <option value="cours" data-i18n="st.cours">En cours</option>
+        <option value="urgent" data-i18n="st.urgent">Urgent</option>
+        <option value="clos" data-i18n="st.clos">Clos</option>
       </select>
     </div>
     <div id="dossierList"></div>
@@ -184,54 +227,52 @@
 
   <!-- CYCLE DE VIE -->
   <section class="view" id="lifecycle">
-    <h2 class="title">🔄 Cycle de Vie — Phases de développement (0-18 ans)</h2>
-    <div class="banner">Pour chaque tranche d'âge : obligations légales, échéances, coûts estimés, checklist et documents requis.</div>
-    <div id="lifecycleContent" class="loading">Chargement…</div>
+    <h2 class="title" data-i18n="life.title">🔄 Cycle de Vie — Phases de développement (0-18 ans)</h2>
+    <div class="banner" data-i18n="life.banner">Pour chaque tranche d'âge : obligations légales, échéances, coûts estimés, checklist et documents requis.</div>
+    <div id="lifecycleContent" class="loading"></div>
   </section>
 
   <!-- LEGISLATION -->
   <section class="view" id="legislation">
-    <h2 class="title">⚖️ Législation &amp; Délais</h2>
-    <div class="banner">Cadre légal applicable à la tutelle d'un MENA et <strong>délais impératifs</strong> à respecter pour une gestion optimale du dossier.</div>
+    <h2 class="title" data-i18n="leg.title">⚖️ Législation &amp; Délais</h2>
+    <div class="banner" data-html="leg.banner"></div>
     <div id="legislationContent"></div>
   </section>
 
   <!-- ASSISTANT CONSEIL -->
   <section class="view" id="conseil">
-    <h2 class="title">🧭 Assistant Conseil</h2>
-    <div class="banner">Décrivez la situation du mineur et le problème rencontré. L'assistant propose des <strong>solutions hiérarchisées</strong> (avantages/inconvénients) avec leurs <strong>références légales</strong>. Réponses fondées uniquement sur la réglementation MENA en vigueur — <strong>aucune spéculation</strong>.</div>
+    <h2 class="title" data-i18n="conseil.title">🧭 Assistant Conseil</h2>
+    <div class="banner" data-html="conseil.banner"></div>
 
     <div class="card" style="margin-bottom:1rem">
-      <h3>1. Profil du mineur</h3>
+      <h3 data-i18n="conseil.s1">1. Profil du mineur</h3>
       <div class="mode-row">
-        <button type="button" class="mode-btn active" id="modeManuel" onclick="conseilMode('manuel')">✏️ Saisie manuelle</button>
-        <button type="button" class="mode-btn" id="modeDossier" onclick="conseilMode('dossier')">📂 Dossier existant</button>
+        <button type="button" class="mode-btn active" id="modeManuel" onclick="conseilMode('manuel')" data-i18n="conseil.manual">✏️ Saisie manuelle</button>
+        <button type="button" class="mode-btn" id="modeDossier" onclick="conseilMode('dossier')" data-i18n="conseil.dossier">📂 Dossier existant</button>
       </div>
 
-      <!-- Mode dossier -->
       <div id="conseilDossierBlock" style="display:none">
-        <label>Choisir le dossier du mineur</label>
-        <select id="conseilDossier" onchange="conseilFromDossier()"><option value="">— Sélectionnez un dossier —</option></select>
+        <label data-i18n="conseil.choose">Choisir le dossier du mineur</label>
+        <select id="conseilDossier" onchange="conseilFromDossier()"><option value="" data-i18n="conseil.selectdossier">— Sélectionnez un dossier —</option></select>
         <div id="conseilDossierContext"></div>
       </div>
 
-      <!-- Mode manuel -->
       <div id="conseilManuelBlock">
         <div class="grid cols-3">
-          <div><label>Âge</label><input id="conseilAge" type="number" min="0" max="18" placeholder="ex. 15" onchange="conseilAnalyser()"></div>
+          <div><label data-i18n="f.age">Âge</label><input id="conseilAge" type="number" min="0" max="18" data-ph="f.age.ph" onchange="conseilAnalyser()"></div>
           <div class="combo">
-            <label>Pays d'origine</label>
-            <input id="conseilPays" autocomplete="off" placeholder="🔍 Rechercher un pays..." oninput="paysSearch()" onfocus="paysSearch()" onkeydown="paysKey(event)">
+            <label data-i18n="f.country">Pays d'origine</label>
+            <input id="conseilPays" autocomplete="off" data-ph="conseil.country.ph" oninput="paysSearch()" onfocus="paysSearch()" onkeydown="paysKey(event)">
             <div class="combo-list" id="paysList"></div>
           </div>
-          <div><label>Statut de séjour</label>
+          <div><label data-i18n="conseil.statut">Statut de séjour</label>
             <select id="conseilStatut" onchange="conseilAnalyser()">
-              <option value="">Non précisé</option>
-              <option value="demande">Demande d'asile en cours</option>
-              <option value="refugie">Réfugié reconnu</option>
-              <option value="subsidiaire">Protection subsidiaire</option>
-              <option value="refus">Demande refusée</option>
-              <option value="sans">Sans procédure / irrégulier</option>
+              <option value="" data-i18n="conseil.statut.0">Non précisé</option>
+              <option value="demande" data-i18n="conseil.statut.demande">Demande d'asile en cours</option>
+              <option value="refugie" data-i18n="conseil.statut.refugie">Réfugié reconnu</option>
+              <option value="subsidiaire" data-i18n="conseil.statut.subsidiaire">Protection subsidiaire</option>
+              <option value="refus" data-i18n="conseil.statut.refus">Demande refusée</option>
+              <option value="sans" data-i18n="conseil.statut.sans">Sans procédure / irrégulier</option>
             </select>
           </div>
         </div>
@@ -240,13 +281,13 @@
     </div>
 
     <div class="card" style="margin-bottom:1rem">
-      <h3>2. Quel est le problème ?</h3>
-      <label>Décrivez le problème en quelques mots</label>
-      <input id="conseilSearch" placeholder="ex. l'école refuse l'inscription, risque de transfert Dublin, fugue..." oninput="conseilSuggest()">
+      <h3 data-i18n="conseil.s2">2. Quel est le problème ?</h3>
+      <label data-i18n="conseil.describe">Décrivez le problème en quelques mots</label>
+      <input id="conseilSearch" data-ph="conseil.describe.ph" oninput="conseilSuggest()">
       <div id="conseilSuggestions" style="margin-top:.6rem"></div>
-      <label style="margin-top:.8rem">…ou choisissez dans la liste</label>
+      <label style="margin-top:.8rem" data-i18n="conseil.orlist">…ou choisissez dans la liste</label>
       <select id="conseilScenario" onchange="conseilSelect(this.value)">
-        <option value="">— Sélectionnez un problème —</option>
+        <option value="" data-i18n="conseil.selectproblem">— Sélectionnez un problème —</option>
       </select>
     </div>
 
@@ -257,24 +298,24 @@
 
   <!-- CAS PRATIQUES -->
   <section class="view" id="cases">
-    <h2 class="title">📚 Cas Pratiques</h2>
-    <div class="banner">Cas concrets pour la <strong>formation du tuteur</strong>. Chaque cas détaille la situation, le <strong>cadre légal</strong>, les <strong>délais</strong>, les <strong>actions à mener</strong> et les leçons à retenir. Cliquez un cas pour le guide complet.</div>
+    <h2 class="title" data-i18n="cases.title">📚 Cas Pratiques</h2>
+    <div class="banner" data-html="cases.banner"></div>
     <div class="filters">
-      <input id="caseSearch" placeholder="🔍 Rechercher (situation, pays, mot-clé)..." oninput="renderCases()">
-      <select id="caseCat" onchange="renderCases()"><option value="">Toutes les catégories</option></select>
+      <input id="caseSearch" data-ph="cases.search" oninput="renderCases()">
+      <select id="caseCat" onchange="renderCases()"><option value="" data-i18n="cases.allcat">Toutes les catégories</option></select>
     </div>
-    <div id="casesContent" class="loading">Chargement des cas…</div>
+    <div id="casesContent" class="loading"></div>
   </section>
 
   <!-- RESSOURCES -->
   <section class="view" id="resources">
-    <h2 class="title">📁 Ressources &amp; Contacts</h2>
+    <h2 class="title" data-i18n="res.title">📁 Ressources &amp; Contacts</h2>
     <div class="filters">
-      <input id="resSearch" placeholder="🔍 Rechercher (nom, ville)..." oninput="renderResources()">
-      <select id="resType" onchange="renderResources()"><option value="">Tous les types</option></select>
-      <select id="resRegion" onchange="renderResources()"><option value="">Toutes les régions</option></select>
+      <input id="resSearch" data-ph="res.search" oninput="renderResources()">
+      <select id="resType" onchange="renderResources()"><option value="" data-i18n="res.alltypes">Tous les types</option></select>
+      <select id="resRegion" onchange="renderResources()"><option value="" data-i18n="res.allregions">Toutes les régions</option></select>
     </div>
-    <div id="resourcesContent" class="loading">Chargement des ressources…</div>
+    <div id="resourcesContent" class="loading"></div>
   </section>
 </main>
 
@@ -286,29 +327,29 @@
     <form id="dossierForm" onsubmit="saveDossier(event)">
       <input type="hidden" id="d_id">
       <div class="grid cols-2">
-        <div><label>Nom / Identifiant *</label><input id="d_nom" required placeholder="ex. Amira K."></div>
-        <div><label>Âge</label><input id="d_age" type="number" min="0" max="18" placeholder="ex. 14"></div>
+        <div><label data-i18n="f.name">Nom / Identifiant *</label><input id="d_nom" required data-ph="f.name.ph"></div>
+        <div><label data-i18n="f.age">Âge</label><input id="d_age" type="number" min="0" max="18" data-ph="f.age.ph"></div>
       </div>
       <div class="grid cols-2">
-        <div><label>Pays d'origine</label><input id="d_pays" placeholder="ex. Syrie"></div>
-        <div><label>Date d'arrivée</label><input id="d_arrivee" type="date"></div>
+        <div><label data-i18n="f.country">Pays d'origine</label><input id="d_pays" data-ph="f.country.ph"></div>
+        <div><label data-i18n="f.arrival">Date d'arrivée</label><input id="d_arrivee" type="date"></div>
       </div>
       <div class="grid cols-2">
-        <div><label>Statut</label>
+        <div><label data-i18n="f.statut">Statut</label>
           <select id="d_statut">
-            <option value="nouveau">Nouveau</option>
-            <option value="cours">En cours</option>
-            <option value="urgent">Urgent</option>
-            <option value="clos">Clos</option>
+            <option value="nouveau" data-i18n="st.nouveau">Nouveau</option>
+            <option value="cours" data-i18n="st.cours">En cours</option>
+            <option value="urgent" data-i18n="st.urgent">Urgent</option>
+            <option value="clos" data-i18n="st.clos">Clos</option>
           </select>
         </div>
-        <div><label>Langue parlée</label><input id="d_langue" placeholder="ex. Arabe"></div>
+        <div><label data-i18n="f.lang">Langue parlée</label><input id="d_langue" data-ph="f.lang.ph"></div>
       </div>
-      <label>Notes / Situation</label>
-      <textarea id="d_notes" rows="3" placeholder="Résumé de la situation..."></textarea>
+      <label data-i18n="f.notes">Notes / Situation</label>
+      <textarea id="d_notes" rows="3" data-ph="f.notes.ph"></textarea>
       <div class="row" style="margin-top:1.2rem;justify-content:flex-end">
-        <button type="button" class="btn sec" onclick="closeModal('dossierModal')">Annuler</button>
-        <button type="submit" class="btn">💾 Enregistrer</button>
+        <button type="button" class="btn sec" onclick="closeModal('dossierModal')" data-i18n="btn.cancel">Annuler</button>
+        <button type="submit" class="btn" data-i18n="btn.save">💾 Enregistrer</button>
       </div>
     </form>
   </div>
@@ -331,7 +372,99 @@
 </div>
 
 <script>
-/* ============ TRADUCTIONS ============ */
+/* ============ INTERNATIONALISATION (FR / NL) ============ */
+let LANG = localStorage.getItem('mena_lang') || 'fr';
+const I18N = {
+ fr:{
+  "app.title":"🛡️ Plateforme MENA Tuteur","app.sub":"Gestion de dossiers de mineurs étrangers non accompagnés",
+  "app.doctitle":"Plateforme MENA Tuteur — Gestion de dossiers",
+  "btn.lock":"🔒 Verrouiller","btn.cancel":"Annuler","btn.save":"💾 Enregistrer",
+  "status.online":"● En ligne","status.offline":"● Hors ligne — données locales",
+  "nav.dashboard":"🏠 Tableau de bord","nav.dossiers":"📂 Mes Dossiers","nav.lifecycle":"🔄 Cycle de Vie","nav.legislation":"⚖️ Législation & Délais","nav.conseil":"🧭 Assistant Conseil","nav.cases":"📚 Cas Pratiques","nav.resources":"📁 Ressources",
+  "dash.title":"🏠 Tableau de bord","dash.welcome":"Bienvenue. Cette plateforme vous permet de <strong>gérer vos dossiers MENA en temps réel</strong> et de rester informé sur la <strong>législation</strong> et les <strong>délais</strong> applicables.",
+  "dash.deadlines":"⏰ Échéances à venir","dash.quick":"🚀 Actions rapides","dash.new":"➕ Nouveau dossier","dash.viewleg":"⚖️ Consulter la législation","dash.viewlife":"🔄 Cycle de vie","dash.localnote":"Les dossiers sont enregistrés localement sur cet appareil (fonctionne hors ligne).",
+  "stat.total":"Dossiers au total","stat.actifs":"Dossiers actifs","stat.urgents":"Dossiers urgents","stat.progmoy":"Progression moyenne","stat.echeances":"Échéances légales référencées",
+  "dash.noactive":"Aucun dossier actif.","dash.uptodate":"Toutes les étapes sont à jour ✔️","dash.nextstep":"Prochaine étape :",
+  "doss.title":"📂 Mes Dossiers","doss.search":"🔍 Rechercher un dossier...","doss.allstatus":"Tous les statuts",
+  "doss.empty":"📭 Aucun dossier. Cliquez sur « ➕ Nouveau dossier » pour commencer.","doss.nomatch":"Aucun dossier ne correspond.","doss.origin":"Origine inconnue","doss.progress":"Progression","doss.steps":"étapes","doss.arrived":"arrivé(e) le",
+  "st.nouveau":"Nouveau","st.cours":"En cours","st.urgent":"Urgent","st.clos":"Clos","u.ans":"ans",
+  "det.checklist":"✅ Checklist de suivi","det.progress":"Progression globale :","det.modify":"✏️ Modifier","det.delete":"🗑️ Supprimer","det.confirmdel":"Supprimer définitivement ce dossier ?",
+  "form.new":"Nouveau dossier","form.edit":"Modifier le dossier",
+  "f.name":"Nom / Identifiant *","f.name.ph":"ex. Amira K.","f.age":"Âge","f.age.ph":"ex. 14","f.country":"Pays d'origine","f.country.ph":"ex. Syrie","f.arrival":"Date d'arrivée","f.statut":"Statut","f.lang":"Langue parlée","f.lang.ph":"ex. Arabe","f.notes":"Notes / Situation","f.notes.ph":"Résumé de la situation...",
+  "life.title":"🔄 Cycle de Vie — Phases de développement (0-18 ans)","life.banner":"Pour chaque tranche d'âge : obligations légales, échéances, coûts estimés, checklist et documents requis.","life.loading":"Chargement…","life.unavailable":"⚠️ Données du cycle de vie indisponibles.","life.phases":"phases","life.obligations":"obligation(s)","life.tasks":"tâche(s)",
+  "phase.obligations":"⚖️ Obligations légales & délais","phase.deadline":"Délai :","phase.responsible":"Responsable :","phase.costs":"💶 Coûts estimés","phase.monthly":"Total mensuel ~","phase.checklist":"✅ Checklist","phase.documents":"📄 Documents requis",
+  "leg.title":"⚖️ Législation & Délais","leg.banner":"Cadre légal applicable à la tutelle d'un MENA et <strong>délais impératifs</strong> à respecter pour une gestion optimale du dossier.",
+  "conseil.title":"🧭 Assistant Conseil","conseil.banner":"Décrivez la situation du mineur et le problème rencontré. L'assistant propose des <strong>solutions hiérarchisées</strong> (avantages/inconvénients) avec leurs <strong>références légales</strong>. Réponses fondées uniquement sur la réglementation MENA en vigueur — <strong>aucune spéculation</strong>.",
+  "conseil.s1":"1. Profil du mineur","conseil.manual":"✏️ Saisie manuelle","conseil.dossier":"📂 Dossier existant","conseil.choose":"Choisir le dossier du mineur","conseil.selectdossier":"— Sélectionnez un dossier —","conseil.country.ph":"🔍 Rechercher un pays...","conseil.statut":"Statut de séjour",
+  "conseil.statut.0":"Non précisé","conseil.statut.demande":"Demande d'asile en cours","conseil.statut.refugie":"Réfugié reconnu","conseil.statut.subsidiaire":"Protection subsidiaire","conseil.statut.refus":"Demande refusée","conseil.statut.sans":"Sans procédure / irrégulier",
+  "conseil.s2":"2. Quel est le problème ?","conseil.describe":"Décrivez le problème en quelques mots","conseil.describe.ph":"ex. l'école refuse l'inscription, risque de transfert Dublin, fugue...","conseil.orlist":"…ou choisissez dans la liste","conseil.selectproblem":"— Sélectionnez un problème —",
+  "conseil.nodossier":"Aucun dossier enregistré. Créez-en un dans « Mes Dossiers » ou utilisez la saisie manuelle.","conseil.matching":"Problèmes correspondants :","conseil.nomatch":"Aucune correspondance — choisissez dans la liste ci-dessous.","conseil.questions":"3. Questions de précision","conseil.qhint":"Répondez pour affiner les solutions proposées.","conseil.choosesel":"— choisir —","conseil.context":"Contexte :","conseil.moreprecise":"<strong>Pour un conseil plus précis</strong>, répondez aux questions ci-dessus :","conseil.moresol":"solution(s) supplémentaire(s) pourrai(en)t s'appliquer.","conseil.answerfirst":"Répondez aux questions de précision pour afficher les solutions adaptées.","conseil.solution":"Solution","conseil.legalbasis":"⚖️ Base légale","conseil.adv":"Avantages","conseil.disadv":"Inconvénients / points d'attention","conseil.demarche":"🎯 Démarche recommandée","conseil.precisions":"ℹ️ Précisions utiles","conseil.countryconsid":"🌍 Considérations liées au pays d'origine :","conseil.countryintro":"Éléments de contexte documentés à confronter au récit individuel — ils peuvent renforcer l'analyse et orienter la protection.","conseil.viewlinked":"▶ Voir le problème lié","conseil.ctxtaken":"contexte complet pris en compte.","conseil.follow":"Suivi :",
+  "cases.title":"📚 Cas Pratiques","cases.banner":"Cas concrets pour la <strong>formation du tuteur</strong>. Chaque cas détaille la situation, le <strong>cadre légal</strong>, les <strong>délais</strong>, les <strong>actions à mener</strong> et les leçons à retenir. Cliquez un cas pour le guide complet.","cases.search":"🔍 Rechercher (situation, pays, mot-clé)...","cases.allcat":"Toutes les catégories","cases.loading":"Chargement des cas…","cases.unavailable":"⚠️ Cas pratiques indisponibles.","cases.nomatch":"Aucun cas ne correspond à votre recherche.","cases.count":"cas","case.actions_n":"actions","case.refs_n":"références","case.delais_n":"délais","case.situation":"📖 Situation","case.chrono":"📅 Chronologie","case.legal":"⚖️ Cadre légal applicable","case.delais":"⏰ Délais clés","case.actions":"✅ Actions du tuteur (solutions adéquates et légales)","case.demarche":"🎯 Démarche recommandée","case.lecons":"💡 Leçons pour le tuteur","case.ressources":"📁 Ressources mobilisables",
+  "res.title":"📁 Ressources & Contacts","res.search":"🔍 Rechercher (nom, ville)...","res.alltypes":"Tous les types","res.allregions":"Toutes les régions","res.loading":"Chargement des ressources…","res.unavailable":"Aucune ressource trouvée.","res.count":"ressource(s)",
+  "auth.setup.title":"Créer votre accès","auth.setup.msg":"Premier lancement : créez un mot de passe pour chiffrer les dossiers.","auth.setup.btn":"Créer & déverrouiller","auth.login.title":"Accès sécurisé","auth.login.msg":"Cette plateforme contient des données sensibles de mineurs. Saisissez votre mot de passe.","auth.login.btn":"Déverrouiller","auth.pw":"Mot de passe","auth.pw2":"Confirmez le mot de passe","auth.hint":"🔒 Vos dossiers sont chiffrés (AES-256) sur cet appareil. Le mot de passe n'est jamais stocké ni transmis — il déverrouille le chiffrement. <strong>Il ne peut pas être récupéré en cas d'oubli.</strong>","auth.err.crypto":"Chiffrement indisponible. Utilisez http://localhost (pas file://).","auth.err.short":"Mot de passe : 6 caractères minimum.","auth.err.match":"Les mots de passe ne correspondent pas.","auth.err.wrong":"Mot de passe incorrect.","auth.err.generic":"Erreur : "
+ },
+ nl:{
+  "app.title":"🛡️ MENA Voogd Platform","app.sub":"Dossierbeheer van niet-begeleide buitenlandse minderjarigen",
+  "app.doctitle":"MENA Voogd Platform — Dossierbeheer",
+  "btn.lock":"🔒 Vergrendelen","btn.cancel":"Annuleren","btn.save":"💾 Opslaan",
+  "status.online":"● Online","status.offline":"● Offline — lokale gegevens",
+  "nav.dashboard":"🏠 Dashboard","nav.dossiers":"📂 Mijn dossiers","nav.lifecycle":"🔄 Levensloop","nav.legislation":"⚖️ Wetgeving & Termijnen","nav.conseil":"🧭 Adviesassistent","nav.cases":"📚 Praktijkgevallen","nav.resources":"📁 Hulpbronnen",
+  "dash.title":"🏠 Dashboard","dash.welcome":"Welkom. Met dit platform kunt u uw <strong>NBMV-dossiers in realtime beheren</strong> en op de hoogte blijven van de toepasselijke <strong>wetgeving</strong> en <strong>termijnen</strong>.",
+  "dash.deadlines":"⏰ Komende termijnen","dash.quick":"🚀 Snelle acties","dash.new":"➕ Nieuw dossier","dash.viewleg":"⚖️ Wetgeving raadplegen","dash.viewlife":"🔄 Levensloop","dash.localnote":"Dossiers worden lokaal op dit toestel opgeslagen (werkt offline).",
+  "stat.total":"Dossiers totaal","stat.actifs":"Actieve dossiers","stat.urgents":"Dringende dossiers","stat.progmoy":"Gemiddelde voortgang","stat.echeances":"Wettelijke termijnen vermeld",
+  "dash.noactive":"Geen actief dossier.","dash.uptodate":"Alle stappen zijn up-to-date ✔️","dash.nextstep":"Volgende stap:",
+  "doss.title":"📂 Mijn dossiers","doss.search":"🔍 Een dossier zoeken...","doss.allstatus":"Alle statussen",
+  "doss.empty":"📭 Geen dossier. Klik op « ➕ Nieuw dossier » om te beginnen.","doss.nomatch":"Geen overeenkomend dossier.","doss.origin":"Herkomst onbekend","doss.progress":"Voortgang","doss.steps":"stappen","doss.arrived":"aangekomen op",
+  "st.nouveau":"Nieuw","st.cours":"Lopend","st.urgent":"Dringend","st.clos":"Afgesloten","u.ans":"jaar",
+  "det.checklist":"✅ Opvolgingschecklist","det.progress":"Totale voortgang:","det.modify":"✏️ Wijzigen","det.delete":"🗑️ Verwijderen","det.confirmdel":"Dit dossier definitief verwijderen?",
+  "form.new":"Nieuw dossier","form.edit":"Dossier wijzigen",
+  "f.name":"Naam / Identificatie *","f.name.ph":"bv. Amira K.","f.age":"Leeftijd","f.age.ph":"bv. 14","f.country":"Land van herkomst","f.country.ph":"bv. Syrië","f.arrival":"Aankomstdatum","f.statut":"Status","f.lang":"Gesproken taal","f.lang.ph":"bv. Arabisch","f.notes":"Notities / Situatie","f.notes.ph":"Samenvatting van de situatie...",
+  "life.title":"🔄 Levensloop — Ontwikkelingsfasen (0-18 jaar)","life.banner":"Voor elke leeftijdsgroep: wettelijke verplichtingen, termijnen, geschatte kosten, checklist en vereiste documenten.","life.loading":"Laden…","life.unavailable":"⚠️ Levensloopgegevens niet beschikbaar.","life.phases":"fasen","life.obligations":"verplichting(en)","life.tasks":"taak/taken",
+  "phase.obligations":"⚖️ Wettelijke verplichtingen & termijnen","phase.deadline":"Termijn:","phase.responsible":"Verantwoordelijke:","phase.costs":"💶 Geschatte kosten","phase.monthly":"Maandelijks totaal ~","phase.checklist":"✅ Checklist","phase.documents":"📄 Vereiste documenten",
+  "leg.title":"⚖️ Wetgeving & Termijnen","leg.banner":"Wettelijk kader voor de voogdij over een NBMV en <strong>dwingende termijnen</strong> voor een optimaal dossierbeheer.",
+  "conseil.title":"🧭 Adviesassistent","conseil.banner":"Beschrijf de situatie van de minderjarige en het probleem. De assistent stelt <strong>gerangschikte oplossingen</strong> voor (voor- en nadelen) met hun <strong>wettelijke referenties</strong>. Antwoorden uitsluitend op basis van de geldende NBMV-regelgeving — <strong>geen speculatie</strong>.",
+  "conseil.s1":"1. Profiel van de minderjarige","conseil.manual":"✏️ Handmatige invoer","conseil.dossier":"📂 Bestaand dossier","conseil.choose":"Kies het dossier van de minderjarige","conseil.selectdossier":"— Selecteer een dossier —","conseil.country.ph":"🔍 Een land zoeken...","conseil.statut":"Verblijfsstatus",
+  "conseil.statut.0":"Niet gespecificeerd","conseil.statut.demande":"Asielaanvraag lopend","conseil.statut.refugie":"Erkend vluchteling","conseil.statut.subsidiaire":"Subsidiaire bescherming","conseil.statut.refus":"Aanvraag geweigerd","conseil.statut.sans":"Zonder procedure / onregelmatig",
+  "conseil.s2":"2. Wat is het probleem?","conseil.describe":"Beschrijf het probleem in enkele woorden","conseil.describe.ph":"bv. school weigert inschrijving, risico op Dublin-overdracht, weglopen...","conseil.orlist":"…of kies uit de lijst","conseil.selectproblem":"— Selecteer een probleem —",
+  "conseil.nodossier":"Geen dossier opgeslagen. Maak er een aan in « Mijn dossiers » of gebruik handmatige invoer.","conseil.matching":"Overeenkomende problemen:","conseil.nomatch":"Geen overeenkomst — kies uit de lijst hieronder.","conseil.questions":"3. Verduidelijkingsvragen","conseil.qhint":"Beantwoord om de voorgestelde oplossingen te verfijnen.","conseil.choosesel":"— kiezen —","conseil.context":"Context:","conseil.moreprecise":"<strong>Voor nauwkeuriger advies</strong>, beantwoord de vragen hierboven:","conseil.moresol":"bijkomende oplossing(en) zou(den) van toepassing kunnen zijn.","conseil.answerfirst":"Beantwoord de verduidelijkingsvragen om de passende oplossingen te tonen.","conseil.solution":"Oplossing","conseil.legalbasis":"⚖️ Wettelijke grondslag","conseil.adv":"Voordelen","conseil.disadv":"Nadelen / aandachtspunten","conseil.demarche":"🎯 Aanbevolen aanpak","conseil.precisions":"ℹ️ Nuttige verduidelijkingen","conseil.countryconsid":"🌍 Overwegingen i.v.m. land van herkomst:","conseil.countryintro":"Gedocumenteerde contextelementen te toetsen aan het individuele verhaal — ze kunnen de analyse versterken en de bescherming sturen.","conseil.viewlinked":"▶ Bekijk het gerelateerde probleem","conseil.ctxtaken":"volledige context in aanmerking genomen.","conseil.follow":"Opvolging:",
+  "cases.title":"📚 Praktijkgevallen","cases.banner":"Concrete gevallen voor de <strong>opleiding van de voogd</strong>. Elk geval beschrijft de situatie, het <strong>wettelijk kader</strong>, de <strong>termijnen</strong>, de <strong>te ondernemen acties</strong> en de lessen. Klik op een geval voor de volledige gids.","cases.search":"🔍 Zoeken (situatie, land, trefwoord)...","cases.allcat":"Alle categorieën","cases.loading":"Gevallen laden…","cases.unavailable":"⚠️ Praktijkgevallen niet beschikbaar.","cases.nomatch":"Geen geval komt overeen met uw zoekopdracht.","cases.count":"gevallen","case.actions_n":"acties","case.refs_n":"referenties","case.delais_n":"termijnen","case.situation":"📖 Situatie","case.chrono":"📅 Chronologie","case.legal":"⚖️ Toepasselijk wettelijk kader","case.delais":"⏰ Belangrijke termijnen","case.actions":"✅ Acties van de voogd (passende en wettelijke oplossingen)","case.demarche":"🎯 Aanbevolen aanpak","case.lecons":"💡 Lessen voor de voogd","case.ressources":"📁 Inzetbare hulpbronnen",
+  "res.title":"📁 Hulpbronnen & Contacten","res.search":"🔍 Zoeken (naam, stad)...","res.alltypes":"Alle types","res.allregions":"Alle regio's","res.loading":"Hulpbronnen laden…","res.unavailable":"Geen hulpbron gevonden.","res.count":"hulpbron(nen)",
+  "auth.setup.title":"Uw toegang aanmaken","auth.setup.msg":"Eerste start: maak een wachtwoord aan om de dossiers te versleutelen.","auth.setup.btn":"Aanmaken & ontgrendelen","auth.login.title":"Beveiligde toegang","auth.login.msg":"Dit platform bevat gevoelige gegevens van minderjarigen. Voer uw wachtwoord in.","auth.login.btn":"Ontgrendelen","auth.pw":"Wachtwoord","auth.pw2":"Bevestig het wachtwoord","auth.hint":"🔒 Uw dossiers zijn versleuteld (AES-256) op dit toestel. Het wachtwoord wordt nooit opgeslagen of verzonden — het ontgrendelt de versleuteling. <strong>Het kan niet worden hersteld bij verlies.</strong>","auth.err.crypto":"Versleuteling niet beschikbaar. Gebruik http://localhost (niet file://).","auth.err.short":"Wachtwoord: minimaal 6 tekens.","auth.err.match":"De wachtwoorden komen niet overeen.","auth.err.wrong":"Onjuist wachtwoord.","auth.err.generic":"Fout: "
+ }
+};
+function t(k){return (I18N[LANG]&&I18N[LANG][k])||I18N.fr[k]||k;}
+function tr(v){if(v==null)return '';if(typeof v==='object')return v[LANG]||v.fr||v.nl||'';return v;}
+function applyI18n(){
+  document.documentElement.lang=LANG;
+  document.title=t('app.doctitle');
+  document.querySelectorAll('[data-i18n]').forEach(el=>el.textContent=t(el.dataset.i18n));
+  document.querySelectorAll('[data-ph]').forEach(el=>el.placeholder=t(el.dataset.ph));
+  document.querySelectorAll('[data-html]').forEach(el=>el.innerHTML=t(el.dataset.html));
+  document.getElementById('langFr').classList.toggle('active',LANG==='fr');
+  document.getElementById('langNl').classList.toggle('active',LANG==='nl');
+}
+function setLang(l){
+  LANG=l;localStorage.setItem('mena_lang',l);
+  applyI18n();refreshAuthUI();setOnline();
+  renderLegislation();
+  if(CRYPTO_KEY){renderDashboard();renderDossiers();}
+  const active=document.querySelector('.view.active')?.id;
+  if(active==='lifecycle')renderLifecycle();
+  if(active==='cases')renderCases();
+  if(active==='resources')renderResources();
+  if(active==='conseil')renderConseil();
+}
+function applyTheme(){
+  const dark=localStorage.getItem('mena_theme')==='dark';
+  document.documentElement.setAttribute('data-theme',dark?'dark':'light');
+  const b=document.getElementById('themeBtn');if(b)b.textContent=dark?'☀️':'🌙';
+}
+function toggleTheme(){
+  const dark=localStorage.getItem('mena_theme')==='dark';
+  localStorage.setItem('mena_theme',dark?'light':'dark');applyTheme();
+}
+
+/* ============ TRADUCTIONS (cycle de vie : groupes & titres de phases) ============ */
 const T_GROUP = {Infancy:"Petite enfance (0-2 ans)","Early Childhood":"Enfance précoce (2-6 ans)","Middle Childhood":"Enfance moyenne (6-12 ans)",Adolescence:"Adolescence (12-18 ans)"};
 const T_PHASE = {
  "Birth & Registration":"Naissance & Enregistrement","Newborn Health & Immunization":"Santé du nouveau-né & Vaccination",
@@ -440,31 +573,32 @@ function saveDossiers(a){DOSSIERS=a;persist();}
 /* ============ AUTHENTIFICATION (UI) ============ */
 function refreshAuthUI(){
   const setup=!hasAccount();
-  document.getElementById('authTitle').textContent=setup?'Créer votre accès':'Accès sécurisé';
-  document.getElementById('authMsg').textContent=setup
-    ?'Premier lancement : créez un mot de passe pour chiffrer les dossiers.'
-    :'Cette plateforme contient des données sensibles de mineurs. Saisissez votre mot de passe.';
+  document.getElementById('authTitle').textContent=setup?t('auth.setup.title'):t('auth.login.title');
+  document.getElementById('authMsg').textContent=setup?t('auth.setup.msg'):t('auth.login.msg');
   document.getElementById('authPw2').style.display=setup?'block':'none';
   document.getElementById('authPw').autocomplete=setup?'new-password':'current-password';
-  document.querySelector('#authForm button').textContent=setup?'Créer & déverrouiller':'Déverrouiller';
+  document.getElementById('authPw').placeholder=t('auth.pw');
+  document.getElementById('authPw2').placeholder=t('auth.pw2');
+  document.getElementById('authHint').innerHTML=t('auth.hint');
+  document.querySelector('#authForm button').textContent=setup?t('auth.setup.btn'):t('auth.login.btn');
 }
 async function doAuth(e){
   e.preventDefault();
   const pw=document.getElementById('authPw').value;
   const err=document.getElementById('authErr');err.textContent='';
-  if(!crypto.subtle){err.textContent="Chiffrement indisponible. Utilisez http://localhost (pas file://).";return false;}
+  if(!crypto.subtle){err.textContent=t('auth.err.crypto');return false;}
   try{
     if(!hasAccount()){
       const pw2=document.getElementById('authPw2').value;
-      if(pw.length<6){err.textContent='Mot de passe : 6 caractères minimum.';return false;}
-      if(pw!==pw2){err.textContent='Les mots de passe ne correspondent pas.';return false;}
+      if(pw.length<6){err.textContent=t('auth.err.short');return false;}
+      if(pw!==pw2){err.textContent=t('auth.err.match');return false;}
       await setupAccount(pw);
     }else{
       const ok=await unlock(pw);
-      if(!ok){err.textContent='Mot de passe incorrect.';return false;}
+      if(!ok){err.textContent=t('auth.err.wrong');return false;}
     }
     onUnlocked();
-  }catch(ex){err.textContent='Erreur : '+ex.message;}
+  }catch(ex){err.textContent=t('auth.err.generic')+ex.message;}
   return false;
 }
 function onUnlocked(){
@@ -518,11 +652,11 @@ document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{if
 function openDossierForm(id){
   document.getElementById('dossierForm').reset();
   document.getElementById('d_id').value='';
-  document.getElementById('dossierModalTitle').textContent='Nouveau dossier';
+  document.getElementById('dossierModalTitle').textContent=t('form.new');
   if(id){
     const d=loadDossiers().find(x=>x.id===id);
     if(d){
-      document.getElementById('dossierModalTitle').textContent='Modifier le dossier';
+      document.getElementById('dossierModalTitle').textContent=t('form.edit');
       d_id.value=d.id;d_nom.value=d.nom;d_age.value=d.age||'';d_pays.value=d.pays||'';
       d_arrivee.value=d.arrivee||'';d_statut.value=d.statut;d_langue.value=d.langue||'';d_notes.value=d.notes||'';
     }
@@ -544,7 +678,7 @@ function saveDossier(e){
   saveDossiers(arr);closeModal('dossierModal');renderDossiers();renderDashboard();
 }
 function deleteDossier(id){
-  if(!confirm('Supprimer définitivement ce dossier ?'))return;
+  if(!confirm(t('det.confirmdel')))return;
   saveDossiers(loadDossiers().filter(x=>x.id!==id));
   closeModal('detailModal');renderDossiers();renderDashboard();
 }
@@ -553,8 +687,8 @@ function toggleCheck(id,i){
   d.checklist[i].done=!d.checklist[i].done;saveDossiers(arr);openDossierDetail(id);renderDashboard();
 }
 function statutBadge(s){
-  const m={nouveau:['b-nouveau','Nouveau'],cours:['b-cours','En cours'],urgent:['b-urgent','Urgent'],clos:['b-clos','Clos']};
-  const[c,l]=m[s]||m.nouveau;return `<span class="badge ${c}">${l}</span>`;
+  const m={nouveau:['b-nouveau','st.nouveau'],cours:['b-cours','st.cours'],urgent:['b-urgent','st.urgent'],clos:['b-clos','st.clos']};
+  const[c,k]=m[s]||m.nouveau;return `<span class="badge ${c}">${t(k)}</span>`;
 }
 function progressOf(d){const done=d.checklist.filter(c=>c.done).length;return Math.round(done/d.checklist.length*100)}
 
@@ -565,16 +699,16 @@ function renderDossiers(){
   if(q)arr=arr.filter(d=>(d.nom+' '+(d.pays||'')).toLowerCase().includes(q));
   if(f)arr=arr.filter(d=>d.statut===f);
   const el=document.getElementById('dossierList');
-  if(!arr.length){el.innerHTML='<div class="empty">📭 Aucun dossier. Cliquez sur « ➕ Nouveau dossier » pour commencer.</div>';return;}
+  if(!arr.length){el.innerHTML=`<div class="empty">${t('doss.empty')}</div>`;return;}
   el.innerHTML=arr.map(d=>{
     const p=progressOf(d);
     return `<div class="list-item" onclick="openDossierDetail('${d.id}')">
       <div class="row" style="justify-content:space-between">
         <strong style="font-size:1.05rem">${esc(d.nom)}</strong>${statutBadge(d.statut)}
       </div>
-      <div class="muted">${d.age?d.age+' ans · ':''}${esc(d.pays||'Origine inconnue')}${d.arrivee?' · arrivé(e) le '+d.arrivee:''}</div>
+      <div class="muted">${d.age?d.age+' '+t('u.ans')+' · ':''}${esc(d.pays||t('doss.origin'))}${d.arrivee?' · '+t('doss.arrived')+' '+d.arrivee:''}</div>
       <div class="progress"><span style="width:${p}%"></span></div>
-      <div class="muted">Progression : ${p}% (${d.checklist.filter(c=>c.done).length}/${d.checklist.length} étapes)</div>
+      <div class="muted">${t('doss.progress')} : ${p}% (${d.checklist.filter(c=>c.done).length}/${d.checklist.length} ${t('doss.steps')})</div>
     </div>`;
   }).join('');
 }
@@ -585,17 +719,17 @@ function openDossierDetail(id){
     <div class="row" style="justify-content:space-between">
       <h3 style="color:var(--bleu);font-size:1.4rem">${esc(d.nom)}</h3>${statutBadge(d.statut)}
     </div>
-    <p class="muted">${d.age?d.age+' ans · ':''}${esc(d.pays||'—')}${d.langue?' · '+esc(d.langue):''}${d.arrivee?' · arrivé(e) le '+d.arrivee:''}</p>
+    <p class="muted">${d.age?d.age+' '+t('u.ans')+' · ':''}${esc(d.pays||'—')}${d.langue?' · '+esc(d.langue):''}${d.arrivee?' · '+t('doss.arrived')+' '+d.arrivee:''}</p>
     ${d.notes?`<p style="margin:.8rem 0;padding:.7rem;background:var(--gris-clair);border-radius:.4rem">${esc(d.notes)}</p>`:''}
     <div class="progress"><span style="width:${p}%"></span></div>
-    <p class="muted" style="margin-bottom:.8rem">Progression globale : <strong>${p}%</strong></p>
-    <h4 style="color:var(--bleu);margin:.6rem 0">✅ Checklist de suivi</h4>
+    <p class="muted" style="margin-bottom:.8rem">${t('det.progress')} <strong>${p}%</strong></p>
+    <h4 style="color:var(--accent);margin:.6rem 0">${t('det.checklist')}</h4>
     <div>${d.checklist.map((c,i)=>`
       <label class="check-line"><input type="checkbox" ${c.done?'checked':''} onchange="toggleCheck('${d.id}',${i})">
       <span style="${c.done?'text-decoration:line-through;color:var(--gris)':''}">${esc(c.t)}</span></label>`).join('')}</div>
     <div class="row" style="margin-top:1.2rem;justify-content:flex-end">
-      <button class="btn sec sm" onclick="openDossierForm('${d.id}')">✏️ Modifier</button>
-      <button class="btn danger sm" onclick="deleteDossier('${d.id}')">🗑️ Supprimer</button>
+      <button class="btn sec sm" onclick="openDossierForm('${d.id}')">${t('det.modify')}</button>
+      <button class="btn danger sm" onclick="deleteDossier('${d.id}')">${t('det.delete')}</button>
     </div>`;
   openModal('detailModal');
 }
@@ -607,11 +741,11 @@ function renderDashboard(){
   const urgents=arr.filter(d=>d.statut==='urgent').length;
   const avgP=arr.length?Math.round(arr.reduce((s,d)=>s+progressOf(d),0)/arr.length):0;
   document.getElementById('statCards').innerHTML=`
-    <div class="stat"><div class="num">${arr.length}</div><div class="lbl">Dossiers au total</div></div>
-    <div class="stat"><div class="num">${actifs}</div><div class="lbl">Dossiers actifs</div></div>
-    <div class="stat" style="border-left-color:var(--rouge)"><div class="num" style="color:var(--rouge)">${urgents}</div><div class="lbl">Dossiers urgents</div></div>
-    <div class="stat" style="border-left-color:var(--vert)"><div class="num" style="color:var(--vert)">${avgP}%</div><div class="lbl">Progression moyenne</div></div>
-    <div class="stat"><div class="num">${LEGISLATION.reduce((s,c)=>s+c.items.length,0)}</div><div class="lbl">Échéances légales référencées</div></div>`;
+    <div class="stat"><div class="num">${arr.length}</div><div class="lbl">${t('stat.total')}</div></div>
+    <div class="stat"><div class="num">${actifs}</div><div class="lbl">${t('stat.actifs')}</div></div>
+    <div class="stat" style="border-left-color:var(--rouge)"><div class="num" style="color:var(--rouge)">${urgents}</div><div class="lbl">${t('stat.urgents')}</div></div>
+    <div class="stat" style="border-left-color:var(--vert)"><div class="num" style="color:var(--vert)">${avgP}%</div><div class="lbl">${t('stat.progmoy')}</div></div>
+    <div class="stat"><div class="num">${LEGISLATION.reduce((s,c)=>s+c.items.length,0)}</div><div class="lbl">${t('stat.echeances')}</div></div>`;
   // échéances : étapes non cochées des dossiers actifs
   const pend=[];
   arr.filter(d=>d.statut!=='clos').forEach(d=>{
@@ -620,39 +754,39 @@ function renderDashboard(){
   });
   document.getElementById('dashDeadlines').innerHTML=pend.length?pend.slice(0,8).map(x=>`
     <div class="deadline ${x.statut==='urgent'?'crit':''}" onclick="go('dossiers')" style="cursor:pointer">
-      <strong>${esc(x.nom)}</strong> ${statutBadge(x.statut)}<br><span class="muted">Prochaine étape : ${esc(x.etape)}</span>
-    </div>`).join(''):'<p class="muted">Toutes les étapes sont à jour ✔️</p>';
+      <strong>${esc(x.nom)}</strong> ${statutBadge(x.statut)}<br><span class="muted">${t('dash.nextstep')} ${esc(x.etape)}</span>
+    </div>`).join(''):`<p class="muted">${t('dash.uptodate')}</p>`;
 }
 
 /* ============ CYCLE DE VIE ============ */
 async function renderLifecycle(){
   if(!LIFECYCLE){LIFECYCLE=await loadJSON('data/lifecycle-data.json');}
   const el=document.getElementById('lifecycleContent');
-  if(!LIFECYCLE||!LIFECYCLE.phases){el.innerHTML='<div class="empty">⚠️ Données du cycle de vie indisponibles.</div>';return;}
+  if(!LIFECYCLE||!LIFECYCLE.phases){el.innerHTML=`<div class="empty">${t('life.unavailable')}</div>`;return;}
   const groups={};
-  LIFECYCLE.phases.forEach(p=>{(groups[p.age_group_name]=groups[p.age_group_name]||[]).push(p)});
+  LIFECYCLE.phases.forEach(p=>{const g=tr(p.g);(groups[g]=groups[g]||[]).push(p)});
   el.innerHTML=Object.entries(groups).map(([g,phases])=>`
-    <details class="accordion"><summary>${tg(g)} — ${phases.length} phases</summary>
+    <details class="accordion"><summary>${esc(g)} — ${phases.length} ${t('life.phases')}</summary>
     <div class="body">${phases.map(p=>`
-      <div class="list-item" onclick='showPhase(${JSON.stringify(p.phase_id)})'>
-        <strong>${tp(p.title)}</strong> <span class="muted">(${p.age_min}-${p.age_max} ans)</span>
-        <div class="muted">${(p.legal_obligations||[]).length} obligation(s) · ${(p.checklist||[]).length} tâche(s)${p.financial_breakdown?` · ~${p.financial_breakdown.total_min}-${p.financial_breakdown.total_max}€`:''}</div>
+      <div class="list-item" onclick='showPhase(${JSON.stringify(p.id)})'>
+        <strong>${esc(tr(p.title))}</strong> <span class="muted">(${p.age_min}-${p.age_max} ${t('u.ans')})</span>
+        <div class="muted">${(p.obligations||[]).length} ${t('life.obligations')} · ${(p.checklist||[]).length} ${t('life.tasks')}${p.cost&&p.cost.max?` · ~${p.cost.min}-${p.cost.max}€`:''}</div>
       </div>`).join('')}</div></details>`).join('');
 }
 function showPhase(pid){
-  const p=LIFECYCLE.phases.find(x=>x.phase_id===pid);if(!p)return;
-  const ob=(p.legal_obligations||[]).map(o=>`<li><strong>${esc(o.obligation)}</strong>${o.deadline?` <span class="badge b-cours">Délai : ${esc(o.deadline)}</span>`:''}${o.responsible_party?`<br><span class="muted">Responsable : ${esc(o.responsible_party)}</span>`:''}</li>`).join('');
-  const fb=p.financial_breakdown;
-  const ck=(p.checklist||[]).map(c=>`<li>${esc(c)}</li>`).join('');
-  const doc=(p.documents_needed||[]).map(c=>`<li>${esc(c)}</li>`).join('');
+  const p=LIFECYCLE.phases.find(x=>x.id===pid);if(!p)return;
+  const ob=(p.obligations||[]).map(o=>`<li><strong>${esc(tr(o.txt))}</strong>${o.delai?` <span class="badge b-cours">${t('phase.deadline')} ${esc(tr(o.delai))}</span>`:''}${o.resp?`<br><span class="muted">${t('phase.responsible')} ${esc(tr(o.resp))}</span>`:''}</li>`).join('');
+  const fb=p.cost;
+  const ck=(p.checklist||[]).map(c=>`<li>${esc(tr(c))}</li>`).join('');
+  const doc=(p.documents||[]).map(c=>`<li>${esc(tr(c))}</li>`).join('');
   document.getElementById('infoContent').innerHTML=`
-    <h3>${tp(p.title)}</h3>
-    <p class="muted">${tg(p.age_group_name)} · ${p.age_min}-${p.age_max} ans</p>
-    <p style="margin:.6rem 0">${esc(p.description||'')}</p>
-    ${ob?`<h4 style="color:var(--bleu);margin:.8rem 0 .3rem">⚖️ Obligations légales & délais</h4><ul class="clean">${ob}</ul>`:''}
-    ${fb?`<h4 style="color:var(--bleu);margin:.8rem 0 .3rem">💶 Coûts estimés</h4><p>Total mensuel ~ <strong>${fb.total_monthly}€</strong> (de ${fb.total_min}€ à ${fb.total_max}€)</p>`:''}
-    ${ck?`<h4 style="color:var(--bleu);margin:.8rem 0 .3rem">✅ Checklist</h4><ul class="clean">${ck}</ul>`:''}
-    ${doc?`<h4 style="color:var(--bleu);margin:.8rem 0 .3rem">📄 Documents requis</h4><ul class="clean">${doc}</ul>`:''}`;
+    <h3>${esc(tr(p.title))}</h3>
+    <p class="muted">${esc(tr(p.g))} · ${p.age_min}-${p.age_max} ${t('u.ans')}</p>
+    <p style="margin:.6rem 0">${esc(tr(p.desc)||'')}</p>
+    ${ob?`<h4 style="color:var(--accent);margin:.8rem 0 .3rem">${t('phase.obligations')}</h4><ul class="clean">${ob}</ul>`:''}
+    ${fb&&fb.max?`<h4 style="color:var(--accent);margin:.8rem 0 .3rem">${t('phase.costs')}</h4><p>${t('phase.monthly')} <strong>${fb.monthly}€</strong> (${fb.min}€ – ${fb.max}€)</p>`:''}
+    ${ck?`<h4 style="color:var(--accent);margin:.8rem 0 .3rem">${t('phase.checklist')}</h4><ul class="clean">${ck}</ul>`:''}
+    ${doc?`<h4 style="color:var(--accent);margin:.8rem 0 .3rem">${t('phase.documents')}</h4><ul class="clean">${doc}</ul>`:''}`;
   openModal('infoModal');
 }
 
@@ -676,25 +810,25 @@ async function renderCases(){
     CASES=Array.isArray(raw)?raw:(raw&&raw.cases?raw.cases:null);
     if(CASES){
       const cats=[...new Set(CASES.map(c=>c.categorie).filter(Boolean))].sort();
-      document.getElementById('caseCat').innerHTML='<option value="">Toutes les catégories</option>'+cats.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join('');
+      document.getElementById('caseCat').innerHTML=`<option value="">${t('cases.allcat')}</option>`+cats.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join('');
     }
   }
   const el=document.getElementById('casesContent');
-  if(!CASES||!CASES.length){el.innerHTML='<div class="empty">⚠️ Cas pratiques indisponibles.</div>';return;}
+  if(!CASES||!CASES.length){el.innerHTML=`<div class="empty">${t('cases.unavailable')}</div>`;return;}
   const q=(document.getElementById('caseSearch')?.value||'').toLowerCase();
   const cat=document.getElementById('caseCat')?.value||'';
   let arr=CASES.map((c,i)=>({c,i}));
   if(cat)arr=arr.filter(x=>x.c.categorie===cat);
   if(q)arr=arr.filter(x=>JSON.stringify(x.c).toLowerCase().includes(q));
-  if(!arr.length){el.innerHTML='<div class="empty">Aucun cas ne correspond à votre recherche.</div>';return;}
-  el.innerHTML=`<p class="muted" style="margin-bottom:.6rem">${arr.length} cas</p>`+arr.map(({c,i})=>`
+  if(!arr.length){el.innerHTML=`<div class="empty">${t('cases.nomatch')}</div>`;return;}
+  el.innerHTML=`<p class="muted" style="margin-bottom:.6rem">${arr.length} ${t('cases.count')}</p>`+arr.map(({c,i})=>`
     <div class="list-item" onclick="showCase(${i})">
       <div class="row" style="justify-content:space-between">
         <strong>${esc(c.titre)}</strong>${c.categorie?`<span class="badge b-nouveau">${esc(c.categorie)}</span>`:''}
       </div>
       <div class="muted">${c.pays?'🌍 '+esc(c.pays):''}${c.age?' · '+c.age+' ans':''}${c.sexe?' · '+esc(c.sexe):''}</div>
       ${(c.vulnerabilites||[]).length?`<div style="margin-top:.4rem">${c.vulnerabilites.slice(0,4).map(v=>`<span class="badge b-urgent" style="margin-right:.3rem;margin-bottom:.2rem;display:inline-block">${esc(v)}</span>`).join('')}</div>`:''}
-      <div class="muted" style="margin-top:.4rem">📋 ${(c.actions_tuteur||[]).length} actions · ⚖️ ${(c.cadre_legal||[]).length} références · ⏰ ${(c.delais_cles||[]).length} délais</div>
+      <div class="muted" style="margin-top:.4rem">📋 ${(c.actions_tuteur||[]).length} ${t('case.actions_n')} · ⚖️ ${(c.cadre_legal||[]).length} ${t('case.refs_n')} · ⏰ ${(c.delais_cles||[]).length} ${t('case.delais_n')}</div>
     </div>`).join('');
 }
 function showCase(i){
@@ -709,31 +843,48 @@ function showCase(i){
     <h3>${esc(c.titre)}</h3>
     <p class="muted">${c.categorie?esc(c.categorie)+' · ':''}${c.pays?esc(c.pays):''}${c.age?' · '+c.age+' ans':''}${c.sexe?' · '+esc(c.sexe):''}</p>
     ${(c.vulnerabilites||[]).length?`<div style="margin:.6rem 0">${c.vulnerabilites.map(v=>`<span class="badge b-urgent" style="margin:.15rem;display:inline-block">${esc(v)}</span>`).join('')}</div>`:''}
-    ${c.situation?`<h4 style="color:var(--bleu);margin:.8rem 0 .3rem">📖 Situation</h4><p>${esc(c.situation)}</p>`:''}
-    ${chrono?`<h4 style="color:var(--bleu);margin:.9rem 0 .3rem">📅 Chronologie</h4><ul class="clean">${chrono}</ul>`:''}
-    ${legal?`<h4 style="color:var(--bleu);margin:.9rem 0 .3rem">⚖️ Cadre légal applicable</h4><ul class="clean">${legal}</ul>`:''}
-    ${delais?`<h4 style="color:var(--bleu);margin:.9rem 0 .3rem">⏰ Délais clés</h4>${delais}`:''}
-    ${actions?`<h4 style="color:var(--bleu);margin:.9rem 0 .3rem">✅ Actions du tuteur (solutions adéquates et légales)</h4><ul class="clean">${actions}</ul>`:''}
-    ${c.solution?`<h4 style="color:var(--bleu);margin:.9rem 0 .3rem">🎯 Démarche recommandée</h4><p style="padding:.7rem;background:#ecfdf5;border-left:4px solid var(--vert);border-radius:.4rem">${esc(c.solution)}</p>`:''}
-    ${lecons?`<h4 style="color:var(--bleu);margin:.9rem 0 .3rem">💡 Leçons pour le tuteur</h4><ul class="clean">${lecons}</ul>`:''}
-    ${ress?`<h4 style="color:var(--bleu);margin:.9rem 0 .3rem">📁 Ressources mobilisables</h4><div>${ress}</div>`:''}`;
+    ${c.situation?`<h4 style="color:var(--accent);margin:.8rem 0 .3rem">${t('case.situation')}</h4><p>${esc(c.situation)}</p>`:''}
+    ${chrono?`<h4 style="color:var(--accent);margin:.9rem 0 .3rem">${t('case.chrono')}</h4><ul class="clean">${chrono}</ul>`:''}
+    ${legal?`<h4 style="color:var(--accent);margin:.9rem 0 .3rem">${t('case.legal')}</h4><ul class="clean">${legal}</ul>`:''}
+    ${delais?`<h4 style="color:var(--accent);margin:.9rem 0 .3rem">${t('case.delais')}</h4>${delais}`:''}
+    ${actions?`<h4 style="color:var(--accent);margin:.9rem 0 .3rem">${t('case.actions')}</h4><ul class="clean">${actions}</ul>`:''}
+    ${c.solution?`<h4 style="color:var(--accent);margin:.9rem 0 .3rem">${t('case.demarche')}</h4><p style="padding:.7rem;background:var(--ok-bg);border-left:4px solid var(--vert);border-radius:.4rem">${esc(c.solution)}</p>`:''}
+    ${lecons?`<h4 style="color:var(--accent);margin:.9rem 0 .3rem">${t('case.lecons')}</h4><ul class="clean">${lecons}</ul>`:''}
+    ${ress?`<h4 style="color:var(--accent);margin:.9rem 0 .3rem">${t('case.ressources')}</h4><div>${ress}</div>`:''}`;
   openModal('infoModal');
 }
 
 /* ============ RESSOURCES ============ */
-const RES_TYPE={firm:"Cabinet juridique",lawyer:"Avocat",organization:"Organisation",ngo:"ONG",clinic:"Clinique",hospital:"Hôpital",social:"Service social",government:"Service public",emergency:"Urgence"};
-const rtFR=t=>RES_TYPE[t]||(t?t.charAt(0).toUpperCase()+t.slice(1):'Ressource');
+const RES_TYPE={
+  firm:{fr:"Cabinet juridique",nl:"Advocatenkantoor"},lawyer:{fr:"Avocat",nl:"Advocaat"},organization:{fr:"Organisation",nl:"Organisatie"},
+  ngo:{fr:"ONG",nl:"ngo"},clinic:{fr:"Clinique",nl:"Kliniek"},hospital:{fr:"Hôpital",nl:"Ziekenhuis"},
+  social:{fr:"Service social",nl:"Sociale dienst"},social_services:{fr:"Services sociaux",nl:"Sociale diensten"},
+  government:{fr:"Service public",nl:"Overheidsdienst"},government_agency:{fr:"Agence publique",nl:"Overheidsinstantie"},
+  emergency:{fr:"Urgence",nl:"Noodhulp"},legal_aid:{fr:"Aide juridique",nl:"Rechtshulp"},
+  healthcare_center:{fr:"Centre de santé",nl:"Gezondheidscentrum"},"Medical Center":{fr:"Centre médical",nl:"Medisch centrum"},
+  language_center:{fr:"Centre linguistique",nl:"Taalcentrum"},"Language Centre":{fr:"Centre linguistique",nl:"Taalcentrum"},
+  integration_center:{fr:"Centre d'intégration",nl:"Integratiecentrum"},culture_center:{fr:"Centre culturel",nl:"Cultureel centrum"},
+  employment_center:{fr:"Centre d'emploi",nl:"Tewerkstellingscentrum"},"Employment Centre":{fr:"Centre d'emploi",nl:"Tewerkstellingscentrum"},
+  housing_association:{fr:"Association de logement",nl:"Huisvestingsvereniging"},"Shelter/Housing Centre":{fr:"Hébergement",nl:"Opvangcentrum"},
+  "Psychological Centre":{fr:"Centre psychologique",nl:"Psychologisch centrum"},"Social Assessment Centre":{fr:"Centre d'évaluation sociale",nl:"Sociaal evaluatiecentrum"},
+  international_org:{fr:"Organisation internationale",nl:"Internationale organisatie"},individual:{fr:"Personne ressource",nl:"Contactpersoon"}
+};
+const RES_REGION={Brussels:{fr:"Bruxelles",nl:"Brussel"},Bruxelles:{fr:"Bruxelles",nl:"Brussel"},Flanders:{fr:"Flandre",nl:"Vlaanderen"},Flandre:{fr:"Flandre",nl:"Vlaanderen"},Wallonia:{fr:"Wallonie",nl:"Wallonië"},Wallonie:{fr:"Wallonie",nl:"Wallonië"},Mixed:{fr:"Mixte / National",nl:"Gemengd / Nationaal"}};
+const rtFR=v=>{const m=RES_TYPE[v];return m?tr(m):(v?v.charAt(0).toUpperCase()+v.slice(1).replace(/_/g,' '):'—');};
+const rgFR=v=>{const m=RES_REGION[v];return m?tr(m):(v||'');};
 async function renderResources(){
   if(!RESOURCES){
     let raw=await loadJSON('data/resources.json');
     if(!raw)raw=await loadJSON('js/data/resources-data.json');
     RESOURCES=raw&&raw.resources?raw.resources:(Array.isArray(raw)?raw:[]);
-    // remplir filtres
-    const types=[...new Set(RESOURCES.map(r=>r.type).filter(Boolean))];
-    const regions=[...new Set(RESOURCES.map(r=>r.region).filter(Boolean))];
-    document.getElementById('resType').innerHTML='<option value="">Tous les types</option>'+types.map(t=>`<option value="${esc(t)}">${esc(rtFR(t))}</option>`).join('');
-    document.getElementById('resRegion').innerHTML='<option value="">Toutes les régions</option>'+regions.map(r=>`<option value="${esc(r)}">${esc(r)}</option>`).join('');
   }
+  // (re)remplir les filtres dans la langue courante
+  const types=[...new Set(RESOURCES.map(r=>r.type).filter(Boolean))];
+  const regions=[...new Set(RESOURCES.map(r=>r.region).filter(Boolean))];
+  const curTy=document.getElementById('resType').value, curRg=document.getElementById('resRegion').value;
+  document.getElementById('resType').innerHTML=`<option value="">${t('res.alltypes')}</option>`+types.map(x=>`<option value="${esc(x)}">${esc(rtFR(x))}</option>`).join('');
+  document.getElementById('resRegion').innerHTML=`<option value="">${t('res.allregions')}</option>`+regions.map(x=>`<option value="${esc(x)}">${esc(rgFR(x))}</option>`).join('');
+  document.getElementById('resType').value=curTy;document.getElementById('resRegion').value=curRg;
   const q=(document.getElementById('resSearch').value||'').toLowerCase();
   const ty=document.getElementById('resType').value;
   const rg=document.getElementById('resRegion').value;
@@ -742,14 +893,14 @@ async function renderResources(){
   if(ty)arr=arr.filter(r=>r.type===ty);
   if(rg)arr=arr.filter(r=>r.region===rg);
   const el=document.getElementById('resourcesContent');
-  if(!arr.length){el.innerHTML='<div class="empty">Aucune ressource trouvée.</div>';return;}
-  el.innerHTML=`<p class="muted" style="margin-bottom:.6rem">${arr.length} ressource(s)</p>`+arr.slice(0,200).map(r=>`
+  if(!arr.length){el.innerHTML=`<div class="empty">${t('res.unavailable')}</div>`;return;}
+  el.innerHTML=`<p class="muted" style="margin-bottom:.6rem">${arr.length} ${t('res.count')}</p>`+arr.slice(0,200).map(r=>`
     <div class="list-item">
       <div class="row" style="justify-content:space-between">
         <strong>${esc(r.name||'—')}</strong><span class="badge b-nouveau">${esc(rtFR(r.type))}</span>
       </div>
       <div class="muted">
-        ${r.region?'📍 '+esc(r.region):''}${r.address?' · '+esc(r.address):''}
+        ${r.region?'📍 '+esc(rgFR(r.region)):''}${r.address?' · '+esc(r.address):''}
         ${r.phone?'<br>📞 '+esc(r.phone):''}${r.email?' · ✉️ '+esc(r.email):''}
         ${r.website?`<br>🔗 <a href="${esc(r.website)}" target="_blank" rel="noopener">${esc(r.website)}</a>`:''}
       </div>
@@ -764,8 +915,8 @@ async function loadConseil(){
   if(CONSEIL&&CONSEIL.scenarios){
     const byDom={};
     CONSEIL.scenarios.forEach(s=>{(byDom[s.domaine]=byDom[s.domaine]||[]).push(s)});
-    document.getElementById('conseilScenario').innerHTML='<option value="">— Sélectionnez un problème —</option>'+
-      Object.entries(byDom).map(([d,arr])=>`<optgroup label="${esc(d)}">`+arr.map(s=>`<option value="${esc(s.id)}">${esc(s.probleme)}</option>`).join('')+'</optgroup>').join('');
+    document.getElementById('conseilScenario').innerHTML=`<option value="">${t('conseil.selectproblem')}</option>`+
+      Object.entries(byDom).map(([d,arr])=>`<optgroup label="${esc(tr(d))}">`+arr.map(s=>`<option value="${esc(s.id)}">${esc(tr(s.probleme))}</option>`).join('')+'</optgroup>').join('');
     const disc=document.getElementById('conseilDisclaimer');
     disc.textContent='⚠️ '+CONSEIL.avertissement;disc.style.display='block';
   }
@@ -787,7 +938,7 @@ function conseilMode(m){
   document.getElementById('conseilDossierBlock').style.display=m==='dossier'?'block':'none';
   if(m==='dossier'){
     const n=loadDossiers().length;
-    if(!n)document.getElementById('conseilDossierContext').innerHTML='<div class="empty">Aucun dossier enregistré. Créez-en un dans « Mes Dossiers » ou utilisez la saisie manuelle.</div>';
+    if(!n)document.getElementById('conseilDossierContext').innerHTML=`<div class="empty">${t('conseil.nodossier')}</div>`;
     else conseilFromDossier();
   }
   renderPaysContext();conseilAnalyser();
@@ -826,14 +977,14 @@ function renderPaysContext(){
   const ctx=conseilContext();
   const r=resolveProfil(ctx.pays);
   if(!r){box.innerHTML='';return;}
-  box.innerHTML=`<div class="card" style="margin-top:1rem;border-left:5px solid var(--orange);background:#fffbeb">
-    <h3>🌍 Considérations liées au pays d'origine : ${esc(r.pays)}</h3>
-    <p class="muted">Éléments de contexte documentés à confronter au récit individuel — ils peuvent renforcer l'analyse et orienter la protection.</p>
+  box.innerHTML=`<div class="card" style="margin-top:1rem;border-left:5px solid var(--orange);background:var(--warn-bg)">
+    <h3>${t('conseil.countryconsid')} ${esc(r.pays)}</h3>
+    <p class="muted">${t('conseil.countryintro')}</p>
     ${r.profil.considerations.map(c=>`<div class="deadline" style="border-left-color:var(--orange)">
-      <strong>${esc(c.theme)}</strong>
-      <p style="margin:.3rem 0">${esc(c.texte)}</p>
+      <strong>${esc(tr(c.theme))}</strong>
+      <p style="margin:.3rem 0">${esc(tr(c.texte))}</p>
       ${c.base?`<span class="muted">⚖️ ${esc(c.base)}</span><br>`:''}
-      ${c.scenario?`<button class="btn sec sm" style="margin-top:.4rem" onclick="conseilSelect('${esc(c.scenario)}')">▶ Voir le problème lié</button>`:''}
+      ${c.scenario?`<button class="btn sec sm" style="margin-top:.4rem" onclick="conseilSelect('${esc(c.scenario)}')">${t('conseil.viewlinked')}</button>`:''}
     </div>`).join('')}
   </div>`;
 }
@@ -854,10 +1005,10 @@ function conseilFromDossier(){
   const p=progressOf(d);
   box.innerHTML=`<div class="card" style="margin-top:.8rem;background:var(--bleu-clair)">
     <div class="row" style="justify-content:space-between"><strong style="font-size:1.05rem">${esc(d.nom)}</strong>${statutBadge(d.statut)}</div>
-    <div class="muted" style="margin:.3rem 0">${d.age?d.age+' ans · ':''}${esc(d.pays||'Origine inconnue')}${d.langue?' · '+esc(d.langue):''}${d.arrivee?' · arrivé(e) le '+d.arrivee:''}</div>
+    <div class="muted" style="margin:.3rem 0">${d.age?d.age+' '+t('u.ans')+' · ':''}${esc(d.pays||t('doss.origin'))}${d.langue?' · '+esc(d.langue):''}${d.arrivee?' · '+t('doss.arrived')+' '+d.arrivee:''}</div>
     ${d.notes?`<p style="margin:.3rem 0">📝 ${esc(d.notes)}</p>`:''}
     <div class="progress"><span style="width:${p}%"></span></div>
-    <div class="muted">Suivi : ${p}% (${d.checklist.filter(c=>c.done).length}/${d.checklist.length} étapes) — contexte complet pris en compte.</div>
+    <div class="muted">${t('conseil.follow')} ${p}% (${d.checklist.filter(c=>c.done).length}/${d.checklist.length} ${t('doss.steps')}) — ${t('conseil.ctxtaken')}</div>
   </div>`;
   renderPaysContext();conseilAnalyser();
 }
@@ -871,9 +1022,9 @@ function conseilSuggest(){
     let score=0;mots.forEach(m=>{if(hay.includes(m))score++;});
     return {s,score};
   }).filter(x=>x.score>0).sort((a,b)=>b.score-a.score).slice(0,4);
-  if(!scored.length){box.innerHTML='<p class="muted">Aucune correspondance — choisissez dans la liste ci-dessous.</p>';return;}
-  box.innerHTML='<p class="muted" style="margin-bottom:.3rem">Problèmes correspondants :</p>'+scored.map(x=>
-    `<button class="btn sec sm" style="margin:.2rem" onclick="conseilSelect('${x.s.id}')">${esc(x.s.probleme)}</button>`).join('');
+  if(!scored.length){box.innerHTML=`<p class="muted">${t('conseil.nomatch')}</p>`;return;}
+  box.innerHTML=`<p class="muted" style="margin-bottom:.3rem">${t('conseil.matching')}</p>`+scored.map(x=>
+    `<button class="btn sec sm" style="margin:.2rem" onclick="conseilSelect('${x.s.id}')">${esc(tr(x.s.probleme))}</button>`).join('');
 }
 function conseilSelect(id){
   if(!CONSEIL)return;
@@ -884,12 +1035,12 @@ function conseilSelect(id){
   // questions de précision
   const qc=document.getElementById('conseilQuestions');
   if((s.questions||[]).length){
-    qc.innerHTML=`<div class="card" style="margin-bottom:1rem"><h3>3. Questions de précision</h3>
-      <p class="muted">Répondez pour affiner les solutions proposées.</p>
-      ${s.questions.map(q=>`<label>${esc(q.texte)}</label>
+    qc.innerHTML=`<div class="card" style="margin-bottom:1rem"><h3>${t('conseil.questions')}</h3>
+      <p class="muted">${t('conseil.qhint')}</p>
+      ${s.questions.map(q=>`<label>${esc(tr(q.texte))}</label>
         <select id="cq_${esc(q.id)}" onchange="conseilAnalyser()">
-          <option value="">— choisir —</option>
-          ${q.options.map(o=>`<option value="${esc(o.val)}">${esc(o.label)}</option>`).join('')}
+          <option value="">${t('conseil.choosesel')}</option>
+          ${q.options.map(o=>`<option value="${esc(o.val)}">${esc(tr(o.label))}</option>`).join('')}
         </select>`).join('')}
     </div>`;
   }else qc.innerHTML='';
@@ -912,37 +1063,37 @@ function conseilAnalyser(){
     return sol.condition.in.includes(v);
   }).sort((a,b)=>(a.rang||9)-(b.rang||9));
 
-  const ctx=[age?age+' ans':'',pays].filter(Boolean).join(' · ');
-  let html=`<div class="card"><h3>📋 ${esc(s.probleme)}</h3>
-    ${ctx?`<p class="muted">Contexte : ${esc(ctx)}</p>`:''}`;
+  const ctx=[age?age+' '+t('u.ans'):'',pays].filter(Boolean).join(' · ');
+  let html=`<div class="card"><h3>📋 ${esc(tr(s.probleme))}</h3>
+    ${ctx?`<p class="muted">${t('conseil.context')} ${esc(ctx)}</p>`:''}`;
   if(manquantes){
-    html+=`<div class="deadline" style="border-left-color:var(--bleu);background:var(--bleu-clair)">💬 <strong>Pour un conseil plus précis</strong>, répondez aux questions ci-dessus : ${manquantes} solution(s) supplémentaire(s) pourrai(en)t s'appliquer.</div>`;
+    html+=`<div class="deadline" style="border-left-color:var(--bleu);background:var(--bleu-clair)">💬 ${t('conseil.moreprecise')} ${manquantes} ${t('conseil.moresol')}</div>`;
   }
   html+='</div>';
 
   if(!visibles.length){
-    html+='<div class="empty">Répondez aux questions de précision pour afficher les solutions adaptées.</div>';
+    html+=`<div class="empty">${t('conseil.answerfirst')}</div>`;
   }else{
     visibles.forEach((sol,i)=>{
-      const legal=(sol.base_legale||[]).map(l=>`<li><strong>${esc(l.texte)}</strong>${l.ref?` <span class="muted">(${esc(l.ref)})</span>`:''}</li>`).join('');
-      const av=(sol.avantages||[]).map(a=>`<li>✅ ${esc(a)}</li>`).join('');
-      const inc=(sol.inconvenients||[]).map(a=>`<li>⚠️ ${esc(a)}</li>`).join('');
+      const legal=(sol.base_legale||[]).map(l=>`<li><strong>${esc(tr(l.texte))}</strong>${l.ref?` <span class="muted">(${esc(l.ref)})</span>`:''}</li>`).join('');
+      const av=(sol.avantages||[]).map(a=>`<li>✅ ${esc(tr(a))}</li>`).join('');
+      const inc=(sol.inconvenients||[]).map(a=>`<li>⚠️ ${esc(tr(a))}</li>`).join('');
       html+=`<div class="card" style="border-left:5px solid ${i===0?'var(--vert)':'var(--bleu)'};margin-top:.8rem">
         <div class="row" style="justify-content:space-between">
-          <h3 style="margin:0">${i===0?'⭐ ':''}Solution ${sol.rang} — ${esc(sol.titre)}</h3>
-          ${sol.delai?`<span class="badge b-cours">⏰ ${esc(sol.delai)}</span>`:''}
+          <h3 style="margin:0">${i===0?'⭐ ':''}${t('conseil.solution')} ${sol.rang} — ${esc(tr(sol.titre))}</h3>
+          ${sol.delai?`<span class="badge b-cours">⏰ ${esc(tr(sol.delai))}</span>`:''}
         </div>
-        <p style="margin:.5rem 0">${esc(sol.description)}</p>
-        ${legal?`<strong style="color:var(--bleu)">⚖️ Base légale</strong><ul class="clean">${legal}</ul>`:''}
+        <p style="margin:.5rem 0">${esc(tr(sol.description))}</p>
+        ${legal?`<strong style="color:var(--accent)">${t('conseil.legalbasis')}</strong><ul class="clean">${legal}</ul>`:''}
         <div class="grid cols-2" style="margin-top:.6rem">
-          ${av?`<div><strong style="color:var(--vert)">Avantages</strong><ul style="list-style:none">${av}</ul></div>`:''}
-          ${inc?`<div><strong style="color:var(--orange)">Inconvénients / points d'attention</strong><ul style="list-style:none">${inc}</ul></div>`:''}
+          ${av?`<div><strong style="color:var(--vert)">${t('conseil.adv')}</strong><ul style="list-style:none">${av}</ul></div>`:''}
+          ${inc?`<div><strong style="color:var(--orange)">${t('conseil.disadv')}</strong><ul style="list-style:none">${inc}</ul></div>`:''}
         </div>
       </div>`;
     });
   }
   if(s.note_precision){
-    html+=`<div class="card" style="margin-top:.8rem;background:#fffbeb"><strong>ℹ️ Précisions utiles</strong><p style="margin-top:.3rem">${esc(s.note_precision)}</p></div>`;
+    html+=`<div class="card" style="margin-top:.8rem;background:var(--warn-bg)"><strong>${t('conseil.precisions')}</strong><p style="margin-top:.3rem">${esc(tr(s.note_precision))}</p></div>`;
   }
   document.getElementById('conseilResult').innerHTML=html;
 }
@@ -951,9 +1102,11 @@ function conseilAnalyser(){
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 
 /* ============ INIT ============ */
-function setOnline(){document.getElementById('appStatus').textContent=navigator.onLine?'● En ligne':'● Hors ligne — données locales';}
+function setOnline(){document.getElementById('appStatus').textContent=navigator.onLine?t('status.online'):t('status.offline');}
 window.addEventListener('online',setOnline);window.addEventListener('offline',setOnline);
 window.addEventListener('load',()=>{
+  applyTheme();                            // thème clair/sombre
+  applyI18n();                             // langue (FR/NL)
   setOnline();
   refreshAuthUI();                         // démarre verrouillé (écran de connexion)
   document.getElementById('authPw').focus();

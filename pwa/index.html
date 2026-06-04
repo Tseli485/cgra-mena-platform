@@ -1,331 +1,545 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CGRA - Plateforme MENA Tuteur</title>
-    <link rel="manifest" href="manifest.json">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #f9fafb;
-            color: #333;
-        }
-        .header {
-            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-            color: white;
-            padding: 2rem;
-            text-align: center;
-        }
-        .header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
-        .header p { font-size: 1.1rem; opacity: 0.9; }
-
-        .nav-container {
-            background: white;
-            border-bottom: 2px solid #2563eb;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        .nav {
-            display: flex;
-            list-style: none;
-            flex-wrap: wrap;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .nav li { border-right: 1px solid #e5e7eb; flex: 1; }
-        .nav li:last-child { border-right: none; }
-        .nav a {
-            display: block;
-            padding: 1.2rem 1rem;
-            color: #374151;
-            text-decoration: none;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-align: center;
-        }
-        .nav a:hover {
-            background: #f3f4f6;
-            color: #2563eb;
-        }
-        .nav a.active {
-            background: #2563eb;
-            color: white;
-            border-bottom: 3px solid #1e40af;
-        }
-
-        .main-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        .module { display: none; }
-        .module.active { display: block; }
-
-        .module h2 {
-            color: #2563eb;
-            margin-bottom: 1.5rem;
-            font-size: 2rem;
-            border-bottom: 3px solid #2563eb;
-            padding-bottom: 0.5rem;
-        }
-
-        .info {
-            background: #dbeafe;
-            border: 2px solid #2563eb;
-            color: #1e40af;
-            padding: 1.5rem;
-            margin: 1rem 0 2rem 0;
-            border-radius: 0.5rem;
-        }
-
-        .content-section {
-            background: white;
-            padding: 1.5rem;
-            margin: 1rem 0;
-            border-radius: 0.5rem;
-            border-left: 4px solid #2563eb;
-        }
-
-        .phase-list, .case-list, .resource-list {
-            list-style: none;
-        }
-
-        .phase-list li, .case-list li, .resource-list li {
-            padding: 1rem;
-            margin: 0.5rem 0;
-            background: #f9fafb;
-            border-left: 3px solid #2563eb;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .phase-list li:hover, .case-list li:hover, .resource-list li:hover {
-            background: #eff6ff;
-            padding-left: 1.5rem;
-        }
-
-        .loading {
-            color: #6b7280;
-            font-style: italic;
-            padding: 2rem;
-            text-align: center;
-        }
-
-        @media (max-width: 768px) {
-            .header h1 { font-size: 1.8rem; }
-            .nav a { padding: 0.8rem 0.5rem; font-size: 0.9rem; }
-            .main-content { padding: 1rem; }
-            .module h2 { font-size: 1.5rem; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plateforme MENA Tuteur — Gestion de dossiers</title>
+<meta name="theme-color" content="#1e40af">
+<link rel="manifest" href="manifest.json">
+<style>
+  :root{
+    --bleu:#1e40af; --bleu2:#2563eb; --bleu-clair:#dbeafe;
+    --vert:#059669; --orange:#d97706; --rouge:#dc2626;
+    --gris:#6b7280; --gris-clair:#f3f4f6; --bord:#e5e7eb;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f9fafb;color:#1f2937;line-height:1.55}
+  .header{background:linear-gradient(135deg,var(--bleu2),var(--bleu));color:#fff;padding:1.4rem 2rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+  .header h1{font-size:1.5rem}
+  .header .sub{opacity:.9;font-size:.9rem}
+  .header .status{margin-left:auto;font-size:.8rem;background:rgba(255,255,255,.15);padding:.4rem .8rem;border-radius:1rem}
+  nav{background:#fff;border-bottom:2px solid var(--bleu);position:sticky;top:0;z-index:50;overflow-x:auto}
+  nav ul{display:flex;list-style:none;max-width:1200px;margin:0 auto}
+  nav li{flex:1;min-width:120px}
+  nav a{display:block;padding:1rem .8rem;text-align:center;color:#374151;text-decoration:none;font-weight:500;cursor:pointer;font-size:.9rem;border-bottom:3px solid transparent;transition:.2s;white-space:nowrap}
+  nav a:hover{background:var(--gris-clair);color:var(--bleu)}
+  nav a.active{background:var(--bleu);color:#fff;border-bottom-color:#1e3a8a}
+  main{max-width:1200px;margin:0 auto;padding:1.5rem 2rem}
+  .view{display:none;animation:fade .25s}
+  .view.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  h2.title{color:var(--bleu);font-size:1.6rem;border-bottom:3px solid var(--bleu);padding-bottom:.5rem;margin-bottom:1.2rem}
+  .banner{background:var(--bleu-clair);border-left:5px solid var(--bleu);padding:1rem 1.2rem;border-radius:.4rem;margin-bottom:1.4rem;color:#1e3a8a}
+  .grid{display:grid;gap:1rem}
+  .grid.cols-3{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+  .grid.cols-2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+  .card{background:#fff;border:1px solid var(--bord);border-radius:.6rem;padding:1.2rem;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+  .card h3{color:var(--bleu);margin-bottom:.6rem;font-size:1.1rem}
+  .stat{background:#fff;border:1px solid var(--bord);border-left:5px solid var(--bleu);border-radius:.6rem;padding:1.2rem}
+  .stat .num{font-size:2.2rem;font-weight:700;color:var(--bleu)}
+  .stat .lbl{color:var(--gris);font-size:.9rem}
+  .btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--bleu);color:#fff;border:none;padding:.6rem 1.1rem;border-radius:.4rem;font-size:.9rem;font-weight:600;cursor:pointer;text-decoration:none;transition:.2s}
+  .btn:hover{background:var(--bleu2)}
+  .btn.sec{background:#fff;color:var(--bleu);border:1px solid var(--bleu)}
+  .btn.danger{background:var(--rouge)}
+  .btn.sm{padding:.35rem .7rem;font-size:.8rem}
+  .row{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center}
+  .badge{display:inline-block;padding:.2rem .6rem;border-radius:1rem;font-size:.75rem;font-weight:600}
+  .b-nouveau{background:#dbeafe;color:#1e40af}.b-cours{background:#fef3c7;color:#92400e}
+  .b-urgent{background:#fee2e2;color:#991b1b}.b-clos{background:#d1fae5;color:#065f46}
+  input,select,textarea{width:100%;padding:.6rem;border:1px solid var(--bord);border-radius:.4rem;font-size:.9rem;font-family:inherit}
+  label{display:block;font-weight:600;font-size:.85rem;margin:.7rem 0 .25rem;color:#374151}
+  .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:100;align-items:flex-start;justify-content:center;padding:2rem 1rem;overflow-y:auto}
+  .modal.open{display:flex}
+  .modal-box{background:#fff;border-radius:.8rem;max-width:640px;width:100%;padding:1.6rem;box-shadow:0 20px 40px rgba(0,0,0,.2)}
+  .modal-box h3{color:var(--bleu);margin-bottom:1rem;font-size:1.3rem}
+  .close{float:right;background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--gris)}
+  .list-item{padding:1rem;border:1px solid var(--bord);border-radius:.5rem;margin-bottom:.7rem;background:#fff;cursor:pointer;transition:.15s}
+  .list-item:hover{border-color:var(--bleu);box-shadow:0 2px 8px rgba(37,99,235,.12)}
+  .progress{height:9px;background:var(--gris-clair);border-radius:5px;overflow:hidden;margin-top:.5rem}
+  .progress span{display:block;height:100%;background:var(--vert);transition:width .3s}
+  .check-line{display:flex;align-items:flex-start;gap:.6rem;padding:.5rem;border-radius:.3rem}
+  .check-line:hover{background:var(--gris-clair)}
+  .check-line input{width:auto;margin-top:.25rem}
+  .deadline{border-left:4px solid var(--orange);padding:.7rem 1rem;background:#fffbeb;border-radius:.3rem;margin-bottom:.6rem}
+  .deadline.crit{border-left-color:var(--rouge);background:#fef2f2}
+  table{width:100%;border-collapse:collapse;font-size:.88rem}
+  th,td{text-align:left;padding:.6rem;border-bottom:1px solid var(--bord)}
+  th{background:var(--gris-clair);color:#374151}
+  .filters{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1rem}
+  .filters input,.filters select{width:auto;flex:1;min-width:160px}
+  .empty{text-align:center;color:var(--gris);padding:3rem 1rem}
+  .loading{text-align:center;color:var(--gris);padding:2rem;font-style:italic}
+  .accordion{border:1px solid var(--bord);border-radius:.5rem;margin-bottom:.6rem;overflow:hidden}
+  .accordion>summary{padding:.9rem 1.1rem;cursor:pointer;font-weight:600;background:#fff;color:var(--bleu);list-style:none}
+  .accordion>summary::-webkit-details-marker{display:none}
+  .accordion>summary:before{content:"▸ ";color:var(--bleu2)}
+  .accordion[open]>summary:before{content:"▾ "}
+  .accordion .body{padding:1rem 1.1rem;border-top:1px solid var(--bord);background:#fafafa}
+  .muted{color:var(--gris);font-size:.85rem}
+  ul.clean{list-style:none}ul.clean li{padding:.35rem 0;border-bottom:1px dashed var(--bord)}
+  @media(max-width:768px){main{padding:1rem}.header{padding:1rem}.header h1{font-size:1.2rem}}
+</style>
 </head>
 <body>
-    <div class="header">
-        <h1>🏫 Plateforme MENA Tuteur</h1>
-        <p>Plateforme complète de formation pour tuteurs</p>
-    </div>
+<div class="header">
+  <div>
+    <h1>🛡️ Plateforme MENA Tuteur</h1>
+    <div class="sub">Gestion de dossiers de mineurs étrangers non accompagnés</div>
+  </div>
+  <div class="status" id="appStatus">● Hors ligne — données locales</div>
+</div>
 
-    <div class="nav-container">
-        <ul class="nav" id="navigation">
-            <li><a class="nav-link active" data-module="dashboard">🏠 Accueil</a></li>
-            <li><a class="nav-link" data-module="lifecycle">🔄 Cycle de Vie</a></li>
-            <li><a class="nav-link" data-module="cases">📚 Cas Pratiques</a></li>
-            <li><a class="nav-link" data-module="resources">📁 Ressources</a></li>
-            <li><a class="nav-link" data-module="role">👤 Mon Rôle</a></li>
-            <li><a class="nav-link" data-module="procedure">⚙️ Procédure</a></li>
-        </ul>
-    </div>
+<nav>
+  <ul>
+    <li><a class="nav active" data-view="dashboard">🏠 Tableau de bord</a></li>
+    <li><a class="nav" data-view="dossiers">📂 Mes Dossiers</a></li>
+    <li><a class="nav" data-view="lifecycle">🔄 Cycle de Vie</a></li>
+    <li><a class="nav" data-view="legislation">⚖️ Législation &amp; Délais</a></li>
+    <li><a class="nav" data-view="cases">📚 Cas Pratiques</a></li>
+    <li><a class="nav" data-view="resources">📁 Ressources</a></li>
+  </ul>
+</nav>
 
-    <div class="main-content">
-        <div id="modules-container">
-            <!-- Dashboard / Accueil -->
-            <div class="module active" id="dashboard">
-                <h2>🏠 Accueil</h2>
-                <div class="info">
-                    ✅ Bienvenue sur la Plateforme MENA Tuteur - Version complète
-                </div>
-                <div class="content-section">
-                    <h3>📖 Guide de Navigation</h3>
-                    <p>Utilisez les onglets ci-dessus pour accéder aux différents modules :</p>
-                    <ul style="margin-left: 2rem; margin-top: 1rem;">
-                        <li><strong>🔄 Cycle de Vie</strong> - Les différentes phases de développement de l'enfant (0-18 ans)</li>
-                        <li><strong>📚 Cas Pratiques</strong> - Études de cas réels pour la formation pratique</li>
-                        <li><strong>📁 Ressources</strong> - Ressources, contacts, et organisation d'aide</li>
-                        <li><strong>👤 Mon Rôle</strong> - Description et responsabilités du tuteur</li>
-                        <li><strong>⚙️ Procédure</strong> - Procédures et protocoles à suivre</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Lifecycle -->
-            <div class="module" id="lifecycle">
-                <h2>🔄 Cycle de Vie - Les Phases de Développement</h2>
-                <div class="info">
-                    Découvrez les différentes étapes du développement de l'enfant de 0 à 18 ans
-                </div>
-                <div id="lifecycle-content" class="content-section">
-                    <div class="loading">Chargement du contenu...</div>
-                </div>
-            </div>
-
-            <!-- Cases -->
-            <div class="module" id="cases">
-                <h2>📚 Cas Pratiques</h2>
-                <div class="info">
-                    Études de cas réels pour l'apprentissage et la formation pratique
-                </div>
-                <div id="cases-content" class="content-section">
-                    <div class="loading">Chargement des cas...</div>
-                </div>
-            </div>
-
-            <!-- Resources -->
-            <div class="module" id="resources">
-                <h2>📁 Ressources & Contacts</h2>
-                <div class="info">
-                    Répertoire des ressources, avocats, organismes, et contacts utiles
-                </div>
-                <div id="resources-content" class="content-section">
-                    <div class="loading">Chargement des ressources...</div>
-                </div>
-            </div>
-
-            <!-- Role -->
-            <div class="module" id="role">
-                <h2>👤 Mon Rôle - Le Tuteur</h2>
-                <div class="info">
-                    Responsabilités et description du rôle de tuteur
-                </div>
-                <div class="content-section">
-                    <p>Le tuteur joue un rôle essentiel dans la protection et le soutien de l'enfant...</p>
-                    <p style="margin-top: 1rem;"><em>Contenu détaillé à charger...</em></p>
-                </div>
-            </div>
-
-            <!-- Procedure -->
-            <div class="module" id="procedure">
-                <h2>⚙️ Procédure</h2>
-                <div class="info">
-                    Procédures et protocoles à suivre
-                </div>
-                <div class="content-section">
-                    <p>Suivez les procédures établies pour assurer la sécurité et le bien-être...</p>
-                    <p style="margin-top: 1rem;"><em>Procédures détaillées à charger...</em></p>
-                </div>
-            </div>
+<main>
+  <!-- TABLEAU DE BORD -->
+  <section class="view active" id="dashboard">
+    <h2 class="title">🏠 Tableau de bord</h2>
+    <div class="banner">Bienvenue. Cette plateforme vous permet de <strong>gérer vos dossiers MENA en temps réel</strong> et de rester informé sur la <strong>législation</strong> et les <strong>délais</strong> applicables.</div>
+    <div class="grid cols-3" id="statCards"></div>
+    <div class="grid cols-2" style="margin-top:1.4rem">
+      <div class="card">
+        <h3>⏰ Échéances à venir</h3>
+        <div id="dashDeadlines"><p class="muted">Aucun dossier actif.</p></div>
+      </div>
+      <div class="card">
+        <h3>🚀 Actions rapides</h3>
+        <div class="row" style="margin-top:.4rem">
+          <button class="btn" onclick="openDossierForm()">➕ Nouveau dossier</button>
+          <button class="btn sec" onclick="go('legislation')">⚖️ Consulter la législation</button>
+          <button class="btn sec" onclick="go('lifecycle')">🔄 Cycle de vie</button>
         </div>
+        <p class="muted" style="margin-top:1rem">Les dossiers sont enregistrés localement sur cet appareil (fonctionne hors ligne).</p>
+      </div>
     </div>
+  </section>
 
-    <!-- Scripts de modules -->
-    <script src="js/db.js"></script>
-    <script src="js/modules/dashboard.js"></script>
-    <script src="js/modules/lifecycle.js"></script>
-    <script src="js/modules/cases.js"></script>
-    <script src="js/modules/resources.js"></script>
-    <script src="js/modules/role.js"></script>
-    <script src="js/modules/procedure.js"></script>
-    <script src="js/modules/search.js"></script>
-    <script src="js/modules/export.js"></script>
-    <script src="js/app.js"></script>
+  <!-- MES DOSSIERS -->
+  <section class="view" id="dossiers">
+    <h2 class="title">📂 Mes Dossiers</h2>
+    <div class="row" style="margin-bottom:1rem">
+      <button class="btn" onclick="openDossierForm()">➕ Nouveau dossier</button>
+      <input id="dossierSearch" placeholder="🔍 Rechercher un dossier..." style="flex:1;min-width:200px" oninput="renderDossiers()">
+      <select id="dossierFilter" onchange="renderDossiers()" style="width:auto">
+        <option value="">Tous les statuts</option>
+        <option value="nouveau">Nouveau</option>
+        <option value="cours">En cours</option>
+        <option value="urgent">Urgent</option>
+        <option value="clos">Clos</option>
+      </select>
+    </div>
+    <div id="dossierList"></div>
+  </section>
 
-    <script>
-        // Navigation simple
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const moduleId = link.dataset.module;
+  <!-- CYCLE DE VIE -->
+  <section class="view" id="lifecycle">
+    <h2 class="title">🔄 Cycle de Vie — Phases de développement (0-18 ans)</h2>
+    <div class="banner">Pour chaque tranche d'âge : obligations légales, échéances, coûts estimés, checklist et documents requis.</div>
+    <div id="lifecycleContent" class="loading">Chargement…</div>
+  </section>
 
-                // Cacher tous les modules
-                document.querySelectorAll('.module').forEach(m => m.classList.remove('active'));
-                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+  <!-- LEGISLATION -->
+  <section class="view" id="legislation">
+    <h2 class="title">⚖️ Législation &amp; Délais</h2>
+    <div class="banner">Cadre légal applicable à la tutelle d'un MENA et <strong>délais impératifs</strong> à respecter pour une gestion optimale du dossier.</div>
+    <div id="legislationContent"></div>
+  </section>
 
-                // Afficher le module sélectionné
-                const module = document.getElementById(moduleId);
-                if (module) {
-                    module.classList.add('active');
-                    link.classList.add('active');
-                }
-            });
-        });
+  <!-- CAS PRATIQUES -->
+  <section class="view" id="cases">
+    <h2 class="title">📚 Cas Pratiques</h2>
+    <div class="banner">Études de cas réelles pour guider votre pratique.</div>
+    <div id="casesContent" class="loading">Chargement des cas…</div>
+  </section>
 
-        // Charger les données si disponibles
-        window.addEventListener('load', () => {
-            console.log('✅ Page loaded');
+  <!-- RESSOURCES -->
+  <section class="view" id="resources">
+    <h2 class="title">📁 Ressources &amp; Contacts</h2>
+    <div class="filters">
+      <input id="resSearch" placeholder="🔍 Rechercher (nom, ville)..." oninput="renderResources()">
+      <select id="resType" onchange="renderResources()"><option value="">Tous les types</option></select>
+      <select id="resRegion" onchange="renderResources()"><option value="">Toutes les régions</option></select>
+    </div>
+    <div id="resourcesContent" class="loading">Chargement des ressources…</div>
+  </section>
+</main>
 
-            // Essayer de charger les données de lifecycle
-            if (window.cgraDB) {
-                console.log('✅ Database loaded');
+<!-- MODAL DOSSIER -->
+<div class="modal" id="dossierModal">
+  <div class="modal-box">
+    <button class="close" onclick="closeModal('dossierModal')">&times;</button>
+    <h3 id="dossierModalTitle">Nouveau dossier</h3>
+    <form id="dossierForm" onsubmit="saveDossier(event)">
+      <input type="hidden" id="d_id">
+      <div class="grid cols-2">
+        <div><label>Nom / Identifiant *</label><input id="d_nom" required placeholder="ex. Amira K."></div>
+        <div><label>Âge</label><input id="d_age" type="number" min="0" max="18" placeholder="ex. 14"></div>
+      </div>
+      <div class="grid cols-2">
+        <div><label>Pays d'origine</label><input id="d_pays" placeholder="ex. Syrie"></div>
+        <div><label>Date d'arrivée</label><input id="d_arrivee" type="date"></div>
+      </div>
+      <div class="grid cols-2">
+        <div><label>Statut</label>
+          <select id="d_statut">
+            <option value="nouveau">Nouveau</option>
+            <option value="cours">En cours</option>
+            <option value="urgent">Urgent</option>
+            <option value="clos">Clos</option>
+          </select>
+        </div>
+        <div><label>Langue parlée</label><input id="d_langue" placeholder="ex. Arabe"></div>
+      </div>
+      <label>Notes / Situation</label>
+      <textarea id="d_notes" rows="3" placeholder="Résumé de la situation..."></textarea>
+      <div class="row" style="margin-top:1.2rem;justify-content:flex-end">
+        <button type="button" class="btn sec" onclick="closeModal('dossierModal')">Annuler</button>
+        <button type="submit" class="btn">💾 Enregistrer</button>
+      </div>
+    </form>
+  </div>
+</div>
 
-                try {
-                    // Charger et afficher les données de cycle de vie si disponibles
-                    fetch('data/lifecycle-data.json')
-                        .then(r => r.json())
-                        .then(data => {
-                            const container = document.getElementById('lifecycle-content');
-                            if (data && data.phases) {
-                                let html = '<ul class="phase-list">';
-                                data.phases.forEach(phase => {
-                                    html += `<li><strong>${phase.age}</strong> - ${phase.title}<br><small>${phase.description}</small></li>`;
-                                });
-                                html += '</ul>';
-                                container.innerHTML = html;
-                            }
-                        })
-                        .catch(e => {
-                            console.log('Lifecycle data not found:', e);
-                            document.getElementById('lifecycle-content').innerHTML =
-                                '<p>Données non disponibles actuellement.</p>';
-                        });
+<!-- MODAL DETAIL DOSSIER -->
+<div class="modal" id="detailModal">
+  <div class="modal-box">
+    <button class="close" onclick="closeModal('detailModal')">&times;</button>
+    <div id="detailContent"></div>
+  </div>
+</div>
 
-                    // Charger les données de cas
-                    fetch('js/data/cases-data.json')
-                        .then(r => r.json())
-                        .then(data => {
-                            const container = document.getElementById('cases-content');
-                            if (data && data.cases) {
-                                let html = '<ul class="case-list">';
-                                data.cases.slice(0, 10).forEach(caseItem => {
-                                    html += `<li><strong>${caseItem.title}</strong><br><small>${caseItem.type} | ${caseItem.age_group}</small></li>`;
-                                });
-                                html += '</ul>';
-                                container.innerHTML = html;
-                            }
-                        })
-                        .catch(e => {
-                            console.log('Cases data not found:', e);
-                            document.getElementById('cases-content').innerHTML =
-                                '<p>Cas pratiques non disponibles actuellement.</p>';
-                        });
+<!-- MODAL GENERIQUE (phase / cas) -->
+<div class="modal" id="infoModal">
+  <div class="modal-box">
+    <button class="close" onclick="closeModal('infoModal')">&times;</button>
+    <div id="infoContent"></div>
+  </div>
+</div>
 
-                    // Charger les ressources
-                    fetch('js/data/resources-data.json')
-                        .then(r => r.json())
-                        .then(data => {
-                            const container = document.getElementById('resources-content');
-                            if (data && data.resources) {
-                                let html = '<ul class="resource-list">';
-                                data.resources.slice(0, 10).forEach(resource => {
-                                    html += `<li><strong>${resource.name}</strong><br><small>${resource.type} | ${resource.region}</small></li>`;
-                                });
-                                html += '</ul>';
-                                container.innerHTML = html;
-                            }
-                        })
-                        .catch(e => {
-                            console.log('Resources data not found:', e);
-                            document.getElementById('resources-content').innerHTML =
-                                '<p>Ressources non disponibles actuellement.</p>';
-                        });
-                } catch (e) {
-                    console.error('Error loading data:', e);
-                }
-            }
-        });
-    </script>
+<script>
+/* ============ TRADUCTIONS ============ */
+const T_GROUP = {Infancy:"Petite enfance (0-2 ans)","Early Childhood":"Enfance précoce (2-6 ans)","Middle Childhood":"Enfance moyenne (6-12 ans)",Adolescence:"Adolescence (12-18 ans)"};
+const T_PHASE = {
+ "Birth & Registration":"Naissance & Enregistrement","Newborn Health & Immunization":"Santé du nouveau-né & Vaccination",
+ "Early Bonding & Development":"Attachement précoce & Développement","Mobility & Language Development":"Mobilité & Développement du langage",
+ "Transition to Toddlerhood":"Transition vers la petite enfance","Preschool Entry & Socialization":"Entrée en maternelle & Socialisation",
+ "Language & Cognitive Development":"Développement langagier & cognitif","Social-Emotional & Play Development":"Développement social-émotionnel & jeu",
+ "Pre-Kindergarten Skills & Independence":"Compétences pré-scolaires & Autonomie","Age Group 2 Completion & Transition":"Fin du groupe 2 & Transition",
+ "Primary School Entry & Adaptation":"Entrée à l'école primaire & Adaptation","Academic Foundation & Early Learning":"Fondations scolaires & Apprentissages",
+ "Skill Development & Peer Relationships":"Développement des compétences & Pairs","Independence & Responsibility":"Autonomie & Responsabilité",
+ "Age Group 3 Completion & Secondary Transition":"Fin du groupe 3 & Transition secondaire","Secondary School Entry & Identity Formation":"Entrée au secondaire & Construction identitaire",
+ "Academic & Vocational Exploration":"Exploration scolaire & professionnelle","Skill Development & Social Responsibility":"Compétences & Responsabilité sociale",
+ "Pre-Adulthood Preparation & Rights Education":"Préparation à la majorité & Éducation aux droits","Transition to Adulthood & Graduations":"Transition vers l'âge adulte & Diplômes",
+ "Age Group 4 Completion & Full Adult Transition":"Fin du groupe 4 & Transition adulte complète"
+};
+const tg=s=>T_GROUP[s]||s, tp=s=>T_PHASE[s]||s;
+
+/* ============ LEGISLATION (FR, contexte MENA Belgique/UE) ============ */
+const LEGISLATION = [
+ {cat:"Désignation du tuteur",items:[
+   {titre:"Signalement du MENA",delai:"Immédiat (dès identification)",ref:"Loi-programme du 24/12/2002, Titre XIII, Ch. 6",desc:"Toute autorité qui constate la présence d'un mineur étranger non accompagné doit le signaler sans délai au Service des Tutelles."},
+   {titre:"Désignation d'un tuteur",delai:"Dans les jours suivant le signalement",ref:"Service des Tutelles (SPF Justice)",desc:"Le Service des Tutelles désigne un tuteur qui représente le mineur dans tous les actes juridiques et veille à son bien-être."},
+   {titre:"Identification & détermination de l'âge",delai:"3 jours ouvrables (test possible)",ref:"Art. 3-7 Loi Tutelle",desc:"En cas de doute sur la minorité, un test d'âge (examen médical triple) peut être réalisé. Le bénéfice du doute profite au mineur."},
+ ]},
+ {cat:"Séjour & Protection internationale",items:[
+   {titre:"Demande de protection internationale",delai:"Dès que possible après l'arrivée",ref:"CGRA / Office des Étrangers",desc:"Le tuteur accompagne le mineur pour introduire sa demande d'asile. Procédure adaptée aux mineurs (audition spécifique)."},
+   {titre:"Recherche de la solution durable",delai:"En continu durant la tutelle",ref:"Directive 2011/95/UE; Loi 15/12/1980",desc:"L'autorité doit rechercher la solution durable conforme à l'intérêt supérieur de l'enfant : réunification familiale, séjour, ou retour encadré."},
+   {titre:"Recours contre décision négative",delai:"30 jours (CCE)",ref:"Conseil du Contentieux des Étrangers",desc:"Délai de recours suspensif contre une décision de refus de séjour ou de protection."},
+   {titre:"Titre de séjour spécifique MENA",delai:"Après évaluation solution durable",ref:"Circulaire 15/09/2005",desc:"Délivrance d'un document de séjour adapté tant qu'une solution durable n'est pas trouvée."},
+ ]},
+ {cat:"État civil & Documents",items:[
+   {titre:"Enregistrement / inscription",delai:"30-60 jours",ref:"Code civil — état civil",desc:"Inscription au registre d'attente puis registre des étrangers selon l'évolution du dossier."},
+   {titre:"Ouverture compte bloqué / gestion des biens",delai:"Dès désignation",ref:"Art. 9-10 Loi Tutelle",desc:"Le tuteur gère les biens du mineur en bon père de famille et rend compte au Service des Tutelles."},
+ ]},
+ {cat:"Scolarité & Santé",items:[
+   {titre:"Inscription scolaire obligatoire",delai:"60 jours après l'arrivée",ref:"Décret scolarité obligatoire",desc:"Tout mineur a droit et obligation à l'enseignement, indépendamment du statut de séjour (classes DASPA/passerelles)."},
+   {titre:"Affiliation mutuelle / couverture médicale",delai:"Dès que possible",ref:"AMU — Aide Médicale Urgente",desc:"Accès aux soins garanti. Le tuteur veille au bilan médical d'arrivée et au suivi vaccinal."},
+   {titre:"Bilan de santé d'arrivée",delai:"Premières semaines",ref:"Fedasil / ONE-Kind&Gezin",desc:"Dépistage (tuberculose), évaluation psychologique et plan de vaccination."},
+ ]},
+ {cat:"Accueil & Hébergement",items:[
+   {titre:"Hébergement adapté",delai:"Immédiat",ref:"Fedasil — Loi accueil 12/01/2007",desc:"Phase d'observation et d'orientation (centre OOC) puis hébergement en structure adaptée à l'âge et au profil."},
+   {titre:"Rapports périodiques au Service des Tutelles",delai:"Selon échéancier (ex. trimestriel)",ref:"Art. 11 Loi Tutelle",desc:"Le tuteur établit des rapports sur la situation du mineur et les démarches entreprises."},
+ ]},
+ {cat:"Transition vers la majorité",items:[
+   {titre:"Préparation à l'autonomie",delai:"Dès 16-17 ans",ref:"Aide à la jeunesse",desc:"Anticiper la fin de tutelle : logement, formation, prolongation éventuelle de l'aide (jeune adulte)."},
+   {titre:"Fin de la tutelle",delai:"À 18 ans",ref:"Art. 24 Loi Tutelle",desc:"La tutelle prend fin à la majorité. Transmission du dossier et orientation vers les dispositifs adultes."},
+ ]},
+];
+
+/* ============ STOCKAGE DOSSIERS ============ */
+const STORE='mena_dossiers';
+function loadDossiers(){try{return JSON.parse(localStorage.getItem(STORE))||[]}catch(e){return[]}}
+function saveDossiers(a){localStorage.setItem(STORE,JSON.stringify(a))}
+// Checklist standard d'un dossier MENA
+const STD_CHECKLIST=[
+ "Signalement au Service des Tutelles","Désignation du tuteur confirmée","Identification / détermination de l'âge",
+ "Demande de protection internationale introduite","Hébergement adapté attribué","Bilan médical d'arrivée réalisé",
+ "Inscription scolaire effectuée","Couverture médicale (mutuelle/AMU) ouverte","Bilan psychologique / suivi trauma",
+ "Recherche de la famille / solution durable engagée","Ouverture de la gestion des biens","Premier rapport au Service des Tutelles"
+];
+
+/* ============ DONNEES JSON ============ */
+let LIFECYCLE=null, CASES=null, RESOURCES=null;
+async function loadJSON(path){
+  try{const r=await fetch(path,{cache:'no-store'});if(!r.ok)throw 0;return await r.json();}
+  catch(e){console.warn('Échec chargement',path,e);return null;}
+}
+
+/* ============ NAVIGATION ============ */
+function go(view){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));
+  document.getElementById(view).classList.add('active');
+  document.querySelector(`nav a[data-view="${view}"]`)?.classList.add('active');
+  window.scrollTo(0,0);
+  if(view==='lifecycle')renderLifecycle();
+  if(view==='cases')renderCases();
+  if(view==='resources')renderResources();
+}
+document.querySelectorAll('nav a').forEach(a=>a.addEventListener('click',()=>go(a.dataset.view)));
+
+/* ============ MODALES ============ */
+function closeModal(id){document.getElementById(id).classList.remove('open')}
+function openModal(id){document.getElementById(id).classList.add('open')}
+document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open')}));
+
+/* ============ DOSSIERS : CRUD ============ */
+function openDossierForm(id){
+  document.getElementById('dossierForm').reset();
+  document.getElementById('d_id').value='';
+  document.getElementById('dossierModalTitle').textContent='Nouveau dossier';
+  if(id){
+    const d=loadDossiers().find(x=>x.id===id);
+    if(d){
+      document.getElementById('dossierModalTitle').textContent='Modifier le dossier';
+      d_id.value=d.id;d_nom.value=d.nom;d_age.value=d.age||'';d_pays.value=d.pays||'';
+      d_arrivee.value=d.arrivee||'';d_statut.value=d.statut;d_langue.value=d.langue||'';d_notes.value=d.notes||'';
+    }
+  }
+  openModal('dossierModal');
+}
+function saveDossier(e){
+  e.preventDefault();
+  const arr=loadDossiers();
+  const id=d_id.value||('D'+Date.now());
+  const existing=arr.find(x=>x.id===id);
+  const data={
+    id,nom:d_nom.value.trim(),age:d_age.value,pays:d_pays.value.trim(),
+    arrivee:d_arrivee.value,statut:d_statut.value,langue:d_langue.value.trim(),notes:d_notes.value.trim(),
+    checklist:existing?existing.checklist:STD_CHECKLIST.map(t=>({t,done:false})),
+    cree:existing?existing.cree:new Date().toISOString().slice(0,10)
+  };
+  if(existing){Object.assign(existing,data)}else{arr.push(data)}
+  saveDossiers(arr);closeModal('dossierModal');renderDossiers();renderDashboard();
+}
+function deleteDossier(id){
+  if(!confirm('Supprimer définitivement ce dossier ?'))return;
+  saveDossiers(loadDossiers().filter(x=>x.id!==id));
+  closeModal('detailModal');renderDossiers();renderDashboard();
+}
+function toggleCheck(id,i){
+  const arr=loadDossiers();const d=arr.find(x=>x.id===id);
+  d.checklist[i].done=!d.checklist[i].done;saveDossiers(arr);openDossierDetail(id);renderDashboard();
+}
+function statutBadge(s){
+  const m={nouveau:['b-nouveau','Nouveau'],cours:['b-cours','En cours'],urgent:['b-urgent','Urgent'],clos:['b-clos','Clos']};
+  const[c,l]=m[s]||m.nouveau;return `<span class="badge ${c}">${l}</span>`;
+}
+function progressOf(d){const done=d.checklist.filter(c=>c.done).length;return Math.round(done/d.checklist.length*100)}
+
+function renderDossiers(){
+  const q=(document.getElementById('dossierSearch').value||'').toLowerCase();
+  const f=document.getElementById('dossierFilter').value;
+  let arr=loadDossiers();
+  if(q)arr=arr.filter(d=>(d.nom+' '+(d.pays||'')).toLowerCase().includes(q));
+  if(f)arr=arr.filter(d=>d.statut===f);
+  const el=document.getElementById('dossierList');
+  if(!arr.length){el.innerHTML='<div class="empty">📭 Aucun dossier. Cliquez sur « ➕ Nouveau dossier » pour commencer.</div>';return;}
+  el.innerHTML=arr.map(d=>{
+    const p=progressOf(d);
+    return `<div class="list-item" onclick="openDossierDetail('${d.id}')">
+      <div class="row" style="justify-content:space-between">
+        <strong style="font-size:1.05rem">${esc(d.nom)}</strong>${statutBadge(d.statut)}
+      </div>
+      <div class="muted">${d.age?d.age+' ans · ':''}${esc(d.pays||'Origine inconnue')}${d.arrivee?' · arrivé(e) le '+d.arrivee:''}</div>
+      <div class="progress"><span style="width:${p}%"></span></div>
+      <div class="muted">Progression : ${p}% (${d.checklist.filter(c=>c.done).length}/${d.checklist.length} étapes)</div>
+    </div>`;
+  }).join('');
+}
+function openDossierDetail(id){
+  const d=loadDossiers().find(x=>x.id===id);if(!d)return;
+  const p=progressOf(d);
+  document.getElementById('detailContent').innerHTML=`
+    <div class="row" style="justify-content:space-between">
+      <h3 style="color:var(--bleu);font-size:1.4rem">${esc(d.nom)}</h3>${statutBadge(d.statut)}
+    </div>
+    <p class="muted">${d.age?d.age+' ans · ':''}${esc(d.pays||'—')}${d.langue?' · '+esc(d.langue):''}${d.arrivee?' · arrivé(e) le '+d.arrivee:''}</p>
+    ${d.notes?`<p style="margin:.8rem 0;padding:.7rem;background:var(--gris-clair);border-radius:.4rem">${esc(d.notes)}</p>`:''}
+    <div class="progress"><span style="width:${p}%"></span></div>
+    <p class="muted" style="margin-bottom:.8rem">Progression globale : <strong>${p}%</strong></p>
+    <h4 style="color:var(--bleu);margin:.6rem 0">✅ Checklist de suivi</h4>
+    <div>${d.checklist.map((c,i)=>`
+      <label class="check-line"><input type="checkbox" ${c.done?'checked':''} onchange="toggleCheck('${d.id}',${i})">
+      <span style="${c.done?'text-decoration:line-through;color:var(--gris)':''}">${esc(c.t)}</span></label>`).join('')}</div>
+    <div class="row" style="margin-top:1.2rem;justify-content:flex-end">
+      <button class="btn sec sm" onclick="openDossierForm('${d.id}')">✏️ Modifier</button>
+      <button class="btn danger sm" onclick="deleteDossier('${d.id}')">🗑️ Supprimer</button>
+    </div>`;
+  openModal('detailModal');
+}
+
+/* ============ DASHBOARD ============ */
+function renderDashboard(){
+  const arr=loadDossiers();
+  const actifs=arr.filter(d=>d.statut!=='clos').length;
+  const urgents=arr.filter(d=>d.statut==='urgent').length;
+  const avgP=arr.length?Math.round(arr.reduce((s,d)=>s+progressOf(d),0)/arr.length):0;
+  document.getElementById('statCards').innerHTML=`
+    <div class="stat"><div class="num">${arr.length}</div><div class="lbl">Dossiers au total</div></div>
+    <div class="stat"><div class="num">${actifs}</div><div class="lbl">Dossiers actifs</div></div>
+    <div class="stat" style="border-left-color:var(--rouge)"><div class="num" style="color:var(--rouge)">${urgents}</div><div class="lbl">Dossiers urgents</div></div>
+    <div class="stat" style="border-left-color:var(--vert)"><div class="num" style="color:var(--vert)">${avgP}%</div><div class="lbl">Progression moyenne</div></div>
+    <div class="stat"><div class="num">${LEGISLATION.reduce((s,c)=>s+c.items.length,0)}</div><div class="lbl">Échéances légales référencées</div></div>`;
+  // échéances : étapes non cochées des dossiers actifs
+  const pend=[];
+  arr.filter(d=>d.statut!=='clos').forEach(d=>{
+    const next=d.checklist.find(c=>!c.done);
+    if(next)pend.push({nom:d.nom,etape:next.t,statut:d.statut,id:d.id});
+  });
+  document.getElementById('dashDeadlines').innerHTML=pend.length?pend.slice(0,8).map(x=>`
+    <div class="deadline ${x.statut==='urgent'?'crit':''}" onclick="go('dossiers')" style="cursor:pointer">
+      <strong>${esc(x.nom)}</strong> ${statutBadge(x.statut)}<br><span class="muted">Prochaine étape : ${esc(x.etape)}</span>
+    </div>`).join(''):'<p class="muted">Toutes les étapes sont à jour ✔️</p>';
+}
+
+/* ============ CYCLE DE VIE ============ */
+async function renderLifecycle(){
+  if(!LIFECYCLE){LIFECYCLE=await loadJSON('data/lifecycle-data.json');}
+  const el=document.getElementById('lifecycleContent');
+  if(!LIFECYCLE||!LIFECYCLE.phases){el.innerHTML='<div class="empty">⚠️ Données du cycle de vie indisponibles.</div>';return;}
+  const groups={};
+  LIFECYCLE.phases.forEach(p=>{(groups[p.age_group_name]=groups[p.age_group_name]||[]).push(p)});
+  el.innerHTML=Object.entries(groups).map(([g,phases])=>`
+    <details class="accordion"><summary>${tg(g)} — ${phases.length} phases</summary>
+    <div class="body">${phases.map(p=>`
+      <div class="list-item" onclick='showPhase(${JSON.stringify(p.phase_id)})'>
+        <strong>${tp(p.title)}</strong> <span class="muted">(${p.age_min}-${p.age_max} ans)</span>
+        <div class="muted">${(p.legal_obligations||[]).length} obligation(s) · ${(p.checklist||[]).length} tâche(s)${p.financial_breakdown?` · ~${p.financial_breakdown.total_min}-${p.financial_breakdown.total_max}€`:''}</div>
+      </div>`).join('')}</div></details>`).join('');
+}
+function showPhase(pid){
+  const p=LIFECYCLE.phases.find(x=>x.phase_id===pid);if(!p)return;
+  const ob=(p.legal_obligations||[]).map(o=>`<li><strong>${esc(o.obligation)}</strong>${o.deadline?` <span class="badge b-cours">Délai : ${esc(o.deadline)}</span>`:''}${o.responsible_party?`<br><span class="muted">Responsable : ${esc(o.responsible_party)}</span>`:''}</li>`).join('');
+  const fb=p.financial_breakdown;
+  const ck=(p.checklist||[]).map(c=>`<li>${esc(c)}</li>`).join('');
+  const doc=(p.documents_needed||[]).map(c=>`<li>${esc(c)}</li>`).join('');
+  document.getElementById('infoContent').innerHTML=`
+    <h3>${tp(p.title)}</h3>
+    <p class="muted">${tg(p.age_group_name)} · ${p.age_min}-${p.age_max} ans</p>
+    <p style="margin:.6rem 0">${esc(p.description||'')}</p>
+    ${ob?`<h4 style="color:var(--bleu);margin:.8rem 0 .3rem">⚖️ Obligations légales & délais</h4><ul class="clean">${ob}</ul>`:''}
+    ${fb?`<h4 style="color:var(--bleu);margin:.8rem 0 .3rem">💶 Coûts estimés</h4><p>Total mensuel ~ <strong>${fb.total_monthly}€</strong> (de ${fb.total_min}€ à ${fb.total_max}€)</p>`:''}
+    ${ck?`<h4 style="color:var(--bleu);margin:.8rem 0 .3rem">✅ Checklist</h4><ul class="clean">${ck}</ul>`:''}
+    ${doc?`<h4 style="color:var(--bleu);margin:.8rem 0 .3rem">📄 Documents requis</h4><ul class="clean">${doc}</ul>`:''}`;
+  openModal('infoModal');
+}
+
+/* ============ LEGISLATION ============ */
+function renderLegislation(){
+  document.getElementById('legislationContent').innerHTML=LEGISLATION.map(c=>`
+    <details class="accordion" open><summary>${esc(c.cat)}</summary><div class="body">
+      ${c.items.map(i=>`<div class="deadline">
+        <div class="row" style="justify-content:space-between"><strong>${esc(i.titre)}</strong>
+        <span class="badge b-cours">⏰ ${esc(i.delai)}</span></div>
+        <p style="margin:.3rem 0">${esc(i.desc)}</p>
+        <span class="muted">📖 ${esc(i.ref)}</span>
+      </div>`).join('')}
+    </div></details>`).join('');
+}
+
+/* ============ CAS PRATIQUES ============ */
+async function renderCases(){
+  if(!CASES){const raw=await loadJSON('js/data/cases-data.json');CASES=Array.isArray(raw)?raw:(raw&&raw.cases?raw.cases:null);}
+  const el=document.getElementById('casesContent');
+  if(!CASES||!CASES.length){el.innerHTML='<div class="empty">⚠️ Cas pratiques indisponibles.</div>';return;}
+  el.innerHTML=CASES.map((c,i)=>`
+    <div class="list-item" onclick="showCase(${i})">
+      <strong>${esc(c.title||'Cas')}</strong>
+      <div class="muted">${c.country?esc(c.country)+' · ':''}${c.age_at_case?c.age_at_case+' ans · ':''}${c.age_group?'tranche '+esc(c.age_group):''}</div>
+      ${(c.vulnerability_flags||[]).length?`<div style="margin-top:.4rem">${c.vulnerability_flags.slice(0,4).map(v=>`<span class="badge b-urgent" style="margin-right:.3rem">${esc(vulnFR(v))}</span>`).join('')}</div>`:''}
+    </div>`).join('');
+}
+const VULN={documentation_gaps:"Documents manquants",education_interrupted:"Scolarité interrompue",health_issues:"Problèmes de santé",housing_instability:"Instabilité du logement",language_barrier:"Barrière linguistique",separated_family:"Famille séparée",trafficking_risk:"Risque de traite",trauma:"Trauma",family_conflict:"Conflit familial"};
+const vulnFR=v=>VULN[v]||v;
+function showCase(i){
+  const c=CASES[i];const s=c.story||{};
+  const tl=(s.timeline||[]).map(t=>`<li><strong>${esc(t.date||'')}</strong> — ${esc(t.event||'')}</li>`).join('');
+  document.getElementById('infoContent').innerHTML=`
+    <h3>${esc(c.title||'Cas')}</h3>
+    <p class="muted">${c.country?esc(c.country)+' · ':''}${c.age_at_case?c.age_at_case+' ans':''}</p>
+    ${(c.vulnerability_flags||[]).length?`<div style="margin:.6rem 0">${c.vulnerability_flags.map(v=>`<span class="badge b-urgent" style="margin:.15rem">${esc(vulnFR(v))}</span>`).join('')}</div>`:''}
+    ${s.situation?`<h4 style="color:var(--bleu);margin:.6rem 0 .3rem">Situation</h4><p>${esc(s.situation)}</p>`:''}
+    ${tl?`<h4 style="color:var(--bleu);margin:.8rem 0 .3rem">📅 Chronologie</h4><ul class="clean">${tl}</ul>`:''}`;
+  openModal('infoModal');
+}
+
+/* ============ RESSOURCES ============ */
+const RES_TYPE={firm:"Cabinet juridique",lawyer:"Avocat",organization:"Organisation",ngo:"ONG",clinic:"Clinique",hospital:"Hôpital",social:"Service social",government:"Service public",emergency:"Urgence"};
+const rtFR=t=>RES_TYPE[t]||(t?t.charAt(0).toUpperCase()+t.slice(1):'Ressource');
+async function renderResources(){
+  if(!RESOURCES){
+    let raw=await loadJSON('data/resources.json');
+    if(!raw)raw=await loadJSON('js/data/resources-data.json');
+    RESOURCES=raw&&raw.resources?raw.resources:(Array.isArray(raw)?raw:[]);
+    // remplir filtres
+    const types=[...new Set(RESOURCES.map(r=>r.type).filter(Boolean))];
+    const regions=[...new Set(RESOURCES.map(r=>r.region).filter(Boolean))];
+    document.getElementById('resType').innerHTML='<option value="">Tous les types</option>'+types.map(t=>`<option value="${esc(t)}">${esc(rtFR(t))}</option>`).join('');
+    document.getElementById('resRegion').innerHTML='<option value="">Toutes les régions</option>'+regions.map(r=>`<option value="${esc(r)}">${esc(r)}</option>`).join('');
+  }
+  const q=(document.getElementById('resSearch').value||'').toLowerCase();
+  const ty=document.getElementById('resType').value;
+  const rg=document.getElementById('resRegion').value;
+  let arr=RESOURCES;
+  if(q)arr=arr.filter(r=>JSON.stringify(r).toLowerCase().includes(q));
+  if(ty)arr=arr.filter(r=>r.type===ty);
+  if(rg)arr=arr.filter(r=>r.region===rg);
+  const el=document.getElementById('resourcesContent');
+  if(!arr.length){el.innerHTML='<div class="empty">Aucune ressource trouvée.</div>';return;}
+  el.innerHTML=`<p class="muted" style="margin-bottom:.6rem">${arr.length} ressource(s)</p>`+arr.slice(0,200).map(r=>`
+    <div class="list-item">
+      <div class="row" style="justify-content:space-between">
+        <strong>${esc(r.name||'—')}</strong><span class="badge b-nouveau">${esc(rtFR(r.type))}</span>
+      </div>
+      <div class="muted">
+        ${r.region?'📍 '+esc(r.region):''}${r.address?' · '+esc(r.address):''}
+        ${r.phone?'<br>📞 '+esc(r.phone):''}${r.email?' · ✉️ '+esc(r.email):''}
+        ${r.website?`<br>🔗 <a href="${esc(r.website)}" target="_blank" rel="noopener">${esc(r.website)}</a>`:''}
+      </div>
+    </div>`).join('');
+}
+
+/* ============ UTIL ============ */
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+
+/* ============ INIT ============ */
+function setOnline(){document.getElementById('appStatus').textContent=navigator.onLine?'● En ligne':'● Hors ligne — données locales';}
+window.addEventListener('online',setOnline);window.addEventListener('offline',setOnline);
+window.addEventListener('load',()=>{
+  setOnline();renderDashboard();renderDossiers();renderLegislation();
+  if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{});}
+});
+</script>
 </body>
 </html>

@@ -434,6 +434,9 @@ const I18N = {
 };
 function t(k){return (I18N[LANG]&&I18N[LANG][k])||I18N.fr[k]||k;}
 function tr(v){if(v==null)return '';if(typeof v==='object')return v[LANG]||v.fr||v.nl||'';return v;}
+/* Noms de pays FR -> NL (affichage selon la langue) */
+const PAYS_NL={"Afghanistan":"Afghanistan","Afrique du Sud":"Zuid-Afrika","Albanie":"Albanië","Algérie":"Algerije","Angola":"Angola","Arabie saoudite":"Saoedi-Arabië","Arménie":"Armenië","Azerbaïdjan":"Azerbeidzjan","Bangladesh":"Bangladesh","Bénin":"Benin","Bhoutan":"Bhutan","Biélorussie":"Wit-Rusland","Birmanie (Myanmar)":"Birma (Myanmar)","Bolivie":"Bolivia","Bosnie-Herzégovine":"Bosnië-Herzegovina","Burkina Faso":"Burkina Faso","Burundi":"Burundi","Cambodge":"Cambodja","Cameroun":"Kameroen","Centrafrique":"Centraal-Afrikaanse Republiek","Chine":"China","Colombie":"Colombia","Comores":"Comoren","Congo (Brazzaville)":"Congo (Brazzaville)","Côte d'Ivoire":"Ivoorkust","Cuba":"Cuba","Djibouti":"Djibouti","Égypte":"Egypte","Émirats arabes unis":"Verenigde Arabische Emiraten","Équateur":"Ecuador","Érythrée":"Eritrea","Eswatini":"Eswatini","Éthiopie":"Ethiopië","Gambie":"Gambia","Géorgie":"Georgië","Ghana":"Ghana","Guinée":"Guinee","Guinée équatoriale":"Equatoriaal-Guinea","Guinée-Bissau":"Guinee-Bissau","Haïti":"Haïti","Honduras":"Honduras","Inde":"India","Indonésie":"Indonesië","Irak":"Irak","Iran":"Iran","Jordanie":"Jordanië","Kazakhstan":"Kazachstan","Kenya":"Kenia","Kosovo":"Kosovo","Koweït":"Koeweit","Laos":"Laos","Liban":"Libanon","Liberia":"Liberia","Libye":"Libië","Macédoine du Nord":"Noord-Macedonië","Madagascar":"Madagaskar","Malaisie":"Maleisië","Mali":"Mali","Maroc":"Marokko","Mauritanie":"Mauritanië","Mexique":"Mexico","Moldavie":"Moldavië","Mongolie":"Mongolië","Monténégro":"Montenegro","Mozambique":"Mozambique","Népal":"Nepal","Nicaragua":"Nicaragua","Niger":"Niger","Nigéria":"Nigeria","Ouganda":"Oeganda","Ouzbékistan":"Oezbekistan","Pakistan":"Pakistan","Palestine":"Palestina","Philippines":"Filipijnen","RD Congo":"DR Congo","République Démocratique du Congo":"Democratische Republiek Congo","Russie":"Rusland","Rwanda":"Rwanda","Sénégal":"Senegal","Serbie":"Servië","Sierra Leone":"Sierra Leone","Somalie":"Somalië","Soudan":"Soedan","Soudan du Sud":"Zuid-Soedan","Sri Lanka":"Sri Lanka","Syrie":"Syrië","Tadjikistan":"Tadzjikistan","Tanzanie":"Tanzania","Tchad":"Tsjaad","Thaïlande":"Thailand","Togo":"Togo","Tunisie":"Tunesië","Turkménistan":"Turkmenistan","Turquie":"Turkije","Ukraine":"Oekraïne","Venezuela":"Venezuela","Vietnam":"Vietnam","Yémen":"Jemen","Zimbabwe":"Zimbabwe","Autre / non précisé":"Andere / niet gespecificeerd"};
+function paysLabel(fr){if(!fr)return '';return LANG==='nl'?(PAYS_NL[fr]||fr):fr;}
 function applyI18n(){
   document.documentElement.lang=LANG;
   document.title=t('app.doctitle');
@@ -452,7 +455,12 @@ function setLang(l){
   if(active==='lifecycle')renderLifecycle();
   if(active==='cases')renderCases();
   if(active==='resources')renderResources();
-  if(active==='conseil')renderConseil();
+  if(active==='conseil')renderConseil().then(()=>{
+    if(CONSEIL_PAYS)document.getElementById('conseilPays').value=paysLabel(CONSEIL_PAYS);
+    if(CONSEIL_MODE==='dossier')conseilFromDossier();
+    renderPaysContext();
+    if(CONSEIL_CURRENT)conseilSelect(CONSEIL_CURRENT.id);
+  });
 }
 function applyTheme(){
   const dark=localStorage.getItem('mena_theme')==='dark';
@@ -828,7 +836,7 @@ async function renderCases(){
       <div class="row" style="justify-content:space-between">
         <strong>${esc(tr(c.titre))}</strong>${c.categorie?`<span class="badge b-nouveau">${esc(tr(c.categorie))}</span>`:''}
       </div>
-      <div class="muted">${c.pays?'🌍 '+esc(c.pays):''}${c.age?' · '+c.age+' '+t('u.ans'):''}${c.sexe?' · '+esc(tr(c.sexe)):''}</div>
+      <div class="muted">${c.pays?'🌍 '+esc(paysLabel(c.pays)):''}${c.age?' · '+c.age+' '+t('u.ans'):''}${c.sexe?' · '+esc(tr(c.sexe)):''}</div>
       ${(c.vulnerabilites||[]).length?`<div style="margin-top:.4rem">${c.vulnerabilites.slice(0,4).map(v=>`<span class="badge b-urgent" style="margin-right:.3rem;margin-bottom:.2rem;display:inline-block">${esc(tr(v))}</span>`).join('')}</div>`:''}
       <div class="muted" style="margin-top:.4rem">📋 ${(c.actions_tuteur||[]).length} ${t('case.actions_n')} · ⚖️ ${(c.cadre_legal||[]).length} ${t('case.refs_n')} · ⏰ ${(c.delais_cles||[]).length} ${t('case.delais_n')}</div>
     </div>`).join('');
@@ -843,7 +851,7 @@ function showCase(i){
   const ress=(c.ressources||[]).map(r=>`<span class="badge b-nouveau" style="margin:.15rem;display:inline-block">${esc(tr(r))}</span>`).join('');
   document.getElementById('infoContent').innerHTML=`
     <h3>${esc(tr(c.titre))}</h3>
-    <p class="muted">${c.categorie?esc(tr(c.categorie))+' · ':''}${c.pays?esc(c.pays):''}${c.age?' · '+c.age+' '+t('u.ans'):''}${c.sexe?' · '+esc(tr(c.sexe)):''}</p>
+    <p class="muted">${c.categorie?esc(tr(c.categorie))+' · ':''}${c.pays?esc(paysLabel(c.pays)):''}${c.age?' · '+c.age+' '+t('u.ans'):''}${c.sexe?' · '+esc(tr(c.sexe)):''}</p>
     ${(c.vulnerabilites||[]).length?`<div style="margin:.6rem 0">${c.vulnerabilites.map(v=>`<span class="badge b-urgent" style="margin:.15rem;display:inline-block">${esc(tr(v))}</span>`).join('')}</div>`:''}
     ${c.situation?`<h4 style="color:var(--accent);margin:.8rem 0 .3rem">${t('case.situation')}</h4><p>${esc(tr(c.situation))}</p>`:''}
     ${chrono?`<h4 style="color:var(--accent);margin:.9rem 0 .3rem">${t('case.chrono')}</h4><ul class="clean">${chrono}</ul>`:''}
@@ -910,7 +918,7 @@ async function renderResources(){
 }
 
 /* ============ ASSISTANT CONSEIL (système expert) ============ */
-let CONSEIL=null, CONSEIL_CURRENT=null, CONSEIL_MODE='manuel', COMBO_OUTSIDE=false;
+let CONSEIL=null, CONSEIL_CURRENT=null, CONSEIL_MODE='manuel', COMBO_OUTSIDE=false, CONSEIL_PAYS='';
 async function loadConseil(){
   if(CONSEIL)return CONSEIL;
   CONSEIL=await loadJSON('js/data/conseil-data.json');
@@ -929,8 +937,8 @@ async function loadConseil(){
 async function renderConseil(){
   await loadConseil();
   const arr=loadDossiers();
-  document.getElementById('conseilDossier').innerHTML='<option value="">— Sélectionnez un dossier —</option>'+
-    arr.map(d=>`<option value="${esc(d.id)}">${esc(d.nom)}${d.age?' ('+d.age+' ans)':''}</option>`).join('');
+  document.getElementById('conseilDossier').innerHTML=`<option value="">${t('conseil.selectdossier')}</option>`+
+    arr.map(d=>`<option value="${esc(d.id)}">${esc(d.nom)}${d.age?' ('+d.age+' '+t('u.ans')+')':''}</option>`).join('');
 }
 function conseilMode(m){
   CONSEIL_MODE=m;
@@ -950,13 +958,15 @@ function paysSearch(){
   if(!CONSEIL||!CONSEIL.pays_liste)return;
   const q=normPays(document.getElementById('conseilPays').value);
   const list=document.getElementById('paysList');
-  const matches=CONSEIL.pays_liste.filter(p=>normPays(p).includes(q)).slice(0,12);
+  // recherche sur le nom FR ET sa traduction NL ; valeur conservée = nom FR (clé canonique)
+  const matches=CONSEIL.pays_liste.filter(p=>normPays(p).includes(q)||normPays(paysLabel(p)).includes(q)).slice(0,12);
   if(!matches.length){list.classList.remove('open');list.innerHTML='';return;}
-  list.innerHTML=matches.map((p,i)=>`<div class="${i===0?'hl':''}" onclick="paysPick('${p.replace(/'/g,"\\'")}')">${esc(p)}</div>`).join('');
+  list.innerHTML=matches.map((p,i)=>`<div class="${i===0?'hl':''}" onclick="paysPick('${p.replace(/'/g,"\\'")}')">${esc(paysLabel(p))}</div>`).join('');
   list.classList.add('open');
 }
 function paysPick(name){
-  document.getElementById('conseilPays').value=name;
+  CONSEIL_PAYS=name;                                   // clé canonique FR
+  document.getElementById('conseilPays').value=paysLabel(name);  // affichage selon la langue
   document.getElementById('paysList').classList.remove('open');
   renderPaysContext();conseilAnalyser();
 }
@@ -980,7 +990,7 @@ function renderPaysContext(){
   const r=resolveProfil(ctx.pays);
   if(!r){box.innerHTML='';return;}
   box.innerHTML=`<div class="card" style="margin-top:1rem;border-left:5px solid var(--orange);background:var(--warn-bg)">
-    <h3>${t('conseil.countryconsid')} ${esc(r.pays)}</h3>
+    <h3>${t('conseil.countryconsid')} ${esc(paysLabel(r.pays))}</h3>
     <p class="muted">${t('conseil.countryintro')}</p>
     ${r.profil.considerations.map(c=>`<div class="deadline" style="border-left-color:var(--orange)">
       <strong>${esc(tr(c.theme))}</strong>
@@ -997,7 +1007,7 @@ function conseilContext(){
     const d=loadDossiers().find(x=>x.id===id);
     return d?{age:d.age,pays:d.pays,langue:d.langue,notes:d.notes,nom:d.nom,statutDossier:d.statut,dossier:d}:{};
   }
-  return {age:document.getElementById('conseilAge').value,pays:(document.getElementById('conseilPays').value||'').trim(),statut:document.getElementById('conseilStatut').value};
+  return {age:document.getElementById('conseilAge').value,pays:CONSEIL_PAYS||(document.getElementById('conseilPays').value||'').trim(),statut:document.getElementById('conseilStatut').value};
 }
 function conseilFromDossier(){
   const id=document.getElementById('conseilDossier').value;

@@ -1,0 +1,29 @@
+{
+  "source": "tribunaux-rechtbanken.be (officiel)",
+  "note": "Coordonnées vérifiées récupérées sur le site officiel des Cours & Tribunaux. Couverture actuelle : Région de Bruxelles-Capitale + cantons limitrophes. Pour les autres arrondissements, utiliser le lien officiel de recherche.",
+  "annuaire": {
+    "fr": "https://www.tribunaux-rechtbanken.be/fr/tribunaux/justice-de-paix",
+    "nl": "https://www.tribunaux-rechtbanken.be/nl/rechtbanken/vredegerecht",
+    "adresses": "https://adresses-judiciaires.just.fgov.be/"
+  },
+  "parCodePostal": {
+    "1000": {"canton": "Justice de paix de Bruxelles (1er canton)", "adresse": "Place Poelaert 3 boîte 5, 1000 Bruxelles", "tel": "02 508 65 41", "email": "j.p.bruxelles1@just.fgov.be"},
+    "1020": {"canton": "Justice de paix de Bruxelles (3e canton)", "adresse": "Rue Fransman 89, 1020 Bruxelles", "tel": "02 682 07 85", "email": "j.p.bruxelles3@just.fgov.be"},
+    "1030": {"canton": "Justice de paix de Schaerbeek (1er canton)", "adresse": "Rue Royale 271-273, 1030 Bruxelles", "tel": "02 682 04 12", "email": "vred.schaarbeek1@just.fgov.be"},
+    "1040": {"canton": "Justice de paix d'Etterbeek", "adresse": "Rue de l'Etang 4, 1040 Bruxelles", "tel": "02 627 08 60", "email": "j.p.etterbeek@just.fgov.be"},
+    "1050": {"canton": "Justice de paix d'Ixelles", "adresse": "Place Poelaert 3, 1000 Bruxelles", "tel": "02 508 65 41", "email": "j.p.ixelles@just.fgov.be"},
+    "1060": {"canton": "Justice de paix de Saint-Gilles", "adresse": "Parvis Saint-Gilles 1, 1060 Bruxelles", "tel": "02 682 04 17", "email": "j.p.stgilles@just.fgov.be"},
+    "1070": {"canton": "Justice de paix d'Anderlecht (1er canton)", "adresse": "Place de la Résistance 3, 1070 Anderlecht", "tel": "02 682 03 39", "email": "j.p.anderlecht1@just.fgov.be"},
+    "1080": {"canton": "Justice de paix de Molenbeek-Saint-Jean", "adresse": "Rue du Niveau 7, 1080 Molenbeek-Saint-Jean", "tel": "02 411 67 95", "email": "vred.stjansmolenbeek@just.fgov.be"},
+    "1083": {"canton": "Justice de paix de Ganshoren", "adresse": "Rue Fransman 89, 1020 Bruxelles", "tel": "02 682 07 85", "email": "j.p.ganshoren@just.fgov.be"},
+    "1090": {"canton": "Justice de paix de Jette", "adresse": "Place Cardinal Mercier 11, 1090 Jette", "tel": "02 425 53 15", "email": "j.p.jette@just.fgov.be"},
+    "1150": {"canton": "Justice de paix de Woluwe-Saint-Pierre", "adresse": "Avenue Grandchamp 147, 1150 Woluwe-Saint-Pierre", "tel": "02 682 04 24", "email": "j.p.woluwe-saint-pierre@just.fgov.be"},
+    "1160": {"canton": "Justice de paix d'Auderghem", "adresse": "Rue de l'Etang 4, 1040 Bruxelles", "tel": "02 672 87 58", "email": "j.p.auderghem@just.fgov.be"},
+    "1180": {"canton": "Justice de paix d'Uccle", "adresse": "Place Jean Vander Elst 29, 1180 Uccle", "tel": "02 682 10 00", "email": "j.p.uccle-vred.ukkel@just.fgov.be"},
+    "1190": {"canton": "Justice de paix de Forest", "adresse": "Chaussée d'Alsemberg 296, 1190 Forest", "tel": "02 682 04 13", "email": "j.p.forest@just.fgov.be"},
+    "1210": {"canton": "Justice de paix de Saint-Josse-ten-Noode", "adresse": "Avenue de l'Astronomie 30/8, 1210 Saint-Josse-ten-Noode", "tel": "02 557 40 41", "email": "vred.stjoosttennode@just.fgov.be"},
+    "1640": {"canton": "Justice de paix de Rhode-Saint-Genèse", "adresse": "Avenue de la Forêt de Soignes 83, 1640 Rhode-Saint-Genèse", "tel": "02 682 04 19", "email": "vred.sint-genesius-rode@just.fgov.be"},
+    "1860": {"canton": "Justice de paix de Meise", "adresse": "Gemeenteplein 15, 1861 Meise", "tel": "02 682 07 86", "email": "vred.meise@just.fgov.be"},
+    "1861": {"canton": "Justice de paix de Meise", "adresse": "Gemeenteplein 15, 1861 Meise", "tel": "02 682 07 86", "email": "vred.meise@just.fgov.be"}
+  }
+}

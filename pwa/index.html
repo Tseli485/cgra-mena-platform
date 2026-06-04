@@ -786,10 +786,12 @@ function openDossierDetail(id){
 
     <details class="accordion"><summary>⚖️ ${LANG==='nl'?'Vrederechter & verplichte verslagen':'Justice de paix & rapports obligatoires'}</summary><div class="body">
       <p class="muted">${LANG==='nl'?"Adres van de jongere onbekend? Zoek de bevoegde vrederechter op het officiële register:":"Adresse du jeune inconnue ? Trouvez le juge de paix compétent sur le registre officiel :"} <a href="${LANG==='nl'?ANNUAIRE_JP.nl:ANNUAIRE_JP.fr}" target="_blank" rel="noopener">tribunaux-rechtbanken.be</a> · <a href="${ANNUAIRE_JP.adresses}" target="_blank" rel="noopener">adresses-judiciaires.just.fgov.be</a></p>
-      <div class="grid cols-2">
-        <div><label>${LANG==='nl'?'Postcode':'Code postal'}</label><input id="jp_cp" value="${esc(f.cp||'')}"></div>
-        <div><label>${LANG==='nl'?'Kanton':'Canton'}</label><input id="jp_canton" value="${esc(f.canton||'')}"></div>
+      <div class="row" style="align-items:flex-end;gap:.4rem">
+        <div style="flex:1;min-width:120px"><label>${LANG==='nl'?'Postcode jongere':'Code postal du jeune'}</label><input id="jp_cp" value="${esc(f.cp||'')}"></div>
+        <button class="btn sm" onclick="jpLookup('${d.id}')">🔍 ${LANG==='nl'?'Vrederechter zoeken':'Trouver le juge de paix'}</button>
       </div>
+      <div class="muted" id="jp_lookup_note" style="margin:.3rem 0;font-size:.8rem"></div>
+      <label>${LANG==='nl'?'Kanton':'Canton'}</label><input id="jp_canton" value="${esc(f.canton||'')}">
       <label>${LANG==='nl'?'Adres vrederechter':'Adresse du juge de paix'}</label><input id="jp_adresse" value="${esc(f.adresse||'')}">
       <div class="grid cols-2">
         <div><label>${LANG==='nl'?'Telefoon':'Téléphone'}</label><input id="jp_tel" value="${esc(f.tel||'')}"></div>
@@ -823,6 +825,7 @@ function openDossierDetail(id){
         <div><label>${LANG==='nl'?'Bedrag (€, +/−)':'Montant (€, +/−)'}</label><input id="op_mt" type="number" step="0.01"></div>
         <button class="btn sm" onclick="addOp('${d.id}')">➕</button>
       </div>
+      <div class="muted" id="op_note" style="font-size:.8rem;color:var(--rouge)"></div>
       ${(d.banque&&d.banque.operations||[]).length?`<table style="margin-top:.6rem"><tr><th>Date</th><th>${LANG==='nl'?'Omschrijving':'Libellé'}</th><th style="text-align:right">€</th><th></th></tr>
         ${d.banque.operations.map((o,i)=>`<tr><td>${esc(o.date)}</td><td>${esc(o.lib)}</td><td style="text-align:right;color:${o.mt<0?'var(--rouge)':'var(--vert)'}">${(+o.mt).toFixed(2)}</td><td><button class="btn danger sm" onclick="delOp('${d.id}',${i})">×</button></td></tr>`).join('')}
         <tr><td colspan="2"><strong>${LANG==='nl'?'SALDO':'SOLDE'}</strong></td><td style="text-align:right"><strong>${soldeOf(d).toFixed(2)} €</strong></td><td></td></tr></table>
@@ -1216,6 +1219,24 @@ const CONTACTS_OFFICIELS={
 };
 /* Annuaire officiel des justices de paix (source vérifiée à consulter — pas de coordonnées inventées) */
 const ANNUAIRE_JP={fr:"https://www.tribunaux-rechtbanken.be/fr/tribunaux/justice-de-paix",nl:"https://www.tribunaux-rechtbanken.be/nl/rechtbanken/vredegerecht",adresses:"https://adresses-judiciaires.just.fgov.be/"};
+/* Base officielle (vérifiée) des justices de paix par code postal */
+let JP_DB=null;
+async function loadJP(){if(!JP_DB)JP_DB=await loadJSON('js/data/justices-de-paix.json');return JP_DB;}
+async function jpLookup(id){
+  await loadJP();
+  const cp=(document.getElementById('jp_cp').value||'').trim();
+  const note=document.getElementById('jp_lookup_note');
+  const e=JP_DB&&JP_DB.parCodePostal&&JP_DB.parCodePostal[cp];
+  if(e){
+    document.getElementById('jp_canton').value=e.canton;
+    document.getElementById('jp_adresse').value=e.adresse;
+    document.getElementById('jp_tel').value=e.tel;
+    document.getElementById('jp_email').value=e.email;
+    if(note)note.innerHTML=`✅ ${LANG==='nl'?'Officiële gegevens (bron':'Données officielles (source'} : tribunaux-rechtbanken.be). ${LANG==='nl'?'Klik op Opslaan.':'Cliquez sur Enregistrer.'}`;
+  }else{
+    if(note)note.innerHTML=`⚠️ ${LANG==='nl'?'Postcode niet in de geverifieerde basis. Zoek op het officiële register':'Code postal absent de la base vérifiée. Cherchez sur le registre officiel'} : <a href="${ANNUAIRE_JP.adresses}" target="_blank" rel="noopener">adresses-judiciaires.just.fgov.be</a>`;
+  }
+}
 /* Rapports obligatoires (cadre tutelle MENA — loi-programme 24/12/2002). Échéances = valeurs par défaut indicatives, modifiables. */
 const RAPPORTS_TYPE=[
   {id:"r_initial",label:{fr:"Rapport initial au Service des Tutelles",nl:"Initieel verslag aan de Dienst Voogdij"},dest:"tutelles",defJours:15,base:"Loi-programme 24/12/2002 (Tutelle)"},
@@ -1328,7 +1349,8 @@ function ficheBlocks(f){
 function saveJuge(id){
   const arr=loadDossiers();const d=arr.find(x=>x.id===id);if(!d)return;
   d.jugePaix={cp:jp_cp.value.trim(),canton:jp_canton.value.trim(),adresse:jp_adresse.value.trim(),tel:jp_tel.value.trim(),email:jp_email.value.trim()};
-  saveDossiers(arr);alert(LANG==='nl'?'Vrederechter opgeslagen':'Juge de paix enregistré');
+  saveDossiers(arr);
+  const n=document.getElementById('jp_lookup_note');if(n)n.innerHTML='✅ '+(LANG==='nl'?'Vrederechter opgeslagen':'Juge de paix enregistré');
 }
 function toggleRapport(id,rid){
   const arr=loadDossiers();const d=arr.find(x=>x.id===id);const r=d.rapports.find(x=>x.id===rid);
@@ -1344,12 +1366,12 @@ function prepRapport(id,rid){
   const sujet=encodeURIComponent(tr(rt.label)+' — '+(d.fiche&&d.fiche.ov?'OE '+d.fiche.ov+' — ':'')+d.nom);
   const corps=encodeURIComponent((LANG==='nl'?'Geachte,\n\nIn bijlage het verslag betreffende de minderjarige ':'Madame, Monsieur,\n\nVeuillez trouver le rapport concernant le mineur ')+d.nom+(d.fiche&&d.fiche.ov?' (OE '+d.fiche.ov+')':'')+'.\n\n'+(LANG==='nl'?'Met hoogachting,\nDe voogd':'Avec mes salutations,\nLe tuteur'));
   if(email){window.location.href=`mailto:${email}?subject=${sujet}&body=${corps}`;}
-  else alert(LANG==='nl'?"Geen e-mailadres ingevuld (vul de vrederechter in).":"Aucune adresse email renseignée (complétez le juge de paix).");
+  else{const n=document.getElementById('jp_lookup_note');if(n)n.innerHTML='⚠️ '+(LANG==='nl'?"Geen e-mailadres ingevuld (vul de vrederechter in).":"Aucune adresse email renseignée (complétez le juge de paix).");}
 }
 function addOp(id){
   const arr=loadDossiers();const d=arr.find(x=>x.id===id);
   const date=op_date.value||nowISO(), lib=op_lib.value.trim(), mt=parseFloat(op_mt.value);
-  if(!lib||isNaN(mt)){alert(LANG==='nl'?'Vul libellé en bedrag in':'Renseignez le libellé et le montant');return;}
+  if(!lib||isNaN(mt)){const n=document.getElementById('op_note');if(n)n.textContent=LANG==='nl'?'Vul omschrijving en bedrag in':'Renseignez le libellé et le montant';return;}
   d.banque.operations.push({date,lib,mt});saveDossiers(arr);openDossierDetail(id);
 }
 function delOp(id,i){const arr=loadDossiers();const d=arr.find(x=>x.id===id);d.banque.operations.splice(i,1);saveDossiers(arr);openDossierDetail(id);}

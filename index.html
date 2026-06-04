@@ -213,6 +213,7 @@
     <h2 class="title" data-i18n="doss.title">📂 Mes Dossiers</h2>
     <div class="row" style="margin-bottom:1rem">
       <button class="btn" onclick="openDossierForm()" data-i18n="dash.new">➕ Nouveau dossier</button>
+      <button class="btn sec" onclick="openFicheImport()" data-i18n="fiche.import">📄 Importer une fiche DVZ</button>
       <input id="dossierSearch" data-ph="doss.search" style="flex:1;min-width:200px" oninput="renderDossiers()">
       <select id="dossierFilter" onchange="renderDossiers()" style="width:auto">
         <option value="" data-i18n="doss.allstatus">Tous les statuts</option>
@@ -355,6 +356,48 @@
   </div>
 </div>
 
+<!-- MODAL IMPORT FICHE DVZ -->
+<div class="modal" id="ficheModal">
+  <div class="modal-box">
+    <button class="close" onclick="closeModal('ficheModal')">&times;</button>
+    <h3 data-i18n="fiche.title">📄 Importer une fiche DVZ (nouveau MENA)</h3>
+    <p class="muted" data-i18n="fiche.hint">Renseignez les champs de la fiche et ajoutez la photo du jeune. Le dossier sera créé avec un suivi complet.</p>
+    <div class="row" style="margin:.4rem 0 .8rem">
+      <button type="button" class="btn sec sm" onclick="fillAzizi()" data-i18n="fiche.example">⚡ Charger l'exemple (fiche AZIZI)</button>
+    </div>
+    <form id="ficheForm" onsubmit="saveFiche(event)">
+      <input type="checkbox" id="ficheAziziFull" style="display:none">
+      <div class="grid cols-2">
+        <div><label data-i18n="fiche.f.nom">Nom & prénom</label><input id="fi_nom" required></div>
+        <div><label data-i18n="fiche.f.ov">N° OE (OV)</label><input id="fi_ov"></div>
+      </div>
+      <div class="grid cols-2">
+        <div><label data-i18n="fiche.f.naissance">Naissance (date / âge)</label><input id="fi_naissance"></div>
+        <div><label data-i18n="fiche.f.sexe">Sexe</label><input id="fi_sexe"></div>
+      </div>
+      <div class="grid cols-2">
+        <div><label data-i18n="fiche.f.nat">Nationalité</label><input id="fi_nat"></div>
+        <div><label data-i18n="fiche.f.langue">Langue parlée</label><input id="fi_langue"></div>
+      </div>
+      <div class="grid cols-2">
+        <div><label data-i18n="fiche.f.adresseBE">Adresse en Belgique</label><input id="fi_adresseBE"></div>
+        <div><label data-i18n="fiche.f.origine">Adresse pays d'origine</label><input id="fi_origine"></div>
+      </div>
+      <label data-i18n="fiche.f.motif">Motif de l'immigration</label>
+      <textarea id="fi_motif" rows="2"></textarea>
+      <label data-i18n="fiche.f.notes">Notes (parcours, scolarité, contacts…)</label>
+      <textarea id="fi_notes" rows="3"></textarea>
+      <label data-i18n="fiche.f.photo">📷 Photo du jeune</label>
+      <input type="file" accept="image/*" onchange="onFichePhoto(this)">
+      <div id="fichePhotoPreview" style="margin-top:.5rem"></div>
+      <div class="row" style="margin-top:1.2rem;justify-content:flex-end">
+        <button type="button" class="btn sec" onclick="closeModal('ficheModal')" data-i18n="btn.cancel">Annuler</button>
+        <button type="submit" class="btn" data-i18n="fiche.create">📁 Créer le dossier</button>
+      </div>
+    </form>
+  </div>
+</div>
+
 <!-- MODAL DETAIL DOSSIER -->
 <div class="modal" id="detailModal">
   <div class="modal-box">
@@ -388,6 +431,7 @@ const I18N = {
   "doss.title":"📂 Mes Dossiers","doss.search":"🔍 Rechercher un dossier...","doss.allstatus":"Tous les statuts",
   "doss.empty":"📭 Aucun dossier. Cliquez sur « ➕ Nouveau dossier » pour commencer.","doss.nomatch":"Aucun dossier ne correspond.","doss.origin":"Origine inconnue","doss.progress":"Progression","doss.steps":"étapes","doss.arrived":"arrivé(e) le",
   "st.nouveau":"Nouveau","st.cours":"En cours","st.urgent":"Urgent","st.clos":"Clos","u.ans":"ans",
+  "fiche.import":"📄 Importer une fiche DVZ","fiche.title":"📄 Importer une fiche DVZ (nouveau MENA)","fiche.hint":"Renseignez les champs de la fiche et ajoutez la photo du jeune. Le dossier sera créé avec un suivi complet.","fiche.example":"⚡ Charger l'exemple (fiche AZIZI)","fiche.create":"📁 Créer le dossier","fiche.f.nom":"Nom & prénom","fiche.f.ov":"N° OE (OV)","fiche.f.naissance":"Naissance (date / âge)","fiche.f.sexe":"Sexe","fiche.f.nat":"Nationalité","fiche.f.langue":"Langue parlée","fiche.f.adresseBE":"Adresse en Belgique","fiche.f.origine":"Adresse pays d'origine","fiche.f.motif":"Motif de l'immigration","fiche.f.notes":"Notes (parcours, scolarité, contacts…)","fiche.f.photo":"📷 Photo du jeune",
   "det.checklist":"✅ Checklist de suivi","det.progress":"Progression globale :","det.modify":"✏️ Modifier","det.delete":"🗑️ Supprimer","det.confirmdel":"Supprimer définitivement ce dossier ?",
   "form.new":"Nouveau dossier","form.edit":"Modifier le dossier",
   "f.name":"Nom / Identifiant *","f.name.ph":"ex. Amira K.","f.age":"Âge","f.age.ph":"ex. 14","f.country":"Pays d'origine","f.country.ph":"ex. Syrie","f.arrival":"Date d'arrivée","f.statut":"Statut","f.lang":"Langue parlée","f.lang.ph":"ex. Arabe","f.notes":"Notes / Situation","f.notes.ph":"Résumé de la situation...",
@@ -416,6 +460,7 @@ const I18N = {
   "doss.title":"📂 Mijn dossiers","doss.search":"🔍 Een dossier zoeken...","doss.allstatus":"Alle statussen",
   "doss.empty":"📭 Geen dossier. Klik op « ➕ Nieuw dossier » om te beginnen.","doss.nomatch":"Geen overeenkomend dossier.","doss.origin":"Herkomst onbekend","doss.progress":"Voortgang","doss.steps":"stappen","doss.arrived":"aangekomen op",
   "st.nouveau":"Nieuw","st.cours":"Lopend","st.urgent":"Dringend","st.clos":"Afgesloten","u.ans":"jaar",
+  "fiche.import":"📄 DVZ-fiche importeren","fiche.title":"📄 DVZ-fiche importeren (nieuwe NBMV)","fiche.hint":"Vul de velden van de fiche in en voeg de foto van de jongere toe. Het dossier wordt aangemaakt met volledige opvolging.","fiche.example":"⚡ Voorbeeld laden (fiche AZIZI)","fiche.create":"📁 Dossier aanmaken","fiche.f.nom":"Naam & voornaam","fiche.f.ov":"OV-nr","fiche.f.naissance":"Geboorte (datum / leeftijd)","fiche.f.sexe":"Geslacht","fiche.f.nat":"Nationaliteit","fiche.f.langue":"Gesproken taal","fiche.f.adresseBE":"Adres in België","fiche.f.origine":"Adres land van herkomst","fiche.f.motif":"Motief voor de immigratie","fiche.f.notes":"Notities (traject, scholing, contacten…)","fiche.f.photo":"📷 Foto van de jongere",
   "det.checklist":"✅ Opvolgingschecklist","det.progress":"Totale voortgang:","det.modify":"✏️ Wijzigen","det.delete":"🗑️ Verwijderen","det.confirmdel":"Dit dossier definitief verwijderen?",
   "form.new":"Nieuw dossier","form.edit":"Dossier wijzigen",
   "f.name":"Naam / Identificatie *","f.name.ph":"bv. Amira K.","f.age":"Leeftijd","f.age.ph":"bv. 14","f.country":"Land van herkomst","f.country.ph":"bv. Syrië","f.arrival":"Aankomstdatum","f.statut":"Status","f.lang":"Gesproken taal","f.lang.ph":"bv. Arabisch","f.notes":"Notities / Situatie","f.notes.ph":"Samenvatting van de situatie...",
@@ -723,15 +768,68 @@ function renderDossiers(){
 function openDossierDetail(id){
   const d=loadDossiers().find(x=>x.id===id);if(!d)return;
   const p=progressOf(d);
+  const f=d.jugePaix||{}; const tu=CONTACTS_OFFICIELS.tutelles, dv=CONTACTS_OFFICIELS.dvz;
   document.getElementById('detailContent').innerHTML=`
-    <div class="row" style="justify-content:space-between">
-      <h3 style="color:var(--bleu);font-size:1.4rem">${esc(d.nom)}</h3>${statutBadge(d.statut)}
+    <div class="row" style="justify-content:space-between;align-items:flex-start">
+      <div class="row" style="gap:.8rem;align-items:center">
+        ${d.photo?`<img src="${d.photo}" alt="photo" style="width:64px;height:64px;object-fit:cover;border-radius:.5rem;border:1px solid var(--bord)">`:''}
+        <div><h3 style="color:var(--accent);font-size:1.4rem;margin:0">${esc(d.nom)}</h3>
+        <span class="muted">${d.age?d.age+' '+t('u.ans')+' · ':''}${esc(paysLabel(d.pays)||d.pays||'—')}${d.langue?' · '+esc(d.langue):''}${d.fiche&&d.fiche.ov?' · OE '+esc(d.fiche.ov):''}</span></div>
+      </div>${statutBadge(d.statut)}
     </div>
-    <p class="muted">${d.age?d.age+' '+t('u.ans')+' · ':''}${esc(d.pays||'—')}${d.langue?' · '+esc(d.langue):''}${d.arrivee?' · '+t('doss.arrived')+' '+d.arrivee:''}</p>
     ${d.notes?`<p style="margin:.8rem 0;padding:.7rem;background:var(--gris-clair);border-radius:.4rem">${esc(d.notes)}</p>`:''}
     <div class="progress"><span style="width:${p}%"></span></div>
     <p class="muted" style="margin-bottom:.8rem">${t('det.progress')} <strong>${p}%</strong></p>
-    <h4 style="color:var(--accent);margin:.6rem 0">${t('det.checklist')}</h4>
+
+    ${d.fiche?`<details class="accordion"><summary>📄 ${LANG==='nl'?'Fiche DVZ (volledige gegevens)':'Fiche DVZ (données complètes)'}</summary><div class="body">
+      <table>${ficheRows(d.fiche)}</table>${ficheBlocks(d.fiche)}</div></details>`:''}
+
+    <details class="accordion"><summary>⚖️ ${LANG==='nl'?'Vrederechter & verplichte verslagen':'Justice de paix & rapports obligatoires'}</summary><div class="body">
+      <p class="muted">${LANG==='nl'?"Adres van de jongere onbekend? Zoek de bevoegde vrederechter op het officiële register:":"Adresse du jeune inconnue ? Trouvez le juge de paix compétent sur le registre officiel :"} <a href="${LANG==='nl'?ANNUAIRE_JP.nl:ANNUAIRE_JP.fr}" target="_blank" rel="noopener">tribunaux-rechtbanken.be</a> · <a href="${ANNUAIRE_JP.adresses}" target="_blank" rel="noopener">adresses-judiciaires.just.fgov.be</a></p>
+      <div class="grid cols-2">
+        <div><label>${LANG==='nl'?'Postcode':'Code postal'}</label><input id="jp_cp" value="${esc(f.cp||'')}"></div>
+        <div><label>${LANG==='nl'?'Kanton':'Canton'}</label><input id="jp_canton" value="${esc(f.canton||'')}"></div>
+      </div>
+      <label>${LANG==='nl'?'Adres vrederechter':'Adresse du juge de paix'}</label><input id="jp_adresse" value="${esc(f.adresse||'')}">
+      <div class="grid cols-2">
+        <div><label>${LANG==='nl'?'Telefoon':'Téléphone'}</label><input id="jp_tel" value="${esc(f.tel||'')}"></div>
+        <div><label>Email</label><input id="jp_email" value="${esc(f.email||'')}"></div>
+      </div>
+      <button class="btn sm" style="margin-top:.5rem" onclick="saveJuge('${d.id}')">💾 ${t('btn.save')}</button>
+      <h4 style="color:var(--accent);margin:.9rem 0 .3rem">📋 ${LANG==='nl'?'Verplichte verslagen':'Rapports obligatoires'}</h4>
+      ${(d.rapports||[]).map(r=>{const rt=RAPPORTS_TYPE.find(x=>x.id===r.id);if(!rt)return'';return `
+        <div class="deadline ${r.fait?'':''}" style="${r.fait?'border-left-color:var(--vert);background:var(--ok-bg)':''}">
+          <label class="check-line" style="padding:0"><input type="checkbox" ${r.fait?'checked':''} onchange="toggleRapport('${d.id}','${r.id}')">
+          <span><strong>${esc(tr(rt.label))}</strong> <span class="muted">→ ${rt.dest==='juge'?(LANG==='nl'?'vrederechter':'juge de paix'):esc(tr(CONTACTS_OFFICIELS[rt.dest].nom))}</span></span></label>
+          <div class="row" style="margin-top:.3rem;gap:.4rem">
+            <span class="muted">${LANG==='nl'?'Vervaldatum':'Échéance'}:</span>
+            <input type="date" style="width:auto" value="${esc(r.echeance||'')}" onchange="setEcheance('${d.id}','${r.id}',this.value)">
+            <button class="btn sec sm" onclick="prepRapport('${d.id}','${r.id}')">✉️ ${LANG==='nl'?'Verzending voorbereiden':"Préparer l'envoi"}</button>
+            ${r.fait&&r.dateFait?`<span class="muted">✓ ${r.dateFait}</span>`:''}
+          </div>
+          <span class="muted" style="font-size:.75rem">📖 ${esc(rt.base)}</span>
+        </div>`;}).join('')}
+      <p class="muted" style="font-size:.78rem;margin-top:.4rem">${LANG==='nl'?'Échéances = indicatieve standaardwaarden, aanpasbaar. Automatische verzending vereist een server (later).':"Échéances = valeurs par défaut indicatives, modifiables. L'envoi automatique nécessitera un serveur (étape ultérieure)."}</p>
+      <div class="muted" style="margin-top:.6rem;font-size:.8rem">📌 ${LANG==='nl'?'Geverifieerde centrale contacten':'Contacts centraux vérifiés'} :<br>
+        • ${esc(tr(tu.nom))} — ${esc(tu.adresse)} — ☎ ${tu.tel} — ✉️ ${tu.email}<br>
+        • ${esc(tr(dv.nom))} — ${esc(dv.adresse)} — ✉️ ${dv.email}</div>
+    </div></details>
+
+    <details class="accordion"><summary>🏦 ${LANG==='nl'?'Bankbeheer':'Suivi bancaire'}</summary><div class="body">
+      <p class="muted">${LANG==='nl'?'Handmatig register van verrichtingen (saldo + uittreksel voor de vrederechter). Echte bankkoppeling: later via server.':'Registre manuel des opérations (solde + relevé pour le juge de paix). Connexion bancaire réelle : ultérieurement via serveur.'}</p>
+      <div class="row" style="gap:.4rem;align-items:flex-end">
+        <div><label>Date</label><input id="op_date" type="date"></div>
+        <div style="flex:1;min-width:140px"><label>${LANG==='nl'?'Omschrijving':'Libellé'}</label><input id="op_lib"></div>
+        <div><label>${LANG==='nl'?'Bedrag (€, +/−)':'Montant (€, +/−)'}</label><input id="op_mt" type="number" step="0.01"></div>
+        <button class="btn sm" onclick="addOp('${d.id}')">➕</button>
+      </div>
+      ${(d.banque&&d.banque.operations||[]).length?`<table style="margin-top:.6rem"><tr><th>Date</th><th>${LANG==='nl'?'Omschrijving':'Libellé'}</th><th style="text-align:right">€</th><th></th></tr>
+        ${d.banque.operations.map((o,i)=>`<tr><td>${esc(o.date)}</td><td>${esc(o.lib)}</td><td style="text-align:right;color:${o.mt<0?'var(--rouge)':'var(--vert)'}">${(+o.mt).toFixed(2)}</td><td><button class="btn danger sm" onclick="delOp('${d.id}',${i})">×</button></td></tr>`).join('')}
+        <tr><td colspan="2"><strong>${LANG==='nl'?'SALDO':'SOLDE'}</strong></td><td style="text-align:right"><strong>${soldeOf(d).toFixed(2)} €</strong></td><td></td></tr></table>
+        <button class="btn sec sm" style="margin-top:.5rem" onclick="exportReleve('${d.id}')">⬇️ ${LANG==='nl'?'Uittreksel exporteren':'Exporter le relevé'}</button>`:`<p class="muted">${LANG==='nl'?'Nog geen verrichting.':'Aucune opération.'}</p>`}
+    </div></details>
+
+    <h4 style="color:var(--accent);margin:.9rem 0 .3rem">${t('det.checklist')}</h4>
     <div>${d.checklist.map((c,i)=>`
       <label class="check-line"><input type="checkbox" ${c.done?'checked':''} onchange="toggleCheck('${d.id}',${i})">
       <span style="${c.done?'text-decoration:line-through;color:var(--gris)':''}">${esc(c.t)}</span></label>`).join('')}</div>
@@ -1108,6 +1206,161 @@ function conseilAnalyser(){
     html+=`<div class="card" style="margin-top:.8rem;background:var(--warn-bg)"><strong>${t('conseil.precisions')}</strong><p style="margin-top:.3rem">${esc(tr(s.note_precision))}</p></div>`;
   }
   document.getElementById('conseilResult').innerHTML=html;
+}
+
+/* ============ IMPORT FICHE DVZ + PHOTO + GESTION ÉTENDUE ============ */
+/* Contacts CENTRAUX vérifiés (figurant sur la fiche DVZ officielle) — non inventés */
+const CONTACTS_OFFICIELS={
+  tutelles:{nom:{fr:"Service des Tutelles (SPF Justice)",nl:"Dienst Voogdij (FOD Justitie)"},adresse:"Boulevard de Waterloo 115 / Waterloolaan 115, 1000 Bruxelles",tel:"078-15.43.24",email:"tutelles@just.fgov.be"},
+  dvz:{nom:{fr:"Office des Étrangers (DVZ)",nl:"Dienst Vreemdelingenzaken (DVZ)"},adresse:"Boulevard Pacheco 44 / Pachecolaan 44, 1000 Bruxelles",tel:"02-274.66.37",email:"interceptions@ibz.fgov.be"}
+};
+/* Annuaire officiel des justices de paix (source vérifiée à consulter — pas de coordonnées inventées) */
+const ANNUAIRE_JP={fr:"https://www.tribunaux-rechtbanken.be/fr/tribunaux/justice-de-paix",nl:"https://www.tribunaux-rechtbanken.be/nl/rechtbanken/vredegerecht",adresses:"https://adresses-judiciaires.just.fgov.be/"};
+/* Rapports obligatoires (cadre tutelle MENA — loi-programme 24/12/2002). Échéances = valeurs par défaut indicatives, modifiables. */
+const RAPPORTS_TYPE=[
+  {id:"r_initial",label:{fr:"Rapport initial au Service des Tutelles",nl:"Initieel verslag aan de Dienst Voogdij"},dest:"tutelles",defJours:15,base:"Loi-programme 24/12/2002 (Tutelle)"},
+  {id:"r_priseencharge",label:{fr:"Rapport de prise en charge / situation du mineur",nl:"Verslag van tenlasteneming / situatie van de minderjarige"},dest:"tutelles",defJours:30,base:"Loi-programme 24/12/2002"},
+  {id:"r_periodique",label:{fr:"Rapport périodique au Service des Tutelles",nl:"Periodiek verslag aan de Dienst Voogdij"},dest:"tutelles",defJours:90,base:"Art. 11 Loi Tutelle"},
+  {id:"r_gestion",label:{fr:"Compte/rapport de gestion des biens au juge de paix",nl:"Beheersverslag van de goederen aan de vrederechter"},dest:"juge",defJours:365,base:"Gestion des biens — juge de paix"}
+];
+function nowISO(){return new Date().toISOString().slice(0,10);}
+function addDays(iso,days){if(!iso)return '';const d=new Date(iso+'T00:00:00');d.setDate(d.getDate()+(+days||0));return d.toISOString().slice(0,10);}
+
+/* Photo -> data URL compressée (reste chiffrée dans le dossier, jamais dans le dépôt) */
+function readPhoto(input,cb){
+  const f=input.files&&input.files[0];if(!f){cb('');return;}
+  const r=new FileReader();
+  r.onload=e=>{const img=new Image();img.onload=()=>{
+    const max=320,sc=Math.min(1,max/Math.max(img.width,img.height));
+    const cv=document.createElement('canvas');cv.width=img.width*sc;cv.height=img.height*sc;
+    cv.getContext('2d').drawImage(img,0,0,cv.width,cv.height);
+    cb(cv.toDataURL('image/jpeg',0.82));
+  };img.src=e.target.result;};
+  r.readAsDataURL(f);
+}
+let FICHE_PHOTO='';
+function onFichePhoto(input){readPhoto(input,d=>{FICHE_PHOTO=d;const pv=document.getElementById('fichePhotoPreview');pv.innerHTML=d?`<img src="${d}" style="max-width:120px;border-radius:.5rem;border:1px solid var(--bord)">`:'';});}
+
+/* Données parsées de la fiche DVZ fournie (AZIZI) — FR = traduction fidèle, NL = original du PDF */
+const FICHE_AZIZI={
+  ov:"9777786", pv:"",
+  nom:"AZIZI, BASIR AHMAD",
+  sexe:{fr:"Masculin",nl:"Mannelijk"},
+  naissance:"30.09.2009 (≈ 14 ans)", lieuNaissance:"Bekh",
+  nationalite:"Afghanistan", eu:{fr:"Non",nl:"Neen"},
+  doute:{fr:"Non",nl:"Neen"}, signale:{fr:"Non",nl:"Neen"},
+  langueMat:"Dari", langueParlee:"Dari",
+  adresseBE:"/", adresseOrigine:"Bekh, Dan E Ghori, Baghlan",
+  alias:"/", empreintes:{fr:"Oui",nl:"Ja"},
+  serviceFiche:"Dorina Popa (MINTEH) @ DVZ", dateFiche:"2023-09-18",
+  pere:{nom:"Azizi, Aziz Ahmad",nat:"AFG",adresse:"Bekh",tel:"/"},
+  mere:{nom:"Azizi, Saltanat",nat:"AFG",adresse:"Bekh",tel:"/"},
+  fratrie:{fr:"3 sœurs et 3 frères, tous plus jeunes que lui (Soraya, Sohaila, Maajan, Shabir Ahmad, Bashir Ahmad, Nasir Ahmad) — tous nés à Bekh, nationalité afghane.",nl:"3 zussen en 3 broers, allen jonger dan hij (Soraya, Sohaila, Maajan, Shabir Ahmad, Bashir Ahmad, Nasir Ahmad) — allen geboren in Bekh, Afghaanse nationaliteit."},
+  familleUE:{fr:"Non",nl:"Neen"},
+  medical:{fr:"Cheveux noirs, yeux bruns. Grossesse : non. Handicap : non. Confus : non. Blessures : non. Maladies (contagieuses) : non. Soins nécessaires : douleur à la jambe droite.",nl:"Zwart haar, bruine ogen. Zwangerschap: neen. Handicap: neen. Verward: neen. Wonden: neen. (Besmettelijke) ziekten: neen. Zorg nodig: pijn aan het rechterbeen."},
+  parquet:{fr:"Intervention du parquet : non.",nl:"Tussenkomst parket: neen."},
+  identiteEtablie:{fr:"Identité établie par : déclaration (oui), documents (non).",nl:"Identiteit vastgesteld via: verklaring (ja), documenten (neen)."},
+  trajet:{fr:"Départ du pays d'origine : il y a 10 mois. Arrivée en Belgique : 18/09/2023. Route : AFG – PAK – IRN – TUR – BUL – SERB – HON (il ne connaît pas tous les pays traversés). Turquie : ≈ 6 mois (Karaman), a travaillé dans plusieurs usines. Demandes antérieures (VA) : Bulgarie, Autriche et Allemagne.",nl:"Vertrek land van herkomst: 10 maanden geleden. Aankomst België: 18/09/2023. Route: AFG – PAK – IRN – TUR – BUL – SERB – HON (hij weet niet langs welke landen hij is gepasseerd). Turkije: ≈ 6 maanden (Karaman), gewerkt in verschillende fabrieken. Eerdere aanvragen (VA): Bulgarije, Oostenrijk en Duitsland."},
+  organisation:{fr:"Organisation du voyage : le papa — financé et organisé. Pourquoi la Belgique : on lui a dit du bien de la Belgique sur la route, surtout le système scolaire ; les migrants y sont mieux protégés.",nl:"Organisatie van de reis: de papa — gefinancierd en georganiseerd. Waarom België: men zei hem onderweg goede dingen over België, vooral het schoolsysteem; migranten worden er beter beschermd."},
+  interception:{fr:"Se présente au DVZ le 18/09/2023.",nl:"Meldt zich aan bij DVZ op 18/09/2023."},
+  motif:{fr:"Motif de l'immigration : il est de conviction religieuse chiite ismaélite, et le papa travaillait pour l'ancien régime (police) ; pour cette raison la famille a dû quitter le pays car ils étaient menacés par les Talibans.",nl:"Motief voor de immigratie: hij is van geloofsovertuiging — chiiet ismaëliet — en de papa werkte voor het oude regime (politie); hierdoor moest het gezin het land verlaten, want ze werden bedreigd door de Taliban."},
+  vulnerabiliteMH:{fr:"Indices de traite des êtres humains : non.",nl:"Aanwijzingen van mensenhandel: neen."},
+  vulnerabilite:{fr:"Autres éléments de vulnérabilité : non.",nl:"Andere kwetsbaarheidselementen: neen."},
+  besoinAccueil:{fr:"Besoin d'accueil : oui.",nl:"Behoefte aan opvang: ja."},
+  objets:{fr:"Effets personnels : sac avec affaires personnelles, téléphone sans carte SIM.",nl:"Persoonlijke voorwerpen: zak met persoonlijke spullen, telefoon zonder simkaart."},
+  scolarite:{fr:"Scolarité : pas d'école — sait un peu écrire et lire.",nl:"Scholing: geen school — kan een beetje schrijven en lezen."},
+  contactFamille:{fr:"Contact avec la famille : aucun contact.",nl:"Contact met familie: geen contact."}
+};
+function openFicheImport(){
+  document.getElementById('ficheForm').reset();FICHE_PHOTO='';
+  document.getElementById('fichePhotoPreview').innerHTML='';
+  openModal('ficheModal');
+}
+function fillAzizi(){
+  const f=FICHE_AZIZI;
+  fi_nom.value=f.nom; fi_naissance.value=f.naissance; fi_sexe.value=tr(f.sexe);
+  fi_nat.value=f.nationalite; fi_langue.value=f.langueParlee; fi_ov.value=f.ov;
+  fi_adresseBE.value=f.adresseBE; fi_origine.value=f.adresseOrigine;
+  fi_motif.value=tr(f.motif); fi_notes.value=tr(f.trajet)+'\n\n'+tr(f.scolarite)+'\n'+tr(f.contactFamille);
+  document.getElementById('ficheAziziFull').checked=true;
+}
+function saveFiche(e){
+  e.preventDefault();
+  const arr=loadDossiers();const id='D'+Date.now();
+  const useFull=document.getElementById('ficheAziziFull').checked && fi_nom.value===FICHE_AZIZI.nom;
+  const age=fi_naissance.value.match(/(\d{1,2})\s*ans|≈?\s*(\d{1,2})/)?.[1]||'';
+  const d={
+    id, nom:fi_nom.value.trim()||'MENA', age:age||'', pays:fi_nat.value.trim(),
+    statut:'nouveau', langue:fi_langue.value.trim(), notes:fi_notes.value.trim(),
+    arrivee:'', photo:FICHE_PHOTO||'',
+    fiche: useFull?FICHE_AZIZI:{
+      ov:fi_ov.value.trim(), nom:fi_nom.value.trim(), naissance:fi_naissance.value.trim(),
+      sexe:fi_sexe.value.trim(), nationalite:fi_nat.value.trim(), langueParlee:fi_langue.value.trim(),
+      adresseBE:fi_adresseBE.value.trim(), adresseOrigine:fi_origine.value.trim(), motif:fi_motif.value.trim()
+    },
+    jugePaix:{cp:'',canton:'',adresse:'',tel:'',email:''},
+    rapports:RAPPORTS_TYPE.map(r=>({id:r.id,echeance:'',fait:false,dateFait:''})),
+    banque:{operations:[]},
+    checklist:STD_CHECKLIST.map(t=>({t,done:false})),
+    cree:nowISO()
+  };
+  arr.push(d);saveDossiers(arr);closeModal('ficheModal');renderDossiers();renderDashboard();
+  openDossierDetail(id);
+}
+
+/* ===== Sections de gestion dans le détail dossier ===== */
+function ficheRows(f){
+  const L={ov:{fr:"N° OE (OV)",nl:"OV-nr"},nom:{fr:"Nom & prénom",nl:"Naam & voornaam"},sexe:{fr:"Sexe",nl:"Geslacht"},naissance:{fr:"Naissance",nl:"Geboorte"},lieuNaissance:{fr:"Lieu de naissance",nl:"Geboorteplaats"},nationalite:{fr:"Nationalité",nl:"Nationaliteit"},langueMat:{fr:"Langue maternelle",nl:"Moedertaal"},langueParlee:{fr:"Langue parlée",nl:"Gesproken taal"},adresseBE:{fr:"Adresse en Belgique",nl:"Adres in België"},adresseOrigine:{fr:"Adresse au pays d'origine",nl:"Adres in land van herkomst"},alias:{fr:"Alias",nl:"Alias"},empreintes:{fr:"Empreintes prises",nl:"Vingerafdrukken genomen"},eu:{fr:"UE",nl:"EU"},doute:{fr:"Doute",nl:"Twijfel"},serviceFiche:{fr:"Fiche remplie par",nl:"Fiche ingevuld door"},dateFiche:{fr:"Date de la fiche",nl:"Datum fiche"}};
+  let h='';
+  for(const k in L){if(f[k]!=null&&f[k]!=='')h+=`<tr><td class="muted" style="white-space:nowrap">${esc(tr(L[k]))}</td><td><strong>${esc(tr(f[k]))}</strong></td></tr>`;}
+  return h;
+}
+function ficheBlocks(f){
+  const B=[["pere",{fr:"Père",nl:"Vader"}],["mere",{fr:"Mère",nl:"Moeder"}]];
+  let fam='';
+  B.forEach(([k,lbl])=>{if(f[k])fam+=`<li><strong>${esc(tr(lbl))} :</strong> ${esc(f[k].nom||'')}${f[k].nat?' ('+esc(f[k].nat)+')':''}${f[k].adresse?' — '+esc(f[k].adresse):''}${f[k].tel&&f[k].tel!=='/'?' — ☎ '+esc(f[k].tel):''}</li>`;});
+  if(f.fratrie)fam+=`<li>${esc(tr(f.fratrie))}</li>`;
+  const longs=[["medical",{fr:"Situation médicale",nl:"Medische situatie"}],["parquet",{fr:"Parquet",nl:"Parket"}],["identiteEtablie",{fr:"Identité",nl:"Identiteit"}],["trajet",{fr:"Trajet & interception",nl:"Traject & interceptie"}],["organisation",{fr:"Organisation du voyage",nl:"Organisatie van de reis"}],["motif",{fr:"Motif de l'immigration",nl:"Motief voor de immigratie"}],["vulnerabiliteMH",{fr:"Traite (indices)",nl:"Mensenhandel (aanwijzingen)"}],["vulnerabilite",{fr:"Vulnérabilité",nl:"Kwetsbaarheid"}],["besoinAccueil",{fr:"Accueil",nl:"Opvang"}],["objets",{fr:"Effets personnels",nl:"Persoonlijke voorwerpen"}],["scolarite",{fr:"Scolarité",nl:"Scholing"}],["contactFamille",{fr:"Contact familial",nl:"Contact met familie"}]];
+  let blocks='';
+  longs.forEach(([k,lbl])=>{if(f[k])blocks+=`<div style="margin:.5rem 0"><strong style="color:var(--accent)">${esc(tr(lbl))}</strong><br>${esc(tr(f[k]))}</div>`;});
+  return (fam?`<strong style="color:var(--accent)">${LANG==='nl'?'Familie':'Famille'}</strong><ul class="clean">${fam}</ul>`:'')+blocks;
+}
+function saveJuge(id){
+  const arr=loadDossiers();const d=arr.find(x=>x.id===id);if(!d)return;
+  d.jugePaix={cp:jp_cp.value.trim(),canton:jp_canton.value.trim(),adresse:jp_adresse.value.trim(),tel:jp_tel.value.trim(),email:jp_email.value.trim()};
+  saveDossiers(arr);alert(LANG==='nl'?'Vrederechter opgeslagen':'Juge de paix enregistré');
+}
+function toggleRapport(id,rid){
+  const arr=loadDossiers();const d=arr.find(x=>x.id===id);const r=d.rapports.find(x=>x.id===rid);
+  r.fait=!r.fait;r.dateFait=r.fait?nowISO():'';saveDossiers(arr);openDossierDetail(id);renderDashboard();
+}
+function setEcheance(id,rid,val){
+  const arr=loadDossiers();const d=arr.find(x=>x.id===id);d.rapports.find(x=>x.id===rid).echeance=val;saveDossiers(arr);
+}
+function prepRapport(id,rid){
+  const d=loadDossiers().find(x=>x.id===id);const rt=RAPPORTS_TYPE.find(x=>x.id===rid);
+  const dest=rt.dest==='juge'?d.jugePaix:CONTACTS_OFFICIELS[rt.dest];
+  const email=rt.dest==='juge'?(d.jugePaix&&d.jugePaix.email):CONTACTS_OFFICIELS[rt.dest].email;
+  const sujet=encodeURIComponent(tr(rt.label)+' — '+(d.fiche&&d.fiche.ov?'OE '+d.fiche.ov+' — ':'')+d.nom);
+  const corps=encodeURIComponent((LANG==='nl'?'Geachte,\n\nIn bijlage het verslag betreffende de minderjarige ':'Madame, Monsieur,\n\nVeuillez trouver le rapport concernant le mineur ')+d.nom+(d.fiche&&d.fiche.ov?' (OE '+d.fiche.ov+')':'')+'.\n\n'+(LANG==='nl'?'Met hoogachting,\nDe voogd':'Avec mes salutations,\nLe tuteur'));
+  if(email){window.location.href=`mailto:${email}?subject=${sujet}&body=${corps}`;}
+  else alert(LANG==='nl'?"Geen e-mailadres ingevuld (vul de vrederechter in).":"Aucune adresse email renseignée (complétez le juge de paix).");
+}
+function addOp(id){
+  const arr=loadDossiers();const d=arr.find(x=>x.id===id);
+  const date=op_date.value||nowISO(), lib=op_lib.value.trim(), mt=parseFloat(op_mt.value);
+  if(!lib||isNaN(mt)){alert(LANG==='nl'?'Vul libellé en bedrag in':'Renseignez le libellé et le montant');return;}
+  d.banque.operations.push({date,lib,mt});saveDossiers(arr);openDossierDetail(id);
+}
+function delOp(id,i){const arr=loadDossiers();const d=arr.find(x=>x.id===id);d.banque.operations.splice(i,1);saveDossiers(arr);openDossierDetail(id);}
+function soldeOf(d){return (d.banque&&d.banque.operations||[]).reduce((s,o)=>s+(+o.mt||0),0);}
+function exportReleve(id){
+  const d=loadDossiers().find(x=>x.id===id);const ops=d.banque.operations||[];
+  let txt=(LANG==='nl'?'REKENINGUITTREKSEL — ':'RELEVÉ DE COMPTE — ')+d.nom+(d.fiche&&d.fiche.ov?' (OE '+d.fiche.ov+')':'')+'\n'+nowISO()+'\n\n';
+  ops.forEach(o=>{txt+=`${o.date}  ${o.lib}  ${(+o.mt).toFixed(2)} €\n`;});
+  txt+=`\n${LANG==='nl'?'SALDO':'SOLDE'} : ${soldeOf(d).toFixed(2)} €\n`;
+  const blob=new Blob([txt],{type:'text/plain'});const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);a.download='releve_'+d.nom.replace(/\W+/g,'_')+'.txt';a.click();
 }
 
 /* ============ UTIL ============ */

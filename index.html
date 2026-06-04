@@ -90,6 +90,17 @@
   .auth-box .hint{font-size:.78rem;color:var(--gris);margin-top:1rem;line-height:1.4}
   .lock-btn{background:rgba(255,255,255,.15);border:none;color:#fff;cursor:pointer;padding:.4rem .8rem;border-radius:1rem;font-size:.8rem;margin-left:.6rem}
   .lock-btn:hover{background:rgba(255,255,255,.28)}
+  /* Combobox pays (recherche) */
+  .combo{position:relative}
+  .combo-list{position:absolute;left:0;right:0;top:100%;z-index:30;background:#fff;border:1px solid var(--bleu);border-top:none;border-radius:0 0 .4rem .4rem;max-height:240px;overflow-y:auto;box-shadow:0 8px 20px rgba(0,0,0,.12);display:none}
+  .combo-list.open{display:block}
+  .combo-list div{padding:.55rem .7rem;cursor:pointer;font-size:.9rem}
+  .combo-list div:hover,.combo-list div.hl{background:var(--bleu-clair);color:var(--bleu)}
+  /* Sélecteur de mode */
+  .mode-row{display:flex;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap}
+  .mode-btn{flex:1;min-width:160px;padding:.8rem;border:2px solid var(--bord);background:#fff;border-radius:.5rem;cursor:pointer;font-weight:600;color:#374151;transition:.2s}
+  .mode-btn:hover{border-color:var(--bleu)}
+  .mode-btn.active{border-color:var(--bleu);background:var(--bleu);color:#fff}
   @media(max-width:768px){main{padding:1rem}.header{padding:1rem}.header h1{font-size:1.2rem}}
 </style>
 </head>
@@ -191,23 +202,41 @@
     <div class="banner">Décrivez la situation du mineur et le problème rencontré. L'assistant propose des <strong>solutions hiérarchisées</strong> (avantages/inconvénients) avec leurs <strong>références légales</strong>. Réponses fondées uniquement sur la réglementation MENA en vigueur — <strong>aucune spéculation</strong>.</div>
 
     <div class="card" style="margin-bottom:1rem">
-      <h3>1. Profil du mineur (contexte)</h3>
-      <label>Lier un dossier existant (optionnel)</label>
-      <select id="conseilDossier" onchange="conseilFromDossier()"><option value="">— Saisie manuelle —</option></select>
-      <div class="grid cols-3" style="margin-top:.6rem">
-        <div><label>Âge</label><input id="conseilAge" type="number" min="0" max="18" placeholder="ex. 15"></div>
-        <div><label>Pays d'origine</label><input id="conseilPays" placeholder="ex. Syrie"></div>
-        <div><label>Statut de séjour</label>
-          <select id="conseilStatut">
-            <option value="">Non précisé</option>
-            <option value="demande">Demande d'asile en cours</option>
-            <option value="refugie">Réfugié reconnu</option>
-            <option value="subsidiaire">Protection subsidiaire</option>
-            <option value="refus">Demande refusée</option>
-            <option value="sans">Sans procédure / irrégulier</option>
-          </select>
+      <h3>1. Profil du mineur</h3>
+      <div class="mode-row">
+        <button type="button" class="mode-btn active" id="modeManuel" onclick="conseilMode('manuel')">✏️ Saisie manuelle</button>
+        <button type="button" class="mode-btn" id="modeDossier" onclick="conseilMode('dossier')">📂 Dossier existant</button>
+      </div>
+
+      <!-- Mode dossier -->
+      <div id="conseilDossierBlock" style="display:none">
+        <label>Choisir le dossier du mineur</label>
+        <select id="conseilDossier" onchange="conseilFromDossier()"><option value="">— Sélectionnez un dossier —</option></select>
+        <div id="conseilDossierContext"></div>
+      </div>
+
+      <!-- Mode manuel -->
+      <div id="conseilManuelBlock">
+        <div class="grid cols-3">
+          <div><label>Âge</label><input id="conseilAge" type="number" min="0" max="18" placeholder="ex. 15" onchange="conseilAnalyser()"></div>
+          <div class="combo">
+            <label>Pays d'origine</label>
+            <input id="conseilPays" autocomplete="off" placeholder="🔍 Rechercher un pays..." oninput="paysSearch()" onfocus="paysSearch()" onkeydown="paysKey(event)">
+            <div class="combo-list" id="paysList"></div>
+          </div>
+          <div><label>Statut de séjour</label>
+            <select id="conseilStatut" onchange="conseilAnalyser()">
+              <option value="">Non précisé</option>
+              <option value="demande">Demande d'asile en cours</option>
+              <option value="refugie">Réfugié reconnu</option>
+              <option value="subsidiaire">Protection subsidiaire</option>
+              <option value="refus">Demande refusée</option>
+              <option value="sans">Sans procédure / irrégulier</option>
+            </select>
+          </div>
         </div>
       </div>
+      <div id="conseilPaysContext"></div>
     </div>
 
     <div class="card" style="margin-bottom:1rem">
@@ -728,7 +757,7 @@ async function renderResources(){
 }
 
 /* ============ ASSISTANT CONSEIL (système expert) ============ */
-let CONSEIL=null, CONSEIL_CURRENT=null;
+let CONSEIL=null, CONSEIL_CURRENT=null, CONSEIL_MODE='manuel', COMBO_OUTSIDE=false;
 async function loadConseil(){
   if(CONSEIL)return CONSEIL;
   CONSEIL=await loadJSON('js/data/conseil-data.json');
@@ -740,21 +769,97 @@ async function loadConseil(){
     const disc=document.getElementById('conseilDisclaimer');
     disc.textContent='⚠️ '+CONSEIL.avertissement;disc.style.display='block';
   }
+  // fermer la liste pays au clic extérieur (une seule fois)
+  if(!COMBO_OUTSIDE){COMBO_OUTSIDE=true;document.addEventListener('click',e=>{if(!e.target.closest('.combo'))document.getElementById('paysList')?.classList.remove('open');});}
   return CONSEIL;
 }
 async function renderConseil(){
   await loadConseil();
-  // peupler la liste des dossiers (contexte)
   const arr=loadDossiers();
-  document.getElementById('conseilDossier').innerHTML='<option value="">— Saisie manuelle —</option>'+
+  document.getElementById('conseilDossier').innerHTML='<option value="">— Sélectionnez un dossier —</option>'+
     arr.map(d=>`<option value="${esc(d.id)}">${esc(d.nom)}${d.age?' ('+d.age+' ans)':''}</option>`).join('');
+}
+function conseilMode(m){
+  CONSEIL_MODE=m;
+  document.getElementById('modeManuel').classList.toggle('active',m==='manuel');
+  document.getElementById('modeDossier').classList.toggle('active',m==='dossier');
+  document.getElementById('conseilManuelBlock').style.display=m==='manuel'?'block':'none';
+  document.getElementById('conseilDossierBlock').style.display=m==='dossier'?'block':'none';
+  if(m==='dossier'){
+    const n=loadDossiers().length;
+    if(!n)document.getElementById('conseilDossierContext').innerHTML='<div class="empty">Aucun dossier enregistré. Créez-en un dans « Mes Dossiers » ou utilisez la saisie manuelle.</div>';
+    else conseilFromDossier();
+  }
+  renderPaysContext();conseilAnalyser();
+}
+/* --- Combobox pays (recherche type Google) --- */
+function paysSearch(){
+  if(!CONSEIL||!CONSEIL.pays_liste)return;
+  const q=normPays(document.getElementById('conseilPays').value);
+  const list=document.getElementById('paysList');
+  const matches=CONSEIL.pays_liste.filter(p=>normPays(p).includes(q)).slice(0,12);
+  if(!matches.length){list.classList.remove('open');list.innerHTML='';return;}
+  list.innerHTML=matches.map((p,i)=>`<div class="${i===0?'hl':''}" onclick="paysPick('${p.replace(/'/g,"\\'")}')">${esc(p)}</div>`).join('');
+  list.classList.add('open');
+}
+function paysPick(name){
+  document.getElementById('conseilPays').value=name;
+  document.getElementById('paysList').classList.remove('open');
+  renderPaysContext();conseilAnalyser();
+}
+function paysKey(e){
+  const list=document.getElementById('paysList');
+  if(e.key==='Escape'){list.classList.remove('open');return;}
+  if(e.key==='Enter'){e.preventDefault();const first=list.querySelector('div');if(first)first.click();}
+}
+function normPays(s){return (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').trim();}
+const PAYS_ALIAS={"rdc":"RD Congo","republique democratique du congo":"RD Congo","congo kinshasa":"RD Congo","congo (kinshasa)":"RD Congo","drc":"RD Congo","myanmar":"Birmanie (Myanmar)","birmanie":"Birmanie (Myanmar)"};
+function resolveProfil(pays){
+  if(!CONSEIL||!CONSEIL.pays_profils||!pays)return null;
+  const n=normPays(pays);
+  if(PAYS_ALIAS[n]&&CONSEIL.pays_profils[PAYS_ALIAS[n]])return {pays:PAYS_ALIAS[n],profil:CONSEIL.pays_profils[PAYS_ALIAS[n]]};
+  for(const k in CONSEIL.pays_profils){if(normPays(k)===n)return {pays:k,profil:CONSEIL.pays_profils[k]};}
+  return null;
+}
+function renderPaysContext(){
+  const box=document.getElementById('conseilPaysContext');if(!box)return;
+  const ctx=conseilContext();
+  const r=resolveProfil(ctx.pays);
+  if(!r){box.innerHTML='';return;}
+  box.innerHTML=`<div class="card" style="margin-top:1rem;border-left:5px solid var(--orange);background:#fffbeb">
+    <h3>🌍 Considérations liées au pays d'origine : ${esc(r.pays)}</h3>
+    <p class="muted">Éléments de contexte documentés à confronter au récit individuel — ils peuvent renforcer l'analyse et orienter la protection.</p>
+    ${r.profil.considerations.map(c=>`<div class="deadline" style="border-left-color:var(--orange)">
+      <strong>${esc(c.theme)}</strong>
+      <p style="margin:.3rem 0">${esc(c.texte)}</p>
+      ${c.base?`<span class="muted">⚖️ ${esc(c.base)}</span><br>`:''}
+      ${c.scenario?`<button class="btn sec sm" style="margin-top:.4rem" onclick="conseilSelect('${esc(c.scenario)}')">▶ Voir le problème lié</button>`:''}
+    </div>`).join('')}
+  </div>`;
+}
+/* --- Contexte selon le mode --- */
+function conseilContext(){
+  if(CONSEIL_MODE==='dossier'){
+    const id=document.getElementById('conseilDossier').value;
+    const d=loadDossiers().find(x=>x.id===id);
+    return d?{age:d.age,pays:d.pays,langue:d.langue,notes:d.notes,nom:d.nom,statutDossier:d.statut,dossier:d}:{};
+  }
+  return {age:document.getElementById('conseilAge').value,pays:(document.getElementById('conseilPays').value||'').trim(),statut:document.getElementById('conseilStatut').value};
 }
 function conseilFromDossier(){
   const id=document.getElementById('conseilDossier').value;
-  if(!id)return;
-  const d=loadDossiers().find(x=>x.id===id);if(!d)return;
-  if(d.age)document.getElementById('conseilAge').value=d.age;
-  if(d.pays)document.getElementById('conseilPays').value=d.pays;
+  const box=document.getElementById('conseilDossierContext');
+  if(!id){box.innerHTML='';return;}
+  const d=loadDossiers().find(x=>x.id===id);if(!d){box.innerHTML='';return;}
+  const p=progressOf(d);
+  box.innerHTML=`<div class="card" style="margin-top:.8rem;background:var(--bleu-clair)">
+    <div class="row" style="justify-content:space-between"><strong style="font-size:1.05rem">${esc(d.nom)}</strong>${statutBadge(d.statut)}</div>
+    <div class="muted" style="margin:.3rem 0">${d.age?d.age+' ans · ':''}${esc(d.pays||'Origine inconnue')}${d.langue?' · '+esc(d.langue):''}${d.arrivee?' · arrivé(e) le '+d.arrivee:''}</div>
+    ${d.notes?`<p style="margin:.3rem 0">📝 ${esc(d.notes)}</p>`:''}
+    <div class="progress"><span style="width:${p}%"></span></div>
+    <div class="muted">Suivi : ${p}% (${d.checklist.filter(c=>c.done).length}/${d.checklist.length} étapes) — contexte complet pris en compte.</div>
+  </div>`;
+  renderPaysContext();conseilAnalyser();
 }
 function conseilSuggest(){
   const q=(document.getElementById('conseilSearch').value||'').toLowerCase().trim();
@@ -795,9 +900,9 @@ function conseilAnalyser(){
   const s=CONSEIL_CURRENT;if(!s)return;
   const ans={};
   (s.questions||[]).forEach(q=>{const v=document.getElementById('cq_'+q.id)?.value;if(v)ans[q.id]=v;});
-  // contexte mineur
-  const age=document.getElementById('conseilAge').value;
-  const pays=document.getElementById('conseilPays').value;
+  // contexte mineur (selon le mode : manuel ou dossier)
+  const c0=conseilContext();
+  const age=c0.age, pays=c0.pays;
   // filtrage des solutions selon conditions
   let manquantes=0;
   const visibles=s.solutions.filter(sol=>{

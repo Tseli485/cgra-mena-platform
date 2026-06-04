@@ -187,7 +187,11 @@
   <!-- CAS PRATIQUES -->
   <section class="view" id="cases">
     <h2 class="title">📚 Cas Pratiques</h2>
-    <div class="banner">Études de cas réelles pour guider votre pratique.</div>
+    <div class="banner">Cas concrets pour la <strong>formation du tuteur</strong>. Chaque cas détaille la situation, le <strong>cadre légal</strong>, les <strong>délais</strong>, les <strong>actions à mener</strong> et les leçons à retenir. Cliquez un cas pour le guide complet.</div>
+    <div class="filters">
+      <input id="caseSearch" placeholder="🔍 Rechercher (situation, pays, mot-clé)..." oninput="renderCases()">
+      <select id="caseCat" onchange="renderCases()"><option value="">Toutes les catégories</option></select>
+    </div>
     <div id="casesContent" class="loading">Chargement des cas…</div>
   </section>
 
@@ -595,27 +599,52 @@ function renderLegislation(){
 
 /* ============ CAS PRATIQUES ============ */
 async function renderCases(){
-  if(!CASES){const raw=await loadJSON('js/data/cases-data.json');CASES=Array.isArray(raw)?raw:(raw&&raw.cases?raw.cases:null);}
+  if(!CASES){
+    const raw=await loadJSON('js/data/cases-data.json');
+    CASES=Array.isArray(raw)?raw:(raw&&raw.cases?raw.cases:null);
+    if(CASES){
+      const cats=[...new Set(CASES.map(c=>c.categorie).filter(Boolean))].sort();
+      document.getElementById('caseCat').innerHTML='<option value="">Toutes les catégories</option>'+cats.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join('');
+    }
+  }
   const el=document.getElementById('casesContent');
   if(!CASES||!CASES.length){el.innerHTML='<div class="empty">⚠️ Cas pratiques indisponibles.</div>';return;}
-  el.innerHTML=CASES.map((c,i)=>`
+  const q=(document.getElementById('caseSearch')?.value||'').toLowerCase();
+  const cat=document.getElementById('caseCat')?.value||'';
+  let arr=CASES.map((c,i)=>({c,i}));
+  if(cat)arr=arr.filter(x=>x.c.categorie===cat);
+  if(q)arr=arr.filter(x=>JSON.stringify(x.c).toLowerCase().includes(q));
+  if(!arr.length){el.innerHTML='<div class="empty">Aucun cas ne correspond à votre recherche.</div>';return;}
+  el.innerHTML=`<p class="muted" style="margin-bottom:.6rem">${arr.length} cas</p>`+arr.map(({c,i})=>`
     <div class="list-item" onclick="showCase(${i})">
-      <strong>${esc(c.title||'Cas')}</strong>
-      <div class="muted">${c.country?esc(c.country)+' · ':''}${c.age_at_case?c.age_at_case+' ans · ':''}${c.age_group?'tranche '+esc(c.age_group):''}</div>
-      ${(c.vulnerability_flags||[]).length?`<div style="margin-top:.4rem">${c.vulnerability_flags.slice(0,4).map(v=>`<span class="badge b-urgent" style="margin-right:.3rem">${esc(vulnFR(v))}</span>`).join('')}</div>`:''}
+      <div class="row" style="justify-content:space-between">
+        <strong>${esc(c.titre)}</strong>${c.categorie?`<span class="badge b-nouveau">${esc(c.categorie)}</span>`:''}
+      </div>
+      <div class="muted">${c.pays?'🌍 '+esc(c.pays):''}${c.age?' · '+c.age+' ans':''}${c.sexe?' · '+esc(c.sexe):''}</div>
+      ${(c.vulnerabilites||[]).length?`<div style="margin-top:.4rem">${c.vulnerabilites.slice(0,4).map(v=>`<span class="badge b-urgent" style="margin-right:.3rem;margin-bottom:.2rem;display:inline-block">${esc(v)}</span>`).join('')}</div>`:''}
+      <div class="muted" style="margin-top:.4rem">📋 ${(c.actions_tuteur||[]).length} actions · ⚖️ ${(c.cadre_legal||[]).length} références · ⏰ ${(c.delais_cles||[]).length} délais</div>
     </div>`).join('');
 }
-const VULN={documentation_gaps:"Documents manquants",education_interrupted:"Scolarité interrompue",health_issues:"Problèmes de santé",housing_instability:"Instabilité du logement",language_barrier:"Barrière linguistique",separated_family:"Famille séparée",trafficking_risk:"Risque de traite",trauma:"Trauma",family_conflict:"Conflit familial"};
-const vulnFR=v=>VULN[v]||v;
 function showCase(i){
-  const c=CASES[i];const s=c.story||{};
-  const tl=(s.timeline||[]).map(t=>`<li><strong>${esc(t.date||'')}</strong> — ${esc(t.event||'')}</li>`).join('');
+  const c=CASES[i];if(!c)return;
+  const chrono=(c.chronologie||[]).map(t=>`<li><strong>${esc(t.date||'')}</strong> — ${esc(t.evenement||'')}</li>`).join('');
+  const legal=(c.cadre_legal||[]).map(l=>`<li><strong>${esc(l.texte)}</strong><br><span class="muted">${esc(l.application)}</span></li>`).join('');
+  const delais=(c.delais_cles||[]).map(d=>`<div class="deadline"><div class="row" style="justify-content:space-between"><span>${esc(d.action)}</span><span class="badge b-cours">⏰ ${esc(d.delai)}</span></div></div>`).join('');
+  const actions=(c.actions_tuteur||[]).map(a=>`<li>${esc(a)}</li>`).join('');
+  const lecons=(c.lecons||[]).map(l=>`<li>${esc(l)}</li>`).join('');
+  const ress=(c.ressources||[]).map(r=>`<span class="badge b-nouveau" style="margin:.15rem;display:inline-block">${esc(r)}</span>`).join('');
   document.getElementById('infoContent').innerHTML=`
-    <h3>${esc(c.title||'Cas')}</h3>
-    <p class="muted">${c.country?esc(c.country)+' · ':''}${c.age_at_case?c.age_at_case+' ans':''}</p>
-    ${(c.vulnerability_flags||[]).length?`<div style="margin:.6rem 0">${c.vulnerability_flags.map(v=>`<span class="badge b-urgent" style="margin:.15rem">${esc(vulnFR(v))}</span>`).join('')}</div>`:''}
-    ${s.situation?`<h4 style="color:var(--bleu);margin:.6rem 0 .3rem">Situation</h4><p>${esc(s.situation)}</p>`:''}
-    ${tl?`<h4 style="color:var(--bleu);margin:.8rem 0 .3rem">📅 Chronologie</h4><ul class="clean">${tl}</ul>`:''}`;
+    <h3>${esc(c.titre)}</h3>
+    <p class="muted">${c.categorie?esc(c.categorie)+' · ':''}${c.pays?esc(c.pays):''}${c.age?' · '+c.age+' ans':''}${c.sexe?' · '+esc(c.sexe):''}</p>
+    ${(c.vulnerabilites||[]).length?`<div style="margin:.6rem 0">${c.vulnerabilites.map(v=>`<span class="badge b-urgent" style="margin:.15rem;display:inline-block">${esc(v)}</span>`).join('')}</div>`:''}
+    ${c.situation?`<h4 style="color:var(--bleu);margin:.8rem 0 .3rem">📖 Situation</h4><p>${esc(c.situation)}</p>`:''}
+    ${chrono?`<h4 style="color:var(--bleu);margin:.9rem 0 .3rem">📅 Chronologie</h4><ul class="clean">${chrono}</ul>`:''}
+    ${legal?`<h4 style="color:var(--bleu);margin:.9rem 0 .3rem">⚖️ Cadre légal applicable</h4><ul class="clean">${legal}</ul>`:''}
+    ${delais?`<h4 style="color:var(--bleu);margin:.9rem 0 .3rem">⏰ Délais clés</h4>${delais}`:''}
+    ${actions?`<h4 style="color:var(--bleu);margin:.9rem 0 .3rem">✅ Actions du tuteur (solutions adéquates et légales)</h4><ul class="clean">${actions}</ul>`:''}
+    ${c.solution?`<h4 style="color:var(--bleu);margin:.9rem 0 .3rem">🎯 Démarche recommandée</h4><p style="padding:.7rem;background:#ecfdf5;border-left:4px solid var(--vert);border-radius:.4rem">${esc(c.solution)}</p>`:''}
+    ${lecons?`<h4 style="color:var(--bleu);margin:.9rem 0 .3rem">💡 Leçons pour le tuteur</h4><ul class="clean">${lecons}</ul>`:''}
+    ${ress?`<h4 style="color:var(--bleu);margin:.9rem 0 .3rem">📁 Ressources mobilisables</h4><div>${ress}</div>`:''}`;
   openModal('infoModal');
 }
 

@@ -1,1592 +1,692 @@
 {
   "cases": [
     {
-      "case_id": "CASE_001",
-    "title": "Unaccompanied Minor - Syrian Refugee",
-    "case_type": "unaccompanied",
-    "age_at_case": 14,
-    "age_group": "12-18",
-    "country": "Syria",
-    "gender": "female",
-    "vulnerability_flags": [
-      "documentation_gaps",
-      "education_interrupted",
-      "health_issues",
-      "housing_instability",
-      "language_barrier",
-      "separated_family",
-      "trafficking_risk"
-    ],
-    "story": {
-      "situation": "Amira was 14 years old when she arrived at the Port of Entry in Lebanon in March 2024. She had been traveling alone for eight months—a journey that began when her family home in Aleppo was destroyed b...",
-      "timeline": [
-        {
-          "date": "March 2023",
-          "event": "Family home destroyed in Aleppo; parents arrange departure"
-        },
-        {
-          "date": "March 2024",
-          "event": "Amira arrives at port of entry, detained for immigration processing"
-        },
-        {
-          "date": "March 28, 2024",
-          "event": "Initial social worker interview; vulnerability assessment conducted"
-        },
-        {
-          "date": "April 15, 2024",
-          "event": "Tuteur (Hélène) officially appointed by protective services"
-        },
-        {
-          "date": "May 3, 2024",
-          "event": "Medical evaluation; tuberculosis screening, immunization plan started"
-        },
-        {
-          "date": "May 18, 2024",
-          "event": "Asylum application filed with legal representation"
-        },
-        {
-          "date": "June 2024",
-          "event": "Enrolled in secondary school (10th grade equivalent) with language support"
-        },
-        {
-          "date": "July 2024",
-          "event": "Psychological evaluation for trauma screening; referred to counseling"
-        },
-        {
-          "date": "August 2024",
-          "event": "First school month completed; forming friendships"
-        },
-        {
-          "date": "October 2024",
-          "event": "Asylum interview conducted by government official"
-        },
-        {
-          "date": "January 2025",
-          "event": "Asylum granted; permission to remain and work permit issued"
-        },
-        {
-          "date": "March 2025",
-          "event": "Began part-time internship at local library; continued schooling"
-        },
-        {
-          "date": "June 2025",
-          "event": "First family video call in 14 months (arranged through Red Crescent)"
-        }
+      "id": "CP01",
+      "titre": "Demande de protection internationale d'un mineur non accompagné",
+      "categorie": "Asile",
+      "pays": "Syrie",
+      "age": 14,
+      "sexe": "Fille",
+      "vulnerabilites": ["Famille séparée", "Scolarité interrompue", "Trauma de guerre", "Barrière linguistique"],
+      "situation": "Amira, 14 ans, arrive seule après huit mois de trajet depuis Alep. Elle ne possède aucun document d'identité et parle uniquement l'arabe. Elle est repérée par la police à la frontière et signalée comme MENA. Elle présente des signes de stress post-traumatique et un état de fatigue avancé.",
+      "chronologie": [
+        {"date": "Jour 1", "evenement": "Repérage par la police, signalement immédiat au Service des Tutelles"},
+        {"date": "Jour 2-3", "evenement": "Désignation d'un tuteur ; mise à l'abri en centre d'observation et d'orientation (Fedasil)"},
+        {"date": "Semaine 1", "evenement": "Bilan médical d'arrivée et premier entretien social avec interprète arabophone"},
+        {"date": "Semaine 2", "evenement": "Introduction de la demande de protection internationale à l'Office des Étrangers"},
+        {"date": "Mois 2", "evenement": "Audition au CGRA, adaptée aux mineurs, en présence du tuteur"},
+        {"date": "Mois 6", "evenement": "Octroi du statut de réfugié ; inscription scolaire en classe passerelle (DASPA)"}
       ],
-      "key_events": [
-        {
-          "description": "Family home destroyed in Aleppo; parents arrange departure",
-          "impact": "documented"
-        },
-        {
-          "description": "Amira arrives at port of entry, detained for immigration processing",
-          "impact": "documented"
-        },
-        {
-          "description": "Initial social worker interview; vulnerability assessment conducted",
-          "impact": "documented"
-        },
-        {
-          "description": "Tuteur (Hélène) officially appointed by protective services",
-          "impact": "documented"
-        },
-        {
-          "description": "Medical evaluation; tuberculosis screening, immunization plan started",
-          "impact": "documented"
-        }
-      ]
-    },
-    "problems_identified": [
-      {
-        "problem": "Identity Documentation",
-        "severity": "high",
-        "domain": "Documents/Asylum",
-        "urgency": "critical"
-      },
-      {
-        "problem": "Language Barrier",
-        "severity": "high",
-        "domain": "Education",
-        "urgency": "critical"
-      },
-      {
-        "problem": "Psychological Trauma",
-        "severity": "high",
-        "domain": "Health/Medical",
-        "urgency": "high"
-      },
-      {
-        "problem": "Malnutrition",
-        "severity": "high",
-        "domain": "Health/Medical",
-        "urgency": "critical"
-      },
-      {
-        "problem": "Untreated Respiratory Infection",
-        "severity": "high",
-        "domain": "Health/Medical",
-        "urgency": "critical"
-      },
-      {
-        "problem": "Housing Instability",
-        "severity": "high",
-        "domain": "Finances/Housing",
-        "urgency": "high"
-      },
-      {
-        "problem": "No Legal Representation Initially",
-        "severity": "high",
-        "domain": "Documents/Asylum",
-        "urgency": "critical"
-      },
-      {
-        "problem": "Family Separation",
-        "severity": "high",
-        "domain": "Family/Reunion",
-        "urgency": "high"
-      },
-      {
-        "problem": "Financial Vulnerability",
-        "severity": "medium",
-        "domain": "Finances/Banking",
-        "urgency": "high"
-      },
-      {
-        "problem": "Educational Gap",
-        "severity": "medium",
-        "domain": "Education",
-        "urgency": "high"
-      },
-      {
-        "problem": "Mental Health Crisis Risk",
-        "severity": "high",
-        "domain": "Health/Medical",
-        "urgency": "high"
-      }
-    ],
-    "legal_framework": [
-      {
-        "law_or_regulation": "UN Convention on the Rights of the Child (CRC, 1989)",
-        "application": "Amira is entitled to protection, care, and legal representation as a minor",
-        "responsible_party": "Government Social Services + Nonprofits"
-      },
-      {
-        "law_or_regulation": "Convention Relating to the Status of Refugees (1951)",
-        "application": "Amira qualifies for refugee status based on persecution in Syria",
-        "responsible_party": "Immigration Authority + Legal Counsel"
-      },
-      {
-        "law_or_regulation": "EU Directive 2011/95/EU",
-        "application": "Defines refugee status and subsidiary protection in European context",
-        "responsible_party": "National Immigration Services"
-      },
-      {
-        "law_or_regulation": "Child Protection Laws (French/Local)",
-        "application": "Mandates appointment of tuteur; establishes guardianship responsibilities",
-        "responsible_party": "Court System + Social Services"
-      },
-      {
-        "law_or_regulation": "Trafficking in Persons Protocol (UN)",
-        "application": "Protects minors from exploitation; provides safe harbor provisions",
-        "responsible_party": "Law Enforcement + Social Services"
-      },
-      {
-        "law_or_regulation": "Education Access Laws",
-        "application": "Guarantees free primary and secondary education regardless of immigration status",
-        "responsible_party": "Ministry of Education"
-      },
-      {
-        "law_or_regulation": "Medical Access Rights",
-        "application": "Entitles all persons to emergency and essential medical care",
-        "responsible_party": "Health Ministry + Hospitals"
-      }
-    ],
-    "solutions_implemented": [
-      {
-        "solution": "Tuteur Appointment",
-        "timeline": "Week 3",
-        "outcomes": "Legal protection established; consistent adult advocate",
-        "success_metrics": "Stability score: 8/10"
-      },
-      {
-        "solution": "Medical Intervention",
-        "timeline": "Weeks 2-8",
-        "outcomes": "Infection resolved; weight gain of 8kg over 3 months; clearance for school",
-        "success_metrics": "Attendance: 94%"
-      },
-      {
-        "solution": "Legal Representation",
-        "timeline": "Weeks 4-16",
-        "outcomes": "Strong case documented; asylum granted in January 2025",
-        "success_metrics": "Success: 100%"
-      },
-      {
-        "solution": "Language Education",
-        "timeline": "Weeks 5-52",
-        "outcomes": "DALF A2 proficiency reached; able to function in school and community",
-        "success_metrics": "Test score: 78%"
-      },
-      {
-        "solution": "School Enrollment",
-        "timeline": "Week 8",
-        "outcomes": "Regular attendance; grades improved from 45% to 68%; peer friendships forming",
-        "success_metrics": "Attendance: 92%"
-      },
-      {
-        "solution": "Housing Security",
-        "timeline": "Week 12",
-        "outcomes": "Stable living situation; cleanliness standards met; peer relationships supportive",
-        "success_metrics": "Moves: 0 (stayed 8+ months)"
-      },
-      {
-        "solution": "Trauma-Informed Counseling",
-        "timeline": "Weeks 10-52",
-        "outcomes": "Sleep patterns improved; anxiety episodes reduced by 60%; engagement in activities",
-        "success_metrics": "Sessions: 32 completed"
-      },
-      {
-        "solution": "Family Reconnection",
-        "timeline": "Weeks 16-52",
-        "outcomes": "First family contact in 14 months; monthly calls established; morale significantly improved",
-        "success_metrics": "Calls: 6 successful"
-      },
-      {
-        "solution": "Employment Pathway",
-        "timeline": "Week 48",
-        "outcomes": "Earned first wages; gained job skills; built professional confidence",
-        "success_metrics": "Hours: 80 completed"
-      }
-    ],
-    "tuteur_obligations": [
-      {
-        "responsibility": "Legal Representation Liaison",
-        "description": "Coordinated with lawyer, ensured Amira understood asylum proceedings, attended all interviews and hearings"
-      },
-      {
-        "responsibility": "Medical Advocacy",
-        "description": "Accompanied Amira to all medical appointments, ensured she understood treatment plans, monitored medication compliance"
-      },
-      {
-        "responsibility": "Educational Support",
-        "description": "Maintained contact with school, assisted with homework, advocated for ESL services, attended parent-teacher conferences"
-      },
-      {
-        "responsibility": "Financial Management",
-        "description": "Managed small stipend provided by state, taught budgeting basics, ensured food security and necessities"
-      },
-      {
-        "responsibility": "Housing Oversight",
-        "description": "Monitored shelter conditions, reported concerns to social services, arranged transfer when needed, maintained inspection records"
-      },
-      {
-        "responsibility": "Emotional Support",
-        "description": "Regular visits (minimum twice weekly), listening to concerns, providing encouragement, modeling stable adult relationship"
-      },
-      {
-        "responsibility": "Cultural Mediation",
-        "description": "Helped bridge cultural gaps, explained local customs, connected Amira with Arabic-speaking community members, attended cultural events together"
-      },
-      {
-        "responsibility": "Family Communication",
-        "description": "Facilitated family reconnection process, helped write letters/emails, coordinated video calls, translated important messages"
-      },
-      {
-        "responsibility": "Documentation Maintenance",
-        "description": "Kept detailed records of progress, filed required reports with social services, prepared documentation for asylum hearing and school records"
-      }
-    ],
-    "lessons_learned": [
-      "**Early Intervention Saves Lives** - Identifying Amira's vulnerability at border intake triggered a protective cascade; without this, she might have been trafficked or deported",
-      "**Trauma-Informed Approach Essential** - Simple interview techniques (speaking in her language, respecting her pace) built trust; aggressive questioning early on would have caused withdrawal",
-      "**Tuteur Relationship Transforms Outcomes** - Personal, consistent adult advocacy was as important as legal documents; Hélène became the stable anchor Amira needed",
-      "**Medical Care Cannot Wait** - Treating infection and malnutrition immediately improved her mental clarity and ability to engage in other processes",
-      "**Education is Stability** - School provided structure, peer relationships, and hope; it was both practical need and psychological lifeline",
-      "**Language Access Non-Negotiable** - Arabic-speaking staff and counselors were critical; even professional interpreters cannot replace native speakers for sensitive conversations",
-      "**Family Connection Restores Humanity** - The first video call with her parents was transformative; Amira shifted from survival mode to planning for the future",
-      "**Documentation Takes Months** - Legal processes are slow; patience and persistence matter; without sustained effort, cases fall through bureaucratic cracks"
-    ],
-    "related_resources": [
-      {
-        "name": "UNHCR (UN Refugee Agency)",
-        "description": "International protection standards, resettlement programs"
-      },
-      {
-        "name": "International Organization for Migration (IOM)",
-        "description": "Trafficking prevention, family tracing services"
-      },
-      {
-        "name": "Save the Children",
-        "description": "Child protection expertise, advocacy for unaccompanied minors"
-      },
-      {
-        "name": "ECPAT International",
-        "description": "Combat trafficking of children; safe housing and rehabilitation"
-      },
-      {
-        "name": "Terre des Hommes",
-        "description": "Child welfare, medical support for vulnerable children"
-      },
-      {
-        "name": "Red Crescent/Red Cross",
-        "description": "Family communication, medical assistance, humanitarian support"
-      },
-      {
-        "name": "Local Bar Association",
-        "description": "Pro bono legal representation for asylum seekers"
-      },
-      {
-        "name": "Doctors Without Borders (MSF)",
-        "description": "Medical care for displaced populations"
-      },
-      {
-        "name": "Local ESL/Literacy Centers",
-        "description": "Language education and integration support"
-      }
-    ],
-    "domains": [
-      "Documents/Asylum",
-      "Education",
-      "Family/Reunion",
-      "Finances/Banking",
-      "Finances/Housing",
-      "Health/Medical"
-    ],
-    "case_status": "documented"
-  },
-  {
-    "case_id": "CASE_002",
-    "title": "Family Conflict and Child Welfare - Afghan Minor",
-    "case_type": "family_conflict",
-    "age_at_case": 12,
-    "age_group": "6-12",
-    "country": "Afghanistan",
-    "gender": "female",
-    "vulnerability_flags": [
-      "education_interrupted",
-      "health_issues",
-      "housing_instability",
-      "language_barrier",
-      "separated_family",
-      "trafficking_risk",
-      "trauma"
-    ],
-    "story": {
-      "situation": "Zahra was 12 years old when her father brought her to a social services office in Brussels and told a caseworker he could no longer care for her. It was October 2024, and her family had arrived as Afg...",
-      "timeline": [
-        {
-          "date": "2021",
-          "event": "Taliban takeover of Kabul; family begins escape planning"
-        },
-        {
-          "date": "Early 2024",
-          "event": "Family arrives in Belgium; asylum application filed"
-        },
-        {
-          "date": "July 2024",
-          "event": "Asylum status approved; housing and stipend provided"
-        },
-        {
-          "date": "August 2024",
-          "event": "Zahra enrolled in school; language support classes begin"
-        },
-        {
-          "date": "September 2024",
-          "event": "Father's depression worsens; conflict escalates at home"
-        },
-        {
-          "date": "September 28, 2024",
-          "event": "Crisis moment: father's harsh words to Zahra"
-        },
-        {
-          "date": "October 3, 2024",
-          "event": "Father brings Zahra to social services; protective intervention initiated"
-        },
-        {
-          "date": "October 10, 2024",
-          "event": "Initial social worker assessment; foster placement authorized"
-        },
-        {
-          "date": "October 15, 2024",
-          "event": "Zahra placed with foster family (Anna and Michel)"
-        },
-        {
-          "date": "October 20, 2024",
-          "event": "First supervised visit with father; emotional reunion"
-        },
-        {
-          "date": "October 25, 2024",
-          "event": "Father assigned to trauma-specialized psychologist"
-        },
-        {
-          "date": "November 2024",
-          "event": "Weekly therapy begins for father; medication initiated"
-        },
-        {
-          "date": "November 30, 2024",
-          "event": "Zahra shows behavioral improvement with foster family"
-        },
-        {
-          "date": "December 2024",
-          "event": "Supervised visits increased to twice weekly"
-        },
-        {
-          "date": "January 2025",
-          "event": "Father's stability improves; reintegration planning begins"
-        },
-        {
-          "date": "February 2025",
-          "event": "Zahra moves back with father; weekly social worker support begins"
-        },
-        {
-          "date": "March 2025",
-          "event": "Zahra and father report improved communication and safety"
-        },
-        {
-          "date": "May 2025",
-          "event": "School reports improved academic engagement; peer relationships forming"
-        }
+      "cadre_legal": [
+        {"texte": "Convention de Genève (1951), art. 1A", "application": "Amira craint avec raison d'être persécutée ; elle relève du statut de réfugié."},
+        {"texte": "Loi-programme du 24/12/2002, Titre XIII, Ch. 6 (Tutelle MENA)", "application": "Obligation de signalement immédiat et de désignation d'un tuteur."},
+        {"texte": "Directive 2013/32/UE (procédures)", "application": "Procédure adaptée : audition spécifique mineur, présence du tuteur obligatoire."},
+        {"texte": "CIDE (1989), art. 3 & 22", "application": "L'intérêt supérieur de l'enfant guide chaque décision ; protection spécifique du mineur demandeur d'asile."}
       ],
-      "key_events": [
-        {
-          "description": "Taliban takeover of Kabul; family begins escape planning",
-          "impact": "documented"
-        },
-        {
-          "description": "Family arrives in Belgium; asylum application filed",
-          "impact": "documented"
-        },
-        {
-          "description": "Asylum status approved; housing and stipend provided",
-          "impact": "documented"
-        },
-        {
-          "description": "Zahra enrolled in school; language support classes begin",
-          "impact": "documented"
-        },
-        {
-          "description": "Father's depression worsens; conflict escalates at home",
-          "impact": "documented"
-        }
-      ]
-    },
-    "problems_identified": [
-      {
-        "problem": "Parental Depression/PTSD",
-        "severity": "high",
-        "domain": "Health/Medical",
-        "urgency": "critical"
-      },
-      {
-        "problem": "Child-Parent Separation",
-        "severity": "high",
-        "domain": "Family/Reunion",
-        "urgency": "critical"
-      },
-      {
-        "problem": "Food Insecurity",
-        "severity": "high",
-        "domain": "Finances/Banking",
-        "urgency": "critical"
-      },
-      {
-        "problem": "Inadequate Housing Conditions",
-        "severity": "medium",
-        "domain": "Finances/Housing",
-        "urgency": "high"
-      },
-      {
-        "problem": "Language Barrier",
-        "severity": "medium",
-        "domain": "Education",
-        "urgency": "high"
-      },
-      {
-        "problem": "Educational Interruption",
-        "severity": "medium",
-        "domain": "Education",
-        "urgency": "high"
-      },
-      {
-        "problem": "Unresolved Grief",
-        "severity": "high",
-        "domain": "Health/Medical",
-        "urgency": "high"
-      },
-      {
-        "problem": "Lack of Professional Mental Health Care",
-        "severity": "high",
-        "domain": "Health/Medical",
-        "urgency": "critical"
-      },
-      {
-        "problem": "Social Isolation",
-        "severity": "medium",
-        "domain": "Family/Reunion",
-        "urgency": "medium"
-      },
-      {
-        "problem": "Financial Stress",
-        "severity": "high",
-        "domain": "Finances/Banking",
-        "urgency": "high"
-      },
-      {
-        "problem": "Legal Documentation",
-        "severity": "medium",
-        "domain": "Documents/Asylum",
-        "urgency": "medium"
-      },
-      {
-        "problem": "Attachment Disruption",
-        "severity": "high",
-        "domain": "Family/Reunion",
-        "urgency": "critical"
-      }
-    ],
-    "legal_framework": [
-      {
-        "law_or_regulation": "UN Convention on the Rights of the Child (CRC, 1989)",
-        "application": "Zahra has right to family unity; separation only if necessary for protection",
-        "responsible_party": "Social Services + Court"
-      },
-      {
-        "law_or_regulation": "Belgian Child Protection Law",
-        "application": "Mandates intervention when child welfare at risk; prioritizes family reunification",
-        "responsible_party": "Child Protection Services"
-      },
-      {
-        "law_or_regulation": "EU Directive on Family Reunification (2003/86/EC)",
-        "application": "Establishes rights for refugee families to live together",
-        "responsible_party": "Immigration + Social Services"
-      },
-      {
-        "law_or_regulation": "Mental Health Treatment Access Laws",
-        "application": "Refugees entitled to psychological services regardless of status",
-        "responsible_party": "Health Ministry"
-      },
-      {
-        "law_or_regulation": "Education Access Rights",
-        "application": "All children have right to free education despite family status changes",
-        "responsible_party": "Ministry of Education"
-      },
-      {
-        "law_or_regulation": "Foster Care Regulations",
-        "application": "Establishes minimum standards for foster placements; oversight requirements",
-        "responsible_party": "Social Services + Court"
-      },
-      {
-        "law_or_regulation": "Refugee Convention (1951)",
-        "application": "Family unity principle applies to recognized refugees",
-        "responsible_party": "Government Services"
-      },
-      {
-        "law_or_regulation": "Data Protection/Family Privacy",
-        "application": "Records of family services protected; privacy maintained",
-        "responsible_party": "Social Services"
-      }
-    ],
-    "solutions_implemented": [
-      {
-        "solution": "Crisis Intervention",
-        "timeline": "Week 1",
-        "outcomes": "Zahra protected; father given space to stabilize",
-        "success_metrics": "Safety: 10/10"
-      },
-      {
-        "solution": "Mental Health Treatment",
-        "timeline": "Weeks 2-8",
-        "outcomes": "Father stabilizes; medication prescribed; coping mechanisms develop",
-        "success_metrics": "Attendance: 18/20 sessions"
-      },
-      {
-        "solution": "Supervised Visitation",
-        "timeline": "Weeks 2-16",
-        "outcomes": "Relationship maintained; communication improves; trust rebuilds",
-        "success_metrics": "Visits: 24 completed"
-      },
-      {
-        "solution": "Financial Assistance",
-        "timeline": "Weeks 1-16",
-        "outcomes": "Food security achieved; housing improves; reduced stress",
-        "success_metrics": "Budget: Balanced"
-      },
-      {
-        "solution": "Foster Care",
-        "timeline": "Weeks 2-16",
-        "outcomes": "Zahra stabilized; peer relationships with foster siblings; school improvement",
-        "success_metrics": "Behavior: Improved 70%"
-      },
-      {
-        "solution": "School Support Services",
-        "timeline": "Weeks 3-20",
-        "outcomes": "Math performance excellent; language skills improve; engagement returns",
-        "success_metrics": "Math: 92% average"
-      },
-      {
-        "solution": "Zahra's Counseling",
-        "timeline": "Weeks 4-20",
-        "outcomes": "Anger management improves; sleep patterns normalize; hope emerges",
-        "success_metrics": "Sessions: 16 completed"
-      },
-      {
-        "solution": "Family Reintegration Planning",
-        "timeline": "Weeks 8-16",
-        "outcomes": "Gradual, supported reintegration; risks mitigated",
-        "success_metrics": "Plan: 12 pages detailed"
-      },
-      {
-        "solution": "Housing Upgrade",
-        "timeline": "Week 12",
-        "outcomes": "Living conditions improve; separate sleeping areas for daughter; comfort increases",
-        "success_metrics": "Quality: Rating 8/10"
-      },
-      {
-        "solution": "Community Connection",
-        "timeline": "Weeks 12-20",
-        "outcomes": "Father connects with peers; Zahra finds cultural community; isolation decreases",
-        "success_metrics": "Participation: Monthly"
-      }
-    ],
-    "tuteur_obligations": [
-      {
-        "responsibility": "Initial Assessment and Safety Planning",
-        "description": "Conducted comprehensive home visit, interviewed both father and daughter separately, documented risk factors, created immediate safety plan"
-      },
-      {
-        "responsibility": "Custody and Legal Navigation",
-        "description": "Coordinated with child protection court; ensured legal authority for placement; maintained ongoing custody documentation"
-      },
-      {
-        "responsibility": "Foster Family Coordination",
-        "description": "Screened and matched appropriate foster family; provided orientation to Zahra's background and needs; maintained regular communication with Anna and Michel"
-      },
-      {
-        "responsibility": "Therapeutic Liaison",
-        "description": "Identified trauma-specialized psychologist for father; coordinated with Zahra's school counselor; tracked progress on both mental health fronts"
-      },
-      {
-        "responsibility": "Supervised Visitation Management",
-        "description": "Arranged, scheduled, and sometimes supervised father-daughter visits; tracked emotional responses; documented progress"
-      },
-      {
-        "responsibility": "Financial Advocacy",
-        "description": "Assessed family's financial needs; helped secure increased refugee stipend; connected to emergency assistance programs; budgeted resources"
-      },
-      {
-        "responsibility": "Housing Support",
-        "description": "Evaluated current housing; helped secure better accommodation; ensured meeting basic safety standards; conducted quality inspections"
-      },
-      {
-        "responsibility": "Educational Coordination",
-        "description": "Liaison with school; ensured ESL services; kept both parents informed of academic progress; addressed behavioral concerns"
-      },
-      {
-        "responsibility": "Reintegration Planning",
-        "description": "Developed comprehensive, phased plan for family reunification; identified risks; built in safeguards; scheduled gradual transition steps"
-      }
-    ],
-    "lessons_learned": [
-      "**Parental Mental Health Crisis is Child Welfare Crisis** - Untreated trauma in parents directly endangers children; identifying and treating parental mental health is child protection",
-      "**Separation as Last Resort Can Be Protective** - Temporary separation allowed both father and daughter healing time; was not punitive but preventive",
-      "**Family Reunification Should Be the Goal** - When parents ask for help, they often want to be better parents; support them toward that goal rather than permanent separation",
-      "**Supervised Visitation Bridges Separation** - Maintaining father-daughter connection during crisis prevented permanent attachment damage",
-      "**Cultural Community Matters** - Connecting father with other Afghan refugees reduced isolation and provided understanding that therapeutic support alone couldn't",
-      "**Trauma-Specialized Treatment Works** - Father's willingness to engage with a psychologist who understood refugee trauma was critical turning point",
-      "**Multiple Support Systems Needed** - No single intervention (therapy, housing, money, school support) alone would have succeeded; coordinated, comprehensive approach essential",
-      "**Hope is Powerful Medicine** - When Zahra saw her father improving and heard him speak about their future, her own healing accelerated"
-    ],
-    "related_resources": [
-      {
-        "name": "International Rescue Committee (IRC)",
-        "description": "Refugee family services, mental health support, resettlement"
-      },
-      {
-        "name": "Médecins du Monde",
-        "description": "Healthcare and psychological support for vulnerable populations"
-      },
-      {
-        "name": "UNHCR",
-        "description": "Family reunification, protection standards, case management"
-      },
-      {
-        "name": "Local Foster Care Association",
-        "description": "Training for foster families, trauma-informed practices"
-      },
-      {
-        "name": "Afghan Refugee Network",
-        "description": "Community support, cultural events, peer mentoring"
-      },
-      {
-        "name": "Mental Health Without Borders",
-        "description": "Psychology services for refugees, trauma treatment"
-      },
-      {
-        "name": "UNICEF",
-        "description": "Child welfare standards, family separation prevention, advocacy"
-      },
-      {
-        "name": "National Center for PTSD",
-        "description": "Trauma treatment protocols, training for providers"
-      },
-      {
-        "name": "Local School District ESL Services",
-        "description": "Language education, academic support"
-      },
-      {
-        "name": "Government Social Services",
-        "description": "Refugee stipends, housing assistance, legal aid"
-      }
-    ],
-    "domains": [
-      "Documents/Asylum",
-      "Education",
-      "Family/Reunion",
-      "Finances/Banking",
-      "Finances/Housing",
-      "Health/Medical"
-    ],
-    "case_status": "documented"
-  },
-  {
-    "case_id": "CASE_003",
-    "title": "Severe Trauma and PTSD - Congolese Minor",
-    "case_type": "trauma",
-    "age_at_case": null,
-    "age_group": "unknown",
-    "country": "Democratic Republic of Congo",
-    "gender": "male",
-    "vulnerability_flags": [
-      "documentation_gaps",
-      "health_issues",
-      "housing_instability",
-      "language_barrier",
-      "separated_family",
-      "trauma"
-    ],
-    "story": {
-      "situation": "Karim was nine years old when he was rescued from an armed group in the Democratic Republic of Congo. He had been with them for six months—six months that he could barely articulate, even months later...",
-      "timeline": [
-        {
-          "date": "March 2024",
-          "event": "Armed conflict; Karim separated from family and abducted by militia"
-        },
-        {
-          "date": "March-September 2024",
-          "event": "In militia compound; exposed to violence, deprivation, abuse"
-        },
-        {
-          "date": "September 2024",
-          "event": "Rescued by humanitarian organization; taken to medical facility"
-        },
-        {
-          "date": "September 15, 2024",
-          "event": "Medical intake; physical assessment; severe malnutrition and trauma noted"
-        },
-        {
-          "date": "September 20, 2024",
-          "event": "Identity recorded; basic security provided; observation begins"
-        },
-        {
-          "date": "September 25, 2024",
-          "event": "Trauma screening conducted; PTSD symptoms documented"
-        },
-        {
-          "date": "October 2024",
-          "event": "Dr. James (trauma specialist) begins presence-based work with Karim"
-        },
-        {
-          "date": "October 15, 2024",
-          "event": "Art therapy begins; Karim expresses through drawing"
-        },
-        {
-          "date": "November 2024",
-          "event": "Karim begins speaking in short phrases; vocabulary rebuilding"
-        },
-        {
-          "date": "November 10, 2024",
-          "event": "Family identification begun by Red Cross"
-        },
-        {
-          "date": "November 20, 2024",
-          "event": "Contact established with mother; alive and searching for Karim"
-        },
-        {
-          "date": "December 2024",
-          "event": "First video call with mother and sister (ICRC facilitated)"
-        },
-        {
-          "date": "December 10, 2024",
-          "event": "TF-CBT therapy begins; structured trauma processing sessions start"
-        },
-        {
-          "date": "January 2025",
-          "event": "Karim shows improved sleep patterns; nightmares reduced 40%"
-        },
-        {
-          "date": "February 2025",
-          "event": "Repatriation arrangements finalized; transition planning complete"
-        },
-        {
-          "date": "February 15, 2025",
-          "event": "Karim travels home with ICRC social worker support"
-        },
-        {
-          "date": "February 20, 2025",
-          "event": "Reunited with mother and sister in Bukavu"
-        },
-        {
-          "date": "Ongoing",
-          "event": "Follow-up therapy and support coordination; community-based care begins"
-        }
+      "delais_cles": [
+        {"action": "Signalement au Service des Tutelles", "delai": "Immédiat"},
+        {"action": "Introduction de la demande d'asile", "delai": "Dès que possible après l'arrivée"},
+        {"action": "Recours au CCE en cas de refus", "delai": "30 jours (suspensif)"},
+        {"action": "Inscription scolaire", "delai": "Dans les 60 jours"}
       ],
-      "key_events": [
-        {
-          "description": "Armed conflict; Karim separated from family and abducted by militia",
-          "impact": "documented"
-        },
-        {
-          "description": "In militia compound; exposed to violence, deprivation, abuse",
-          "impact": "documented"
-        },
-        {
-          "description": "Rescued by humanitarian organization; taken to medical facility",
-          "impact": "documented"
-        },
-        {
-          "description": "Medical intake; physical assessment; severe malnutrition and trauma noted",
-          "impact": "documented"
-        },
-        {
-          "description": "Identity recorded; basic security provided; observation begins",
-          "impact": "documented"
-        }
-      ]
+      "actions_tuteur": [
+        "Veiller au signalement et confirmer la désignation officielle de la tutelle.",
+        "Mobiliser un interprète arabophone pour chaque démarche importante.",
+        "Accompagner Amira à l'audition CGRA et préparer son récit dans un cadre rassurant.",
+        "Organiser le bilan médical et orienter vers un suivi psychologique du trauma.",
+        "Engager la recherche de la famille via la Croix-Rouge (rétablissement des liens familiaux).",
+        "Inscrire Amira en classe passerelle et suivre son intégration scolaire.",
+        "Rédiger les rapports périodiques au Service des Tutelles."
+      ],
+      "solution": "Le tuteur sécurise d'abord la mise à l'abri et la santé, puis bâtit méthodiquement le dossier d'asile avec un récit cohérent et documenté. L'audition adaptée et la présence du tuteur permettent l'octroi du statut de réfugié, ouvrant l'accès au séjour stable, à la scolarité et aux soins.",
+      "lecons": [
+        "Le signalement immédiat déclenche toute la chaîne de protection — ne jamais le différer.",
+        "La langue maternelle et un cadre de confiance sont décisifs pour recueillir un récit fiable.",
+        "Santé et stabilité passent avant les démarches administratives complexes.",
+        "Documenter le parcours renforce la crédibilité de la demande d'asile."
+      ],
+      "ressources": ["Service des Tutelles (SPF Justice)", "Fedasil", "CGRA", "Croix-Rouge — Rétablissement des liens familiaux"]
     },
-    "problems_identified": [
-      {
-        "problem": "Complex PTSD",
-        "severity": "critical",
-        "domain": "Health/Medical",
-        "urgency": "critical"
-      },
-      {
-        "problem": "Sexual Abuse History",
-        "severity": "critical",
-        "domain": "Health/Medical",
-        "urgency": "critical"
-      },
-      {
-        "problem": "Severe Malnutrition",
-        "severity": "high",
-        "domain": "Health/Medical",
-        "urgency": "critical"
-      },
-      {
-        "problem": "Attachment Disruption",
-        "severity": "high",
-        "domain": "Family/Reunion",
-        "urgency": "critical"
-      },
-      {
-        "problem": "Communication Breakdown",
-        "severity": "high",
-        "domain": "Health/Medical",
-        "urgency": "high"
-      },
-      {
-        "problem": "Sleep Disorders",
-        "severity": "high",
-        "domain": "Health/Medical",
-        "urgency": "critical"
-      },
-      {
-        "problem": "Hypervigilance",
-        "severity": "high",
-        "domain": "Health/Medical",
-        "urgency": "high"
-      },
-      {
-        "problem": "Identity Documentation Loss",
-        "severity": "high",
-        "domain": "Documents/Asylum",
-        "urgency": "high"
-      },
-      {
-        "problem": "Grief and Loss",
-        "severity": "high",
-        "domain": "Health/Medical",
-        "urgency": "high"
-      },
-      {
-        "problem": "Emotional Dysregulation",
-        "severity": "high",
-        "domain": "Health/Medical",
-        "urgency": "high"
-      },
-      {
-        "problem": "Medical Complications",
-        "severity": "high",
-        "domain": "Health/Medical",
-        "urgency": "critical"
-      },
-      {
-        "problem": "Family Reunion Readiness",
-        "severity": "high",
-        "domain": "Family/Reunion",
-        "urgency": "high"
-      }
-    ],
-    "legal_framework": [
-      {
-        "law_or_regulation": "UN Convention on the Rights of the Child (CRC, 1989)",
-        "application": "Karim has right to protection, recovery, and family reunification",
-        "responsible_party": "UN Organizations + DRC Services"
-      },
-      {
-        "law_or_regulation": "Convention on the Worst Forms of Child Labor (ILO)",
-        "application": "Protects against forced recruitment into armed groups",
-        "responsible_party": "International Law + DRC Services"
-      },
-      {
-        "law_or_regulation": "UN Optional Protocol on Children in Armed Conflict",
-        "application": "Prohibits use of children in warfare; provides demobilization support",
-        "responsible_party": "UNICEF + DRC Government"
-      },
-      {
-        "law_or_regulation": "DRC Child Protection Law",
-        "application": "Mandates protection of vulnerable children; family reunification priority",
-        "responsible_party": "Ministry of Social Affairs"
-      },
-      {
-        "law_or_regulation": "Medical Ethics for Child Trauma",
-        "application": "Establishes informed consent, trauma-informed care standards",
-        "responsible_party": "Healthcare Providers"
-      },
-      {
-        "law_or_regulation": "International Humanitarian Law (Geneva Conventions)",
-        "application": "Protects kidnapped children; mandates humane treatment during repatriation",
-        "responsible_party": "Red Cross/ICRC"
-      },
-      {
-        "law_or_regulation": "Educational Rights",
-        "application": "Child has right to education; remedial schooling should be available",
-        "responsible_party": "Ministry of Education"
-      },
-      {
-        "law_or_regulation": "Mental Health Treatment Standards",
-        "application": "Trauma-focused therapy, psychiatric care, medication as appropriate",
-        "responsible_party": "WHO Guidelines + Providers"
-      }
-    ],
-    "solutions_implemented": [
-      {
-        "solution": "Medical Stabilization",
-        "timeline": "Weeks 1-4",
-        "outcomes": "Weight gain (4kg in 8 weeks); infections cleared; physical health restored",
-        "success_metrics": "Health: 7/10"
-      },
-      {
-        "solution": "Trauma Specialists",
-        "timeline": "Weeks 2-20+",
-        "outcomes": "Trust established; communication begins; processing starts",
-        "success_metrics": "Engagement: 85%"
-      },
-      {
-        "solution": "Presence-Based Therapy",
-        "timeline": "Weeks 2-8",
-        "outcomes": "Safety felt; boundaries respected; foundation of trust built",
-        "success_metrics": "Sessions: 16 completed"
-      },
-      {
-        "solution": "Art Therapy",
-        "timeline": "Weeks 3-20+",
-        "outcomes": "Emotional release; narrative emerges through images; catharsis",
-        "success_metrics": "Sessions: 32 completed"
-      },
-      {
-        "solution": "Trauma-Focused CBT",
-        "timeline": "Weeks 8-20+",
-        "outcomes": "Nightmares reduce 40%; anxiety symptoms decrease; coping skills develop",
-        "success_metrics": "Progress: 70% improvement"
-      },
-      {
-        "solution": "Psychiatric Medication",
-        "timeline": "Weeks 8-20+",
-        "outcomes": "Better sleep quality; reduced hypervigilance; emotional regulation improves",
-        "success_metrics": "Med compliance: 95%"
-      },
-      {
-        "solution": "Family Reconnection",
-        "timeline": "Weeks 4-12",
-        "outcomes": "Family located alive; reunification possible; hope restored",
-        "success_metrics": "Contact: 8 calls established"
-      },
-      {
-        "solution": "Repatriation Planning",
-        "timeline": "Weeks 12-18",
-        "outcomes": "Safe journey arranged; mother prepared; community resources identified",
-        "success_metrics": "Plan: Comprehensive"
-      },
-      {
-        "solution": "Mother's Trauma Training",
-        "timeline": "Weeks 12-16",
-        "outcomes": "Mother equipped to support; expectations realistic; compassion enhanced",
-        "success_metrics": "Training: 6 sessions"
-      },
-      {
-        "solution": "Community Care Transition",
-        "timeline": "Weeks 16-20",
-        "outcomes": "Safety net in place; local therapists trained; follow-up scheduled",
-        "success_metrics": "Network: 4 providers"
-      }
-    ],
-    "tuteur_obligations": [],
-    "lessons_learned": [
-      "**Relationship is the Primary Intervention** - Healing from trauma first requires safety in relationship; therapeutic techniques are secondary to being present with the child",
-      "**Non-Verbal Expression is Essential** - Children traumatized into silence need art, play, and movement; words come later, after safety is established",
-      "**Pacing is Critical** - Pushing trauma disclosure too quickly causes re-traumatization; slow, steady, child-led pace allows integration and healing",
-      "**Bodily Safety Comes First** - Physical health (nutrition, sleep, medicine) must be addressed before or alongside psychological work",
-      "**Patience Rewires Trauma** - Consistent, patient presence over time literally changes brain physiology in traumatized children",
-      "**Family Reunion is Complex** - Both child and family members are traumatized; reunion must be carefully managed to avoid secondary trauma",
-      "**Local Context Matters** - Healing must include cultural, community, and family dimensions; external therapy alone is insufficient",
-      "**Hope Must Be Maintained** - Karim's connection to his mother—even through brief messages—sustained him through darkest periods of therapy"
-    ],
-    "related_resources": [
-      {
-        "name": "UNICEF",
-        "description": "Child protection, trauma-informed services, repatriation support"
-      },
-      {
-        "name": "International Rescue Committee (IRC)",
-        "description": "Refugee mental health, family services, reintegration programs"
-      },
-      {
-        "name": "Doctors Without Borders (MSF)",
-        "description": "Medical care for vulnerable children, mental health services"
-      },
-      {
-        "name": "Save the Children",
-        "description": "Child protection, trauma response, reintegration of children from armed groups"
-      },
-      {
-        "name": "International Committee of Red Cross (ICRC)",
-        "description": "Family reunification, humanitarian tracing, protection"
-      },
-      {
-        "name": "Headington Institute",
-        "description": "Trauma recovery protocols, resilience-building for survivors"
-      },
-      {
-        "name": "National Center for PTSD",
-        "description": "Evidence-based treatment protocols, training for providers"
-      },
-      {
-        "name": "EMDR International Association",
-        "description": "Eye Movement Desensitization and Reprocessing for trauma"
-      },
-      {
-        "name": "ChildFund",
-        "description": "Child welfare services in developing regions"
-      },
-      {
-        "name": "Local Mental Health Services in DRC",
-        "description": "Community-based ongoing support after repatriation"
-      }
-    ],
-    "domains": [
-      "Documents/Asylum",
-      "Family/Reunion",
-      "Health/Medical"
-    ],
-    "case_status": "documented"
-  },
-  {
-    "case_id": "CASE_004",
-    "title": "Shelter Runaway",
-    "case_type": "runaway",
-    "age_at_case": null,
-    "age_group": "unknown",
-    "country": "Unknown",
-    "gender": "unknown",
-    "vulnerability_flags": [],
-    "story": {
-      "situation": "...",
-      "timeline": [],
-      "key_events": []
+    {
+      "id": "CP02",
+      "titre": "Défaillance parentale et conflit familial",
+      "categorie": "Protection de la jeunesse",
+      "pays": "Afghanistan",
+      "age": 12,
+      "sexe": "Fille",
+      "vulnerabilites": ["Conflit familial", "Souffrance psychologique", "Logement instable"],
+      "situation": "Zahra, 12 ans, est conduite par son père au service social : dépressif et dépassé depuis l'exil, il déclare ne plus pouvoir s'en occuper. L'enfant montre un repli et des résultats scolaires en chute. Le père n'est ni maltraitant ni absent : il est en détresse.",
+      "chronologie": [
+        {"date": "Jour 1", "evenement": "Demande d'aide du père au service social ; évaluation de la situation"},
+        {"date": "Semaine 1", "evenement": "Placement provisoire de Zahra en famille d'accueil ; visites encadrées maintenues"},
+        {"date": "Semaine 2", "evenement": "Orientation du père vers un suivi psychologique spécialisé exil/trauma"},
+        {"date": "Mois 2", "evenement": "Amélioration du père ; augmentation progressive des visites"},
+        {"date": "Mois 4", "evenement": "Plan de réintégration familiale progressif et accompagné"},
+        {"date": "Mois 6", "evenement": "Retour de Zahra au domicile avec suivi social hebdomadaire"}
+      ],
+      "cadre_legal": [
+        {"texte": "Décret relatif à l'aide à la jeunesse", "application": "Intervention car le bien-être de l'enfant est compromis ; priorité au maintien/rétablissement du lien familial."},
+        {"texte": "CIDE (1989), art. 9", "application": "La séparation parent-enfant est une mesure de dernier recours, temporaire et réévaluée."},
+        {"texte": "Directive 2013/33/UE (accueil)", "application": "Accès aux soins de santé mentale pour le parent demandeur/bénéficiaire."}
+      ],
+      "delais_cles": [
+        {"action": "Évaluation sociale de la situation", "delai": "Sans délai"},
+        {"action": "Réévaluation de la mesure de placement", "delai": "Périodique (mesure temporaire)"},
+        {"action": "Rapport au Service des Tutelles", "delai": "Selon échéancier"}
+      ],
+      "actions_tuteur": [
+        "Distinguer la défaillance ponctuelle (détresse) de la maltraitance — éviter une rupture définitive injustifiée.",
+        "Privilégier le placement temporaire en maintenant des visites encadrées régulières.",
+        "Orienter le parent vers un soin de santé mentale adapté à l'exil.",
+        "Co-construire un plan de réintégration progressif avec des garde-fous.",
+        "Soutenir la scolarité de Zahra pendant la période d'instabilité.",
+        "Documenter chaque étape pour objectiver la décision de retour."
+      ],
+      "solution": "Plutôt qu'une séparation définitive, le tuteur organise une mise à l'abri temporaire tout en traitant la cause réelle : la détresse psychologique du père. Le soin parental et un retour progressif et accompagné restaurent une cellule familiale fonctionnelle.",
+      "lecons": [
+        "La crise de santé mentale d'un parent est un enjeu de protection de l'enfant.",
+        "La réunification familiale doit rester l'objectif quand elle est compatible avec l'intérêt de l'enfant.",
+        "La visite encadrée préserve le lien d'attachement pendant la séparation.",
+        "Traiter la cause vaut mieux que gérer le symptôme."
+      ],
+      "ressources": ["Service de l'Aide à la Jeunesse (SAJ/SPJ)", "Services de santé mentale", "Familles d'accueil agréées"]
     },
-    "problems_identified": [],
-    "legal_framework": [],
-    "solutions_implemented": [],
-    "tuteur_obligations": [],
-    "lessons_learned": [],
-    "related_resources": [],
-    "domains": [
-      "general"
-    ],
-    "case_status": "documented"
-  },
-  {
-    "case_id": "CASE_005",
-    "title": "Work Situation / Child Labor",
-    "case_type": "child_labor",
-    "age_at_case": null,
-    "age_group": "unknown",
-    "country": "Unknown",
-    "gender": "unknown",
-    "vulnerability_flags": [],
-    "story": {
-      "situation": "...",
-      "timeline": [],
-      "key_events": []
+    {
+      "id": "CP03",
+      "titre": "Ancien enfant associé à un groupe armé — trauma complexe",
+      "categorie": "Santé / Trauma",
+      "pays": "République Démocratique du Congo",
+      "age": 9,
+      "sexe": "Garçon",
+      "vulnerabilites": ["Trauma sévère", "Malnutrition", "Mutisme", "Famille séparée"],
+      "situation": "Karim, 9 ans, a été enrôlé de force par une milice pendant six mois. Secouru par une ONG, il est mutique, hypervigilant et souffre de malnutrition. Il sursaute au moindre bruit et ne supporte pas le contact.",
+      "chronologie": [
+        {"date": "Semaine 1", "evenement": "Stabilisation médicale (nutrition, infections) en lieu sûr"},
+        {"date": "Semaine 2-4", "evenement": "Approche par la présence : travail de mise en sécurité, sans pression verbale"},
+        {"date": "Mois 2", "evenement": "Art-thérapie ; premiers mots ; expression par le dessin"},
+        {"date": "Mois 3", "evenement": "Localisation de la mère par le CICR ; premier appel vidéo"},
+        {"date": "Mois 4-5", "evenement": "Thérapie ciblée sur le trauma (TF-TCC) ; sommeil amélioré"},
+        {"date": "Mois 6", "evenement": "Réunification encadrée et suivi psychosocial de proximité"}
+      ],
+      "cadre_legal": [
+        {"texte": "Protocole facultatif CIDE sur les enfants dans les conflits armés", "application": "Interdiction de l'enrôlement ; droit à la démobilisation et à la réadaptation."},
+        {"texte": "Convention de l'OIT n°182 (pires formes de travail des enfants)", "application": "Protège contre le recrutement forcé."},
+        {"texte": "CIDE (1989), art. 39", "application": "Droit à la réadaptation physique et psychologique et à la réinsertion sociale."}
+      ],
+      "delais_cles": [
+        {"action": "Mise en sécurité et stabilisation médicale", "delai": "Immédiat"},
+        {"action": "Recherche familiale (CICR)", "delai": "Dès que la sécurité le permet"},
+        {"action": "Évaluation de la faisabilité de la réunification", "delai": "Avant tout retour"}
+      ],
+      "actions_tuteur": [
+        "Garantir d'abord la sécurité corporelle : nutrition, sommeil, soins.",
+        "Respecter le rythme de l'enfant ; ne jamais forcer la parole ni le récit du trauma.",
+        "Mobiliser des médiations non verbales (art-thérapie, jeu).",
+        "Coordonner une thérapie spécialisée du trauma (ex. TF-TCC).",
+        "Engager la recherche familiale via le CICR et préparer la famille au retour.",
+        "Mettre en place un relais de soins durable avant toute réunification."
+      ],
+      "solution": "La relation de sécurité prime sur la technique : le tuteur installe d'abord un cadre apaisant, puis introduit des soins spécialisés. La reconnexion familiale et un suivi de proximité permettent une réinsertion progressive sans re-traumatisation.",
+      "lecons": [
+        "La sécurité relationnelle est la première intervention thérapeutique.",
+        "Forcer la verbalisation du trauma re-traumatise — laisser l'enfant guider le rythme.",
+        "La santé physique conditionne la disponibilité psychique.",
+        "Une réunification réussie se prépare des deux côtés et s'accompagne dans la durée."
+      ],
+      "ressources": ["CICR", "UNICEF", "Services de pédopsychiatrie spécialisés trauma", "Médecins Sans Frontières"]
     },
-    "problems_identified": [],
-    "legal_framework": [],
-    "solutions_implemented": [],
-    "tuteur_obligations": [],
-    "lessons_learned": [],
-    "related_resources": [],
-    "domains": [
-      "general"
-    ],
-    "case_status": "documented"
-  },
-  {
-    "case_id": "CASE_006",
-    "title": "Justice-Involved / Police Contact",
-    "case_type": "justice_system",
-    "age_at_case": null,
-    "age_group": "unknown",
-    "country": "Unknown",
-    "gender": "unknown",
-    "vulnerability_flags": [],
-    "story": {
-      "situation": "...",
-      "timeline": [],
-      "key_events": []
+    {
+      "id": "CP04",
+      "titre": "Fugue du centre d'accueil et risque de disparition",
+      "categorie": "Disparition / Sécurité",
+      "pays": "Maroc",
+      "age": 15,
+      "sexe": "Garçon",
+      "vulnerabilites": ["Logement instable", "Risque de traite", "Rupture de scolarité"],
+      "situation": "Mohammed, 15 ans, fugue du centre après trois semaines. Il supporte mal le cadre et veut rejoindre un cousin présumé dans un autre pays. Le risque est qu'il bascule dans des réseaux d'exploitation pendant son errance.",
+      "chronologie": [
+        {"date": "Jour 0", "evenement": "Constat de l'absence ; signalement immédiat (police + Service des Tutelles)"},
+        {"date": "Jour 0", "evenement": "Diffusion d'un signalement de disparition de mineur"},
+        {"date": "Jour 5", "evenement": "Localisation par les services sociaux d'une autre ville"},
+        {"date": "Semaine 2", "evenement": "Entretien de remobilisation ; écoute des motifs de la fugue"},
+        {"date": "Mois 1", "evenement": "Réorientation vers un accueil plus adapté à son profil"},
+        {"date": "Mois 2", "evenement": "Vérification de la piste familiale via canaux officiels"}
+      ],
+      "cadre_legal": [
+        {"texte": "Procédure « Disparition inquiétante de mineur »", "application": "Tout MENA disparu est présumé en danger : signalement et recherche actives."},
+        {"texte": "Directive 2011/36/UE (traite des êtres humains)", "application": "Vigilance accrue : les MENA en fugue sont des cibles privilégiées des réseaux."},
+        {"texte": "Loi du 12/01/2007 (accueil)", "application": "Droit à un hébergement adapté au profil et à l'âge du mineur."}
+      ],
+      "delais_cles": [
+        {"action": "Signalement de la disparition", "delai": "Immédiat dès le constat"},
+        {"action": "Réévaluation de l'orientation après retour", "delai": "Dès la remobilisation"}
+      ],
+      "actions_tuteur": [
+        "Signaler immédiatement toute disparition — ne jamais attendre.",
+        "Traiter chaque fugue de MENA comme une disparition inquiétante (risque de traite).",
+        "À son retour, écouter sans juger les raisons de la fugue.",
+        "Évaluer la réalité et la sécurité de la piste familiale invoquée.",
+        "Réorienter vers une structure d'accueil mieux adaptée pour éviter la récidive.",
+        "Renforcer l'accroche scolaire/occupationnelle comme facteur de stabilité."
+      ],
+      "solution": "Le tuteur réagit comme face à une disparition à risque, retrouve le mineur, puis traite la cause de la fugue (inadaptation du cadre, quête familiale) par une réorientation et une vérification sécurisée de la piste familiale, plutôt que par la contrainte.",
+      "lecons": [
+        "Une fugue de MENA n'est jamais anodine : risque élevé d'exploitation.",
+        "Comprendre le « pourquoi » de la fugue prévient la récidive.",
+        "Un cadre d'accueil inadapté nourrit l'instabilité.",
+        "La vérification des liens familiaux doit passer par des canaux officiels et sûrs."
+      ],
+      "ressources": ["Police / Child Focus", "Service des Tutelles", "Fedasil", "Croix-Rouge"]
     },
-    "problems_identified": [],
-    "legal_framework": [],
-    "solutions_implemented": [],
-    "tuteur_obligations": [],
-    "lessons_learned": [],
-    "related_resources": [],
-    "domains": [
-      "general"
-    ],
-    "case_status": "documented"
-  },
-  {
-    "case_id": "CASE_007",
-    "title": "Health Crisis - Diabetes Management in Migration",
-    "case_type": "health",
-    "age_at_case": null,
-    "age_group": "unknown",
-    "country": "Unknown",
-    "gender": "unknown",
-    "vulnerability_flags": [],
-    "story": {
-      "situation": "...",
-      "timeline": [],
-      "key_events": []
+    {
+      "id": "CP05",
+      "titre": "Exploitation par le travail d'un adolescent",
+      "categorie": "Exploitation économique",
+      "pays": "Bangladesh",
+      "age": 14,
+      "sexe": "Garçon",
+      "vulnerabilites": ["Travail des enfants", "Problèmes de santé", "Rupture de scolarité", "Dette/emprise"],
+      "situation": "Yassin, 14 ans, est découvert par un inspecteur travaillant dans un atelier textile, sans contrat, douze heures par jour, pour rembourser une « dette de voyage ». Il présente des troubles respiratoires liés aux poussières et n'est pas scolarisé.",
+      "chronologie": [
+        {"date": "Jour 1", "evenement": "Constat d'inspection du travail ; retrait immédiat du lieu d'exploitation"},
+        {"date": "Jour 1", "evenement": "Signalement comme MENA et possible victime de traite à des fins d'exploitation"},
+        {"date": "Semaine 1", "evenement": "Bilan médical (troubles respiratoires) et mise à l'abri"},
+        {"date": "Semaine 2", "evenement": "Orientation vers le dispositif de protection des victimes de traite"},
+        {"date": "Mois 1", "evenement": "Scolarisation/formation ; suivi psychologique de l'emprise"},
+        {"date": "Mois 3", "evenement": "Procédure pénale contre l'exploiteur ; statut de protection pour Yassin"}
+      ],
+      "cadre_legal": [
+        {"texte": "Convention OIT n°138 (âge minimum) & n°182", "application": "Le travail de Yassin relève d'une des pires formes de travail des enfants."},
+        {"texte": "Loi du 10/08/2005 (traite des êtres humains) — Belgique", "application": "Exploitation économique : la victime mineure bénéficie d'un statut de protection."},
+        {"texte": "Directive 2011/36/UE", "application": "Identification, protection et non-sanction de la victime de traite."},
+        {"texte": "Décret scolarité obligatoire", "application": "Droit et obligation à l'enseignement, indépendamment du statut."}
+      ],
+      "delais_cles": [
+        {"action": "Retrait du lieu d'exploitation", "delai": "Immédiat"},
+        {"action": "Orientation vers un centre spécialisé traite", "delai": "Sans délai"},
+        {"action": "Inscription scolaire/formation", "delai": "Dans les 60 jours"}
+      ],
+      "actions_tuteur": [
+        "Faire cesser immédiatement l'exploitation et sécuriser le mineur.",
+        "Activer le dispositif spécialisé « victimes de traite » (centres agréés).",
+        "Veiller à l'absence de sanction de la victime (principe de non-punition).",
+        "Organiser les soins pour les pathologies liées au travail.",
+        "Réinsérer par la scolarité ou la formation professionnelle.",
+        "Soutenir la coopération avec la justice tout en protégeant l'enfant."
+      ],
+      "solution": "Le tuteur traite Yassin comme une victime, non comme un travailleur en infraction : retrait, statut de protection traite, soins, et réinsertion scolaire. La « dette de voyage » est un mécanisme d'emprise typique, juridiquement nul.",
+      "lecons": [
+        "Le travail d'un MENA cache souvent un réseau de traite.",
+        "La victime ne doit jamais être pénalisée pour les faits commis sous contrainte.",
+        "La « dette » est un outil d'asservissement sans valeur juridique.",
+        "La réinsertion par l'école ou la formation est la meilleure protection à long terme."
+      ],
+      "ressources": ["Centres spécialisés traite (PAG-ASA, Sürya, Payoke)", "Inspection du travail", "Service des Tutelles"]
     },
-    "problems_identified": [],
-    "legal_framework": [],
-    "solutions_implemented": [],
-    "tuteur_obligations": [],
-    "lessons_learned": [],
-    "related_resources": [],
-    "domains": [
-      "general"
-    ],
-    "case_status": "documented"
-  },
-  {
-    "case_id": "CASE_008",
-    "title": "Family Reunification - Navigating Legal & Emotional Barriers",
-    "case_type": "reunification",
-    "age_at_case": null,
-    "age_group": "unknown",
-    "country": "Unknown",
-    "gender": "unknown",
-    "vulnerability_flags": [],
-    "story": {
-      "situation": "...",
-      "timeline": [],
-      "key_events": []
+    {
+      "id": "CP06",
+      "titre": "Traite à des fins d'exploitation sexuelle",
+      "categorie": "Traite des êtres humains",
+      "pays": "Nigéria",
+      "age": 16,
+      "sexe": "Fille",
+      "vulnerabilites": ["Risque de traite", "Trauma", "Emprise psychologique", "Famille séparée"],
+      "situation": "Joy, 16 ans, a été amenée sous promesse d'études puis contrainte à la prostitution. Elle est sous l'emprise d'un réseau (serment « juju », menaces sur sa famille restée au pays). Elle nie d'abord toute exploitation par peur.",
+      "chronologie": [
+        {"date": "Jour 1", "evenement": "Repérage ; mise en sécurité dans un lieu confidentiel"},
+        {"date": "Semaine 1", "evenement": "Évaluation par un centre spécialisé traite ; établissement d'un lien de confiance"},
+        {"date": "Semaine 2-4", "evenement": "Délai de réflexion ; soins et accompagnement psychologique de l'emprise"},
+        {"date": "Mois 2", "evenement": "Décision de collaborer ; obtention du statut de protection des victimes de traite"},
+        {"date": "Mois 3", "evenement": "Suivi du trauma, scolarisation, sécurisation de la famille au pays via partenaires"}
+      ],
+      "cadre_legal": [
+        {"texte": "Protocole de Palerme (2000)", "application": "Définit la traite ; le consentement de la victime est sans effet face à la contrainte."},
+        {"texte": "Directive 2011/36/UE & Loi du 10/08/2005", "application": "Statut de séjour et protection spécifiques aux victimes de traite."},
+        {"texte": "Convention d'Istanbul", "application": "Protection renforcée des femmes et filles victimes de violences et d'exploitation."},
+        {"texte": "CIDE, art. 34-35", "application": "Protection contre l'exploitation et la violence sexuelles."}
+      ],
+      "delais_cles": [
+        {"action": "Mise en sécurité confidentielle", "delai": "Immédiat"},
+        {"action": "Délai de réflexion (statut traite)", "delai": "Période de réflexion légale"},
+        {"action": "Orientation centre spécialisé", "delai": "Sans délai"}
+      ],
+      "actions_tuteur": [
+        "Assurer une mise à l'abri dans un lieu tenu confidentiel face au réseau.",
+        "Ne pas brusquer les aveux : l'emprise et la peur expliquent le déni initial.",
+        "Confier l'accompagnement à un centre spécialisé traite.",
+        "Activer le statut de protection sans conditionner l'aide à la dénonciation.",
+        "Prendre au sérieux les menaces sur la famille et solliciter des partenaires sur place.",
+        "Déconstruire l'emprise (y compris rituelle) avec un soutien psychologique adapté."
+      ],
+      "solution": "Le tuteur protège d'abord, comprend l'emprise, et n'exige jamais la dénonciation comme préalable à l'aide. Le statut de protection des victimes, des soins spécialisés et la sécurisation de la famille brisent le levier de contrôle du réseau.",
+      "lecons": [
+        "Le déni initial est un symptôme de l'emprise, pas une absence d'exploitation.",
+        "Le consentement apparent est inopérant en présence de contrainte.",
+        "La confidentialité du lieu d'accueil est vitale.",
+        "L'aide ne doit jamais être conditionnée à la coopération judiciaire."
+      ],
+      "ressources": ["Centres spécialisés traite", "Police judiciaire — cellule traite", "Service des Tutelles", "ONG anti-traite"]
     },
-    "problems_identified": [],
-    "legal_framework": [],
-    "solutions_implemented": [],
-    "tuteur_obligations": [],
-    "lessons_learned": [],
-    "related_resources": [],
-    "domains": [
-      "general"
-    ],
-    "case_status": "documented"
-  },
-  {
-    "case_id": "CASE_009",
-    "title": "Readmission & Safe Third Country - Legal Borderlands",
-    "case_type": "readmission",
-    "age_at_case": null,
-    "age_group": "unknown",
-    "country": "Unknown",
-    "gender": "unknown",
-    "vulnerability_flags": [],
-    "story": {
-      "situation": "...",
-      "timeline": [],
-      "key_events": []
+    {
+      "id": "CP07",
+      "titre": "Mineur en conflit avec la loi",
+      "categorie": "Justice des mineurs",
+      "pays": "Algérie",
+      "age": 16,
+      "sexe": "Garçon",
+      "vulnerabilites": ["Conflit familial", "Logement instable", "Rupture de scolarité"],
+      "situation": "Khalid, 16 ans, est interpellé pour un vol avec un groupe plus âgé qui l'instrumentalise. C'est son premier contact avec la justice. Il risque la marginalisation et la récidive s'il est traité comme un délinquant ordinaire plutôt que comme un mineur à protéger.",
+      "chronologie": [
+        {"date": "Jour 1", "evenement": "Interpellation ; information du tuteur ; présence à l'audition"},
+        {"date": "Jour 2", "evenement": "Présentation au juge de la jeunesse ; mesure éducative privilégiée"},
+        {"date": "Semaine 2", "evenement": "Évaluation socio-éducative ; mesure de réparation/accompagnement"},
+        {"date": "Mois 1", "evenement": "Réinscription en formation ; éloignement du groupe à risque"},
+        {"date": "Mois 3", "evenement": "Suivi éducatif ; bilan positif au juge de la jeunesse"}
+      ],
+      "cadre_legal": [
+        {"texte": "Loi/Décret sur la protection de la jeunesse", "application": "Le mineur relève de mesures éducatives, non de la logique pénale adulte."},
+        {"texte": "CIDE, art. 37 & 40", "application": "Justice adaptée aux mineurs ; privation de liberté en dernier recours et la plus brève possible."},
+        {"texte": "Règles de Beijing (ONU)", "application": "Priorité à la réinsertion et à des alternatives à la détention."}
+      ],
+      "delais_cles": [
+        {"action": "Présence du tuteur à l'audition", "delai": "Dès l'interpellation"},
+        {"action": "Présentation au juge de la jeunesse", "delai": "Délais légaux stricts"}
+      ],
+      "actions_tuteur": [
+        "Être présent dès l'audition et garantir l'assistance d'un avocat spécialisé jeunesse.",
+        "Faire valoir le statut de mineur à protéger et le contexte d'instrumentalisation.",
+        "Plaider pour une mesure éducative/réparatrice plutôt que répressive.",
+        "Éloigner Khalid du groupe à risque et restaurer un cadre.",
+        "Réengager une formation ou un projet structurant.",
+        "Assurer un suivi éducatif et rendre compte au juge."
+      ],
+      "solution": "Le tuteur fait primer la logique de protection sur la logique répressive : assistance juridique, mesure éducative, rupture avec le groupe délinquant et réinsertion par la formation, évitant l'engrenage de la récidive.",
+      "lecons": [
+        "Un mineur délinquant reste avant tout un mineur à protéger.",
+        "La détention doit être l'exception, brève et de dernier recours.",
+        "L'instrumentalisation par des plus âgés doit être documentée et plaidée.",
+        "La réinsertion structurante prévient la récidive mieux que la sanction seule."
+      ],
+      "ressources": ["Juge de la jeunesse", "Avocat spécialisé droit de la jeunesse", "Services d'aide éducative", "Service des Tutelles"]
     },
-    "problems_identified": [],
-    "legal_framework": [],
-    "solutions_implemented": [],
-    "tuteur_obligations": [],
-    "lessons_learned": [],
-    "related_resources": [],
-    "domains": [
-      "general"
-    ],
-    "case_status": "documented"
-  },
-  {
-    "case_id": "CASE_010",
-    "title": "Mixed Vulnerabilities 1 - Trauma, Family Conflict & Health Crisis",
-    "case_type": "mixed",
-    "age_at_case": null,
-    "age_group": "unknown",
-    "country": "Unknown",
-    "gender": "unknown",
-    "vulnerability_flags": [],
-    "story": {
-      "situation": "...",
-      "timeline": [],
-      "key_events": []
+    {
+      "id": "CP08",
+      "titre": "Maladie chronique et continuité des soins en migration",
+      "categorie": "Santé",
+      "pays": "Irak",
+      "age": 11,
+      "sexe": "Fille",
+      "vulnerabilites": ["Problèmes de santé", "Rupture de soins", "Logement instable"],
+      "situation": "Layla, 11 ans, est diabétique de type 1. Pendant le parcours migratoire, son traitement a été interrompu, faute d'insuline et de suivi. Elle arrive en état d'hyperglycémie chronique, sans ordonnance ni carnet de suivi.",
+      "chronologie": [
+        {"date": "Jour 1", "evenement": "Repérage du problème de santé au bilan d'arrivée ; orientation médicale urgente"},
+        {"date": "Semaine 1", "evenement": "Stabilisation du diabète ; ouverture de la couverture médicale (AMU/mutuelle)"},
+        {"date": "Semaine 2", "evenement": "Mise en place d'un suivi diabétologique pédiatrique régulier"},
+        {"date": "Mois 1", "evenement": "Éducation thérapeutique de Layla (auto-surveillance) avec interprète"},
+        {"date": "Mois 2", "evenement": "Hébergement adapté garantissant chaîne du froid de l'insuline et repas réguliers"}
+      ],
+      "cadre_legal": [
+        {"texte": "CIDE, art. 24", "application": "Droit de l'enfant au meilleur état de santé possible et à l'accès aux soins."},
+        {"texte": "Aide Médicale Urgente (AMU)", "application": "Accès garanti aux soins, y compris pour situations administratives précaires."},
+        {"texte": "Directive 2013/33/UE (accueil)", "application": "Soins de santé et conditions matérielles adaptées aux besoins particuliers."}
+      ],
+      "delais_cles": [
+        {"action": "Prise en charge médicale", "delai": "Urgente (état instable)"},
+        {"action": "Ouverture de la couverture santé", "delai": "Dès que possible"}
+      ],
+      "actions_tuteur": [
+        "Faire de la santé une priorité absolue lorsqu'un risque vital existe.",
+        "Ouvrir sans délai la couverture médicale (AMU puis affiliation).",
+        "Mettre en place un suivi spécialisé pérenne (diabétologie pédiatrique).",
+        "Veiller à un hébergement compatible avec la maladie (chaîne du froid, repas réguliers).",
+        "Organiser l'éducation thérapeutique de l'enfant avec interprète.",
+        "Constituer un dossier médical complet pour assurer la continuité des soins."
+      ],
+      "solution": "Le tuteur sécurise la continuité des soins : prise en charge urgente, couverture médicale, suivi spécialisé et hébergement adapté. L'éducation thérapeutique rend Layla actrice de sa santé et prévient les complications.",
+      "lecons": [
+        "Une maladie chronique interrompue peut devenir une urgence vitale.",
+        "L'AMU garantit l'accès aux soins même en situation précaire.",
+        "L'hébergement doit être compatible avec les contraintes médicales.",
+        "Rendre l'enfant autonome dans sa maladie est un objectif de soin."
+      ],
+      "ressources": ["Hôpital pédiatrique", "Mutuelle / CPAS (AMU)", "Diabétologie pédiatrique", "Interprétariat médical"]
     },
-    "problems_identified": [],
-    "legal_framework": [],
-    "solutions_implemented": [],
-    "tuteur_obligations": [
-      {
-        "responsibility": "Case Assessment and Planning",
-        "description": "Conduct comprehensive initial assessment across all life domains (health, education, family, psychological, economic)"
-      },
-      {
-        "responsibility": "Medical Case Management",
-        "description": "Ensure TB treatment initiation and monitor medication adherence"
-      },
-      {
-        "responsibility": "Psychosocial Support Coordination",
-        "description": "Identify and refer to qualified child psychologist or trauma counselor"
-      },
-      {
-        "responsibility": "Family Strengthening and Mediation",
-        "description": "Facilitate communication between immediate family and extended family"
-      },
-      {
-        "responsibility": "Educational Advocacy and Support",
-        "description": "Verify school enrollment and regular attendance"
-      },
-      {
-        "responsibility": "Economic Support Access",
-        "description": "Assess household economic situation and identify available assistance programs"
-      },
-      {
-        "responsibility": "Safety Monitoring and Protection",
-        "description": "Conduct regular home visits to assess living conditions and safety"
-      },
-      {
-        "responsibility": "Service Coordination and Navigation",
-        "description": "Maintain active contact with all service providers (health, school, counselor, etc.)"
-      },
-      {
-        "responsibility": "Capacity Building for Primary Caregiver",
-        "description": "Support mother's participation in parenting education and stress management"
-      },
-      {
-        "responsibility": "Documentation and Accountability",
-        "description": "Maintain detailed case file with all documents, assessments, and communications"
-      },
-      {
-        "responsibility": "Advocacy and Rights Protection",
-        "description": "Ensure child's voices and preferences are heard in decision-making"
-      },
-      {
-        "responsibility": "Case Closure Planning and Sustainability",
-        "description": "By month 6, work with family and service providers to plan for transition"
-      }
-    ],
-    "lessons_learned": [
-      "**Multiple Vulnerabilities Interact and Compound**",
-      "**Timing of Crisis Intervention is Critical**",
-      "**Schools are Critical Early Warning Systems**",
-      "**Caregiver Stress is a Protective Factor Risk**",
-      "**Family Conflict Resolution can Restore Critical Support**",
-      "**Coordinated, Multi-Sectoral Approach is Non-Negotiable**",
-      "**Economic Support Must be Paired with Other Interventions**",
-      "**Formal Health Systems and Social Protection Systems Must Be Integrated**",
-      "**Tailored Support for Different Child Developmental Stages**",
-      "**Sustainability Requires Building Family and Community Capacity**"
-    ],
-    "related_resources": [],
-    "domains": [
-      "general"
-    ],
-    "case_status": "documented"
-  },
-  {
-    "case_id": "CASE_011",
-    "title": "Mixed Vulnerabilities 2 - Trafficking, Psychological Trauma & Educational Delay",
-    "case_type": "mixed",
-    "age_at_case": null,
-    "age_group": "unknown",
-    "country": "Unknown",
-    "gender": "unknown",
-    "vulnerability_flags": [],
-    "story": {
-      "situation": "...",
-      "timeline": [],
-      "key_events": []
+    {
+      "id": "CP09",
+      "titre": "Réunification familiale transfrontalière",
+      "categorie": "Réunification familiale",
+      "pays": "Somalie",
+      "age": 10,
+      "sexe": "Fille",
+      "vulnerabilites": ["Famille séparée", "Documents manquants", "Souffrance psychologique"],
+      "situation": "Zainab, 10 ans, est séparée de son père depuis quatre ans. Le père, réfugié reconnu dans un autre pays européen, souhaite la réunification. Les preuves du lien familial sont incomplètes et la procédure administrative est longue et complexe.",
+      "chronologie": [
+        {"date": "Mois 1", "evenement": "Identification du lien familial ; localisation du père"},
+        {"date": "Mois 2", "evenement": "Constitution du dossier de regroupement ; recherche de preuves du lien"},
+        {"date": "Mois 4", "evenement": "Test ADN proposé faute de documents officiels suffisants"},
+        {"date": "Mois 8", "evenement": "Évaluation de l'intérêt supérieur de l'enfant ; préparation psychologique"},
+        {"date": "Mois 12", "evenement": "Décision favorable ; réunification encadrée et suivi post-réunification"}
+      ],
+      "cadre_legal": [
+        {"texte": "Directive 2003/86/CE (regroupement familial)", "application": "Droit au regroupement, notamment pour les familles de réfugiés."},
+        {"texte": "Règlement Dublin III, art. 8", "application": "Priorité de rapprochement vers le membre de famille présent dans un État membre."},
+        {"texte": "CIDE, art. 10", "application": "Les demandes de réunification familiale sont traitées avec diligence et bienveillance."}
+      ],
+      "delais_cles": [
+        {"action": "Demande de prise en charge Dublin (rapprochement familial)", "delai": "Délais stricts du règlement"},
+        {"action": "Préparation psychologique à la réunification", "delai": "Avant le transfert"}
+      ],
+      "actions_tuteur": [
+        "Documenter le lien familial par tous moyens (témoignages, photos, test ADN si nécessaire).",
+        "Mobiliser le mécanisme Dublin pour le rapprochement quand un membre de famille est dans l'UE.",
+        "Faire évaluer l'intérêt supérieur de l'enfant avant tout transfert.",
+        "Préparer psychologiquement Zainab à des retrouvailles après une longue séparation.",
+        "Coordonner avec le tuteur/services du pays d'accueil du père.",
+        "Prévoir un suivi post-réunification pour accompagner la réadaptation."
+      ],
+      "solution": "Le tuteur transforme une procédure longue en parcours maîtrisé : preuve du lien, activation du bon instrument juridique (Dublin/regroupement), évaluation de l'intérêt de l'enfant et préparation psychologique, garantissant des retrouvailles réussies et durables.",
+      "lecons": [
+        "L'absence de documents ne ferme pas la réunification : d'autres preuves existent (dont l'ADN).",
+        "Le règlement Dublin peut servir l'intérêt de l'enfant (rapprochement familial).",
+        "Des retrouvailles après des années se préparent psychologiquement.",
+        "Le suivi post-réunification prévient les désillusions et les ruptures."
+      ],
+      "ressources": ["Office des Étrangers — cellule Dublin", "Croix-Rouge / CICR", "Services sociaux du pays d'accueil", "Laboratoires agréés (test ADN)"]
     },
-    "problems_identified": [],
-    "legal_framework": [],
-    "solutions_implemented": [],
-    "tuteur_obligations": [
-      {
-        "responsibility": "Comprehensive Initial Assessment and Care Planning",
-        "description": "Assess trafficking experience and trauma impacts across all life domains"
-      },
-      {
-        "responsibility": "Medical Care Coordination and Health Monitoring",
-        "description": "Ensure emergency medical assessment and treatment"
-      },
-      {
-        "responsibility": "Psychological Trauma Support and Mental Health Coordination",
-        "description": "Refer to qualified trauma-informed child psychologist"
-      },
-      {
-        "responsibility": "Educational Assessment, Enrollment, and Academic Support",
-        "description": "Conduct educational assessment; identify learning gaps and needs"
-      },
-      {
-        "responsibility": "Family Relationship Building and Reunification Support",
-        "description": "Assess family relationships and reintegration feasibility"
-      },
-      {
-        "responsibility": "Maternal Mental Health and Caregiver Capacity Support",
-        "description": "Assess mother's mental health status and treatment needs"
-      },
-      {
-        "responsibility": "Economic Support and Housing Stability",
-        "description": "Assess household economic situation and vulnerabilities"
-      },
-      {
-        "responsibility": "Re-trafficking Prevention and Risk Management",
-        "description": "Conduct re-trafficking risk assessment; update periodically"
-      },
-      {
-        "responsibility": "Service Coordination and Multi-Sectoral Collaboration",
-        "description": "Establish contact with all service providers (medical, psychological, educational, social)"
-      },
-      {
-        "responsibility": "Safety Monitoring and Protection",
-        "description": "Conduct regular home visits; assess living conditions and safety"
-      },
-      {
-        "responsibility": "Documentation and Legal Support",
-        "description": "Verify Oumou's birth registration and legal documentation"
-      },
-      {
-        "responsibility": "Empowerment and Skill Development",
-        "description": "Support Oumou's voice and preferences in decision-making"
-      },
-      {
-        "responsibility": "Monitoring, Outcomes, and Transition",
-        "description": "Track indicators across health, psychological, educational, family, economic domains"
-      }
-    ],
-    "lessons_learned": [
-      "**Trafficking is a Symptom of Poverty and System Failure, Not Primarily a Criminal Issue**",
-      "**Families in Extreme Poverty May Participate in Trafficking Unknowingly or Desperately**",
-      "**Trafficking Survivors Require Intensive, Specialized, Trauma-Informed Care**",
-      "**Educational Delay from Missed Schooling is a Lifelong Vulnerability**",
-      "**Maternal Mental Illness Must Be Treated Alongside Family Reunification**",
-      "**Poverty Reduction is Re-trafficking Prevention**",
-      "**Community Knowledge of Trafficking Event Can Create Stigma or Risk**",
-      "**Re-trafficking Risk Assessment Must Be Ongoing, Not One-Time**",
-      "**Legal Prosecution of Traffickers Can Conflict with Survivor Protection**",
-      "**Trafficking Survivors Require Longer-Term Case Management Than Other Vulnerable Children**"
-    ],
-    "related_resources": [],
-    "domains": [
-      "general"
-    ],
-    "case_status": "documented"
-  },
-  {
-    "case_id": "CASE_012",
-    "title": "Additional Complex Case - Legal, Employment & Family Intersections",
-    "case_type": "additional",
-    "age_at_case": null,
-    "age_group": "unknown",
-    "country": "Unknown",
-    "gender": "unknown",
-    "vulnerability_flags": [],
-    "story": {
-      "situation": "...",
-      "timeline": [],
-      "key_events": []
+    {
+      "id": "CP10",
+      "titre": "Procédure Dublin et risque de transfert",
+      "categorie": "Procédure Dublin",
+      "pays": "Afghanistan",
+      "age": 16,
+      "sexe": "Garçon",
+      "vulnerabilites": ["Documents manquants", "Trauma", "Risque de rupture de parcours"],
+      "situation": "Hassan, 16 ans, a d'abord transité par un autre État membre où ses empreintes ont été enregistrées. Ce pays est désigné « responsable » par Dublin. Mais Hassan y a vécu des conditions d'accueil défaillantes et y est isolé, sans famille.",
+      "chronologie": [
+        {"date": "Jour 1", "evenement": "Détection d'un hit Eurodac ; information sur la procédure Dublin"},
+        {"date": "Semaine 2", "evenement": "Analyse : Hassan est mineur non accompagné sans famille dans l'autre État"},
+        {"date": "Mois 1", "evenement": "Argumentation pour la responsabilité de l'État où il se trouve (intérêt de l'enfant)"},
+        {"date": "Mois 2", "evenement": "Maintien de la demande d'asile sur place ; pas de transfert"},
+        {"date": "Mois 4", "evenement": "Poursuite de la procédure de fond ; stabilisation et scolarisation"}
+      ],
+      "cadre_legal": [
+        {"texte": "Règlement Dublin III, art. 8.4", "application": "Pour un MENA sans famille dans l'UE, l'État responsable est celui où il se trouve, si conforme à son intérêt."},
+        {"texte": "CJUE, arrêt MA e.a. (C-648/11)", "application": "Un MENA ne doit pas être transféré au seul motif d'un premier enregistrement ailleurs."},
+        {"texte": "CIDE, art. 3", "application": "L'intérêt supérieur prime sur la logique de répartition entre États."}
+      ],
+      "delais_cles": [
+        {"action": "Contestation/recours contre une décision de transfert", "delai": "Délais courts du règlement"},
+        {"action": "Détermination de l'État responsable", "delai": "Délais Dublin stricts"}
+      ],
+      "actions_tuteur": [
+        "Faire valoir que, pour un MENA isolé, l'État responsable est en principe celui où il réside.",
+        "S'appuyer sur la jurisprudence (arrêt MA) contre un transfert automatique.",
+        "Documenter les défaillances d'accueil subies dans l'autre État.",
+        "Contester dans les délais toute décision de transfert.",
+        "Stabiliser Hassan (hébergement, soins, école) pendant la procédure.",
+        "Articuler systématiquement l'argumentaire autour de l'intérêt supérieur de l'enfant."
+      ],
+      "solution": "Le tuteur évite un transfert préjudiciable en mobilisant la règle protectrice de Dublin pour les MENA isolés et la jurisprudence européenne. La procédure d'asile se poursuit sur place, dans la continuité et la stabilité.",
+      "lecons": [
+        "Un MENA isolé n'est pas transférable au seul motif d'un premier enregistrement ailleurs.",
+        "La jurisprudence européenne est un levier concret de protection.",
+        "Les délais Dublin sont courts : la réactivité est cruciale.",
+        "L'intérêt supérieur de l'enfant prime sur la mécanique inter-États."
+      ],
+      "ressources": ["Avocat spécialisé droit des étrangers", "Office des Étrangers — cellule Dublin", "CCE (recours)", "ONG d'aide juridique"]
     },
-    "problems_identified": [],
-    "legal_framework": [],
-    "solutions_implemented": [],
-    "tuteur_obligations": [
-      {
-        "responsibility": "Comprehensive Initial Assessment and Case Planning",
-        "description": "Assess abuse, labor exploitation, medical crisis, educational status, family situation"
-      },
-      {
-        "responsibility": "Medical Coordination and Health Management",
-        "description": "Ensure emergency medical care; oversee infection treatment"
-      },
-      {
-        "responsibility": "Psychological Support and Mental Health",
-        "description": "Refer to qualified trauma-informed psychologist"
-      },
-      {
-        "responsibility": "Educational Assessment, Re-engagement, and Academic Support",
-        "description": "Conduct educational assessment; identify gaps and learning needs"
-      },
-      {
-        "responsibility": "Safety Assessment and Protective Planning",
-        "description": "Assess home environment for safety; identify abuse risks"
-      },
-      {
-        "responsibility": "Family Strengthening and Relationship Support",
-        "description": "Assess family relationships and dynamics; document strengths"
-      },
-      {
-        "responsibility": "Maternal Support and Domestic Violence Response",
-        "description": "Assess mother's own trauma and wellbeing"
-      },
-      {
-        "responsibility": "Economic Support and Livelihood Restructuring",
-        "description": "Assess household's economic situation comprehensively"
-      },
-      {
-        "responsibility": "Legal Advocacy and Prosecution Support",
-        "description": "Coordinate with police investigation; ensure proper evidence gathering"
-      },
-      {
-        "responsibility": "Labor Abuse Investigation and Employer Accountability",
-        "description": "Ensure child labor violation is properly investigated"
-      },
-      {
-        "responsibility": "Service Coordination and Multi-Sectoral Integration",
-        "description": "Establish contact with all service providers (medical, school, psychological, legal)"
-      },
-      {
-        "responsibility": "Advocacy and Rights Protection",
-        "description": "Ensure Bashir's voice and preferences are centered in decision-making"
-      },
-      {
-        "responsibility": "Monitoring, Outcomes, and Case Transition",
-        "description": "Track indicators across health, psychological, educational, family, economic, legal domains"
-      }
-    ],
-    "lessons_learned": [
-      "**Adolescent Vulnerability is Qualitatively Different from Younger Children**",
-      "**Poverty-Driven Child Labor is Systematic, Not Just Individual**",
-      "**Occupational Injuries in Child Labor Have Permanent Consequences**",
-      "**Domestic Violence Against Mothers Affects Child Protection**",
-      "**Educational Delay is Cumulative and Difficult to Reverse**",
-      "**Legal Processes Are Slow and Can Re-Traumatize Victims**",
-      "**Adolescent Identity Formation is Disrupted by Trauma and Labor**",
-      "**Economic Support Must Be Coupled with Employment Support for Caregivers**",
-      "**Prosecutorial Response to Child Labor Requires Multi-Sectoral Coordination**",
-      "**Recovery from Simultaneous Traumas Takes Time and Patience**"
-    ],
-    "related_resources": [],
-    "domains": [
-      "general"
-    ],
-    "case_status": "documented"
-  },
-  {
-    "case_id": "CASE_013",
-    "title": "Complex Scenario 1 - Approaching Legal Adulthood",
-    "case_type": "complex",
-    "age_at_case": null,
-    "age_group": "unknown",
-    "country": "Unknown",
-    "gender": "unknown",
-    "vulnerability_flags": [],
-    "story": {
-      "situation": "...",
-      "timeline": [],
-      "key_events": []
+    {
+      "id": "CP11",
+      "titre": "Risque de mariage forcé",
+      "categorie": "Protection / Violences",
+      "pays": "Guinée",
+      "age": 15,
+      "sexe": "Fille",
+      "vulnerabilites": ["Risque de mariage forcé", "Pression familiale", "Rupture de scolarité"],
+      "situation": "Fatou, 15 ans, confie à une enseignante que sa famille élargie prépare son mariage avec un homme adulte, prévu lors d'un « voyage au pays » imminent. Elle est terrorisée et craint de ne pas revenir.",
+      "chronologie": [
+        {"date": "Jour 1", "evenement": "Signalement par l'école ; mise en sécurité de Fatou"},
+        {"date": "Jour 2", "evenement": "Évaluation du risque ; mesure de protection et opposition au départ"},
+        {"date": "Semaine 1", "evenement": "Signalement aux autorités ; éventuelle interdiction de sortie du territoire"},
+        {"date": "Mois 1", "evenement": "Accompagnement psychologique ; travail prudent avec la famille si possible"},
+        {"date": "Mois 3", "evenement": "Maintien de la scolarité et d'un cadre protecteur stable"}
+      ],
+      "cadre_legal": [
+        {"texte": "Code pénal — mariage forcé (art. 391sexies)", "application": "Le mariage forcé est une infraction pénale ; la tentative est punissable."},
+        {"texte": "Convention d'Istanbul, art. 37", "application": "Obligation de prévenir et sanctionner les mariages forcés."},
+        {"texte": "CIDE, art. 19 & 24.3", "application": "Protection contre toute violence et contre les pratiques préjudiciables."}
+      ],
+      "delais_cles": [
+        {"action": "Signalement et mise en sécurité", "delai": "Immédiat (départ imminent)"},
+        {"action": "Mesure d'interdiction de sortie du territoire", "delai": "En urgence si risque de départ"}
+      ],
+      "actions_tuteur": [
+        "Prendre la révélation au sérieux et mettre Fatou en sécurité sans délai.",
+        "Évaluer le caractère imminent du risque (voyage programmé).",
+        "Solliciter en urgence les mesures de protection (y compris interdiction de sortie du territoire).",
+        "Signaler les faits aux autorités compétentes.",
+        "Offrir un soutien psychologique et préserver la scolarité.",
+        "Travailler avec la famille avec prudence, sans jamais exposer la mineure."
+      ],
+      "solution": "Face à un risque imminent, le tuteur agit vite : mise en sécurité, mesures juridiques bloquant le départ et signalement. La protection de l'enfant prime sur la préservation des relations familiales.",
+      "lecons": [
+        "Un « voyage au pays » peut masquer un mariage forcé : vigilance maximale.",
+        "L'imminence justifie des mesures d'urgence, dont l'interdiction de sortie du territoire.",
+        "La parole de la mineure doit être crue et protégée.",
+        "La protection prime sur le maintien à tout prix du lien familial."
+      ],
+      "ressources": ["Service d'Aide à la Jeunesse", "Police — violences intrafamiliales", "Associations spécialisées (mariages forcés/MGF)", "Service des Tutelles"]
     },
-    "problems_identified": [],
-    "legal_framework": [],
-    "solutions_implemented": [],
-    "tuteur_obligations": [],
-    "lessons_learned": [],
-    "related_resources": [],
-    "domains": [
-      "general"
-    ],
-    "case_status": "documented"
-  },
-  {
-    "case_id": "CASE_014",
-    "title": "Complex Scenario 2 - Religious Persecution & Cultural Integration",
-    "case_type": "complex",
-    "age_at_case": null,
-    "age_group": "unknown",
-    "country": "Unknown",
-    "gender": "unknown",
-    "vulnerability_flags": [],
-    "story": {
-      "situation": "...",
-      "timeline": [],
-      "key_events": []
+    {
+      "id": "CP12",
+      "titre": "Risque de mutilation génitale féminine (MGF)",
+      "categorie": "Protection / Violences",
+      "pays": "Guinée",
+      "age": 7,
+      "sexe": "Fille",
+      "vulnerabilites": ["Risque de MGF", "Pression communautaire", "Vulnérabilité liée à l'âge"],
+      "situation": "Aïssa, 7 ans, est concernée par un projet d'excision soutenu par une partie de la famille avant un retour au pays. La mère s'y oppose mais subit une forte pression. Le risque est sérieux et la MGF est irréversible.",
+      "chronologie": [
+        {"date": "Jour 1", "evenement": "Signalement par un service médical/scolaire ; évaluation du risque"},
+        {"date": "Semaine 1", "evenement": "Mesures de protection ; information juridique de la famille sur l'interdiction"},
+        {"date": "Mois 1", "evenement": "Soutien à la mère protectrice ; éventuel certificat de non-excision préventif"},
+        {"date": "Mois 2", "evenement": "Mesures contre un départ à risque ; suivi médical et psychosocial"},
+        {"date": "Suivi", "evenement": "Veille régulière et accompagnement à long terme"}
+      ],
+      "cadre_legal": [
+        {"texte": "Code pénal — MGF (art. 409)", "application": "Toute mutilation génitale est une infraction, y compris commise à l'étranger."},
+        {"texte": "Convention d'Istanbul, art. 38", "application": "Obligation de prévenir et de sanctionner les MGF."},
+        {"texte": "CIDE, art. 24.3", "application": "Abolition des pratiques traditionnelles préjudiciables à la santé de l'enfant."}
+      ],
+      "delais_cles": [
+        {"action": "Évaluation du risque et protection", "delai": "Sans délai"},
+        {"action": "Mesures avant un départ à risque", "delai": "En urgence si voyage prévu"}
+      ],
+      "actions_tuteur": [
+        "Évaluer le risque réel et son imminence (projet de voyage).",
+        "Activer les mesures de protection de la jeunesse.",
+        "Informer la famille du caractère pénal de la MGF, y compris à l'étranger.",
+        "Soutenir le parent protecteur face à la pression communautaire.",
+        "Envisager un certificat médical de non-excision préventif et un suivi.",
+        "Prévenir tout départ tant que le risque persiste."
+      ],
+      "solution": "La MGF étant irréversible, le tuteur agit en prévention : protection, information juridique dissuasive, appui au parent protecteur et blocage des départs à risque, avec une veille à long terme.",
+      "lecons": [
+        "Une MGF est irréversible : la prévention prime sur tout.",
+        "L'interdiction s'applique même si l'acte est commis à l'étranger.",
+        "Soutenir le parent protecteur est un levier majeur.",
+        "Le suivi doit s'inscrire dans la durée, pas seulement avant un voyage."
+      ],
+      "ressources": ["GAMS / associations anti-MGF", "Service d'Aide à la Jeunesse", "Médecins / PMI-ONE", "Police"]
     },
-    "problems_identified": [],
-    "legal_framework": [],
-    "solutions_implemented": [],
-    "tuteur_obligations": [],
-    "lessons_learned": [],
-    "related_resources": [],
-    "domains": [
-      "general"
-    ],
-    "case_status": "documented"
-  },
-  {
-    "case_id": "CASE_015",
-    "title": "Complex Scenario 3 - Ethnic Minority, Language Barriers & Health Exploitation",
-    "case_type": "complex",
-    "age_at_case": null,
-    "age_group": "unknown",
-    "country": "Unknown",
-    "gender": "unknown",
-    "vulnerability_flags": [],
-    "story": {
-      "situation": "...",
-      "timeline": [],
-      "key_events": []
+    {
+      "id": "CP13",
+      "titre": "Détermination de l'âge contestée",
+      "categorie": "Identification",
+      "pays": "Gambie",
+      "age": 17,
+      "sexe": "Garçon",
+      "vulnerabilites": ["Documents manquants", "Risque de basculement hors protection"],
+      "situation": "Ousmane se déclare âgé de 17 ans, mais les autorités doutent et envisagent de le traiter comme un adulte, ce qui le priverait de la tutelle et de la protection MENA. Il n'a aucun document d'état civil.",
+      "chronologie": [
+        {"date": "Jour 1", "evenement": "Doute sur l'âge ; saisine du Service des Tutelles"},
+        {"date": "Semaine 1", "evenement": "Désignation provisoire d'un tuteur le temps de trancher (présomption de minorité)"},
+        {"date": "Semaine 2", "evenement": "Test d'âge médical (examen triple) avec consentement éclairé"},
+        {"date": "Mois 1", "evenement": "Application de la marge d'erreur et du bénéfice du doute"},
+        {"date": "Mois 1", "evenement": "Confirmation de la minorité ; maintien de la protection MENA"}
+      ],
+      "cadre_legal": [
+        {"texte": "Loi-programme du 24/12/2002 (Tutelle), art. 3-7", "application": "Procédure de détermination de l'âge ; tutelle provisoire pendant l'examen."},
+        {"texte": "Principe du bénéfice du doute", "application": "En cas d'incertitude, la personne est présumée mineure et protégée."},
+        {"texte": "CIDE, art. 8", "application": "Droit à la préservation de l'identité ; protection face aux erreurs d'évaluation."}
+      ],
+      "delais_cles": [
+        {"action": "Saisine du Service des Tutelles en cas de doute", "delai": "Immédiat"},
+        {"action": "Tutelle provisoire", "delai": "Pendant toute la procédure d'âge"}
+      ],
+      "actions_tuteur": [
+        "Faire valoir la présomption de minorité et obtenir une tutelle provisoire.",
+        "Veiller au consentement éclairé avant tout examen médical.",
+        "Rappeler la marge d'erreur des tests et exiger le bénéfice du doute.",
+        "Rassembler tout élément (témoignages, documents reconstitués) étayant la minorité.",
+        "Maintenir la protection MENA tant que l'âge n'est pas établi avec certitude.",
+        "Contester une évaluation aboutissant indûment à la majorité."
+      ],
+      "solution": "Le tuteur protège Ousmane des conséquences d'une évaluation hâtive : présomption de minorité, tutelle provisoire, prise en compte de la marge d'erreur et du bénéfice du doute, garantissant le maintien de la protection.",
+      "lecons": [
+        "Le doute sur l'âge profite au mineur, pas à l'administration.",
+        "Les tests d'âge ont une marge d'erreur significative.",
+        "Une mauvaise évaluation fait basculer un enfant hors de toute protection.",
+        "La tutelle provisoire protège pendant la procédure."
+      ],
+      "ressources": ["Service des Tutelles", "Médecins agréés", "Avocat spécialisé", "ONG d'aide aux MENA"]
     },
-    "problems_identified": [],
-    "legal_framework": [],
-    "solutions_implemented": [],
-    "tuteur_obligations": [],
-    "lessons_learned": [],
-    "related_resources": [],
-    "domains": [
-      "general"
-    ],
-    "case_status": "documented"
+    {
+      "id": "CP14",
+      "titre": "Transition vers la majorité (sortie de tutelle à 18 ans)",
+      "categorie": "Transition / Autonomie",
+      "pays": "Érythrée",
+      "age": 17,
+      "sexe": "Garçon",
+      "vulnerabilites": ["Fin de protection imminente", "Logement à sécuriser", "Insertion à construire"],
+      "situation": "Tesfay, 17 ans, approche de ses 18 ans. La tutelle prendra fin et il perdra une grande part de l'accompagnement. Sans préparation, il risque de basculer dans la précarité et le sans-abrisme du jour au lendemain.",
+      "chronologie": [
+        {"date": "16-17 ans", "evenement": "Lancement précoce du projet d'autonomie (logement, formation, droits)"},
+        {"date": "6 mois avant 18 ans", "evenement": "Sécurisation du séjour et orientation formation/emploi"},
+        {"date": "3 mois avant", "evenement": "Recherche de logement (autonome ou accompagné) et ouverture des droits adultes"},
+        {"date": "18 ans", "evenement": "Fin de la tutelle ; transmission organisée vers les dispositifs adultes"},
+        {"date": "Après 18 ans", "evenement": "Relais d'accompagnement (aide jeune adulte) si disponible"}
+      ],
+      "cadre_legal": [
+        {"texte": "Loi-programme du 24/12/2002 (Tutelle), art. 24", "application": "La tutelle prend fin à la majorité ; transmission du dossier organisée."},
+        {"texte": "Dispositifs d'aide aux jeunes adultes", "application": "Possibilité de prolongation de l'accompagnement au-delà de 18 ans."},
+        {"texte": "CIDE / Observations du Comité", "application": "La transition vers l'âge adulte doit être préparée et accompagnée."}
+      ],
+      "delais_cles": [
+        {"action": "Démarrage du projet d'autonomie", "delai": "Dès 16-17 ans"},
+        {"action": "Sécurisation du séjour", "delai": "Avant la majorité"},
+        {"action": "Fin de la tutelle", "delai": "À 18 ans"}
+      ],
+      "actions_tuteur": [
+        "Anticiper la sortie dès 16-17 ans : ne jamais attendre les 18 ans.",
+        "Sécuriser le statut de séjour avant la majorité.",
+        "Construire un projet de formation ou d'emploi réaliste.",
+        "Rechercher un logement adapté (autonome ou supervisé).",
+        "Ouvrir les droits sociaux du régime adulte et expliquer leur fonctionnement.",
+        "Organiser un relais vers les dispositifs jeunes adultes et transmettre le dossier."
+      ],
+      "solution": "Le tuteur prépare la majorité comme une transition planifiée, pas une rupture : séjour sécurisé, formation, logement et relais adultes en place avant le 18e anniversaire, évitant le décrochage et la précarité.",
+      "lecons": [
+        "Le passage à 18 ans est une falaise si on ne l'anticipe pas.",
+        "Le séjour doit être sécurisé avant la majorité.",
+        "Logement, formation et droits adultes se préparent des mois à l'avance.",
+        "Un relais organisé évite la rupture sèche de l'accompagnement."
+      ],
+      "ressources": ["Service des Tutelles", "Aide à la jeunesse / jeunes adultes", "Services logement", "Organismes de formation et CPAS"]
+    },
+    {
+      "id": "CP15",
+      "titre": "Persécution liée à l'orientation sexuelle",
+      "categorie": "Asile",
+      "pays": "Ouganda",
+      "age": 16,
+      "sexe": "Garçon",
+      "vulnerabilites": ["Risque de persécution", "Isolement", "Souffrance psychologique"],
+      "situation": "David, 16 ans, a fui son pays où l'homosexualité est criminalisée et où il a subi des violences. Il craint pour sa vie en cas de retour mais a du mal à exprimer son vécu, par honte et par peur du jugement, y compris au sein des structures d'accueil.",
+      "chronologie": [
+        {"date": "Jour 1", "evenement": "Accueil et instauration d'un climat de confiance et de non-jugement"},
+        {"date": "Semaine 2", "evenement": "Demande de protection internationale (motif d'appartenance à un groupe social)"},
+        {"date": "Mois 1", "evenement": "Préparation de l'audition CGRA avec un soutien adapté et confidentiel"},
+        {"date": "Mois 2", "evenement": "Soutien psychologique ; orientation vers des associations spécialisées"},
+        {"date": "Mois 5", "evenement": "Octroi du statut de réfugié ; intégration sécurisée"}
+      ],
+      "cadre_legal": [
+        {"texte": "Convention de Genève (1951)", "application": "L'orientation sexuelle constitue l'appartenance à un « certain groupe social » ouvrant le statut de réfugié."},
+        {"texte": "Directive 2011/95/UE, art. 10", "application": "Reconnaît explicitement le groupe social fondé sur l'orientation sexuelle."},
+        {"texte": "CJUE, arrêts A, B, C (C-148/13)", "application": "Interdit les questions intrusives ou les « tests » pour établir l'orientation."}
+      ],
+      "delais_cles": [
+        {"action": "Introduction de la demande d'asile", "delai": "Dès que possible"},
+        {"action": "Recours au CCE en cas de refus", "delai": "30 jours"}
+      ],
+      "actions_tuteur": [
+        "Créer un cadre de confiance et de stricte confidentialité.",
+        "Identifier le motif d'asile pertinent (groupe social) et le faire valoir.",
+        "Préparer l'audition en respectant la difficulté à se livrer.",
+        "Veiller à ce qu'aucune question intrusive ou dégradante ne soit posée.",
+        "Orienter vers un soutien psychologique et des associations LGBTQ+.",
+        "Assurer un hébergement sûr, à l'abri d'éventuelles hostilités."
+      ],
+      "solution": "Le tuteur sécurise un cadre de confiance, fait reconnaître le motif d'asile (appartenance à un groupe social) et protège David des questions intrusives, conformément à la jurisprudence, aboutissant à l'octroi d'une protection.",
+      "lecons": [
+        "L'orientation sexuelle est un motif d'asile reconnu.",
+        "Aucune preuve intrusive de l'orientation ne peut être exigée.",
+        "La honte et la peur expliquent un récit difficile : ne pas en tirer de défiance.",
+        "La sécurité doit aussi être assurée au sein des lieux d'accueil."
+      ],
+      "ressources": ["CGRA", "Associations LGBTQ+ (ex. Rainbow refugees)", "Soutien psychologique", "Avocat spécialisé"]
+    },
+    {
+      "id": "CP16",
+      "titre": "Crise de santé mentale et risque suicidaire",
+      "categorie": "Santé mentale",
+      "pays": "Syrie",
+      "age": 15,
+      "sexe": "Garçon",
+      "vulnerabilites": ["Trauma", "Risque suicidaire", "Isolement", "Insomnie"],
+      "situation": "Omar, 15 ans, exprime des idées noires et a fait un geste auto-agressif. Il a perdu des proches dans la guerre, dort très peu et s'isole. La situation présente un risque vital immédiat.",
+      "chronologie": [
+        {"date": "Jour 0", "evenement": "Détection du risque suicidaire ; évaluation psychiatrique urgente"},
+        {"date": "Jour 1", "evenement": "Mise en sécurité ; éventuelle hospitalisation si danger imminent"},
+        {"date": "Semaine 1", "evenement": "Plan de sécurité et suivi psychiatrique/psychologique régulier"},
+        {"date": "Mois 1", "evenement": "Renforcement du cadre quotidien (sommeil, école, liens sociaux)"},
+        {"date": "Mois 3", "evenement": "Stabilisation ; thérapie du deuil et du trauma au long cours"}
+      ],
+      "cadre_legal": [
+        {"texte": "CIDE, art. 6 & 24", "application": "Droit à la vie, à la survie et au meilleur état de santé, incluant la santé mentale."},
+        {"texte": "Directive 2013/33/UE (accueil)", "application": "Prise en compte des besoins particuliers et accès aux soins de santé mentale."},
+        {"texte": "Législation sur l'aide médicale urgente", "application": "Accès garanti aux soins urgents, y compris psychiatriques."}
+      ],
+      "delais_cles": [
+        {"action": "Évaluation psychiatrique du risque suicidaire", "delai": "Urgence immédiate"},
+        {"action": "Mise en place du plan de sécurité", "delai": "Sans délai"}
+      ],
+      "actions_tuteur": [
+        "Traiter toute idée suicidaire comme une urgence vitale, sans minimiser.",
+        "Organiser une évaluation psychiatrique immédiate.",
+        "Mettre en place un plan de sécurité (réduction des moyens, présence, contacts d'urgence).",
+        "Assurer un suivi psychiatrique et psychologique régulier.",
+        "Restaurer un cadre quotidien stabilisant (sommeil, école, liens).",
+        "Engager au long cours une thérapie du deuil et du trauma."
+      ],
+      "solution": "Le tuteur réagit à l'urgence vitale par une évaluation psychiatrique immédiate et un plan de sécurité, puis installe un suivi durable et un cadre de vie stabilisant, ouvrant la voie à un travail de fond sur le deuil et le trauma.",
+      "lecons": [
+        "Une idée suicidaire ne se minimise jamais : c'est une urgence.",
+        "Le plan de sécurité (moyens, présence, contacts) sauve des vies.",
+        "Un cadre quotidien stable est thérapeutique en soi.",
+        "Le deuil et le trauma se traitent dans la durée, après la mise en sécurité."
+      ],
+      "ressources": ["Urgences psychiatriques", "Pédopsychiatrie", "Centres de santé mentale", "Lignes d'écoute / prévention suicide"]
     }
   ]
 }

@@ -1237,20 +1237,29 @@ const ANNUAIRE_JP={fr:"https://www.tribunaux-rechtbanken.be/fr/tribunaux/justice
 /* Base officielle (vérifiée) des justices de paix par code postal */
 let JP_DB=null;
 async function loadJP(){if(!JP_DB)JP_DB=await loadJSON('js/data/justices-de-paix.json');return JP_DB;}
+function jpFillFromCp(cp,confirmed){
+  const e=JP_DB&&JP_DB.parCodePostal&&JP_DB.parCodePostal[cp];if(!e)return;
+  document.getElementById('jp_canton').value=e.canton;
+  document.getElementById('jp_adresse').value=e.adresse;
+  document.getElementById('jp_tel').value=e.tel;
+  document.getElementById('jp_email').value=e.email;
+  const note=document.getElementById('jp_lookup_note');if(!note)return;
+  note.innerHTML=confirmed
+    ? '✅ '+(LANG==='nl'?'Officiële gegevens (bron: tribunaux-rechtbanken.be). Klik op Opslaan.':'Données officielles (source : tribunaux-rechtbanken.be). Cliquez sur Enregistrer.')
+    : '⚠️ '+(LANG==='nl'?'Voorstel op basis van nabijheid — bevestig op het officiële register vóór het opslaan':'Proposition par proximité — à confirmer sur le registre officiel avant d\'enregistrer')+` : <a href="${ANNUAIRE_JP.adresses}" target="_blank" rel="noopener">adresses-judiciaires.just.fgov.be</a>`;
+}
 async function jpLookup(id){
   await loadJP();
   const cp=(document.getElementById('jp_cp').value||'').trim();
-  const note=document.getElementById('jp_lookup_note');
-  const e=JP_DB&&JP_DB.parCodePostal&&JP_DB.parCodePostal[cp];
-  if(e){
-    document.getElementById('jp_canton').value=e.canton;
-    document.getElementById('jp_adresse').value=e.adresse;
-    document.getElementById('jp_tel').value=e.tel;
-    document.getElementById('jp_email').value=e.email;
-    if(note)note.innerHTML=`✅ ${LANG==='nl'?'Officiële gegevens (bron':'Données officielles (source'} : tribunaux-rechtbanken.be). ${LANG==='nl'?'Klik op Opslaan.':'Cliquez sur Enregistrer.'}`;
-  }else{
-    if(note)note.innerHTML=`⚠️ ${LANG==='nl'?'Postcode niet in de geverifieerde basis. Zoek op het officiële register':'Code postal absent de la base vérifiée. Cherchez sur le registre officiel'} : <a href="${ANNUAIRE_JP.adresses}" target="_blank" rel="noopener">adresses-judiciaires.just.fgov.be</a>`;
-  }
+  const note=document.getElementById('jp_lookup_note');if(!note)return;
+  if(JP_DB&&JP_DB.parCodePostal&&JP_DB.parCodePostal[cp]){jpFillFromCp(cp,true);return;}
+  const target=parseInt(cp,10);
+  if(isNaN(target)){note.innerHTML='⚠️ '+(LANG==='nl'?'Voer een geldige postcode in.':'Saisissez un code postal valide.');return;}
+  const codes=Object.keys(JP_DB.parCodePostal).map(Number).filter(n=>!isNaN(n));
+  const near=codes.map(n=>({n,d:Math.abs(n-target)})).sort((a,b)=>a.d-b.d).slice(0,3);
+  note.innerHTML=(LANG==='nl'?'Postcode niet exact in de basis. Dichtstbijzijnde kantons (te bevestigen) :':'Code postal absent de la base. Cantons les plus proches (à confirmer) :')+'<br>'+
+    near.map(x=>{const e=JP_DB.parCodePostal[String(x.n)];return `<button class="btn sec sm" style="margin:.2rem" onclick="jpFillFromCp('${x.n}',false)">${esc(e.canton)} (${x.n})</button>`;}).join('')+
+    `<br><a href="${ANNUAIRE_JP.adresses}" target="_blank" rel="noopener">${LANG==='nl'?'Officieel register':'Registre officiel'}</a>`;
 }
 /* Rapports obligatoires (cadre tutelle MENA — loi-programme 24/12/2002). Échéances = valeurs par défaut indicatives, modifiables. */
 const RAPPORTS_TYPE=[

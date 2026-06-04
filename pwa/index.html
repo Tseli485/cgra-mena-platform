@@ -78,16 +78,45 @@
   .accordion .body{padding:1rem 1.1rem;border-top:1px solid var(--bord);background:#fafafa}
   .muted{color:var(--gris);font-size:.85rem}
   ul.clean{list-style:none}ul.clean li{padding:.35rem 0;border-bottom:1px dashed var(--bord)}
+  /* Écran de sécurité */
+  .auth-gate{position:fixed;inset:0;z-index:1000;background:linear-gradient(135deg,#1e3a8a,#1e40af);display:flex;align-items:center;justify-content:center;padding:1.5rem}
+  .auth-gate.hidden{display:none}
+  .auth-box{background:#fff;border-radius:1rem;padding:2.2rem;max-width:420px;width:100%;box-shadow:0 25px 50px rgba(0,0,0,.3);text-align:center}
+  .auth-box .lock-ico{font-size:3rem}
+  .auth-box h2{color:var(--bleu);margin:.6rem 0 .3rem;font-size:1.5rem}
+  .auth-box p{color:var(--gris);font-size:.9rem;margin-bottom:1.2rem}
+  .auth-box input{text-align:center;font-size:1.1rem;letter-spacing:.1em;margin-bottom:.6rem}
+  .auth-box .err{color:var(--rouge);font-size:.85rem;min-height:1.2em;margin-bottom:.4rem}
+  .auth-box .hint{font-size:.78rem;color:var(--gris);margin-top:1rem;line-height:1.4}
+  .lock-btn{background:rgba(255,255,255,.15);border:none;color:#fff;cursor:pointer;padding:.4rem .8rem;border-radius:1rem;font-size:.8rem;margin-left:.6rem}
+  .lock-btn:hover{background:rgba(255,255,255,.28)}
   @media(max-width:768px){main{padding:1rem}.header{padding:1rem}.header h1{font-size:1.2rem}}
 </style>
 </head>
 <body>
+<!-- ÉCRAN DE SÉCURITÉ -->
+<div class="auth-gate" id="authGate">
+  <div class="auth-box">
+    <div class="lock-ico">🔐</div>
+    <h2 id="authTitle">Accès sécurisé</h2>
+    <p id="authMsg">Cette plateforme contient des données sensibles de mineurs. Saisissez votre mot de passe.</p>
+    <form id="authForm" onsubmit="return doAuth(event)">
+      <input type="password" id="authPw" placeholder="Mot de passe" autocomplete="current-password" autofocus>
+      <input type="password" id="authPw2" placeholder="Confirmez le mot de passe" autocomplete="new-password" style="display:none">
+      <div class="err" id="authErr"></div>
+      <button type="submit" class="btn" style="width:100%">Déverrouiller</button>
+    </form>
+    <div class="hint" id="authHint">🔒 Vos dossiers sont chiffrés (AES-256) sur cet appareil. Le mot de passe n'est jamais stocké ni transmis — il déverrouille le chiffrement. <strong>Il ne peut pas être récupéré en cas d'oubli.</strong></div>
+  </div>
+</div>
+
 <div class="header">
   <div>
     <h1>🛡️ Plateforme MENA Tuteur</h1>
     <div class="sub">Gestion de dossiers de mineurs étrangers non accompagnés</div>
   </div>
   <div class="status" id="appStatus">● Hors ligne — données locales</div>
+  <button class="lock-btn" onclick="lockApp()" title="Verrouiller">🔒 Verrouiller</button>
 </div>
 
 <nav>
@@ -276,10 +305,106 @@ const LEGISLATION = [
  ]},
 ];
 
-/* ============ STOCKAGE DOSSIERS ============ */
-const STORE='mena_dossiers';
-function loadDossiers(){try{return JSON.parse(localStorage.getItem(STORE))||[]}catch(e){return[]}}
-function saveDossiers(a){localStorage.setItem(STORE,JSON.stringify(a))}
+/* ============ SÉCURITÉ : CHIFFREMENT AES-GCM ============ */
+const AUTH_KEY='mena_auth', STORE='mena_dossiers_enc', CHECK='MENA_OK';
+let CRYPTO_KEY=null;          // clé AES dérivée du mot de passe (en mémoire uniquement)
+let DOSSIERS=[];              // dossiers déchiffrés (en mémoire uniquement)
+const enc=new TextEncoder(), dec=new TextDecoder();
+const b64=buf=>btoa(String.fromCharCode(...new Uint8Array(buf)));
+const unb64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+
+async function deriveKey(password,salt){
+  const base=await crypto.subtle.importKey('raw',enc.encode(password),'PBKDF2',false,['deriveKey']);
+  return crypto.subtle.deriveKey(
+    {name:'PBKDF2',salt,iterations:150000,hash:'SHA-256'},
+    base,{name:'AES-GCM',length:256},false,['encrypt','decrypt']);
+}
+async function aesEncrypt(key,plaintext){
+  const iv=crypto.getRandomValues(new Uint8Array(12));
+  const ct=await crypto.subtle.encrypt({name:'AES-GCM',iv},key,enc.encode(plaintext));
+  return {iv:b64(iv),ct:b64(ct)};
+}
+async function aesDecrypt(key,obj){
+  const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:unb64(obj.iv)},key,unb64(obj.ct));
+  return dec.decode(pt);
+}
+function hasAccount(){return !!localStorage.getItem(AUTH_KEY)}
+
+// Création du compte (premier lancement)
+async function setupAccount(password){
+  const salt=crypto.getRandomValues(new Uint8Array(16));
+  const key=await deriveKey(password,salt);
+  const check=await aesEncrypt(key,CHECK);          // jeton de vérification chiffré
+  localStorage.setItem(AUTH_KEY,JSON.stringify({salt:b64(salt),check}));
+  CRYPTO_KEY=key; DOSSIERS=[];
+  await persist();
+}
+// Connexion : vérifie le mot de passe et charge/déchiffre les dossiers
+async function unlock(password){
+  const acc=JSON.parse(localStorage.getItem(AUTH_KEY));
+  const key=await deriveKey(password,unb64(acc.salt));
+  let token;
+  try{token=await aesDecrypt(key,acc.check);}catch(e){return false;}  // mauvais mot de passe
+  if(token!==CHECK)return false;
+  CRYPTO_KEY=key;
+  const blob=localStorage.getItem(STORE);
+  if(blob){try{DOSSIERS=JSON.parse(await aesDecrypt(key,JSON.parse(blob)));}catch(e){DOSSIERS=[];}}
+  else DOSSIERS=[];
+  return true;
+}
+// Persiste les dossiers chiffrés
+async function persist(){
+  if(!CRYPTO_KEY)return;
+  const obj=await aesEncrypt(CRYPTO_KEY,JSON.stringify(DOSSIERS));
+  localStorage.setItem(STORE,JSON.stringify(obj));
+}
+// API synchrone utilisée par le reste de l'app (source de vérité en mémoire)
+function loadDossiers(){return DOSSIERS;}
+function saveDossiers(a){DOSSIERS=a;persist();}
+
+/* ============ AUTHENTIFICATION (UI) ============ */
+function refreshAuthUI(){
+  const setup=!hasAccount();
+  document.getElementById('authTitle').textContent=setup?'Créer votre accès':'Accès sécurisé';
+  document.getElementById('authMsg').textContent=setup
+    ?'Premier lancement : créez un mot de passe pour chiffrer les dossiers.'
+    :'Cette plateforme contient des données sensibles de mineurs. Saisissez votre mot de passe.';
+  document.getElementById('authPw2').style.display=setup?'block':'none';
+  document.getElementById('authPw').autocomplete=setup?'new-password':'current-password';
+  document.querySelector('#authForm button').textContent=setup?'Créer & déverrouiller':'Déverrouiller';
+}
+async function doAuth(e){
+  e.preventDefault();
+  const pw=document.getElementById('authPw').value;
+  const err=document.getElementById('authErr');err.textContent='';
+  if(!crypto.subtle){err.textContent="Chiffrement indisponible. Utilisez http://localhost (pas file://).";return false;}
+  try{
+    if(!hasAccount()){
+      const pw2=document.getElementById('authPw2').value;
+      if(pw.length<6){err.textContent='Mot de passe : 6 caractères minimum.';return false;}
+      if(pw!==pw2){err.textContent='Les mots de passe ne correspondent pas.';return false;}
+      await setupAccount(pw);
+    }else{
+      const ok=await unlock(pw);
+      if(!ok){err.textContent='Mot de passe incorrect.';return false;}
+    }
+    onUnlocked();
+  }catch(ex){err.textContent='Erreur : '+ex.message;}
+  return false;
+}
+function onUnlocked(){
+  document.getElementById('authGate').classList.add('hidden');
+  document.getElementById('authForm').reset();
+  renderDashboard();renderDossiers();renderLegislation();
+}
+function lockApp(){
+  CRYPTO_KEY=null;DOSSIERS=[];
+  document.getElementById('authPw').value='';document.getElementById('authPw2').value='';
+  document.getElementById('authErr').textContent='';
+  refreshAuthUI();
+  document.getElementById('authGate').classList.remove('hidden');
+  document.getElementById('authPw').focus();
+}
 // Checklist standard d'un dossier MENA
 const STD_CHECKLIST=[
  "Signalement au Service des Tutelles","Désignation du tuteur confirmée","Identification / détermination de l'âge",
@@ -537,7 +662,9 @@ function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;',
 function setOnline(){document.getElementById('appStatus').textContent=navigator.onLine?'● En ligne':'● Hors ligne — données locales';}
 window.addEventListener('online',setOnline);window.addEventListener('offline',setOnline);
 window.addEventListener('load',()=>{
-  setOnline();renderDashboard();renderDossiers();renderLegislation();
+  setOnline();
+  refreshAuthUI();                         // démarre verrouillé (écran de connexion)
+  document.getElementById('authPw').focus();
   if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{});}
 });
 </script>

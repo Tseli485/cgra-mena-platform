@@ -993,9 +993,26 @@ const RES_TYPE={
   employment_center:{fr:"Centre d'emploi",nl:"Tewerkstellingscentrum"},"Employment Centre":{fr:"Centre d'emploi",nl:"Tewerkstellingscentrum"},
   housing_association:{fr:"Association de logement",nl:"Huisvestingsvereniging"},"Shelter/Housing Centre":{fr:"Hébergement",nl:"Opvangcentrum"},
   "Psychological Centre":{fr:"Centre psychologique",nl:"Psychologisch centrum"},"Social Assessment Centre":{fr:"Centre d'évaluation sociale",nl:"Sociaal evaluatiecentrum"},
-  international_org:{fr:"Organisation internationale",nl:"Internationale organisatie"},individual:{fr:"Personne ressource",nl:"Contactpersoon"}
+  international_org:{fr:"Organisation internationale",nl:"Internationale organisatie"},individual:{fr:"Personne ressource",nl:"Contactpersoon"},
+  autorite:{fr:"Autorité / Service public",nl:"Overheid / Openbare dienst"},
+  accueil:{fr:"Accueil & hébergement",nl:"Opvang & huisvesting"},
+  juridique:{fr:"Juridique & droits",nl:"Juridisch & rechten"},
+  sante:{fr:"Santé / Médical",nl:"Gezondheid / Medisch"},
+  sante_mentale:{fr:"Santé mentale & trauma",nl:"Geestelijke gezondheid & trauma"},
+  traite:{fr:"Traite des êtres humains",nl:"Mensenhandel"},
+  violences:{fr:"Violences / MGF / mariage forcé",nl:"Geweld / VGV / gedwongen huwelijk"},
+  scolarite:{fr:"Scolarité & intégration",nl:"Onderwijs & integratie"},
+  disparition:{fr:"Disparition de mineur",nl:"Vermissing minderjarige"},
+  social:{fr:"Aide sociale",nl:"Maatschappelijke hulp"},
+  urgence:{fr:"Urgence & ligne d'écoute",nl:"Noodhulp & luisterlijn"},
+  droits_enfant:{fr:"Droits de l'enfant",nl:"Kinderrechten"},
+  lgbtqia:{fr:"LGBTQIA+",nl:"LGBTQIA+"},
+  refugies:{fr:"Réfugiés & asile",nl:"Vluchtelingen & asiel"},
+  famille:{fr:"Famille & enfance",nl:"Gezin & kind"},
+  jeunesse:{fr:"Jeunesse (AMO)",nl:"Jeugd (AMO)"},
+  international:{fr:"International (ONU)",nl:"Internationaal (VN)"}
 };
-const RES_REGION={Brussels:{fr:"Bruxelles",nl:"Brussel"},Bruxelles:{fr:"Bruxelles",nl:"Brussel"},Flanders:{fr:"Flandre",nl:"Vlaanderen"},Flandre:{fr:"Flandre",nl:"Vlaanderen"},Wallonia:{fr:"Wallonie",nl:"Wallonië"},Wallonie:{fr:"Wallonie",nl:"Wallonië"},Mixed:{fr:"Mixte / National",nl:"Gemengd / Nationaal"}};
+const RES_REGION={Brussels:{fr:"Bruxelles",nl:"Brussel"},Bruxelles:{fr:"Bruxelles",nl:"Brussel"},Flanders:{fr:"Flandre",nl:"Vlaanderen"},Flandre:{fr:"Flandre",nl:"Vlaanderen"},Wallonia:{fr:"Wallonie",nl:"Wallonië"},Wallonie:{fr:"Wallonie",nl:"Wallonië"},Mixed:{fr:"Mixte / National",nl:"Gemengd / Nationaal"},National:{fr:"National",nl:"Nationaal"},"Fédéral":{fr:"Fédéral",nl:"Federaal"},International:{fr:"International",nl:"Internationaal"}};
 const rtFR=v=>{const m=RES_TYPE[v];return m?tr(m):(v?v.charAt(0).toUpperCase()+v.slice(1).replace(/_/g,' '):'—');};
 const rgFR=v=>{const m=RES_REGION[v];return m?tr(m):(v||'');};
 async function renderResources(){
@@ -1025,6 +1042,7 @@ async function renderResources(){
       <div class="row" style="justify-content:space-between">
         <strong>${esc(r.name||'—')}</strong><span class="badge b-nouveau">${esc(rtFR(r.type))}</span>
       </div>
+      ${r.desc?`<div style="margin:.25rem 0">${esc(tr(r.desc))}</div>`:''}
       <div class="muted">
         ${r.region?'📍 '+esc(rgFR(r.region)):''}${r.address?' · '+esc(r.address):''}
         ${r.phone?'<br>📞 '+esc(r.phone):''}${r.email?' · ✉️ '+esc(r.email):''}

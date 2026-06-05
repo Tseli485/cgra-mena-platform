@@ -202,6 +202,7 @@
           <button class="btn" onclick="openDossierForm()" data-i18n="dash.new">➕ Nouveau dossier</button>
           <button class="btn sec" onclick="go('legislation')" data-i18n="dash.viewleg">⚖️ Consulter la législation</button>
           <button class="btn sec" onclick="go('lifecycle')" data-i18n="dash.viewlife">🔄 Cycle de vie</button>
+          <button class="btn sec" onclick="openBackup()" data-i18n="bk.btn">💾 Sauvegarde / Transfert</button>
         </div>
         <p class="muted" style="margin-top:1rem" data-i18n="dash.localnote">Les dossiers sont enregistrés localement sur cet appareil (fonctionne hors ligne).</p>
       </div>
@@ -429,6 +430,14 @@
   </div>
 </div>
 
+<!-- MODAL SAUVEGARDE / TRANSFERT (chiffré) -->
+<div class="modal" id="backupModal">
+  <div class="modal-box">
+    <button class="close" onclick="closeModal('backupModal')">&times;</button>
+    <div id="backupBox"></div>
+  </div>
+</div>
+
 <script src="js/lib/pdf.min.js"></script>
 <script>
 /* ============ INTERNATIONALISATION (FR / NL) ============ */
@@ -441,7 +450,7 @@ const I18N = {
   "status.online":"● En ligne","status.offline":"● Hors ligne — données locales",
   "nav.dashboard":"🏠 Tableau de bord","nav.dossiers":"📂 Mes Dossiers","nav.lifecycle":"🔄 Cycle de Vie","nav.legislation":"⚖️ Législation & Délais","nav.conseil":"🧭 Assistant Conseil","nav.cases":"📚 Cas Pratiques","nav.resources":"📁 Ressources",
   "dash.title":"🏠 Tableau de bord","dash.welcome":"Bienvenue. Cette plateforme vous permet de <strong>gérer vos dossiers MENA en temps réel</strong> et de rester informé sur la <strong>législation</strong> et les <strong>délais</strong> applicables.",
-  "dash.deadlines":"⏰ Échéances à venir","dash.quick":"🚀 Actions rapides","dash.new":"➕ Nouveau dossier","dash.viewleg":"⚖️ Consulter la législation","dash.viewlife":"🔄 Cycle de vie","dash.localnote":"Les dossiers sont enregistrés localement sur cet appareil (fonctionne hors ligne).",
+  "dash.deadlines":"⏰ Échéances à venir","dash.quick":"🚀 Actions rapides","bk.btn":"💾 Sauvegarde / Transfert","dash.new":"➕ Nouveau dossier","dash.viewleg":"⚖️ Consulter la législation","dash.viewlife":"🔄 Cycle de vie","dash.localnote":"Les dossiers sont enregistrés localement sur cet appareil (fonctionne hors ligne).",
   "stat.total":"Dossiers au total","stat.actifs":"Dossiers actifs","stat.urgents":"Dossiers urgents","stat.progmoy":"Progression moyenne","stat.echeances":"Échéances légales référencées",
   "dash.noactive":"Aucun dossier actif.","dash.uptodate":"Toutes les étapes sont à jour ✔️","dash.nextstep":"Prochaine étape :",
   "doss.title":"📂 Mes Dossiers","doss.search":"🔍 Rechercher un dossier...","doss.allstatus":"Tous les statuts",
@@ -470,7 +479,7 @@ const I18N = {
   "status.online":"● Online","status.offline":"● Offline — lokale gegevens",
   "nav.dashboard":"🏠 Dashboard","nav.dossiers":"📂 Mijn dossiers","nav.lifecycle":"🔄 Levensloop","nav.legislation":"⚖️ Wetgeving & Termijnen","nav.conseil":"🧭 Adviesassistent","nav.cases":"📚 Praktijkgevallen","nav.resources":"📁 Hulpbronnen",
   "dash.title":"🏠 Dashboard","dash.welcome":"Welkom. Met dit platform kunt u uw <strong>NBMV-dossiers in realtime beheren</strong> en op de hoogte blijven van de toepasselijke <strong>wetgeving</strong> en <strong>termijnen</strong>.",
-  "dash.deadlines":"⏰ Komende termijnen","dash.quick":"🚀 Snelle acties","dash.new":"➕ Nieuw dossier","dash.viewleg":"⚖️ Wetgeving raadplegen","dash.viewlife":"🔄 Levensloop","dash.localnote":"Dossiers worden lokaal op dit toestel opgeslagen (werkt offline).",
+  "dash.deadlines":"⏰ Komende termijnen","dash.quick":"🚀 Snelle acties","bk.btn":"💾 Back-up / Overdracht","dash.new":"➕ Nieuw dossier","dash.viewleg":"⚖️ Wetgeving raadplegen","dash.viewlife":"🔄 Levensloop","dash.localnote":"Dossiers worden lokaal op dit toestel opgeslagen (werkt offline).",
   "stat.total":"Dossiers totaal","stat.actifs":"Actieve dossiers","stat.urgents":"Dringende dossiers","stat.progmoy":"Gemiddelde voortgang","stat.echeances":"Wettelijke termijnen vermeld",
   "dash.noactive":"Geen actief dossier.","dash.uptodate":"Alle stappen zijn up-to-date ✔️","dash.nextstep":"Volgende stap:",
   "doss.title":"📂 Mijn dossiers","doss.search":"🔍 Een dossier zoeken...","doss.allstatus":"Alle statussen",
@@ -638,6 +647,67 @@ async function persist(){
 // API synchrone utilisée par le reste de l'app (source de vérité en mémoire)
 function loadDossiers(){return DOSSIERS;}
 function saveDossiers(a){DOSSIERS=a;persist();}
+
+/* ============ SAUVEGARDE & TRANSFERT CHIFFRÉ (entre tuteurs / appareils) ============ */
+function openBackup(){
+  if(!CRYPTO_KEY){return;}
+  const nd=DOSSIERS.length, nr=loadCustomRes().length;
+  document.getElementById('backupBox').innerHTML=`
+    <h3>💾 ${LANG==='nl'?'Back-up & overdracht':'Sauvegarde & transfert'}</h3>
+    <p class="muted">${LANG==='nl'?'Versleutelde overdracht naar een andere voogd/toestel. Geen server — uw gegevens blijven onder uw controle.':'Transfert chiffré vers un autre tuteur/appareil. Aucun serveur — vos données restent sous votre contrôle.'}</p>
+    <div class="card" style="margin:.6rem 0">
+      <strong>⬇️ ${LANG==='nl'?'Exporteren':'Exporter'} (${nd} ${LANG==='nl'?'dossiers':'dossiers'}, ${nr} ${LANG==='nl'?'eigen hulpbronnen':'ressources perso'})</strong>
+      <label>${LANG==='nl'?'Overdrachtswachtwoord':'Mot de passe de transfert'}</label>
+      <input type="password" id="bk_pw_exp" placeholder="${LANG==='nl'?'min. 6 tekens':'min. 6 caractères'}">
+      <div class="muted" id="bk_exp_note" style="font-size:.8rem;min-height:1em"></div>
+      <button class="btn sm" style="margin-top:.4rem" onclick="doExport()">⬇️ ${LANG==='nl'?'Versleutelde back-up downloaden':'Télécharger la sauvegarde chiffrée'}</button>
+    </div>
+    <div class="card">
+      <strong>⬆️ ${LANG==='nl'?'Importeren':'Importer'}</strong>
+      <p class="muted" style="font-size:.8rem">${LANG==='nl'?'Voegt de dossiers samen (vervangt bij gelijk ID).':'Fusionne les dossiers (remplace si même identifiant).'}</p>
+      <label>${LANG==='nl'?'Back-upbestand (.menabackup)':'Fichier de sauvegarde (.menabackup)'}</label>
+      <input type="file" id="bk_file" accept=".menabackup,application/json">
+      <label>${LANG==='nl'?'Overdrachtswachtwoord':'Mot de passe de transfert'}</label>
+      <input type="password" id="bk_pw_imp">
+      <div class="muted" id="bk_imp_note" style="font-size:.8rem;min-height:1em"></div>
+      <button class="btn sm" style="margin-top:.4rem" onclick="doImport()">⬆️ ${LANG==='nl'?'Importeren':'Importer'}</button>
+    </div>`;
+  openModal('backupModal');
+}
+async function doExport(){
+  const pw=document.getElementById('bk_pw_exp').value;
+  const note=document.getElementById('bk_exp_note');
+  if(pw.length<6){note.textContent=LANG==='nl'?'Wachtwoord: min. 6 tekens.':'Mot de passe : 6 caractères minimum.';return;}
+  const salt=crypto.getRandomValues(new Uint8Array(16));
+  const key=await deriveKey(pw,salt);
+  const payload=JSON.stringify({v:1,exportedAt:new Date().toISOString(),dossiers:DOSSIERS,customRes:loadCustomRes()});
+  const enc2=await aesEncrypt(key,payload);
+  const file={format:'mena-backup',v:1,salt:b64(salt),iv:enc2.iv,ct:enc2.ct};
+  const blob=new Blob([JSON.stringify(file)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download='mena-tuteur-'+new Date().toISOString().slice(0,10)+'.menabackup';a.click();
+  note.textContent=LANG==='nl'?'✅ Back-up gedownload. Bewaar het wachtwoord apart.':'✅ Sauvegarde téléchargée. Conservez le mot de passe séparément.';
+}
+async function doImport(){
+  const note=document.getElementById('bk_imp_note');
+  const fileInput=document.getElementById('bk_file');const pw=document.getElementById('bk_pw_imp').value;
+  const f=fileInput.files&&fileInput.files[0];
+  if(!f){note.textContent=LANG==='nl'?'Kies een bestand.':'Choisissez un fichier.';return;}
+  if(!pw){note.textContent=LANG==='nl'?'Voer het wachtwoord in.':'Saisissez le mot de passe.';return;}
+  try{
+    const text=await f.text();const obj=JSON.parse(text);
+    if(obj.format!=='mena-backup')throw new Error(LANG==='nl'?'Ongeldig bestand':'Fichier invalide');
+    const key=await deriveKey(pw,unb64(obj.salt));
+    let pt;try{pt=await aesDecrypt(key,{iv:obj.iv,ct:obj.ct});}catch(e){note.textContent=LANG==='nl'?'Onjuist wachtwoord.':'Mot de passe incorrect.';return;}
+    const data=JSON.parse(pt);
+    const map={};DOSSIERS.forEach(d=>map[d.id]=d);(data.dossiers||[]).forEach(d=>map[d.id]=d);
+    DOSSIERS=Object.values(map);await persist();
+    const rmap={};loadCustomRes().forEach(r=>rmap[r.name]=r);(data.customRes||[]).forEach(r=>rmap[r.name]=r);saveCustomRes(Object.values(rmap));
+    RESOURCES=null;
+    note.textContent=(LANG==='nl'?'✅ Geïmporteerd : ':'✅ Importé : ')+(data.dossiers||[]).length+(LANG==='nl'?' dossiers.':' dossiers.');
+    renderDashboard();renderDossiers();
+  }catch(e){note.textContent=(LANG==='nl'?'⚠️ Fout: ':'⚠️ Erreur : ')+e.message;}
+}
 
 /* ============ AUTHENTIFICATION (UI) ============ */
 function refreshAuthUI(){

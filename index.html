@@ -316,6 +316,9 @@
       <select id="resType" onchange="renderResources()"><option value="" data-i18n="res.alltypes">Tous les types</option></select>
       <select id="resRegion" onchange="renderResources()"><option value="" data-i18n="res.allregions">Toutes les régions</option></select>
     </div>
+    <div class="row" style="margin-bottom:.6rem">
+      <button class="btn sm" onclick="openResForm()" data-i18n="res.add">➕ Ajouter / compléter une ressource</button>
+    </div>
     <div id="resCats" class="row" style="gap:.4rem;margin-bottom:1rem"></div>
     <div id="resourcesContent" class="loading"></div>
   </section>
@@ -418,6 +421,14 @@
   </div>
 </div>
 
+<!-- MODAL RESSOURCE (ajout / édition manuelle) -->
+<div class="modal" id="resModal">
+  <div class="modal-box">
+    <button class="close" onclick="closeModal('resModal')">&times;</button>
+    <div id="resFormBox"></div>
+  </div>
+</div>
+
 <script src="js/lib/pdf.min.js"></script>
 <script>
 /* ============ INTERNATIONALISATION (FR / NL) ============ */
@@ -449,7 +460,7 @@ const I18N = {
   "conseil.s2":"2. Quel est le problème ?","conseil.describe":"Décrivez le problème en quelques mots","conseil.describe.ph":"ex. l'école refuse l'inscription, risque de transfert Dublin, fugue...","conseil.orlist":"…ou choisissez dans la liste","conseil.selectproblem":"— Sélectionnez un problème —",
   "conseil.nodossier":"Aucun dossier enregistré. Créez-en un dans « Mes Dossiers » ou utilisez la saisie manuelle.","conseil.matching":"Problèmes correspondants :","conseil.nomatch":"Aucune correspondance — choisissez dans la liste ci-dessous.","conseil.questions":"3. Questions de précision","conseil.qhint":"Répondez pour affiner les solutions proposées.","conseil.choosesel":"— choisir —","conseil.context":"Contexte :","conseil.moreprecise":"<strong>Pour un conseil plus précis</strong>, répondez aux questions ci-dessus :","conseil.moresol":"solution(s) supplémentaire(s) pourrai(en)t s'appliquer.","conseil.answerfirst":"Répondez aux questions de précision pour afficher les solutions adaptées.","conseil.solution":"Solution","conseil.legalbasis":"⚖️ Base légale","conseil.adv":"Avantages","conseil.disadv":"Inconvénients / points d'attention","conseil.demarche":"🎯 Démarche recommandée","conseil.precisions":"ℹ️ Précisions utiles","conseil.countryconsid":"🌍 Considérations liées au pays d'origine :","conseil.countryintro":"Éléments de contexte documentés à confronter au récit individuel — ils peuvent renforcer l'analyse et orienter la protection.","conseil.viewlinked":"▶ Voir le problème lié","conseil.ctxtaken":"contexte complet pris en compte.","conseil.follow":"Suivi :",
   "cases.title":"📚 Cas Pratiques","cases.banner":"Cas concrets pour la <strong>formation du tuteur</strong>. Chaque cas détaille la situation, le <strong>cadre légal</strong>, les <strong>délais</strong>, les <strong>actions à mener</strong> et les leçons à retenir. Cliquez un cas pour le guide complet.","cases.search":"🔍 Rechercher (situation, pays, mot-clé)...","cases.allcat":"Toutes les catégories","cases.loading":"Chargement des cas…","cases.unavailable":"⚠️ Cas pratiques indisponibles.","cases.nomatch":"Aucun cas ne correspond à votre recherche.","cases.count":"cas","case.actions_n":"actions","case.refs_n":"références","case.delais_n":"délais","case.situation":"📖 Situation","case.chrono":"📅 Chronologie","case.legal":"⚖️ Cadre légal applicable","case.delais":"⏰ Délais clés","case.actions":"✅ Actions du tuteur (solutions adéquates et légales)","case.demarche":"🎯 Démarche recommandée","case.lecons":"💡 Leçons pour le tuteur","case.ressources":"📁 Ressources mobilisables",
-  "res.title":"📁 Ressources & Contacts","res.search":"🔍 Rechercher (nom, ville)...","res.alltypes":"Tous les types","res.allregions":"Toutes les régions","res.loading":"Chargement des ressources…","res.unavailable":"Aucune ressource trouvée.","res.count":"ressource(s)",
+  "res.title":"📁 Ressources & Contacts","res.search":"🔍 Rechercher (nom, ville)...","res.alltypes":"Tous les types","res.allregions":"Toutes les régions","res.loading":"Chargement des ressources…","res.unavailable":"Aucune ressource trouvée.","res.count":"ressource(s)","res.add":"➕ Ajouter / compléter une ressource","res.edited":"✎ complété","res.custom":"★ perso",
   "auth.setup.title":"Créer votre accès","auth.setup.msg":"Premier lancement : créez un mot de passe pour chiffrer les dossiers.","auth.setup.btn":"Créer & déverrouiller","auth.login.title":"Accès sécurisé","auth.login.msg":"Cette plateforme contient des données sensibles de mineurs. Saisissez votre mot de passe.","auth.login.btn":"Déverrouiller","auth.pw":"Mot de passe","auth.pw2":"Confirmez le mot de passe","auth.hint":"🔒 Vos dossiers sont chiffrés (AES-256) sur cet appareil. Le mot de passe n'est jamais stocké ni transmis — il déverrouille le chiffrement. <strong>Il ne peut pas être récupéré en cas d'oubli.</strong>","auth.err.crypto":"Chiffrement indisponible. Utilisez http://localhost (pas file://).","auth.err.short":"Mot de passe : 6 caractères minimum.","auth.err.match":"Les mots de passe ne correspondent pas.","auth.err.wrong":"Mot de passe incorrect.","auth.err.generic":"Erreur : "
  },
  nl:{
@@ -478,7 +489,7 @@ const I18N = {
   "conseil.s2":"2. Wat is het probleem?","conseil.describe":"Beschrijf het probleem in enkele woorden","conseil.describe.ph":"bv. school weigert inschrijving, risico op Dublin-overdracht, weglopen...","conseil.orlist":"…of kies uit de lijst","conseil.selectproblem":"— Selecteer een probleem —",
   "conseil.nodossier":"Geen dossier opgeslagen. Maak er een aan in « Mijn dossiers » of gebruik handmatige invoer.","conseil.matching":"Overeenkomende problemen:","conseil.nomatch":"Geen overeenkomst — kies uit de lijst hieronder.","conseil.questions":"3. Verduidelijkingsvragen","conseil.qhint":"Beantwoord om de voorgestelde oplossingen te verfijnen.","conseil.choosesel":"— kiezen —","conseil.context":"Context:","conseil.moreprecise":"<strong>Voor nauwkeuriger advies</strong>, beantwoord de vragen hierboven:","conseil.moresol":"bijkomende oplossing(en) zou(den) van toepassing kunnen zijn.","conseil.answerfirst":"Beantwoord de verduidelijkingsvragen om de passende oplossingen te tonen.","conseil.solution":"Oplossing","conseil.legalbasis":"⚖️ Wettelijke grondslag","conseil.adv":"Voordelen","conseil.disadv":"Nadelen / aandachtspunten","conseil.demarche":"🎯 Aanbevolen aanpak","conseil.precisions":"ℹ️ Nuttige verduidelijkingen","conseil.countryconsid":"🌍 Overwegingen i.v.m. land van herkomst:","conseil.countryintro":"Gedocumenteerde contextelementen te toetsen aan het individuele verhaal — ze kunnen de analyse versterken en de bescherming sturen.","conseil.viewlinked":"▶ Bekijk het gerelateerde probleem","conseil.ctxtaken":"volledige context in aanmerking genomen.","conseil.follow":"Opvolging:",
   "cases.title":"📚 Praktijkgevallen","cases.banner":"Concrete gevallen voor de <strong>opleiding van de voogd</strong>. Elk geval beschrijft de situatie, het <strong>wettelijk kader</strong>, de <strong>termijnen</strong>, de <strong>te ondernemen acties</strong> en de lessen. Klik op een geval voor de volledige gids.","cases.search":"🔍 Zoeken (situatie, land, trefwoord)...","cases.allcat":"Alle categorieën","cases.loading":"Gevallen laden…","cases.unavailable":"⚠️ Praktijkgevallen niet beschikbaar.","cases.nomatch":"Geen geval komt overeen met uw zoekopdracht.","cases.count":"gevallen","case.actions_n":"acties","case.refs_n":"referenties","case.delais_n":"termijnen","case.situation":"📖 Situatie","case.chrono":"📅 Chronologie","case.legal":"⚖️ Toepasselijk wettelijk kader","case.delais":"⏰ Belangrijke termijnen","case.actions":"✅ Acties van de voogd (passende en wettelijke oplossingen)","case.demarche":"🎯 Aanbevolen aanpak","case.lecons":"💡 Lessen voor de voogd","case.ressources":"📁 Inzetbare hulpbronnen",
-  "res.title":"📁 Hulpbronnen & Contacten","res.search":"🔍 Zoeken (naam, stad)...","res.alltypes":"Alle types","res.allregions":"Alle regio's","res.loading":"Hulpbronnen laden…","res.unavailable":"Geen hulpbron gevonden.","res.count":"hulpbron(nen)",
+  "res.title":"📁 Hulpbronnen & Contacten","res.search":"🔍 Zoeken (naam, stad)...","res.alltypes":"Alle types","res.allregions":"Alle regio's","res.loading":"Hulpbronnen laden…","res.unavailable":"Geen hulpbron gevonden.","res.count":"hulpbron(nen)","res.add":"➕ Een hulpbron toevoegen / aanvullen","res.edited":"✎ aangevuld","res.custom":"★ eigen",
   "auth.setup.title":"Uw toegang aanmaken","auth.setup.msg":"Eerste start: maak een wachtwoord aan om de dossiers te versleutelen.","auth.setup.btn":"Aanmaken & ontgrendelen","auth.login.title":"Beveiligde toegang","auth.login.msg":"Dit platform bevat gevoelige gegevens van minderjarigen. Voer uw wachtwoord in.","auth.login.btn":"Ontgrendelen","auth.pw":"Wachtwoord","auth.pw2":"Bevestig het wachtwoord","auth.hint":"🔒 Uw dossiers zijn versleuteld (AES-256) op dit toestel. Het wachtwoord wordt nooit opgeslagen of verzonden — het ontgrendelt de versleuteling. <strong>Het kan niet worden hersteld bij verlies.</strong>","auth.err.crypto":"Versleuteling niet beschikbaar. Gebruik http://localhost (niet file://).","auth.err.short":"Wachtwoord: minimaal 6 tekens.","auth.err.match":"De wachtwoorden komen niet overeen.","auth.err.wrong":"Onjuist wachtwoord.","auth.err.generic":"Fout: "
  }
 };
@@ -1017,15 +1028,81 @@ const RES_REGION={Brussels:{fr:"Bruxelles",nl:"Brussel"},Bruxelles:{fr:"Bruxelle
 const rtFR=v=>{const m=RES_TYPE[v];return m?tr(m):(v?v.charAt(0).toUpperCase()+v.slice(1).replace(/_/g,' '):'—');};
 function setResCat(code){const el=document.getElementById('resType');if(el){el.value=code;}renderResources();}
 const rgFR=v=>{const m=RES_REGION[v];return m?tr(m):(v||'');};
+/* Ressources personnalisées (ajouts/compléments du tuteur) — stockage local */
+function loadCustomRes(){try{return JSON.parse(localStorage.getItem('mena_res_custom'))||[]}catch(e){return[]}}
+function saveCustomRes(a){localStorage.setItem('mena_res_custom',JSON.stringify(a))}
+function mergedResources(){
+  const byName={};
+  (RESOURCES||[]).forEach(r=>{byName[r.name]={...r};});
+  loadCustomRes().forEach(c=>{
+    if(byName[c.name]){Object.assign(byName[c.name],c);byName[c.name]._edited=true;}
+    else byName[c.name]={...c,_custom:true};
+  });
+  return Object.values(byName);
+}
+const RES_DOMAINES=["autorite","accueil","juridique","sante","sante_mentale","traite","violences","scolarite","disparition","social","urgence","droits_enfant","lgbtqia","refugies","famille","jeunesse","international"];
+const RES_REGIONS=["Bruxelles","Flandre","Wallonie","National","Fédéral","International"];
+function openResForm(name){
+  const r=name?mergedResources().find(x=>x.name===name):null;
+  const v=k=>r&&r[k]?esc(typeof r[k]==='object'?tr(r[k]):r[k]):'';
+  document.getElementById('resFormBox').innerHTML=`
+    <h3>${name?(LANG==='nl'?'Hulpbron bewerken':'Modifier la ressource'):(LANG==='nl'?'Nieuwe hulpbron':'Nouvelle ressource')}</h3>
+    <form onsubmit="return saveRes(event)">
+      <input type="hidden" id="res_orig" value="${name?esc(name):''}">
+      <label>${LANG==='nl'?'Naam':'Nom'} *</label><input id="res_name" required value="${v('name')}">
+      <div class="grid cols-2">
+        <div><label>${LANG==='nl'?'Domein':'Domaine'}</label><select id="res_type">${RES_DOMAINES.map(d=>`<option value="${d}" ${r&&r.type===d?'selected':''}>${esc(rtFR(d))}</option>`).join('')}</select></div>
+        <div><label>${LANG==='nl'?'Regio':'Région'}</label><select id="res_region">${RES_REGIONS.map(rg=>`<option value="${rg}" ${r&&r.region===rg?'selected':''}>${esc(rgFR(rg))}</option>`).join('')}</select></div>
+      </div>
+      <label>${LANG==='nl'?'Adres':'Adresse'}</label><input id="res_address" value="${v('address')}">
+      <div class="grid cols-2">
+        <div><label>${LANG==='nl'?'Telefoon':'Téléphone'}</label><input id="res_phone" value="${v('phone')}"></div>
+        <div><label>Email</label><input id="res_email" value="${v('email')}"></div>
+      </div>
+      <label>${LANG==='nl'?'Website':'Site web'}</label><input id="res_website" value="${v('website')}" placeholder="https://">
+      <label>${LANG==='nl'?'Beschrijving':'Description'}</label><textarea id="res_desc" rows="2">${v('desc')}</textarea>
+      <div class="row" style="margin-top:1rem;justify-content:flex-end">
+        ${name?`<button type="button" class="btn danger sm" onclick="delRes('${esc(name)}')">🗑️ ${LANG==='nl'?'Verwijderen/herstellen':'Supprimer/réinitialiser'}</button>`:''}
+        <button type="button" class="btn sec" onclick="closeModal('resModal')">${t('btn.cancel')}</button>
+        <button type="submit" class="btn">${t('btn.save')}</button>
+      </div>
+    </form>`;
+  openModal('resModal');
+}
+function saveRes(e){
+  e.preventDefault();
+  const orig=document.getElementById('res_orig').value;
+  const entry={
+    name:document.getElementById('res_name').value.trim(),
+    type:document.getElementById('res_type').value,
+    region:document.getElementById('res_region').value,
+    address:document.getElementById('res_address').value.trim(),
+    phone:document.getElementById('res_phone').value.trim(),
+    email:document.getElementById('res_email').value.trim(),
+    website:document.getElementById('res_website').value.trim(),
+    desc:document.getElementById('res_desc').value.trim()
+  };
+  if(!entry.name)return false;
+  let arr=loadCustomRes().filter(c=>c.name!==orig && c.name!==entry.name);
+  arr.push(entry);saveCustomRes(arr);
+  closeModal('resModal');renderResources();
+  return false;
+}
+function editRes(name){openResForm(name);}
+function delRes(name){
+  saveCustomRes(loadCustomRes().filter(c=>c.name!==name));
+  closeModal('resModal');renderResources();
+}
 async function renderResources(){
   if(!RESOURCES){
     let raw=await loadJSON('data/resources.json');
     if(!raw)raw=await loadJSON('js/data/resources-data.json');
     RESOURCES=raw&&raw.resources?raw.resources:(Array.isArray(raw)?raw:[]);
   }
+  const LIST=mergedResources();
   // (re)remplir les filtres dans la langue courante
-  const types=[...new Set(RESOURCES.map(r=>r.type).filter(Boolean))];
-  const regions=[...new Set(RESOURCES.map(r=>r.region).filter(Boolean))];
+  const types=[...new Set(LIST.map(r=>r.type).filter(Boolean))];
+  const regions=[...new Set(LIST.map(r=>r.region).filter(Boolean))];
   const curTy=document.getElementById('resType').value, curRg=document.getElementById('resRegion').value;
   document.getElementById('resType').innerHTML=`<option value="">${t('res.alltypes')}</option>`+types.map(x=>`<option value="${esc(x)}">${esc(rtFR(x))}</option>`).join('');
   document.getElementById('resRegion').innerHTML=`<option value="">${t('res.allregions')}</option>`+regions.map(x=>`<option value="${esc(x)}">${esc(rgFR(x))}</option>`).join('');
@@ -1033,23 +1110,24 @@ async function renderResources(){
   // boutons de catégories (chips) — filtre rapide par domaine
   const rc=document.getElementById('resCats');
   if(rc){
-    const cats=[...new Set(RESOURCES.map(r=>r.type).filter(Boolean))].sort((a,b)=>tr(RES_TYPE[a]||a).localeCompare(tr(RES_TYPE[b]||b)));
-    rc.innerHTML=`<button class="btn ${!curTy?'':'sec'} sm" onclick="setResCat('')">${LANG==='nl'?'Alles':'Tout'} (${RESOURCES.length})</button>`+
-      cats.map(x=>{const n=RESOURCES.filter(r=>r.type===x).length;return `<button class="btn ${curTy===x?'':'sec'} sm" onclick="setResCat('${x}')">${esc(rtFR(x))} (${n})</button>`;}).join('');
+    const cats=[...new Set(LIST.map(r=>r.type).filter(Boolean))].sort((a,b)=>tr(RES_TYPE[a]||a).localeCompare(tr(RES_TYPE[b]||b)));
+    rc.innerHTML=`<button class="btn ${!curTy?'':'sec'} sm" onclick="setResCat('')">${LANG==='nl'?'Alles':'Tout'} (${LIST.length})</button>`+
+      cats.map(x=>{const n=LIST.filter(r=>r.type===x).length;return `<button class="btn ${curTy===x?'':'sec'} sm" onclick="setResCat('${x}')">${esc(rtFR(x))} (${n})</button>`;}).join('');
   }
   const q=(document.getElementById('resSearch').value||'').toLowerCase();
   const ty=document.getElementById('resType').value;
   const rg=document.getElementById('resRegion').value;
-  let arr=RESOURCES;
+  let arr=LIST;
   if(q)arr=arr.filter(r=>JSON.stringify(r).toLowerCase().includes(q));
   if(ty)arr=arr.filter(r=>r.type===ty);
   if(rg)arr=arr.filter(r=>r.region===rg);
   const el=document.getElementById('resourcesContent');
   if(!arr.length){el.innerHTML=`<div class="empty">${t('res.unavailable')}</div>`;return;}
-  el.innerHTML=`<p class="muted" style="margin-bottom:.6rem">${arr.length} ${t('res.count')}</p>`+arr.slice(0,200).map(r=>`
+  el.innerHTML=`<p class="muted" style="margin-bottom:.6rem">${arr.length} ${t('res.count')}</p>`+arr.slice(0,300).map(r=>`
     <div class="list-item">
       <div class="row" style="justify-content:space-between">
-        <strong>${esc(r.name||'—')}</strong><span class="badge b-nouveau">${esc(rtFR(r.type))}</span>
+        <strong>${esc(r.name||'—')}${r._custom?` <span class="badge b-clos">${t('res.custom')}</span>`:r._edited?` <span class="badge b-cours">${t('res.edited')}</span>`:''}</strong>
+        <span><span class="badge b-nouveau">${esc(rtFR(r.type))}</span> <button class="btn sec sm" data-n="${esc(r.name)}" onclick="editRes(this.dataset.n)" title="${LANG==='nl'?'Bewerken':'Modifier'}">✏️</button></span>
       </div>
       ${r.desc?`<div style="margin:.25rem 0">${esc(tr(r.desc))}</div>`:''}
       <div class="muted">

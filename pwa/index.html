@@ -316,6 +316,7 @@
       <select id="resType" onchange="renderResources()"><option value="" data-i18n="res.alltypes">Tous les types</option></select>
       <select id="resRegion" onchange="renderResources()"><option value="" data-i18n="res.allregions">Toutes les régions</option></select>
     </div>
+    <div id="resCats" class="row" style="gap:.4rem;margin-bottom:1rem"></div>
     <div id="resourcesContent" class="loading"></div>
   </section>
 </main>
@@ -1014,6 +1015,7 @@ const RES_TYPE={
 };
 const RES_REGION={Brussels:{fr:"Bruxelles",nl:"Brussel"},Bruxelles:{fr:"Bruxelles",nl:"Brussel"},Flanders:{fr:"Flandre",nl:"Vlaanderen"},Flandre:{fr:"Flandre",nl:"Vlaanderen"},Wallonia:{fr:"Wallonie",nl:"Wallonië"},Wallonie:{fr:"Wallonie",nl:"Wallonië"},Mixed:{fr:"Mixte / National",nl:"Gemengd / Nationaal"},National:{fr:"National",nl:"Nationaal"},"Fédéral":{fr:"Fédéral",nl:"Federaal"},International:{fr:"International",nl:"Internationaal"}};
 const rtFR=v=>{const m=RES_TYPE[v];return m?tr(m):(v?v.charAt(0).toUpperCase()+v.slice(1).replace(/_/g,' '):'—');};
+function setResCat(code){const el=document.getElementById('resType');if(el){el.value=code;}renderResources();}
 const rgFR=v=>{const m=RES_REGION[v];return m?tr(m):(v||'');};
 async function renderResources(){
   if(!RESOURCES){
@@ -1028,6 +1030,13 @@ async function renderResources(){
   document.getElementById('resType').innerHTML=`<option value="">${t('res.alltypes')}</option>`+types.map(x=>`<option value="${esc(x)}">${esc(rtFR(x))}</option>`).join('');
   document.getElementById('resRegion').innerHTML=`<option value="">${t('res.allregions')}</option>`+regions.map(x=>`<option value="${esc(x)}">${esc(rgFR(x))}</option>`).join('');
   document.getElementById('resType').value=curTy;document.getElementById('resRegion').value=curRg;
+  // boutons de catégories (chips) — filtre rapide par domaine
+  const rc=document.getElementById('resCats');
+  if(rc){
+    const cats=[...new Set(RESOURCES.map(r=>r.type).filter(Boolean))].sort((a,b)=>tr(RES_TYPE[a]||a).localeCompare(tr(RES_TYPE[b]||b)));
+    rc.innerHTML=`<button class="btn ${!curTy?'':'sec'} sm" onclick="setResCat('')">${LANG==='nl'?'Alles':'Tout'} (${RESOURCES.length})</button>`+
+      cats.map(x=>{const n=RESOURCES.filter(r=>r.type===x).length;return `<button class="btn ${curTy===x?'':'sec'} sm" onclick="setResCat('${x}')">${esc(rtFR(x))} (${n})</button>`;}).join('');
+  }
   const q=(document.getElementById('resSearch').value||'').toLowerCase();
   const ty=document.getElementById('resType').value;
   const rg=document.getElementById('resRegion').value;

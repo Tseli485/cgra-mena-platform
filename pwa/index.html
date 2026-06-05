@@ -856,6 +856,7 @@ function openDossierDetail(id){
       <label class="check-line"><input type="checkbox" ${c.done?'checked':''} onchange="toggleCheck('${d.id}',${i})">
       <span style="${c.done?'text-decoration:line-through;color:var(--gris)':''}">${esc(c.t)}</span></label>`).join('')}</div>
     <div class="row" style="margin-top:1.2rem;justify-content:flex-end">
+      <button class="btn sec sm" onclick="genDossierComplet('${d.id}')">🖨️ ${LANG==='nl'?'Volledig dossier (PDF)':'Dossier complet (PDF)'}</button>
       <button class="btn sec sm" onclick="openDossierForm('${d.id}')">${t('det.modify')}</button>
       <button class="btn danger sm" onclick="deleteDossier('${d.id}')">${t('det.delete')}</button>
     </div>`;
@@ -1589,6 +1590,32 @@ function genReport(id,rid){
     <p style="margin-top:.6rem"><em>${LANG==='nl'?'(Vul de inhoud van het verslag aan.)':'(Complétez le contenu du rapport.)'}</em></p>
     <br><br><p>${LANG==='nl'?'De voogd,':'Le tuteur,'}</p>`;
   printDoc(tr(rt.label),html);
+}
+function genDossierComplet(id){
+  const d=loadDossiers().find(x=>x.id===id);if(!d)return;initGestion(d);
+  const f=d.fiche||{};
+  const stMap={nouveau:LANG==='nl'?'Nieuw':'Nouveau',cours:LANG==='nl'?'Lopend':'En cours',urgent:LANG==='nl'?'Dringend':'Urgent',clos:LANG==='nl'?'Afgesloten':'Clos'};
+  const photo=d.photo?`<img src="${d.photo}" style="max-width:110px;float:right;border-radius:6px;margin-left:1rem">`:'';
+  const idRows=[['OE/OV',f.ov],[LANG==='nl'?'Naam':'Nom',d.nom],[LANG==='nl'?'Geslacht':'Sexe',f.sexe?tr(f.sexe):''],[LANG==='nl'?'Geboorte':'Naissance',f.naissance],[LANG==='nl'?'Nationaliteit':'Nationalité',d.pays?paysLabel(d.pays):f.nationalite],[LANG==='nl'?'Taal':'Langue',d.langue||f.langueParlee],[LANG==='nl'?'Adres herkomst':'Adresse origine',f.adresseOrigine],[LANG==='nl'?'Adres BE':'Adresse BE',f.adresseBE]]
+    .filter(x=>x[1]).map(x=>`<tr><td>${esc(x[0])}</td><td><strong>${esc(x[1])}</strong></td></tr>`).join('');
+  const jp=d.jugePaix||{};
+  const jpHtml=jp.canton?`<p><strong>${esc(jp.canton)}</strong><br>${esc(jp.adresse||'')}${jp.tel?'<br>☎ '+esc(jp.tel):''}${jp.email?' · ✉ '+esc(jp.email):''}</p>`:`<p class="muted">${LANG==='nl'?'Niet ingevuld':'Non renseigné'}</p>`;
+  const rap=(d.rapports||[]).map(r=>{const rt=RAPPORTS_TYPE.find(x=>x.id===r.id);return `<tr><td>${esc(rt?tr(rt.label):r.id)}</td><td>${esc(r.echeance||'')}</td><td>${r.fait?'✓ '+(r.dateFait||''):'—'}</td></tr>`;}).join('');
+  const ops=(d.banque&&d.banque.operations)||[];
+  const opHtml=ops.map(o=>`<tr><td>${esc(o.date)}</td><td>${esc(o.lib)}</td><td class="r">${(+o.mt).toFixed(2)}</td></tr>`).join('');
+  const done=d.checklist.filter(c=>c.done).length;
+  const ck=d.checklist.map(c=>`<tr><td>${c.done?'☑':'☐'}</td><td>${esc(c.t)}</td></tr>`).join('');
+  const html=`${photo}<h1>${esc(d.nom)}${f.ov?' — OE '+esc(f.ov):''}</h1>
+    <p>${nowISO()} · ${esc(stMap[d.statut]||d.statut)}${d.age?' · '+d.age+' '+t('u.ans'):''}</p>
+    <h2 style="color:#1e40af">${LANG==='nl'?'Identiteit':'Identité'}</h2><table>${idRows}</table>
+    ${f.motif?`<p style="margin-top:.6rem"><strong>${LANG==='nl'?'Motief':'Motif'} :</strong> ${esc(tr(f.motif))}</p>`:''}
+    <h2 style="color:#1e40af">${LANG==='nl'?'Vrederechter':'Justice de paix'}</h2>${jpHtml}
+    <h2 style="color:#1e40af">${LANG==='nl'?'Verplichte verslagen':'Rapports obligatoires'}</h2><table><tr><th>${LANG==='nl'?'Verslag':'Rapport'}</th><th>${LANG==='nl'?'Termijn':'Échéance'}</th><th>${LANG==='nl'?'Gedaan':'Fait'}</th></tr>${rap}</table>
+    <h2 style="color:#1e40af">${LANG==='nl'?'Bankbeheer':'Suivi bancaire'} — ${LANG==='nl'?'saldo':'solde'} ${soldeOf(d).toFixed(2)} €</h2>${ops.length?`<table><tr><th>Date</th><th>${LANG==='nl'?'Omschrijving':'Libellé'}</th><th class="r">€</th></tr>${opHtml}</table>`:`<p class="muted">—</p>`}
+    <h2 style="color:#1e40af">${LANG==='nl'?'Checklist':'Checklist'} (${done}/${d.checklist.length})</h2><table>${ck}</table>
+    ${d.notes?`<h2 style="color:#1e40af">Notes</h2><p>${esc(d.notes).slice(0,4000)}</p>`:''}
+    <br><p>${LANG==='nl'?'De voogd,':'Le tuteur,'}</p>`;
+  printDoc((LANG==='nl'?'Dossier ':'Dossier ')+d.nom,html);
 }
 function printReleve(id){
   const d=loadDossiers().find(x=>x.id===id);if(!d)return;const ops=(d.banque&&d.banque.operations)||[];

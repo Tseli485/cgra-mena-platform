@@ -4,3 +4,8 @@ mena_photo.png
 pdf_extract.json
 *.backup.json
 .netlify/
+dist/
+build_pi/
+build/
+*.spec
+__pycache__/

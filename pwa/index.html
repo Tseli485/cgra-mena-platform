@@ -373,6 +373,7 @@
       <input type="file" accept="application/pdf,.pdf" onchange="onPdfFile(this)">
       <div id="pdfStatus" class="muted" style="font-size:.8rem;margin-top:.3rem"></div>
       <button type="button" class="btn sec sm" style="margin-top:.5rem" onclick="fillAzizi()" data-i18n="fiche.example">⚡ Charger l'exemple (fiche AZIZI)</button>
+      <button type="button" class="btn sec sm" style="margin-top:.5rem" onclick="openTrad(document.getElementById('fi_notes')?document.getElementById('fi_notes').value:'')" data-i18n="fiche.translate">🌐 Traduire un document (NL→FR)</button>
     </div>
     <form id="ficheForm" onsubmit="saveFiche(event)">
       <input type="checkbox" id="ficheAziziFull" style="display:none">
@@ -439,6 +440,14 @@
   </div>
 </div>
 
+<!-- MODAL TRADUCTION NL -> FR -->
+<div class="modal" id="trModal">
+  <div class="modal-box">
+    <button class="close" onclick="closeModal('trModal')">&times;</button>
+    <div id="trBox"></div>
+  </div>
+</div>
+
 <script src="js/lib/pdf.min.js"></script>
 <script>
 /* ============ INTERNATIONALISATION (FR / NL) ============ */
@@ -457,7 +466,7 @@ const I18N = {
   "doss.title":"📂 Mes Dossiers","doss.search":"🔍 Rechercher un dossier...","doss.allstatus":"Tous les statuts",
   "doss.empty":"📭 Aucun dossier. Cliquez sur « ➕ Nouveau dossier » pour commencer.","doss.nomatch":"Aucun dossier ne correspond.","doss.origin":"Origine inconnue","doss.progress":"Progression","doss.steps":"étapes","doss.arrived":"arrivé(e) le",
   "st.nouveau":"Nouveau","st.cours":"En cours","st.urgent":"Urgent","st.clos":"Clos","u.ans":"ans",
-  "fiche.import":"📄 Importer une fiche DVZ","fiche.title":"📄 Importer une fiche DVZ (nouveau MENA)","fiche.hint":"Renseignez les champs de la fiche et ajoutez la photo du jeune. Le dossier sera créé avec un suivi complet.","fiche.example":"⚡ Charger l'exemple (fiche AZIZI)","fiche.create":"📁 Créer le dossier","fiche.f.nom":"Nom & prénom","fiche.f.ov":"N° OE (OV)","fiche.f.naissance":"Naissance (date / âge)","fiche.f.sexe":"Sexe","fiche.f.nat":"Nationalité","fiche.f.langue":"Langue parlée","fiche.f.adresseBE":"Adresse en Belgique","fiche.f.origine":"Adresse pays d'origine","fiche.f.motif":"Motif de l'immigration","fiche.f.notes":"Notes (parcours, scolarité, contacts…)","fiche.f.photo":"📷 Photo du jeune","fiche.pdf":"📎 Lire automatiquement une fiche PDF (DVZ)",
+  "fiche.import":"📄 Importer une fiche DVZ","fiche.title":"📄 Importer une fiche DVZ (nouveau MENA)","fiche.hint":"Renseignez les champs de la fiche et ajoutez la photo du jeune. Le dossier sera créé avec un suivi complet.","fiche.example":"⚡ Charger l'exemple (fiche AZIZI)","fiche.create":"📁 Créer le dossier","fiche.f.nom":"Nom & prénom","fiche.f.ov":"N° OE (OV)","fiche.f.naissance":"Naissance (date / âge)","fiche.f.sexe":"Sexe","fiche.f.nat":"Nationalité","fiche.f.langue":"Langue parlée","fiche.f.adresseBE":"Adresse en Belgique","fiche.f.origine":"Adresse pays d'origine","fiche.f.motif":"Motif de l'immigration","fiche.f.notes":"Notes (parcours, scolarité, contacts…)","fiche.f.photo":"📷 Photo du jeune","fiche.pdf":"📎 Lire automatiquement une fiche PDF (DVZ)","fiche.translate":"🌐 Traduire un document (NL→FR)",
   "det.checklist":"✅ Checklist de suivi","det.progress":"Progression globale :","det.modify":"✏️ Modifier","det.delete":"🗑️ Supprimer","det.confirmdel":"Supprimer définitivement ce dossier ?",
   "form.new":"Nouveau dossier","form.edit":"Modifier le dossier",
   "f.name":"Nom / Identifiant *","f.name.ph":"ex. Amira K.","f.age":"Âge","f.age.ph":"ex. 14","f.country":"Pays d'origine","f.country.ph":"ex. Syrie","f.arrival":"Date d'arrivée","f.statut":"Statut","f.lang":"Langue parlée","f.lang.ph":"ex. Arabe","f.notes":"Notes / Situation","f.notes.ph":"Résumé de la situation...",
@@ -486,7 +495,7 @@ const I18N = {
   "doss.title":"📂 Mijn dossiers","doss.search":"🔍 Een dossier zoeken...","doss.allstatus":"Alle statussen",
   "doss.empty":"📭 Geen dossier. Klik op « ➕ Nieuw dossier » om te beginnen.","doss.nomatch":"Geen overeenkomend dossier.","doss.origin":"Herkomst onbekend","doss.progress":"Voortgang","doss.steps":"stappen","doss.arrived":"aangekomen op",
   "st.nouveau":"Nieuw","st.cours":"Lopend","st.urgent":"Dringend","st.clos":"Afgesloten","u.ans":"jaar",
-  "fiche.import":"📄 DVZ-fiche importeren","fiche.title":"📄 DVZ-fiche importeren (nieuwe NBMV)","fiche.hint":"Vul de velden van de fiche in en voeg de foto van de jongere toe. Het dossier wordt aangemaakt met volledige opvolging.","fiche.example":"⚡ Voorbeeld laden (fiche AZIZI)","fiche.create":"📁 Dossier aanmaken","fiche.f.nom":"Naam & voornaam","fiche.f.ov":"OV-nr","fiche.f.naissance":"Geboorte (datum / leeftijd)","fiche.f.sexe":"Geslacht","fiche.f.nat":"Nationaliteit","fiche.f.langue":"Gesproken taal","fiche.f.adresseBE":"Adres in België","fiche.f.origine":"Adres land van herkomst","fiche.f.motif":"Motief voor de immigratie","fiche.f.notes":"Notities (traject, scholing, contacten…)","fiche.f.photo":"📷 Foto van de jongere","fiche.pdf":"📎 Een PDF-fiche automatisch lezen (DVZ)",
+  "fiche.import":"📄 DVZ-fiche importeren","fiche.title":"📄 DVZ-fiche importeren (nieuwe NBMV)","fiche.hint":"Vul de velden van de fiche in en voeg de foto van de jongere toe. Het dossier wordt aangemaakt met volledige opvolging.","fiche.example":"⚡ Voorbeeld laden (fiche AZIZI)","fiche.create":"📁 Dossier aanmaken","fiche.f.nom":"Naam & voornaam","fiche.f.ov":"OV-nr","fiche.f.naissance":"Geboorte (datum / leeftijd)","fiche.f.sexe":"Geslacht","fiche.f.nat":"Nationaliteit","fiche.f.langue":"Gesproken taal","fiche.f.adresseBE":"Adres in België","fiche.f.origine":"Adres land van herkomst","fiche.f.motif":"Motief voor de immigratie","fiche.f.notes":"Notities (traject, scholing, contacten…)","fiche.f.photo":"📷 Foto van de jongere","fiche.pdf":"📎 Een PDF-fiche automatisch lezen (DVZ)","fiche.translate":"🌐 Een document vertalen (NL→FR)",
   "det.checklist":"✅ Opvolgingschecklist","det.progress":"Totale voortgang:","det.modify":"✏️ Wijzigen","det.delete":"🗑️ Verwijderen","det.confirmdel":"Dit dossier definitief verwijderen?",
   "form.new":"Nieuw dossier","form.edit":"Dossier wijzigen",
   "f.name":"Naam / Identificatie *","f.name.ph":"bv. Amira K.","f.age":"Leeftijd","f.age.ph":"bv. 14","f.country":"Land van herkomst","f.country.ph":"bv. Syrië","f.arrival":"Aankomstdatum","f.statut":"Status","f.lang":"Gesproken taal","f.lang.ph":"bv. Arabisch","f.notes":"Notities / Situatie","f.notes.ph":"Samenvatting van de situatie...",
@@ -1514,6 +1523,77 @@ const FICHE_AZIZI={
   scolarite:{fr:"Scolarité : pas d'école — sait un peu écrire et lire.",nl:"Scholing: geen school — kan een beetje schrijven en lezen."},
   contactFamille:{fr:"Contact avec la famille : aucun contact.",nl:"Contact met familie: geen contact."}
 };
+/* ============ TRADUCTION NL -> FR (documents officiels DVZ/MENA) ============ */
+const NL_FR={
+  "niet-begeleide minderjarige vreemdeling":"mineur étranger non accompagné","niet-begeleide minderjarige":"mineur non accompagné",
+  "dienst vreemdelingenzaken":"Office des Étrangers","dienst voogdij":"Service des Tutelles",
+  "nummer van het dossier":"numéro du dossier","proces-verbaal":"procès-verbal","ov-nr":"n° OE",
+  "naam en voornaam":"nom et prénom","voornaam":"prénom","naam":"nom",
+  "geslacht":"sexe","mannelijk":"masculin","vrouwelijk":"féminin",
+  "geboorteplaats en -datum":"lieu et date de naissance","geboorteplaats en":"lieu de naissance et","geboorteplaats":"lieu de naissance","geboortedatum":"date de naissance","geboorte":"naissance",
+  "nationaliteit":"nationalité","afghanistan":"Afghanistan",
+  "moedertaal":"langue maternelle","gesproken taal":"langue parlée","gesproken talen":"langues parlées",
+  "andere gebruikte identiteiten":"autres identités utilisées","alias":"alias",
+  "adres in belgië":"adresse en Belgique","adres in land van herkomst of ander land":"adresse dans le pays d'origine ou un autre pays","land van herkomst":"pays d'origine","adres woonplaats":"adresse (domicile)","woonplaats":"domicile","adres":"adresse",
+  "werd de jongere reeds gesignaleerd":"le jeune a-t-il déjà été signalé","gesignaleerd":"signalé",
+  "vingerafdrukken of andere biometrische gegevens werden genomen":"les empreintes digitales ou autres données biométriques ont été prises","vingerafdrukken":"empreintes digitales","biometrische gegevens":"données biométriques","werden genomen":"ont été prises",
+  "twijfel over de ingeroepen minderjarigheid":"doute sur la minorité invoquée","minderjarigheid":"minorité","minderjarige":"mineur","twijfel geuit":"doute exprimé","twijfel":"doute","jongere":"jeune",
+  "ouders":"parents","vader":"père","moeder":"mère","broers en zussen":"frères et sœurs","broer":"frère","broers":"frères","zus":"sœur","zussen":"sœurs","jonger dan hem":"plus jeune que lui","jonger dan":"plus jeune que",
+  "telefoon":"téléphone","gsm":"GSM",
+  "specifieke rubriek voor de":"rubrique spécifique pour les","blinde passagiers":"passagers clandestins","potentiële":"potentiels",
+  "tussenkomst parket":"intervention du parquet","parket":"parquet","genomen maatregelen":"mesures prises","terbeschikkingstelling van de jeugdrechter":"mise à disposition du juge de la jeunesse","jeugdrechter":"juge de la jeunesse","leeftijdstest":"test d'âge","verantwoordelijke magistraat":"magistrat responsable","contactpersoon":"personne de contact","contactpersonen":"personnes de contact",
+  "identiteit vastgesteld aan de hand van":"identité établie sur la base de","identiteit vastgesteld":"identité établie","identiteit":"identité","verklaring":"déclaration","documenten":"documents","document":"document",
+  "fysieke kenmerken":"caractéristiques physiques","lengte":"taille","kleur haar":"couleur des cheveux","kleur ogen":"couleur des yeux","zwart":"noir","bruin":"brun","blauw":"bleu","groen":"vert",
+  "medische situatie":"situation médicale","zwangerschap":"grossesse","handicap":"handicap","verward":"confus","wonden":"blessures","besmettelijke ziekten":"maladies contagieuses","ziekten":"maladies","ziekte":"maladie","zijn medische zorgen noodzakelijk":"des soins médicaux sont-ils nécessaires","medische zorgen":"soins médicaux","pijn aan het rechterbeen":"douleur à la jambe droite","pijn aan de rechterbeen":"douleur à la jambe droite","pijn":"douleur","rechterbeen":"jambe droite","linkerbeen":"jambe gauche",
+  "zijn er andere familieleden of kennissen aanwezig in een andere lidstaat van de europese unie":"y a-t-il d'autres membres de la famille ou des connaissances présents dans un autre État membre de l'Union européenne","familieleden":"membres de la famille","kennissen":"connaissances","lidstaat":"État membre","europese unie":"Union européenne","derde land":"pays tiers",
+  "traject, interceptie en verblijf":"trajet, interception et séjour","beschrijving van het reistraject naar belgië":"description de l'itinéraire de voyage vers la Belgique","reistraject":"itinéraire de voyage","reis":"voyage","traject":"trajet","interceptie":"interception","verblijf":"séjour",
+  "eerste land van binnenkomst":"premier pays d'entrée","transit via welk land":"transit par quel pays","plaats waar de grens werd overgestoken":"lieu de franchissement de la frontière","grens":"frontière","overgestoken":"franchie","datum van aankomst":"date d'arrivée","transportmiddelen":"moyens de transport","aankomst":"arrivée","vertrek":"départ","maanden geleden":"il y a des mois","maanden":"mois","weken":"semaines","dagen":"jours",
+  "gewerkt in verschillende fabrieken":"a travaillé dans plusieurs usines","gewerkt":"a travaillé","fabrieken":"usines","fabriek":"usine",
+  "organisatie van de reis":"organisation du voyage","wie heeft zich om de minderjarige bekommerd":"qui s'est occupé du mineur","wie heeft de reis georganiseerd":"qui a organisé le voyage","rol van de ouders":"rôle des parents","gefinancierd en georganiseerd":"financé et organisé","gefinancierd":"financé","georganiseerd":"organisé",
+  "waarom":"pourquoi","mensen zeiden me op de weg goede dingen over":"des gens m'ont dit du bien sur la route à propos de","het schoolsysteem":"le système scolaire","migranten worden beter beschermd":"les migrants sont mieux protégés","beter beschermd":"mieux protégés",
+  "omstandigheden van de interceptie van de minderjarige":"circonstances de l'interception du mineur","meldt zich aan bij dvz":"se présente à l'Office des Étrangers","meldt zich aan":"se présente",
+  "motief voor de immigratie naar belgië":"motif de l'immigration vers la Belgique","om welke reden(en) is de jongere in belgië":"pour quelle(s) raison(s) le jeune est-il en Belgique","om welke reden":"pour quelle raison","motief":"motif","immigratie":"immigration",
+  "hij is van geloofsovertuiging":"il est de conviction religieuse","geloofsovertuiging":"conviction religieuse","chiiet":"chiite","ismaëliet":"ismaélite","werkte de papa voor het oude regime":"le papa travaillait pour l'ancien régime","oude regime":"ancien régime","regime":"régime","politie":"police","hierdoor moest we het land verlaten":"c'est pourquoi nous avons dû quitter le pays","het land verlaten":"quitter le pays","verlaten":"quitter","want we werden gedreigd door de taliban":"car nous étions menacés par les Taliban","gedreigd":"menacés","bedreigd":"menacé","taliban":"Taliban","papa":"papa","mama":"maman",
+  "kwetsbaarheid":"vulnérabilité","zijn er aanwijzingen":"y a-t-il des indices","aanwijzingen":"indices","elementen die laten veronderstellen":"éléments laissant supposer","slachtoffer":"victime","mensenhandel":"traite des êtres humains","economische uitbuiting":"exploitation économique","seksuele uitbuiting":"exploitation sexuelle","bedelarij":"mendicité","uitbuiting":"exploitation","mensensmokkel":"trafic d'êtres humains","preciseer":"précisez",
+  "behoefte aan opvang":"besoin d'accueil","opvang":"accueil","motivering in geval van afwijzing of weigering van opvang":"motivation en cas de rejet ou de refus d'accueil","afwijzing":"rejet","weigering":"refus",
+  "persoonlijke voorwerpen":"effets personnels","bagage":"bagage","kledij":"vêtements","geld":"argent","juwelen":"bijoux","zak met persoonlijke spullen":"sac avec affaires personnelles","persoonlijke spullen":"affaires personnelles","telefoon zonder simkaart":"téléphone sans carte SIM","zonder simkaart":"sans carte SIM","simkaart":"carte SIM",
+  "scholing":"scolarité","geen school":"pas d'école","een beetje schrijven en lezen":"écrit et lit un peu","schrijven":"écrire","lezen":"lire","school":"école",
+  "contact met familie":"contact avec la famille","geen contact":"aucun contact",
+  "gebruiksaanwijzing voor het invullen van de fiche":"mode d'emploi pour remplir la fiche","alle rubrieken moeten worden ingevuld":"toutes les rubriques doivent être remplies","niet van toepassing":"non applicable","rubriek":"rubrique","fiche":"fiche","ingevuld":"rempli","invullen":"remplir",
+  "stempel":"cachet","identificatie van de dienst die de fiche invult":"identification du service qui remplit la fiche",
+  "ja":"oui","neen":"non","nee":"non","onbekend":"inconnu","geboren te":"né à","geboren":"né",
+  "slachtoffer van":"victime de","en ook":"et aussi","ook":"aussi","en":"et","van":"de","een":"un","maar":"mais","of":"ou","omdat":"parce que","want":"car","dat":"que","de persoon":"la personne","persoon":"personne","zou kunnen zijn":"pourrait être","zou kunnen":"pourrait","geen":"pas de","met":"avec","zonder":"sans","voor":"pour","naar":"vers","tijdens":"pendant","volgens":"selon","tussen":"entre","door":"par","over":"au sujet de","ongeveer":"environ","sinds":"depuis","reeds":"déjà","nog":"encore","altijd":"toujours","nooit":"jamais","hij":"il","zij":"elle","wij":"nous","verklaart":"déclare","verklaarde":"a déclaré",
+  "januari":"janvier","februari":"février","maart":"mars","april":"avril","mei":"mai","juni":"juin","juli":"juillet","augustus":"août","september":"septembre","oktober":"octobre","november":"novembre","december":"décembre",
+  "betreft":"concerne","aan boord van":"à bord de","gelegen in de haven van":"situé dans le port de","haven":"port","schip":"navire","motorschip":"navire à moteur",
+  "indien er een technisch probleem is":"en cas de problème technique","per telefax":"par télécopie","na 17 uur":"après 17 heures","tijdens weekends en op feestdagen":"durant les week-ends et jours fériés","feestdagen":"jours fériés","weekends":"week-ends",
+  "verblijfsdocumenten":"documents de séjour","identiteitsdocumenten":"documents d'identité","een kopie van":"une copie de","een foto van de betrokkene":"une photo de l'intéressé","betrokkene":"intéressé","via elektronische post":"par courrier électronique","wordt gestuurd naar":"est envoyée à",
+  "e-mail":"e-mail","telefoonnummer":"numéro de téléphone"
+};
+const NL_FR_SORTED=Object.entries(NL_FR).sort((a,b)=>b[0].length-a[0].length);
+function trDocNL(text){
+  if(!text)return '';
+  let s=String(text);
+  for(const [nl,fr] of NL_FR_SORTED){
+    const re=new RegExp('(^|[^\\p{L}])('+nl.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')(?![\\p{L}])','giu');
+    s=s.replace(re,(m,p1)=>p1+fr);
+  }
+  return s;
+}
+/* Outil de traduction d'un document collé */
+function openTrad(prefill){
+  document.getElementById('trBox').innerHTML=`
+    <h3>🌐 ${LANG==='nl'?'Document vertalen (NL → FR)':'Traduire un document (NL → FR)'}</h3>
+    <p class="muted" style="font-size:.82rem">${LANG==='nl'?'Plak hier een Nederlandse tekst. De vertaling van de officiële/getemplateerde delen is exact; vrije tekst is een automatische versie — controleer ze.':'Collez un texte néerlandais. La traduction des parties officielles/templatées est exacte ; le texte libre est une version automatique — vérifiez-la.'}</p>
+    <label>${LANG==='nl'?'Nederlandse tekst':'Texte néerlandais'}</label>
+    <textarea id="trIn" rows="6">${prefill?esc(prefill):''}</textarea>
+    <button class="btn sm" style="margin:.5rem 0" onclick="doTrad()">➡️ ${LANG==='nl'?'Vertalen naar het Frans':'Traduire en français'}</button>
+    <label>${LANG==='nl'?'Franse vertaling (te controleren)':'Traduction française (à vérifier)'}</label>
+    <textarea id="trOut" rows="6" readonly></textarea>
+    <button class="btn sec sm" style="margin-top:.5rem" onclick="(function(){var o=document.getElementById('trOut');o.select();document.execCommand('copy');})()">📋 ${LANG==='nl'?'Kopiëren':'Copier'}</button>`;
+  openModal('trModal');
+  if(prefill)doTrad();
+}
+function doTrad(){document.getElementById('trOut').value=trDocNL(document.getElementById('trIn').value);}
 function openFicheImport(){
   document.getElementById('ficheForm').reset();FICHE_PHOTO='';
   document.getElementById('fichePhotoPreview').innerHTML='';
@@ -1563,10 +1643,13 @@ function parseFicheText(txt){
   set('fi_ov',ov); set('fi_nom',nom); set('fi_naissance',naissance);
   set('fi_sexe', sexeNL?(/^M/i.test(sexeNL)?(LANG==='nl'?'Mannelijk':'Masculin'):(LANG==='nl'?'Vrouwelijk':'Féminin')):'');
   set('fi_nat',nat); set('fi_langue',langue); set('fi_adresseBE',adresseBE); set('fi_origine',origine);
-  set('fi_motif',motif);
-  // texte intégral conservé dans les notes (rien n'est perdu)
+  set('fi_motif', (LANG==='fr'&&motif)?trDocNL(motif):motif);
+  // notes : en FR, traduction auto (à vérifier) + texte original NL conservé ; en NL, texte original
   const notes=document.getElementById('fi_notes');
-  if(notes)notes.value=(LANG==='nl'?'[Volledige tekst van de PDF-fiche]\n':'[Texte intégral de la fiche PDF]\n')+txt.trim();
+  if(notes){
+    if(LANG==='fr')notes.value='[Traduction FR — automatique, à vérifier]\n'+trDocNL(txt.trim())+'\n\n[Texte original néerlandais]\n'+txt.trim();
+    else notes.value='[Volledige tekst van de PDF-fiche]\n'+txt.trim();
+  }
 }
 function fillAzizi(){
   const f=FICHE_AZIZI;

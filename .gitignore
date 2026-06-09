@@ -9,3 +9,5 @@ build_pi/
 build/
 *.spec
 __pycache__/
+dist-multi/
+release_assets/

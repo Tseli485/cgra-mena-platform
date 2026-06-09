@@ -11,3 +11,8 @@ build/
 __pycache__/
 dist-multi/
 release_assets/
+*.menabackup
+dvz_fulltext.txt
+mena_photo.jpg
+mena_photo_b64.txt
+20230918 fiche DVZ.pdf

@@ -1637,12 +1637,13 @@ function saveTradToDossier(){
   saveDossiers(arr);closeModal('trModal');openDossierDetail(TRAD_DOSSIER);
 }
 function openFicheImport(){
-  document.getElementById('ficheForm').reset();FICHE_PHOTO='';
+  document.getElementById('ficheForm').reset();FICHE_PHOTO='';PDF_IMPORT=null;
   document.getElementById('fichePhotoPreview').innerHTML='';
   const ps=document.getElementById('pdfStatus');if(ps)ps.textContent='';
   openModal('ficheModal');
 }
 /* Lecture automatique d'une fiche PDF (texte + photo) via pdf.js, hors-ligne */
+let PDF_IMPORT=null;   // valeurs NL d'origine de la dernière fiche PDF importée (pour stockage bilingue)
 async function onPdfFile(input){
   const file=input.files&&input.files[0];if(!file)return;
   const status=document.getElementById('pdfStatus');
@@ -1686,12 +1687,11 @@ function parseFicheText(txt){
   set('fi_sexe', sexeNL?(/^M/i.test(sexeNL)?(LANG==='nl'?'Mannelijk':'Masculin'):(LANG==='nl'?'Vrouwelijk':'Féminin')):'');
   set('fi_nat',nat); set('fi_langue',langue); set('fi_adresseBE',adresseBE); set('fi_origine',origine);
   set('fi_motif', (LANG==='fr'&&motif)?trDocNL(motif):motif);
-  // notes : en FR, traduction auto (à vérifier) + texte original NL conservé ; en NL, texte original
-  const notes=document.getElementById('fi_notes');
-  if(notes){
-    if(LANG==='fr')notes.value='[Traduction FR — automatique, à vérifier]\n'+trDocNL(txt.trim())+'\n\n[Texte original néerlandais]\n'+txt.trim();
-    else notes.value='[Volledige tekst van de PDF-fiche]\n'+txt.trim();
-  }
+  // mémoriser les valeurs NL d'origine → stockage BILINGUE à la sauvegarde
+  // (mode FR : tout en FR traduit ; mode NL : tout en NL original)
+  PDF_IMPORT={ov,nom,naissance,sexeNL,nat,langue,adresseBE,origine,motifNL:motif,fullNL:txt.trim()};
+  // le document complet est conservé en bilingue dans la fiche ; les notes restent libres pour le tuteur
+  const notes=document.getElementById('fi_notes');if(notes)notes.value='';
 }
 function fillAzizi(){
   const f=FICHE_AZIZI;
@@ -1706,22 +1706,37 @@ function saveFiche(e){
   const arr=loadDossiers();const id='D'+Date.now();
   const useFull=document.getElementById('ficheAziziFull').checked && fi_nom.value===FICHE_AZIZI.nom;
   const age=fi_naissance.value.match(/(\d{1,2})\s*ans|≈?\s*(\d{1,2})/)?.[1]||'';
+  // Fiche issue d'un PDF DVZ → stockage BILINGUE (FR traduit + NL original)
+  let ficheData;
+  if(useFull){ ficheData=FICHE_AZIZI; }
+  else if(PDF_IMPORT){
+    const sx=PDF_IMPORT.sexeNL?(/^M/i.test(PDF_IMPORT.sexeNL)?{fr:"Masculin",nl:"Mannelijk"}:{fr:"Féminin",nl:"Vrouwelijk"}):fi_sexe.value.trim();
+    ficheData={
+      ov:fi_ov.value.trim(), nom:fi_nom.value.trim(), naissance:fi_naissance.value.trim(),
+      sexe:sx, nationalite:fi_nat.value.trim(), langueParlee:fi_langue.value.trim(),
+      adresseBE:fi_adresseBE.value.trim(), adresseOrigine:fi_origine.value.trim(),
+      motif: PDF_IMPORT.motifNL?{fr:trDocNL(PDF_IMPORT.motifNL),nl:PDF_IMPORT.motifNL}:fi_motif.value.trim(),
+      texteIntegral:{fr:trDocNL(PDF_IMPORT.fullNL),nl:PDF_IMPORT.fullNL}
+    };
+  } else {
+    ficheData={
+      ov:fi_ov.value.trim(), nom:fi_nom.value.trim(), naissance:fi_naissance.value.trim(),
+      sexe:fi_sexe.value.trim(), nationalite:fi_nat.value.trim(), langueParlee:fi_langue.value.trim(),
+      adresseBE:fi_adresseBE.value.trim(), adresseOrigine:fi_origine.value.trim(), motif:fi_motif.value.trim()
+    };
+  }
   const d={
     id, nom:fi_nom.value.trim()||'MENA', age:age||'', pays:fi_nat.value.trim(),
     statut:'nouveau', langue:fi_langue.value.trim(), notes:fi_notes.value.trim(),
     arrivee:'', photo:FICHE_PHOTO||'',
-    fiche: useFull?FICHE_AZIZI:{
-      ov:fi_ov.value.trim(), nom:fi_nom.value.trim(), naissance:fi_naissance.value.trim(),
-      sexe:fi_sexe.value.trim(), nationalite:fi_nat.value.trim(), langueParlee:fi_langue.value.trim(),
-      adresseBE:fi_adresseBE.value.trim(), adresseOrigine:fi_origine.value.trim(), motif:fi_motif.value.trim()
-    },
+    fiche: ficheData,
     jugePaix:{cp:'',canton:'',adresse:'',tel:'',email:''},
     rapports:initRapports(nowISO()),
     banque:{operations:[]},
     checklist:STD_CHECKLIST.map(t=>({t,done:false})),
     cree:nowISO()
   };
-  arr.push(d);saveDossiers(arr);closeModal('ficheModal');renderDossiers();renderDashboard();
+  arr.push(d);saveDossiers(arr);PDF_IMPORT=null;closeModal('ficheModal');renderDossiers();renderDashboard();
   openDossierDetail(id);
 }
 
@@ -1740,6 +1755,7 @@ function ficheBlocks(f){
   const longs=[["medical",{fr:"Situation médicale",nl:"Medische situatie"}],["parquet",{fr:"Parquet",nl:"Parket"}],["identiteEtablie",{fr:"Identité",nl:"Identiteit"}],["trajet",{fr:"Trajet & interception",nl:"Traject & interceptie"}],["organisation",{fr:"Organisation du voyage",nl:"Organisatie van de reis"}],["motif",{fr:"Motif de l'immigration",nl:"Motief voor de immigratie"}],["vulnerabiliteMH",{fr:"Traite (indices)",nl:"Mensenhandel (aanwijzingen)"}],["vulnerabilite",{fr:"Vulnérabilité",nl:"Kwetsbaarheid"}],["besoinAccueil",{fr:"Accueil",nl:"Opvang"}],["objets",{fr:"Effets personnels",nl:"Persoonlijke voorwerpen"}],["scolarite",{fr:"Scolarité",nl:"Scholing"}],["contactFamille",{fr:"Contact familial",nl:"Contact met familie"}]];
   let blocks='';
   longs.forEach(([k,lbl])=>{if(f[k])blocks+=`<div style="margin:.5rem 0"><strong style="color:var(--accent)">${esc(tr(lbl))}</strong><br>${esc(tr(f[k]))}</div>`;});
+  if(f.texteIntegral)blocks+=`<div style="margin:.6rem 0"><strong style="color:var(--accent)">${LANG==='nl'?'Volledige tekst (document)':'Texte intégral (document)'}</strong><div style="white-space:pre-wrap;font-size:.88rem;margin-top:.3rem">${esc(tr(f.texteIntegral))}</div></div>`;
   return (fam?`<strong style="color:var(--accent)">${LANG==='nl'?'Familie':'Famille'}</strong><ul class="clean">${fam}</ul>`:'')+blocks;
 }
 function saveJuge(id){

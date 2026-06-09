@@ -776,13 +776,29 @@ function lockApp(){
   document.getElementById('authGate').classList.remove('hidden');
   document.getElementById('authPw').focus();
 }
-// Checklist standard d'un dossier MENA
+// Checklist standard d'un dossier MENA (stockée en FR ; affichée selon la langue)
 const STD_CHECKLIST=[
  "Signalement au Service des Tutelles","Désignation du tuteur confirmée","Identification / détermination de l'âge",
  "Demande de protection internationale introduite","Hébergement adapté attribué","Bilan médical d'arrivée réalisé",
  "Inscription scolaire effectuée","Couverture médicale (mutuelle/AMU) ouverte","Bilan psychologique / suivi trauma",
  "Recherche de la famille / solution durable engagée","Ouverture de la gestion des biens","Premier rapport au Service des Tutelles"
 ];
+const CHECKLIST_NL={
+ "Signalement au Service des Tutelles":"Melding aan de Dienst Voogdij",
+ "Désignation du tuteur confirmée":"Aanstelling van de voogd bevestigd",
+ "Identification / détermination de l'âge":"Identificatie / leeftijdsbepaling",
+ "Demande de protection internationale introduite":"Verzoek om internationale bescherming ingediend",
+ "Hébergement adapté attribué":"Aangepaste opvang toegewezen",
+ "Bilan médical d'arrivée réalisé":"Medisch onthaalonderzoek uitgevoerd",
+ "Inscription scolaire effectuée":"Schoolinschrijving uitgevoerd",
+ "Couverture médicale (mutuelle/AMU) ouverte":"Medische dekking (ziekenfonds/DMH) geopend",
+ "Bilan psychologique / suivi trauma":"Psychologische evaluatie / trauma-opvolging",
+ "Recherche de la famille / solution durable engagée":"Opsporing van de familie / duurzame oplossing opgestart",
+ "Ouverture de la gestion des biens":"Opening van het beheer van de goederen",
+ "Premier rapport au Service des Tutelles":"Eerste verslag aan de Dienst Voogdij"
+};
+// Affiche un item de checklist dans la langue courante (FR par défaut, NL si traduit dispo)
+function ckLabel(txt){return (LANG==='nl'&&CHECKLIST_NL[txt])?CHECKLIST_NL[txt]:txt;}
 
 /* ============ DONNEES JSON ============ */
 let LIFECYCLE=null, CASES=null, RESOURCES=null;
@@ -947,7 +963,7 @@ function openDossierDetail(id){
     <h4 style="color:var(--accent);margin:.9rem 0 .3rem">${t('det.checklist')}</h4>
     <div>${d.checklist.map((c,i)=>`
       <label class="check-line"><input type="checkbox" ${c.done?'checked':''} onchange="toggleCheck('${d.id}',${i})">
-      <span style="${c.done?'text-decoration:line-through;color:var(--gris)':''}">${esc(c.t)}</span></label>`).join('')}</div>
+      <span style="${c.done?'text-decoration:line-through;color:var(--gris)':''}">${esc(ckLabel(c.t))}</span></label>`).join('')}</div>
     <div class="row" style="margin-top:1.2rem;justify-content:flex-end">
       <button class="btn sec sm" onclick="transDossier('${d.id}')">🌐 ${LANG==='nl'?'Document vertalen (NL→FR)':'Traduire le document (NL→FR)'}</button>
       <button class="btn sec sm" onclick="genDossierComplet('${d.id}')">🖨️ ${LANG==='nl'?'Volledig dossier (PDF)':'Dossier complet (PDF)'}</button>
@@ -978,7 +994,7 @@ function renderDashboard(){
         deadlines.push({nom:d.nom,label:rt?tr(rt.label):r.id,date:r.echeance,id:d.id,over:r.echeance<today});}
     });
     const next=d.checklist.find(c=>!c.done);
-    if(next)deadlines.push({nom:d.nom,label:t('dash.nextstep')+' '+next.t,date:'',id:d.id,over:false,etape:true});
+    if(next)deadlines.push({nom:d.nom,label:t('dash.nextstep')+' '+ckLabel(next.t),date:'',id:d.id,over:false,etape:true});
   });
   deadlines.sort((a,b)=>{if(!a.date)return 1;if(!b.date)return -1;return a.date<b.date?-1:1;});
   const lateLbl=LANG==='nl'?'⚠️ Te laat':'⚠️ En retard';
@@ -1796,7 +1812,7 @@ function genDossierComplet(id){
   const ops=(d.banque&&d.banque.operations)||[];
   const opHtml=ops.map(o=>`<tr><td>${esc(o.date)}</td><td>${esc(o.lib)}</td><td class="r">${(+o.mt).toFixed(2)}</td></tr>`).join('');
   const done=d.checklist.filter(c=>c.done).length;
-  const ck=d.checklist.map(c=>`<tr><td>${c.done?'☑':'☐'}</td><td>${esc(c.t)}</td></tr>`).join('');
+  const ck=d.checklist.map(c=>`<tr><td>${c.done?'☑':'☐'}</td><td>${esc(ckLabel(c.t))}</td></tr>`).join('');
   const html=`${photo}<h1>${esc(d.nom)}${f.ov?' — OE '+esc(f.ov):''}</h1>
     <p>${nowISO()} · ${esc(stMap[d.statut]||d.statut)}${d.age?' · '+d.age+' '+t('u.ans'):''}</p>
     <h2 style="color:#1e40af">${LANG==='nl'?'Identiteit':'Identité'}</h2><table>${idRows}</table>

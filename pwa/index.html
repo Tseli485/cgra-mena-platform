@@ -154,6 +154,7 @@
       <button type="submit" class="btn" style="width:100%">Déverrouiller</button>
     </form>
     <div class="hint" id="authHint">🔒 Vos dossiers sont chiffrés (AES-256) sur cet appareil. Le mot de passe n'est jamais stocké ni transmis — il déverrouille le chiffrement. <strong>Il ne peut pas être récupéré en cas d'oubli.</strong></div>
+    <button type="button" id="authReset" onclick="resetAccount()" style="display:none;background:none;border:none;color:#fff;opacity:.85;text-decoration:underline;cursor:pointer;font-size:.78rem;margin-top:.9rem">Mot de passe oublié ? Réinitialiser</button>
   </div>
 </div>
 
@@ -720,6 +721,19 @@ function refreshAuthUI(){
   document.getElementById('authPw2').placeholder=t('auth.pw2');
   document.getElementById('authHint').innerHTML=t('auth.hint');
   document.querySelector('#authForm button').textContent=setup?t('auth.setup.btn'):t('auth.login.btn');
+  const rst=document.getElementById('authReset');
+  if(rst){rst.style.display=setup?'none':'inline-block';rst.textContent=LANG==='nl'?'Wachtwoord vergeten? Resetten':'Mot de passe oublié ? Réinitialiser';}
+}
+function resetAccount(){
+  const msg=LANG==='nl'
+    ? "Wachtwoord vergeten?\n\nDe versleutelde dossiers KUNNEN NIET worden hersteld en worden definitief gewist (tenzij u een .menabackup-bestand hebt).\n\nDoorgaan en een nieuw wachtwoord aanmaken?"
+    : "Mot de passe oublié ?\n\nLes dossiers chiffrés NE PEUVENT PAS être récupérés et seront définitivement effacés (sauf si vous avez un fichier .menabackup).\n\nContinuer et créer un nouveau mot de passe ?";
+  if(!confirm(msg))return;
+  localStorage.removeItem(AUTH_KEY);localStorage.removeItem(STORE);
+  CRYPTO_KEY=null;DOSSIERS=[];
+  document.getElementById('authPw').value='';document.getElementById('authPw2').value='';
+  document.getElementById('authErr').textContent='';
+  refreshAuthUI();document.getElementById('authPw').focus();
 }
 async function doAuth(e){
   e.preventDefault();

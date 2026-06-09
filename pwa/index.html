@@ -949,6 +949,7 @@ function openDossierDetail(id){
       <label class="check-line"><input type="checkbox" ${c.done?'checked':''} onchange="toggleCheck('${d.id}',${i})">
       <span style="${c.done?'text-decoration:line-through;color:var(--gris)':''}">${esc(c.t)}</span></label>`).join('')}</div>
     <div class="row" style="margin-top:1.2rem;justify-content:flex-end">
+      <button class="btn sec sm" onclick="transDossier('${d.id}')">🌐 ${LANG==='nl'?'Document vertalen (NL→FR)':'Traduire le document (NL→FR)'}</button>
       <button class="btn sec sm" onclick="genDossierComplet('${d.id}')">🖨️ ${LANG==='nl'?'Volledig dossier (PDF)':'Dossier complet (PDF)'}</button>
       <button class="btn sec sm" onclick="openDossierForm('${d.id}')">${t('det.modify')}</button>
       <button class="btn danger sm" onclick="deleteDossier('${d.id}')">${t('det.delete')}</button>
@@ -1562,12 +1563,13 @@ const NL_FR={
   "gebruiksaanwijzing voor het invullen van de fiche":"mode d'emploi pour remplir la fiche","alle rubrieken moeten worden ingevuld":"toutes les rubriques doivent être remplies","niet van toepassing":"non applicable","rubriek":"rubrique","fiche":"fiche","ingevuld":"rempli","invullen":"remplir",
   "stempel":"cachet","identificatie van de dienst die de fiche invult":"identification du service qui remplit la fiche",
   "ja":"oui","neen":"non","nee":"non","onbekend":"inconnu","geboren te":"né à","geboren":"né",
-  "slachtoffer van":"victime de","en ook":"et aussi","ook":"aussi","en":"et","van":"de","een":"un","maar":"mais","of":"ou","omdat":"parce que","want":"car","dat":"que","de persoon":"la personne","persoon":"personne","zou kunnen zijn":"pourrait être","zou kunnen":"pourrait","geen":"pas de","met":"avec","zonder":"sans","voor":"pour","naar":"vers","tijdens":"pendant","volgens":"selon","tussen":"entre","door":"par","over":"au sujet de","ongeveer":"environ","sinds":"depuis","reeds":"déjà","nog":"encore","altijd":"toujours","nooit":"jamais","hij":"il","zij":"elle","wij":"nous","verklaart":"déclare","verklaarde":"a déclaré",
+  "slachtoffer van":"victime de","en ook":"et aussi","ook":"aussi","en":"et","van":"de","een":"un","maar":"mais","of":"ou","omdat":"parce que","want":"car","dat":"que","de persoon":"la personne","persoon":"personne","zou kunnen zijn":"pourrait être","zou kunnen":"pourrait","geen":"pas de","met":"avec","zonder":"sans","voor":"pour","naar":"vers","tijdens":"pendant","volgens":"selon","tussen":"entre","door":"par","over":"au sujet de","ongeveer":"environ","sinds":"depuis","reeds":"déjà","nog":"encore","altijd":"toujours","nooit":"jamais","hij":"il","zij":"elle","wij":"nous","verklaart":"déclare","verklaarde":"a déclaré","werkte":"travaillait","werkt":"travaille","woont":"habite","woonde":"habitait","heeft":"a","hadden":"avaient","had":"avait","was":"était","waren":"étaient","kwam":"est arrivé","ging":"est allé","reisde":"a voyagé","vluchtte":"a fui","kreeg":"a reçu",
   "januari":"janvier","februari":"février","maart":"mars","april":"avril","mei":"mai","juni":"juin","juli":"juillet","augustus":"août","september":"septembre","oktober":"octobre","november":"novembre","december":"décembre",
   "betreft":"concerne","aan boord van":"à bord de","gelegen in de haven van":"situé dans le port de","haven":"port","schip":"navire","motorschip":"navire à moteur",
   "indien er een technisch probleem is":"en cas de problème technique","per telefax":"par télécopie","na 17 uur":"après 17 heures","tijdens weekends en op feestdagen":"durant les week-ends et jours fériés","feestdagen":"jours fériés","weekends":"week-ends",
   "verblijfsdocumenten":"documents de séjour","identiteitsdocumenten":"documents d'identité","een kopie van":"une copie de","een foto van de betrokkene":"une photo de l'intéressé","betrokkene":"intéressé","via elektronische post":"par courrier électronique","wordt gestuurd naar":"est envoyée à",
-  "e-mail":"e-mail","telefoonnummer":"numéro de téléphone"
+  "e-mail":"e-mail","telefoonnummer":"numéro de téléphone",
+  "brussel":"Bruxelles","antwerpen":"Anvers","gent":"Gand","brugge":"Bruges","luik":"Liège","bergen":"Mons","leuven":"Louvain","mechelen":"Malines","oostende":"Ostende","kortrijk":"Courtrai","henegouwen":"Hainaut","vlaanderen":"Flandre","wallonië":"Wallonie","belgië":"Belgique"
 };
 const NL_FR_SORTED=Object.entries(NL_FR).sort((a,b)=>b[0].length-a[0].length);
 function trDocNL(text){
@@ -1580,20 +1582,43 @@ function trDocNL(text){
   return s;
 }
 /* Outil de traduction d'un document collé */
-function openTrad(prefill){
+let TRAD_DOSSIER=null;
+function openTrad(prefill,dossierId){
+  TRAD_DOSSIER=dossierId||null;
   document.getElementById('trBox').innerHTML=`
     <h3>🌐 ${LANG==='nl'?'Document vertalen (NL → FR)':'Traduire un document (NL → FR)'}</h3>
-    <p class="muted" style="font-size:.82rem">${LANG==='nl'?'Plak hier een Nederlandse tekst. De vertaling van de officiële/getemplateerde delen is exact; vrije tekst is een automatische versie — controleer ze.':'Collez un texte néerlandais. La traduction des parties officielles/templatées est exacte ; le texte libre est une version automatique — vérifiez-la.'}</p>
+    <p class="muted" style="font-size:.82rem">${LANG==='nl'?'Plak hier een Nederlandse tekst. De vertaling van de officiële/getemplateerde delen is exact; vrije tekst is een automatische versie — controleer en bewerk ze.':'Collez un texte néerlandais. La traduction des parties officielles/templatées est exacte ; le texte libre est une version automatique — vérifiez-la et corrigez-la.'}</p>
     <label>${LANG==='nl'?'Nederlandse tekst':'Texte néerlandais'}</label>
     <textarea id="trIn" rows="6">${prefill?esc(prefill):''}</textarea>
     <button class="btn sm" style="margin:.5rem 0" onclick="doTrad()">➡️ ${LANG==='nl'?'Vertalen naar het Frans':'Traduire en français'}</button>
-    <label>${LANG==='nl'?'Franse vertaling (te controleren)':'Traduction française (à vérifier)'}</label>
-    <textarea id="trOut" rows="6" readonly></textarea>
-    <button class="btn sec sm" style="margin-top:.5rem" onclick="(function(){var o=document.getElementById('trOut');o.select();document.execCommand('copy');})()">📋 ${LANG==='nl'?'Kopiëren':'Copier'}</button>`;
+    <label>${LANG==='nl'?'Franse vertaling (bewerkbaar)':'Traduction française (modifiable)'}</label>
+    <textarea id="trOut" rows="6"></textarea>
+    <div class="row" style="margin-top:.5rem">
+      <button class="btn sec sm" onclick="(function(){var o=document.getElementById('trOut');o.select();document.execCommand('copy');})()">📋 ${LANG==='nl'?'Kopiëren':'Copier'}</button>
+      ${dossierId?`<button class="btn sm" onclick="saveTradToDossier()">💾 ${LANG==='nl'?'Opslaan in dossiernotities':'Enregistrer dans les notes du dossier'}</button>`:''}
+    </div>`;
   openModal('trModal');
   if(prefill)doTrad();
 }
 function doTrad(){document.getElementById('trOut').value=trDocNL(document.getElementById('trIn').value);}
+function transDossier(id){
+  const d=loadDossiers().find(x=>x.id===id);if(!d)return;
+  let src=d.notes||'';
+  // récupérer l'original NL si les notes contiennent déjà une traduction
+  const mk=src.indexOf('[Texte original néerlandais]');
+  if(mk>=0)src=src.slice(mk+'[Texte original néerlandais]'.length).trim();
+  // sinon, compléter avec le motif de la fiche si présent
+  if(!src && d.fiche && d.fiche.motif)src=tr(d.fiche.motif);
+  openTrad(src,id);
+}
+function saveTradToDossier(){
+  if(!TRAD_DOSSIER)return;
+  const arr=loadDossiers();const d=arr.find(x=>x.id===TRAD_DOSSIER);if(!d)return;
+  const fr=document.getElementById('trOut').value.trim();
+  const nl=document.getElementById('trIn').value.trim();
+  d.notes='[Traduction FR — vérifiée par le tuteur]\n'+fr+'\n\n[Texte original néerlandais]\n'+nl;
+  saveDossiers(arr);closeModal('trModal');openDossierDetail(TRAD_DOSSIER);
+}
 function openFicheImport(){
   document.getElementById('ficheForm').reset();FICHE_PHOTO='';
   document.getElementById('fichePhotoPreview').innerHTML='';

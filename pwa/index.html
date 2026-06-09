@@ -372,7 +372,7 @@
       <label data-i18n="fiche.pdf" style="margin-top:0">📎 Lire automatiquement une fiche PDF (DVZ)</label>
       <input type="file" accept="application/pdf,.pdf" onchange="onPdfFile(this)">
       <div id="pdfStatus" class="muted" style="font-size:.8rem;margin-top:.3rem"></div>
-      <button type="button" class="btn sec sm" style="margin-top:.5rem" onclick="fillAzizi()" data-i18n="fiche.example">⚡ Charger l'exemple (fiche AZIZI)</button>
+      <button type="button" class="btn sec sm" style="margin-top:.5rem" onclick="fillAzizi()" data-i18n="fiche.example">⚡ Charger un exemple (fiche fictive)</button>
       <button type="button" class="btn sec sm" style="margin-top:.5rem" onclick="openTrad(document.getElementById('fi_notes')?document.getElementById('fi_notes').value:'')" data-i18n="fiche.translate">🌐 Traduire un document (NL→FR)</button>
     </div>
     <form id="ficheForm" onsubmit="saveFiche(event)">
@@ -466,7 +466,7 @@ const I18N = {
   "doss.title":"📂 Mes Dossiers","doss.search":"🔍 Rechercher un dossier...","doss.allstatus":"Tous les statuts",
   "doss.empty":"📭 Aucun dossier. Cliquez sur « ➕ Nouveau dossier » pour commencer.","doss.nomatch":"Aucun dossier ne correspond.","doss.origin":"Origine inconnue","doss.progress":"Progression","doss.steps":"étapes","doss.arrived":"arrivé(e) le",
   "st.nouveau":"Nouveau","st.cours":"En cours","st.urgent":"Urgent","st.clos":"Clos","u.ans":"ans",
-  "fiche.import":"📄 Importer une fiche DVZ","fiche.title":"📄 Importer une fiche DVZ (nouveau MENA)","fiche.hint":"Renseignez les champs de la fiche et ajoutez la photo du jeune. Le dossier sera créé avec un suivi complet.","fiche.example":"⚡ Charger l'exemple (fiche AZIZI)","fiche.create":"📁 Créer le dossier","fiche.f.nom":"Nom & prénom","fiche.f.ov":"N° OE (OV)","fiche.f.naissance":"Naissance (date / âge)","fiche.f.sexe":"Sexe","fiche.f.nat":"Nationalité","fiche.f.langue":"Langue parlée","fiche.f.adresseBE":"Adresse en Belgique","fiche.f.origine":"Adresse pays d'origine","fiche.f.motif":"Motif de l'immigration","fiche.f.notes":"Notes (parcours, scolarité, contacts…)","fiche.f.photo":"📷 Photo du jeune","fiche.pdf":"📎 Lire automatiquement une fiche PDF (DVZ)","fiche.translate":"🌐 Traduire un document (NL→FR)",
+  "fiche.import":"📄 Importer une fiche DVZ","fiche.title":"📄 Importer une fiche DVZ (nouveau MENA)","fiche.hint":"Renseignez les champs de la fiche et ajoutez la photo du jeune. Le dossier sera créé avec un suivi complet.","fiche.example":"⚡ Charger un exemple (fiche fictive)","fiche.create":"📁 Créer le dossier","fiche.f.nom":"Nom & prénom","fiche.f.ov":"N° OE (OV)","fiche.f.naissance":"Naissance (date / âge)","fiche.f.sexe":"Sexe","fiche.f.nat":"Nationalité","fiche.f.langue":"Langue parlée","fiche.f.adresseBE":"Adresse en Belgique","fiche.f.origine":"Adresse pays d'origine","fiche.f.motif":"Motif de l'immigration","fiche.f.notes":"Notes (parcours, scolarité, contacts…)","fiche.f.photo":"📷 Photo du jeune","fiche.pdf":"📎 Lire automatiquement une fiche PDF (DVZ)","fiche.translate":"🌐 Traduire un document (NL→FR)",
   "det.checklist":"✅ Checklist de suivi","det.progress":"Progression globale :","det.modify":"✏️ Modifier","det.delete":"🗑️ Supprimer","det.confirmdel":"Supprimer définitivement ce dossier ?",
   "form.new":"Nouveau dossier","form.edit":"Modifier le dossier",
   "f.name":"Nom / Identifiant *","f.name.ph":"ex. Amira K.","f.age":"Âge","f.age.ph":"ex. 14","f.country":"Pays d'origine","f.country.ph":"ex. Syrie","f.arrival":"Date d'arrivée","f.statut":"Statut","f.lang":"Langue parlée","f.lang.ph":"ex. Arabe","f.notes":"Notes / Situation","f.notes.ph":"Résumé de la situation...",
@@ -495,7 +495,7 @@ const I18N = {
   "doss.title":"📂 Mijn dossiers","doss.search":"🔍 Een dossier zoeken...","doss.allstatus":"Alle statussen",
   "doss.empty":"📭 Geen dossier. Klik op « ➕ Nieuw dossier » om te beginnen.","doss.nomatch":"Geen overeenkomend dossier.","doss.origin":"Herkomst onbekend","doss.progress":"Voortgang","doss.steps":"stappen","doss.arrived":"aangekomen op",
   "st.nouveau":"Nieuw","st.cours":"Lopend","st.urgent":"Dringend","st.clos":"Afgesloten","u.ans":"jaar",
-  "fiche.import":"📄 DVZ-fiche importeren","fiche.title":"📄 DVZ-fiche importeren (nieuwe NBMV)","fiche.hint":"Vul de velden van de fiche in en voeg de foto van de jongere toe. Het dossier wordt aangemaakt met volledige opvolging.","fiche.example":"⚡ Voorbeeld laden (fiche AZIZI)","fiche.create":"📁 Dossier aanmaken","fiche.f.nom":"Naam & voornaam","fiche.f.ov":"OV-nr","fiche.f.naissance":"Geboorte (datum / leeftijd)","fiche.f.sexe":"Geslacht","fiche.f.nat":"Nationaliteit","fiche.f.langue":"Gesproken taal","fiche.f.adresseBE":"Adres in België","fiche.f.origine":"Adres land van herkomst","fiche.f.motif":"Motief voor de immigratie","fiche.f.notes":"Notities (traject, scholing, contacten…)","fiche.f.photo":"📷 Foto van de jongere","fiche.pdf":"📎 Een PDF-fiche automatisch lezen (DVZ)","fiche.translate":"🌐 Een document vertalen (NL→FR)",
+  "fiche.import":"📄 DVZ-fiche importeren","fiche.title":"📄 DVZ-fiche importeren (nieuwe NBMV)","fiche.hint":"Vul de velden van de fiche in en voeg de foto van de jongere toe. Het dossier wordt aangemaakt met volledige opvolging.","fiche.example":"⚡ Voorbeeld laden (fictieve fiche)","fiche.create":"📁 Dossier aanmaken","fiche.f.nom":"Naam & voornaam","fiche.f.ov":"OV-nr","fiche.f.naissance":"Geboorte (datum / leeftijd)","fiche.f.sexe":"Geslacht","fiche.f.nat":"Nationaliteit","fiche.f.langue":"Gesproken taal","fiche.f.adresseBE":"Adres in België","fiche.f.origine":"Adres land van herkomst","fiche.f.motif":"Motief voor de immigratie","fiche.f.notes":"Notities (traject, scholing, contacten…)","fiche.f.photo":"📷 Foto van de jongere","fiche.pdf":"📎 Een PDF-fiche automatisch lezen (DVZ)","fiche.translate":"🌐 Een document vertalen (NL→FR)",
   "det.checklist":"✅ Opvolgingschecklist","det.progress":"Totale voortgang:","det.modify":"✏️ Wijzigen","det.delete":"🗑️ Verwijderen","det.confirmdel":"Dit dossier definitief verwijderen?",
   "form.new":"Nieuw dossier","form.edit":"Dossier wijzigen",
   "f.name":"Naam / Identificatie *","f.name.ph":"bv. Amira K.","f.age":"Leeftijd","f.age.ph":"bv. 14","f.country":"Land van herkomst","f.country.ph":"bv. Syrië","f.arrival":"Aankomstdatum","f.statut":"Status","f.lang":"Gesproken taal","f.lang.ph":"bv. Arabisch","f.notes":"Notities / Situatie","f.notes.ph":"Samenvatting van de situatie...",
@@ -1511,34 +1511,35 @@ let FICHE_PHOTO='';
 function onFichePhoto(input){readPhoto(input,d=>{FICHE_PHOTO=d;const pv=document.getElementById('fichePhotoPreview');pv.innerHTML=d?`<img src="${d}" style="max-width:120px;border-radius:.5rem;border:1px solid var(--bord)">`:'';});}
 
 /* Données parsées de la fiche DVZ fournie (AZIZI) — FR = traduction fidèle, NL = original du PDF */
+/* Exemple FICTIF (aucune donnée réelle) — sert uniquement de démonstration */
 const FICHE_AZIZI={
-  ov:"9777786", pv:"",
-  nom:"AZIZI, BASIR AHMAD",
+  ov:"0000000 (exemple)", pv:"",
+  nom:"EXEMPLE — Karim D.",
   sexe:{fr:"Masculin",nl:"Mannelijk"},
-  naissance:"30.09.2009 (≈ 14 ans)", lieuNaissance:"Bekh",
+  naissance:"01.01.2010 (≈ 14 ans)", lieuNaissance:"(ville — exemple)",
   nationalite:"Afghanistan", eu:{fr:"Non",nl:"Neen"},
   doute:{fr:"Non",nl:"Neen"}, signale:{fr:"Non",nl:"Neen"},
   langueMat:"Dari", langueParlee:"Dari",
-  adresseBE:"/", adresseOrigine:"Bekh, Dan E Ghori, Baghlan",
+  adresseBE:"/", adresseOrigine:"(région — exemple), pays d'origine",
   alias:"/", empreintes:{fr:"Oui",nl:"Ja"},
-  serviceFiche:"Dorina Popa (MINTEH) @ DVZ", dateFiche:"2023-09-18",
-  pere:{nom:"Azizi, Aziz Ahmad",nat:"AFG",adresse:"Bekh",tel:"/"},
-  mere:{nom:"Azizi, Saltanat",nat:"AFG",adresse:"Bekh",tel:"/"},
-  fratrie:{fr:"3 sœurs et 3 frères, tous plus jeunes que lui (Soraya, Sohaila, Maajan, Shabir Ahmad, Bashir Ahmad, Nasir Ahmad) — tous nés à Bekh, nationalité afghane.",nl:"3 zussen en 3 broers, allen jonger dan hij (Soraya, Sohaila, Maajan, Shabir Ahmad, Bashir Ahmad, Nasir Ahmad) — allen geboren in Bekh, Afghaanse nationaliteit."},
+  serviceFiche:"Service DVZ (exemple)", dateFiche:"2024-01-15",
+  pere:{nom:"Parent 1 (exemple)",nat:"AFG",adresse:"(exemple)",tel:"/"},
+  mere:{nom:"Parent 2 (exemple)",nat:"AFG",adresse:"(exemple)",tel:"/"},
+  fratrie:{fr:"Plusieurs frères et sœurs plus jeunes, restés au pays d'origine (exemple fictif).",nl:"Meerdere jongere broers en zussen, gebleven in het land van herkomst (fictief voorbeeld)."},
   familleUE:{fr:"Non",nl:"Neen"},
-  medical:{fr:"Cheveux noirs, yeux bruns. Grossesse : non. Handicap : non. Confus : non. Blessures : non. Maladies (contagieuses) : non. Soins nécessaires : douleur à la jambe droite.",nl:"Zwart haar, bruine ogen. Zwangerschap: neen. Handicap: neen. Verward: neen. Wonden: neen. (Besmettelijke) ziekten: neen. Zorg nodig: pijn aan het rechterbeen."},
+  medical:{fr:"Cheveux noirs, yeux bruns. Grossesse : non. Handicap : non. Blessures : non. Maladies (contagieuses) : non. Soins éventuels : à évaluer.",nl:"Zwart haar, bruine ogen. Zwangerschap: neen. Handicap: neen. Wonden: neen. (Besmettelijke) ziekten: neen. Eventuele zorg: te evalueren."},
   parquet:{fr:"Intervention du parquet : non.",nl:"Tussenkomst parket: neen."},
   identiteEtablie:{fr:"Identité établie par : déclaration (oui), documents (non).",nl:"Identiteit vastgesteld via: verklaring (ja), documenten (neen)."},
-  trajet:{fr:"Départ du pays d'origine : il y a 10 mois. Arrivée en Belgique : 18/09/2023. Route : AFG – PAK – IRN – TUR – BUL – SERB – HON (il ne connaît pas tous les pays traversés). Turquie : ≈ 6 mois (Karaman), a travaillé dans plusieurs usines. Demandes antérieures (VA) : Bulgarie, Autriche et Allemagne.",nl:"Vertrek land van herkomst: 10 maanden geleden. Aankomst België: 18/09/2023. Route: AFG – PAK – IRN – TUR – BUL – SERB – HON (hij weet niet langs welke landen hij is gepasseerd). Turkije: ≈ 6 maanden (Karaman), gewerkt in verschillende fabrieken. Eerdere aanvragen (VA): Bulgarije, Oostenrijk en Duitsland."},
-  organisation:{fr:"Organisation du voyage : le papa — financé et organisé. Pourquoi la Belgique : on lui a dit du bien de la Belgique sur la route, surtout le système scolaire ; les migrants y sont mieux protégés.",nl:"Organisatie van de reis: de papa — gefinancierd en georganiseerd. Waarom België: men zei hem onderweg goede dingen over België, vooral het schoolsysteem; migranten worden er beter beschermd."},
-  interception:{fr:"Se présente au DVZ le 18/09/2023.",nl:"Meldt zich aan bij DVZ op 18/09/2023."},
-  motif:{fr:"Motif de l'immigration : il est de conviction religieuse chiite ismaélite, et le papa travaillait pour l'ancien régime (police) ; pour cette raison la famille a dû quitter le pays car ils étaient menacés par les Talibans.",nl:"Motief voor de immigratie: hij is van geloofsovertuiging — chiiet ismaëliet — en de papa werkte voor het oude regime (politie); hierdoor moest het gezin het land verlaten, want ze werden bedreigd door de Taliban."},
+  trajet:{fr:"Départ du pays d'origine : il y a quelques mois. Arrivée en Belgique : récente. Route : plusieurs pays de transit (exemple). A travaillé durant le trajet. Demandes antérieures éventuelles dans d'autres pays UE.",nl:"Vertrek land van herkomst: enkele maanden geleden. Aankomst België: recent. Route: meerdere transitlanden (voorbeeld). Heeft onderweg gewerkt. Mogelijke eerdere aanvragen in andere EU-landen."},
+  organisation:{fr:"Organisation du voyage : financé et organisé par la famille (exemple). Pourquoi la Belgique : réputation du système scolaire et de la protection des mineurs.",nl:"Organisatie van de reis: gefinancierd en georganiseerd door de familie (voorbeeld). Waarom België: reputatie van het schoolsysteem en de bescherming van minderjarigen."},
+  interception:{fr:"Se présente au DVZ (exemple).",nl:"Meldt zich aan bij DVZ (voorbeeld)."},
+  motif:{fr:"Motif de l'immigration : situation d'insécurité dans le pays d'origine ; la famille a dû partir pour des raisons de sécurité (exemple fictif, à des fins de démonstration).",nl:"Motief voor de immigratie: onveilige situatie in het land van herkomst; het gezin moest vertrekken om veiligheidsredenen (fictief voorbeeld, voor demonstratiedoeleinden)."},
   vulnerabiliteMH:{fr:"Indices de traite des êtres humains : non.",nl:"Aanwijzingen van mensenhandel: neen."},
-  vulnerabilite:{fr:"Autres éléments de vulnérabilité : non.",nl:"Andere kwetsbaarheidselementen: neen."},
+  vulnerabilite:{fr:"Autres éléments de vulnérabilité : à évaluer.",nl:"Andere kwetsbaarheidselementen: te evalueren."},
   besoinAccueil:{fr:"Besoin d'accueil : oui.",nl:"Behoefte aan opvang: ja."},
-  objets:{fr:"Effets personnels : sac avec affaires personnelles, téléphone sans carte SIM.",nl:"Persoonlijke voorwerpen: zak met persoonlijke spullen, telefoon zonder simkaart."},
-  scolarite:{fr:"Scolarité : pas d'école — sait un peu écrire et lire.",nl:"Scholing: geen school — kan een beetje schrijven en lezen."},
-  contactFamille:{fr:"Contact avec la famille : aucun contact.",nl:"Contact met familie: geen contact."}
+  objets:{fr:"Effets personnels : sac avec affaires personnelles, téléphone.",nl:"Persoonlijke voorwerpen: zak met persoonlijke spullen, telefoon."},
+  scolarite:{fr:"Scolarité : scolarisation interrompue ; sait un peu écrire et lire.",nl:"Scholing: onderbroken schoolloopbaan; kan een beetje schrijven en lezen."},
+  contactFamille:{fr:"Contact avec la famille : à rétablir.",nl:"Contact met familie: te herstellen."}
 };
 /* ============ TRADUCTION NL -> FR (documents officiels DVZ/MENA) ============ */
 const NL_FR={

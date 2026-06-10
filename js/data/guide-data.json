@@ -1,0 +1,571 @@
+{
+ "version": "1.0",
+ "note": "Guide pédagogique du tuteur MENA — contenu vérifié sur sources officielles (justice.belgium.be, CGRA, Fedasil, Mineurs en Exil) — 2026-06",
+ "modules": [
+  {
+   "id": "m1",
+   "ico": "🤝",
+   "titre": {
+    "fr": "Module 1 — Vous êtes désigné tuteur : les 15 premiers jours",
+    "nl": "Module 1 — U bent aangesteld als voogd: de eerste 15 dagen"
+   },
+   "cours": {
+    "fr": "Le Service des Tutelles (SPF Justice) vous désigne par ordonnance. Vous devenez le représentant légal du mineur : vous le représentez dans TOUS les actes juridiques (séjour, asile, école, soins, biens). Le jeune reste capable de poser les actes de la vie quotidienne. Votre première mission : rencontrer le jeune au plus vite (idéalement dans les 5 jours), avec un interprète si nécessaire (gratuit via le Service des Tutelles), vous présenter, expliquer votre rôle (vous n'êtes ni la police, ni l'OE, ni son éducateur) et établir la confiance.",
+    "nl": "De Dienst Voogdij (FOD Justitie) stelt u aan bij beschikking. U wordt de wettelijke vertegenwoordiger van de minderjarige: u vertegenwoordigt hem in ALLE rechtshandelingen (verblijf, asiel, school, zorg, goederen). Uw eerste opdracht: de jongere zo snel mogelijk ontmoeten (idealiter binnen 5 dagen), met tolk indien nodig (gratis via de Dienst Voogdij), uzelf voorstellen en vertrouwen opbouwen."
+   },
+   "actions": {
+    "fr": [
+     "Accuser réception de la désignation auprès du Service des Tutelles",
+     "Première rencontre avec le jeune (interprète si besoin)",
+     "Rencontrer le centre d'accueil / la famille d'accueil",
+     "Vérifier que le signalement à l'OE (fiche MENA) est fait",
+     "Désigner un avocat spécialisé jeunesse (gratuit, via le BAJ)",
+     "Rédiger et envoyer le RAPPORT INITIAL (délai légal : 15 jours) au Service des Tutelles ET au juge de paix"
+    ],
+    "nl": [
+     "Ontvangst van de aanstelling bevestigen aan de Dienst Voogdij",
+     "Eerste ontmoeting met de jongere (tolk indien nodig)",
+     "Het opvangcentrum / pleeggezin ontmoeten",
+     "Nagaan of de melding bij DVZ (NBMV-fiche) gebeurd is",
+     "Een gespecialiseerde jeugdadvocaat aanstellen (gratis, via het BJB)",
+     "Het EERSTE VERSLAG opstellen en versturen (wettelijke termijn: 15 dagen) aan de Dienst Voogdij EN de vrederechter"
+    ]
+   },
+   "documents": {
+    "fr": [
+     "Rapport initial (15 jours) → Service des Tutelles + juge de paix",
+     "Demande de désignation d'avocat → Bureau d'aide juridique (BAJ)"
+    ],
+    "nl": [
+     "Eerste verslag (15 dagen) → Dienst Voogdij + vrederechter",
+     "Aanvraag aanstelling advocaat → Bureau voor juridische bijstand (BJB)"
+    ]
+   },
+   "conseils": {
+    "fr": "Piège fréquent : promettre des choses (« tu auras tes papiers »). Ne promettez jamais un résultat, promettez votre engagement. Notez tout dès le premier jour : vos notes serviront pour chaque rapport.",
+    "nl": "Veelvoorkomende valkuil: dingen beloven (« je krijgt je papieren »). Beloof nooit een resultaat, beloof uw inzet. Noteer alles vanaf dag één."
+   },
+   "refs": "Loi-programme (I) 24/12/2002, Titre XIII, ch. 6 (art. 3-24) ; AR 22/12/2003"
+  },
+  {
+   "id": "m2",
+   "ico": "🪪",
+   "titre": {
+    "fr": "Module 2 — Identification & test d'âge",
+    "nl": "Module 2 — Identificatie & leeftijdsbepaling"
+   },
+   "cours": {
+    "fr": "Si l'OE ou le CGRA doute de la minorité, le Service des Tutelles fait réaliser un test médical (triple test : dents, poignet, clavicule). En cas de doute après test, l'âge LE PLUS BAS est retenu (bénéfice du doute). Si le jeune est déclaré majeur, la tutelle prend fin — mais un recours (Conseil d'État) est possible. Aidez aussi le jeune à rassembler tout document d'identité (taskara, passeport, acte de naissance) via sa famille — l'ambassade n'est JAMAIS contactée pour un demandeur d'asile.",
+    "nl": "Bij twijfel over de minderjarigheid laat de Dienst Voogdij een medische test uitvoeren (drievoudige test). Bij twijfel na de test geldt de LAAGSTE leeftijd (voordeel van de twijfel). Wordt de jongere meerderjarig verklaard, dan eindigt de voogdij — beroep bij de Raad van State is mogelijk. Contacteer NOOIT de ambassade voor een asielzoeker."
+   },
+   "actions": {
+    "fr": [
+     "Être présent (ou représenté) lors du test d'âge",
+     "Demander copie des résultats et vérifier la marge d'erreur mentionnée",
+     "En cas de contestation : consulter l'avocat immédiatement (recours)",
+     "Rassembler les documents d'identité via la famille (jamais l'ambassade si demande d'asile)"
+    ],
+    "nl": [
+     "Aanwezig zijn (of vertegenwoordigd) bij de leeftijdstest",
+     "Kopie van de resultaten vragen en de foutmarge nagaan",
+     "Bij betwisting: onmiddellijk de advocaat raadplegen (beroep)",
+     "Identiteitsdocumenten verzamelen via de familie (nooit de ambassade bij asielaanvraag)"
+    ]
+   },
+   "documents": {
+    "fr": [
+     "Observations écrites sur le test d'âge → Service des Tutelles"
+    ],
+    "nl": [
+     "Schriftelijke opmerkingen over de leeftijdstest → Dienst Voogdij"
+    ]
+   },
+   "conseils": {
+    "fr": "Le résultat du test a une marge d'erreur scientifique reconnue (souvent ±2 ans) : si la fourchette inclut la minorité, insistez par écrit sur le bénéfice du doute.",
+    "nl": "De test heeft een erkende wetenschappelijke foutmarge (vaak ±2 jaar): omvat de vork de minderjarigheid, dring dan schriftelijk aan op het voordeel van de twijfel."
+   },
+   "refs": "Loi-programme 24/12/2002, art. 7 ; Loi 12/01/2007 (accueil), art. 41"
+  },
+  {
+   "id": "m3",
+   "ico": "🛂",
+   "titre": {
+    "fr": "Module 3 — Protection internationale (asile) pas à pas",
+    "nl": "Module 3 — Internationale bescherming (asiel) stap voor stap"
+   },
+   "cours": {
+    "fr": "C'est VOUS qui introduisez la demande de protection internationale (DPI) auprès de l'OE si c'est dans l'intérêt du jeune. Étapes : 1) présentation à l'OE → annexe 26 + déclaration ; 2) attestation d'immatriculation (« carte orange ») renouvelable ; 3) audition CGRA « mineurs » (vous DEVEZ être présent + avocat ; coordinateur MENA du CGRA) ; 4) décision : statut de réfugié (carte A puis B), protection subsidiaire, ou refus ; 5) recours CCE dans les 30 jours. En parallèle existe la procédure « solution durable » (art. 61/14 et s., loi 1980) si l'asile n'est pas adapté. Dublin III : si la famille est dans un autre État membre, le regroupement Dublin peut être demandé (art. 8 — intérêt supérieur).",
+    "nl": "U dient zelf het verzoek om internationale bescherming in bij DVZ als dat in het belang van de jongere is. Stappen: 1) aanmelding bij DVZ → bijlage 26; 2) attest van immatriculatie (« oranje kaart »); 3) gehoor bij CGVS « minderjarigen » (u MOET aanwezig zijn + advocaat); 4) beslissing: vluchtelingenstatus, subsidiaire bescherming of weigering; 5) beroep RvV binnen 30 dagen. Parallel bestaat de procedure « duurzame oplossing » (art. 61/14 e.v. wet 1980). Dublin III: familie in een andere lidstaat → Dublin-hereniging mogelijk (art. 8)."
+   },
+   "actions": {
+    "fr": [
+     "Évaluer avec l'avocat la meilleure procédure (DPI / solution durable / les deux)",
+     "Introduire la DPI à l'OE et accompagner le jeune à CHAQUE convocation",
+     "Préparer l'audition CGRA avec le jeune et l'avocat (récit chronologique, preuves)",
+     "Vérifier les délais de recours (CCE : 30 jours) après toute décision négative",
+     "Demander la prolongation de l'attestation d'immatriculation avant expiration"
+    ],
+    "nl": [
+     "Met de advocaat de beste procedure bepalen (IB / duurzame oplossing / beide)",
+     "Het verzoek indienen bij DVZ en de jongere bij ELKE oproeping vergezellen",
+     "Het CGVS-gehoor voorbereiden met jongere en advocaat",
+     "De beroepstermijnen bewaken (RvV: 30 dagen)",
+     "De verlenging van het attest van immatriculatie tijdig aanvragen"
+    ]
+   },
+   "documents": {
+    "fr": [
+     "Demande de protection internationale → OE",
+     "Questionnaire CGRA (avec l'avocat) → CGRA",
+     "Recours éventuel → CCE (30 jours)",
+     "Demande « solution durable » → OE (Bureau MINTEH)"
+    ],
+    "nl": [
+     "Verzoek om internationale bescherming → DVZ",
+     "CGVS-vragenlijst (met advocaat) → CGVS",
+     "Eventueel beroep → RvV (30 dagen)",
+     "Aanvraag « duurzame oplossing » → DVZ (Bureau MINTEH)"
+    ]
+   },
+   "conseils": {
+    "fr": "N'attendez pas la fin de la procédure d'asile pour préparer un plan B (solution durable, études, documents d'identité). Les deux procédures se préparent en parallèle.",
+    "nl": "Wacht niet op het einde van de asielprocedure om een plan B voor te bereiden (duurzame oplossing, studies, identiteitsdocumenten)."
+   },
+   "refs": "Loi 15/12/1980 (art. 61/14-61/25) ; Loi 12/01/2007 ; Règlement (UE) 604/2013 (Dublin III), art. 8"
+  },
+  {
+   "id": "m4",
+   "ico": "🏠",
+   "titre": {
+    "fr": "Module 4 — Accueil : du COO au logement autonome",
+    "nl": "Module 4 — Opvang: van OOC tot zelfstandig wonen"
+   },
+   "cours": {
+    "fr": "Trajet Fedasil en 3 phases : 1) COO (centre d'observation et d'orientation : Steenokkerzeel ou Sugny, 2-4 semaines) ; 2) centre collectif adapté MENA (Fedasil, Croix-Rouge/Rode Kruis) ; 3) vers 16-17 ans, si autonomie suffisante : ILA (initiative locale d'accueil du CPAS) ou logement supervisé. Les jeunes vulnérables (<13 ans, problèmes psychologiques, victimes de traite) sont orientés vers familles d'accueil (Pleegzorg, services de placement familial) ou structures spécialisées (Esperanto, Minor-Ndako).",
+    "nl": "Fedasil-traject in 3 fasen: 1) OOC (observatie- en oriëntatiecentrum: Steenokkerzeel of Sugny, 2-4 weken); 2) aangepast collectief centrum (Fedasil, Rode Kruis); 3) rond 16-17 jaar, bij voldoende zelfstandigheid: LOI (lokaal opvanginitiatief van het OCMW) of begeleid wonen. Kwetsbare jongeren (<13 jaar, psychische problemen, slachtoffers mensenhandel) gaan naar pleeggezinnen (Pleegzorg) of gespecialiseerde structuren (Esperanto, Minor-Ndako)."
+   },
+   "actions": {
+    "fr": [
+     "Visiter le lieu d'accueil et rencontrer le référent du jeune (1×/mois minimum)",
+     "Participer aux réunions de réseau (école-centre-tuteur)",
+     "Anticiper le passage en ILA dès 16 ans si le jeune est autonome",
+     "Signaler immédiatement tout problème (harcèlement, fugue, mal-être) à Fedasil et au Service des Tutelles"
+    ],
+    "nl": [
+     "De opvangplek bezoeken en de referent van de jongere ontmoeten (min. 1×/maand)",
+     "Deelnemen aan netwerkvergaderingen (school-centrum-voogd)",
+     "De overgang naar LOI vanaf 16 jaar anticiperen",
+     "Elk probleem (pesten, wegloop, onwelzijn) onmiddellijk melden aan Fedasil en de Dienst Voogdij"
+    ]
+   },
+   "documents": {
+    "fr": [
+     "Demande de transfert / changement de structure → Fedasil (dispatching)"
+    ],
+    "nl": [
+     "Aanvraag transfer / verandering van structuur → Fedasil (dispatching)"
+    ]
+   },
+   "conseils": {
+    "fr": "En cas de DISPARITION du jeune : signalez dans les 24 h à la police (obligatoire), au Service des Tutelles, à Fedasil et à Child Focus (116 000). Ne classez jamais sans suite.",
+    "nl": "Bij VERDWIJNING van de jongere: meld binnen 24 u aan de politie (verplicht), de Dienst Voogdij, Fedasil en Child Focus (116 000)."
+   },
+   "refs": "Loi 12/01/2007 (accueil) ; modèle de trajet Fedasil MENA"
+  },
+  {
+   "id": "m5",
+   "ico": "🏫",
+   "titre": {
+    "fr": "Module 5 — École, santé & vie quotidienne",
+    "nl": "Module 5 — School, gezondheid & dagelijks leven"
+   },
+   "cours": {
+    "fr": "OBLIGATION SCOLAIRE dès le 60e jour après l'inscription au registre : inscrivez le jeune au plus vite en DASPA (FR Bruxelles-Wallonie) ou OKAN (NL Flandre) — classes passerelles pour primo-arrivants. Santé : ouvrez la couverture mutuelle (le MENA peut être titulaire dès l'inscription) ou l'AMU via le CPAS ; programmez bilan médical complet, vaccins, dentiste, et un suivi psychologique spécialisé trauma/exil (Solentra, Ulysse, SSM). Le sport et les loisirs sont essentiels : clubs, chèques sport via le CPAS.",
+    "nl": "LEERPLICHT vanaf de 60e dag na inschrijving in het register: schrijf de jongere zo snel mogelijk in in OKAN (Vlaanderen) of DASPA (Brussel-Wallonië). Gezondheid: open de ziekenfondsdekking of DMH via het OCMW; plan een volledig medisch onderzoek, vaccins, tandarts en gespecialiseerde psychologische begeleiding (Solentra, PSC). Sport en vrije tijd zijn essentieel."
+   },
+   "actions": {
+    "fr": [
+     "Inscrire en DASPA/OKAN (test de niveau) — viser la rentrée la plus proche",
+     "Ouvrir la mutuelle (ou AMU au CPAS) et choisir un médecin traitant",
+     "Bilan médical complet + calendrier vaccinal + dentiste",
+     "Mettre en place un suivi psy spécialisé exil si signaux (cauchemars, repli, agressivité)",
+     "Inscrire à une activité sportive/culturelle"
+    ],
+    "nl": [
+     "Inschrijven in OKAN/DASPA (niveautest)",
+     "Ziekenfonds openen (of DMH bij het OCMW) en huisarts kiezen",
+     "Volledig medisch onderzoek + vaccinatieschema + tandarts",
+     "Gespecialiseerde psychologische begeleiding bij signalen",
+     "Inschrijven voor een sport-/cultuuractiviteit"
+    ]
+   },
+   "documents": {
+    "fr": [
+     "Inscription scolaire → direction DASPA/OKAN",
+     "Affiliation mutuelle → mutualité choisie",
+     "Demande AMU → CPAS du lieu de résidence"
+    ],
+    "nl": [
+     "Schoolinschrijving → directie OKAN/DASPA",
+     "Aansluiting ziekenfonds → gekozen mutualiteit",
+     "Aanvraag DMH → OCMW van de verblijfplaats"
+    ]
+   },
+   "conseils": {
+    "fr": "L'école est le meilleur indicateur d'intégration ET un élément fort du dossier séjour. Gardez tous les bulletins et attestations : ils serviront pour la solution durable et le séjour à 18 ans.",
+    "nl": "School is de beste integratie-indicator EN een sterk element in het verblijfsdossier. Bewaar alle rapporten en attesten."
+   },
+   "refs": "Obligation scolaire : loi 29/06/1983 ; AMU : AR 12/12/1996 ; décrets DASPA/OKAN"
+  },
+  {
+   "id": "m6",
+   "ico": "🏦",
+   "titre": {
+    "fr": "Module 6 — Gestion des biens, argent & banque",
+    "nl": "Module 6 — Beheer van goederen, geld & bank"
+   },
+   "cours": {
+    "fr": "Vous gérez les biens du mineur « en bon père de famille » sous le contrôle du JUGE DE PAIX du lieu de résidence du jeune. Ouvrez un compte jeune au nom du mineur (présentez l'ordonnance de désignation) ; l'argent du jeune (argent de poche Fedasil, job étudiant, allocations) lui appartient. Tout acte important (placement, héritage, sommes importantes) requiert l'AUTORISATION PRÉALABLE du juge de paix. Vous rendez compte de la gestion dans le rapport semestriel au juge de paix.",
+    "nl": "U beheert de goederen van de minderjarige « als een goede huisvader » onder toezicht van de VREDERECHTER van de verblijfplaats. Open een jongerenrekening op naam van de minderjarige (toon de aanstellingsbeschikking); het geld van de jongere behoort hem toe. Elke belangrijke handeling vereist de VOORAFGAANDE MACHTIGING van de vrederechter. U legt rekenschap af in het zesmaandelijks verslag."
+   },
+   "actions": {
+    "fr": [
+     "Identifier le juge de paix compétent (canton du lieu de résidence — outil dans le dossier)",
+     "Ouvrir un compte jeune (banque proche du jeune, compte gratuit — voir conseil banque dans le dossier)",
+     "Tenir le registre des opérations dans l'app (chaque entrée/sortie)",
+     "Demander l'autorisation du juge de paix avant tout acte de disposition",
+     "Joindre l'état des comptes au rapport semestriel"
+    ],
+    "nl": [
+     "De bevoegde vrederechter identificeren (kanton van de verblijfplaats)",
+     "Een jongerenrekening openen (bank dicht bij de jongere, gratis rekening)",
+     "Het verrichtingenregister bijhouden in de app",
+     "Machtiging van de vrederechter vragen vóór elke daad van beschikking",
+     "De rekeningstand bij het zesmaandelijks verslag voegen"
+    ]
+   },
+   "documents": {
+    "fr": [
+     "Requête en autorisation (actes de disposition) → juge de paix",
+     "État des comptes (relevé de l'app) → annexe du rapport semestriel"
+    ],
+    "nl": [
+     "Verzoekschrift tot machtiging → vrederechter",
+     "Rekeningoverzicht (uit de app) → bijlage bij het zesmaandelijks verslag"
+    ]
+   },
+   "conseils": {
+    "fr": "Ne mélangez JAMAIS votre argent et celui du jeune. Conservez chaque ticket. L'app calcule le solde et génère le relevé pour le juge de paix.",
+    "nl": "Vermeng NOOIT uw geld met dat van de jongere. Bewaar elk ticket. De app berekent het saldo en genereert het overzicht voor de vrederechter."
+   },
+   "refs": "Loi-programme 24/12/2002, art. 12 ; C. civ. (administration légale) ; compétence : C. jud. art. 594"
+  },
+  {
+   "id": "m7",
+   "ico": "📋",
+   "titre": {
+    "fr": "Module 7 — Vos rapports obligatoires & le contrôle",
+    "nl": "Module 7 — Uw verplichte verslagen & het toezicht"
+   },
+   "cours": {
+    "fr": "Calendrier légal : 1) RAPPORT INITIAL dans les 15 JOURS de la désignation → Service des Tutelles ET juge de paix ; 2) RAPPORT SEMESTRIEL (2×/an) → juge de paix avec copie au Service des Tutelles : situation personnelle (séjour, école, santé, intégration) + situation patrimoniale ; 3) RAPPORT FINAL dans les 15 jours de la fin de tutelle (18 ans, statut, départ…) → Service des Tutelles + juge de paix. Le Service des Tutelles peut vous convoquer et contrôler votre activité ; le juge de paix contrôle la gestion des biens.",
+    "nl": "Wettelijke kalender: 1) EERSTE VERSLAG binnen 15 DAGEN na de aanstelling → Dienst Voogdij EN vrederechter; 2) ZESMAANDELIJKS VERSLAG (2×/jaar) → vrederechter met kopie aan de Dienst Voogdij: persoonlijke situatie + vermogenssituatie; 3) EINDVERSLAG binnen 15 dagen na het einde van de voogdij → Dienst Voogdij + vrederechter. De Dienst Voogdij kan u oproepen en uw activiteit controleren."
+   },
+   "actions": {
+    "fr": [
+     "Générer chaque rapport depuis l'app (PDF) aux échéances affichées",
+     "Envoyer au juge de paix (adresse trouvée par code postal dans le dossier) + copie Service des Tutelles",
+     "Conserver les accusés de réception",
+     "Tenir à jour le registre bancaire AVANT chaque rapport semestriel"
+    ],
+    "nl": [
+     "Elk verslag vanuit de app genereren (PDF) op de getoonde vervaldata",
+     "Versturen aan de vrederechter + kopie aan de Dienst Voogdij",
+     "De ontvangstbewijzen bewaren",
+     "Het bankregister bijwerken VÓÓR elk zesmaandelijks verslag"
+    ]
+   },
+   "documents": {
+    "fr": [
+     "Rapport initial (15 j) → Tutelles + juge de paix",
+     "Rapport semestriel (tous les 6 mois) → juge de paix + copie Tutelles",
+     "Rapport final (15 j après la fin) → Tutelles + juge de paix"
+    ],
+    "nl": [
+     "Eerste verslag (15 d) → Voogdij + vrederechter",
+     "Zesmaandelijks verslag (om de 6 maanden) → vrederechter + kopie Voogdij",
+     "Eindverslag (15 d na het einde) → Voogdij + vrederechter"
+    ]
+   },
+   "conseils": {
+    "fr": "Un rapport en retard = signal d'alerte pour le Service des Tutelles. L'app vous alerte avant chaque échéance : le rapport semestriel se nourrit de vos notes mensuelles, n'attendez pas le dernier jour.",
+    "nl": "Een laattijdig verslag = alarmsignaal voor de Dienst Voogdij. De app waarschuwt u vóór elke vervaldag."
+   },
+   "refs": "Loi-programme 24/12/2002, art. 19 ; AR 22/12/2003, art. 6"
+  },
+  {
+   "id": "m8",
+   "ico": "👨‍👩‍👧",
+   "titre": {
+    "fr": "Module 8 — Recherche familiale & regroupement",
+    "nl": "Module 8 — Familieopsporing & gezinshereniging"
+   },
+   "cours": {
+    "fr": "Rechercher la famille fait partie de vos missions (sauf danger pour le jeune ou sa famille). Acteurs : 1) RLF — Rétablissement des Liens Familiaux (Croix-Rouge de Belgique / Rode Kruis « Tracing ») : recherche gratuite et confidentielle via le réseau CICR, JAMAIS via les autorités du pays ; 2) Service des Tutelles & Fedasil (évaluation de l'intérêt supérieur) ; 3) OE pour le séjour. Trois scénarios : a) famille dans un autre État UE → demande de prise en charge DUBLIN III (art. 8 : regroupement prioritaire des MENA) ; b) famille hors UE et jeune reconnu réfugié → la famille peut demander le REGROUPEMENT FAMILIAL (délai favorable : demande dans l'ANNÉE de la reconnaissance — conditions de logement/ressources non exigées) ; c) retour volontaire du jeune vers sa famille → programme OIM/Fedasil avec garanties d'accueil vérifiées sur place.",
+    "nl": "Familieopsporing behoort tot uw opdrachten (behalve bij gevaar). Actoren: 1) Tracing (Rode Kruis / Croix-Rouge RLF): gratis en vertrouwelijk via het ICRC-netwerk, NOOIT via de autoriteiten van het land; 2) Dienst Voogdij & Fedasil (beoordeling hoger belang); 3) DVZ voor het verblijf. Drie scenario's: a) familie in een andere EU-staat → DUBLIN III-overnameverzoek (art. 8); b) familie buiten de EU en de jongere is erkend vluchteling → GEZINSHERENIGING (gunstig: aanvraag binnen het JAAR na erkenning — geen woonst-/inkomensvoorwaarden); c) vrijwillige terugkeer → IOM/Fedasil-programma met ter plaatse geverifieerde garanties."
+   },
+   "actions": {
+    "fr": [
+     "Aborder la question familiale avec le jeune (avec tact, jamais forcer)",
+     "Ouvrir un dossier tracing à la Croix-Rouge (RLF) si le jeune le souhaite",
+     "Si famille en UE : demander à l'avocat d'activer Dublin III art. 8 rapidement",
+     "Si reconnu réfugié : informer la famille du délai d'UN AN pour le regroupement facilité",
+     "Pour un retour : exiger l'évaluation de l'intérêt supérieur + garanties d'accueil écrites (OIM)"
+    ],
+    "nl": [
+     "Het familiethema met de jongere bespreken (met tact, nooit forceren)",
+     "Een tracing-dossier openen bij het Rode Kruis als de jongere dat wil",
+     "Familie in de EU: de advocaat Dublin III art. 8 snel laten activeren",
+     "Bij erkenning: de familie informeren over de termijn van ÉÉN JAAR voor vereenvoudigde hereniging",
+     "Bij terugkeer: beoordeling hoger belang + schriftelijke opvanggaranties eisen (IOM)"
+    ]
+   },
+   "documents": {
+    "fr": [
+     "Demande de tracing → Croix-Rouge (RLF)",
+     "Demande Dublin (via avocat) → OE",
+     "Demande de visa regroupement familial (famille) → poste diplomatique belge",
+     "Demande retour volontaire → Fedasil/OIM"
+    ],
+    "nl": [
+     "Tracing-aanvraag → Rode Kruis",
+     "Dublin-verzoek (via advocaat) → DVZ",
+     "Visumaanvraag gezinshereniging (familie) → Belgische diplomatieke post",
+     "Aanvraag vrijwillige terugkeer → Fedasil/IOM"
+    ]
+   },
+   "conseils": {
+    "fr": "Le délai d'un an après la reconnaissance du statut de réfugié est CRUCIAL : passé ce délai, la famille doit prouver logement, ressources et mutuelle. Mettez une alerte dès la décision positive du CGRA.",
+    "nl": "De termijn van één jaar na de erkenning is CRUCIAAL: daarna moet de familie woonst, inkomsten en ziekenfonds bewijzen. Zet een alarm zodra het CGVS positief beslist."
+   },
+   "refs": "Règlement (UE) 604/2013 art. 8 ; Loi 15/12/1980 art. 10 ; CICR/RLF ; programme OIM-Fedasil"
+  },
+  {
+   "id": "m9",
+   "ico": "⚖️",
+   "titre": {
+    "fr": "Module 9 — Le jeune face à la police et à la justice",
+    "nl": "Module 9 — De jongere tegenover politie en justitie"
+   },
+   "cours": {
+    "fr": "Si le jeune est soupçonné d'un fait qualifié infraction (FQI) : il relève du DROIT DE LA JEUNESSE (pas du droit pénal adulte) — loi du 8/4/1965 + décrets communautaires (Code Madrane en FWB ; decreet jeugddelinquentierecht en Flandre). Règles SALDUZ : avant toute audition, le mineur a DROIT à une concertation confidentielle avec un avocat et à sa présence pendant l'audition — il NE PEUT PAS y renoncer. L'avocat jeunesse est GRATUIT (BAJ, permanence Salduz). Votre rôle : être prévenu, être présent si possible, contacter l'avocat, suivre le dossier (parquet jeunesse → juge de la jeunesse), accompagner aux audiences, veiller aux mesures (réprimande, médiation, prestation, placement IPPJ/gemeenschapsinstelling). Si le jeune est VICTIME : déposez plainte avec lui, demandez l'aide aux victimes ; pour la traite des êtres humains, contactez un centre spécialisé (PAG-ASA, Esperanto, Payoke, Sürya).",
+    "nl": "Wordt de jongere verdacht van een als misdrijf omschreven feit (MOF): JEUGDRECHT is van toepassing — wet 8/4/1965 + decreten (jeugddelinquentierecht in Vlaanderen). SALDUZ-regels: vóór elk verhoor heeft de minderjarige RECHT op vertrouwelijk overleg met een advocaat en op diens aanwezigheid — hij KAN er NIET aan verzaken. De jeugdadvocaat is GRATIS (BJB, Salduz-permanentie). Uw rol: verwittigd worden, aanwezig zijn, de advocaat contacteren, het dossier volgen (jeugdparket → jeugdrechter), de zittingen bijwonen. Is de jongere SLACHTOFFER: dien samen klacht in, vraag slachtofferhulp; bij mensenhandel: gespecialiseerd centrum (PAG-ASA, Payoke, Esperanto, Sürya)."
+   },
+   "actions": {
+    "fr": [
+     "Exiger d'être prévenu de toute audition (laisser vos coordonnées au centre et au jeune)",
+     "Vérifier qu'un avocat jeunesse est présent AVANT l'audition (jamais d'audition sans avocat)",
+     "Ne jamais laisser le jeune signer un document non compris (interprète obligatoire)",
+     "Assister aux audiences du juge de la jeunesse ; demander copie des décisions",
+     "Si placement : maintenir le lien (visites) et veiller à la scolarité",
+     "Si victime de traite : statut spécifique « victime TEH » possible (titre de séjour) via centre spécialisé"
+    ],
+    "nl": [
+     "Eisen verwittigd te worden van elk verhoor",
+     "Nagaan dat een jeugdadvocaat aanwezig is VÓÓR het verhoor",
+     "De jongere nooit een onbegrepen document laten tekenen (tolk verplicht)",
+     "De zittingen van de jeugdrechter bijwonen; kopie van de beslissingen vragen",
+     "Bij plaatsing: het contact onderhouden en op de scholing toezien",
+     "Bij slachtoffer mensenhandel: specifiek statuut mogelijk via gespecialiseerd centrum"
+    ]
+   },
+   "documents": {
+    "fr": [
+     "Désignation avocat jeunesse → BAJ (gratuit)",
+     "Déclaration de personne lésée / plainte → police ou parquet",
+     "Demande statut victime TEH → centre spécialisé + OE"
+    ],
+    "nl": [
+     "Aanstelling jeugdadvocaat → BJB (gratis)",
+     "Verklaring benadeelde persoon / klacht → politie of parket",
+     "Aanvraag statuut slachtoffer mensenhandel → gespecialiseerd centrum + DVZ"
+    ]
+   },
+   "conseils": {
+    "fr": "Une procédure jeunesse N'EMPÊCHE PAS la procédure de séjour, mais peut la compliquer : informez l'avocat séjour ET l'avocat jeunesse pour qu'ils se coordonnent. Documentez le positif (école, sport) pour l'audience.",
+    "nl": "Een jeugdprocedure VERHINDERT de verblijfsprocedure niet, maar kan ze bemoeilijken: laat beide advocaten zich coördineren. Documenteer het positieve (school, sport) voor de zitting."
+   },
+   "refs": "Loi 8/4/1965 ; Salduz : art. 47bis C.i.cr. (lois 13/8/2011 et 21/11/2016) ; décret FWB 18/01/2018 ; Vlaams decreet 15/02/2019"
+  },
+  {
+   "id": "m10",
+   "ico": "🧭",
+   "titre": {
+    "fr": "Module 10 — La solution durable & le séjour",
+    "nl": "Module 10 — De duurzame oplossing & het verblijf"
+   },
+   "cours": {
+    "fr": "Pour chaque MENA, l'OE (bureau MINTEH) doit déterminer une SOLUTION DURABLE, dans l'ordre de priorité : 1) regroupement familial (en Belgique ou ailleurs) ; 2) retour dans le pays d'origine avec garanties d'accueil ; 3) autorisation de séjour en Belgique. Si l'asile n'aboutit pas, la procédure « MENA » (art. 61/14 et s.) permet d'obtenir : attestation d'immatriculation 6 mois → carte A (si la solution durable est en Belgique) → séjour définitif possible après 3 ans. Constituez le dossier : documents d'identité, scolarité, intégration, attaches en Belgique vs pays d'origine.",
+    "nl": "Voor elke NBMV moet DVZ (bureau MINTEH) een DUURZAME OPLOSSING bepalen, in volgorde: 1) gezinshereniging; 2) terugkeer met opvanggaranties; 3) verblijfsmachtiging in België. Slaagt het asiel niet, dan kan via de NBMV-procedure (art. 61/14 e.v.): attest 6 maanden → A-kaart → definitief verblijf mogelijk na 3 jaar. Bouw het dossier op: identiteitsdocumenten, scholing, integratie."
+   },
+   "actions": {
+    "fr": [
+     "Demander l'application de la procédure solution durable à MINTEH (avec l'avocat)",
+     "Rassembler les preuves d'identité (acte de naissance, taskara légalisée si possible)",
+     "Constituer le dossier intégration (bulletins, attestations, activités)",
+     "Préparer chaque entretien MINTEH avec le jeune",
+     "Suivre les renouvellements de titre (alerte avant expiration)"
+    ],
+    "nl": [
+     "De toepassing van de procedure duurzame oplossing vragen bij MINTEH",
+     "Identiteitsbewijzen verzamelen",
+     "Het integratiedossier opbouwen (rapporten, attesten, activiteiten)",
+     "Elk MINTEH-gesprek voorbereiden met de jongere",
+     "De vernieuwingen van de verblijfstitel opvolgen (alarm vóór vervaldag)"
+    ]
+   },
+   "documents": {
+    "fr": [
+     "Demande solution durable + pièces → OE (MINTEH)",
+     "Renouvellement attestation/carte A → commune"
+    ],
+    "nl": [
+     "Aanvraag duurzame oplossing + stukken → DVZ (MINTEH)",
+     "Vernieuwing attest/A-kaart → gemeente"
+    ]
+   },
+   "conseils": {
+    "fr": "La qualité du dossier d'intégration fait souvent la différence. Scannez et archivez chaque document dans le dossier de l'app dès réception.",
+    "nl": "De kwaliteit van het integratiedossier maakt vaak het verschil. Scan en archiveer elk document meteen."
+   },
+   "refs": "Loi 15/12/1980, art. 61/14-61/25 ; AR 8/10/1981"
+  },
+  {
+   "id": "m11",
+   "ico": "🎂",
+   "titre": {
+    "fr": "Module 11 — Les 18 ans : transition & fin de tutelle",
+    "nl": "Module 11 — 18 jaar: overgang & einde voogdij"
+   },
+   "cours": {
+    "fr": "La tutelle prend fin AUTOMATIQUEMENT à 18 ans. Préparez la transition DÈS 16 ANS ½ : séjour (statut réglé ou procédure en cours), logement (candidature logement social/AIS dès que possible, aide CPAS jeune majeur), revenus (RIS du CPAS si conditions, job étudiant), suivi (services jeunes majeurs, mentor). Aide à la jeunesse possible jusqu'à 25 ans (aide aux jeunes majeurs en FWB / voortgezette jeugdhulp en Flandre) — la demande doit être faite AVANT 18 ans. À la fin : rapport final (15 jours) + remise de tous les documents au jeune + clôture des comptes en sa présence.",
+    "nl": "De voogdij eindigt AUTOMATISCH op 18 jaar. Bereid de overgang voor VANAF 16,5 JAAR: verblijf, huisvesting (sociale woning, OCMW-hulp jonge meerderjarige), inkomen (leefloon indien voorwaarden, studentenjob), begeleiding. Voortgezette jeugdhulp tot 25 jaar mogelijk — de aanvraag moet VÓÓR 18 jaar gebeuren. Op het einde: eindverslag (15 dagen) + overdracht van alle documenten aan de jongere + afsluiting van de rekeningen in zijn aanwezigheid."
+   },
+   "actions": {
+    "fr": [
+     "À 16½ ans : établir un plan de transition écrit avec le jeune et le centre",
+     "Demander l'aide jeune majeur / voortgezette jeugdhulp AVANT 18 ans",
+     "Candidatures logement (social, AIS, kots solidaires) + dossier CPAS",
+     "Vérifier le titre de séjour à 18 ans (passage commune)",
+     "Rapport final + remise au jeune de TOUS ses documents originaux",
+     "Archiver le dossier dans l'app (bouton « Clôturer & archiver »)"
+    ],
+    "nl": [
+     "Op 16,5 jaar: een schriftelijk transitieplan opstellen",
+     "Voortgezette jeugdhulp aanvragen VÓÓR 18 jaar",
+     "Huisvestingskandidaturen + OCMW-dossier",
+     "De verblijfstitel op 18 jaar nakijken",
+     "Eindverslag + overhandiging van ALLE originele documenten aan de jongere",
+     "Het dossier archiveren in de app"
+    ]
+   },
+   "documents": {
+    "fr": [
+     "Demande d'aide jeune majeur → SAJ / jeugdhulp",
+     "Demande RIS → CPAS",
+     "Rapport final → Tutelles + juge de paix"
+    ],
+    "nl": [
+     "Aanvraag voortgezette jeugdhulp → jeugdhulp",
+     "Leefloonaanvraag → OCMW",
+     "Eindverslag → Voogdij + vrederechter"
+    ]
+   },
+   "conseils": {
+    "fr": "Le « cliff edge » des 18 ans est le moment le plus dangereux du parcours : sans préparation, le jeune peut perdre logement, revenus et suivi le même jour. Le plan de transition écrit est votre meilleur outil.",
+    "nl": "De « cliff edge » van 18 jaar is het gevaarlijkste moment: zonder voorbereiding kan de jongere op één dag huisvesting, inkomen en begeleiding verliezen."
+   },
+   "refs": "Loi-programme 24/12/2002, art. 23-24 ; décret FWB 18/01/2018 (aide 18-25) ; decreet integrale jeugdhulp"
+  },
+  {
+   "id": "m12",
+   "ico": "💶",
+   "titre": {
+    "fr": "Module 12 — Vos frais, votre rémunération",
+    "nl": "Module 12 — Uw kosten, uw vergoeding"
+   },
+   "cours": {
+    "fr": "Le tuteur « citoyen » reçoit par tutelle : 1) une INDEMNITÉ FORFAITAIRE annuelle indexée (par mineur, payée par le SPF Justice) ; 2) 85 € de forfait annuel pour frais administratifs (téléphone, copies) ; 3) le remboursement des FRAIS DE DÉPLACEMENT à 0,428 €/km (montant indexé — AR 18/01/1965), distance réelle porte-à-porte contrôlée via Google Maps/Michelin ; 4) le remboursement des recommandés et frais exceptionnels justifiés (sur pièces). Introduisez votre déclaration via les formulaires du Service des Tutelles. L'app enregistre vos déplacements, calcule les montants au tarif du jour et génère la déclaration.",
+    "nl": "De « burger »-voogd ontvangt per voogdij: 1) een jaarlijkse geïndexeerde FORFAITAIRE VERGOEDING; 2) 85 € forfait voor administratiekosten; 3) terugbetaling van de VERPLAATSINGSKOSTEN aan 0,428 €/km (geïndexeerd — KB 18/01/1965), reële afstand deur-tot-deur gecontroleerd via Google Maps; 4) terugbetaling van aangetekende zendingen en verantwoorde uitzonderlijke kosten. De app registreert uw verplaatsingen, rekent aan het dagtarief en genereert de declaratie."
+   },
+   "actions": {
+    "fr": [
+     "Enregistrer CHAQUE déplacement dans l'app (date, motif, trajet, km, parking)",
+     "Mettre à jour le tarif €/km en vigueur dans l'app (indexé périodiquement)",
+     "Garder tous les justificatifs (parking, recommandés)",
+     "Générer la déclaration de frais (PDF) et l'envoyer au Service des Tutelles"
+    ],
+    "nl": [
+     "ELKE verplaatsing registreren in de app",
+     "Het geldende €/km-tarief bijwerken in de app",
+     "Alle bewijsstukken bewaren",
+     "De kostendeclaratie (PDF) genereren en aan de Dienst Voogdij bezorgen"
+    ]
+   },
+   "documents": {
+    "fr": [
+     "Déclaration de frais + justificatifs → Service des Tutelles"
+    ],
+    "nl": [
+     "Kostendeclaratie + bewijsstukken → Dienst Voogdij"
+    ]
+   },
+   "conseils": {
+    "fr": "Notez le déplacement LE JOUR MÊME (l'app le fait en 30 secondes) : reconstituer 6 mois de trajets a posteriori fait perdre de l'argent et des justificatifs.",
+    "nl": "Noteer de verplaatsing DEZELFDE DAG: zes maanden achteraf reconstrueren kost geld en bewijsstukken."
+   },
+   "refs": "AR 22/12/2003 (rémunération tuteur) ; AR 18/01/1965 (frais de parcours) — justice.belgium.be → rémunération du tuteur"
+  },
+  {
+   "id": "m13",
+   "ico": "💬",
+   "titre": {
+    "fr": "Module 13 — Les demandes du jeune : anticiper & répondre",
+    "nl": "Module 13 — Vragen van de jongere: anticiperen & antwoorden"
+   },
+   "cours": {
+    "fr": "Questions qui reviennent TOUJOURS — préparez vos réponses : « Je veux un GSM / de l'argent » (argent de poche Fedasil selon l'âge ; gérer ensemble, compte jeune) ; « Je veux travailler » (job étudiant possible si scolarisé + titre de séjour valable ; le contrat d'occupation étudiant est signé par le jeune avec votre accord) ; « Je veux faire venir ma famille » (→ Module 8 ; soyez honnête sur les délais) ; « Je veux voyager avec l'école » (titre de voyage pour réfugié reconnu ; sinon document spécifique — anticipez 3 mois) ; « Je veux conduire » (permis théorique dès 17 ans si séjour légal) ; « Je veux changer de centre / d'école » (demande motivée à Fedasil / la direction) ; « Je veux me marier / je suis en couple » (vigilance mariage précoce ou forcé → en parler au Service des Tutelles) ; « Je ne veux plus te voir » (le jeune peut demander un changement de tuteur au Service des Tutelles — ne le prenez pas personnellement, gardez le lien).",
+    "nl": "Vragen die ALTIJD terugkomen: « Ik wil een gsm / geld » (zakgeld Fedasil; samen beheren); « Ik wil werken » (studentenjob mogelijk indien schoolgaand + geldig verblijf, met uw akkoord); « Ik wil mijn familie laten komen » (→ Module 8; wees eerlijk over termijnen); « Ik wil op schoolreis » (reisdocument: anticipeer 3 maanden); « Ik wil rijden » (theorie vanaf 17 jaar bij wettig verblijf); « Ik wil van centrum / school veranderen » (gemotiveerde aanvraag); « Ik wil trouwen / heb een relatie » (waakzaamheid kindhuwelijk → Dienst Voogdij); « Ik wil je niet meer zien » (de jongere kan een voogdwissel vragen — houd de band)."
+   },
+   "actions": {
+    "fr": [
+     "Répondre vite, même si la réponse est un « non » motivé : le silence détruit la confiance",
+     "Tracer chaque demande importante et votre réponse dans les notes du dossier",
+     "Pour le job étudiant : vérifier titre de séjour + accord écrit + heures légales",
+     "Pour un voyage scolaire à l'étranger : lancer le titre de voyage 3 mois avant"
+    ],
+    "nl": [
+     "Snel antwoorden, zelfs als het antwoord een gemotiveerd « nee » is",
+     "Elke belangrijke vraag en uw antwoord noteren in het dossier",
+     "Studentenjob: verblijfstitel + schriftelijk akkoord + uren nagaan",
+     "Schoolreis naar het buitenland: reisdocument 3 maanden vooraf aanvragen"
+    ]
+   },
+   "documents": {
+    "fr": [
+     "Accord du tuteur (job étudiant) → employeur",
+     "Demande de titre de voyage → commune / OE"
+    ],
+    "nl": [
+     "Akkoord van de voogd (studentenjob) → werkgever",
+     "Aanvraag reisdocument → gemeente / DVZ"
+    ]
+   },
+   "conseils": {
+    "fr": "Règle d'or : ce qui est expliqué est accepté, même un refus. Utilisez l'Assistant Conseil de l'app pour les cas particuliers : il adapte la réponse au pays d'origine.",
+    "nl": "Gouden regel: wat uitgelegd wordt, wordt aanvaard — zelfs een weigering. Gebruik de Adviesassistent van de app."
+   },
+   "refs": "Loi 3/7/1978 (contrat étudiant) ; AR 8/10/1981 (titres de voyage) ; pratique Fedasil"
+  }
+ ]
+}

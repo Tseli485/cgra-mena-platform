@@ -198,6 +198,7 @@
     <li><a class="nav" data-view="legislation" data-i18n="nav.legislation">⚖️ Législation &amp; Délais</a></li>
     <li><a class="nav" data-view="conseil" data-i18n="nav.conseil">🧭 Assistant Conseil</a></li>
     <li><a class="nav" data-view="cases" data-i18n="nav.cases">📚 Cas Pratiques</a></li>
+    <li><a class="nav" data-view="guide" data-i18n="nav.guide">🎓 Guide du tuteur</a></li>
     <li><a class="nav" data-view="resources" data-i18n="nav.resources">📁 Ressources</a></li>
   </ul>
 </nav>
@@ -242,6 +243,7 @@
     <div class="row" style="margin-bottom:1rem">
       <button class="btn" onclick="openDossierForm()" data-i18n="dash.new">➕ Nouveau dossier</button>
       <button class="btn sec" onclick="openFicheImport()" data-i18n="fiche.import">📄 Importer une fiche DVZ</button>
+      <button class="btn sec" onclick="openArchives()" id="archBtn">🗂️ Archives</button>
       <input id="dossierSearch" data-ph="doss.search" style="flex:1;min-width:200px" oninput="renderDossiers()">
       <select id="dossierFilter" onchange="renderDossiers()" style="width:auto">
         <option value="" data-i18n="doss.allstatus">Tous les statuts</option>
@@ -334,6 +336,14 @@
       <select id="caseCat" onchange="renderCases()"><option value="" data-i18n="cases.allcat">Toutes les catégories</option></select>
     </div>
     <div id="casesContent" class="loading"></div>
+  </section>
+
+  <!-- GUIDE DU TUTEUR -->
+  <section class="view" id="guide">
+    <h2 class="title" data-i18n="guide.title">🎓 Guide du tuteur débutant — de la désignation aux 18 ans</h2>
+    <div class="banner" data-i18n="guide.banner">13 modules pas-à-pas : cours, actions à faire, documents à remettre (et à qui), rendez-vous, pièges à éviter. Contenu basé sur la réglementation en vigueur.</div>
+    <div id="guideContent" class="loading"></div>
+    <div class="card" style="margin-top:1.2rem" id="intervContent"></div>
   </section>
 
   <!-- RESSOURCES -->
@@ -486,6 +496,14 @@
   <div class="modal-box">
     <button class="close" onclick="closeModal('glossModal')">&times;</button>
     <div id="glossBox"></div>
+  </div>
+</div>
+
+<!-- MODAL ARCHIVES -->
+<div class="modal" id="archModal">
+  <div class="modal-box">
+    <button class="close" onclick="closeModal('archModal')">&times;</button>
+    <div id="archBox"></div>
   </div>
 </div>
 
@@ -820,9 +838,10 @@ function onUnlocked(){
   renderDashboard();renderDossiers();renderLegislation();
   idleReset();      // démarre le verrouillage automatique (10 min d'inactivité)
   maybeTour();      // visite guidée au premier lancement
+  updateArchBtn();  // compteur des archives
 }
 function lockApp(){
-  CRYPTO_KEY=null;DOSSIERS=[];
+  CRYPTO_KEY=null;DOSSIERS=[];ARCHIVES=null;
   document.getElementById('authPw').value='';document.getElementById('authPw2').value='';
   document.getElementById('authErr').textContent='';
   refreshAuthUI();
@@ -873,6 +892,7 @@ function go(view){
   if(view==='lifecycle')renderLifecycle();
   if(view==='cases')renderCases();
   if(view==='resources'){renderResources();renderSourcesOff();}
+  if(view==='guide')renderGuide();
   if(view==='conseil')renderConseil();
 }
 document.querySelectorAll('nav a').forEach(a=>a.addEventListener('click',()=>go(a.dataset.view)));
@@ -992,7 +1012,7 @@ function openDossierDetail(id){
       </div>
       <button class="btn sm" style="margin-top:.5rem" onclick="saveJuge('${d.id}')">💾 ${t('btn.save')}</button>
       <h4 style="color:var(--accent);margin:.9rem 0 .3rem">📋 ${LANG==='nl'?'Verplichte verslagen':'Rapports obligatoires'}</h4>
-      ${(d.rapports||[]).map(r=>{const rt=RAPPORTS_TYPE.find(x=>x.id===r.id);if(!rt)return'';return `
+      ${(d.rapports||[]).map(r=>{const rt=rtFind(r.id);if(!rt)return'';return `
         <div class="deadline ${r.fait?'':''}" style="${r.fait?'border-left-color:var(--vert);background:var(--ok-bg)':''}">
           <label class="check-line" style="padding:0"><input type="checkbox" ${r.fait?'checked':''} onchange="toggleRapport('${d.id}','${r.id}')">
           <span><strong>${esc(tr(rt.label))}</strong> <span class="muted">→ ${rt.dest==='juge'?(LANG==='nl'?'vrederechter':'juge de paix'):esc(tr(CONTACTS_OFFICIELS[rt.dest].nom))}</span></span></label>
@@ -1011,8 +1031,27 @@ function openDossierDetail(id){
         • ${esc(tr(dv.nom))} — ${esc(dv.adresse)} — ✉️ ${dv.email}</div>
     </div></details>
 
+    <details class="accordion"><summary>📅 ${LANG==='nl'?'Agenda & afspraken':'Agenda & rendez-vous'}</summary><div class="body">
+      <p class="muted">${LANG==='nl'?'Automatisch voorgesteld plan (aanpasbaar). Afspraken binnen 30 dagen verschijnen op het dashboard.':'Plan proposé automatiquement (modifiable). Les rendez-vous à moins de 30 jours apparaissent sur le tableau de bord.'}</p>
+      ${(d.rdv||[]).map((r,i)=>`<div class="deadline" style="${r.fait?'border-left-color:var(--vert);background:var(--ok-bg)':''}">
+        <label class="check-line" style="padding:0"><input type="checkbox" ${r.fait?'checked':''} onchange="toggleRdv('${d.id}',${i})">
+        <span><strong>${esc(rdvLbl(r.titre))}</strong>${r.lieu?' — '+esc(r.lieu):''}</span></label>
+        <div class="row" style="margin-top:.3rem;gap:.4rem">
+          <input type="date" style="width:auto" value="${esc(r.date||'')}" onchange="setRdvDate('${d.id}',${i},this.value)">
+          <button class="btn danger sm" onclick="delRdv('${d.id}',${i})">×</button>
+        </div></div>`).join('')}
+      <div class="row" style="gap:.4rem;align-items:flex-end;margin-top:.6rem">
+        <div><label>Date</label><input id="rdv_date" type="date"></div>
+        <div style="flex:1;min-width:140px"><label>${LANG==='nl'?'Onderwerp':'Objet'}</label><input id="rdv_titre"></div>
+        <div><label>${LANG==='nl'?'Plaats':'Lieu'}</label><input id="rdv_lieu"></div>
+        <button class="btn sm" onclick="addRdv('${d.id}')">➕</button>
+      </div>
+      <button class="btn sec sm" style="margin-top:.6rem" onclick="exportICS('${d.id}')">📆 ${LANG==='nl'?'Exporteren naar agenda (.ics)':'Exporter vers mon agenda (.ics)'}</button>
+    </div></details>
+
     <details class="accordion"><summary>🏦 ${LANG==='nl'?'Bankbeheer':'Suivi bancaire'}</summary><div class="body">
       <p class="muted">${LANG==='nl'?'Handmatig register van verrichtingen (saldo + uittreksel voor de vrederechter). Echte bankkoppeling: later via server.':'Registre manuel des opérations (solde + relevé pour le juge de paix). Connexion bancaire réelle : ultérieurement via serveur.'}</p>
+      <div id="bankAdv" class="muted" style="font-size:.85rem"></div>
       <div class="row" style="gap:.4rem;align-items:flex-end">
         <div><label>Date</label><input id="op_date" type="date"></div>
         <div style="flex:1;min-width:140px"><label>${LANG==='nl'?'Omschrijving':'Libellé'}</label><input id="op_lib"></div>
@@ -1027,6 +1066,34 @@ function openDossierDetail(id){
         <button class="btn sec sm" style="margin-top:.5rem" onclick="printReleve('${d.id}')">🖨️ ${LANG==='nl'?'Uittreksel (PDF)':'Relevé (PDF)'}</button>`:`<p class="muted">${LANG==='nl'?'Nog geen verrichting.':'Aucune opération.'}</p>`}
     </div></details>
 
+    <details class="accordion"><summary>🚗 ${LANG==='nl'?'Kosten & verplaatsingen (terugbetaling voogd)':'Frais & déplacements (remboursement tuteur)'}</summary><div class="body">
+      <p class="muted">${LANG==='nl'?'Reële afstand deur-tot-deur (Google Maps), tarief €/km van de dag (geïndexeerd — KB 18/01/1965), parking en bijkomende kosten. Genereer de declaratie voor de Dienst Voogdij.':'Distance réelle porte-à-porte (Google Maps), tarif €/km du jour (indexé — AR 18/01/1965), parking et frais annexes. Générez la déclaration pour le Service des Tutelles.'}</p>
+      <div class="row" style="gap:.4rem;align-items:flex-end">
+        <div><label>${LANG==='nl'?'Tarief €/km (vandaag)':'Tarif €/km (du jour)'}</label><input id="fr_pkm" type="number" step="0.001" value="${getPkm()}" onchange="setPkm(this.value)" style="width:90px"></div>
+        <span class="muted" style="font-size:.78rem">${LANG==='nl'?'Officieel geïndexeerd tarief — pas aan volgens de geldende waarde.':'Tarif officiel indexé — adaptez selon la valeur en vigueur.'}</span>
+      </div>
+      <div class="row" style="gap:.4rem;align-items:flex-end;margin-top:.5rem">
+        <div><label>Date</label><input id="fr_date" type="date"></div>
+        <div style="flex:1;min-width:120px"><label>${LANG==='nl'?'Reden':'Motif'}</label><input id="fr_motif" placeholder="${LANG==='nl'?'bv. CGVS-gehoor':'ex. audition CGRA'}"></div>
+      </div>
+      <div class="row" style="gap:.4rem;align-items:flex-end;margin-top:.3rem">
+        <div style="flex:1;min-width:110px"><label>${LANG==='nl'?'Van':'De'}</label><input id="fr_de" placeholder="${LANG==='nl'?'uw adres':'votre adresse'}"></div>
+        <div style="flex:1;min-width:110px"><label>${LANG==='nl'?'Naar':'À'}</label><input id="fr_a" placeholder="${LANG==='nl'?'bestemming':'destination'}"></div>
+        <button class="btn sec sm" onclick="mapsRoute()">🗺️ ${LANG==='nl'?'Km berekenen (Maps)':'Calculer km (Maps)'}</button>
+      </div>
+      <div class="row" style="gap:.4rem;align-items:flex-end;margin-top:.3rem">
+        <div><label>${LANG==='nl'?'Km (heen-terug)':'Km (aller-retour)'}</label><input id="fr_km" type="number" step="0.1" style="width:110px"></div>
+        <div><label>Parking €</label><input id="fr_park" type="number" step="0.01" style="width:90px"></div>
+        <div><label>${LANG==='nl'?'Andere €':'Autres €'}</label><input id="fr_autres" type="number" step="0.01" style="width:90px"></div>
+        <button class="btn sm" onclick="addFrais('${d.id}')">➕</button>
+      </div>
+      <div class="muted" id="fr_note" style="font-size:.8rem"></div>
+      ${(d.frais||[]).length?`<table style="margin-top:.6rem"><tr><th>Date</th><th>${LANG==='nl'?'Reden':'Motif'}</th><th>${LANG==='nl'?'Traject':'Trajet'}</th><th class="r">Km</th><th class="r">€/km</th><th class="r">${LANG==='nl'?'Totaal':'Total'}</th><th></th></tr>
+        ${d.frais.map((f2,i)=>`<tr><td>${esc(f2.date)}</td><td>${esc(f2.motif)}</td><td style="font-size:.78rem">${esc(f2.de)} → ${esc(f2.a)}</td><td class="r">${(+f2.km).toFixed(1)}</td><td class="r">${(+f2.pkm).toFixed(3)}</td><td class="r"><strong>${fraisTotal(f2).toFixed(2)}</strong></td><td><button class="btn danger sm" onclick="delFrais('${d.id}',${i})">×</button></td></tr>`).join('')}
+        <tr><td colspan="5"><strong>TOTAL</strong></td><td class="r"><strong>${(d.frais||[]).reduce((t2,f2)=>t2+fraisTotal(f2),0).toFixed(2)} €</strong></td><td></td></tr></table>
+        <button class="btn sec sm" style="margin-top:.5rem" onclick="genFraisPDF('${d.id}')">🖨️ ${LANG==='nl'?'Kostendeclaratie (PDF)':'Déclaration de frais (PDF)'}</button>`:''}
+    </div></details>
+
     <h4 style="color:var(--accent);margin:.9rem 0 .3rem">${t('det.checklist')}</h4>
     <div>${d.checklist.map((c,i)=>`
       <label class="check-line"><input type="checkbox" ${c.done?'checked':''} onchange="toggleCheck('${d.id}',${i})">
@@ -1036,9 +1103,11 @@ function openDossierDetail(id){
       <button class="btn sec sm" onclick="transDossier('${d.id}')">🌐 ${LANG==='nl'?'Document vertalen (NL→FR)':'Traduire le document (NL→FR)'}</button>
       <button class="btn sec sm" onclick="genDossierComplet('${d.id}')">🖨️ ${LANG==='nl'?'Volledig dossier (PDF)':'Dossier complet (PDF)'}</button>
       <button class="btn sec sm" onclick="openDossierForm('${d.id}')">${t('det.modify')}</button>
+      <button class="btn sec sm" onclick="archiverDossier('${d.id}')">📦 ${LANG==='nl'?'Afsluiten & archiveren':'Clôturer & archiver'}</button>
       <button class="btn danger sm" onclick="deleteDossier('${d.id}')">${t('det.delete')}</button>
     </div>`;
   openModal('detailModal');
+  fillBankAdvice(d);
 }
 
 /* ============ DASHBOARD ============ */
@@ -1059,8 +1128,14 @@ function renderDashboard(){
   const deadlines=[];
   arr.filter(d=>d.statut!=='clos').forEach(d=>{
     (d.rapports||[]).forEach(r=>{
-      if(!r.fait&&r.echeance){const rt=RAPPORTS_TYPE.find(x=>x.id===r.id);
+      if(!r.fait&&r.echeance){const rt=rtFind(r.id);
         deadlines.push({nom:d.nom,label:rt?tr(rt.label):r.id,date:r.echeance,id:d.id,over:r.echeance<today});}
+    });
+    (d.rdv||[]).forEach(r=>{
+      if(!r.fait&&r.date){
+        if(r.date<today)deadlines.push({nom:d.nom,label:'📅 '+rdvLbl(r.titre),date:r.date,id:d.id,over:true});
+        else if(r.date<=addDays(today,30))deadlines.push({nom:d.nom,label:'📅 '+rdvLbl(r.titre),date:r.date,id:d.id,over:false});
+      }
     });
     const next=d.checklist.find(c=>!c.done);
     if(next)deadlines.push({nom:d.nom,label:t('dash.nextstep')+' '+ckLabel(next.t),date:'',id:d.id,over:false,etape:true});
@@ -1547,12 +1622,21 @@ async function jpLookup(id){
     `<br><a href="${ANNUAIRE_JP.adresses}" target="_blank" rel="noopener">${LANG==='nl'?'Officieel register':'Registre officiel'}</a>`;
 }
 /* Rapports obligatoires (cadre tutelle MENA — loi-programme 24/12/2002). Échéances = valeurs par défaut indicatives, modifiables. */
+// Modèle légal vérifié (justice.belgium.be) : initial 15 j → Tutelles + juge de paix ;
+// semestriel 2×/an → juge de paix + copie Tutelles ; final 15 j après la fin de tutelle.
 const RAPPORTS_TYPE=[
-  {id:"r_initial",label:{fr:"Rapport initial au Service des Tutelles",nl:"Initieel verslag aan de Dienst Voogdij"},dest:"tutelles",defJours:15,base:"Loi-programme 24/12/2002 (Tutelle)"},
-  {id:"r_priseencharge",label:{fr:"Rapport de prise en charge / situation du mineur",nl:"Verslag van tenlasteneming / situatie van de minderjarige"},dest:"tutelles",defJours:30,base:"Loi-programme 24/12/2002"},
-  {id:"r_periodique",label:{fr:"Rapport périodique au Service des Tutelles",nl:"Periodiek verslag aan de Dienst Voogdij"},dest:"tutelles",defJours:90,base:"Art. 11 Loi Tutelle"},
-  {id:"r_gestion",label:{fr:"Compte/rapport de gestion des biens au juge de paix",nl:"Beheersverslag van de goederen aan de vrederechter"},dest:"juge",defJours:365,base:"Gestion des biens — juge de paix"}
+  {id:"r_initial",label:{fr:"Rapport initial (Tutelles + juge de paix)",nl:"Eerste verslag (Voogdij + vrederechter)"},dest:"tutelles",defJours:15,base:"Loi-programme 24/12/2002, art. 19 — délai : 15 jours"},
+  {id:"r_sem1",label:{fr:"Rapport semestriel n°1 (juge de paix + copie Tutelles)",nl:"Zesmaandelijks verslag nr. 1 (vrederechter + kopie Voogdij)"},dest:"juge",defJours:180,base:"Loi-programme 24/12/2002, art. 19 — 2×/an : situation personnelle + biens"},
+  {id:"r_sem2",label:{fr:"Rapport semestriel n°2 (juge de paix + copie Tutelles)",nl:"Zesmaandelijks verslag nr. 2 (vrederechter + kopie Voogdij)"},dest:"juge",defJours:360,base:"Loi-programme 24/12/2002, art. 19 — 2×/an : situation personnelle + biens"},
+  {id:"r_final",label:{fr:"Rapport final (15 j après la fin de tutelle)",nl:"Eindverslag (15 d na het einde van de voogdij)"},dest:"tutelles",defJours:1440,base:"Loi-programme 24/12/2002, art. 24 — 15 jours après la fin"}
 ];
+// Anciens identifiants (dossiers créés avant v1.2) — conservés pour l'affichage
+const RAPPORTS_LEGACY=[
+  {id:"r_priseencharge",label:{fr:"Rapport de prise en charge / situation du mineur",nl:"Verslag van tenlasteneming"},dest:"tutelles",base:"Loi-programme 24/12/2002"},
+  {id:"r_periodique",label:{fr:"Rapport périodique au Service des Tutelles",nl:"Periodiek verslag aan de Dienst Voogdij"},dest:"tutelles",base:"Loi-programme 24/12/2002"},
+  {id:"r_gestion",label:{fr:"Compte/rapport de gestion des biens au juge de paix",nl:"Beheersverslag van de goederen"},dest:"juge",base:"Gestion des biens — juge de paix"}
+];
+function rtFind(id){return RAPPORTS_TYPE.find(x=>x.id===id)||RAPPORTS_LEGACY.find(x=>x.id===id);}
 function nowISO(){return new Date().toISOString().slice(0,10);}
 function addDays(iso,days){if(!iso)return '';const d=new Date(iso+'T00:00:00');d.setDate(d.getDate()+(+days||0));return d.toISOString().slice(0,10);}
 /* Initialise les rapports obligatoires avec échéances calculées depuis une date de base */
@@ -1561,6 +1645,8 @@ function initGestion(d){
   if(!d.jugePaix)d.jugePaix={cp:'',canton:'',adresse:'',tel:'',email:''};
   if(!d.rapports||!d.rapports.length)d.rapports=initRapports(d.arrivee||d.cree);
   if(!d.banque)d.banque={operations:[]};
+  if(!d.rdv)d.rdv=genRdvDefaults(d.arrivee||d.cree);   // plan de rendez-vous auto
+  if(!d.frais)d.frais=[];                              // déplacements & frais du tuteur
   return d;
 }
 
@@ -1808,7 +1894,7 @@ function setEcheance(id,rid,val){
   const arr=loadDossiers();const d=arr.find(x=>x.id===id);d.rapports.find(x=>x.id===rid).echeance=val;saveDossiers(arr);
 }
 function prepRapport(id,rid){
-  const d=loadDossiers().find(x=>x.id===id);const rt=RAPPORTS_TYPE.find(x=>x.id===rid);
+  const d=loadDossiers().find(x=>x.id===id);const rt=rtFind(rid);
   const dest=rt.dest==='juge'?d.jugePaix:CONTACTS_OFFICIELS[rt.dest];
   const email=rt.dest==='juge'?(d.jugePaix&&d.jugePaix.email):CONTACTS_OFFICIELS[rt.dest].email;
   const sujet=encodeURIComponent(tr(rt.label)+' — '+(d.fiche&&d.fiche.ov?'OE '+d.fiche.ov+' — ':'')+d.nom);
@@ -1840,7 +1926,7 @@ function printDoc(title,html){
   w.document.close();w.focus();
 }
 function genReport(id,rid){
-  const d=loadDossiers().find(x=>x.id===id);const rt=RAPPORTS_TYPE.find(x=>x.id===rid);if(!d||!rt)return;
+  const d=loadDossiers().find(x=>x.id===id);const rt=rtFind(rid);if(!d||!rt)return;
   const destNom=rt.dest==='juge'?((d.jugePaix&&d.jugePaix.canton)||(LANG==='nl'?'Vrederechter':'Juge de paix')):tr(CONTACTS_OFFICIELS[rt.dest].nom);
   const destAdr=rt.dest==='juge'?((d.jugePaix&&d.jugePaix.adresse)||''):CONTACTS_OFFICIELS[rt.dest].adresse;
   const html=`<h1>${esc(tr(rt.label))}</h1><p>${nowISO()}</p>
@@ -1861,7 +1947,7 @@ function genDossierComplet(id){
     .filter(x=>x[1]).map(x=>`<tr><td>${esc(x[0])}</td><td><strong>${esc(x[1])}</strong></td></tr>`).join('');
   const jp=d.jugePaix||{};
   const jpHtml=jp.canton?`<p><strong>${esc(jp.canton)}</strong><br>${esc(jp.adresse||'')}${jp.tel?'<br>☎ '+esc(jp.tel):''}${jp.email?' · ✉ '+esc(jp.email):''}</p>`:`<p class="muted">${LANG==='nl'?'Niet ingevuld':'Non renseigné'}</p>`;
-  const rap=(d.rapports||[]).map(r=>{const rt=RAPPORTS_TYPE.find(x=>x.id===r.id);return `<tr><td>${esc(rt?tr(rt.label):r.id)}</td><td>${esc(r.echeance||'')}</td><td>${r.fait?'✓ '+(r.dateFait||''):'—'}</td></tr>`;}).join('');
+  const rap=(d.rapports||[]).map(r=>{const rt=rtFind(r.id);return `<tr><td>${esc(rt?tr(rt.label):r.id)}</td><td>${esc(r.echeance||'')}</td><td>${r.fait?'✓ '+(r.dateFait||''):'—'}</td></tr>`;}).join('');
   const ops=(d.banque&&d.banque.operations)||[];
   const opHtml=ops.map(o=>`<tr><td>${esc(o.date)}</td><td>${esc(o.lib)}</td><td class="r">${(+o.mt).toFixed(2)}</td></tr>`).join('');
   const done=d.checklist.filter(c=>c.done).length;
@@ -1891,10 +1977,10 @@ function printReleve(id){
 }
 
 /* ============ VERSION & MISES À JOUR ============ */
-const APP_VERSION='1.1.0';
+const APP_VERSION='1.2.0';
 window.APP_VERSION=APP_VERSION;   // expose pour tests.html (const non attache a window)
-Object.assign(I18N.fr,{"dash.q1":"📄 Nouveau MENA (fiche DVZ)","dash.q2":"📂 Mes dossiers","dash.q3":"⏰ Urgences & échéances","gs.ph":"🔍 Recherche globale (dossiers, lois, cas, ressources)…","ft.check":"🔄 Vérifier les mises à jour"});
-Object.assign(I18N.nl,{"dash.q1":"📄 Nieuwe NBMV (DVZ-fiche)","dash.q2":"📂 Mijn dossiers","dash.q3":"⏰ Urgenties & vervaldata","gs.ph":"🔍 Globaal zoeken (dossiers, wetten, gevallen, hulpbronnen)…","ft.check":"🔄 Updates controleren"});
+Object.assign(I18N.fr,{"nav.guide":"🎓 Guide du tuteur","guide.title":"🎓 Guide du tuteur débutant — de la désignation aux 18 ans","guide.banner":"13 modules pas-à-pas : cours, actions à faire, documents à remettre (et à qui), rendez-vous, pièges à éviter. Contenu basé sur la réglementation en vigueur.","dash.q1":"📄 Nouveau MENA (fiche DVZ)","dash.q2":"📂 Mes dossiers","dash.q3":"⏰ Urgences & échéances","gs.ph":"🔍 Recherche globale (dossiers, lois, cas, ressources)…","ft.check":"🔄 Vérifier les mises à jour"});
+Object.assign(I18N.nl,{"nav.guide":"🎓 Voogdengids","guide.title":"🎓 Gids voor de beginnende voogd — van aanstelling tot 18 jaar","guide.banner":"13 stap-voor-stapmodules: cursus, acties, documenten (en aan wie), afspraken, valkuilen. Inhoud gebaseerd op de geldende regelgeving.","dash.q1":"📄 Nieuwe NBMV (DVZ-fiche)","dash.q2":"📂 Mijn dossiers","dash.q3":"⏰ Urgenties & vervaldata","gs.ph":"🔍 Globaal zoeken (dossiers, wetten, gevallen, hulpbronnen)…","ft.check":"🔄 Updates controleren"});
 const UPDATE_URL='https://tseli485.github.io/cgra-mena-platform/version.json';
 async function checkUpdates(){
   const n=document.getElementById('updNote');
@@ -2031,6 +2117,211 @@ function markUntranslated(src,out){
     const lw=w.toLowerCase();
     return (srcW.has(lw)&&!dictVals.has(lw))?'<mark class="nt">'+w+'</mark>':w;
   });
+}
+
+
+/* ============ v1.2 : GUIDE DU TUTEUR ============ */
+let GUIDE=null,INTERV=null;
+async function renderGuide(){
+  if(!GUIDE)GUIDE=await loadJSON('js/data/guide-data.json');
+  if(!INTERV)INTERV=await loadJSON('js/data/intervenants-data.json');
+  const el=document.getElementById('guideContent');
+  if(!GUIDE||!GUIDE.modules){el.innerHTML='<div class="empty">—</div>';return;}
+  el.innerHTML=GUIDE.modules.map(m=>`
+    <details class="accordion"><summary>${m.ico} ${esc(tr(m.titre))}</summary><div class="body">
+      <p>${esc(tr(m.cours))}</p>
+      <h4 style="color:var(--accent);margin:.7rem 0 .3rem">✅ ${LANG==='nl'?'Wat u moet doen (in volgorde)':'Ce que vous devez faire (dans l\'ordre)'}</h4>
+      <ol style="margin-left:1.2rem">${tr(m.actions).map(a=>`<li style="margin:.25rem 0">${esc(a)}</li>`).join('')}</ol>
+      <h4 style="color:var(--accent);margin:.7rem 0 .3rem">📤 ${LANG==='nl'?'Documenten — wat, aan wie':'Documents — quoi, à qui'}</h4>
+      <ul class="clean">${tr(m.documents).map(x=>`<li>📄 ${esc(x)}</li>`).join('')}</ul>
+      <div class="banner" style="margin-top:.7rem">💡 ${esc(tr(m.conseils))}</div>
+      <p class="muted" style="font-size:.78rem;margin-top:.5rem">📖 ${esc(m.refs)}</p>
+    </div></details>`).join('');
+  // Intervenants + banques
+  const iv=document.getElementById('intervContent');
+  if(INTERV&&INTERV.intervenants){
+    iv.innerHTML=`<h3>👥 ${LANG==='nl'?'Alle actoren van het traject':'Tous les intervenants du parcours'}</h3>
+      ${INTERV.intervenants.map(x=>`<details class="accordion"><summary>${x.ico} ${esc(tr(x.nom))}</summary><div class="body">
+        <p>${esc(tr(x.role))}</p>
+        <p class="muted">📍 ${esc(x.adresse)} · ☎ ${esc(x.tel)} · ✉️ ${esc(x.email)} · <a href="${x.web.split(' ')[0]}" target="_blank" rel="noopener">site</a></p>
+        <p><strong>${LANG==='nl'?'Wanneer contacteren:':'Quand le contacter :'}</strong> ${esc(tr(x.quand))}</p>
+      </div></details>`).join('')}
+      <h3 style="margin-top:1rem">🏦 ${LANG==='nl'?'Banken voor de jongerenrekening':'Banques pour le compte du jeune'}</h3>
+      <p class="muted" style="font-size:.85rem">${esc(tr(INTERV.banques.note))}</p>
+      <table><tr><th>${LANG==='nl'?'Bank':'Banque'}</th><th>${LANG==='nl'?'Rekening':'Compte'}</th><th>${LANG==='nl'?'Netwerk':'Réseau'}</th></tr>
+      ${INTERV.banques.liste.map(b=>`<tr><td><strong>${esc(b.nom)}</strong></td><td>${esc(b.compte)}</td><td>${esc(tr(b.reseau))} — <a href="${b.loc}" target="_blank" rel="noopener">${LANG==='nl'?'kantoor zoeken':'trouver une agence'}</a></td></tr>`).join('')}</table>`;
+  }
+}
+
+/* ============ v1.2 : AGENDA & RENDEZ-VOUS ============ */
+function rdvLbl(t2){return typeof t2==='string'?t2:tr(t2||{});}
+function genRdvDefaults(base){
+  const B=base||nowISO();
+  const P=[[3,{fr:"Première rencontre avec le jeune (+ interprète si besoin)",nl:"Eerste ontmoeting met de jongere (+ tolk indien nodig)"}],
+    [7,{fr:"Visite du centre d'accueil / rencontre du référent",nl:"Bezoek opvangcentrum / ontmoeting referent"}],
+    [10,{fr:"Désignation de l'avocat (BAJ)",nl:"Aanstelling advocaat (BJB)"}],
+    [14,{fr:"Envoi du rapport initial (Tutelles + juge de paix)",nl:"Versturen eerste verslag (Voogdij + vrederechter)"}],
+    [21,{fr:"Inscription scolaire DASPA/OKAN",nl:"Schoolinschrijving OKAN/DASPA"}],
+    [30,{fr:"Bilan médical complet + ouverture mutuelle",nl:"Volledig medisch onderzoek + ziekenfonds"}],
+    [45,{fr:"Ouverture du compte bancaire jeune",nl:"Opening jongerenrekening"}],
+    [60,{fr:"Préparation de l'audition CGRA (avec l'avocat)",nl:"Voorbereiding CGVS-gehoor (met advocaat)"}],
+    [175,{fr:"Préparer le rapport semestriel n°1",nl:"Zesmaandelijks verslag nr. 1 voorbereiden"}],
+    [355,{fr:"Préparer le rapport semestriel n°2",nl:"Zesmaandelijks verslag nr. 2 voorbereiden"}]];
+  return P.map(([j,t2])=>({date:addDays(B,j),titre:t2,lieu:'',fait:false}));
+}
+function addRdv(id){
+  const arr=loadDossiers();const d=arr.find(x=>x.id===id);if(!d)return;
+  const date=document.getElementById('rdv_date').value,t2=document.getElementById('rdv_titre').value.trim();
+  if(!date||!t2)return;
+  d.rdv.push({date,titre:t2,lieu:document.getElementById('rdv_lieu').value.trim(),fait:false});
+  d.rdv.sort((a,b)=>a.date<b.date?-1:1);
+  saveDossiers(arr);openDossierDetail(id);renderDashboard();
+}
+function delRdv(id,i){const arr=loadDossiers();const d=arr.find(x=>x.id===id);d.rdv.splice(i,1);saveDossiers(arr);openDossierDetail(id);renderDashboard();}
+function toggleRdv(id,i){const arr=loadDossiers();const d=arr.find(x=>x.id===id);d.rdv[i].fait=!d.rdv[i].fait;saveDossiers(arr);openDossierDetail(id);renderDashboard();}
+function setRdvDate(id,i,v){const arr=loadDossiers();const d=arr.find(x=>x.id===id);d.rdv[i].date=v;saveDossiers(arr);renderDashboard();}
+function exportICS(id){
+  const d=loadDossiers().find(x=>x.id===id);if(!d)return;
+  const lines=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//MENA Tuteur//FR'];
+  (d.rdv||[]).filter(r=>!r.fait&&r.date).forEach((r,i)=>{
+    const dt=r.date.replace(/-/g,'');
+    lines.push('BEGIN:VEVENT','UID:mena-'+d.id+'-'+i+'@menatuteur','DTSTART;VALUE=DATE:'+dt,
+      'SUMMARY:'+rdvLbl(r.titre).replace(/[,;]/g,' ')+' ('+d.nom.replace(/[,;]/g,' ')+')',
+      r.lieu?'LOCATION:'+r.lieu.replace(/[,;]/g,' '):'','END:VEVENT');
+  });
+  lines.push('END:VCALENDAR');
+  const blob=new Blob([lines.filter(Boolean).join('\r\n')],{type:'text/calendar'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download='rdv_'+d.nom.replace(/\W+/g,'_')+'.ics';a.click();
+}
+
+/* ============ v1.2 : CONSEIL BANQUE PAR ADRESSE ============ */
+function regionOfCp(cp){
+  cp=+cp||0;
+  if(cp>=1000&&cp<=1299)return 'BXL';
+  if((cp>=1300&&cp<=1499)||(cp>=4000&&cp<=7999))return 'WAL';
+  if((cp>=1500&&cp<=3999)||(cp>=8000&&cp<=9999))return 'VLA';
+  return '';
+}
+async function fillBankAdvice(d){
+  const el=document.getElementById('bankAdv');if(!el)return;
+  if(!INTERV)INTERV=await loadJSON('js/data/intervenants-data.json');
+  if(!INTERV)return;
+  const cp=(d.jugePaix&&d.jugePaix.cp)||'';
+  const reg=regionOfCp(cp);
+  const noms=reg?INTERV.banques.parRegion[reg]:INTERV.banques.liste.map(b=>b.nom);
+  const lbl={BXL:'Bruxelles',WAL:'Wallonie',VLA:(LANG==='nl'?'Vlaanderen':'Flandre')}[reg]||'';
+  el.innerHTML='💡 '+(LANG==='nl'
+    ?`Aanbevolen banken${lbl?' ('+lbl+', op basis van postcode '+esc(cp)+')':''} : <strong>${noms.join(' · ')}</strong> — gratis jongerenrekening, toon de aanstellingsbeschikking. Volledige lijst: tabblad Gids.`
+    :`Banques conseillées${lbl?' ('+lbl+', d\'après le code postal '+esc(cp)+')':''} : <strong>${noms.join(' · ')}</strong> — compte jeune gratuit, présentez l\'ordonnance de désignation. Liste complète : onglet Guide.`);
+}
+
+/* ============ v1.2 : FRAIS & DÉPLACEMENTS DU TUTEUR ============ */
+function getPkm(){return localStorage.getItem('mena_pkm')||'0.428';}
+function setPkm(v){localStorage.setItem('mena_pkm',(+v||0.428).toString());}
+function fraisTotal(f){return (+f.km||0)*(+f.pkm||0)+(+f.park||0)+(+f.autres||0);}
+function mapsRoute(){
+  const de=encodeURIComponent(document.getElementById('fr_de').value.trim());
+  const a=encodeURIComponent(document.getElementById('fr_a').value.trim());
+  const n=document.getElementById('fr_note');
+  if(!de||!a){n.textContent=LANG==='nl'?'Vul vertrek en bestemming in.':'Renseignez départ et destination.';return;}
+  window.open('https://www.google.com/maps/dir/?api=1&origin='+de+'&destination='+a+'&travelmode=driving','_blank');
+  n.textContent=LANG==='nl'?'Lees de afstand in Google Maps en vul het aantal km (heen-terug) hieronder in.':'Lisez la distance dans Google Maps puis saisissez les km (aller-retour) ci-dessous.';
+}
+function addFrais(id){
+  const arr=loadDossiers();const d=arr.find(x=>x.id===id);if(!d)return;
+  const f={date:document.getElementById('fr_date').value||nowISO(),motif:document.getElementById('fr_motif').value.trim(),
+    de:document.getElementById('fr_de').value.trim(),a:document.getElementById('fr_a').value.trim(),
+    km:+document.getElementById('fr_km').value||0,pkm:+document.getElementById('fr_pkm').value||+getPkm(),
+    park:+document.getElementById('fr_park').value||0,autres:+document.getElementById('fr_autres').value||0};
+  if(!f.motif&&!f.km){document.getElementById('fr_note').textContent=LANG==='nl'?'Vul minstens reden en km in.':'Renseignez au moins le motif et les km.';return;}
+  d.frais.push(f);saveDossiers(arr);openDossierDetail(id);
+}
+function delFrais(id,i){const arr=loadDossiers();const d=arr.find(x=>x.id===id);d.frais.splice(i,1);saveDossiers(arr);openDossierDetail(id);}
+function genFraisPDF(id){
+  const d=loadDossiers().find(x=>x.id===id);if(!d||!(d.frais||[]).length)return;
+  const tot=d.frais.reduce((t2,f)=>t2+fraisTotal(f),0);
+  const totKm=d.frais.reduce((t2,f)=>t2+(+f.km||0),0);
+  printDoc(LANG==='nl'?'Kostendeclaratie voogd':'Déclaration de frais du tuteur',
+    `<h1>${LANG==='nl'?'Kostendeclaratie van de voogd':'Déclaration de frais du tuteur'}</h1>
+     <p>${LANG==='nl'?'Dossier':'Dossier'} : <strong>${esc(d.nom)}</strong>${d.fiche&&d.fiche.ov?' — OV '+esc(d.fiche.ov):''}<br>
+     ${LANG==='nl'?'Datum':'Date'} : ${nowISO()}<br>
+     ${LANG==='nl'?'Bestemmeling: Dienst Voogdij (FOD Justitie), Waterloolaan 115, 1000 Brussel':'Destinataire : Service des Tutelles (SPF Justice), Bd de Waterloo 115, 1000 Bruxelles'}</p>
+     <table><tr><th>Date</th><th>${LANG==='nl'?'Reden':'Motif'}</th><th>${LANG==='nl'?'Traject (heen-terug)':'Trajet (aller-retour)'}</th><th class="r">Km</th><th class="r">€/km</th><th class="r">Parking</th><th class="r">${LANG==='nl'?'Andere':'Autres'}</th><th class="r">Total</th></tr>
+     ${d.frais.map(f=>`<tr><td>${esc(f.date)}</td><td>${esc(f.motif)}</td><td>${esc(f.de)} → ${esc(f.a)}</td><td class="r">${(+f.km).toFixed(1)}</td><td class="r">${(+f.pkm).toFixed(3)}</td><td class="r">${(+f.park).toFixed(2)}</td><td class="r">${(+f.autres).toFixed(2)}</td><td class="r">${fraisTotal(f).toFixed(2)}</td></tr>`).join('')}
+     <tr><td colspan="3"><strong>TOTAL</strong></td><td class="r"><strong>${totKm.toFixed(1)}</strong></td><td colspan="3"></td><td class="r"><strong>${tot.toFixed(2)} €</strong></td></tr></table>
+     <p style="font-size:.85rem;color:#555">${LANG==='nl'?'Reële afstanden deur-tot-deur, controleerbaar via Google Maps/Michelin (KB 18/01/1965). Bewijsstukken in bijlage.':'Distances réelles porte-à-porte, contrôlables via Google Maps/Michelin (AR 18/01/1965). Justificatifs en annexe.'}</p>
+     <p style="margin-top:2rem">${LANG==='nl'?'Handtekening van de voogd':'Signature du tuteur'} : ______________________</p>`);
+}
+
+/* ============ v1.2 : ARCHIVES (dossiers clôturés, chiffrés, consultables) ============ */
+let ARCHIVES=null;
+const ARCH_STORE='mena_archive_enc';
+async function loadArchEnsure(){
+  if(ARCHIVES!==null)return;
+  const raw=localStorage.getItem(ARCH_STORE);
+  if(!raw){ARCHIVES=[];return;}
+  try{ARCHIVES=JSON.parse(await aesDecrypt(CRYPTO_KEY,JSON.parse(raw)));}catch(e){console.warn('arch',e);ARCHIVES=[];}
+}
+async function persistArch(){
+  localStorage.setItem(ARCH_STORE,JSON.stringify(await aesEncrypt(CRYPTO_KEY,JSON.stringify(ARCHIVES))));
+}
+async function archiverDossier(id){
+  if(!confirm(LANG==='nl'?'Dit dossier afsluiten en archiveren? Het verdwijnt uit de actieve lijst maar blijft raadpleegbaar in de Archieven.':'Clôturer et archiver ce dossier ? Il quittera la liste active mais restera consultable dans les Archives.'))return;
+  await loadArchEnsure();
+  const arr=loadDossiers();const i=arr.findIndex(x=>x.id===id);if(i<0)return;
+  const d=arr[i];d.statut='clos';d.archiveLe=nowISO();
+  ARCHIVES.push(d);arr.splice(i,1);
+  DOSSIERS=arr;await persist();await persistArch();
+  closeModal('detailModal');renderDossiers();renderDashboard();updateArchBtn();
+}
+async function updateArchBtn(){
+  await loadArchEnsure();
+  const b=document.getElementById('archBtn');
+  if(b)b.textContent='🗂️ '+(LANG==='nl'?'Archieven':'Archives')+(ARCHIVES.length?' ('+ARCHIVES.length+')':'');
+}
+async function openArchives(){
+  await loadArchEnsure();
+  const el=document.getElementById('archBox');
+  el.innerHTML=`<h3>🗂️ ${LANG==='nl'?'Gearchiveerde dossiers':'Dossiers archivés'}</h3>
+    <p class="muted">${LANG==='nl'?'Afgesloten dossiers, versleuteld bewaard. Raadpleegbaar, herstelbaar, exporteerbaar.':'Dossiers clôturés, conservés chiffrés. Consultables, restaurables, exportables.'}</p>
+    ${ARCHIVES.length?ARCHIVES.map((d,i)=>`<div class="list-item">
+      <div class="row" style="justify-content:space-between"><strong>${esc(d.nom)}</strong><span class="muted">${LANG==='nl'?'gearchiveerd op':'archivé le'} ${esc(d.archiveLe||'')}</span></div>
+      <div class="muted">${d.age?d.age+' '+t('u.ans')+' · ':''}${esc(d.pays||'')}</div>
+      <div class="row" style="margin-top:.4rem">
+        <button class="btn sec sm" onclick="viewArch(${i})">👁️ ${LANG==='nl'?'Raadplegen':'Consulter'}</button>
+        <button class="btn sec sm" onclick="restoreArch(${i})">↩️ ${LANG==='nl'?'Herstellen':'Restaurer'}</button>
+        <button class="btn danger sm" onclick="delArch(${i})">🗑️</button>
+      </div></div>`).join(''):`<div class="empty">${LANG==='nl'?'Geen gearchiveerd dossier.':'Aucun dossier archivé.'}</div>`}`;
+  openModal('archModal');
+}
+function viewArch(i){
+  const d=ARCHIVES[i];if(!d)return;
+  const el=document.getElementById('archBox');
+  el.innerHTML=`<button class="btn sec sm" onclick="openArchives()">← ${LANG==='nl'?'Terug':'Retour'}</button>
+    <div class="row" style="gap:.8rem;align-items:center;margin-top:.6rem">
+      ${d.photo?`<img src="${d.photo}" style="width:64px;height:64px;object-fit:cover;border-radius:.5rem;border:1px solid var(--bord)">`:''}
+      <div><h3 style="color:var(--accent);margin:0">${esc(d.nom)}</h3>
+      <span class="muted">${d.age?d.age+' '+t('u.ans')+' · ':''}${esc(d.pays||'')} — ${LANG==='nl'?'AFGESLOTEN dossier (alleen-lezen)':'Dossier CLÔTURÉ (lecture seule)'}</span></div>
+    </div>
+    ${d.notes?`<p style="margin:.8rem 0;padding:.7rem;background:var(--gris-clair);border-radius:.4rem;white-space:pre-wrap">${esc(d.notes)}</p>`:''}
+    ${d.fiche?`<table>${ficheRows(d.fiche)}</table>${ficheBlocks(d.fiche)}`:''}
+    <h4 style="color:var(--accent);margin:.8rem 0 .3rem">📋 ${LANG==='nl'?'Verslagen':'Rapports'}</h4>
+    <ul class="clean">${(d.rapports||[]).map(r=>{const rt=rtFind(r.id);return rt?`<li>${r.fait?'☑':'☐'} ${esc(tr(rt.label))} — ${esc(r.echeance||'')}</li>`:''}).join('')}</ul>
+    ${(d.banque&&d.banque.operations||[]).length?`<h4 style="color:var(--accent);margin:.8rem 0 .3rem">🏦 ${LANG==='nl'?'Saldo bij afsluiting':'Solde à la clôture'}</h4><p>${soldeOf(d).toFixed(2)} €</p>`:''}
+    <h4 style="color:var(--accent);margin:.8rem 0 .3rem">✅ Checklist</h4>
+    <ul class="clean">${(d.checklist||[]).map(c=>`<li>${c.done?'☑':'☐'} ${esc(ckLabel(c.t))}</li>`).join('')}</ul>`;
+}
+async function restoreArch(i){
+  if(!confirm(LANG==='nl'?'Dossier terugzetten naar de actieve lijst?':'Restaurer ce dossier dans la liste active ?'))return;
+  const d=ARCHIVES.splice(i,1)[0];d.statut='cours';delete d.archiveLe;
+  const arr=loadDossiers();arr.push(d);DOSSIERS=arr;
+  await persist();await persistArch();
+  closeModal('archModal');renderDossiers();renderDashboard();updateArchBtn();
+}
+async function delArch(i){
+  if(!confirm(LANG==='nl'?'Dit gearchiveerde dossier DEFINITIEF verwijderen?':'Supprimer DÉFINITIVEMENT ce dossier archivé ?'))return;
+  ARCHIVES.splice(i,1);await persistArch();openArchives();updateArchBtn();
 }
 
 /* ============ UTIL ============ */

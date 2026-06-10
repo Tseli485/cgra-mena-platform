@@ -187,6 +187,17 @@
   mark.nt{background:#F2DFAE;color:#5C4308;border-radius:.2rem;padding:0 .15rem}
   [data-theme="dark"] mark.nt{background:#8A6420;color:#FBEFD2}
   .gsearch-res .list-item{cursor:pointer}
+  /* Document officiel structuré (texte intégral DVZ & co) */
+  .doc-pro{background:var(--surface);border:1px solid var(--bord);border-radius:.55rem;padding:.4rem 0;font-size:.88rem}
+  .doc-pro .doc-h{font-family:var(--serif);font-weight:700;color:var(--accent);background:var(--surface3);border-top:1px solid var(--bord);border-bottom:1px solid var(--bord);padding:.55rem 1rem;margin-top:.35rem;font-size:.95rem}
+  .doc-pro .doc-h:first-child{margin-top:0;border-top:none}
+  .doc-pro .doc-line{display:grid;grid-template-columns:minmax(150px,34%) 1fr;gap:.8rem;padding:.4rem 1rem;border-bottom:1px dashed var(--bord)}
+  .doc-pro .doc-line:last-child{border-bottom:none}
+  .doc-pro .doc-k{font-size:.74rem;letter-spacing:.05em;text-transform:uppercase;color:var(--gris);padding-top:.15rem}
+  .doc-pro .doc-v{font-weight:600;color:var(--text);overflow-wrap:anywhere}
+  .doc-pro .doc-p{padding:.5rem 1rem;border-bottom:1px dashed var(--bord);color:var(--text2);line-height:1.65}
+  .doc-pro .doc-note{padding:.5rem 1rem;font-size:.8rem;color:var(--gris);font-style:italic}
+  @media(max-width:560px){.doc-pro .doc-line{grid-template-columns:1fr;gap:.1rem}}
   footer{color:var(--gris);font-size:.75rem;text-align:center;padding:1.2rem 0 1.6rem;border-top:1px solid var(--bord);margin-top:1.5rem}
   footer a{color:var(--accent)}
   :focus-visible{outline:2px solid var(--bleu2);outline-offset:2px}
@@ -2097,7 +2108,7 @@ function printReleve(id){
 }
 
 /* ============ VERSION & MISES À JOUR ============ */
-const APP_VERSION='1.3.0';
+const APP_VERSION='1.3.1';
 window.APP_VERSION=APP_VERSION;   // expose pour tests.html (const non attache a window)
 Object.assign(I18N.fr,{"dash.matrix":"📊 Suivi par dossier","nav.guide":"🎓 Guide du tuteur","guide.title":"🎓 Guide du tuteur débutant — de la désignation aux 18 ans","guide.banner":"13 modules pas-à-pas : cours, actions à faire, documents à remettre (et à qui), rendez-vous, pièges à éviter. Contenu basé sur la réglementation en vigueur.","dash.q1":"📄 Nouveau MENA (fiche DVZ)","dash.q2":"📂 Mes dossiers","dash.q3":"⏰ Urgences & échéances","gs.ph":"🔍 Recherche globale (dossiers, lois, cas, ressources)…","ft.check":"🔄 Vérifier les mises à jour","ft.dl":"Télécharger l’application"});
 Object.assign(I18N.nl,{"dash.matrix":"📊 Opvolging per dossier","nav.guide":"🎓 Voogdengids","guide.title":"🎓 Gids voor de beginnende voogd — van aanstelling tot 18 jaar","guide.banner":"13 stap-voor-stapmodules: cursus, acties, documenten (en aan wie), afspraken, valkuilen. Inhoud gebaseerd op de geldende regelgeving.","dash.q1":"📄 Nieuwe NBMV (DVZ-fiche)","dash.q2":"📂 Mijn dossiers","dash.q3":"⏰ Urgenties & vervaldata","gs.ph":"🔍 Globaal zoeken (dossiers, wetten, gevallen, hulpbronnen)…","ft.check":"🔄 Updates controleren","ft.dl":"Applicatie downloaden"});
@@ -2484,7 +2495,7 @@ function ficheView(f){
       long('vulnerabiliteMH',NL?'Mensenhandel (aanwijzingen)':'Traite des êtres humains (indices)')+long('vulnerabilite',NL?'Andere kwetsbaarheid':'Autre vulnérabilité')+long('parquet','Parquet/Parket'))}
     ${S('🏠','Accueil, scolarité & contacts','Opvang, scholing & contacten',
       long('besoinAccueil',NL?'Opvang':'Accueil')+long('scolarite',NL?'Scholing':'Scolarité')+long('contactFamille',NL?'Contact met familie':'Contact familial')+long('objets',NL?'Persoonlijke voorwerpen':'Effets personnels'))}
-    ${f.texteIntegral?`<section><div class="eyebrow">📄 ${NL?'Volledige tekst van het document':'Texte intégral du document'}</div><details><summary class="muted" style="cursor:pointer">${NL?'Tonen / verbergen':'Afficher / masquer'}</summary><p style="white-space:pre-wrap;font-size:.86rem;margin-top:.4rem">${esc(tr(f.texteIntegral))}</p></details></section>`:''}
+    ${f.texteIntegral?`<section><div class="eyebrow">📄 ${NL?'Volledige tekst van het document':'Texte intégral du document'}</div><details open><summary class="muted" style="cursor:pointer">${NL?'Tonen / verbergen':'Afficher / masquer'}</summary><div style="margin-top:.5rem">${formatDocPro(tr(f.texteIntegral))}</div></details></section>`:''}
     ${(f.serviceFiche||f.dateFiche)?`<section><div class="eyebrow">🏛️ ${NL?'Herkomst van de fiche':'Origine de la fiche'}</div><dl class="dl-grid">${dd(['serviceFiche','dateFiche'])}</dl></section>`:''}
   </div>`;
 }
@@ -2588,6 +2599,88 @@ function notifCheck(){
       if(!r.fait&&r.date&&r.date>=today&&r.date<=soonRdv)msgs.push('📅 '+rdvLbl(r.titre)+' — '+d.nom+' ('+r.date+')');});
   });
   msgs.slice(0,4).forEach((m,i)=>setTimeout(()=>{try{new Notification('MENA Tuteur',{body:m,icon:'icon-192.png'});}catch(e){}},i*900));
+}
+
+
+/* ============ v1.3.1 : PRÉSENTATION PRO DU TEXTE INTÉGRAL D'UN DOCUMENT ============ */
+// Titres de section reconnus (FR traduits + NL d'origine) — le texte est structuré, jamais tronqué.
+const DOC_HEADS=[
+  "fiche mineur étranger non accompagné","fiche niet-begeleide minderjarige vreemdeling",
+  "mode d'emploi pour remplir la fiche","handleiding voor het invullen van de fiche",
+  "rubrique spécifique pour les (potentiels) passagers clandestins","specifieke rubriek voor de (potentiële) verstekelingen",
+  "données concernant la famille","gegevens betreffende de familie",
+  "description médicale","medische beschrijving",
+  "trajet","traject","interception","interceptie",
+  "vulnérabilité","kwetsbaarheid","divers","allerlei"
+];
+const DOC_FIELDS=[
+  "numéro du dossier de DE Office des Étrangers","numéro du dossier","n° OE","OV-nr",
+  "NUMMER de HET procès-verbal","numéro du procès-verbal","procès-verbal","proces-verbaal",
+  "nom et prénom","naam en voornaam","sexe","geslacht",
+  "lieu de naissance et –DATUM","lieu de naissance et -datum","lieu et date de naissance","geboorteplaats en –datum","geboorteplaats en -datum",
+  "EU","nationalité","nationaliteit","doute","twijfel",
+  "le jeune a-t-il déjà été signalé","werd de jongere reeds eerder gesignaleerd",
+  "langue maternelle","moedertaal","langue parlée","langues parlées","gesproken taal",
+  "adresse et Belgique","adresse en Belgique","adres in belgië",
+  "adresse dans le pays d'origine ou un autre pays","adresse dans le pays d'origine","adres in land van herkomst of een ander land",
+  "autres identités utilisées (alias)","autres identités utilisées","andere gebruikte identiteiten",
+  "De les empreintes digitales ou autres données biométriques ont été prises","empreintes digitales","vingerafdrukken",
+  "identification du service qui remplit la fiche (cachet)","identification du service qui remplit la fiche","identificatie van de dienst",
+  "intervention du parquet","tussenkomst parket","mesures prises","genomen maatregelen",
+  "numéro de téléphone de magistrat responsable","telefoonnummer van de verantwoordelijke magistraat",
+  "Contactperso(o)n(et)","contactpersonen","personne de contact",
+  "identité établie sur la base de","identiteit vastgesteld op basis van",
+  "déclaration","verklaring","documents","documenten",
+  "père","vader","mère","moeder","frères et sœurs","broers en zussen",
+  "membres de la famille et Europe","famille en Europe","familieleden in europa",
+  "grossesse","zwangerschap","handicap","blessures","wonden","maladies (contagieuses)","maladies","ziekten",
+  "soins nécessaires","zorg nodig","confus","verward",
+  "départ du pays d'origine","vertrek land van herkomst","arrivée en Belgique","aankomst belgië","route",
+  "organisation du voyage","organisatie van de reis","pourquoi la Belgique","waarom belgië",
+  "motif de l'immigration","motief voor de immigratie","Om welke reden(en) is de jongere en Belgique",
+  "indices de traite des êtres humains","aanwijzingen van mensenhandel",
+  "autres éléments de vulnérabilité","andere kwetsbaarheidselementen",
+  "besoin d'accueil","behoefte aan opvang","effets personnels","persoonlijke voorwerpen",
+  "scolarité","scholing","contact avec la famille","contact met familie",
+  "situé dans le port de","duur du séjour","Vermoedelijke duur","à bord de","aan boord van",
+  "et cas de problème technique","in geval van technisch probleem",
+  "Service des Tutelles","Office des Étrangers","dienst voogdij","dienst vreemdelingenzaken"
+];
+function formatDocPro(text){
+  if(!text)return '';
+  let t=String(text).replace(/\s+/g,' ').trim();
+  // 1) marquer les sections puis les champs (du plus long au plus court)
+  const mark=(list,tag)=>{
+    list.slice().sort((a,b)=>b.length-a.length).forEach(lbl=>{
+      const re=new RegExp('(^|[\\s.;•·])('+lbl.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')\\s*:?\\s*','giu');
+      t=t.replace(re,(m,p1,p2)=>p1+'\u0001'+tag+'\u0002'+p2+'\u0003');
+    });
+  };
+  mark(DOC_HEADS,'H');mark(DOC_FIELDS,'F');
+  // 2) découper et rendre
+  const parts=t.split('\u0001').filter(x=>x.trim());
+  let html='',pendingK=null;
+  const clean=x=>String(x||'').replace(/[HF]/g,'').replace(/[]/g,' ');
+  const flush=v=>{
+    v=clean(v).trim().replace(/^[:.\s]+/,'');
+    if(pendingK!==null){
+      if(v.length>260)html+=`<div class="doc-line"><span class="doc-k">${esc(pendingK)}</span><span class="doc-v" style="font-weight:400">${esc(v)}</span></div>`;
+      else html+=`<div class="doc-line"><span class="doc-k">${esc(pendingK)}</span><span class="doc-v">${esc(v||'—')}</span></div>`;
+      pendingK=null;
+    } else if(v) html+=`<div class="doc-p">${esc(v)}</div>`;
+  };
+  parts.forEach(seg=>{
+    const m=seg.match(/^([HF])\u0002([^\u0003]*)\u0003([\s\S]*)$/);
+    if(!m){flush(seg);return;}
+    const [,tag,label,rest]=m;
+    if(tag==='H'){flush('');html+=`<div class="doc-h">📌 ${esc(clean(label).toUpperCase())}</div>`;flush(rest);}
+    else{flush('');pendingK=clean(label);flush(rest);}
+  });
+  flush('');
+  const note=LANG==='nl'
+    ?'Automatisch gestructureerde weergave van de volledige tekst — niets werd weggelaten. Vertaling per woordenboek: controleer de vrije tekst.'
+    :'Mise en forme automatique du texte intégral — rien n\'a été retiré. Traduction par dictionnaire : vérifiez le texte libre.';
+  return `<div class="doc-pro">${html}<div class="doc-note">ℹ️ ${note}</div></div>`;
 }
 
 /* ============ UTIL ============ */

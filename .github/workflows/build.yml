@@ -32,6 +32,8 @@ jobs:
           python-version: '3.12'
       - name: Install build tools
         run: python -m pip install --upgrade pip pyinstaller pillow
+      - name: Exclure les modeles IA de l'executable (charges depuis le site, mis en cache)
+        run: python -c "import shutil; shutil.rmtree('pwa/models', ignore_errors=True)"
       - name: Build executable
         run: pyinstaller --onefile --name MENA-Tuteur ${{ matrix.iconarg }} --add-data "pwa${{ matrix.sep }}pwa" --console server.py
       - name: Package macOS .app bundle

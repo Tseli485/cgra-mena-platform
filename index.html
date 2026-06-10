@@ -811,7 +811,20 @@ async function doExport(){
   if(pw.length<6){note.textContent=LANG==='nl'?'Wachtwoord: min. 6 tekens.':'Mot de passe : 6 caractères minimum.';return;}
   const salt=crypto.getRandomValues(new Uint8Array(16));
   const key=await deriveKey(pw,salt);
-  const payload=JSON.stringify({v:1,exportedAt:new Date().toISOString(),dossiers:DOSSIERS,customRes:loadCustomRes()});
+  // v2 : inclut les archives et les pièces jointes (rechiffrées avec le mot de passe d'export)
+  await loadArchEnsure();
+  const pjAll=[];
+  try{
+    const db=await idbOpen();
+    await new Promise(res=>{const cur=db.transaction('pj').objectStore('pj').openCursor();
+      cur.onsuccess=async e2=>{const c=e2.target.result;
+        if(!c){res();return;}
+        try{const buf=await aesDecryptBytes(CRYPTO_KEY,c.value.iv,c.value.ct);
+          pjAll.push({dossier:c.value.dossier,name:c.value.name,type:c.value.type,size:c.value.size,date:c.value.date,b64:bufToB64(buf)});}catch(e3){}
+        c.continue();};
+      cur.onerror=()=>res();});
+  }catch(e){}
+  const payload=JSON.stringify({v:2,exportedAt:new Date().toISOString(),dossiers:DOSSIERS,archives:ARCHIVES||[],pj:pjAll,customRes:loadCustomRes()});
   const enc2=await aesEncrypt(key,payload);
   const file={format:'mena-backup',v:1,salt:b64(salt),iv:enc2.iv,ct:enc2.ct};
   const blob=new Blob([JSON.stringify(file)],{type:'application/json'});
@@ -834,6 +847,20 @@ async function doImport(){
     const data=JSON.parse(pt);
     const map={};DOSSIERS.forEach(d=>map[d.id]=d);(data.dossiers||[]).forEach(d=>map[d.id]=d);
     DOSSIERS=Object.values(map);await persist();
+    // v2 : archives + pièces jointes
+    if(data.archives&&data.archives.length){
+      await loadArchEnsure();
+      const am={};ARCHIVES.forEach(d=>am[d.id]=d);data.archives.forEach(d=>am[d.id]=d);
+      ARCHIVES=Object.values(am);await persistArch();updateArchBtn();
+    }
+    if(data.pj&&data.pj.length){
+      const db=await idbOpen();
+      for(const x of data.pj){
+        const buf=b64ToBuf(x.b64);
+        const {iv,ct}=await aesEncryptBytes(CRYPTO_KEY,buf);
+        db.transaction('pj','readwrite').objectStore('pj').put({id:'P'+Date.now()+Math.floor(Math.random()*99999),dossier:x.dossier,name:x.name,type:x.type,size:x.size,date:x.date,iv,ct});
+      }
+    }
     const rmap={};loadCustomRes().forEach(r=>rmap[r.name]=r);(data.customRes||[]).forEach(r=>rmap[r.name]=r);saveCustomRes(Object.values(rmap));
     RESOURCES=null;
     note.textContent=(LANG==='nl'?'✅ Geïmporteerd : ':'✅ Importé : ')+(data.dossiers||[]).length+(LANG==='nl'?' dossiers.':' dossiers.');
@@ -1813,7 +1840,11 @@ function openTrad(prefill,dossierId){
     <select id="trDir" style="width:auto"><option value="nlfr">NL → FR</option><option value="frnl">FR → NL</option></select>
     <label style="margin-top:.4rem">${LANG==='nl'?'Brontekst':'Texte source'}</label>
     <textarea id="trIn" rows="6">${prefill?esc(prefill):''}</textarea>
-    <button class="btn sm" style="margin:.5rem 0" onclick="doTrad()">➡️ ${LANG==='nl'?'Vertalen':'Traduire'}</button>
+    <div class="row" style="margin:.5rem 0">
+      <button class="btn sm" onclick="doTrad()">➡️ ${LANG==='nl'?'Vertalen (woordenboek, direct)':'Traduire (dictionnaire, instantané)'}</button>
+      <button class="btn sec sm" onclick="doTradIA()" title="${LANG==='nl'?'Neuronale vertaling NL→FR, 100% op dit toestel (eenmalige download ±47 MB)':'Traduction neuronale NL→FR, 100% sur cet appareil (téléchargement unique ±47 Mo)'}">🧠 ${LANG==='nl'?'AI-vertaling (lokaal)':'Traduction IA (locale)'}</button>
+    </div>
+    <div class="muted" id="trNote" style="font-size:.8rem;min-height:1.1em"></div>
     <label>${LANG==='nl'?'Vertaling (bewerkbaar)':'Traduction (modifiable)'}</label>
     <textarea id="trOut" rows="6"></textarea>
     <div id="trPrev" class="muted" style="font-size:.85rem;white-space:pre-wrap;border:1px dashed var(--bord);border-radius:.4rem;padding:.5rem;margin-top:.4rem;display:none"></div>
@@ -2108,7 +2139,7 @@ function printReleve(id){
 }
 
 /* ============ VERSION & MISES À JOUR ============ */
-const APP_VERSION='1.3.1';
+const APP_VERSION='1.4.0';
 window.APP_VERSION=APP_VERSION;   // expose pour tests.html (const non attache a window)
 Object.assign(I18N.fr,{"dash.matrix":"📊 Suivi par dossier","nav.guide":"🎓 Guide du tuteur","guide.title":"🎓 Guide du tuteur débutant — de la désignation aux 18 ans","guide.banner":"13 modules pas-à-pas : cours, actions à faire, documents à remettre (et à qui), rendez-vous, pièges à éviter. Contenu basé sur la réglementation en vigueur.","dash.q1":"📄 Nouveau MENA (fiche DVZ)","dash.q2":"📂 Mes dossiers","dash.q3":"⏰ Urgences & échéances","gs.ph":"🔍 Recherche globale (dossiers, lois, cas, ressources)…","ft.check":"🔄 Vérifier les mises à jour","ft.dl":"Télécharger l’application"});
 Object.assign(I18N.nl,{"dash.matrix":"📊 Opvolging per dossier","nav.guide":"🎓 Voogdengids","guide.title":"🎓 Gids voor de beginnende voogd — van aanstelling tot 18 jaar","guide.banner":"13 stap-voor-stapmodules: cursus, acties, documenten (en aan wie), afspraken, valkuilen. Inhoud gebaseerd op de geldende regelgeving.","dash.q1":"📄 Nieuwe NBMV (DVZ-fiche)","dash.q2":"📂 Mijn dossiers","dash.q3":"⏰ Urgenties & vervaldata","gs.ph":"🔍 Globaal zoeken (dossiers, wetten, gevallen, hulpbronnen)…","ft.check":"🔄 Updates controleren","ft.dl":"Applicatie downloaden"});
@@ -2158,7 +2189,7 @@ async function globalSearch(q){
   if(!RESOURCES){let raw=await loadJSON('data/resources.json');RESOURCES=raw&&raw.resources?raw.resources:(Array.isArray(raw)?raw:[]);}
   const resArr=Array.isArray(RESOURCES)?RESOURCES:[];
   const out=[];
-  DOSSIERS.forEach(d=>{if((d.nom+' '+(d.pays||'')).toLowerCase().includes(q))out.push({ico:'📂',lbl:d.nom,sub:LANG==='nl'?'Dossier':'Dossier',act:`openDossierDetail('${d.id}')`});});
+  DOSSIERS.forEach(d=>{if((d.nom+' '+(d.pays||'')+' '+(d.notes||'')+' '+JSON.stringify(d.fiche||{})).toLowerCase().includes(q))out.push({ico:'📂',lbl:d.nom,sub:LANG==='nl'?'Dossier':'Dossier',act:`openDossierDetail('${d.id}')`});});
   LEGISLATION.forEach(c=>c.items.forEach(i=>{if((tr(i.titre)+' '+tr(i.detail||{fr:'',nl:''})).toLowerCase().includes(q))out.push({ico:'⚖️',lbl:tr(i.titre),sub:tr(c.cat),act:`go('legislation')`});}));
   ((CASES&&CASES.cases)||[]).forEach(c=>{if((tr(c.titre)+' '+tr(c.situation)).toLowerCase().includes(q))out.push({ico:'📚',lbl:tr(c.titre),sub:LANG==='nl'?'Praktijkgeval':'Cas pratique',act:`go('cases')`});});
   resArr.concat(loadCustomRes()).forEach(r=>{if((r.name+' '+(r.desc?tr(r.desc):'')).toLowerCase().includes(q))out.push({ico:'📁',lbl:r.name,sub:LANG==='nl'?'Hulpbron':'Ressource',act:`go('resources')`});});
@@ -2518,6 +2549,8 @@ function dotOf2(d,today){
 }
 
 /* ============ v1.3 : PIÈCES JOINTES CHIFFRÉES (IndexedDB + AES-GCM) ============ */
+function bufToB64(buf){let bin='';const u=new Uint8Array(buf);for(let i=0;i<u.length;i+=0x8000)bin+=String.fromCharCode.apply(null,u.subarray(i,i+0x8000));return btoa(bin);}
+function b64ToBuf(b){const bin=atob(b);const u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return u.buffer;}
 let IDB=null;
 function idbOpen(){return new Promise((res,rej)=>{
   if(IDB)return res(IDB);
@@ -2681,6 +2714,93 @@ function formatDocPro(text){
     ?'Automatisch gestructureerde weergave van de volledige tekst — niets werd weggelaten. Vertaling per woordenboek: controleer de vrije tekst.'
     :'Mise en forme automatique du texte intégral — rien n\'a été retiré. Traduction par dictionnaire : vérifiez le texte libre.';
   return `<div class="doc-pro">${html}<div class="doc-note">ℹ️ ${note}</div></div>`;
+}
+
+
+/* ============ v1.4 : TRADUCTION NEURONALE LOCALE (Bergamot / Firefox Translations) ============ */
+// NL→FR par pivot NL→EN→FR. Moteur WASM + modèles servis par l'app (ou le site
+// public pour l'exécutable) ; mis en cache après le 1er chargement ; AUCUNE
+// donnée envoyée à un serveur — la traduction s'exécute sur l'appareil.
+let BG_WORKER=null,BG_READY=false,BG_LOADING=false,BG_SEQ=0;
+const BG_FILES={
+  nlen:{model:'models/bergamot/nlen/model.nlen.intgemm.alphas.bin',lex:'models/bergamot/nlen/lex.50.50.nlen.s2t.bin',vocab:'models/bergamot/nlen/vocab.nlen.spm'},
+  enfr:{model:'models/bergamot/enfr/model.enfr.intgemm.alphas.bin',lex:'models/bergamot/enfr/lex.50.50.enfr.s2t.bin',vocab:'models/bergamot/enfr/vocab.enfr.spm'}
+};
+const BG_REMOTE='https://tseli485.github.io/cgra-mena-platform/';   // repli pour l'exécutable
+async function bgFetch(path,onProgress){
+  const cache=await caches.open('bergamot-v1');
+  for(const base of ['',BG_REMOTE]){
+    const url=base+path;
+    try{
+      let r=await cache.match(url);
+      if(!r){
+        r=await fetch(url);
+        if(!r.ok)throw 0;
+        await cache.put(url,r.clone());
+      }
+      onProgress&&onProgress(path);
+      return await r.arrayBuffer();
+    }catch(e){/* essayer la source suivante */}
+  }
+  throw new Error((LANG==='nl'?'Model onbereikbaar: ':'Modèle inaccessible : ')+path);
+}
+function bgEnsure(status){
+  return new Promise(async(resolve,reject)=>{
+    if(BG_READY)return resolve();
+    if(BG_LOADING)return reject(new Error('loading'));
+    BG_LOADING=true;
+    try{
+      status(LANG==='nl'?'⏳ AI-motor laden…':'⏳ Chargement du moteur IA…');
+      BG_WORKER=new Worker('js/bergamot-worker.js');
+      const engineReady=new Promise((res,rej)=>{
+        BG_WORKER.onmessage=e=>{if(e.data.op==='engine')res();if(e.data.op==='err')rej(new Error(e.data.msg));};
+        setTimeout(()=>rej(new Error('timeout moteur')),30000);
+      });
+      await engineReady;
+      let done=0;const total=6;
+      const prog=()=>{done++;status((LANG==='nl'?'⏳ Modellen laden ':'⏳ Téléchargement des modèles ')+done+'/'+total+' (≈47 Mo, une seule fois)');};
+      const [nm,nl_,nv,em,el,ev]=await Promise.all([
+        bgFetch(BG_FILES.nlen.model,prog),bgFetch(BG_FILES.nlen.lex,prog),bgFetch(BG_FILES.nlen.vocab,prog),
+        bgFetch(BG_FILES.enfr.model,prog),bgFetch(BG_FILES.enfr.lex,prog),bgFetch(BG_FILES.enfr.vocab,prog)
+      ]);
+      status(LANG==='nl'?'⏳ Modellen initialiseren…':'⏳ Initialisation des modèles…');
+      const ready=new Promise((res,rej)=>{
+        BG_WORKER.onmessage=e=>{if(e.data.op==='ready')res();if(e.data.op==='err')rej(new Error(e.data.msg));};
+        setTimeout(()=>rej(new Error('timeout init')),60000);
+      });
+      BG_WORKER.postMessage({op:'load',nlen:{model:nm,lex:nl_,vocab:nv},enfr:{model:em,lex:el,vocab:ev}},[nm,nl_,nv,em,el,ev]);
+      await ready;
+      BG_READY=true;BG_LOADING=false;
+      status('✅ '+(LANG==='nl'?'AI klaar (100 % lokaal)':'IA prête (100 % locale)'));
+      resolve();
+    }catch(e){BG_LOADING=false;status('⚠️ '+e.message);reject(e);}
+  });
+}
+function bgTranslate(text){
+  return new Promise((resolve,reject)=>{
+    const id=++BG_SEQ;
+    const h=e=>{
+      if(e.data.id!==id)return;
+      BG_WORKER.removeEventListener('message',h);
+      if(e.data.op==='res')resolve(e.data.text);else reject(new Error(e.data.msg));
+    };
+    BG_WORKER.addEventListener('message',h);
+    BG_WORKER.postMessage({op:'tr',id,text});
+    setTimeout(()=>{BG_WORKER.removeEventListener('message',h);reject(new Error('timeout'));},120000);
+  });
+}
+async function doTradIA(){
+  const st=m=>{document.getElementById('trNote').textContent=m;};
+  try{
+    await bgEnsure(st);
+    st(LANG==='nl'?'🧠 Vertalen…':'🧠 Traduction…');
+    const out=await bgTranslate(document.getElementById('trIn').value);
+    document.getElementById('trOut').value=out;
+    const prev=document.getElementById('trPrev');
+    prev.innerHTML='<strong>'+(LANG==='nl'?'AI-vertaling (neuronaal, lokaal) :':'Traduction IA (neuronale, locale) :')+'</strong>\n'+esc(out);
+    prev.style.display='block';
+    st('✅ '+(LANG==='nl'?'Klaar — neuronale vertaling, kwaliteit superieur aan het woordenboek.':'Terminé — traduction neuronale, qualité supérieure au dictionnaire.'));
+  }catch(e){if(e.message!=='loading')st('⚠️ '+e.message);}
 }
 
 /* ============ UTIL ============ */

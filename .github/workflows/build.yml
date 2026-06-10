@@ -41,8 +41,17 @@ jobs:
           mkdir -p "$APP/Contents/MacOS"
           cp dist/MENA-Tuteur "$APP/Contents/MacOS/MENA-Tuteur"
           chmod +x "$APP/Contents/MacOS/MENA-Tuteur"
-          printf '%s
-' '<?xml version="1.0" encoding="UTF-8"?>' '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">' '<plist version="1.0"><dict>' '<key>CFBundleName</key><string>MENA Tuteur</string>' '<key>CFBundleExecutable</key><string>MENA-Tuteur</string>' '<key>CFBundleIdentifier</key><string>be.mena.tuteur</string>' '<key>CFBundleVersion</key><string>1.0</string>' '<key>CFBundlePackageType</key><string>APPL</string>' '</dict></plist>' > "$APP/Contents/Info.plist"
+          {
+            echo '<?xml version="1.0" encoding="UTF-8"?>'
+            echo '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">'
+            echo '<plist version="1.0"><dict>'
+            echo '<key>CFBundleName</key><string>MENA Tuteur</string>'
+            echo '<key>CFBundleExecutable</key><string>MENA-Tuteur</string>'
+            echo '<key>CFBundleIdentifier</key><string>be.mena.tuteur</string>'
+            echo '<key>CFBundleVersion</key><string>1.0</string>'
+            echo '<key>CFBundlePackageType</key><string>APPL</string>'
+            echo '</dict></plist>'
+          } > "$APP/Contents/Info.plist"
           cd dist && zip -ry MENA-Tuteur-macOS.app.zip "MENA Tuteur.app" && rm -rf "MENA Tuteur.app"
       - name: Upload artifact
         uses: actions/upload-artifact@v4

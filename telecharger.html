@@ -1,0 +1,41 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Télécharger — Plateforme MENA Tuteur</title>
+<style>
+:root{--bleu:#19497F;--fonce:#123A68;--or:#B07E2B;--ink:#16243A;--bg:#F4F6F9;--bord:#D9DEE7}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+header{background:linear-gradient(150deg,var(--fonce),#1D5694);border-bottom:3px solid var(--or);color:#fff;padding:2.2rem 2rem;text-align:center}
+header h1{font-family:Georgia,serif;font-size:1.7rem}
+header p{opacity:.85;margin-top:.3rem}
+main{max-width:880px;margin:0 auto;padding:2rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin:1.4rem 0}
+.card{background:#fff;border:1px solid var(--bord);border-top:3px solid var(--or);border-radius:.7rem;padding:1.4rem;text-align:center}
+.card h2{font-family:Georgia,serif;font-size:1.15rem;margin-bottom:.4rem}
+.card p{font-size:.85rem;color:#5F6B7A;min-height:3.2em}
+.btn{display:inline-block;background:var(--bleu);color:#fff;text-decoration:none;padding:.65rem 1.3rem;border-radius:.45rem;font-weight:600;margin-top:.6rem}
+.btn:hover{background:var(--fonce)}
+.note{background:#E3ECF7;border-left:4px solid var(--or);padding:1rem 1.2rem;border-radius:.45rem;font-size:.9rem;margin:1.2rem 0}
+footer{text-align:center;color:#5F6B7A;font-size:.78rem;padding:1.5rem}
+a{color:var(--bleu)}
+code{background:#EEF1F5;padding:.1rem .4rem;border-radius:.3rem;font-size:.85em}
+</style></head><body>
+<header>
+  <h1>🛡️ Plateforme MENA Tuteur</h1>
+  <p>Application de bureau — aucune installation, double-clic et c'est parti · Bureaubladapplicatie — geen installatie nodig</p>
+</header>
+<main>
+  <div class="note">🌐 <strong>Le plus simple :</strong> utilisez directement la version web — <a href="index.html">ouvrir l'application</a>. Les téléchargements ci-dessous servent à travailler sans navigateur configuré ou à transmettre l'app à un collègue.</div>
+  <div class="grid">
+    <div class="card"><h2>🪟 Windows</h2><p>Double-cliquez sur le fichier. Si SmartScreen s'affiche : « Informations complémentaires » → « Exécuter quand même ».</p>
+      <a class="btn" href="https://github.com/Tseli485/cgra-mena-platform/releases/latest/download/MENA-Tuteur-Windows.exe">Télécharger .exe</a></div>
+    <div class="card"><h2>🍎 macOS</h2><p>Dézippez puis clic droit → Ouvrir (1<sup>re</sup> fois uniquement, app non signée).</p>
+      <a class="btn" href="https://github.com/Tseli485/cgra-mena-platform/releases/latest/download/MENA-Tuteur-macOS.app.zip">Télécharger .app.zip</a></div>
+    <div class="card"><h2>🐧 Linux</h2><p><code>chmod +x MENA-Tuteur-Linux</code> puis exécutez. Python non requis.</p>
+      <a class="btn" href="https://github.com/Tseli485/cgra-mena-platform/releases/latest/download/MENA-Tuteur-Linux">Télécharger</a></div>
+  </div>
+  <div class="note">🔒 <strong>Vérifier l'intégrité :</strong> comparez le SHA-256 de votre fichier avec <a href="https://github.com/Tseli485/cgra-mena-platform/releases/latest/download/SHA256SUMS.txt">SHA256SUMS.txt</a> (PowerShell : <code>Get-FileHash MENA-Tuteur-Windows.exe</code>).<br>
+  📱 <strong>Sur mobile/tablette :</strong> ouvrez la <a href="index.html">version web</a> puis menu du navigateur → « Installer l'application ».</div>
+  <p style="text-align:center"><a href="https://github.com/Tseli485/cgra-mena-platform/releases/latest">Toutes les versions & notes de mise à jour →</a></p>
+</main>
+<footer>Plateforme MENA Tuteur — données chiffrées (AES-256), 100 % hors ligne, aucune donnée de mineur transmise. <a href="index.html">← Retour à l'application</a></footer>
+</body></html>

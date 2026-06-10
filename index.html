@@ -7,152 +7,189 @@
 <meta name="theme-color" content="#1e40af">
 <link rel="manifest" href="manifest.json">
 <style>
+  /* ===== Design system v1.3 — « dossier officiel » : bleu administration + or de cachet,
+     titres serif (registre légal), intercalaires colorés. Tous les noms de variables
+     et de classes existants sont conservés. ===== */
   :root{
-    --bleu:#1e40af; --bleu2:#2563eb; --bleu-clair:#dbeafe; --bleu-fonce:#1e3a8a;
-    --vert:#059669; --orange:#d97706; --rouge:#dc2626;
-    --gris:#6b7280; --gris-clair:#f3f4f6; --bord:#e5e7eb;
-    --bg:#f9fafb; --surface:#fff; --surface2:#fafafa; --surface3:#f9fafb;
-    --text:#1f2937; --text2:#374151;
-    --banner-bg:#dbeafe; --banner-text:#1e3a8a;
-    --accent:var(--bleu); --accent-strong:#1e3a8a;
-    --warn-bg:#fffbeb; --crit-bg:#fef2f2;
-    --b-nouveau-bg:#dbeafe; --b-nouveau-tx:#1e40af;
-    --b-cours-bg:#fef3c7; --b-cours-tx:#92400e;
-    --b-urgent-bg:#fee2e2; --b-urgent-tx:#991b1b;
-    --b-clos-bg:#d1fae5; --b-clos-tx:#065f46;
-    --ok-bg:#ecfdf5;
-    --shadow:0 1px 3px rgba(0,0,0,.05); --shadow-lg:0 20px 40px rgba(0,0,0,.2);
+    --bleu:#19497F; --bleu2:#2E6FD0; --bleu-clair:#E3ECF7; --bleu-fonce:#123A68;
+    --or:#B07E2B; --or-clair:#F3E9D7;
+    --vert:#1E7F5C; --orange:#C07212; --rouge:#B3362B;
+    --gris:#5F6B7A; --gris-clair:#EEF1F5; --bord:#D9DEE7;
+    --bg:#F4F6F9; --surface:#FFFFFF; --surface2:#F9FAFC; --surface3:#F4F6F9;
+    --text:#16243A; --text2:#33415C;
+    --banner-bg:#E3ECF7; --banner-text:#123A68;
+    --accent:var(--bleu); --accent-strong:#123A68;
+    --warn-bg:#FBF3E4; --crit-bg:#FAE9E7;
+    --b-nouveau-bg:#E3ECF7; --b-nouveau-tx:#19497F;
+    --b-cours-bg:#F3E9D7; --b-cours-tx:#7A5512;
+    --b-urgent-bg:#FAE9E7; --b-urgent-tx:#8C2A21;
+    --b-clos-bg:#E2F2EB; --b-clos-tx:#155C43;
+    --ok-bg:#EDF7F2;
+    --shadow:0 1px 2px rgba(22,36,58,.07),0 1px 6px rgba(22,36,58,.05);
+    --shadow-lg:0 24px 48px rgba(18,58,104,.25);
+    --serif:Georgia,'Times New Roman',serif;
   }
   [data-theme="dark"]{
-    --bleu:#3b82f6; --bleu2:#60a5fa; --bleu-clair:#1e3a5f; --bleu-fonce:#1d4ed8;
-    --vert:#34d399; --orange:#fbbf24; --rouge:#f87171;
-    --gris:#94a3b8; --gris-clair:#273449; --bord:#334155;
-    --bg:#0b1220; --surface:#1e293b; --surface2:#273449; --surface3:#172033;
-    --text:#e8edf4; --text2:#cbd5e1;
-    --banner-bg:#172a46; --banner-text:#bfdbfe;
-    --accent:#60a5fa; --accent-strong:#93c5fd;
-    --warn-bg:#3a2f12; --crit-bg:#3a1d1d;
-    --b-nouveau-bg:#1e3a5f; --b-nouveau-tx:#bfdbfe;
-    --b-cours-bg:#3a2f12; --b-cours-tx:#fcd34d;
-    --b-urgent-bg:#3a1d1d; --b-urgent-tx:#fca5a5;
-    --b-clos-bg:#0f3d2e; --b-clos-tx:#6ee7b7;
-    --ok-bg:#0f3d2e;
-    --shadow:0 1px 3px rgba(0,0,0,.4); --shadow-lg:0 20px 40px rgba(0,0,0,.6);
+    --bleu:#7FB0F0; --bleu2:#9CC2F5; --bleu-clair:#1C3252; --bleu-fonce:#5E96DD;
+    --or:#D8A04C; --or-clair:#3A2F1A;
+    --vert:#46C292; --orange:#E3A24C; --rouge:#EF7B6E;
+    --gris:#9AA8BC; --gris-clair:#222F44; --bord:#33415C;
+    --bg:#0D1524; --surface:#172238; --surface2:#1D2A44; --surface3:#13203A;
+    --text:#E9EEF6; --text2:#C7D2E4;
+    --banner-bg:#1C3252; --banner-text:#C7DBF7;
+    --accent:#9CC2F5; --accent-strong:#C7DBF7;
+    --warn-bg:#332812; --crit-bg:#3A1E1A;
+    --b-nouveau-bg:#1C3252; --b-nouveau-tx:#C7DBF7;
+    --b-cours-bg:#3A2F1A; --b-cours-tx:#EFCB8C;
+    --b-urgent-bg:#3A1E1A; --b-urgent-tx:#F6B3AA;
+    --b-clos-bg:#143828; --b-clos-tx:#8CE0BC;
+    --ok-bg:#143828;
+    --shadow:0 1px 3px rgba(0,0,0,.45);
+    --shadow-lg:0 24px 48px rgba(0,0,0,.65);
   }
   *{margin:0;padding:0;box-sizing:border-box}
-  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.55;transition:background .25s,color .25s}
-  .header{background:linear-gradient(135deg,var(--bleu2),var(--bleu));color:#fff;padding:1.4rem 2rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
-  .header h1{font-size:1.5rem}
-  .header .sub{opacity:.9;font-size:.9rem}
-  .header .status{margin-left:auto;font-size:.8rem;background:rgba(255,255,255,.15);padding:.4rem .8rem;border-radius:1rem}
-  nav{background:var(--surface);border-bottom:2px solid var(--bleu);position:sticky;top:0;z-index:50;overflow-x:auto}
-  nav ul{display:flex;list-style:none;max-width:1200px;margin:0 auto}
-  nav li{flex:1;min-width:120px}
-  nav a{display:block;padding:1rem .8rem;text-align:center;color:var(--text2);text-decoration:none;font-weight:500;cursor:pointer;font-size:.9rem;border-bottom:3px solid transparent;transition:.2s;white-space:nowrap}
-  nav a:hover{background:var(--gris-clair);color:var(--bleu)}
-  nav a.active{background:var(--bleu);color:#fff;border-bottom-color:var(--bleu-fonce)}
-  main{max-width:1200px;margin:0 auto;padding:1.5rem 2rem}
+  html{scroll-behavior:smooth}
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;transition:background .25s,color .25s}
+  /* En-tête : bandeau bleu profond + filet or (cachet) */
+  .header{background:linear-gradient(150deg,var(--bleu-fonce) 0%,#19497F 70%,#1D5694 100%);border-bottom:3px solid var(--or);color:#fff;padding:1.2rem 2rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+  [data-theme="dark"] .header{background:linear-gradient(150deg,#0F1B30,#16294A)}
+  .header h1{font-family:var(--serif);font-size:1.45rem;font-weight:700;letter-spacing:.01em}
+  .header .sub{opacity:.85;font-size:.85rem;letter-spacing:.02em}
+  .header .status{font-size:.78rem;background:rgba(255,255,255,.14);padding:.35rem .8rem;border-radius:1rem}
+  /* Navigation : onglets soulignés, sobres */
+  nav{background:var(--surface);border-bottom:1px solid var(--bord);position:sticky;top:0;z-index:50;overflow-x:auto;box-shadow:var(--shadow)}
+  nav ul{display:flex;list-style:none;max-width:1240px;margin:0 auto}
+  nav li{flex:1;min-width:118px}
+  nav a{display:block;padding:.95rem .7rem;text-align:center;color:var(--text2);text-decoration:none;font-weight:600;cursor:pointer;font-size:.86rem;border-bottom:3px solid transparent;transition:color .15s,border-color .15s;white-space:nowrap}
+  nav a:hover{color:var(--accent);background:var(--surface2)}
+  nav a.active{color:var(--accent);border-bottom-color:var(--or)}
+  main{max-width:1240px;margin:0 auto;padding:1.6rem 2rem 2.5rem}
   .view{display:none;animation:fade .25s}
   .view.active{display:block}
   @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-  h2.title{color:var(--accent);font-size:1.6rem;border-bottom:3px solid var(--bleu);padding-bottom:.5rem;margin-bottom:1.2rem}
-  .banner{background:var(--banner-bg);border-left:5px solid var(--bleu);padding:1rem 1.2rem;border-radius:.4rem;margin-bottom:1.4rem;color:var(--banner-text)}
+  /* Titres de vue : serif + rubrique or */
+  h2.title{font-family:var(--serif);color:var(--text);font-size:1.7rem;font-weight:700;padding-bottom:.45rem;margin-bottom:1.2rem;border-bottom:1px solid var(--bord);position:relative}
+  h2.title:after{content:"";position:absolute;left:0;bottom:-1px;width:72px;height:3px;background:var(--or)}
+  .banner{background:var(--banner-bg);border-left:4px solid var(--or);padding:.95rem 1.2rem;border-radius:.45rem;margin-bottom:1.4rem;color:var(--banner-text);font-size:.92rem}
   .grid{display:grid;gap:1rem}
-  .grid.cols-3{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+  .grid.cols-3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
   .grid.cols-2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
-  .card{background:var(--surface);border:1px solid var(--bord);border-radius:.6rem;padding:1.2rem;box-shadow:var(--shadow)}
-  .card h3{color:var(--accent);margin-bottom:.6rem;font-size:1.1rem}
-  .stat{background:var(--surface);border:1px solid var(--bord);border-left:5px solid var(--bleu);border-radius:.6rem;padding:1.2rem}
-  .stat .num{font-size:2.2rem;font-weight:700;color:var(--accent)}
-  .stat .lbl{color:var(--gris);font-size:.9rem}
-  .btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--bleu);color:#fff;border:none;padding:.6rem 1.1rem;border-radius:.4rem;font-size:.9rem;font-weight:600;cursor:pointer;text-decoration:none;transition:.2s}
-  .btn:hover{background:var(--bleu2)}
+  .card{background:var(--surface);border:1px solid var(--bord);border-radius:.7rem;padding:1.25rem 1.35rem;box-shadow:var(--shadow)}
+  .card h3{font-family:var(--serif);color:var(--text);margin-bottom:.6rem;font-size:1.12rem}
+  .stat{background:var(--surface);border:1px solid var(--bord);border-top:3px solid var(--or);border-radius:.7rem;padding:1.05rem 1.2rem;box-shadow:var(--shadow)}
+  .stat .num{font-family:var(--serif);font-size:2.1rem;font-weight:700;color:var(--accent)}
+  .stat .lbl{color:var(--gris);font-size:.82rem;letter-spacing:.04em;text-transform:uppercase}
+  .btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--bleu);color:#fff;border:none;padding:.6rem 1.1rem;border-radius:.45rem;font-size:.88rem;font-weight:600;cursor:pointer;text-decoration:none;transition:background .15s,transform .1s}
+  [data-theme="dark"] .btn{background:#2E6FD0}
+  .btn:hover{background:var(--bleu-fonce);transform:translateY(-1px)}
+  [data-theme="dark"] .btn:hover{background:#3D7EDE}
   .btn.sec{background:var(--surface);color:var(--accent);border:1px solid var(--bleu)}
-  .btn.danger{background:var(--rouge);color:#fff}
-  .btn.sm{padding:.35rem .7rem;font-size:.8rem}
+  .btn.sec:hover{background:var(--bleu-clair)}
+  .btn.danger{background:var(--rouge);color:#fff;border:none}
+  .btn.sm{padding:.35rem .7rem;font-size:.78rem}
   .row{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center}
-  .badge{display:inline-block;padding:.2rem .6rem;border-radius:1rem;font-size:.75rem;font-weight:600}
+  .badge{display:inline-block;padding:.18rem .6rem;border-radius:1rem;font-size:.72rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase}
   .b-nouveau{background:var(--b-nouveau-bg);color:var(--b-nouveau-tx)}.b-cours{background:var(--b-cours-bg);color:var(--b-cours-tx)}
   .b-urgent{background:var(--b-urgent-bg);color:var(--b-urgent-tx)}.b-clos{background:var(--b-clos-bg);color:var(--b-clos-tx)}
-  input,select,textarea{width:100%;padding:.6rem;border:1px solid var(--bord);border-radius:.4rem;font-size:.9rem;font-family:inherit;background:var(--surface);color:var(--text)}
+  input,select,textarea{width:100%;padding:.6rem .7rem;border:1px solid var(--bord);border-radius:.45rem;font-size:.9rem;font-family:inherit;background:var(--surface);color:var(--text)}
+  input:focus,select:focus,textarea:focus{outline:2px solid var(--bleu2);outline-offset:1px;border-color:var(--bleu2)}
   input::placeholder,textarea::placeholder{color:var(--gris)}
-  label{display:block;font-weight:600;font-size:.85rem;margin:.7rem 0 .25rem;color:var(--text2)}
-  .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:100;align-items:flex-start;justify-content:center;padding:2rem 1rem;overflow-y:auto}
+  label{display:block;font-weight:600;font-size:.82rem;margin:.7rem 0 .25rem;color:var(--text2)}
+  .modal{display:none;position:fixed;inset:0;background:rgba(13,21,36,.62);backdrop-filter:blur(2px);z-index:100;align-items:flex-start;justify-content:center;padding:2rem 1rem;overflow-y:auto}
   .modal.open{display:flex}
-  .modal-box{background:var(--surface);color:var(--text);border-radius:.8rem;max-width:640px;width:100%;padding:1.6rem;box-shadow:var(--shadow-lg)}
-  .modal-box h3{color:var(--accent);margin-bottom:1rem;font-size:1.3rem}
+  .modal-box{background:var(--surface);color:var(--text);border-radius:.85rem;border-top:4px solid var(--or);max-width:680px;width:100%;padding:1.6rem 1.7rem;box-shadow:var(--shadow-lg)}
+  .modal-box h3{font-family:var(--serif);color:var(--text);margin-bottom:1rem;font-size:1.3rem}
   .close{float:right;background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--gris)}
-  .list-item{padding:1rem;border:1px solid var(--bord);border-radius:.5rem;margin-bottom:.7rem;background:var(--surface);cursor:pointer;transition:.15s}
-  .list-item:hover{border-color:var(--bleu);box-shadow:0 2px 8px rgba(37,99,235,.18)}
-  .progress{height:9px;background:var(--gris-clair);border-radius:5px;overflow:hidden;margin-top:.5rem}
-  .progress span{display:block;height:100%;background:var(--vert);transition:width .3s}
+  .list-item{padding:.95rem 1.05rem;border:1px solid var(--bord);border-radius:.55rem;margin-bottom:.65rem;background:var(--surface);cursor:pointer;transition:border-color .15s,box-shadow .15s}
+  .list-item:hover{border-color:var(--bleu2);box-shadow:0 3px 12px rgba(25,73,127,.14)}
+  .progress{height:8px;background:var(--gris-clair);border-radius:5px;overflow:hidden;margin-top:.5rem}
+  .progress span{display:block;height:100%;background:linear-gradient(90deg,var(--vert),#2E9D75);transition:width .3s}
   .check-line{display:flex;align-items:flex-start;gap:.6rem;padding:.5rem;border-radius:.3rem}
   .check-line:hover{background:var(--gris-clair)}
   .check-line input{width:auto;margin-top:.25rem}
-  .deadline{border-left:4px solid var(--orange);padding:.7rem 1rem;background:var(--warn-bg);border-radius:.3rem;margin-bottom:.6rem}
+  .deadline{border-left:4px solid var(--orange);padding:.7rem 1rem;background:var(--warn-bg);border-radius:.35rem;margin-bottom:.6rem}
   .deadline.crit{border-left-color:var(--rouge);background:var(--crit-bg)}
-  table{width:100%;border-collapse:collapse;font-size:.88rem}
-  th,td{text-align:left;padding:.6rem;border-bottom:1px solid var(--bord)}
-  th{background:var(--gris-clair);color:var(--text2)}
+  table{width:100%;border-collapse:collapse;font-size:.87rem}
+  th,td{text-align:left;padding:.55rem .6rem;border-bottom:1px solid var(--bord)}
+  th{background:var(--surface3);color:var(--text2);font-size:.74rem;letter-spacing:.05em;text-transform:uppercase}
   .filters{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1rem}
   .filters input,.filters select{width:auto;flex:1;min-width:160px}
   .empty{text-align:center;color:var(--gris);padding:3rem 1rem}
   .loading{text-align:center;color:var(--gris);padding:2rem;font-style:italic}
-  .accordion{border:1px solid var(--bord);border-radius:.5rem;margin-bottom:.6rem;overflow:hidden}
-  .accordion>summary{padding:.9rem 1.1rem;cursor:pointer;font-weight:600;background:var(--surface);color:var(--accent);list-style:none}
+  .accordion{border:1px solid var(--bord);border-radius:.55rem;margin-bottom:.6rem;overflow:hidden;background:var(--surface)}
+  .accordion>summary{padding:.85rem 1.1rem;cursor:pointer;font-weight:600;background:var(--surface);color:var(--accent);list-style:none;font-size:.93rem}
   .accordion>summary::-webkit-details-marker{display:none}
-  .accordion>summary:before{content:"▸ ";color:var(--bleu2)}
+  .accordion>summary:before{content:"▸ ";color:var(--or)}
+  .accordion[open]>summary{border-bottom:1px solid var(--bord)}
   .accordion[open]>summary:before{content:"▾ "}
-  .accordion .body{padding:1rem 1.1rem;border-top:1px solid var(--bord);background:var(--surface2)}
+  .accordion .body{padding:1rem 1.15rem;background:var(--surface2)}
   .muted{color:var(--gris);font-size:.85rem}
   ul.clean{list-style:none}ul.clean li{padding:.35rem 0;border-bottom:1px dashed var(--bord)}
   /* Écran de sécurité */
-  .auth-gate{position:fixed;inset:0;z-index:1000;background:linear-gradient(135deg,#1e3a8a,#1e40af);display:flex;align-items:center;justify-content:center;padding:1.5rem}
-  [data-theme="dark"] .auth-gate{background:linear-gradient(135deg,#0b1220,#1e293b)}
+  .auth-gate{position:fixed;inset:0;z-index:1000;background:linear-gradient(150deg,#0F1B30,#123A68);display:flex;align-items:center;justify-content:center;padding:1.5rem}
   .auth-gate.hidden{display:none}
-  .auth-box{background:var(--surface);border-radius:1rem;padding:2.2rem;max-width:420px;width:100%;box-shadow:0 25px 50px rgba(0,0,0,.4);text-align:center}
+  .auth-box{background:var(--surface);border-radius:1rem;border-top:4px solid var(--or);padding:2.2rem;max-width:420px;width:100%;box-shadow:0 25px 50px rgba(0,0,0,.45);text-align:center}
   .auth-box .lock-ico{font-size:3rem}
-  .auth-box h2{color:var(--accent);margin:.6rem 0 .3rem;font-size:1.5rem}
+  .auth-box h2{font-family:var(--serif);color:var(--text);margin:.6rem 0 .3rem;font-size:1.5rem}
   .auth-box p{color:var(--gris);font-size:.9rem;margin-bottom:1.2rem}
   .auth-box input{text-align:center;font-size:1.1rem;letter-spacing:.1em;margin-bottom:.6rem}
   .auth-box .err{color:var(--rouge);font-size:.85rem;min-height:1.2em;margin-bottom:.4rem}
   .auth-box .hint{font-size:.78rem;color:var(--gris);margin-top:1rem;line-height:1.4}
-  .lock-btn{background:rgba(255,255,255,.15);border:none;color:#fff;cursor:pointer;padding:.4rem .8rem;border-radius:1rem;font-size:.8rem}
-  .lock-btn:hover{background:rgba(255,255,255,.28)}
-  /* Contrôles d'en-tête : langue + thème */
+  .lock-btn{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);color:#fff;cursor:pointer;padding:.4rem .8rem;border-radius:1rem;font-size:.8rem}
+  .lock-btn:hover{background:rgba(255,255,255,.26)}
   .hdr-ctrl{display:flex;align-items:center;gap:.4rem;margin-left:auto;flex-wrap:wrap}
   .lang-switch{display:inline-flex;border:1px solid rgba(255,255,255,.4);border-radius:1rem;overflow:hidden}
   .lang-switch button{background:transparent;border:none;color:#fff;padding:.35rem .7rem;cursor:pointer;font-size:.8rem;font-weight:600}
-  .lang-switch button.active{background:#fff;color:var(--bleu)}
-  .icon-btn{background:rgba(255,255,255,.15);border:none;color:#fff;cursor:pointer;padding:.4rem .7rem;border-radius:1rem;font-size:.85rem}
-  .icon-btn:hover{background:rgba(255,255,255,.28)}
-  /* Combobox pays (recherche) */
+  .lang-switch button.active{background:#fff;color:var(--bleu-fonce)}
+  .icon-btn{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18);color:#fff;cursor:pointer;padding:.4rem .7rem;border-radius:1rem;font-size:.85rem}
+  .icon-btn:hover{background:rgba(255,255,255,.26)}
   .combo{position:relative}
   .combo-list{position:absolute;left:0;right:0;top:100%;z-index:30;background:var(--surface);border:1px solid var(--bleu);border-top:none;border-radius:0 0 .4rem .4rem;max-height:240px;overflow-y:auto;box-shadow:0 8px 20px rgba(0,0,0,.18);display:none}
   .combo-list.open{display:block}
   .combo-list div{padding:.55rem .7rem;cursor:pointer;font-size:.9rem;color:var(--text)}
   .combo-list div:hover,.combo-list div.hl{background:var(--bleu-clair);color:var(--accent)}
-  /* Sélecteur de mode */
   .mode-row{display:flex;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap}
   .mode-btn{flex:1;min-width:160px;padding:.8rem;border:2px solid var(--bord);background:var(--surface);border-radius:.5rem;cursor:pointer;font-weight:600;color:var(--text2);transition:.2s}
-  .mode-btn:hover{border-color:var(--bleu)}
+  .mode-btn:hover{border-color:var(--bleu2)}
   .mode-btn.active{border-color:var(--bleu);background:var(--bleu);color:#fff}
+  /* ===== Cartes dossiers : intercalaire d'onglet (signature) ===== */
+  .doss-card{display:flex;gap:.95rem;align-items:flex-start;position:relative;padding:1rem 1.1rem 1rem 1.35rem;border:1px solid var(--bord);border-radius:.6rem;margin-bottom:.7rem;background:var(--surface);cursor:pointer;transition:border-color .15s,box-shadow .15s,transform .1s;overflow:hidden}
+  .doss-card:hover{border-color:var(--bleu2);box-shadow:0 4px 16px rgba(25,73,127,.16);transform:translateY(-1px)}
+  .doss-card .tabmark{position:absolute;left:0;top:0;bottom:0;width:7px}
+  .tab-nouveau{background:var(--bleu2)}.tab-cours{background:var(--orange)}.tab-urgent{background:var(--rouge)}.tab-clos{background:var(--vert)}
+  .doss-photo{width:56px;height:56px;border-radius:.5rem;object-fit:cover;border:1px solid var(--bord);flex-shrink:0;background:var(--gris-clair);display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:var(--gris)}
+  .doss-main{flex:1;min-width:0}
+  .doss-next{font-size:.8rem;margin-top:.3rem;color:var(--text2)}
+  .doss-next.late{color:var(--rouge);font-weight:600}
+  /* ===== Fiche DVZ professionnelle : rubriques à eyebrow or ===== */
+  .fiche-pro section{margin:0 0 1.1rem;background:var(--surface);border:1px solid var(--bord);border-radius:.55rem;padding:.9rem 1.05rem}
+  .eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--or);display:flex;align-items:center;gap:.45rem;margin-bottom:.55rem}
+  .eyebrow:after{content:"";flex:1;height:1px;background:var(--bord)}
+  .dl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:.45rem .9rem}
+  .dl-grid>div{padding:.3rem 0;border-bottom:1px dashed var(--bord)}
+  .dl-grid dt{font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:var(--gris)}
+  .dl-grid dd{font-weight:600;color:var(--text);margin:0;font-size:.92rem}
+  .fiche-long{margin:.45rem 0}
+  .fiche-long .lt{font-size:.75rem;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.05em}
+  .fiche-long p{font-size:.9rem;margin-top:.15rem}
+  /* Tableau de suivi multi-dossiers */
+  #dashMatrix td{vertical-align:middle}
+  #dashMatrix tr{cursor:pointer}
+  #dashMatrix tr:hover td{background:var(--bleu-clair)}
   @media(max-width:768px){main{padding:1rem}.header{padding:1rem}.header h1{font-size:1.2rem}}
-  /* Mobile : tableaux défilables horizontalement (banque, checklist, fiche) */
   @media(max-width:520px){.modal-box table,.card table{display:block;overflow-x:auto;white-space:nowrap}}
-  /* Impression propre de toute page de l'app */
-  @media print{nav,.hdr-ctrl,.btn,.filters,.lock-btn,.icon-btn,.lang-switch{display:none!important}body{background:#fff;color:#000}.card,.list-item{box-shadow:none;border:1px solid #ccc}}
-  /* Pastille d'échéance sur la liste des dossiers */
+  @media print{nav,.hdr-ctrl,.btn,.filters,.lock-btn,.icon-btn,.lang-switch{display:none!important}body{background:#fff;color:#000}.card,.list-item,.doss-card{box-shadow:none;border:1px solid #ccc}}
   .dot{display:inline-block;width:.7rem;height:.7rem;border-radius:50%;margin-right:.35rem;vertical-align:baseline}
-  .dot-ok{background:var(--vert)}.dot-warn{background:#d97706}.dot-crit{background:var(--rouge)}
-  /* Gros boutons d'action du tableau de bord */
+  .dot-ok{background:var(--vert)}.dot-warn{background:var(--orange)}.dot-crit{background:var(--rouge)}
   .quick3{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:.7rem;margin:.8rem 0 1.1rem}
-  .quick3 button{padding:1rem .8rem;font-size:1.02rem;border-radius:.7rem}
-  /* Mot non traduit (à vérifier) dans l'aperçu de traduction */
-  mark.nt{background:#fde68a;color:#713f12;border-radius:.2rem;padding:0 .15rem}
-  [data-theme="dark"] mark.nt{background:#a16207;color:#fef9c3}
+  .quick3 button{padding:1rem .8rem;font-size:1rem;border-radius:.7rem;justify-content:center}
+  mark.nt{background:#F2DFAE;color:#5C4308;border-radius:.2rem;padding:0 .15rem}
+  [data-theme="dark"] mark.nt{background:#8A6420;color:#FBEFD2}
   .gsearch-res .list-item{cursor:pointer}
-  footer{color:var(--gris);font-size:.75rem;text-align:center;padding:1rem 0 1.4rem}
+  footer{color:var(--gris);font-size:.75rem;text-align:center;padding:1.2rem 0 1.6rem;border-top:1px solid var(--bord);margin-top:1.5rem}
+  footer a{color:var(--accent)}
+  :focus-visible{outline:2px solid var(--bleu2);outline-offset:2px}
 </style>
 </head>
 <body>
@@ -219,6 +256,10 @@
     </div>
     <div id="gsearchRes" class="gsearch-res"></div>
     <div class="grid cols-3" id="statCards"></div>
+    <div class="card" style="margin-top:1.4rem" id="dashMatrixCard">
+      <h3 data-i18n="dash.matrix">📊 Suivi par dossier</h3>
+      <div id="dashMatrix" style="overflow-x:auto"></div>
+    </div>
     <div class="grid cols-2" style="margin-top:1.4rem">
       <div class="card">
         <h3 data-i18n="dash.deadlines">⏰ Échéances à venir</h3>
@@ -365,6 +406,7 @@
 
 <footer>
   <span id="appVersionLbl"></span> ·
+  <a href="telecharger.html">💻 <span data-i18n="ft.dl">Télécharger l'application</span></a> ·
   <a href="#" onclick="checkUpdates();return false" data-i18n="ft.check">🔄 Vérifier les mises à jour</a>
   <span id="updNote"></span>
 </footer>
@@ -839,6 +881,7 @@ function onUnlocked(){
   idleReset();      // démarre le verrouillage automatique (10 min d'inactivité)
   maybeTour();      // visite guidée au premier lancement
   updateArchBtn();  // compteur des archives
+  notifInit();      // notifications d'échéances (1 salve/jour max)
 }
 function lockApp(){
   CRYPTO_KEY=null;DOSSIERS=[];ARCHIVES=null;
@@ -967,13 +1010,19 @@ function renderDossiers(){
   };
   el.innerHTML=arr.map(d=>{
     const p=progressOf(d);
-    return `<div class="list-item" onclick="openDossierDetail('${d.id}')">
-      <div class="row" style="justify-content:space-between">
-        <strong style="font-size:1.05rem"><span class="dot ${dotOf(d)}" title="${LANG==='nl'?'Status vervaldata':'État des échéances'}"></span>${esc(d.nom)}</strong>${statutBadge(d.statut)}
+    const nx=nextEcheance(d);
+    return `<div class="doss-card" onclick="openDossierDetail('${d.id}')">
+      <span class="tabmark tab-${d.statut||'nouveau'}"></span>
+      ${d.photo?`<img class="doss-photo" src="${d.photo}" alt="">`:`<div class="doss-photo">👤</div>`}
+      <div class="doss-main">
+        <div class="row" style="justify-content:space-between">
+          <strong style="font-size:1.05rem"><span class="dot ${dotOf(d)}" title="${LANG==='nl'?'Status vervaldata':'État des échéances'}"></span>${esc(d.nom)}</strong>${statutBadge(d.statut)}
+        </div>
+        <div class="muted">${d.age?d.age+' '+t('u.ans')+' · ':''}${esc(paysLabel(d.pays)||d.pays||t('doss.origin'))}${d.arrivee?' · '+t('doss.arrived')+' '+d.arrivee:''}${d.fiche&&d.fiche.ov?' · OE '+esc(d.fiche.ov):''}</div>
+        ${nx?`<div class="doss-next ${nx.late?'late':''}">${nx.late?'⚠️':'⏰'} ${LANG==='nl'?'Volgende vervaldag':'Prochaine échéance'} : <strong>${esc(nx.date)}</strong> — ${esc(nx.label)}</div>`:''}
+        <div class="progress"><span style="width:${p}%"></span></div>
+        <div class="muted" style="font-size:.78rem">${t('doss.progress')} : ${p}% (${d.checklist.filter(c=>c.done).length}/${d.checklist.length} ${t('doss.steps')})</div>
       </div>
-      <div class="muted">${d.age?d.age+' '+t('u.ans')+' · ':''}${esc(d.pays||t('doss.origin'))}${d.arrivee?' · '+t('doss.arrived')+' '+d.arrivee:''}</div>
-      <div class="progress"><span style="width:${p}%"></span></div>
-      <div class="muted">${t('doss.progress')} : ${p}% (${d.checklist.filter(c=>c.done).length}/${d.checklist.length} ${t('doss.steps')})</div>
     </div>`;
   }).join('');
 }
@@ -994,8 +1043,8 @@ function openDossierDetail(id){
     <div class="progress"><span style="width:${p}%"></span></div>
     <p class="muted" style="margin-bottom:.8rem">${t('det.progress')} <strong>${p}%</strong></p>
 
-    ${d.fiche?`<details class="accordion"><summary>📄 ${LANG==='nl'?'Fiche DVZ (volledige gegevens)':'Fiche DVZ (données complètes)'}</summary><div class="body">
-      <table>${ficheRows(d.fiche)}</table>${ficheBlocks(d.fiche)}</div></details>`:''}
+    ${d.fiche?`<details class="accordion"><summary>📄 ${LANG==='nl'?'Eerste vaststellingen DVZ — volledige fiche':'Premières constatations DVZ — fiche complète'}</summary><div class="body">
+      ${ficheView(d.fiche)}</div></details>`:''}
 
     <details class="accordion"><summary>⚖️ ${LANG==='nl'?'Vrederechter & verplichte verslagen':'Justice de paix & rapports obligatoires'}</summary><div class="body">
       <p class="muted">${LANG==='nl'?"Adres van de jongere onbekend? Zoek de bevoegde vrederechter op het officiële register:":"Adresse du jeune inconnue ? Trouvez le juge de paix compétent sur le registre officiel :"} <a href="${LANG==='nl'?ANNUAIRE_JP.nl:ANNUAIRE_JP.fr}" target="_blank" rel="noopener">tribunaux-rechtbanken.be</a> · <a href="${ANNUAIRE_JP.adresses}" target="_blank" rel="noopener">adresses-judiciaires.just.fgov.be</a></p>
@@ -1066,6 +1115,13 @@ function openDossierDetail(id){
         <button class="btn sec sm" style="margin-top:.5rem" onclick="printReleve('${d.id}')">🖨️ ${LANG==='nl'?'Uittreksel (PDF)':'Relevé (PDF)'}</button>`:`<p class="muted">${LANG==='nl'?'Nog geen verrichting.':'Aucune opération.'}</p>`}
     </div></details>
 
+    <details class="accordion"><summary>📎 ${LANG==='nl'?'Documenten van het dossier (versleuteld)':'Documents du dossier (chiffrés)'}</summary><div class="body">
+      <p class="muted">${LANG==='nl'?'Scan en bewaar hier de officiële documenten (bijlage 26, attest, kaart…). AES-256-versleuteld, enkel op dit toestel. Max 10 MB/bestand.':'Scannez et conservez ici les documents officiels (annexe 26, attestation, carte…). Chiffrés AES-256, uniquement sur cet appareil. Max 10 Mo/fichier.'}</p>
+      <input type="file" onchange="pjAdd('${d.id}',this)">
+      <div class="muted" id="pj_note" style="font-size:.8rem"></div>
+      <div id="pjListBox" style="margin-top:.5rem"></div>
+    </div></details>
+
     <details class="accordion"><summary>🚗 ${LANG==='nl'?'Kosten & verplaatsingen (terugbetaling voogd)':'Frais & déplacements (remboursement tuteur)'}</summary><div class="body">
       <p class="muted">${LANG==='nl'?'Reële afstand deur-tot-deur (Google Maps), tarief €/km van de dag (geïndexeerd — KB 18/01/1965), parking en bijkomende kosten. Genereer de declaratie voor de Dienst Voogdij.':'Distance réelle porte-à-porte (Google Maps), tarif €/km du jour (indexé — AR 18/01/1965), parking et frais annexes. Générez la déclaration pour le Service des Tutelles.'}</p>
       <div class="row" style="gap:.4rem;align-items:flex-end">
@@ -1108,6 +1164,7 @@ function openDossierDetail(id){
     </div>`;
   openModal('detailModal');
   fillBankAdvice(d);
+  fillPj(d.id);
 }
 
 /* ============ DASHBOARD ============ */
@@ -1147,6 +1204,32 @@ function renderDashboard(){
       <strong>${esc(x.nom)}</strong> ${x.date?`<span class="badge ${x.over?'b-urgent':'b-cours'}">${x.over?lateLbl+' · ':'⏰ '}${esc(x.date)}</span>`:''}<br>
       <span class="muted">${esc(x.label)}</span>
     </div>`).join(''):`<p class="muted">${t('dash.uptodate')}</p>`;
+
+  // Matrice de suivi : chaque MENA géré indépendamment, vue d'ensemble par dossier
+  const mc=document.getElementById('dashMatrixCard');
+  const actifsArr=arr.filter(d=>d.statut!=='clos');
+  if(mc){
+    if(actifsArr.length<1){mc.style.display='none';}
+    else{
+      mc.style.display='';
+      const rows=actifsArr.map(d=>{
+        initGestion(d);
+        const rdvN=(d.rdv||[]).filter(r=>!r.fait&&r.date&&r.date>=today).sort((a,b)=>a.date<b.date?-1:1)[0];
+        const rapN=(d.rapports||[]).filter(r=>!r.fait&&r.echeance).sort((a,b)=>a.echeance<b.echeance?-1:1)[0];
+        const rapRt=rapN?rtFind(rapN.id):null;
+        return `<tr onclick="openDossierDetail('${d.id}')">
+          <td><span class="dot ${dotOf2(d,today)}"></span><strong>${esc(d.nom)}</strong></td>
+          <td>${statutBadge(d.statut)}</td>
+          <td>${rdvN?esc(rdvN.date)+' · '+esc(rdvLbl(rdvN.titre).slice(0,38)):'—'}</td>
+          <td style="${rapN&&rapN.echeance<today?'color:var(--rouge);font-weight:700':''}">${rapN?esc(rapN.echeance)+' · '+esc(rapRt?tr(rapRt.label).slice(0,34):''):'—'}</td>
+          <td style="text-align:right">${soldeOf(d).toFixed(2)} €</td>
+          <td style="min-width:110px"><div class="progress" style="margin:0"><span style="width:${progressOf(d)}%"></span></div></td>
+        </tr>`;
+      }).join('');
+      document.getElementById('dashMatrix').innerHTML=`<table>
+        <tr><th>${LANG==='nl'?'Jongere':'Jeune'}</th><th>${LANG==='nl'?'Status':'Statut'}</th><th>${LANG==='nl'?'Volgende afspraak':'Prochain RDV'}</th><th>${LANG==='nl'?'Volgend verslag':'Prochain rapport'}</th><th style="text-align:right">${LANG==='nl'?'Saldo':'Solde'}</th><th>${LANG==='nl'?'Voortgang':'Avancement'}</th></tr>${rows}</table>`;
+    }
+  }
 }
 
 /* ============ CYCLE DE VIE ============ */
@@ -1926,16 +2009,53 @@ function printDoc(title,html){
   w.document.close();w.focus();
 }
 function genReport(id,rid){
+  // Rapport PRÉ-REMPLI à partir des données du dossier : le tuteur ne complète
+  // que les zones [À compléter]. Structure conforme à l'art. 19 (situation
+  // personnelle + situation patrimoniale).
   const d=loadDossiers().find(x=>x.id===id);const rt=rtFind(rid);if(!d||!rt)return;
-  const destNom=rt.dest==='juge'?((d.jugePaix&&d.jugePaix.canton)||(LANG==='nl'?'Vrederechter':'Juge de paix')):tr(CONTACTS_OFFICIELS[rt.dest].nom);
+  initGestion(d);
+  const NL=LANG==='nl';
+  const destNom=rt.dest==='juge'?((d.jugePaix&&d.jugePaix.canton)||(NL?'Vrederechter':'Juge de paix')):tr(CONTACTS_OFFICIELS[rt.dest].nom);
   const destAdr=rt.dest==='juge'?((d.jugePaix&&d.jugePaix.adresse)||''):CONTACTS_OFFICIELS[rt.dest].adresse;
-  const html=`<h1>${esc(tr(rt.label))}</h1><p>${nowISO()}</p>
-    <p><strong>${LANG==='nl'?'Aan':'À'} :</strong> ${esc(destNom)}${destAdr?'<br>'+esc(destAdr):''}</p>
-    <p><strong>${LANG==='nl'?'Betreft de minderjarige':'Concernant le mineur'} :</strong> ${esc(d.nom)}${d.fiche&&d.fiche.ov?' (OE '+esc(d.fiche.ov)+')':''}${d.age?' — '+d.age+' '+t('u.ans'):''}${d.pays?' — '+esc(paysLabel(d.pays)):''}</p>
-    <p class="muted">📖 ${esc(rt.base)}</p><hr>
-    <p><strong>${LANG==='nl'?'Situatie / notities':'Situation / notes'} :</strong></p><p>${esc(d.notes||'…')}</p>
-    <p style="margin-top:.6rem"><em>${LANG==='nl'?'(Vul de inhoud van het verslag aan.)':'(Complétez le contenu du rapport.)'}</em></p>
-    <br><br><p>${LANG==='nl'?'De voogd,':'Le tuteur,'}</p>`;
+  const f=d.fiche||{};
+  const FILL=NL?'<em style="color:#8C6A1D">[Aan te vullen]</em>':'<em style="color:#8C6A1D">[À compléter]</em>';
+  const ck=t2=>{const c=d.checklist.find(x=>x.t===t2);return c?c.done:false;};
+  const oui=NL?'ja':'oui', enCours=NL?'lopend / aan te vullen':'en cours / à compléter';
+  const rdvFaits=(d.rdv||[]).filter(r=>r.fait).map(r=>`<li>${esc(r.date)} — ${esc(rdvLbl(r.titre))}</li>`).join('');
+  const ops=(d.banque&&d.banque.operations)||[];
+  const sec=(n,t2)=>`<h2 style="font-family:Georgia,serif;font-size:1.05rem;color:#19497F;border-bottom:1px solid #D9DEE7;margin:1.1rem 0 .4rem">${n}. ${t2}</h2>`;
+  const html=`
+    <h1>${esc(tr(rt.label))}</h1>
+    <p style="color:#555">${NL?'Datum':'Date'} : ${nowISO()} — ${NL?'Wettelijke basis':'Base légale'} : ${esc(rt.base)}</p>
+    <table style="margin:.6rem 0"><tr>
+      <td style="width:50%;vertical-align:top"><strong>${NL?'Van (voogd)':'De (tuteur)'} :</strong><br>${FILL}<br>${FILL}</td>
+      <td style="vertical-align:top"><strong>${NL?'Aan':'À'} :</strong><br>${esc(destNom)}${destAdr?'<br>'+esc(destAdr):''}${rt.dest==='juge'?'<br><span style="color:#555">'+(NL?'Kopie: Dienst Voogdij, Waterloolaan 115, 1000 Brussel':'Copie : Service des Tutelles, Bd de Waterloo 115, 1000 Bruxelles')+'</span>':''}</td>
+    </tr></table>
+    ${sec(1,NL?'Identiteit van de minderjarige':'Identité du mineur')}
+    <table>
+      ${[[NL?'Naam en voornaam':'Nom et prénom',d.nom],[ 'N° OE (OV)',f.ov],[NL?'Geboren':'Naissance',f.naissance],[NL?'Nationaliteit':'Nationalité',paysLabel(d.pays)||f.nationalite],[NL?'Taal':'Langue',d.langue||f.langueParlee],[NL?'Verblijfplaats':'Lieu de résidence',f.adresseBE&&f.adresseBE!=='/'?f.adresseBE:'']]
+        .map(x=>`<tr><td style="width:38%;color:#555">${esc(x[0])}</td><td><strong>${x[1]?esc(x[1]):FILL}</strong></td></tr>`).join('')}
+    </table>
+    ${sec(2,NL?'Verblijfssituatie':'Situation de séjour')}
+    <p>${f.motif?(NL?'Motief van de immigratie: ':'Motif de l\'immigration : ')+esc(tr(f.motif)):''}</p>
+    <p>${NL?'Stand van de procedure':'État de la procédure'} : ${ck("Demande de protection internationale introduite")?(NL?'verzoek om internationale bescherming ingediend':'demande de protection internationale introduite')+' — '+FILL:FILL}</p>
+    ${sec(3,NL?'Opvang en huisvesting':'Accueil et hébergement')}
+    <p>${ck("Hébergement adapté attribué")?(NL?'Aangepaste opvang toegewezen.':'Hébergement adapté attribué.')+' '+FILL:FILL}</p>
+    ${sec(4,NL?'Scholing':'Scolarité')}
+    <p>${ck("Inscription scolaire effectuée")?(NL?'Schoolinschrijving uitgevoerd.':'Inscription scolaire effectuée.')+' '+FILL:enCours+' — '+FILL}</p>
+    ${sec(5,NL?'Gezondheid':'Santé')}
+    <p>${ck("Bilan médical d'arrivée réalisé")?(NL?'Medisch onthaalonderzoek uitgevoerd':'Bilan médical d\'arrivée réalisé')+' — '+(NL?'mutualiteit':'mutuelle')+' : '+(ck("Couverture médicale (mutuelle/AMU) ouverte")?oui:FILL):FILL}
+    ${ck("Bilan psychologique / suivi trauma")?'<br>'+(NL?'Psychologische opvolging lopend.':'Suivi psychologique en cours.'):''}</p>
+    ${sec(6,NL?'Contacten en stappen van de voogd':'Contacts et démarches du tuteur')}
+    ${rdvFaits?`<ul style="margin-left:1.2rem">${rdvFaits}</ul>`:`<p>${FILL}</p>`}
+    ${sec(7,NL?'Vermogenssituatie (beheer van de goederen)':'Situation patrimoniale (gestion des biens)')}
+    <p>${ops.length?(NL?'Rekeningstand op heden':'Solde du compte à ce jour')+' : <strong>'+soldeOf(d).toFixed(2)+' €</strong> ('+ops.length+' '+(NL?'verrichtingen — uittreksel in bijlage':'opérations — relevé en annexe')+')':(NL?'Geen verrichting geregistreerd.':'Aucune opération enregistrée.')+' '+FILL}</p>
+    ${sec(8,NL?'Opmerkingen en voorstellen':'Observations et propositions')}
+    <p>${d.notes?esc(d.notes).slice(0,2500):FILL}</p>
+    <br><table><tr>
+      <td style="width:50%">${NL?'Opgemaakt te':'Fait à'} ${FILL}, ${NL?'op':'le'} ${nowISO()}</td>
+      <td style="text-align:right">${NL?'De voogd,':'Le tuteur,'}<br><br><br>____________________</td>
+    </tr></table>`;
   printDoc(tr(rt.label),html);
 }
 function genDossierComplet(id){
@@ -1977,10 +2097,10 @@ function printReleve(id){
 }
 
 /* ============ VERSION & MISES À JOUR ============ */
-const APP_VERSION='1.2.0';
+const APP_VERSION='1.3.0';
 window.APP_VERSION=APP_VERSION;   // expose pour tests.html (const non attache a window)
-Object.assign(I18N.fr,{"nav.guide":"🎓 Guide du tuteur","guide.title":"🎓 Guide du tuteur débutant — de la désignation aux 18 ans","guide.banner":"13 modules pas-à-pas : cours, actions à faire, documents à remettre (et à qui), rendez-vous, pièges à éviter. Contenu basé sur la réglementation en vigueur.","dash.q1":"📄 Nouveau MENA (fiche DVZ)","dash.q2":"📂 Mes dossiers","dash.q3":"⏰ Urgences & échéances","gs.ph":"🔍 Recherche globale (dossiers, lois, cas, ressources)…","ft.check":"🔄 Vérifier les mises à jour"});
-Object.assign(I18N.nl,{"nav.guide":"🎓 Voogdengids","guide.title":"🎓 Gids voor de beginnende voogd — van aanstelling tot 18 jaar","guide.banner":"13 stap-voor-stapmodules: cursus, acties, documenten (en aan wie), afspraken, valkuilen. Inhoud gebaseerd op de geldende regelgeving.","dash.q1":"📄 Nieuwe NBMV (DVZ-fiche)","dash.q2":"📂 Mijn dossiers","dash.q3":"⏰ Urgenties & vervaldata","gs.ph":"🔍 Globaal zoeken (dossiers, wetten, gevallen, hulpbronnen)…","ft.check":"🔄 Updates controleren"});
+Object.assign(I18N.fr,{"dash.matrix":"📊 Suivi par dossier","nav.guide":"🎓 Guide du tuteur","guide.title":"🎓 Guide du tuteur débutant — de la désignation aux 18 ans","guide.banner":"13 modules pas-à-pas : cours, actions à faire, documents à remettre (et à qui), rendez-vous, pièges à éviter. Contenu basé sur la réglementation en vigueur.","dash.q1":"📄 Nouveau MENA (fiche DVZ)","dash.q2":"📂 Mes dossiers","dash.q3":"⏰ Urgences & échéances","gs.ph":"🔍 Recherche globale (dossiers, lois, cas, ressources)…","ft.check":"🔄 Vérifier les mises à jour","ft.dl":"Télécharger l’application"});
+Object.assign(I18N.nl,{"dash.matrix":"📊 Opvolging per dossier","nav.guide":"🎓 Voogdengids","guide.title":"🎓 Gids voor de beginnende voogd — van aanstelling tot 18 jaar","guide.banner":"13 stap-voor-stapmodules: cursus, acties, documenten (en aan wie), afspraken, valkuilen. Inhoud gebaseerd op de geldende regelgeving.","dash.q1":"📄 Nieuwe NBMV (DVZ-fiche)","dash.q2":"📂 Mijn dossiers","dash.q3":"⏰ Urgenties & vervaldata","gs.ph":"🔍 Globaal zoeken (dossiers, wetten, gevallen, hulpbronnen)…","ft.check":"🔄 Updates controleren","ft.dl":"Applicatie downloaden"});
 const UPDATE_URL='https://tseli485.github.io/cgra-mena-platform/version.json';
 async function checkUpdates(){
   const n=document.getElementById('updNote');
@@ -2137,6 +2257,17 @@ async function renderGuide(){
       <div class="banner" style="margin-top:.7rem">💡 ${esc(tr(m.conseils))}</div>
       <p class="muted" style="font-size:.78rem;margin-top:.5rem">📖 ${esc(m.refs)}</p>
     </div></details>`).join('');
+  // Documents officiels (modèles + formulaires des autorités)
+  const docsOff=[
+    ["📄",LANG==='nl'?'Modellen van verslagen & info voor voogden':'Modèles de rapports & infos pour tuteurs',"https://justice.belgium.be/fr/themes_et_dossiers/enfants_et_jeunes/mineurs_etrangers_non_accompagne/tuteur"],
+    ["💶",LANG==='nl'?'Vergoeding & kostendeclaratie (officiële regels)':'Rémunération & déclaration de frais (règles officielles)',"https://justice.belgium.be/fr/themes_et_dossiers/enfants_et_jeunes/mineurs_etrangers_non_accompagne/tuteur/remuneration_du_tuteur"],
+    ["🔍",LANG==='nl'?'Toezicht op de voogd (verslagplicht)':'Contrôle du tuteur (obligations de rapport)',"https://justice.belgium.be/fr/themes_et_dossiers/enfants_et_jeunes/mineurs_etrangers_non_accompagne/tuteur/controle_du_tuteur"],
+    ["🛂",LANG==='nl'?'DVZ — NBMV-procedures (MINTEH)':'OE — procédures MENA (MINTEH)',"https://dofi.ibz.be/fr"],
+    ["🛡️","CGRA/CGVS — "+(LANG==='nl'?'brochures & formulieren asiel':'brochures & formulaires asile'),"https://www.cgra.be"]
+  ];
+  el.innerHTML+=`<div class="card" style="margin-top:1rem"><h3>📑 ${LANG==='nl'?'Officiële documenten in te vullen':'Documents officiels à remplir'}</h3>
+    <p class="muted" style="font-size:.85rem">${LANG==='nl'?'De app genereert zelf: eerste/zesmaandelijks/eindverslag (vooringevuld), rekeninguittreksel, kostendeclaratie, volledig dossier. Voor de officiële modellen en formulieren van de autoriteiten:':'L\'app génère elle-même : rapport initial/semestriel/final (pré-remplis), relevé de compte, déclaration de frais, dossier complet. Pour les modèles et formulaires officiels des autorités :'}</p>
+    <ul class="clean">${docsOff.map(x=>`<li>${x[0]} <a href="${x[2]}" target="_blank" rel="noopener">${esc(x[1])}</a></li>`).join('')}</ul></div>`;
   // Intervenants + banques
   const iv=document.getElementById('intervContent');
   if(INTERV&&INTERV.intervenants){
@@ -2305,7 +2436,7 @@ function viewArch(i){
       <span class="muted">${d.age?d.age+' '+t('u.ans')+' · ':''}${esc(d.pays||'')} — ${LANG==='nl'?'AFGESLOTEN dossier (alleen-lezen)':'Dossier CLÔTURÉ (lecture seule)'}</span></div>
     </div>
     ${d.notes?`<p style="margin:.8rem 0;padding:.7rem;background:var(--gris-clair);border-radius:.4rem;white-space:pre-wrap">${esc(d.notes)}</p>`:''}
-    ${d.fiche?`<table>${ficheRows(d.fiche)}</table>${ficheBlocks(d.fiche)}`:''}
+    ${d.fiche?ficheView(d.fiche):''}
     <h4 style="color:var(--accent);margin:.8rem 0 .3rem">📋 ${LANG==='nl'?'Verslagen':'Rapports'}</h4>
     <ul class="clean">${(d.rapports||[]).map(r=>{const rt=rtFind(r.id);return rt?`<li>${r.fait?'☑':'☐'} ${esc(tr(rt.label))} — ${esc(r.echeance||'')}</li>`:''}).join('')}</ul>
     ${(d.banque&&d.banque.operations||[]).length?`<h4 style="color:var(--accent);margin:.8rem 0 .3rem">🏦 ${LANG==='nl'?'Saldo bij afsluiting':'Solde à la clôture'}</h4><p>${soldeOf(d).toFixed(2)} €</p>`:''}
@@ -2322,6 +2453,141 @@ async function restoreArch(i){
 async function delArch(i){
   if(!confirm(LANG==='nl'?'Dit gearchiveerde dossier DEFINITIEF verwijderen?':'Supprimer DÉFINITIVEMENT ce dossier archivé ?'))return;
   ARCHIVES.splice(i,1);await persistArch();openArchives();updateArchBtn();
+}
+
+
+/* ============ v1.3 : FICHE DVZ — PRÉSENTATION PROFESSIONNELLE ============ */
+// Rubriques titrées (eyebrow or) ; rien n'est omis : tout champ présent est affiché.
+function ficheView(f){
+  const NL=LANG==='nl';
+  const L={ov:'N° OE (OV)',pv:NL?'PV-nr':'N° PV',nom:NL?'Naam & voornaam':'Nom & prénom',sexe:NL?'Geslacht':'Sexe',
+    naissance:NL?'Geboorte':'Naissance',lieuNaissance:NL?'Geboorteplaats':'Lieu de naissance',
+    nationalite:NL?'Nationaliteit':'Nationalité',eu:'UE/EU',doute:NL?'Twijfel leeftijd':'Doute âge',
+    signale:NL?'Gesignaleerd':'Signalé',langueMat:NL?'Moedertaal':'Langue maternelle',
+    langueParlee:NL?'Gesproken taal':'Langue parlée',alias:'Alias',empreintes:NL?'Vingerafdrukken':'Empreintes',
+    serviceFiche:NL?'Fiche opgesteld door':'Fiche établie par',dateFiche:NL?'Datum fiche':'Date de la fiche',
+    adresseBE:NL?'Adres in België':'Adresse en Belgique',adresseOrigine:NL?'Adres land van herkomst':'Adresse au pays d\'origine',
+    familleUE:NL?'Familie in de EU':'Famille dans l\'UE'};
+  const v=k=>{const x=f[k];if(x==null||x==='')return null;return typeof x==='object'&&(x.fr||x.nl)?tr(x):String(x);};
+  const dd=ks=>ks.map(k=>{const val=v(k);return val?`<div><dt>${esc(L[k]||k)}</dt><dd>${esc(val)}</dd></div>`:'';}).join('');
+  const long=(k,lbl)=>{const val=v(k);return val?`<div class="fiche-long"><span class="lt">${esc(lbl)}</span><p>${esc(val)}</p></div>`:'';};
+  const parent=(k,lbl)=>{const x=f[k];if(!x||!x.nom)return '';return `<div><dt>${esc(lbl)}</dt><dd>${esc(x.nom)}${x.nat?' ('+esc(x.nat)+')':''}${x.adresse&&x.adresse!=='/'?' — '+esc(x.adresse):''}${x.tel&&x.tel!=='/'?' — ☎ '+esc(x.tel):''}</dd></div>`;};
+  const S=(ico,titreFR,titreNL,inner)=>inner.trim()?`<section><div class="eyebrow">${ico} ${esc(NL?titreNL:titreFR)}</div>${inner}</section>`:'';
+  return `<div class="fiche-pro">
+    ${S('🪪','Identité','Identiteit',`<dl class="dl-grid">${dd(['nom','ov','pv','sexe','naissance','lieuNaissance','nationalite','langueMat','langueParlee','alias','empreintes','eu','doute','signale'])}</dl>${long('identiteEtablie',NL?'Vaststelling identiteit':'Établissement de l\'identité')}`)}
+    ${S('📍','Adresses','Adressen',`<dl class="dl-grid">${dd(['adresseBE','adresseOrigine'])}</dl>`)}
+    ${S('👨‍👩‍👧','Famille','Familie',`<dl class="dl-grid">${parent('pere',NL?'Vader':'Père')}${parent('mere',NL?'Moeder':'Mère')}${dd(['familleUE'])}</dl>${long('fratrie',NL?'Broers en zussen':'Fratrie')}`)}
+    ${S('🏥','Santé','Gezondheid',long('medical',NL?'Medische vaststellingen':'Constatations médicales'))}
+    ${S('🧭','Trajet & motif de l\'immigration','Traject & motief van de immigratie',
+      long('trajet',NL?'Traject':'Trajet')+long('organisation',NL?'Organisatie van de reis':'Organisation du voyage')+long('interception',NL?'Aanmelding / interceptie':'Présentation / interception')+long('motif',NL?'Motief':'Motif'))}
+    ${S('🛡️','Vulnérabilité & protection','Kwetsbaarheid & bescherming',
+      long('vulnerabiliteMH',NL?'Mensenhandel (aanwijzingen)':'Traite des êtres humains (indices)')+long('vulnerabilite',NL?'Andere kwetsbaarheid':'Autre vulnérabilité')+long('parquet','Parquet/Parket'))}
+    ${S('🏠','Accueil, scolarité & contacts','Opvang, scholing & contacten',
+      long('besoinAccueil',NL?'Opvang':'Accueil')+long('scolarite',NL?'Scholing':'Scolarité')+long('contactFamille',NL?'Contact met familie':'Contact familial')+long('objets',NL?'Persoonlijke voorwerpen':'Effets personnels'))}
+    ${f.texteIntegral?`<section><div class="eyebrow">📄 ${NL?'Volledige tekst van het document':'Texte intégral du document'}</div><details><summary class="muted" style="cursor:pointer">${NL?'Tonen / verbergen':'Afficher / masquer'}</summary><p style="white-space:pre-wrap;font-size:.86rem;margin-top:.4rem">${esc(tr(f.texteIntegral))}</p></details></section>`:''}
+    ${(f.serviceFiche||f.dateFiche)?`<section><div class="eyebrow">🏛️ ${NL?'Herkomst van de fiche':'Origine de la fiche'}</div><dl class="dl-grid">${dd(['serviceFiche','dateFiche'])}</dl></section>`:''}
+  </div>`;
+}
+
+/* ============ v1.3 : PROCHAINE ÉCHÉANCE PAR DOSSIER ============ */
+function nextEcheance(d){
+  const today=nowISO();let best=null;
+  (d.rapports||[]).forEach(r=>{if(!r.fait&&r.echeance){const rt=rtFind(r.id);
+    if(!best||r.echeance<best.date)best={date:r.echeance,label:rt?tr(rt.label):r.id,late:r.echeance<today};}});
+  (d.rdv||[]).forEach(r=>{if(!r.fait&&r.date){
+    if(!best||r.date<best.date)best={date:r.date,label:'📅 '+rdvLbl(r.titre),late:r.date<today};}});
+  return best;
+}
+function dotOf2(d,today){
+  let cls='dot-ok';const warn=addDays(today,14);
+  (d.rapports||[]).forEach(r=>{if(!r.fait&&r.echeance){
+    if(r.echeance<today)cls='dot-crit';
+    else if(r.echeance<=warn&&cls!=='dot-crit')cls='dot-warn';}});
+  return cls;
+}
+
+/* ============ v1.3 : PIÈCES JOINTES CHIFFRÉES (IndexedDB + AES-GCM) ============ */
+let IDB=null;
+function idbOpen(){return new Promise((res,rej)=>{
+  if(IDB)return res(IDB);
+  const q=indexedDB.open('mena_pj',1);
+  q.onupgradeneeded=e=>{e.target.result.createObjectStore('pj',{keyPath:'id'});};
+  q.onsuccess=e=>{IDB=e.target.result;res(IDB);};
+  q.onerror=()=>rej(q.error);
+});}
+async function aesEncryptBytes(key,buf){
+  const iv=crypto.getRandomValues(new Uint8Array(12));
+  const ct=await crypto.subtle.encrypt({name:'AES-GCM',iv},key,buf);
+  return {iv:Array.from(iv),ct};
+}
+async function aesDecryptBytes(key,ivArr,ct){
+  return crypto.subtle.decrypt({name:'AES-GCM',iv:new Uint8Array(ivArr)},key,ct);
+}
+async function pjAdd(dossierId,input){
+  const f=input.files&&input.files[0];if(!f||!CRYPTO_KEY)return;
+  const note=document.getElementById('pj_note');
+  if(f.size>10*1024*1024){note.textContent=LANG==='nl'?'Max 10 MB per bestand.':'Max 10 Mo par fichier.';return;}
+  note.textContent='⏳';
+  const {iv,ct}=await aesEncryptBytes(CRYPTO_KEY,await f.arrayBuffer());
+  const db=await idbOpen();
+  const tx=db.transaction('pj','readwrite');
+  tx.objectStore('pj').put({id:'P'+Date.now()+Math.floor(Math.random()*999),dossier:dossierId,name:f.name,type:f.type||'application/octet-stream',size:f.size,date:nowISO(),iv,ct});
+  tx.oncomplete=()=>fillPj(dossierId);
+}
+async function pjList(dossierId){
+  const db=await idbOpen();
+  return new Promise(res=>{const out=[];
+    const cur=db.transaction('pj').objectStore('pj').openCursor();
+    cur.onsuccess=e=>{const c=e.target.result;
+      if(c){if(c.value.dossier===dossierId)out.push({id:c.value.id,name:c.value.name,size:c.value.size,date:c.value.date});c.continue();}
+      else res(out);};
+    cur.onerror=()=>res(out);
+  });
+}
+async function pjOpen(pid){
+  const db=await idbOpen();
+  const rec=await new Promise(res=>{const q=db.transaction('pj').objectStore('pj').get(pid);q.onsuccess=()=>res(q.result);q.onerror=()=>res(null);});
+  if(!rec)return;
+  try{
+    const buf=await aesDecryptBytes(CRYPTO_KEY,rec.iv,rec.ct);
+    const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([buf],{type:rec.type}));
+    a.download=rec.name;a.click();
+  }catch(e){const n=document.getElementById('pj_note');if(n)n.textContent='⚠️ '+e.message;}
+}
+async function pjDel(pid,dossierId){
+  const db=await idbOpen();
+  const tx=db.transaction('pj','readwrite');tx.objectStore('pj').delete(pid);
+  tx.oncomplete=()=>fillPj(dossierId);
+}
+async function fillPj(dossierId){
+  const el=document.getElementById('pjListBox');if(!el)return;
+  const list=await pjList(dossierId);
+  el.innerHTML=list.length?`<ul class="clean">${list.map(x=>`<li>📄 <a href="#" onclick="event.preventDefault();pjOpen('${x.id}')">${esc(x.name)}</a> <span class="muted">(${Math.round(x.size/1024)} Ko · ${esc(x.date)})</span> <button class="btn danger sm" style="float:right" onclick="pjDel('${x.id}','${dossierId}')">×</button></li>`).join('')}</ul>`
+    :`<p class="muted">${LANG==='nl'?'Nog geen document.':'Aucun document.'}</p>`;
+  const n=document.getElementById('pj_note');if(n)n.textContent='';
+}
+
+/* ============ v1.3 : NOTIFICATIONS D'ÉCHÉANCES ============ */
+async function notifInit(){
+  if(!('Notification' in window))return;
+  if(Notification.permission==='default'){try{await Notification.requestPermission();}catch(e){}}
+  notifCheck();
+}
+function notifCheck(){
+  if(!('Notification' in window)||Notification.permission!=='granted')return;
+  const today=nowISO();
+  if(localStorage.getItem('mena_notif_day')===today)return;   // max 1 salve/jour
+  localStorage.setItem('mena_notif_day',today);
+  const soon=addDays(today,7),soonRdv=addDays(today,3);
+  const msgs=[];
+  loadDossiers().forEach(d=>{
+    (d.rapports||[]).forEach(r=>{
+      if(!r.fait&&r.echeance&&r.echeance<=soon){const rt=rtFind(r.id);
+        msgs.push((r.echeance<today?'⚠️ '+(LANG==='nl'?'TE LAAT':'EN RETARD')+' : ':'⏰ ')+(rt?tr(rt.label):'')+' — '+d.nom+' ('+r.echeance+')');}});
+    (d.rdv||[]).forEach(r=>{
+      if(!r.fait&&r.date&&r.date>=today&&r.date<=soonRdv)msgs.push('📅 '+rdvLbl(r.titre)+' — '+d.nom+' ('+r.date+')');});
+  });
+  msgs.slice(0,4).forEach((m,i)=>setTimeout(()=>{try{new Notification('MENA Tuteur',{body:m,icon:'icon-192.png'});}catch(e){}},i*900));
 }
 
 /* ============ UTIL ============ */

@@ -1,0 +1,308 @@
+{
+ "version": "1.0",
+ "note": "Intervenants du parcours MENA — coordonnées centrales vérifiées 2026-06 (sites officiels)",
+ "intervenants": [
+  {
+   "id": "tutelles",
+   "ico": "🏛️",
+   "nom": {
+    "fr": "Service des Tutelles (SPF Justice)",
+    "nl": "Dienst Voogdij (FOD Justitie)"
+   },
+   "role": {
+    "fr": "Désigne et contrôle les tuteurs ; signalement des MENA ; interprètes ; rapports",
+    "nl": "Stelt voogden aan en controleert ze; melding NBMV; tolken; verslagen"
+   },
+   "adresse": "Boulevard de Waterloo 115, 1000 Bruxelles",
+   "tel": "02 542 70 51 (urgences 078 15 43 24)",
+   "email": "tutelles@just.fgov.be",
+   "web": "https://justice.belgium.be",
+   "quand": {
+    "fr": "Désignation, rapport initial/semestriel/final, tout incident grave, changement de tuteur",
+    "nl": "Aanstelling, eerste/zesmaandelijks/eindverslag, elk ernstig incident"
+   }
+  },
+  {
+   "id": "minteh",
+   "ico": "🛂",
+   "nom": {
+    "fr": "OE — Bureau MINTEH (Office des Étrangers)",
+    "nl": "DVZ — Bureau MINTEH (Dienst Vreemdelingenzaken)"
+   },
+   "role": {
+    "fr": "Fiche MENA, solution durable, titres de séjour (procédure 61/14 et s.)",
+    "nl": "NBMV-fiche, duurzame oplossing, verblijfstitels (procedure 61/14 e.v.)"
+   },
+   "adresse": "Boulevard Pachéco 44, 1000 Bruxelles",
+   "tel": "02 793 95 00",
+   "email": "bureauminteh@ibz.fgov.be",
+   "web": "https://dofi.ibz.be",
+   "quand": {
+    "fr": "Demande solution durable, signalement, questions de séjour hors asile",
+    "nl": "Aanvraag duurzame oplossing, melding, verblijfsvragen buiten asiel"
+   }
+  },
+  {
+   "id": "cgra",
+   "ico": "🛡️",
+   "nom": {
+    "fr": "CGRA — Commissariat général aux réfugiés et aux apatrides",
+    "nl": "CGVS — Commissariaat-generaal voor de Vluchtelingen en de Staatlozen"
+   },
+   "role": {
+    "fr": "Examine la demande d'asile ; coordinateurs MENA ; auditions adaptées",
+    "nl": "Behandelt het asielverzoek; NBMV-coördinatoren; aangepaste gehoren"
+   },
+   "adresse": "Rue Ernest Blerot 39, 1070 Bruxelles",
+   "tel": "02 205 51 11",
+   "email": "cgra-cgvs.info@ibz.fgov.be",
+   "web": "https://www.cgra.be",
+   "quand": {
+    "fr": "Audition asile (votre présence obligatoire), questions de procédure, attestations",
+    "nl": "Asielgehoor (uw aanwezigheid verplicht), procedurevragen, attesten"
+   }
+  },
+  {
+   "id": "fedasil",
+   "ico": "🏠",
+   "nom": {
+    "fr": "Fedasil — Agence fédérale pour l'accueil",
+    "nl": "Fedasil — Federaal agentschap voor de opvang"
+   },
+   "role": {
+    "fr": "Accueil (COO → centres → ILA), dispatching, retour volontaire, argent de poche",
+    "nl": "Opvang (OOC → centra → LOI), dispatching, vrijwillige terugkeer, zakgeld"
+   },
+   "adresse": "Rue des Chartreux 21, 1000 Bruxelles",
+   "tel": "02 213 44 11",
+   "email": "info@fedasil.be",
+   "web": "https://www.fedasil.be",
+   "quand": {
+    "fr": "Transfert de centre, problèmes d'accueil, retour volontaire, disparition",
+    "nl": "Transfer van centrum, opvangproblemen, vrijwillige terugkeer, verdwijning"
+   }
+  },
+  {
+   "id": "rlf",
+   "ico": "🔍",
+   "nom": {
+    "fr": "Croix-Rouge — Rétablissement des Liens Familiaux (RLF / Tracing)",
+    "nl": "Rode Kruis — Tracing (herstel familiebanden)"
+   },
+   "role": {
+    "fr": "Recherche de famille gratuite et confidentielle via le réseau CICR (jamais via les autorités du pays)",
+    "nl": "Gratis en vertrouwelijke familieopsporing via het ICRC-netwerk"
+   },
+   "adresse": "Rue de Stalle 96, 1180 Bruxelles (FR) / Motstraat 40, 2800 Mechelen (NL)",
+   "tel": "02 371 31 11 (FR) / 015 44 33 22 (NL)",
+   "email": "tracing@croix-rouge.be / tracing@rodekruis.be",
+   "web": "https://croix-rouge.be · https://rodekruis.be",
+   "quand": {
+    "fr": "Dès que le jeune souhaite rechercher sa famille (module 8 du Guide)",
+    "nl": "Zodra de jongere zijn familie wil opsporen (module 8 van de Gids)"
+   }
+  },
+  {
+   "id": "oim",
+   "ico": "✈️",
+   "nom": {
+    "fr": "OIM — Organisation internationale pour les migrations",
+    "nl": "IOM — Internationale Organisatie voor Migratie"
+   },
+   "role": {
+    "fr": "Organisation pratique du retour volontaire avec garanties d'accueil et réintégration",
+    "nl": "Praktische organisatie van de vrijwillige terugkeer met opvanggaranties"
+   },
+   "adresse": "c/o programme REAB — Bruxelles",
+   "tel": "02 287 70 00",
+   "email": "robrusselsinfo@iom.int",
+   "web": "https://belgium.iom.int",
+   "quand": {
+    "fr": "Uniquement si le retour volontaire est la solution durable retenue (intérêt supérieur)",
+    "nl": "Enkel als vrijwillige terugkeer de gekozen duurzame oplossing is"
+   }
+  },
+  {
+   "id": "baj",
+   "ico": "⚖️",
+   "nom": {
+    "fr": "BAJ — Bureau d'aide juridique (avocats pro deo)",
+    "nl": "BJB — Bureau voor juridische bijstand (pro-Deoadvocaten)"
+   },
+   "role": {
+    "fr": "Avocat GRATUIT pour le mineur (asile, séjour, jeunesse, Salduz)",
+    "nl": "GRATIS advocaat voor de minderjarige (asiel, verblijf, jeugd, Salduz)"
+   },
+   "adresse": "Au tribunal de chaque arrondissement",
+   "tel": "Permanence Salduz : 0800 90 808",
+   "email": "—",
+   "web": "https://avocats.be · https://advocaat.be",
+   "quand": {
+    "fr": "Dès la désignation (avocat séjour) + immédiatement si audition police (Salduz)",
+    "nl": "Vanaf de aanstelling (verblijfsadvocaat) + onmiddellijk bij politieverhoor (Salduz)"
+   }
+  },
+  {
+   "id": "childfocus",
+   "ico": "📞",
+   "nom": {
+    "fr": "Child Focus",
+    "nl": "Child Focus"
+   },
+   "role": {
+    "fr": "Disparitions et exploitation sexuelle de mineurs — n° urgence 116 000 (24h/24)",
+    "nl": "Verdwijningen en seksuele uitbuiting van minderjarigen — noodnummer 116 000"
+   },
+   "adresse": "Avenue Houba de Strooper 292, 1020 Bruxelles",
+   "tel": "116 000 (gratuit, 24/7)",
+   "email": "116000@childfocus.org",
+   "web": "https://childfocus.be",
+   "quand": {
+    "fr": "Dans les 24 h de toute disparition (avec police + Tutelles + Fedasil)",
+    "nl": "Binnen 24 u bij elke verdwijning (met politie + Voogdij + Fedasil)"
+   }
+  },
+  {
+   "id": "teh",
+   "ico": "🆘",
+   "nom": {
+    "fr": "Centres spécialisés traite des êtres humains (PAG-ASA, Payoke, Sürya, Esperanto)",
+    "nl": "Gespecialiseerde centra mensenhandel (PAG-ASA, Payoke, Sürya, Esperanto)"
+   },
+   "role": {
+    "fr": "Accueil, accompagnement et statut de séjour « victime TEH » ; Esperanto = mineurs",
+    "nl": "Opvang, begeleiding en verblijfsstatuut « slachtoffer mensenhandel »; Esperanto = minderjarigen"
+   },
+   "adresse": "PAG-ASA (Bxl) 02 511 64 64 · Payoke (Anvers) 03 201 16 90 · Sürya (Liège) 04 232 40 30",
+   "tel": "voir centres",
+   "email": "info@pag-asa.be",
+   "web": "https://www.pag-asa.be",
+   "quand": {
+    "fr": "Au moindre indice de traite/exploitation (même un doute) — parler aussi au magistrat TEH",
+    "nl": "Bij het minste teken van mensenhandel/uitbuiting (zelfs twijfel)"
+   }
+  },
+  {
+   "id": "jugejeunesse",
+   "ico": "👨‍⚖️",
+   "nom": {
+    "fr": "Juge de la jeunesse & parquet jeunesse",
+    "nl": "Jeugdrechter & jeugdparket"
+   },
+   "role": {
+    "fr": "Mineur en danger ou fait qualifié infraction ; mesures protectionnelles",
+    "nl": "Minderjarige in gevaar of MOF; beschermingsmaatregelen"
+   },
+   "adresse": "Tribunal de la famille et de la jeunesse de l'arrondissement",
+   "tel": "via le tribunal de première instance",
+   "email": "—",
+   "web": "https://www.tribunaux-rechtbanken.be",
+   "quand": {
+    "fr": "Convocations, audiences (votre présence recommandée), suivi des mesures",
+    "nl": "Oproepingen, zittingen (uw aanwezigheid aanbevolen), opvolging maatregelen"
+   }
+  },
+  {
+   "id": "solentra",
+   "ico": "🧠",
+   "nom": {
+    "fr": "Solentra (psy transculturel) / Ulysse (santé mentale exil)",
+    "nl": "Solentra (transcultureel) / PSC (geestelijke gezondheid)"
+   },
+   "role": {
+    "fr": "Soutien psychologique spécialisé trauma & exil pour MENA",
+    "nl": "Gespecialiseerde psychologische steun trauma & ballingschap voor NBMV"
+   },
+   "adresse": "Solentra : Pleinlaan 11, 1050 Bruxelles · Ulysse : Rue de l'Été 130, 1050 Ixelles",
+   "tel": "Solentra 02 614 58 01 · Ulysse 02 533 06 70",
+   "email": "info@solentra.be",
+   "web": "https://www.solentra.be",
+   "quand": {
+    "fr": "Cauchemars, repli, agressivité, deuil, trauma — ne pas attendre la crise",
+    "nl": "Nachtmerries, terugtrekking, agressie, rouw, trauma — wacht niet op de crisis"
+   }
+  }
+ ],
+ "banques": {
+  "note": {
+   "fr": "Critères de choix d'une banque pour le compte du mineur : agence PROCHE du lieu de vie du jeune (autonomie), compte jeune GRATUIT, habitude des comptes « tutelle » (présenter l'ordonnance de désignation), carte de débit avec plafonds. Les banques ci-dessous ont un réseau national et des comptes jeunes gratuits — vérifiez l'agence la plus proche via leur localisateur.",
+   "nl": "Criteria voor de keuze van een bank: kantoor DICHT BIJ de verblijfplaats van de jongere, GRATIS jongerenrekening, vertrouwd met « voogdij »-rekeningen (toon de aanstellingsbeschikking), debetkaart met limieten."
+  },
+  "liste": [
+   {
+    "nom": "Belfius",
+    "compte": "Belfius Pulse Start (jeune, gratuit)",
+    "reseau": {
+     "fr": "Très dense partout en Belgique (ancien réseau communal) — souvent le plus proche en zone rurale wallonne",
+     "nl": "Zeer dicht netwerk in heel België — vaak het dichtstbij in landelijk gebied"
+    },
+    "loc": "https://www.belfius.be/retail/fr/outils/agences/index.aspx"
+   },
+   {
+    "nom": "BNP Paribas Fortis",
+    "compte": "Compte à vue jeune (gratuit < 25 ans)",
+    "reseau": {
+     "fr": "Réseau national dense + points bpost (banque postale intégrée)",
+     "nl": "Dicht nationaal netwerk + bpost-punten"
+    },
+    "loc": "https://www.bnpparibasfortis.be/fr/agences"
+   },
+   {
+    "nom": "KBC / CBC",
+    "compte": "Compte jeune K'Ching / CBC Young (gratuit)",
+    "reseau": {
+     "fr": "KBC très présent en Flandre ; CBC en Wallonie ; KBC Brussels à Bruxelles",
+     "nl": "KBC sterk aanwezig in Vlaanderen; CBC in Wallonië; KBC Brussels in Brussel"
+    },
+    "loc": "https://www.kbc.be/particuliers/fr/agence.html"
+   },
+   {
+    "nom": "ING",
+    "compte": "ING Lion Account (gratuit)",
+    "reseau": {
+     "fr": "Réseau national, présence urbaine forte",
+     "nl": "Nationaal netwerk, sterke aanwezigheid in steden"
+    },
+    "loc": "https://www.ing.be/fr/retail/branches"
+   },
+   {
+    "nom": "Argenta",
+    "compte": "Compte jeune (gratuit)",
+    "reseau": {
+     "fr": "Frais bas ; agences nombreuses en Flandre, plus rares à Bruxelles/Wallonie",
+     "nl": "Lage kosten; veel kantoren in Vlaanderen"
+    },
+    "loc": "https://www.argenta.be/fr/trouver-une-agence.html"
+   },
+   {
+    "nom": "Crelan",
+    "compte": "Compte jeune (gratuit)",
+    "reseau": {
+     "fr": "Bonne couverture rurale (Wallonie & Flandre)",
+     "nl": "Goede landelijke dekking"
+    },
+    "loc": "https://www.crelan.be/fr/particuliers/agences"
+   }
+  ],
+  "parRegion": {
+   "BXL": [
+    "BNP Paribas Fortis",
+    "Belfius",
+    "KBC Brussels",
+    "ING"
+   ],
+   "WAL": [
+    "Belfius",
+    "CBC",
+    "BNP Paribas Fortis",
+    "Crelan"
+   ],
+   "VLA": [
+    "KBC",
+    "Argenta",
+    "Belfius",
+    "BNP Paribas Fortis"
+   ]
+  }
+ }
+}

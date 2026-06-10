@@ -1,9 +1,10 @@
-/* Worker Bergamot — traduction neuronale NL→FR 100 % locale (pivot NL→EN→FR).
+/* Worker Bergamot — traduction neuronale 100 % locale par pivot (NL→EN→FR et FR→EN→NL).
    Moteur : @browsermt/bergamot-translator 0.4.9 (WASM, vendorisé dans js/lib/).
-   Modèles : Mozilla firefox-translations (tiny, v1.0), servis depuis models/bergamot/.
+   Modèles : Mozilla firefox-translations (tiny v1.0), servis depuis models/bergamot/.
    Aucune donnée n'est envoyée à un serveur : tout s'exécute dans ce worker. */
 'use strict';
-let READY = false, SERVICE = null, MODEL_NLEN = null, MODEL_ENFR = null;
+const MODELS = {};          // { nlfr:{a,b}, frnl:{a,b} }
+let SERVICE = null;
 
 /* Le WASM importe un module « wasm_gemm » (multiplication matricielle int8,
    fournie nativement par Firefox). Hors Firefox, on relie ces imports aux
@@ -40,7 +41,7 @@ var Module = {
 };
 importScripts('lib/bergamot-translator-worker.js');
 
-// Configuration Marian validée (extension officielle mozilla/firefox-translations)
+/* Configuration Marian validée (extension officielle mozilla/firefox-translations) */
 const CONFIG = `beam-size: 1
 normalize: 1.0
 word-penalty: 0
@@ -67,13 +68,15 @@ function buildModel(b) {     // b = {model, lex, vocab} (ArrayBuffers)
   vocabs.push_back(aligned(b.vocab, 64));
   return new Module.TranslationModel(CONFIG, aligned(b.model, 256), aligned(b.lex, 64), vocabs, null);
 }
-function translate(text) {
+function translate(key, text) {
+  const m = MODELS[key];
+  if (!m) throw new Error('direction non chargée: ' + key);
   const input = new Module.VectorString();
   input.push_back(text);
   const opts = new Module.VectorResponseOptions();
   opts.push_back({ qualityScores: false, alignment: false, html: false });
   const pivot = SERVICE.translateViaPivoting || SERVICE.translateViaPivot || SERVICE.pivot;
-  const out = pivot.call(SERVICE, MODEL_NLEN, MODEL_ENFR, input, opts);
+  const out = pivot.call(SERVICE, m.a, m.b, input, opts);
   const res = out.get(0).getTranslatedText();
   input.delete(); opts.delete(); out.delete();
   return res;
@@ -83,18 +86,11 @@ onmessage = e => {
   const d = e.data;
   try {
     if (d.op === 'load') {
-      postMessage({ op: 'log', msg: 'classes: ' + ['BlockingService','TranslationModel','AlignedMemory','AlignedMemoryList','VectorString','VectorResponseOptions','ResponseOptions'].map(k => k + '=' + typeof Module[k]).join(' ') });
-      SERVICE = new Module.BlockingService({ cacheSize: 0 });
-      postMessage({ op: 'log', msg: 'service OK' });
-      MODEL_NLEN = buildModel(d.nlen);
-      postMessage({ op: 'log', msg: 'model nlen OK' });
-      MODEL_ENFR = buildModel(d.enfr);
-      postMessage({ op: 'log', msg: 'model enfr OK' });
-      READY = true;
-      postMessage({ op: 'ready' });
+      if (!SERVICE) SERVICE = new Module.BlockingService({ cacheSize: 0 });
+      MODELS[d.key] = { a: buildModel(d.a), b: buildModel(d.b) };
+      postMessage({ op: 'ready', key: d.key });
     } else if (d.op === 'tr') {
-      if (!READY) throw new Error('not ready');
-      postMessage({ op: 'res', id: d.id, text: translate(d.text) });
+      postMessage({ op: 'res', id: d.id, text: translate(d.key, d.text) });
     }
   } catch (err) {
     postMessage({ op: 'err', id: d.id, msg: String(err && err.message || err) });

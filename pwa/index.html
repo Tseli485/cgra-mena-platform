@@ -274,6 +274,7 @@
     <div class="grid cols-2" style="margin-top:1.4rem">
       <div class="card">
         <h3 data-i18n="dash.deadlines">⏰ Échéances à venir</h3>
+        <select id="dashDossier" onchange="renderDashboard()" style="margin:.3rem 0 .6rem"></select>
         <div id="dashDeadlines"></div>
       </div>
       <div class="card">
@@ -557,6 +558,14 @@
   <div class="modal-box">
     <button class="close" onclick="closeModal('archModal')">&times;</button>
     <div id="archBox"></div>
+  </div>
+</div>
+
+<!-- MODAL ANALYSE DE DOCUMENT -->
+<div class="modal" id="anaModal">
+  <div class="modal-box">
+    <button class="close" onclick="closeModal('anaModal')">&times;</button>
+    <div id="anaBox"></div>
   </div>
 </div>
 
@@ -1153,6 +1162,19 @@ function openDossierDetail(id){
         <button class="btn sec sm" style="margin-top:.5rem" onclick="printReleve('${d.id}')">🖨️ ${LANG==='nl'?'Uittreksel (PDF)':'Relevé (PDF)'}</button>`:`<p class="muted">${LANG==='nl'?'Nog geen verrichting.':'Aucune opération.'}</p>`}
     </div></details>
 
+    <details class="accordion" ${(d.conseils||[]).length?'open':''}><summary>⚖️ ${LANG==='nl'?'Actieve adviezen & wijzigingshistoriek':'Conseils actifs & historique des changements'}${(d.conseils||[]).length?` <span class="badge b-urgent">${d.conseils.length}</span>`:''}</summary><div class="body">
+      ${d.statutJur?`<p><strong>${LANG==='nl'?'Juridisch statuut':'Statut juridique'} :</strong> <span class="badge b-nouveau">${esc(tr(d.statutJur))}</span></p>`:''}
+      ${(d.conseils||[]).length?(d.conseils||[]).map((c,i)=>`<div class="deadline" style="border-left-color:var(--or)">
+        <div class="row" style="justify-content:space-between;align-items:flex-start">
+          <span style="flex:1">${esc(tr(c))}</span>
+          <button class="btn sec sm" title="${LANG==='nl'?'Behandeld':'Traité'}" onclick="dismissConseil('${d.id}',${i})">✓</button>
+        </div><span class="muted" style="font-size:.72rem">${esc(c.date||'')}</span></div>`).join('')
+      :`<p class="muted">${LANG==='nl'?'Geen actief advies. Analyseer een document om wijzigingen te detecteren.':'Aucun conseil actif. Analysez un document pour détecter des changements.'}</p>`}
+      <button class="btn sec sm" onclick="openAnalyseInput('${d.id}')">🔎 ${LANG==='nl'?'Een document analyseren':'Analyser un document'}</button>
+      ${(d.journal||[]).length?`<h4 style="color:var(--accent);margin:.8rem 0 .3rem">📜 ${LANG==='nl'?'Historiek':'Historique'}</h4>
+        <ul class="clean" style="font-size:.82rem">${(d.journal||[]).slice(0,12).map(j=>`<li>${esc(j.date)} — <strong>${esc(tr(j.label))}</strong> <span class="muted">(${esc(j.source)})</span></li>`).join('')}</ul>`:''}
+    </div></details>
+
     <details class="accordion"><summary>📎 ${LANG==='nl'?'Documenten van het dossier (versleuteld)':'Documents du dossier (chiffrés)'}</summary><div class="body">
       <p class="muted">${LANG==='nl'?'Scan en bewaar hier de officiële documenten (bijlage 26, attest, kaart…). AES-256-versleuteld, enkel op dit toestel. Max 10 MB/bestand.':'Scannez et conservez ici les documents officiels (annexe 26, attestation, carte…). Chiffrés AES-256, uniquement sur cet appareil. Max 10 Mo/fichier.'}</p>
       <input type="file" onchange="pjAdd('${d.id}',this)">
@@ -1220,8 +1242,17 @@ function renderDashboard(){
     <div class="stat"><div class="num">${LEGISLATION.reduce((s,c)=>s+c.items.length,0)}</div><div class="lbl">${t('stat.echeances')}</div></div>`;
   // échéances : rapports obligatoires non faits (avec date) + prochaine étape de checklist
   const today=nowISO();
+  // Lisibilité : les échéances ne s'affichent que pour le jeune SÉLECTIONNÉ
+  const selEl=document.getElementById('dashDossier');
+  const actifs2=arr.filter(d=>d.statut!=='clos');
+  if(selEl){
+    const prev=selEl.value;
+    selEl.innerHTML=`<option value="">${LANG==='nl'?'— Kies een jongere —':'— Sélectionnez un jeune —'}</option>`+
+      actifs2.map(d=>`<option value="${d.id}"${d.id===prev?' selected':''}>${esc(d.nom)}</option>`).join('');
+  }
+  const selId=selEl?selEl.value:'';
   const deadlines=[];
-  arr.filter(d=>d.statut!=='clos').forEach(d=>{
+  actifs2.filter(d=>d.id===selId).forEach(d=>{
     (d.rapports||[]).forEach(r=>{
       if(!r.fait&&r.echeance){const rt=rtFind(r.id);
         deadlines.push({nom:d.nom,label:rt?tr(rt.label):r.id,date:r.echeance,id:d.id,over:r.echeance<today});}
@@ -1237,7 +1268,8 @@ function renderDashboard(){
   });
   deadlines.sort((a,b)=>{if(!a.date)return 1;if(!b.date)return -1;return a.date<b.date?-1:1;});
   const lateLbl=LANG==='nl'?'⚠️ Te laat':'⚠️ En retard';
-  document.getElementById('dashDeadlines').innerHTML=deadlines.length?deadlines.slice(0,10).map(x=>`
+  const selHint=`<p class="muted">${LANG==='nl'?'👆 Kies hierboven een jongere om ALLEEN zijn vervaldata te zien.':'👆 Sélectionnez un jeune ci-dessus pour afficher UNIQUEMENT ses échéances.'}</p>`;
+  document.getElementById('dashDeadlines').innerHTML=!selId?selHint:deadlines.length?deadlines.slice(0,10).map(x=>`
     <div class="deadline ${x.over?'crit':''}" onclick="openDossierDetail('${x.id}')" style="cursor:pointer">
       <strong>${esc(x.nom)}</strong> ${x.date?`<span class="badge ${x.over?'b-urgent':'b-cours'}">${x.over?lateLbl+' · ':'⏰ '}${esc(x.date)}</span>`:''}<br>
       <span class="muted">${esc(x.label)}</span>
@@ -1842,7 +1874,7 @@ function openTrad(prefill,dossierId){
     <textarea id="trIn" rows="6">${prefill?esc(prefill):''}</textarea>
     <div class="row" style="margin:.5rem 0">
       <button class="btn sm" onclick="doTrad()">➡️ ${LANG==='nl'?'Vertalen (woordenboek, direct)':'Traduire (dictionnaire, instantané)'}</button>
-      <button class="btn sec sm" onclick="doTradIA()" title="${LANG==='nl'?'Neuronale vertaling NL→FR, 100% op dit toestel (eenmalige download ±47 MB)':'Traduction neuronale NL→FR, 100% sur cet appareil (téléchargement unique ±47 Mo)'}">🧠 ${LANG==='nl'?'AI-vertaling (lokaal)':'Traduction IA (locale)'}</button>
+      <button class="btn sec sm" onclick="doTradIA()" title="${LANG==='nl'?'Neuronale vertaling NL→FR, 100% op dit toestel (eenmalige download ±47 MB)':'Traduction neuronale NL→FR, 100% sur cet appareil (téléchargement unique ±47 Mo)'}">🧠 ${LANG==='nl'?'AI-vertaling (lokaal, NL↔FR)':'Traduction IA (locale, NL↔FR)'}</button>
     </div>
     <div class="muted" id="trNote" style="font-size:.8rem;min-height:1.1em"></div>
     <label>${LANG==='nl'?'Vertaling (bewerkbaar)':'Traduction (modifiable)'}</label>
@@ -1882,6 +1914,7 @@ function saveTradToDossier(){
   const nl=document.getElementById('trIn').value.trim();
   d.notes='[Traduction FR — vérifiée par le tuteur]\n'+fr+'\n\n[Texte original néerlandais]\n'+nl;
   saveDossiers(arr);closeModal('trModal');openDossierDetail(TRAD_DOSSIER);
+  setTimeout(()=>openAnalyse(d.id,nl+'\n'+fr,'Traduction'),400);   // analyse systématique
 }
 function openFicheImport(){
   document.getElementById('ficheForm').reset();FICHE_PHOTO='';PDF_IMPORT=null;
@@ -1983,8 +2016,10 @@ function saveFiche(e){
     checklist:STD_CHECKLIST.map(t=>({t,done:false})),
     cree:nowISO()
   };
+  const anaTxt=PDF_IMPORT?PDF_IMPORT.fullNL:'';
   arr.push(d);saveDossiers(arr);PDF_IMPORT=null;closeModal('ficheModal');renderDossiers();renderDashboard();
   openDossierDetail(id);
+  if(anaTxt)setTimeout(()=>openAnalyse(id,anaTxt,'Fiche DVZ'),400);   // analyse systématique du document importé
 }
 
 /* ===== Sections de gestion dans le détail dossier ===== */
@@ -2139,7 +2174,7 @@ function printReleve(id){
 }
 
 /* ============ VERSION & MISES À JOUR ============ */
-const APP_VERSION='1.4.0';
+const APP_VERSION='1.5.0';
 window.APP_VERSION=APP_VERSION;   // expose pour tests.html (const non attache a window)
 Object.assign(I18N.fr,{"dash.matrix":"📊 Suivi par dossier","nav.guide":"🎓 Guide du tuteur","guide.title":"🎓 Guide du tuteur débutant — de la désignation aux 18 ans","guide.banner":"13 modules pas-à-pas : cours, actions à faire, documents à remettre (et à qui), rendez-vous, pièges à éviter. Contenu basé sur la réglementation en vigueur.","dash.q1":"📄 Nouveau MENA (fiche DVZ)","dash.q2":"📂 Mes dossiers","dash.q3":"⏰ Urgences & échéances","gs.ph":"🔍 Recherche globale (dossiers, lois, cas, ressources)…","ft.check":"🔄 Vérifier les mises à jour","ft.dl":"Télécharger l’application"});
 Object.assign(I18N.nl,{"dash.matrix":"📊 Opvolging per dossier","nav.guide":"🎓 Voogdengids","guide.title":"🎓 Gids voor de beginnende voogd — van aanstelling tot 18 jaar","guide.banner":"13 stap-voor-stapmodules: cursus, acties, documenten (en aan wie), afspraken, valkuilen. Inhoud gebaseerd op de geldende regelgeving.","dash.q1":"📄 Nieuwe NBMV (DVZ-fiche)","dash.q2":"📂 Mijn dossiers","dash.q3":"⏰ Urgenties & vervaldata","gs.ph":"🔍 Globaal zoeken (dossiers, wetten, gevallen, hulpbronnen)…","ft.check":"🔄 Updates controleren","ft.dl":"Applicatie downloaden"});
@@ -2572,11 +2607,22 @@ async function pjAdd(dossierId,input){
   const note=document.getElementById('pj_note');
   if(f.size>10*1024*1024){note.textContent=LANG==='nl'?'Max 10 MB per bestand.':'Max 10 Mo par fichier.';return;}
   note.textContent='⏳';
-  const {iv,ct}=await aesEncryptBytes(CRYPTO_KEY,await f.arrayBuffer());
+  const raw=await f.arrayBuffer();
+  const {iv,ct}=await aesEncryptBytes(CRYPTO_KEY,raw);
   const db=await idbOpen();
   const tx=db.transaction('pj','readwrite');
   tx.objectStore('pj').put({id:'P'+Date.now()+Math.floor(Math.random()*999),dossier:dossierId,name:f.name,type:f.type||'application/octet-stream',size:f.size,date:nowISO(),iv,ct});
   tx.oncomplete=()=>fillPj(dossierId);
+  // analyse systématique : si PDF, extraire le texte et détecter les changements
+  if((f.type==='application/pdf'||/\.pdf$/i.test(f.name))&&window.pdfjsLib){
+    try{
+      pdfjsLib.GlobalWorkerOptions.workerSrc='js/lib/pdf.worker.min.js';
+      const pdf=await pdfjsLib.getDocument({data:raw.slice(0)}).promise;
+      let full='';
+      for(let i=1;i<=pdf.numPages;i++){const pg=await pdf.getPage(i);const tc=await pg.getTextContent();full+=tc.items.map(it=>it.str).join(' ')+'\n';}
+      if(full.trim())setTimeout(()=>openAnalyse(dossierId,full,f.name),300);
+    }catch(e){console.warn('analyse PJ',e);}
+  }
 }
 async function pjList(dossierId){
   const db=await idbOpen();
@@ -2717,90 +2763,185 @@ function formatDocPro(text){
 }
 
 
-/* ============ v1.4 : TRADUCTION NEURONALE LOCALE (Bergamot / Firefox Translations) ============ */
-// NL→FR par pivot NL→EN→FR. Moteur WASM + modèles servis par l'app (ou le site
-// public pour l'exécutable) ; mis en cache après le 1er chargement ; AUCUNE
-// donnée envoyée à un serveur — la traduction s'exécute sur l'appareil.
-let BG_WORKER=null,BG_READY=false,BG_LOADING=false,BG_SEQ=0;
-const BG_FILES={
-  nlen:{model:'models/bergamot/nlen/model.nlen.intgemm.alphas.bin',lex:'models/bergamot/nlen/lex.50.50.nlen.s2t.bin',vocab:'models/bergamot/nlen/vocab.nlen.spm'},
-  enfr:{model:'models/bergamot/enfr/model.enfr.intgemm.alphas.bin',lex:'models/bergamot/enfr/lex.50.50.enfr.s2t.bin',vocab:'models/bergamot/enfr/vocab.enfr.spm'}
-};
-const BG_REMOTE='https://tseli485.github.io/cgra-mena-platform/';   // repli pour l'exécutable
+/* ============ v1.5 : TRADUCTION NEURONALE LOCALE BIDIRECTIONNELLE ============ */
+// NL→FR (pivot NL→EN→FR) et FR→NL (pivot FR→EN→NL). Moteur WASM + modèles
+// Mozilla servis par l'app (ou le site public pour l'exécutable), mis en cache
+// après le 1er chargement. AUCUNE donnée envoyée à un serveur.
+let BG_WORKER=null,BG_ENGINE=false,BG_DIRS={},BG_LOADING=false,BG_SEQ=0;
+const BG_PAIR_FILES=p=>({model:`models/bergamot/${p}/model.${p}.intgemm.alphas.bin`,lex:`models/bergamot/${p}/lex.50.50.${p}.s2t.bin`,vocab:`models/bergamot/${p}/vocab.${p}.spm`});
+const BG_DIR_PAIRS={nlfr:['nlen','enfr'],frnl:['fren','ennl']};
+const BG_REMOTE='https://tseli485.github.io/cgra-mena-platform/';
 async function bgFetch(path,onProgress){
   const cache=await caches.open('bergamot-v1');
   for(const base of ['',BG_REMOTE]){
     const url=base+path;
     try{
       let r=await cache.match(url);
-      if(!r){
-        r=await fetch(url);
-        if(!r.ok)throw 0;
-        await cache.put(url,r.clone());
-      }
-      onProgress&&onProgress(path);
+      if(!r){r=await fetch(url);if(!r.ok)throw 0;await cache.put(url,r.clone());}
+      onProgress&&onProgress();
       return await r.arrayBuffer();
-    }catch(e){/* essayer la source suivante */}
+    }catch(e){}
   }
   throw new Error((LANG==='nl'?'Model onbereikbaar: ':'Modèle inaccessible : ')+path);
 }
-function bgEnsure(status){
-  return new Promise(async(resolve,reject)=>{
-    if(BG_READY)return resolve();
-    if(BG_LOADING)return reject(new Error('loading'));
-    BG_LOADING=true;
-    try{
+function bgMsg(filter){return new Promise((res,rej)=>{
+  const h=e=>{const m=e.data;
+    if(m.op==='err'&&m.id==null){BG_WORKER.removeEventListener('message',h);rej(new Error(m.msg));}
+    else if(filter(m)){BG_WORKER.removeEventListener('message',h);res(m);}};
+  BG_WORKER.addEventListener('message',h);
+  setTimeout(()=>{BG_WORKER.removeEventListener('message',h);rej(new Error('timeout'));},90000);
+});}
+async function bgEnsure(dir,status){
+  if(BG_DIRS[dir])return;
+  if(BG_LOADING)throw new Error('loading');
+  BG_LOADING=true;
+  try{
+    if(!BG_WORKER){
       status(LANG==='nl'?'⏳ AI-motor laden…':'⏳ Chargement du moteur IA…');
       BG_WORKER=new Worker('js/bergamot-worker.js');
-      const engineReady=new Promise((res,rej)=>{
-        BG_WORKER.onmessage=e=>{if(e.data.op==='engine')res();if(e.data.op==='err')rej(new Error(e.data.msg));};
-        setTimeout(()=>rej(new Error('timeout moteur')),30000);
-      });
-      await engineReady;
-      let done=0;const total=6;
-      const prog=()=>{done++;status((LANG==='nl'?'⏳ Modellen laden ':'⏳ Téléchargement des modèles ')+done+'/'+total+' (≈47 Mo, une seule fois)');};
-      const [nm,nl_,nv,em,el,ev]=await Promise.all([
-        bgFetch(BG_FILES.nlen.model,prog),bgFetch(BG_FILES.nlen.lex,prog),bgFetch(BG_FILES.nlen.vocab,prog),
-        bgFetch(BG_FILES.enfr.model,prog),bgFetch(BG_FILES.enfr.lex,prog),bgFetch(BG_FILES.enfr.vocab,prog)
-      ]);
-      status(LANG==='nl'?'⏳ Modellen initialiseren…':'⏳ Initialisation des modèles…');
-      const ready=new Promise((res,rej)=>{
-        BG_WORKER.onmessage=e=>{if(e.data.op==='ready')res();if(e.data.op==='err')rej(new Error(e.data.msg));};
-        setTimeout(()=>rej(new Error('timeout init')),60000);
-      });
-      BG_WORKER.postMessage({op:'load',nlen:{model:nm,lex:nl_,vocab:nv},enfr:{model:em,lex:el,vocab:ev}},[nm,nl_,nv,em,el,ev]);
-      await ready;
-      BG_READY=true;BG_LOADING=false;
-      status('✅ '+(LANG==='nl'?'AI klaar (100 % lokaal)':'IA prête (100 % locale)'));
-      resolve();
-    }catch(e){BG_LOADING=false;status('⚠️ '+e.message);reject(e);}
-  });
+      await bgMsg(m=>m.op==='engine');
+      BG_ENGINE=true;
+    }
+    const [pa,pb]=BG_DIR_PAIRS[dir];
+    let done=0;const prog=()=>{done++;status((LANG==='nl'?'⏳ Modellen laden ':'⏳ Téléchargement des modèles ')+done+'/6 (≈47 Mo, une seule fois)');};
+    const fa=BG_PAIR_FILES(pa),fb=BG_PAIR_FILES(pb);
+    const [am,al,av,bm,bl,bv]=await Promise.all([
+      bgFetch(fa.model,prog),bgFetch(fa.lex,prog),bgFetch(fa.vocab,prog),
+      bgFetch(fb.model,prog),bgFetch(fb.lex,prog),bgFetch(fb.vocab,prog)]);
+    status(LANG==='nl'?'⏳ Modellen initialiseren…':'⏳ Initialisation des modèles…');
+    const ready=bgMsg(m=>m.op==='ready'&&m.key===dir);
+    BG_WORKER.postMessage({op:'load',key:dir,a:{model:am,lex:al,vocab:av},b:{model:bm,lex:bl,vocab:bv}},[am,al,av,bm,bl,bv]);
+    await ready;
+    BG_DIRS[dir]=true;
+    status('✅ '+(LANG==='nl'?'AI klaar (100 % lokaal)':'IA prête (100 % locale)'));
+  }finally{BG_LOADING=false;}
 }
-function bgTranslate(text){
+function bgTranslate(dir,text){
   return new Promise((resolve,reject)=>{
     const id=++BG_SEQ;
-    const h=e=>{
-      if(e.data.id!==id)return;
-      BG_WORKER.removeEventListener('message',h);
-      if(e.data.op==='res')resolve(e.data.text);else reject(new Error(e.data.msg));
-    };
+    const h=e=>{if(e.data.id!==id)return;BG_WORKER.removeEventListener('message',h);
+      if(e.data.op==='res')resolve(e.data.text);else reject(new Error(e.data.msg));};
     BG_WORKER.addEventListener('message',h);
-    BG_WORKER.postMessage({op:'tr',id,text});
+    BG_WORKER.postMessage({op:'tr',id,key:dir,text});
     setTimeout(()=>{BG_WORKER.removeEventListener('message',h);reject(new Error('timeout'));},120000);
   });
 }
 async function doTradIA(){
   const st=m=>{document.getElementById('trNote').textContent=m;};
+  const dir=document.getElementById('trDir').value==='frnl'?'frnl':'nlfr';
   try{
-    await bgEnsure(st);
+    await bgEnsure(dir,st);
     st(LANG==='nl'?'🧠 Vertalen…':'🧠 Traduction…');
-    const out=await bgTranslate(document.getElementById('trIn').value);
+    const out=await bgTranslate(dir,document.getElementById('trIn').value);
     document.getElementById('trOut').value=out;
     const prev=document.getElementById('trPrev');
     prev.innerHTML='<strong>'+(LANG==='nl'?'AI-vertaling (neuronaal, lokaal) :':'Traduction IA (neuronale, locale) :')+'</strong>\n'+esc(out);
     prev.style.display='block';
-    st('✅ '+(LANG==='nl'?'Klaar — neuronale vertaling, kwaliteit superieur aan het woordenboek.':'Terminé — traduction neuronale, qualité supérieure au dictionnaire.'));
+    st('✅ '+(LANG==='nl'?'Klaar — neuronale vertaling.':'Terminé — traduction neuronale.'));
   }catch(e){if(e.message!=='loading')st('⚠️ '+e.message);}
+}
+
+/* ============ v1.5 : ANALYSE AUTOMATIQUE DES DOCUMENTS & PROPAGATION ============ */
+// CHAQUE document introduit (fiche PDF, traduction, pièce jointe PDF, collage
+// manuel) est analysé. Les changements détectés (statut, adresse, école…) sont
+// proposés au tuteur puis RÉPERCUTÉS dans tout le dossier : fiche, juge de paix,
+// checklist, agenda, conseils juridiques. Tout est tracé dans le journal.
+function ckSet(d,label){const c=(d.checklist||[]).find(x=>x.t===label);if(c&&!c.done){c.done=true;return true;}return false;}
+function addConseil(d,obj){d.conseils=d.conseils||[];if(!d.conseils.some(x=>x.fr===obj.fr)){d.conseils.push({fr:obj.fr,nl:obj.nl,date:nowISO()});return true;}return false;}
+function addRdvAuto(d,date,titre){d.rdv=d.rdv||[];if(!d.rdv.some(r=>rdvLbl(r.titre)===tr(titre)&&!r.fait)){d.rdv.push({date,titre,lieu:'',fait:false});d.rdv.sort((a,b)=>a.date<b.date?-1:1);}}
+const DOC_DETECTORS=[
+ {id:'refugie',re:/(reconnu\s?e?\s(comme\s)?r[ée]fugi[ée]|statut de r[ée]fugi[ée]|qualit[ée] de r[ée]fugi[ée].{0,20}reconnue|erkend als vluchteling|vluchtelingenstatus.{0,20}(toegekend|erkend))/i,
+  label:{fr:"Statut de RÉFUGIÉ reconnu détecté",nl:"Erkenning als VLUCHTELING gedetecteerd"},
+  apply(d){d.statutJur={fr:'Réfugié reconnu',nl:'Erkend vluchteling'};
+    addConseil(d,{fr:"⚖️ Réfugié reconnu : la famille dispose d'UN AN (art. 10 L.15/12/1980) pour demander le regroupement familial SANS conditions de logement/ressources. Informez la famille immédiatement (Module 8 du Guide). Demandez aussi le titre de voyage et la carte A à la commune.",nl:"⚖️ Erkend vluchteling: de familie heeft ÉÉN JAAR (art. 10 W.15/12/1980) om gezinshereniging aan te vragen ZONDER woonst-/inkomensvoorwaarden. Informeer de familie onmiddellijk (Module 8). Vraag ook het reisdocument en de A-kaart aan."});
+    addRdvAuto(d,addDays(nowISO(),300),{fr:"⚠️ Vérifier que la demande de regroupement familial est partie (délai 1 an)",nl:"⚠️ Nagaan of de aanvraag gezinshereniging vertrokken is (termijn 1 jaar)"});
+    addRdvAuto(d,addDays(nowISO(),14),{fr:"Commune : carte A + titre de voyage réfugié",nl:"Gemeente: A-kaart + reisdocument vluchteling"});}},
+ {id:'subsidiaire',re:/(protection subsidiaire|subsidiaire bescherming)/i,
+  label:{fr:"PROTECTION SUBSIDIAIRE détectée",nl:"SUBSIDIAIRE BESCHERMING gedetecteerd"},
+  apply(d){d.statutJur={fr:'Protection subsidiaire',nl:'Subsidiaire bescherming'};
+    addConseil(d,{fr:"⚖️ Protection subsidiaire : titre de séjour limité (carte A, 1 an renouvelable). Le regroupement familial reste possible (délai d'un an pour conditions allégées). Surveillez chaque renouvellement.",nl:"⚖️ Subsidiaire bescherming: beperkt verblijf (A-kaart, 1 jaar verlengbaar). Gezinshereniging blijft mogelijk. Bewaak elke verlenging."});
+    addRdvAuto(d,addDays(nowISO(),330),{fr:"Renouvellement de la carte A (protection subsidiaire)",nl:"Verlenging A-kaart (subsidiaire bescherming)"});}},
+ {id:'refus',re:/(d[ée]cision (de )?refus|refus (du|de la) (CGRA|protection)|weigering van de (vluchtelingenstatus|asielaanvraag|internationale bescherming)|negatieve beslissing)/i,
+  label:{fr:"DÉCISION DE REFUS détectée",nl:"WEIGERINGSBESLISSING gedetecteerd"},
+  apply(d){d.statutJur={fr:'Refus — recours possible',nl:'Weigering — beroep mogelijk'};
+    addConseil(d,{fr:"🚨 Refus : le RECOURS au CCE doit être introduit dans les 30 JOURS de la notification. Contactez l'avocat AUJOURD'HUI. En parallèle : vérifier la procédure « solution durable » (art. 61/14) si pas encore demandée.",nl:"🚨 Weigering: het BEROEP bij de RvV moet binnen 30 DAGEN worden ingediend. Contacteer de advocaat VANDAAG. Parallel: procedure « duurzame oplossing » (art. 61/14) nagaan."});
+    addRdvAuto(d,addDays(nowISO(),3),{fr:"🚨 Avocat : préparer le recours CCE (délai 30 jours !)",nl:"🚨 Advocaat: RvV-beroep voorbereiden (termijn 30 dagen!)"});}},
+ {id:'oqt',re:/(ordre de quitter le territoire|bevel om het grondgebied te verlaten|\bOQT\b|\bBGV\b)/i,
+  label:{fr:"ORDRE DE QUITTER LE TERRITOIRE détecté",nl:"BEVEL OM HET GRONDGEBIED TE VERLATEN gedetecteerd"},
+  apply(d){addConseil(d,{fr:"🚨 OQT reçu : consultez l'avocat immédiatement (recours possible). Un MENA ne peut être éloigné sans solution durable ni garanties d'accueil. Vérifiez le délai mentionné sur le document.",nl:"🚨 BGV ontvangen: raadpleeg onmiddellijk de advocaat (beroep mogelijk). Een NBMV kan niet verwijderd worden zonder duurzame oplossing."});
+    addRdvAuto(d,addDays(nowISO(),2),{fr:"🚨 Avocat : analyse de l'OQT et recours",nl:"🚨 Advocaat: analyse BGV en beroep"});}},
+ {id:'annexe26',re:/(annexe 26|bijlage 26)/i,
+  label:{fr:"Annexe 26 (demande de protection internationale) détectée",nl:"Bijlage 26 (verzoek internationale bescherming) gedetecteerd"},
+  apply(d){ckSet(d,"Demande de protection internationale introduite");
+    addConseil(d,{fr:"📋 Annexe 26 reçue : la demande de PI est introduite. Préparez l'audition CGRA avec le jeune et l'avocat (récit chronologique, preuves). L'attestation d'immatriculation suivra.",nl:"📋 Bijlage 26 ontvangen: het verzoek om IB is ingediend. Bereid het CGVS-gehoor voor met jongere en advocaat."});}},
+ {id:'carteA',re:/(carte A\b|A[- ]kaart)/i,
+  label:{fr:"Carte A (titre de séjour) détectée",nl:"A-kaart (verblijfstitel) gedetecteerd"},
+  apply(d){d.statutJur=d.statutJur||{fr:'Carte A',nl:'A-kaart'};
+    addRdvAuto(d,addDays(nowISO(),330),{fr:"Renouvellement de la carte A (avant expiration)",nl:"Verlenging A-kaart (vóór vervaldatum)"});
+    addConseil(d,{fr:"🪪 Carte A obtenue : notez la date d'expiration et demandez le renouvellement au moins 30 jours avant. Conservez une copie dans les pièces jointes.",nl:"🪪 A-kaart verkregen: noteer de vervaldatum en vraag de verlenging min. 30 dagen vooraf."});}},
+ {id:'adresse',re:/(?:adres(?:se)?|woont|verblijft|habite|r[ée]side|transf[ée]r[ée]|overgeplaatst|gevestigd|domicili)[^.;]{0,80}?\b([1-9][0-9]{3})\s+([A-ZÀ-Ü][A-Za-zà-ÿ' -]{2,28})/i,
+  label:{fr:"CHANGEMENT D'ADRESSE détecté",nl:"ADRESWIJZIGING gedetecteerd"},
+  apply(d,m){const cp=m[1],ville=m[2].trim();
+    d.fiche=d.fiche||{};d.fiche.adresseBE=m[0].replace(/^[\s\S]*(?:adresse|adres(?:se)?|woont|verblijft|habite|r[ée]sid\w*|domicili\w*|transf[ée]r[ée]\w*|overgeplaatst|gevestigd)\s*:?\s*/i,'').trim()||cp+' '+ville;
+    d.jugePaix=d.jugePaix||{};const oldCp=d.jugePaix.cp;d.jugePaix.cp=cp;
+    addConseil(d,{fr:"📍 Nouvelle adresse ("+cp+" "+ville+") répercutée dans la fiche. "+(oldCp&&oldCp!==cp?"Le code postal a changé ("+oldCp+" → "+cp+") : le JUGE DE PAIX compétent change probablement — relancez « Trouver le juge de paix » dans le dossier et informez l'ancien et le nouveau canton + le Service des Tutelles.":"Vérifiez le juge de paix compétent via le bouton du dossier."),nl:"📍 Nieuw adres ("+cp+" "+ville+") doorgevoerd in de fiche. "+(oldCp&&oldCp!==cp?"De postcode wijzigde ("+oldCp+" → "+cp+"): de bevoegde VREDERECHTER wijzigt wellicht — zoek hem opnieuw op en verwittig beide kantons + de Dienst Voogdij.":"Controleer de bevoegde vrederechter.")});
+    addRdvAuto(d,addDays(nowISO(),7),{fr:"Notifier le changement d'adresse (juge de paix + Tutelles + mutuelle + école)",nl:"Adreswijziging melden (vrederechter + Voogdij + ziekenfonds + school)"});}},
+ {id:'ecole',re:/(inscription scolaire|inscrit\s?e? [àa] l'[ée]cole|ingeschreven (in|op) .{0,20}school|schoolinschrijving|\bDASPA\b|\bOKAN\b)/i,
+  label:{fr:"Inscription scolaire détectée",nl:"Schoolinschrijving gedetecteerd"},
+  apply(d){ckSet(d,"Inscription scolaire effectuée");
+    addConseil(d,{fr:"🏫 Inscription scolaire actée : conservez l'attestation (pièce jointe) — élément clé du dossier d'intégration pour la solution durable et le séjour.",nl:"🏫 Schoolinschrijving genoteerd: bewaar het attest — sleutelelement van het integratiedossier."});}},
+ {id:'mutuelle',re:/(affili[ée]e? [àa] (la |une )?mutu|mutualit[ée]|aangesloten bij .{0,20}ziekenfonds|ziekenfonds.{0,20}aangesloten)/i,
+  label:{fr:"Affiliation mutuelle détectée",nl:"Aansluiting ziekenfonds gedetecteerd"},
+  apply(d){ckSet(d,"Couverture médicale (mutuelle/AMU) ouverte");}},
+ {id:'transfert',re:/(transf[ée]r[ée]?|overplaatsing|overgeplaatst)[^.;]{0,40}(centre|centrum|\bILA\b|\bLOI\b)/i,
+  label:{fr:"Transfert de centre d'accueil détecté",nl:"Transfer van opvangcentrum gedetecteerd"},
+  apply(d){addConseil(d,{fr:"🏠 Transfert de centre : mettez à jour l'adresse, prévenez l'école, la mutuelle, le juge de paix et le Service des Tutelles, et rencontrez le nouveau référent dans la semaine.",nl:"🏠 Transfer: werk het adres bij, verwittig school, ziekenfonds, vrederechter en Dienst Voogdij, en ontmoet de nieuwe referent binnen de week."});
+    addRdvAuto(d,addDays(nowISO(),7),{fr:"Visite du nouveau centre + rencontre du référent",nl:"Bezoek nieuw centrum + ontmoeting referent"});}}
+];
+let ANA={};
+function analyzeDocText(txt){
+  const found=[];const t=String(txt||'');
+  DOC_DETECTORS.forEach(D=>{const m=t.match(D.re);if(m)found.push({D,m});});
+  return found;
+}
+function openAnalyse(dossierId,txt,source){
+  const found=analyzeDocText(txt);
+  ANA={dossierId,txt,source,found};
+  const NL=LANG==='nl';
+  document.getElementById('anaBox').innerHTML=`
+    <h3>🔎 ${NL?'Analyse van het document':'Analyse du document'} <span class="muted" style="font-size:.8rem">(${esc(source)})</span></h3>
+    ${found.length?`
+      <p class="muted">${NL?'Gedetecteerde wijzigingen — vink aan wat moet worden DOORGEVOERD in het hele dossier (fiche, vrederechter, checklist, agenda, juridische adviezen) :':'Changements détectés — cochez ce qui doit être RÉPERCUTÉ dans tout le dossier (fiche, juge de paix, checklist, agenda, conseils juridiques) :'}</p>
+      ${found.map((x,i)=>`<label class="check-line"><input type="checkbox" id="ana_${i}" checked>
+        <span><strong>${esc(tr(x.D.label))}</strong><br><span class="muted" style="font-size:.78rem">« …${esc(String(x.m[0]).slice(0,110))}… »</span></span></label>`).join('')}
+      <button class="btn" style="margin-top:.8rem" onclick="applyAnalyse()">✅ ${NL?'Doorvoeren in het dossier':'Répercuter dans le dossier'}</button>`
+    :`<p class="muted">${NL?'Geen statuut-/adres-/procedurewijziging gedetecteerd in dit document. Het blijft uiteraard beschikbaar in het dossier.':'Aucun changement de statut/adresse/procédure détecté dans ce document. Il reste bien sûr disponible dans le dossier.'}</p>`}
+  `;
+  openModal('anaModal');
+}
+function applyAnalyse(){
+  const arr=loadDossiers();const d=arr.find(x=>x.id===ANA.dossierId);if(!d)return;
+  d.journal=d.journal||[];
+  let n=0;
+  ANA.found.forEach((x,i)=>{
+    const cb=document.getElementById('ana_'+i);
+    if(cb&&cb.checked){
+      x.D.apply(d,x.m);n++;
+      d.journal.unshift({date:nowISO(),source:ANA.source,label:{fr:x.D.label.fr,nl:x.D.label.nl}});
+    }
+  });
+  saveDossiers(arr);closeModal('anaModal');
+  renderDashboard();renderDossiers();openDossierDetail(d.id);
+}
+function dismissConseil(id,i){const arr=loadDossiers();const d=arr.find(x=>x.id===id);d.conseils.splice(i,1);saveDossiers(arr);openDossierDetail(id);}
+function openAnalyseInput(dossierId){
+  const NL=LANG==='nl';
+  document.getElementById('anaBox').innerHTML=`
+    <h3>🔎 ${NL?'Een document analyseren':'Analyser un document'}</h3>
+    <p class="muted">${NL?'Plak de tekst van GELIJK WELK document (beslissing, brief, attest…). De wijzigingen worden gedetecteerd en doorgevoerd in het dossier.':'Collez le texte de N\'IMPORTE QUEL document (décision, courrier, attestation…). Les changements seront détectés et répercutés dans le dossier.'}</p>
+    <textarea id="anaIn" rows="7"></textarea>
+    <button class="btn" style="margin-top:.6rem" onclick="openAnalyse('${dossierId}',document.getElementById('anaIn').value,'${NL?'Handmatig':'Manuel'}')">🔎 ${NL?'Analyseren':'Analyser'}</button>`;
+  openModal('anaModal');
 }
 
 /* ============ UTIL ============ */

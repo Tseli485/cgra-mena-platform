@@ -2174,7 +2174,7 @@ function printReleve(id){
 }
 
 /* ============ VERSION & MISES À JOUR ============ */
-const APP_VERSION='1.5.0';
+const APP_VERSION='1.5.1';
 window.APP_VERSION=APP_VERSION;   // expose pour tests.html (const non attache a window)
 Object.assign(I18N.fr,{"dash.matrix":"📊 Suivi par dossier","nav.guide":"🎓 Guide du tuteur","guide.title":"🎓 Guide du tuteur débutant — de la désignation aux 18 ans","guide.banner":"13 modules pas-à-pas : cours, actions à faire, documents à remettre (et à qui), rendez-vous, pièges à éviter. Contenu basé sur la réglementation en vigueur.","dash.q1":"📄 Nouveau MENA (fiche DVZ)","dash.q2":"📂 Mes dossiers","dash.q3":"⏰ Urgences & échéances","gs.ph":"🔍 Recherche globale (dossiers, lois, cas, ressources)…","ft.check":"🔄 Vérifier les mises à jour","ft.dl":"Télécharger l’application"});
 Object.assign(I18N.nl,{"dash.matrix":"📊 Opvolging per dossier","nav.guide":"🎓 Voogdengids","guide.title":"🎓 Gids voor de beginnende voogd — van aanstelling tot 18 jaar","guide.banner":"13 stap-voor-stapmodules: cursus, acties, documenten (en aan wie), afspraken, valkuilen. Inhoud gebaseerd op de geldende regelgeving.","dash.q1":"📄 Nieuwe NBMV (DVZ-fiche)","dash.q2":"📂 Mijn dossiers","dash.q3":"⏰ Urgenties & vervaldata","gs.ph":"🔍 Globaal zoeken (dossiers, wetten, gevallen, hulpbronnen)…","ft.check":"🔄 Updates controleren","ft.dl":"Applicatie downloaden"});
@@ -2893,6 +2893,44 @@ const DOC_DETECTORS=[
  {id:'mutuelle',re:/(affili[ée]e? [àa] (la |une )?mutu|mutualit[ée]|aangesloten bij .{0,20}ziekenfonds|ziekenfonds.{0,20}aangesloten)/i,
   label:{fr:"Affiliation mutuelle détectée",nl:"Aansluiting ziekenfonds gedetecteerd"},
   apply(d){ckSet(d,"Couverture médicale (mutuelle/AMU) ouverte");}},
+ {id:'dublin',re:/(r[èe]glement dublin|dublin\s?(iii|3)?\b|(re)?prise en charge.{0,40}[ée]tat membre|overname(verzoek)?|terugname(verzoek)?.{0,30}lidstaat)/i,
+  label:{fr:"Procédure DUBLIN détectée",nl:"DUBLIN-procedure gedetecteerd"},
+  apply(d){addConseil(d,{fr:"⚖️ Dublin : vérifiez avec l'avocat l'État responsable. Si un membre de la famille séjourne légalement dans un autre État membre, l'art. 8 Dublin III rend cet État responsable (intérêt supérieur du MENA). Délai de transfert : 6 mois après acceptation. Documentez le lien familial immédiatement.",nl:"⚖️ Dublin: controleer met de advocaat de verantwoordelijke staat. Verblijft een gezinslid wettig in een andere lidstaat, dan is die staat verantwoordelijk (art. 8 Dublin III). Transfertermijn: 6 maanden. Documenteer de familieband onmiddellijk."});
+    addRdvAuto(d,addDays(nowISO(),5),{fr:"Avocat : analyse Dublin (art. 8 — famille en UE ?)",nl:"Advocaat: Dublin-analyse (art. 8 — familie in de EU?)"});}},
+ {id:'convoc_cgra',re:/(convocation.{0,60}(CGRA|audition)|audition personnelle|oproeping.{0,60}(CGVS|gehoor)|persoonlijk onderhoud)/i,
+  label:{fr:"CONVOCATION À L'AUDITION CGRA détectée",nl:"OPROEPING CGVS-GEHOOR gedetecteerd"},
+  apply(d,m){const dm=String(ANA.txt||'').match(/\b([0-3]?\d)[\/.\-]([01]?\d)[\/.\-](20\d\d)\b/);
+    const dt=dm?`${dm[3]}-${String(dm[2]).padStart(2,'0')}-${String(dm[1]).padStart(2,'0')}`:addDays(nowISO(),21);
+    addRdvAuto(d,dt,{fr:"🛂 Audition CGRA — présence du tuteur OBLIGATOIRE (+ avocat + interprète)",nl:"🛂 CGVS-gehoor — aanwezigheid voogd VERPLICHT (+ advocaat + tolk)"});
+    addRdvAuto(d,addDays(nowISO(),7),{fr:"Préparation de l'audition CGRA avec le jeune et l'avocat",nl:"Voorbereiding CGVS-gehoor met jongere en advocaat"});
+    addConseil(d,{fr:"🛂 Audition CGRA planifiée"+(dm?" le "+dm[0]:"")+" : votre présence est obligatoire. Préparez le récit chronologique avec le jeune et l'avocat ; rassemblez les preuves ; demandez un interprète dans la langue exacte du jeune.",nl:"🛂 CGVS-gehoor gepland"+(dm?" op "+dm[0]:"")+": uw aanwezigheid is verplicht. Bereid het chronologisch relaas voor met jongere en advocaat."});}},
+ {id:'avocat',re:/(avocat (d[ée]sign[ée]|pro deo)|d[ée]signation d'un avocat|aanstelling.{0,25}advocaat|aangestelde advocaat|pro[- ]?deoadvocaat)/i,
+  label:{fr:"Désignation d'un avocat détectée",nl:"Aanstelling advocaat gedetecteerd"},
+  apply(d){addConseil(d,{fr:"⚖️ Avocat désigné : notez ses coordonnées dans les notes du dossier, transmettez-lui la fiche DVZ et tenez-le informé de chaque document reçu (analyse partagée).",nl:"⚖️ Advocaat aangesteld: noteer zijn gegevens, bezorg hem de DVZ-fiche en houd hem op de hoogte van elk document."});}},
+ {id:'convoc_police',re:/(convocation.{0,40}(police|commissariat|audition salduz)|uitnodiging.{0,40}(politie|verhoor)|verhoor.{0,30}politie)/i,
+  label:{fr:"CONVOCATION POLICE détectée",nl:"POLITIEOPROEPING gedetecteerd"},
+  apply(d){addConseil(d,{fr:"🚨 Convocation police : règles SALDUZ — le mineur NE PEUT PAS être auditionné sans concertation confidentielle préalable avec un avocat ni sans sa présence (il ne peut pas y renoncer). Permanence avocat : 0800 90 808. Exigez un interprète. Soyez présent.",nl:"🚨 Politieoproeping: SALDUZ — de minderjarige KAN NIET verhoord worden zonder voorafgaand vertrouwelijk overleg met een advocaat en diens aanwezigheid. Permanentie: 0800 90 808. Eis een tolk."});
+    addRdvAuto(d,addDays(nowISO(),1),{fr:"🚨 Organiser l'assistance Salduz (avocat 0800 90 808) avant l'audition",nl:"🚨 Salduz-bijstand regelen (advocaat 0800 90 808) vóór het verhoor"});}},
+ {id:'age_majeur',re:/(d[ée]clar[ée]e? majeur|test d'[âa]ge.{0,80}(majeur|18 ans)|leeftijdsonderzoek.{0,80}meerderjarig|meerderjarig verklaard)/i,
+  label:{fr:"DÉCLARÉ MAJEUR après test d'âge — URGENT",nl:"MEERDERJARIG VERKLAARD na leeftijdstest — DRINGEND"},
+  apply(d){addConseil(d,{fr:"🚨 Déclaré majeur : la tutelle va prendre fin et l'accueil MENA aussi. RECOURS possible (Conseil d'État, délai court) — contactez l'avocat AUJOURD'HUI. Vérifiez la marge d'erreur scientifique du test (souvent ±2 ans) et tout document d'identité prouvant la minorité. Anticipez l'hébergement adulte en parallèle.",nl:"🚨 Meerderjarig verklaard: de voogdij en de NBMV-opvang eindigen. BEROEP mogelijk (Raad van State, korte termijn) — contacteer de advocaat VANDAAG. Controleer de wetenschappelijke foutmarge (±2 jaar) en elk identiteitsdocument."});
+    addRdvAuto(d,addDays(nowISO(),1),{fr:"🚨 Avocat : recours contre le résultat du test d'âge",nl:"🚨 Advocaat: beroep tegen leeftijdstest"});}},
+ {id:'ordo_tutelle',re:/(ordonnance de d[ée]signation|d[ée]sign[ée]e? (comme|en qualit[ée] de) tuteur|aanstelling als voogd|beschikking.{0,30}voogd)/i,
+  label:{fr:"Ordonnance de désignation du tuteur détectée",nl:"Aanstellingsbeschikking voogd gedetecteerd"},
+  apply(d){ckSet(d,"Désignation du tuteur confirmée");
+    addConseil(d,{fr:"📋 Désignation confirmée : le RAPPORT INITIAL doit partir dans les 15 JOURS (Service des Tutelles + juge de paix). Conservez l'ordonnance (pièce jointe) — elle sert pour la banque, l'école, la mutuelle.",nl:"📋 Aanstelling bevestigd: het EERSTE VERSLAG moet binnen 15 DAGEN vertrekken (Dienst Voogdij + vrederechter). Bewaar de beschikking — nodig voor bank, school, ziekenfonds."});}},
+ {id:'attest_immat',re:/(attestation d'immatriculation|carte orange|attest van immatriculatie|oranje kaart)/i,
+  label:{fr:"Attestation d'immatriculation (carte orange) détectée",nl:"Attest van immatriculatie (oranje kaart) gedetecteerd"},
+  apply(d){d.statutJur=d.statutJur||{fr:'Attestation d\'immatriculation',nl:'Attest van immatriculatie'};
+    addRdvAuto(d,addDays(nowISO(),100),{fr:"Renouvellement de l'attestation d'immatriculation (avant expiration)",nl:"Verlenging attest van immatriculatie (vóór vervaldatum)"});
+    addConseil(d,{fr:"🪪 Attestation d'immatriculation reçue : notez la date d'expiration exacte et demandez le renouvellement à la commune AVANT l'échéance (sans titre valable, risque pour l'école, la mutuelle, le travail étudiant).",nl:"🪪 Attest ontvangen: noteer de exacte vervaldatum en vraag de verlenging VÓÓR de vervaldag."});}},
+ {id:'disparition',re:/(disparition|a disparu|port[ée]e? disparu|signalement.{0,40}disparition|verdwijning|verdwenen|vermist)/i,
+  label:{fr:"DISPARITION signalée — protocole d'urgence",nl:"VERDWIJNING gemeld — noodprotocol"},
+  apply(d){addConseil(d,{fr:"🚨 Disparition : protocole 24 h OBLIGATOIRE — 1) police (PV), 2) Child Focus 116 000 (24h/24), 3) Service des Tutelles, 4) Fedasil. Fournissez photo récente + contacts + réseaux sociaux. La tutelle NE s'arrête PAS : continuez les rapports. Au retour : entretien sans reproche, chercher la cause (réseau ? dette ? famille ailleurs ?).",nl:"🚨 Verdwijning: 24u-protocol VERPLICHT — 1) politie (PV), 2) Child Focus 116 000, 3) Dienst Voogdij, 4) Fedasil. Bezorg recente foto + contacten. De voogdij stopt NIET."});
+    addRdvAuto(d,addDays(nowISO(),1),{fr:"🚨 Suivi du signalement de disparition (police + Child Focus + Tutelles)",nl:"🚨 Opvolging melding verdwijning"});}},
+ {id:'sol_durable',re:/(solution durable|duurzame oplossing|61\/14)/i,
+  label:{fr:"Procédure SOLUTION DURABLE détectée",nl:"Procedure DUURZAME OPLOSSING gedetecteerd"},
+  apply(d){addConseil(d,{fr:"🧭 Solution durable (art. 61/14 et s.) : constituez le dossier d'intégration (bulletins, attestations, activités, identité) — c'est sa qualité qui fait la différence. Préparez chaque entretien MINTEH avec le jeune. La demande doit être faite PENDANT la minorité.",nl:"🧭 Duurzame oplossing (art. 61/14 e.v.): bouw het integratiedossier op (rapporten, attesten, identiteit). Bereid elk MINTEH-gesprek voor. De aanvraag moet TIJDENS de minderjarigheid gebeuren."});}},
  {id:'transfert',re:/(transf[ée]r[ée]?|overplaatsing|overgeplaatst)[^.;]{0,40}(centre|centrum|\bILA\b|\bLOI\b)/i,
   label:{fr:"Transfert de centre d'accueil détecté",nl:"Transfer van opvangcentrum gedetecteerd"},
   apply(d){addConseil(d,{fr:"🏠 Transfert de centre : mettez à jour l'adresse, prévenez l'école, la mutuelle, le juge de paix et le Service des Tutelles, et rencontrez le nouveau référent dans la semaine.",nl:"🏠 Transfer: werk het adres bij, verwittig school, ziekenfonds, vrederechter en Dienst Voogdij, en ontmoet de nieuwe referent binnen de week."});

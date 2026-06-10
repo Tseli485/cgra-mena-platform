@@ -46,6 +46,11 @@ document.getElementById('app').addEventListener('load',async()=>{
     const {iv,ct}=await W.aesEncryptBytes(k,data);
     const back=new Uint8Array(await W.aesDecryptBytes(k,iv,ct));
     return new TextDecoder().decode(back)==='document officiel é€';});
+  // 9. b64 binaire (sauvegarde v2 des pièces jointes) aller-retour
+  await T('bufToB64/b64ToBuf : round-trip',()=>{
+    const src=new Uint8Array([0,1,2,255,128,66]);
+    const back=new Uint8Array(W.b64ToBuf(W.bufToB64(src.buffer)));
+    return back.length===6&&back[3]===255&&back[5]===66;});
   const h=document.createElement('h2');h.textContent=`Résultat : ${pass}/${total}`;h.className=pass===total?'ok':'ko';R.before(h);
 });
 </script></body></html>

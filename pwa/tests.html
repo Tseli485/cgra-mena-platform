@@ -35,6 +35,17 @@ document.getElementById('app').addEventListener('load',async()=>{
   // 6. version cohérente
   await T('APP_VERSION = version.json',async()=>{
     const v=(await (await fetch('version.json')).json()).version;return v===W.APP_VERSION;});
+  // 7. calcul des frais (km × tarif + parking + autres)
+  await T('fraisTotal : 130 km × 0,428 + 8 + 2 = 65,64',()=>{
+    return Math.abs(W.fraisTotal({km:130,pkm:0.428,park:8,autres:2})-65.64)<0.005;});
+  // 8. chiffrement binaire (pièces jointes) aller-retour
+  await T('aesEncryptBytes/aesDecryptBytes : round-trip',async()=>{
+    const salt=W.crypto.getRandomValues(new Uint8Array(16));
+    const k=await W.deriveKey('pj-test',salt);
+    const data=new TextEncoder().encode('document officiel é€');
+    const {iv,ct}=await W.aesEncryptBytes(k,data);
+    const back=new Uint8Array(await W.aesDecryptBytes(k,iv,ct));
+    return new TextDecoder().decode(back)==='document officiel é€';});
   const h=document.createElement('h2');h.textContent=`Résultat : ${pass}/${total}`;h.className=pass===total?'ok':'ko';R.before(h);
 });
 </script></body></html>

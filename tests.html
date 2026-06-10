@@ -1,0 +1,40 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>Tests — MENA Tuteur</title>
+<style>body{font-family:system-ui;padding:2rem;max-width:760px;margin:auto}li{margin:.3rem 0}.ok{color:#15803d}.ko{color:#b91c1c}</style></head>
+<body><h1>🧪 Tests automatiques</h1><p>Vérifie chiffrement, traduction et import de fiche (dans un iframe de l'app).</p>
+<ul id="r"></ul>
+<iframe id="app" src="index.html" style="width:1px;height:1px;opacity:0"></iframe>
+<script>
+const R=document.getElementById('r');
+function log(name,ok,msg){const li=document.createElement('li');li.className=ok?'ok':'ko';li.textContent=(ok?'✅ ':'❌ ')+name+(msg?' — '+msg:'');R.appendChild(li);return ok;}
+document.getElementById('app').addEventListener('load',async()=>{
+  const W=document.getElementById('app').contentWindow;
+  let pass=0,total=0;const T=async(n,fn)=>{total++;try{if(await fn()){pass++;log(n,true);}else log(n,false,'assertion');}catch(e){log(n,false,e.message);}};
+  // 1. chiffrement aller-retour
+  await T('AES-GCM chiffrement/déchiffrement',async()=>{
+    const salt=W.crypto.getRandomValues(new Uint8Array(16));
+    const k=await W.deriveKey('motdepasse-test',salt);
+    const enc=await W.aesEncrypt(k,'données sensibles éé');
+    return (await W.aesDecrypt(k,enc))==='données sensibles éé';});
+  // 2. mauvais mot de passe rejeté
+  await T('Mauvais mot de passe rejeté',async()=>{
+    const salt=W.crypto.getRandomValues(new Uint8Array(16));
+    const k1=await W.deriveKey('bon',salt),k2=await W.deriveKey('mauvais',salt);
+    const enc=await W.aesEncrypt(k1,'x');
+    try{await W.aesDecrypt(k2,enc);return false;}catch(e){return true;}});
+  // 3. traduction NL→FR (contenu templaté exact)
+  await T('trDocNL : champs officiels exacts',()=>{
+    const o=W.trDocNL('Behoefte aan opvang : JA. Geslacht : mannelijk.');
+    return o.includes("besoin d'accueil")&&o.includes('oui')&&o.includes('masculin');});
+  // 4. traduction FR→NL
+  await T('trDocFR : sens inverse',()=>W.trDocFR("besoin d'accueil : oui").toLowerCase().includes('opvang'));
+  // 5. parse de fiche DVZ
+  await T('parseFicheText : extraction OV/nom/sexe',()=>{
+    W.openFicheImport&&W.openFicheImport();
+    W.parseFicheText('OV-NR.: 7654321 NAAM EN VOORNAAM: TEST, CASE GESLACHT : MANNELIJK GEBOORTEPLAATS EN –DATUM : X EN 01.01.2010 EU : NEEN NATIONALITEIT: AFGHANISTAN TWIJFEL : NEEN');
+    return W.document.getElementById('fi_ov').value==='7654321'&&W.document.getElementById('fi_nom').value.includes('TEST');});
+  // 6. version cohérente
+  await T('APP_VERSION = version.json',async()=>{
+    const v=(await (await fetch('version.json')).json()).version;return v===W.APP_VERSION;});
+  const h=document.createElement('h2');h.textContent=`Résultat : ${pass}/${total}`;h.className=pass===total?'ok':'ko';R.before(h);
+});
+</script></body></html>

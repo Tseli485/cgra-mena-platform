@@ -3,7 +3,7 @@ name: Build executables (Windows / macOS / Linux)
 on:
   workflow_dispatch:        # lancement manuel depuis l'onglet Actions
   push:
-    tags: ['v*']            # ou en poussant un tag (ex. v1.0)
+    tags: ['v*']            # ou en poussant un tag (ex. v1.1.0)
 
 jobs:
   build:
@@ -34,8 +34,43 @@ jobs:
         run: python -m pip install --upgrade pip pyinstaller pillow
       - name: Build executable
         run: pyinstaller --onefile --name MENA-Tuteur ${{ matrix.iconarg }} --add-data "pwa${{ matrix.sep }}pwa" --console server.py
+      - name: Package macOS .app bundle
+        if: runner.os == 'macOS'
+        run: |
+          APP="dist/MENA Tuteur.app"
+          mkdir -p "$APP/Contents/MacOS"
+          cp dist/MENA-Tuteur "$APP/Contents/MacOS/MENA-Tuteur"
+          chmod +x "$APP/Contents/MacOS/MENA-Tuteur"
+          printf '%s
+' '<?xml version="1.0" encoding="UTF-8"?>' '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">' '<plist version="1.0"><dict>' '<key>CFBundleName</key><string>MENA Tuteur</string>' '<key>CFBundleExecutable</key><string>MENA-Tuteur</string>' '<key>CFBundleIdentifier</key><string>be.mena.tuteur</string>' '<key>CFBundleVersion</key><string>1.0</string>' '<key>CFBundlePackageType</key><string>APPL</string>' '</dict></plist>' > "$APP/Contents/Info.plist"
+          cd dist && zip -ry MENA-Tuteur-macOS.app.zip "MENA Tuteur.app" && rm -rf "MENA Tuteur.app"
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.artifact }}
           path: dist/*
+
+  release:
+    name: Publier la release (tag)
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+      - name: Preparer les fichiers et calculer les SHA-256
+        run: |
+          mkdir release
+          cp artifacts/MENA-Tuteur-Windows/MENA-Tuteur.exe release/MENA-Tuteur-Windows.exe
+          cp artifacts/MENA-Tuteur-Linux/MENA-Tuteur release/MENA-Tuteur-Linux
+          cp artifacts/MENA-Tuteur-macOS/MENA-Tuteur-macOS.app.zip release/MENA-Tuteur-macOS.app.zip 2>/dev/null || cp artifacts/MENA-Tuteur-macOS/MENA-Tuteur release/MENA-Tuteur-macOS
+          cd release && sha256sum * > SHA256SUMS.txt && cat SHA256SUMS.txt
+      - name: Creer la release GitHub
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="${GITHUB_REF#refs/tags/}"
+          gh release create "$TAG" release/* --repo ${{ github.repository }} --title "Plateforme MENA Tuteur $TAG" --notes "Application autonome (aucune installation). **Windows** : double-clic sur l'exe. **macOS** : dezippez puis clic droit -> Ouvrir. **Linux** : chmod +x puis executer. Verifiez l'integrite avec SHA256SUMS.txt. Lien web : https://tseli485.github.io/cgra-mena-platform/"

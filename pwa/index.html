@@ -138,6 +138,21 @@
   .mode-btn:hover{border-color:var(--bleu)}
   .mode-btn.active{border-color:var(--bleu);background:var(--bleu);color:#fff}
   @media(max-width:768px){main{padding:1rem}.header{padding:1rem}.header h1{font-size:1.2rem}}
+  /* Mobile : tableaux défilables horizontalement (banque, checklist, fiche) */
+  @media(max-width:520px){.modal-box table,.card table{display:block;overflow-x:auto;white-space:nowrap}}
+  /* Impression propre de toute page de l'app */
+  @media print{nav,.hdr-ctrl,.btn,.filters,.lock-btn,.icon-btn,.lang-switch{display:none!important}body{background:#fff;color:#000}.card,.list-item{box-shadow:none;border:1px solid #ccc}}
+  /* Pastille d'échéance sur la liste des dossiers */
+  .dot{display:inline-block;width:.7rem;height:.7rem;border-radius:50%;margin-right:.35rem;vertical-align:baseline}
+  .dot-ok{background:var(--vert)}.dot-warn{background:#d97706}.dot-crit{background:var(--rouge)}
+  /* Gros boutons d'action du tableau de bord */
+  .quick3{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:.7rem;margin:.8rem 0 1.1rem}
+  .quick3 button{padding:1rem .8rem;font-size:1.02rem;border-radius:.7rem}
+  /* Mot non traduit (à vérifier) dans l'aperçu de traduction */
+  mark.nt{background:#fde68a;color:#713f12;border-radius:.2rem;padding:0 .15rem}
+  [data-theme="dark"] mark.nt{background:#a16207;color:#fef9c3}
+  .gsearch-res .list-item{cursor:pointer}
+  footer{color:var(--gris);font-size:.75rem;text-align:center;padding:1rem 0 1.4rem}
 </style>
 </head>
 <body>
@@ -169,6 +184,7 @@
       <button id="langFr" onclick="setLang('fr')">FR</button>
       <button id="langNl" onclick="setLang('nl')">NL</button>
     </div>
+    <button class="icon-btn" onclick="openGlossaire()" title="Glossaire">📖</button>
     <button class="icon-btn" id="themeBtn" onclick="toggleTheme()" title="Thème">🌙</button>
     <button class="lock-btn" onclick="lockApp()" data-i18n="btn.lock">🔒 Verrouiller</button>
   </div>
@@ -191,6 +207,16 @@
   <section class="view active" id="dashboard">
     <h2 class="title" data-i18n="dash.title">🏠 Tableau de bord</h2>
     <div class="banner" data-html="dash.welcome"></div>
+    <div id="bkReminder"></div>
+    <div class="quick3">
+      <button class="btn" onclick="openFicheImport()" data-i18n="dash.q1">📄 Nouveau MENA (fiche DVZ)</button>
+      <button class="btn sec" onclick="go('dossiers')" data-i18n="dash.q2">📂 Mes dossiers</button>
+      <button class="btn sec" onclick="document.getElementById('dashDeadlines').scrollIntoView({behavior:'smooth'})" data-i18n="dash.q3">⏰ Urgences &amp; échéances</button>
+    </div>
+    <div class="row" style="margin:.2rem 0 1rem">
+      <input id="gsearch" data-ph="gs.ph" style="flex:1;min-width:220px" oninput="globalSearch(this.value)">
+    </div>
+    <div id="gsearchRes" class="gsearch-res"></div>
     <div class="grid cols-3" id="statCards"></div>
     <div class="grid cols-2" style="margin-top:1.4rem">
       <div class="card">
@@ -323,8 +349,15 @@
     </div>
     <div id="resCats" class="row" style="gap:.4rem;margin-bottom:1rem"></div>
     <div id="resourcesContent" class="loading"></div>
+    <div class="card" style="margin-top:1.2rem" id="sourcesOfficielles"></div>
   </section>
 </main>
+
+<footer>
+  <span id="appVersionLbl"></span> ·
+  <a href="#" onclick="checkUpdates();return false" data-i18n="ft.check">🔄 Vérifier les mises à jour</a>
+  <span id="updNote"></span>
+</footer>
 
 <!-- MODAL DOSSIER -->
 <div class="modal" id="dossierModal">
@@ -448,6 +481,23 @@
   </div>
 </div>
 
+<!-- MODAL GLOSSAIRE -->
+<div class="modal" id="glossModal">
+  <div class="modal-box">
+    <button class="close" onclick="closeModal('glossModal')">&times;</button>
+    <div id="glossBox"></div>
+  </div>
+</div>
+
+<!-- MODAL VISITE GUIDÉE (premier lancement) -->
+<div class="modal" id="tourModal">
+  <div class="modal-box">
+    <button class="close" onclick="closeModal('tourModal')">&times;</button>
+    <div id="tourBox"></div>
+  </div>
+</div>
+
+<script src="js/nl-fr-dict.js"></script>
 <script src="js/lib/pdf.min.js"></script>
 <script>
 /* ============ INTERNATIONALISATION (FR / NL) ============ */
@@ -696,6 +746,7 @@ async function doExport(){
   const blob=new Blob([JSON.stringify(file)],{type:'application/json'});
   const a=document.createElement('a');a.href=URL.createObjectURL(blob);
   a.download='mena-tuteur-'+new Date().toISOString().slice(0,10)+'.menabackup';a.click();
+  localStorage.setItem('mena_last_export',Date.now());renderBkReminder();
   note.textContent=LANG==='nl'?'✅ Back-up gedownload. Bewaar het wachtwoord apart.':'✅ Sauvegarde téléchargée. Conservez le mot de passe séparément.';
 }
 async function doImport(){
@@ -767,6 +818,8 @@ function onUnlocked(){
   document.getElementById('authGate').classList.add('hidden');
   document.getElementById('authForm').reset();
   renderDashboard();renderDossiers();renderLegislation();
+  idleReset();      // démarre le verrouillage automatique (10 min d'inactivité)
+  maybeTour();      // visite guidée au premier lancement
 }
 function lockApp(){
   CRYPTO_KEY=null;DOSSIERS=[];
@@ -799,6 +852,9 @@ const CHECKLIST_NL={
 };
 // Affiche un item de checklist dans la langue courante (FR par défaut, NL si traduit dispo)
 function ckLabel(txt){return (LANG==='nl'&&CHECKLIST_NL[txt])?CHECKLIST_NL[txt]:txt;}
+// Onglet de référence pour chaque étape de la checklist (ℹ️ → fiche pratique)
+const CK_VIEWS=['legislation','legislation','legislation','legislation','resources','resources','lifecycle','legislation','resources','cases','legislation','legislation'];
+function ckView(i){return CK_VIEWS[i]||'legislation';}
 
 /* ============ DONNEES JSON ============ */
 let LIFECYCLE=null, CASES=null, RESOURCES=null;
@@ -816,7 +872,7 @@ function go(view){
   window.scrollTo(0,0);
   if(view==='lifecycle')renderLifecycle();
   if(view==='cases')renderCases();
-  if(view==='resources')renderResources();
+  if(view==='resources'){renderResources();renderSourcesOff();}
   if(view==='conseil')renderConseil();
 }
 document.querySelectorAll('nav a').forEach(a=>a.addEventListener('click',()=>go(a.dataset.view)));
@@ -878,11 +934,22 @@ function renderDossiers(){
   if(f)arr=arr.filter(d=>d.statut===f);
   const el=document.getElementById('dossierList');
   if(!arr.length){el.innerHTML=`<div class="empty">${t('doss.empty')}</div>`;return;}
+  // pastille d'échéance : rouge = rapport en retard, orange = sous 14 jours, vert = OK
+  const today=nowISO(),warn=addDays(today,14);
+  const dotOf=d=>{
+    let cls='dot-ok';
+    (d.rapports||[]).forEach(r=>{
+      if(!r.fait&&r.echeance){
+        if(r.echeance<today)cls='dot-crit';
+        else if(r.echeance<=warn&&cls!=='dot-crit')cls='dot-warn';
+      }});
+    return cls;
+  };
   el.innerHTML=arr.map(d=>{
     const p=progressOf(d);
     return `<div class="list-item" onclick="openDossierDetail('${d.id}')">
       <div class="row" style="justify-content:space-between">
-        <strong style="font-size:1.05rem">${esc(d.nom)}</strong>${statutBadge(d.statut)}
+        <strong style="font-size:1.05rem"><span class="dot ${dotOf(d)}" title="${LANG==='nl'?'Status vervaldata':'État des échéances'}"></span>${esc(d.nom)}</strong>${statutBadge(d.statut)}
       </div>
       <div class="muted">${d.age?d.age+' '+t('u.ans')+' · ':''}${esc(d.pays||t('doss.origin'))}${d.arrivee?' · '+t('doss.arrived')+' '+d.arrivee:''}</div>
       <div class="progress"><span style="width:${p}%"></span></div>
@@ -963,7 +1030,8 @@ function openDossierDetail(id){
     <h4 style="color:var(--accent);margin:.9rem 0 .3rem">${t('det.checklist')}</h4>
     <div>${d.checklist.map((c,i)=>`
       <label class="check-line"><input type="checkbox" ${c.done?'checked':''} onchange="toggleCheck('${d.id}',${i})">
-      <span style="${c.done?'text-decoration:line-through;color:var(--gris)':''}">${esc(ckLabel(c.t))}</span></label>`).join('')}</div>
+      <span style="${c.done?'text-decoration:line-through;color:var(--gris)':''}">${esc(ckLabel(c.t))}</span>
+      <a href="#" title="${LANG==='nl'?'Praktische gids':'Fiche pratique'}" style="margin-left:.35rem;text-decoration:none" onclick="event.preventDefault();event.stopPropagation();closeModal('detailModal');go(ckView(${i}))">ℹ️</a></label>`).join('')}</div>
     <div class="row" style="margin-top:1.2rem;justify-content:flex-end">
       <button class="btn sec sm" onclick="transDossier('${d.id}')">🌐 ${LANG==='nl'?'Document vertalen (NL→FR)':'Traduire le document (NL→FR)'}</button>
       <button class="btn sec sm" onclick="genDossierComplet('${d.id}')">🖨️ ${LANG==='nl'?'Volledig dossier (PDF)':'Dossier complet (PDF)'}</button>
@@ -975,6 +1043,7 @@ function openDossierDetail(id){
 
 /* ============ DASHBOARD ============ */
 function renderDashboard(){
+  renderBkReminder();
   const arr=loadDossiers();
   const actifs=arr.filter(d=>d.statut!=='clos').length;
   const urgents=arr.filter(d=>d.statut==='urgent').length;
@@ -1542,52 +1611,7 @@ const FICHE_AZIZI={
   contactFamille:{fr:"Contact avec la famille : à rétablir.",nl:"Contact met familie: te herstellen."}
 };
 /* ============ TRADUCTION NL -> FR (documents officiels DVZ/MENA) ============ */
-const NL_FR={
-  "niet-begeleide minderjarige vreemdeling":"mineur étranger non accompagné","niet-begeleide minderjarige":"mineur non accompagné",
-  "dienst vreemdelingenzaken":"Office des Étrangers","dienst voogdij":"Service des Tutelles",
-  "nummer van het dossier":"numéro du dossier","proces-verbaal":"procès-verbal","ov-nr":"n° OE",
-  "naam en voornaam":"nom et prénom","voornaam":"prénom","naam":"nom",
-  "geslacht":"sexe","mannelijk":"masculin","vrouwelijk":"féminin",
-  "geboorteplaats en -datum":"lieu et date de naissance","geboorteplaats en":"lieu de naissance et","geboorteplaats":"lieu de naissance","geboortedatum":"date de naissance","geboorte":"naissance",
-  "nationaliteit":"nationalité","afghanistan":"Afghanistan",
-  "moedertaal":"langue maternelle","gesproken taal":"langue parlée","gesproken talen":"langues parlées",
-  "andere gebruikte identiteiten":"autres identités utilisées","alias":"alias",
-  "adres in belgië":"adresse en Belgique","adres in land van herkomst of ander land":"adresse dans le pays d'origine ou un autre pays","land van herkomst":"pays d'origine","adres woonplaats":"adresse (domicile)","woonplaats":"domicile","adres":"adresse",
-  "werd de jongere reeds gesignaleerd":"le jeune a-t-il déjà été signalé","gesignaleerd":"signalé",
-  "vingerafdrukken of andere biometrische gegevens werden genomen":"les empreintes digitales ou autres données biométriques ont été prises","vingerafdrukken":"empreintes digitales","biometrische gegevens":"données biométriques","werden genomen":"ont été prises",
-  "twijfel over de ingeroepen minderjarigheid":"doute sur la minorité invoquée","minderjarigheid":"minorité","minderjarige":"mineur","twijfel geuit":"doute exprimé","twijfel":"doute","jongere":"jeune",
-  "ouders":"parents","vader":"père","moeder":"mère","broers en zussen":"frères et sœurs","broer":"frère","broers":"frères","zus":"sœur","zussen":"sœurs","jonger dan hem":"plus jeune que lui","jonger dan":"plus jeune que",
-  "telefoon":"téléphone","gsm":"GSM",
-  "specifieke rubriek voor de":"rubrique spécifique pour les","blinde passagiers":"passagers clandestins","potentiële":"potentiels",
-  "tussenkomst parket":"intervention du parquet","parket":"parquet","genomen maatregelen":"mesures prises","terbeschikkingstelling van de jeugdrechter":"mise à disposition du juge de la jeunesse","jeugdrechter":"juge de la jeunesse","leeftijdstest":"test d'âge","verantwoordelijke magistraat":"magistrat responsable","contactpersoon":"personne de contact","contactpersonen":"personnes de contact",
-  "identiteit vastgesteld aan de hand van":"identité établie sur la base de","identiteit vastgesteld":"identité établie","identiteit":"identité","verklaring":"déclaration","documenten":"documents","document":"document",
-  "fysieke kenmerken":"caractéristiques physiques","lengte":"taille","kleur haar":"couleur des cheveux","kleur ogen":"couleur des yeux","zwart":"noir","bruin":"brun","blauw":"bleu","groen":"vert",
-  "medische situatie":"situation médicale","zwangerschap":"grossesse","handicap":"handicap","verward":"confus","wonden":"blessures","besmettelijke ziekten":"maladies contagieuses","ziekten":"maladies","ziekte":"maladie","zijn medische zorgen noodzakelijk":"des soins médicaux sont-ils nécessaires","medische zorgen":"soins médicaux","pijn aan het rechterbeen":"douleur à la jambe droite","pijn aan de rechterbeen":"douleur à la jambe droite","pijn":"douleur","rechterbeen":"jambe droite","linkerbeen":"jambe gauche",
-  "zijn er andere familieleden of kennissen aanwezig in een andere lidstaat van de europese unie":"y a-t-il d'autres membres de la famille ou des connaissances présents dans un autre État membre de l'Union européenne","familieleden":"membres de la famille","kennissen":"connaissances","lidstaat":"État membre","europese unie":"Union européenne","derde land":"pays tiers",
-  "traject, interceptie en verblijf":"trajet, interception et séjour","beschrijving van het reistraject naar belgië":"description de l'itinéraire de voyage vers la Belgique","reistraject":"itinéraire de voyage","reis":"voyage","traject":"trajet","interceptie":"interception","verblijf":"séjour",
-  "eerste land van binnenkomst":"premier pays d'entrée","transit via welk land":"transit par quel pays","plaats waar de grens werd overgestoken":"lieu de franchissement de la frontière","grens":"frontière","overgestoken":"franchie","datum van aankomst":"date d'arrivée","transportmiddelen":"moyens de transport","aankomst":"arrivée","vertrek":"départ","maanden geleden":"il y a des mois","maanden":"mois","weken":"semaines","dagen":"jours",
-  "gewerkt in verschillende fabrieken":"a travaillé dans plusieurs usines","gewerkt":"a travaillé","fabrieken":"usines","fabriek":"usine",
-  "organisatie van de reis":"organisation du voyage","wie heeft zich om de minderjarige bekommerd":"qui s'est occupé du mineur","wie heeft de reis georganiseerd":"qui a organisé le voyage","rol van de ouders":"rôle des parents","gefinancierd en georganiseerd":"financé et organisé","gefinancierd":"financé","georganiseerd":"organisé",
-  "waarom":"pourquoi","mensen zeiden me op de weg goede dingen over":"des gens m'ont dit du bien sur la route à propos de","het schoolsysteem":"le système scolaire","migranten worden beter beschermd":"les migrants sont mieux protégés","beter beschermd":"mieux protégés",
-  "omstandigheden van de interceptie van de minderjarige":"circonstances de l'interception du mineur","meldt zich aan bij dvz":"se présente à l'Office des Étrangers","meldt zich aan":"se présente",
-  "motief voor de immigratie naar belgië":"motif de l'immigration vers la Belgique","om welke reden(en) is de jongere in belgië":"pour quelle(s) raison(s) le jeune est-il en Belgique","om welke reden":"pour quelle raison","motief":"motif","immigratie":"immigration",
-  "hij is van geloofsovertuiging":"il est de conviction religieuse","geloofsovertuiging":"conviction religieuse","chiiet":"chiite","ismaëliet":"ismaélite","werkte de papa voor het oude regime":"le papa travaillait pour l'ancien régime","oude regime":"ancien régime","regime":"régime","politie":"police","hierdoor moest we het land verlaten":"c'est pourquoi nous avons dû quitter le pays","het land verlaten":"quitter le pays","verlaten":"quitter","want we werden gedreigd door de taliban":"car nous étions menacés par les Taliban","gedreigd":"menacés","bedreigd":"menacé","taliban":"Taliban","papa":"papa","mama":"maman",
-  "kwetsbaarheid":"vulnérabilité","zijn er aanwijzingen":"y a-t-il des indices","aanwijzingen":"indices","elementen die laten veronderstellen":"éléments laissant supposer","slachtoffer":"victime","mensenhandel":"traite des êtres humains","economische uitbuiting":"exploitation économique","seksuele uitbuiting":"exploitation sexuelle","bedelarij":"mendicité","uitbuiting":"exploitation","mensensmokkel":"trafic d'êtres humains","preciseer":"précisez",
-  "behoefte aan opvang":"besoin d'accueil","opvang":"accueil","motivering in geval van afwijzing of weigering van opvang":"motivation en cas de rejet ou de refus d'accueil","afwijzing":"rejet","weigering":"refus",
-  "persoonlijke voorwerpen":"effets personnels","bagage":"bagage","kledij":"vêtements","geld":"argent","juwelen":"bijoux","zak met persoonlijke spullen":"sac avec affaires personnelles","persoonlijke spullen":"affaires personnelles","telefoon zonder simkaart":"téléphone sans carte SIM","zonder simkaart":"sans carte SIM","simkaart":"carte SIM",
-  "scholing":"scolarité","geen school":"pas d'école","een beetje schrijven en lezen":"écrit et lit un peu","schrijven":"écrire","lezen":"lire","school":"école",
-  "contact met familie":"contact avec la famille","geen contact":"aucun contact",
-  "gebruiksaanwijzing voor het invullen van de fiche":"mode d'emploi pour remplir la fiche","alle rubrieken moeten worden ingevuld":"toutes les rubriques doivent être remplies","niet van toepassing":"non applicable","rubriek":"rubrique","fiche":"fiche","ingevuld":"rempli","invullen":"remplir",
-  "stempel":"cachet","identificatie van de dienst die de fiche invult":"identification du service qui remplit la fiche",
-  "ja":"oui","neen":"non","nee":"non","onbekend":"inconnu","geboren te":"né à","geboren":"né",
-  "slachtoffer van":"victime de","en ook":"et aussi","ook":"aussi","en":"et","van":"de","een":"un","maar":"mais","of":"ou","omdat":"parce que","want":"car","dat":"que","de persoon":"la personne","persoon":"personne","zou kunnen zijn":"pourrait être","zou kunnen":"pourrait","geen":"pas de","met":"avec","zonder":"sans","voor":"pour","naar":"vers","tijdens":"pendant","volgens":"selon","tussen":"entre","door":"par","over":"au sujet de","ongeveer":"environ","sinds":"depuis","reeds":"déjà","nog":"encore","altijd":"toujours","nooit":"jamais","hij":"il","zij":"elle","wij":"nous","verklaart":"déclare","verklaarde":"a déclaré","werkte":"travaillait","werkt":"travaille","woont":"habite","woonde":"habitait","heeft":"a","hadden":"avaient","had":"avait","was":"était","waren":"étaient","kwam":"est arrivé","ging":"est allé","reisde":"a voyagé","vluchtte":"a fui","kreeg":"a reçu",
-  "januari":"janvier","februari":"février","maart":"mars","april":"avril","mei":"mai","juni":"juin","juli":"juillet","augustus":"août","september":"septembre","oktober":"octobre","november":"novembre","december":"décembre",
-  "betreft":"concerne","aan boord van":"à bord de","gelegen in de haven van":"situé dans le port de","haven":"port","schip":"navire","motorschip":"navire à moteur",
-  "indien er een technisch probleem is":"en cas de problème technique","per telefax":"par télécopie","na 17 uur":"après 17 heures","tijdens weekends en op feestdagen":"durant les week-ends et jours fériés","feestdagen":"jours fériés","weekends":"week-ends",
-  "verblijfsdocumenten":"documents de séjour","identiteitsdocumenten":"documents d'identité","een kopie van":"une copie de","een foto van de betrokkene":"une photo de l'intéressé","betrokkene":"intéressé","via elektronische post":"par courrier électronique","wordt gestuurd naar":"est envoyée à",
-  "e-mail":"e-mail","telefoonnummer":"numéro de téléphone",
-  "brussel":"Bruxelles","antwerpen":"Anvers","gent":"Gand","brugge":"Bruges","luik":"Liège","bergen":"Mons","leuven":"Louvain","mechelen":"Malines","oostende":"Ostende","kortrijk":"Courtrai","henegouwen":"Hainaut","vlaanderen":"Flandre","wallonië":"Wallonie","belgië":"Belgique"
-};
+/* Dictionnaire NL_FR chargé depuis js/nl-fr-dict.js */
 const NL_FR_SORTED=Object.entries(NL_FR).sort((a,b)=>b[0].length-a[0].length);
 function trDocNL(text){
   if(!text)return '';
@@ -1603,13 +1627,16 @@ let TRAD_DOSSIER=null;
 function openTrad(prefill,dossierId){
   TRAD_DOSSIER=dossierId||null;
   document.getElementById('trBox').innerHTML=`
-    <h3>🌐 ${LANG==='nl'?'Document vertalen (NL → FR)':'Traduire un document (NL → FR)'}</h3>
-    <p class="muted" style="font-size:.82rem">${LANG==='nl'?'Plak hier een Nederlandse tekst. De vertaling van de officiële/getemplateerde delen is exact; vrije tekst is een automatische versie — controleer en bewerk ze.':'Collez un texte néerlandais. La traduction des parties officielles/templatées est exacte ; le texte libre est une version automatique — vérifiez-la et corrigez-la.'}</p>
-    <label>${LANG==='nl'?'Nederlandse tekst':'Texte néerlandais'}</label>
+    <h3>🌐 ${LANG==='nl'?'Document vertalen':'Traduire un document'}</h3>
+    <p class="muted" style="font-size:.82rem">${LANG==='nl'?'Plak een tekst (PDF, Word, e-mail…). Officiële/getemplateerde delen worden exact vertaald; vrije tekst is een automatische versie — woorden in het geel zijn mogelijk niet vertaald, controleer ze.':'Collez un texte (PDF, Word, email…). Les parties officielles/templatées sont traduites exactement ; le texte libre est une version automatique — les mots en jaune ne sont peut-être pas traduits, vérifiez-les.'}</p>
+    <label>${LANG==='nl'?'Richting':'Sens'}</label>
+    <select id="trDir" style="width:auto"><option value="nlfr">NL → FR</option><option value="frnl">FR → NL</option></select>
+    <label style="margin-top:.4rem">${LANG==='nl'?'Brontekst':'Texte source'}</label>
     <textarea id="trIn" rows="6">${prefill?esc(prefill):''}</textarea>
-    <button class="btn sm" style="margin:.5rem 0" onclick="doTrad()">➡️ ${LANG==='nl'?'Vertalen naar het Frans':'Traduire en français'}</button>
-    <label>${LANG==='nl'?'Franse vertaling (bewerkbaar)':'Traduction française (modifiable)'}</label>
+    <button class="btn sm" style="margin:.5rem 0" onclick="doTrad()">➡️ ${LANG==='nl'?'Vertalen':'Traduire'}</button>
+    <label>${LANG==='nl'?'Vertaling (bewerkbaar)':'Traduction (modifiable)'}</label>
     <textarea id="trOut" rows="6"></textarea>
+    <div id="trPrev" class="muted" style="font-size:.85rem;white-space:pre-wrap;border:1px dashed var(--bord);border-radius:.4rem;padding:.5rem;margin-top:.4rem;display:none"></div>
     <div class="row" style="margin-top:.5rem">
       <button class="btn sec sm" onclick="(function(){var o=document.getElementById('trOut');o.select();document.execCommand('copy');})()">📋 ${LANG==='nl'?'Kopiëren':'Copier'}</button>
       ${dossierId?`<button class="btn sm" onclick="saveTradToDossier()">💾 ${LANG==='nl'?'Opslaan in dossiernotities':'Enregistrer dans les notes du dossier'}</button>`:''}
@@ -1617,7 +1644,16 @@ function openTrad(prefill,dossierId){
   openModal('trModal');
   if(prefill)doTrad();
 }
-function doTrad(){document.getElementById('trOut').value=trDocNL(document.getElementById('trIn').value);}
+function doTrad(){
+  const src=document.getElementById('trIn').value;
+  const dir=document.getElementById('trDir').value;
+  const out=dir==='frnl'?trDocFR(src):trDocNL(src);
+  document.getElementById('trOut').value=out;
+  // aperçu : surligne les mots probablement non traduits
+  const prev=document.getElementById('trPrev');
+  prev.innerHTML='<strong>'+(LANG==='nl'?'Voorbeeld (geel = te controleren) :':'Aperçu (jaune = à vérifier) :')+'</strong>\n'+markUntranslated(src,out);
+  prev.style.display='block';
+}
 function transDossier(id){
   const d=loadDossiers().find(x=>x.id===id);if(!d)return;
   let src=d.notes||'';
@@ -1854,6 +1890,149 @@ function printReleve(id){
   printDoc((LANG==='nl'?'Rekeninguittreksel':'Relevé')+' '+d.nom,html);
 }
 
+/* ============ VERSION & MISES À JOUR ============ */
+const APP_VERSION='1.1.0';
+window.APP_VERSION=APP_VERSION;   // expose pour tests.html (const non attache a window)
+Object.assign(I18N.fr,{"dash.q1":"📄 Nouveau MENA (fiche DVZ)","dash.q2":"📂 Mes dossiers","dash.q3":"⏰ Urgences & échéances","gs.ph":"🔍 Recherche globale (dossiers, lois, cas, ressources)…","ft.check":"🔄 Vérifier les mises à jour"});
+Object.assign(I18N.nl,{"dash.q1":"📄 Nieuwe NBMV (DVZ-fiche)","dash.q2":"📂 Mijn dossiers","dash.q3":"⏰ Urgenties & vervaldata","gs.ph":"🔍 Globaal zoeken (dossiers, wetten, gevallen, hulpbronnen)…","ft.check":"🔄 Updates controleren"});
+const UPDATE_URL='https://tseli485.github.io/cgra-mena-platform/version.json';
+async function checkUpdates(){
+  const n=document.getElementById('updNote');
+  n.textContent=' ⏳';
+  try{
+    const r=await fetch(UPDATE_URL+'?t='+Date.now(),{cache:'no-store'});
+    const v=(await r.json()).version;
+    if(v && v!==APP_VERSION)n.innerHTML=' — '+(LANG==='nl'?'Nieuwe versie beschikbaar':'Nouvelle version disponible')+' : <strong>'+esc(v)+'</strong> → <a href="https://github.com/Tseli485/cgra-mena-platform/releases/latest" target="_blank" rel="noopener">'+(LANG==='nl'?'downloaden':'télécharger')+'</a>';
+    else n.textContent=' — ✅ '+(LANG==='nl'?'U gebruikt de laatste versie.':'Vous utilisez la dernière version.');
+  }catch(e){n.textContent=' — ⚠️ '+(LANG==='nl'?'Verificatie onmogelijk (offline?).':'Vérification impossible (hors ligne ?).');}
+}
+
+/* ============ VERROUILLAGE AUTOMATIQUE (inactivité) ============ */
+const IDLE_MS=10*60*1000;   // 10 minutes sans interaction → verrouillage
+let IDLE_T=null,IDLE_LAST=0;
+function idleReset(){
+  const now=Date.now();
+  if(now-IDLE_LAST<5000)return;   // throttle (mousemove)
+  IDLE_LAST=now;
+  if(IDLE_T)clearTimeout(IDLE_T);
+  IDLE_T=setTimeout(()=>{if(CRYPTO_KEY)lockApp();},IDLE_MS);
+}
+['click','keydown','mousemove','touchstart','scroll'].forEach(e=>document.addEventListener(e,idleReset,{passive:true}));
+
+/* ============ RAPPEL DE SAUVEGARDE ============ */
+function renderBkReminder(){
+  const el=document.getElementById('bkReminder');if(!el)return;
+  const last=+localStorage.getItem('mena_last_export')||0;
+  const days=last?Math.floor((Date.now()-last)/864e5):999;
+  if(DOSSIERS.length&&days>7){
+    el.innerHTML=`<div class="banner" style="border-left:4px solid var(--rouge)">💾 ${LANG==='nl'
+      ?`Laatste back-up: ${last?days+' dagen geleden':'nooit'}. Maak een versleutelde back-up om gegevensverlies te voorkomen.`
+      :`Dernière sauvegarde : ${last?'il y a '+days+' jours':'jamais'}. Exportez une sauvegarde chiffrée pour éviter toute perte.`}
+      <button class="btn sm" style="margin-left:.6rem" onclick="openBackup()">${LANG==='nl'?'Nu back-uppen':'Sauvegarder maintenant'}</button></div>`;
+  }else el.innerHTML='';
+}
+
+/* ============ RECHERCHE GLOBALE ============ */
+async function globalSearch(q){
+  const el=document.getElementById('gsearchRes');
+  q=(q||'').trim().toLowerCase();
+  if(q.length<2){el.innerHTML='';return;}
+  if(!CASES)CASES=await loadJSON('js/data/cases-data.json');
+  if(!RESOURCES){let raw=await loadJSON('data/resources.json');RESOURCES=raw&&raw.resources?raw.resources:(Array.isArray(raw)?raw:[]);}
+  const resArr=Array.isArray(RESOURCES)?RESOURCES:[];
+  const out=[];
+  DOSSIERS.forEach(d=>{if((d.nom+' '+(d.pays||'')).toLowerCase().includes(q))out.push({ico:'📂',lbl:d.nom,sub:LANG==='nl'?'Dossier':'Dossier',act:`openDossierDetail('${d.id}')`});});
+  LEGISLATION.forEach(c=>c.items.forEach(i=>{if((tr(i.titre)+' '+tr(i.detail||{fr:'',nl:''})).toLowerCase().includes(q))out.push({ico:'⚖️',lbl:tr(i.titre),sub:tr(c.cat),act:`go('legislation')`});}));
+  ((CASES&&CASES.cases)||[]).forEach(c=>{if((tr(c.titre)+' '+tr(c.situation)).toLowerCase().includes(q))out.push({ico:'📚',lbl:tr(c.titre),sub:LANG==='nl'?'Praktijkgeval':'Cas pratique',act:`go('cases')`});});
+  resArr.concat(loadCustomRes()).forEach(r=>{if((r.name+' '+(r.desc?tr(r.desc):'')).toLowerCase().includes(q))out.push({ico:'📁',lbl:r.name,sub:LANG==='nl'?'Hulpbron':'Ressource',act:`go('resources')`});});
+  el.innerHTML=out.length?out.slice(0,12).map(x=>`<div class="list-item" onclick="${x.act};document.getElementById('gsearch').value='';globalSearch('')">${x.ico} <strong>${esc(x.lbl)}</strong> <span class="muted">— ${esc(x.sub)}</span></div>`).join('')
+    :`<p class="muted">${LANG==='nl'?'Geen resultaat.':'Aucun résultat.'}</p>`;
+}
+
+/* ============ GLOSSAIRE FR/NL DES SIGLES ============ */
+const GLOSSAIRE=[
+ ["MENA / NBMV",{fr:"Mineur étranger non accompagné",nl:"Niet-begeleide minderjarige vreemdeling"}],
+ ["OE / DVZ",{fr:"Office des Étrangers",nl:"Dienst Vreemdelingenzaken"}],
+ ["CGRA / CGVS",{fr:"Commissariat général aux réfugiés et aux apatrides",nl:"Commissariaat-generaal voor de Vluchtelingen en de Staatlozen"}],
+ ["CCE / RvV",{fr:"Conseil du contentieux des étrangers",nl:"Raad voor Vreemdelingenbetwistingen"}],
+ ["PI / IB",{fr:"Protection internationale (asile)",nl:"Internationale bescherming (asiel)"}],
+ ["OQT / BGV",{fr:"Ordre de quitter le territoire",nl:"Bevel om het grondgebied te verlaten"}],
+ ["AMU / DMH",{fr:"Aide médicale urgente",nl:"Dringende medische hulp"}],
+ ["CPAS / OCMW",{fr:"Centre public d'action sociale",nl:"Openbaar centrum voor maatschappelijk welzijn"}],
+ ["Fedasil",{fr:"Agence fédérale pour l'accueil des demandeurs d'asile",nl:"Federaal agentschap voor de opvang van asielzoekers"}],
+ ["Service des Tutelles / Dienst Voogdij",{fr:"Service du SPF Justice qui désigne les tuteurs",nl:"Dienst van de FOD Justitie die voogden aanstelt"}],
+ ["ILA / LOI",{fr:"Initiative locale d'accueil",nl:"Lokaal opvanginitiatief"}],
+ ["Annexe 26 / Bijlage 26",{fr:"Attestation de demande de protection internationale",nl:"Attest van verzoek om internationale bescherming"}],
+ ["AI",{fr:"Attestation d'immatriculation (« carte orange »)",nl:"Attest van immatriculatie (« oranje kaart »)"}],
+ ["Carte A / A-kaart",{fr:"Titre de séjour à durée limitée",nl:"Verblijfstitel van beperkte duur"}],
+ ["Dublin III",{fr:"Règlement UE déterminant l'État responsable de la demande d'asile",nl:"EU-verordening die de verantwoordelijke asielstaat bepaalt"}],
+ ["Myria",{fr:"Centre fédéral Migration (droits des étrangers)",nl:"Federaal Migratiecentrum (rechten van vreemdelingen)"}],
+ ["Juge de paix / Vrederechter",{fr:"Juge compétent pour la gestion des biens du mineur",nl:"Rechter bevoegd voor het beheer van de goederen van de minderjarige"}],
+ ["SDJ",{fr:"Service droit des jeunes (aide juridique)",nl:"Dienst jongerenrecht (juridische hulp)"}],
+ ["VA",{fr:"Demande antérieure (hit Eurodac dans un autre pays)",nl:"Eerdere aanvraag (Eurodac-hit in een ander land)"}]
+];
+function openGlossaire(){
+  document.getElementById('glossBox').innerHTML=`<h3>📖 ${LANG==='nl'?'Glossarium van afkortingen':'Glossaire des sigles'}</h3>
+    <table>${GLOSSAIRE.map(([s,d])=>`<tr><td style="white-space:nowrap"><strong>${esc(s)}</strong></td><td>${esc(tr(d))}</td></tr>`).join('')}</table>`;
+  openModal('glossModal');
+}
+
+/* ============ VISITE GUIDÉE (premier déverrouillage) ============ */
+function maybeTour(){
+  if(localStorage.getItem('mena_tour_done'))return;
+  const S=LANG==='nl'
+    ?[["📄","Nieuwe NBMV","Importeer de DVZ-fiche (PDF): het dossier wordt automatisch aangemaakt, met foto."],
+      ["⚖️","Vrederechter","Zoek in het dossier de bevoegde vrederechter op postcode en sla zijn gegevens op."],
+      ["⏰","Verplichte verslagen","De termijnen worden berekend; bereid de verzending voor per e-mail of PDF."],
+      ["🌐","Vertaling","In FR-modus worden Nederlandse documenten automatisch vertaald."],
+      ["💾","Back-up","Exporteer regelmatig een versleutelde back-up (ook om aan een collega door te geven)."]]
+    :[["📄","Nouveau MENA","Importez la fiche DVZ (PDF) : le dossier se crée automatiquement, photo comprise."],
+      ["⚖️","Juge de paix","Dans le dossier, trouvez le juge de paix par code postal et enregistrez ses coordonnées."],
+      ["⏰","Rapports obligatoires","Les échéances sont calculées ; préparez l'envoi par email ou PDF."],
+      ["🌐","Traduction","En mode FR, les documents néerlandais sont traduits automatiquement."],
+      ["💾","Sauvegarde","Exportez régulièrement une sauvegarde chiffrée (transmissible à un collègue)."]];
+  document.getElementById('tourBox').innerHTML=`<h3>👋 ${LANG==='nl'?'Welkom! 5 stappen om te starten':'Bienvenue ! 5 étapes pour démarrer'}</h3>
+    ${S.map(([i,t2,d],n)=>`<div class="list-item"><strong>${n+1}. ${i} ${esc(t2)}</strong><div class="muted">${esc(d)}</div></div>`).join('')}
+    <button class="btn" style="margin-top:.8rem" onclick="localStorage.setItem('mena_tour_done','1');closeModal('tourModal')">✅ ${LANG==='nl'?'Begrepen':'Compris'}</button>`;
+  openModal('tourModal');
+}
+
+/* ============ SOURCES OFFICIELLES (veille juridique) ============ */
+const DATA_VERIFIED='2026-06';   // date de dernière vérification du contenu juridique
+const SOURCES_OFF=[
+ ["Service des Tutelles (SPF Justice)","https://justice.belgium.be/fr/themes_et_dossiers/enfants_et_jeunes/mineurs_etrangers_non_accompagne"],
+ ["CGRA / CGVS","https://www.cgra.be/fr"],["Office des Étrangers / DVZ","https://dofi.ibz.be/fr"],
+ ["Fedasil","https://www.fedasil.be/fr"],["Moniteur belge","https://www.ejustice.just.fgov.be/cgi/welcome.pl"],
+ ["Plateforme Mineurs en Exil","https://www.mineursenexil.be/"],["Myria","https://www.myria.be/fr"],
+ ["Agentschap Opgroeien (VL)","https://www.opgroeien.be/"],["Tribunaux & justices de paix","https://www.tribunaux-rechtbanken.be/fr"]
+];
+function renderSourcesOff(){
+  const el=document.getElementById('sourcesOfficielles');if(!el)return;
+  el.innerHTML=`<h3>📡 ${LANG==='nl'?'Officiële bronnen (juridische monitoring)':'Sources officielles (veille juridique)'}</h3>
+    <p class="muted">${LANG==='nl'?'Juridische inhoud van deze app geverifieerd op':'Contenu juridique de cette application vérifié le'} <strong>${DATA_VERIFIED}</strong>. ${LANG==='nl'?'Raadpleeg bij twijfel altijd de officiële bron:':'En cas de doute, consultez toujours la source officielle :'}</p>
+    <ul class="clean">${SOURCES_OFF.map(([n,u])=>`<li>🔗 <a href="${u}" target="_blank" rel="noopener">${esc(n)}</a></li>`).join('')}</ul>`;
+}
+
+/* ============ TRADUCTION FR -> NL (sens inverse) + APERÇU SURLIGNÉ ============ */
+const FR_NL_SORTED=Object.entries(NL_FR).map(([nl,fr])=>[fr,nl]).filter(([f])=>f.length>2).sort((a,b)=>b[0].length-a[0].length);
+function trDocFR(text){
+  if(!text)return '';let s=String(text);
+  for(const [fr,nl] of FR_NL_SORTED){
+    const re=new RegExp('(^|[^\\p{L}])('+fr.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')(?![\\p{L}])','giu');
+    s=s.replace(re,(m,p1)=>p1+nl);
+  }
+  return s;
+}
+// Aperçu : surligne les mots restés identiques à l'original (probablement non traduits)
+function markUntranslated(src,out){
+  const srcW=new Set((src.toLowerCase().match(/\p{L}{4,}/gu)||[]));
+  const dictVals=new Set(Object.values(NL_FR).flatMap(v=>v.toLowerCase().match(/\p{L}{4,}/gu)||[]));
+  return esc(out).replace(/\p{L}{4,}/gu,w=>{
+    const lw=w.toLowerCase();
+    return (srcW.has(lw)&&!dictVals.has(lw))?'<mark class="nt">'+w+'</mark>':w;
+  });
+}
+
 /* ============ UTIL ============ */
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 
@@ -1864,6 +2043,7 @@ window.addEventListener('load',()=>{
   applyTheme();                            // thème clair/sombre
   applyI18n();                             // langue (FR/NL)
   setOnline();
+  document.getElementById('appVersionLbl').textContent='Plateforme MENA Tuteur v'+APP_VERSION;
   refreshAuthUI();                         // démarre verrouillé (écran de connexion)
   document.getElementById('authPw').focus();
   if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{});}

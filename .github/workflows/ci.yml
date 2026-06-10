@@ -1,0 +1,39 @@
+name: CI (validation des données et versions)
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Valider les JSON de données
+        run: |
+          python3 - << 'EOF'
+          import json, glob, sys
+          files = glob.glob('pwa/**/*.json', recursive=True)
+          bad = []
+          for f in files:
+              try: json.load(open(f, encoding='utf-8'))
+              except Exception as e: bad.append(f"{f}: {e}")
+          if bad: print("\n".join(bad)); sys.exit(1)
+          print(f"OK — {len(files)} JSON valides")
+          EOF
+      - name: Vérifier la cohérence des versions (index / version.json)
+        run: |
+          python3 - << 'EOF'
+          import json, re, sys
+          v = json.load(open('pwa/version.json'))['version']
+          html = open('pwa/index.html', encoding='utf-8').read()
+          m = re.search(r"APP_VERSION='([^']+)'", html)
+          assert m, "APP_VERSION introuvable"
+          assert m.group(1) == v, f"index.html={m.group(1)} != version.json={v}"
+          print("Versions cohérentes:", v)
+          EOF
+      - name: Vérifier qu'aucune donnée réelle n'est présente
+        run: |
+          ! grep -rniE "9777786|baghlan|saltanat|dorina popa|basir ahmad" pwa/ || (echo "DONNEES REELLES DETECTEES" && exit 1)
+          echo "OK — aucune donnée personnelle réelle"

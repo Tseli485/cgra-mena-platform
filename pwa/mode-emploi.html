@@ -1,0 +1,231 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mode d'emploi — Plateforme MENA Tuteur</title>
+<style>
+:root{--bleu:#19497F;--fonce:#123A68;--or:#B07E2B;--ink:#16243A;--bg:#F4F6F9;--bord:#D9DEE7;--vert:#1E7F5C;--rouge:#B3362B}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;font-size:1.02rem}
+header{background:linear-gradient(150deg,var(--fonce),#1D5694);border-bottom:3px solid var(--or);color:#fff;padding:2.4rem 2rem;text-align:center}
+header h1{font-family:Georgia,serif;font-size:1.9rem}
+header p{opacity:.9;margin-top:.4rem;max-width:640px;margin-inline:auto}
+main{max-width:860px;margin:0 auto;padding:2rem 1.5rem 4rem}
+h2{font-family:Georgia,serif;font-size:1.45rem;margin:2.6rem 0 .8rem;padding-bottom:.35rem;border-bottom:1px solid var(--bord);position:relative}
+h2:after{content:"";position:absolute;left:0;bottom:-1px;width:64px;height:3px;background:var(--or)}
+h2 .num{display:inline-block;background:var(--bleu);color:#fff;border-radius:50%;width:2rem;height:2rem;line-height:2rem;text-align:center;font-size:1rem;margin-right:.5rem;font-family:'Segoe UI',sans-serif}
+h3{font-size:1.08rem;margin:1.4rem 0 .4rem;color:var(--fonce)}
+p{margin:.6rem 0}
+figure{margin:1.1rem 0;text-align:center}
+figure img{max-width:100%;border:1px solid var(--bord);border-radius:.6rem;box-shadow:0 4px 18px rgba(22,36,58,.12)}
+figcaption{font-size:.82rem;color:#5F6B7A;margin-top:.4rem;font-style:italic}
+.tip{background:#FDF6E9;border-left:4px solid var(--or);padding:.85rem 1.1rem;border-radius:.45rem;margin:1rem 0;font-size:.95rem}
+.tip:before{content:"💡 Conseil — ";font-weight:700}
+.warn{background:#FAE9E7;border-left:4px solid var(--rouge);padding:.85rem 1.1rem;border-radius:.45rem;margin:1rem 0;font-size:.95rem}
+.warn:before{content:"⚠️ Important — ";font-weight:700}
+.ok{background:#EDF7F2;border-left:4px solid var(--vert);padding:.85rem 1.1rem;border-radius:.45rem;margin:1rem 0;font-size:.95rem}
+ol.steps{margin:.6rem 0 .6rem 1.4rem}
+ol.steps li{margin:.45rem 0}
+ul{margin:.5rem 0 .5rem 1.4rem}
+.toc{background:#fff;border:1px solid var(--bord);border-top:3px solid var(--or);border-radius:.7rem;padding:1.3rem 1.6rem;margin:1.6rem 0}
+.toc h2{margin-top:0;border:none}.toc h2:after{display:none}
+.toc ol{columns:2;column-gap:2rem;margin-left:1.2rem}
+.toc a{color:var(--bleu);text-decoration:none}
+.toc a:hover{text-decoration:underline}
+kbd,.btn-ex{display:inline-block;background:var(--bleu);color:#fff;padding:.1rem .55rem;border-radius:.35rem;font-size:.85em;font-weight:600}
+code{background:#EEF1F5;padding:.1rem .4rem;border-radius:.3rem;font-size:.9em}
+footer{text-align:center;color:#5F6B7A;font-size:.8rem;padding:2rem;border-top:1px solid var(--bord)}
+@media print{header{padding:1.2rem}figure img{box-shadow:none}h2{page-break-after:avoid}figure{page-break-inside:avoid}.toc ol{columns:1}}
+@page{margin:1.6cm}
+</style></head><body>
+<header>
+  <h1>📖 Mode d'emploi pas à pas</h1>
+  <p><strong>Plateforme MENA Tuteur</strong> — guide complet pour le tuteur qui débute. Aucune connaissance technique ni juridique n'est nécessaire : suivez les étapes dans l'ordre, l'application vous prend par la main.</p>
+</header>
+<main>
+
+<div class="toc">
+<h2>Sommaire</h2>
+<ol>
+<li><a href="#s1">Ouvrir l'application</a></li>
+<li><a href="#s2">Créer votre mot de passe</a></li>
+<li><a href="#s3">La visite de bienvenue</a></li>
+<li><a href="#s4">Le tableau de bord</a></li>
+<li><a href="#s5">Voir les échéances d'un jeune</a></li>
+<li><a href="#s6">Créer un dossier (fiche DVZ)</a></li>
+<li><a href="#s7">L'analyse automatique des documents</a></li>
+<li><a href="#s8">Le dossier du jeune en détail</a></li>
+<li><a href="#s9">Le juge de paix et vos rapports</a></li>
+<li><a href="#s10">L'agenda des rendez-vous</a></li>
+<li><a href="#s11">L'argent du jeune (banque)</a></li>
+<li><a href="#s12">Vos frais de déplacement</a></li>
+<li><a href="#s13">Conserver les documents (pièces jointes)</a></li>
+<li><a href="#s14">Traduire un document NL ↔ FR</a></li>
+<li><a href="#s15">Le Guide du tuteur (vos cours)</a></li>
+<li><a href="#s16">Le glossaire des sigles</a></li>
+<li><a href="#s17">Sauvegarder et transmettre</a></li>
+<li><a href="#s18">Clôturer un dossier à 18 ans</a></li>
+<li><a href="#s19">Questions fréquentes</a></li>
+</ol>
+</div>
+
+<h2 id="s1"><span class="num">1</span>Ouvrir l'application</h2>
+<p>Trois possibilités — choisissez la plus simple pour vous :</p>
+<ol class="steps">
+<li><strong>Le lien internet</strong> (recommandé) : ouvrez <a href="https://tseli485.github.io/cgra-mena-platform/">tseli485.github.io/cgra-mena-platform</a> dans votre navigateur (Chrome, Edge, Firefox…). Astuce : dans le menu du navigateur, choisissez « <em>Installer l'application</em> » pour l'avoir comme une vraie application, qui fonctionne ensuite <strong>même sans internet</strong>.</li>
+<li><strong>L'application de bureau</strong> : téléchargez-la depuis la <a href="telecharger.html">page de téléchargement</a> (Windows, Mac, Linux). Double-cliquez, c'est tout.</li>
+<li><strong>Windows uniquement</strong> : tapez <code>winget install MENA-Tuteur</code> dans un terminal (une fois la publication Microsoft validée).</li>
+</ol>
+<div class="tip">L'application fonctionne entièrement <strong>sur votre appareil</strong>. Rien — absolument rien — concernant les jeunes n'est envoyé sur internet.</div>
+
+<h2 id="s2"><span class="num">2</span>Créer votre mot de passe</h2>
+<p>À la première ouverture, l'application vous demande de créer un mot de passe. C'est <strong>la clé qui chiffre toutes les données</strong> des jeunes (chiffrement AES-256, le même niveau que les banques).</p>
+<figure><img src="manual/01-mot-de-passe.png" alt="Écran de création du mot de passe"><figcaption>L'écran sécurisé au premier lancement.</figcaption></figure>
+<ol class="steps">
+<li>Choisissez un mot de passe d'au moins 8 caractères, que vous retiendrez.</li>
+<li>Confirmez-le, puis validez.</li>
+</ol>
+<div class="warn">Notez ce mot de passe dans un endroit sûr (PAS dans l'application). Personne ne peut le récupérer à votre place : c'est lui qui protège les données. En cas d'oubli, le lien « Mot de passe oublié ? » efface tout et repart de zéro — d'où l'importance des sauvegardes (étape 17).</div>
+<div class="tip">L'application se verrouille toute seule après <strong>10 minutes d'inactivité</strong>, et vous pouvez la verrouiller à tout moment avec le bouton 🔒 en haut à droite. Prenez ce réflexe quand vous quittez votre écran.</div>
+
+<h2 id="s3"><span class="num">3</span>La visite de bienvenue</h2>
+<p>Juste après la création du mot de passe, une fenêtre vous présente les 5 gestes essentiels. Lisez-la tranquillement : c'est le résumé de tout ce manuel.</p>
+<figure><img src="manual/02-bienvenue.png" alt="Visite guidée en 5 étapes"><figcaption>La visite de bienvenue, affichée une seule fois.</figcaption></figure>
+
+<h2 id="s4"><span class="num">4</span>Le tableau de bord</h2>
+<p>C'est votre page d'accueil. De haut en bas :</p>
+<figure><img src="manual/03-tableau-de-bord.png" alt="Tableau de bord"><figcaption>Le tableau de bord après la création d'un premier dossier.</figcaption></figure>
+<ul>
+<li><strong>Le rappel de sauvegarde</strong> (bandeau rouge) : il apparaît si vous n'avez pas exporté de sauvegarde depuis plus de 7 jours. Ne l'ignorez pas !</li>
+<li><strong>Les trois grands boutons</strong> : créer un nouveau dossier MENA, voir vos dossiers, aller aux échéances.</li>
+<li><strong>La recherche globale</strong> : tapez n'importe quel mot (un nom, « regroupement », « Salduz »…) — elle cherche dans vos dossiers, la législation, les cas pratiques et les ressources.</li>
+<li><strong>Les compteurs</strong> : nombre de dossiers, urgents, progression moyenne.</li>
+</ul>
+
+<h2 id="s5"><span class="num">5</span>Voir les échéances d'un jeune</h2>
+<p>Pour éviter toute confusion entre les jeunes, la carte « ⏰ Échéances à venir » n'affiche rien tant que vous n'avez pas <strong>choisi un jeune</strong> dans le menu déroulant.</p>
+<figure><img src="manual/04-echeances-selection.png" alt="Échéances du jeune sélectionné"><figcaption>Après sélection : uniquement les rapports et rendez-vous DE CE jeune. Le rouge = en retard.</figcaption></figure>
+<p>Et pour la vue d'ensemble de <strong>tous</strong> vos jeunes en un coup d'œil, regardez juste en dessous :</p>
+<figure><img src="manual/05-suivi-par-dossier.png" alt="Suivi par dossier"><figcaption>Une ligne par jeune : prochain rendez-vous, prochain rapport, solde, avancement. Cliquez sur une ligne pour ouvrir le dossier.</figcaption></figure>
+
+<h2 id="s6"><span class="num">6</span>Créer un dossier : importer la fiche DVZ</h2>
+<p>Quand le Service des Tutelles vous confie un jeune, vous recevez sa <strong>fiche « mineur étranger non accompagné »</strong> (souvent appelée fiche DVZ, souvent en néerlandais). L'application la lit pour vous :</p>
+<ol class="steps">
+<li>Sur le tableau de bord, cliquez sur <span class="btn-ex">📄 Nouveau MENA (fiche DVZ)</span>.</li>
+<li>Cliquez sur « 📎 Lire automatiquement une fiche PDF » et choisissez le fichier PDF reçu.</li>
+<li>L'application remplit les champs toute seule — <strong>y compris la photo du jeune</strong>, découpée automatiquement. En mode FR, le contenu néerlandais est traduit.</li>
+<li>Vérifiez, complétez si besoin, puis cliquez sur <span class="btn-ex">📁 Créer le dossier</span>.</li>
+</ol>
+<figure><img src="manual/06-mes-dossiers.png" alt="Liste des dossiers"><figcaption>Chaque dossier devient une carte : photo, statut (la bande de couleur), prochaine échéance, progression.</figcaption></figure>
+<figure><img src="manual/07-import-fiche.png" alt="Fenêtre d'import de la fiche DVZ"><figcaption>La fenêtre d'import (ici remplie avec l'exemple fictif intégré — bouton « Charger un exemple »).</figcaption></figure>
+<div class="tip">Pas de PDF sous la main ? Cliquez sur « ⚡ Charger un exemple (fiche fictive) » pour vous entraîner sans aucun risque : ces données sont inventées.</div>
+
+<h2 id="s7"><span class="num">7</span>L'analyse automatique des documents</h2>
+<p>C'est votre filet de sécurité juridique. <strong>Chaque document que vous introduisez</strong> (fiche importée, traduction, pièce jointe PDF, texte collé) est analysé : l'application détecte 19 situations importantes — décision de refus, reconnaissance du statut de réfugié, ordre de quitter le territoire, changement d'adresse, convocation à la police ou au CGRA, test d'âge, disparition…</p>
+<figure><img src="manual/08-analyse-document.png" alt="Analyse d'un document"><figcaption>Ici, l'application a détecté un refus ET un changement d'adresse dans le même courrier.</figcaption></figure>
+<ol class="steps">
+<li>Cochez les détections correctes (tout est coché par défaut).</li>
+<li>Cliquez sur <span class="btn-ex">✅ Répercuter dans le dossier</span>.</li>
+<li>L'application met à jour <strong>tout le dossier</strong> : l'adresse, le juge de paix compétent, le statut juridique, la checklist, et crée les rendez-vous nécessaires (ex. « recours dans les 30 jours » → rendez-vous avocat à J+3) ainsi que des <strong>conseils juridiques</strong> avec les références de loi.</li>
+</ol>
+<div class="warn">L'analyse vous assiste mais ne remplace ni votre lecture ni l'avocat : lisez toujours le document, et au moindre doute appelez l'avocat du jeune (gratuit — Bureau d'aide juridique).</div>
+
+<h2 id="s8"><span class="num">8</span>Le dossier du jeune en détail</h2>
+<p>Cliquez sur une carte pour ouvrir le dossier complet. Tout est organisé en sections dépliables :</p>
+<figure><img src="manual/09-dossier-detail.png" alt="Dossier en détail"><figcaption>En haut : identité, statut, progression. La section « Conseils actifs » s'ouvre seule quand il y a des actions à mener.</figcaption></figure>
+<figure><img src="manual/10-fiche-dvz.png" alt="Fiche DVZ présentée par rubriques"><figcaption>« Premières constatations DVZ » : la fiche complète, présentée par rubriques claires (identité, famille, santé, trajet, vulnérabilité…) — rien n'est omis.</figcaption></figure>
+<figure><img src="manual/16-conseils-actifs.png" alt="Conseils actifs et historique"><figcaption>Les conseils juridiques actifs (avec références légales) et l'historique horodaté de chaque changement. Cliquez sur ✓ quand un conseil est traité.</figcaption></figure>
+
+<h2 id="s9"><span class="num">9</span>Le juge de paix et vos rapports obligatoires</h2>
+<p>En tant que tuteur, la loi vous impose trois types de rapports (loi-programme du 24/12/2002, art. 19 et 24) :</p>
+<ul>
+<li><strong>Rapport initial</strong> : dans les <strong>15 jours</strong> de votre désignation → Service des Tutelles ET juge de paix ;</li>
+<li><strong>Rapport semestriel</strong> : <strong>2 fois par an</strong> → juge de paix, copie au Service des Tutelles ;</li>
+<li><strong>Rapport final</strong> : dans les 15 jours de la fin de la tutelle.</li>
+</ul>
+<figure><img src="manual/11-juge-rapports.png" alt="Juge de paix et rapports"><figcaption>Tapez le code postal du jeune → l'application trouve le juge de paix compétent (adresse, téléphone). Les échéances des rapports sont calculées automatiquement.</figcaption></figure>
+<ol class="steps">
+<li>Entrez le <strong>code postal</strong> du lieu de vie du jeune et cliquez sur « 🔍 Trouver le juge de paix ». Enregistrez.</li>
+<li>À chaque échéance, cliquez sur <span class="btn-ex">🖨️ PDF</span> : le rapport est généré <strong>pré-rempli</strong> avec les données du dossier (identité, école, santé, solde du compte…). Vous ne complétez que les zones <em>[À compléter]</em>.</li>
+<li>« ✉️ Préparer l'envoi » crée l'email avec le bon destinataire.</li>
+<li>Cochez le rapport une fois envoyé : l'application garde la date.</li>
+</ol>
+
+<h2 id="s10"><span class="num">10</span>L'agenda des rendez-vous</h2>
+<p>À la création du dossier, l'application planifie pour vous les <strong>10 rendez-vous types</strong> du début de tutelle (première rencontre, centre, avocat, rapport initial, école, médecin, banque, préparation CGRA…). Modifiez les dates librement, ajoutez vos propres rendez-vous, et exportez tout vers votre agenda personnel (fichier <code>.ics</code> : Google Agenda, Outlook…).</p>
+<figure><img src="manual/12-agenda.png" alt="Agenda du dossier"><figcaption>Cochez un rendez-vous réalisé : il alimentera automatiquement votre prochain rapport.</figcaption></figure>
+<div class="tip">Les rendez-vous à moins de 30 jours remontent sur le tableau de bord, et l'application peut afficher des notifications (acceptez-les quand le navigateur le propose).</div>
+
+<h2 id="s11"><span class="num">11</span>L'argent du jeune (suivi bancaire)</h2>
+<p>Vous gérez les biens du mineur sous le contrôle du juge de paix. Notez ici chaque entrée et sortie : l'application calcule le solde et génère le <strong>relevé officiel</strong> à joindre à votre rapport semestriel.</p>
+<figure><img src="manual/13-banque.png" alt="Suivi bancaire"><figcaption>Le registre des opérations. En dessous du tableau : « Relevé (PDF) » pour le juge de paix. L'application conseille aussi les banques proches du jeune (compte jeune gratuit).</figcaption></figure>
+<div class="warn">Ne mélangez JAMAIS votre argent et celui du jeune. Pour tout acte important (grosse somme, héritage), demandez d'abord l'autorisation du juge de paix.</div>
+
+<h2 id="s12"><span class="num">12</span>Vos frais de déplacement (remboursement)</h2>
+<p>Le SPF Justice vous rembourse <strong>0,428 €/km</strong> (tarif indexé — modifiable dans l'application) plus parking et frais justifiés. Notez chaque déplacement <em>le jour même</em> :</p>
+<figure><img src="manual/14-frais.png" alt="Frais et déplacements"><figcaption>Le bouton « 🗺️ Calculer km (Maps) » ouvre l'itinéraire Google Maps : lisez la distance, saisissez l'aller-retour.</figcaption></figure>
+<ol class="steps">
+<li>Date, motif (ex. « Audition CGRA »), départ et destination.</li>
+<li>Cliquez sur « 🗺️ Calculer km » → recopiez les km (aller-retour).</li>
+<li>Ajoutez parking/divers, puis ➕.</li>
+<li>En fin de période : <span class="btn-ex">🖨️ Déclaration de frais (PDF)</span> → à envoyer au Service des Tutelles avec vos justificatifs.</li>
+</ol>
+
+<h2 id="s13"><span class="num">13</span>Conserver les documents (pièces jointes)</h2>
+<p>Scannez ou photographiez chaque document officiel (annexe 26, attestation, carte, bulletin…) et déposez-le dans le dossier : il est <strong>chiffré</strong> sur votre appareil. Si c'est un PDF, son contenu est automatiquement analysé (étape 7).</p>
+<figure><img src="manual/15-pieces-jointes.png" alt="Pièces jointes chiffrées"><figcaption>Vos documents, chiffrés AES-256, jamais transmis. Cliquez sur un nom pour le retélécharger.</figcaption></figure>
+
+<h2 id="s14"><span class="num">14</span>Traduire un document NL ↔ FR</h2>
+<p>Beaucoup de documents arrivent en néerlandais. Deux outils, accessibles depuis le dossier (« 🌐 Traduire le document ») ou la fenêtre d'import :</p>
+<ul>
+<li><strong>➡️ Dictionnaire (instantané)</strong> : traduction immédiate, exacte pour le vocabulaire administratif ; les mots incertains sont surlignés en jaune.</li>
+<li><strong>🧠 Traduction IA (locale)</strong> : une vraie traduction neuronale, du niveau de Firefox Translate, dans les <strong>deux sens NL ↔ FR</strong>. Premier usage : téléchargement unique d'environ 47 Mo, puis tout fonctionne hors ligne. Comme toujours : <strong>rien ne quitte votre appareil</strong>.</li>
+</ul>
+<figure><img src="manual/17-traduction.png" alt="Outil de traduction"><figcaption>Collez le texte, choisissez le sens, traduisez — puis « Enregistrer dans les notes du dossier ».</figcaption></figure>
+
+<h2 id="s15"><span class="num">15</span>Le Guide du tuteur : vos cours complets</h2>
+<p>L'onglet <span class="btn-ex">🎓 Guide du tuteur</span> est votre formation intégrée : <strong>13 modules</strong> qui couvrent toute la tutelle, de votre désignation aux 18 ans du jeune. Chaque module contient : un cours simple, les actions dans l'ordre, les documents à remettre (et à qui), les pièges à éviter et les références légales.</p>
+<figure><img src="manual/18-guide.png" alt="Guide du tuteur"><figcaption>Les 13 modules + la liste de tous les intervenants (avec « quand les contacter ») + les banques conseillées.</figcaption></figure>
+<div class="tip">Avant chaque grande étape (audition CGRA, regroupement familial, 18 ans…), relisez le module correspondant : 10 minutes de lecture évitent des semaines d'erreurs.</div>
+
+<h2 id="s16"><span class="num">16</span>Le glossaire des sigles</h2>
+<p>CGRA, OQT, DASPA, MINTEH… Le monde des MENA déborde de sigles. Cliquez sur le bouton <span class="btn-ex">📖</span> en haut à droite, à tout moment :</p>
+<figure><img src="manual/19-glossaire.png" alt="Glossaire"><figcaption>19 sigles expliqués, en français et en néerlandais.</figcaption></figure>
+
+<h2 id="s17"><span class="num">17</span>Sauvegarder et transmettre un dossier</h2>
+<p>Vos données vivent uniquement sur votre appareil : la sauvegarde est donc <strong>votre responsabilité</strong>. Une fois par semaine (le bandeau du tableau de bord vous le rappelle) :</p>
+<figure><img src="manual/20-sauvegarde.png" alt="Sauvegarde et transfert"><figcaption>Export chiffré : choisissez un mot de passe de sauvegarde, un fichier .menabackup est téléchargé.</figcaption></figure>
+<ol class="steps">
+<li>Tableau de bord → <span class="btn-ex">💾 Sauvegarde / Transfert</span>.</li>
+<li>Choisissez un mot de passe de sauvegarde (il peut être différent du mot de passe principal) → « Exporter ». Rangez le fichier en lieu sûr (clé USB, disque).</li>
+<li><strong>Pour transmettre un dossier à un collègue tuteur</strong> : envoyez-lui le fichier <code>.menabackup</code> + le mot de passe <em>par deux canaux différents</em> (ex. fichier par email, mot de passe par SMS). Il l'importe via la même fenêtre : dossiers, archives et pièces jointes inclus.</li>
+</ol>
+
+<h2 id="s18"><span class="num">18</span>Clôturer un dossier (les 18 ans)</h2>
+<p>La tutelle prend fin automatiquement aux 18 ans (préparez la transition dès 16 ans ½ — Module 11 du Guide). Une fois le rapport final envoyé et les documents remis au jeune :</p>
+<ol class="steps">
+<li>Ouvrez le dossier → <span class="btn-ex">📦 Clôturer & archiver</span>.</li>
+<li>Le dossier quitte votre liste active mais reste <strong>consultable à tout moment</strong> dans 🗂️ Archives (chiffré, en lecture seule). Vous pouvez aussi le restaurer ou le supprimer définitivement.</li>
+</ol>
+<figure><img src="manual/21-archives.png" alt="Archives"><figcaption>Les archives : vos anciens dossiers, conservés en sécurité, hors de votre vue quotidienne.</figcaption></figure>
+
+<h2 id="s19"><span class="num">19</span>Questions fréquentes</h2>
+<h3>« J'ai oublié mon mot de passe »</h3>
+<p>Sur l'écran de connexion, « Mot de passe oublié ? Réinitialiser » efface tout et repart de zéro. Restaurez ensuite votre dernière sauvegarde <code>.menabackup</code> — c'est exactement pour cela qu'on sauvegarde chaque semaine.</p>
+<h3>« Est-ce que mes données partent sur internet ? »</h3>
+<p>Non. Jamais. Les dossiers sont chiffrés (AES-256) et stockés uniquement dans votre navigateur/appareil. Même la traduction par IA s'exécute localement. Le code de l'application est public et vérifiable.</p>
+<h3>« L'application fonctionne-t-elle sans internet ? »</h3>
+<p>Oui, une fois ouverte une première fois (et installée via « Installer l'application »). Seuls le tout premier chargement et le téléchargement initial des modèles de traduction IA demandent une connexion.</p>
+<h3>« Comment mettre à jour ? »</h3>
+<p>En bas de page, « 🔄 Vérifier les mises à jour » compare votre version à la dernière publiée. La version web se met à jour toute seule.</p>
+<h3>« Un écran ne ressemble pas au manuel »</h3>
+<p>L'application évolue (en mieux !). Les principes restent identiques ; les captures de ce manuel correspondent à la version 1.5.</p>
+<h3>« Qui appeler en urgence ? »</h3>
+<ul>
+<li><strong>Disparition</strong> : police + Child Focus <strong>116 000</strong> (24h/24) + Service des Tutelles + Fedasil — dans les 24 h.</li>
+<li><strong>Audition police</strong> : permanence avocats Salduz <strong>0800 90 808</strong> — jamais d'audition sans avocat.</li>
+<li><strong>Service des Tutelles</strong> : 02 542 70 51 (urgences : 078 15 43 24).</li>
+</ul>
+
+<div class="ok">Vous êtes prêt(e). Commencez par créer votre mot de passe, importez votre première fiche, et laissez l'application vous guider — module après module, échéance après échéance. Bonne tutelle ! 🛡️</div>
+
+</main>
+<footer>Plateforme MENA Tuteur — Mode d'emploi v1.5 · <a href="index.html">← Retour à l'application</a> · Pour imprimer ou enregistrer en PDF : Ctrl+P</footer>
+</body></html>

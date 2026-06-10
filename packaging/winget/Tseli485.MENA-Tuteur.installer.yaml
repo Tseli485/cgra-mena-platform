@@ -1,6 +1,6 @@
 # Manifeste winget — installateur (portable, aucune installation requise)
 PackageIdentifier: Tseli485.MENA-Tuteur
-PackageVersion: 1.3.1
+PackageVersion: 1.4.0
 InstallerLocale: fr-FR
 Platform:
 - Windows.Desktop
@@ -11,7 +11,7 @@ Commands:
 ReleaseDate: 2026-06-10
 Installers:
 - Architecture: x64
-  InstallerUrl: https://github.com/Tseli485/cgra-mena-platform/releases/download/v1.3.1/MENA-Tuteur-Windows.exe
-  InstallerSha256: 43E7940E61BB1234E8CD4B48742B957E6FF3489F5147ECEC2C06C9E92710578F
+  InstallerUrl: https://github.com/Tseli485/cgra-mena-platform/releases/download/v1.4.0/MENA-Tuteur-Windows.exe
+  InstallerSha256: EA3868B2A0590F661F230E4E0AAF727F34E97FC70F108DDD9BBE9C3F9F3342DE
 ManifestType: installer
 ManifestVersion: 1.6.0

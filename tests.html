@@ -55,6 +55,13 @@ document.getElementById('app').addEventListener('load',async()=>{
   await T('computeDelais : refus CGRA → CCE à J+30',()=>{
     const r=W.computeDelais('refus','2026-01-01');
     return r.length===2&&r[1].date==='2026-01-31';});
+  // 11. tournée : l'ordre optimal bat l'ordre saisi (3 étapes alignées)
+  await T('tspOrder : itinéraire optimal multi-visites',()=>{
+    const dep={lat:50.5,lon:4.0};
+    const stops=[{lat:50.5,lon:5.0},{lat:50.5,lon:4.2},{lat:50.5,lon:4.6}];
+    const r=W.tspOrder(dep,stops);
+    const naive=(()=>{const D=(a,b)=>W.havKm(a,b);return D(dep,stops[0])+D(stops[0],stops[1])+D(stops[1],stops[2])+D(stops[2],dep);})();
+    return r.order.length===3 && r.km<naive-10 && r.order[1]===2;});
   const h=document.createElement('h2');h.textContent=`Résultat : ${pass}/${total}`;h.className=pass===total?'ok':'ko';R.before(h);
 });
 </script></body></html>

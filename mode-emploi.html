@@ -41,6 +41,17 @@ footer{text-align:center;color:#5F6B7A;font-size:.8rem;padding:2rem;border-top:1
 </header>
 <main>
 
+<p style="text-align:right;font-size:.85rem">🇳🇱 <a href="handleiding.html">Nederlandse versie — Handleiding</a></p>
+
+<div class="tip" style="background:#EDF7F2;border-left-color:#1E7F5C">
+<strong>Trois jeunes fictifs vous accompagnent dans ce manuel</strong> (toutes leurs données sont inventées) :
+<ul style="margin:.4rem 0 0 1.4rem">
+<li><strong>Karim, 16 ans (Afghanistan)</strong> — votre tutelle « en cours » : c'est son dossier que vous voyez dans la plupart des captures (rapports, banque, frais, conseils actifs…).</li>
+<li><strong>Fatou, 16 ans (Guinée)</strong> — la tutelle qui démarre : vous venez d'être désigné, tout est à faire.</li>
+<li><strong>Ali, 18 ans (Afghanistan)</strong> — la tutelle terminée : son dossier est clôturé et archivé.</li>
+</ul>
+Suivez-les : chaque écran du manuel correspond à un moment réel de la vie d'une tutelle.</div>
+
 <div class="toc">
 <h2>Sommaire</h2>
 <ol>
@@ -63,6 +74,7 @@ footer{text-align:center;color:#5F6B7A;font-size:.8rem;padding:2rem;border-top:1
 <li><a href="#s17">Sauvegarder et transmettre</a></li>
 <li><a href="#s18">Clôturer un dossier à 18 ans</a></li>
 <li><a href="#s19">Questions fréquentes</a></li>
+<li><a href="#s20">⚖️ Les nouvelles règles 2025-2026</a></li>
 </ol>
 </div>
 
@@ -102,6 +114,7 @@ footer{text-align:center;color:#5F6B7A;font-size:.8rem;padding:2rem;border-top:1
 <h2 id="s5"><span class="num">5</span>Voir les échéances d'un jeune</h2>
 <p>Pour éviter toute confusion entre les jeunes, la carte « ⏰ Échéances à venir » n'affiche rien tant que vous n'avez pas <strong>choisi un jeune</strong> dans le menu déroulant.</p>
 <figure><img src="manual/04-echeances-selection.png" alt="Échéances du jeune sélectionné"><figcaption>Après sélection : uniquement les rapports et rendez-vous DE CE jeune. Le rouge = en retard.</figcaption></figure>
+<p><em>Exemple concret :</em> vous tutorez Karim et Fatou. En sélectionnant <strong>Karim</strong>, vous voyez SES rapports semestriels et SES rendez-vous — rien de Fatou. Impossible de confondre les délais de l'un avec ceux de l'autre.</p>
 <p>Et pour la vue d'ensemble de <strong>tous</strong> vos jeunes en un coup d'œil, regardez juste en dessous :</p>
 <figure><img src="manual/05-suivi-par-dossier.png" alt="Suivi par dossier"><figcaption>Une ligne par jeune : prochain rendez-vous, prochain rapport, solde, avancement. Cliquez sur une ligne pour ouvrir le dossier.</figcaption></figure>
 
@@ -119,7 +132,8 @@ footer{text-align:center;color:#5F6B7A;font-size:.8rem;padding:2rem;border-top:1
 
 <h2 id="s7"><span class="num">7</span>L'analyse automatique des documents</h2>
 <p>C'est votre filet de sécurité juridique. <strong>Chaque document que vous introduisez</strong> (fiche importée, traduction, pièce jointe PDF, texte collé) est analysé : l'application détecte 19 situations importantes — décision de refus, reconnaissance du statut de réfugié, ordre de quitter le territoire, changement d'adresse, convocation à la police ou au CGRA, test d'âge, disparition…</p>
-<figure><img src="manual/08-analyse-document.png" alt="Analyse d'un document"><figcaption>Ici, l'application a détecté un refus ET un changement d'adresse dans le même courrier.</figcaption></figure>
+<p><em>Situation vécue :</em> vous recevez un courrier de 3 pages en néerlandais concernant Karim. Vous le collez dans l'analyse : l'application détecte qu'il s'agit d'un <strong>refus du CGRA</strong> ET que Karim a été <strong>transféré à Charleroi</strong>. En un clic : le recours (30 jours) est planifié avec l'avocat, l'adresse est mise à jour, et l'application vous signale que le juge de paix compétent a probablement changé.</p>
+<figure><img src="manual/08-analyse-document.png" alt="Analyse d'un document"><figcaption>Ici, l'application a détecté un refus ET un changement d'adresse dans le même courrier de Karim.</figcaption></figure>
 <ol class="steps">
 <li>Cochez les détections correctes (tout est coché par défaut).</li>
 <li>Cliquez sur <span class="btn-ex">✅ Répercuter dans le dossier</span>.</li>
@@ -170,7 +184,7 @@ footer{text-align:center;color:#5F6B7A;font-size:.8rem;padding:2rem;border-top:1
 
 <h2 id="s13"><span class="num">13</span>Conserver les documents (pièces jointes)</h2>
 <p>Scannez ou photographiez chaque document officiel (annexe 26, attestation, carte, bulletin…) et déposez-le dans le dossier : il est <strong>chiffré</strong> sur votre appareil. Si c'est un PDF, son contenu est automatiquement analysé (étape 7).</p>
-<figure><img src="manual/15-pieces-jointes.png" alt="Pièces jointes chiffrées"><figcaption>Vos documents, chiffrés AES-256, jamais transmis. Cliquez sur un nom pour le retélécharger.</figcaption></figure>
+<figure><img src="manual/15-pieces-jointes.png" alt="Pièces jointes chiffrées"><figcaption>Le dossier de Karim contient déjà son annexe 26 et son attestation scolaire — chiffrées AES-256, jamais transmises. Cliquez sur un nom pour retélécharger.</figcaption></figure>
 
 <h2 id="s14"><span class="num">14</span>Traduire un document NL ↔ FR</h2>
 <p>Beaucoup de documents arrivent en néerlandais. Deux outils, accessibles depuis le dossier (« 🌐 Traduire le document ») ou la fenêtre d'import :</p>
@@ -204,7 +218,8 @@ footer{text-align:center;color:#5F6B7A;font-size:.8rem;padding:2rem;border-top:1
 <li>Ouvrez le dossier → <span class="btn-ex">📦 Clôturer & archiver</span>.</li>
 <li>Le dossier quitte votre liste active mais reste <strong>consultable à tout moment</strong> dans 🗂️ Archives (chiffré, en lecture seule). Vous pouvez aussi le restaurer ou le supprimer définitivement.</li>
 </ol>
-<figure><img src="manual/21-archives.png" alt="Archives"><figcaption>Les archives : vos anciens dossiers, conservés en sécurité, hors de votre vue quotidienne.</figcaption></figure>
+<p><em>Exemple :</em> Ali vient d'avoir 18 ans. Vous avez envoyé le rapport final, remis ses documents originaux et clôturé le compte en sa présence. Son dossier part aux archives — deux ans plus tard, le Service des Tutelles vous pose une question : vous le consultez en deux clics.</p>
+<figure><img src="manual/21-archives.png" alt="Archives"><figcaption>Les archives : le dossier d'Ali, conservé chiffré, consultable, restaurable.</figcaption></figure>
 
 <h2 id="s19"><span class="num">19</span>Questions fréquentes</h2>
 <h3>« J'ai oublié mon mot de passe »</h3>
@@ -224,8 +239,36 @@ footer{text-align:center;color:#5F6B7A;font-size:.8rem;padding:2rem;border-top:1
 <li><strong>Service des Tutelles</strong> : 02 542 70 51 (urgences : 078 15 43 24).</li>
 </ul>
 
+<h2 id="s20"><span class="num">20</span>⚖️ Les nouvelles règles 2025-2026, expliquées simplement</h2>
+<p>Le droit des étrangers a fortement changé récemment. L'application est à jour de ces réformes (ses conseils automatiques en tiennent compte), mais vous devez les comprendre. Voici l'essentiel, vérifié sur les sources officielles en juin 2026.</p>
+
+<h3>A. Le regroupement familial : la loi du 18 juillet 2025</h3>
+<p>Entrée en vigueur le <strong>18 août 2025</strong>, cette loi durcit considérablement les règles. Ce qui change concrètement pour vos tutelles :</p>
+<ul>
+<li><strong>Le délai « favorable » passe d'1 an à 6 MOIS.</strong> Quand votre jeune est reconnu réfugié, sa famille (parents) peut demander à le rejoindre <em>sans devoir prouver revenus et logement</em> — mais seulement si la demande est introduite dans les <strong>6 mois</strong> de la reconnaissance. Avant la réforme, c'était un an. <em>Conséquence pratique : dès la décision positive du CGRA, c'est une course contre la montre — l'application crée automatiquement le rappel et le conseil dès qu'elle détecte la reconnaissance dans un document.</em></li>
+<li><strong>Passé les 6 mois :</strong> la famille doit prouver des revenus d'au moins <strong>120 % du revenu d'intégration</strong> (environ 2 130 € nets/mois — les allocations sociales ne comptent pas), un logement suffisant et une assurance maladie. Pour la plupart des familles restées au pays, c'est quasi impossible.</li>
+<li><strong>Le silence vaut désormais REFUS.</strong> Avant, si l'administration ne répondait pas dans le délai (9 mois), la demande était acceptée d'office. C'est inversé : sans réponse, la demande est <em>rejetée</em> automatiquement, et il faut introduire un recours. Suivez donc activement chaque demande avec l'avocat.</li>
+<li><strong>Restriction propre aux MENA :</strong> un parent ne peut plus rejoindre son enfant mineur reconnu réfugié si l'enfant était <em>accompagné de l'autre parent</em> à son arrivée en Belgique.</li>
+<li><strong>Protection subsidiaire — point chaud :</strong> la loi excluait le regroupement des parents avec un MENA bénéficiaire de la protection subsidiaire. La <strong>Cour constitutionnelle a suspendu</strong> cette différence de traitement (arrêt du 26 février 2026, questions envoyées à la Cour de justice de l'UE). Le droit est donc <em>en mouvement</em> : pour un jeune en protection subsidiaire, ne concluez jamais seul — appelez l'avocat et consultez <a href="https://www.myria.be">Myria</a>.</li>
+</ul>
+<div class="warn">Retenez le réflexe : <strong>reconnaissance du statut = la demande de la famille doit partir dans les 6 mois</strong>. C'est LE délai le plus important de la réforme pour un tuteur.</div>
+
+<h3>B. Le test d'âge : la Belgique condamnée (CEDH, 6 mars 2025)</h3>
+<p>La Cour européenne des droits de l'homme a jugé que la procédure belge de détermination de l'âge <strong>manque de garanties procédurales</strong> (violation de l'article 8). Concrètement, si votre jeune est déclaré majeur après le triple test médical :</p>
+<ul>
+<li>le recours a aujourd'hui <strong>beaucoup plus de poids</strong> — l'avocat doit citer cet arrêt ;</li>
+<li>exigez toujours la copie complète des résultats et la <strong>marge d'erreur</strong> (souvent ±2 ans) ;</li>
+<li>rassemblez tout document d'identité (taskara, acte de naissance) via la famille — jamais via l'ambassade pour un demandeur d'asile.</li>
+</ul>
+<p>L'application cite automatiquement cet arrêt dans son conseil lorsque l'analyse d'un document détecte un résultat « majeur ».</p>
+
+<h3>C. L'accueil sous pression (réforme 2025)</h3>
+<p>La réforme de l'asile de juillet 2025 permet notamment de refuser l'accueil aux personnes déjà protégées dans un autre pays de l'UE, et le réseau d'accueil se réduit (fin progressive de places communales). La Cour constitutionnelle a, là aussi, suspendu certaines mesures (26 février 2026). <strong>Ce qui ne change pas :</strong> un MENA est prioritaire et a toujours droit à un accueil adapté. Si une place est refusée ou inadaptée à votre jeune, signalez-le immédiatement au Service des Tutelles et à l'avocat — ne laissez jamais un mineur sans solution d'hébergement.</p>
+
+<div class="tip">L'application vérifie ses contenus juridiques et affiche leur date de vérification (onglet Ressources → Sources officielles). En cas de doute sur une règle, la source officielle prime toujours : Moniteur belge, CGRA, justice.belgium.be, Myria.</div>
+
 <div class="ok">Vous êtes prêt(e). Commencez par créer votre mot de passe, importez votre première fiche, et laissez l'application vous guider — module après module, échéance après échéance. Bonne tutelle ! 🛡️</div>
 
 </main>
-<footer>Plateforme MENA Tuteur — Mode d'emploi v1.5 · <a href="index.html">← Retour à l'application</a> · Pour imprimer ou enregistrer en PDF : Ctrl+P</footer>
+<footer>Plateforme MENA Tuteur — Mode d'emploi v1.6 — réglementation vérifiée juin 2026 · <a href="index.html">← Retour à l'application</a> · Pour imprimer ou enregistrer en PDF : Ctrl+P</footer>
 </body></html>

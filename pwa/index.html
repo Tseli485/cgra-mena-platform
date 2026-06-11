@@ -256,11 +256,13 @@
   <section class="view active" id="dashboard">
     <h2 class="title" data-i18n="dash.title">🏠 Tableau de bord</h2>
     <div class="banner" data-html="dash.welcome"></div>
+    <div id="legalAlert"></div>
     <div id="bkReminder"></div>
     <div class="quick3">
       <button class="btn" onclick="openFicheImport()" data-i18n="dash.q1">📄 Nouveau MENA (fiche DVZ)</button>
       <button class="btn sec" onclick="go('dossiers')" data-i18n="dash.q2">📂 Mes dossiers</button>
       <button class="btn sec" onclick="document.getElementById('dashDeadlines').scrollIntoView({behavior:'smooth'})" data-i18n="dash.q3">⏰ Urgences &amp; échéances</button>
+      <button class="btn sec" onclick="openStats()" data-i18n="dash.q4">📈 Mes statistiques</button>
     </div>
     <div class="row" style="margin:.2rem 0 1rem">
       <input id="gsearch" data-ph="gs.ph" style="flex:1;min-width:220px" oninput="globalSearch(this.value)">
@@ -561,6 +563,26 @@
     <div id="archBox"></div>
   </div>
 </div>
+
+<!-- MODAL CALCULATEUR DE DÉLAIS -->
+<div class="modal" id="calcModal"><div class="modal-box">
+  <button class="close" onclick="closeModal('calcModal')">&times;</button><div id="calcBox"></div>
+</div></div>
+
+<!-- MODAL PRÉPARATION AUDITION CGRA -->
+<div class="modal" id="cgraModal"><div class="modal-box" style="max-width:760px">
+  <button class="close" onclick="closeModal('cgraModal')">&times;</button><div id="cgraBox"></div>
+</div></div>
+
+<!-- MODAL STATISTIQUES -->
+<div class="modal" id="statsModal"><div class="modal-box" style="max-width:760px">
+  <button class="close" onclick="closeModal('statsModal')">&times;</button><div id="statsBox"></div>
+</div></div>
+
+<!-- MODAL NOTES DE VERSION -->
+<div class="modal" id="wnModal"><div class="modal-box">
+  <button class="close" onclick="closeModal('wnModal')">&times;</button><div id="wnBox"></div>
+</div></div>
 
 <!-- MODAL ANALYSE DE DOCUMENT -->
 <div class="modal" id="anaModal">
@@ -933,6 +955,8 @@ function onUnlocked(){
   maybeTour();      // visite guidée au premier lancement
   updateArchBtn();  // compteur des archives
   notifInit();      // notifications d'échéances (1 salve/jour max)
+  checkLegalAlert();// alerte juridique publiée via le site
+  maybeWhatsNew();  // notes de version
 }
 function lockApp(){
   CRYPTO_KEY=null;DOSSIERS=[];ARCHIVES=null;
@@ -1220,6 +1244,8 @@ function openDossierDetail(id){
       <span style="${c.done?'text-decoration:line-through;color:var(--gris)':''}">${esc(ckLabel(c.t))}</span>
       <a href="#" title="${LANG==='nl'?'Praktische gids':'Fiche pratique'}" style="margin-left:.35rem;text-decoration:none" onclick="event.preventDefault();event.stopPropagation();closeModal('detailModal');go(ckView(${i}))">ℹ️</a></label>`).join('')}</div>
     <div class="row" style="margin-top:1.2rem;justify-content:flex-end">
+      <button class="btn sec sm" onclick="openCalcDelais('${d.id}')">🧮 ${LANG==='nl'?'Termijnen':'Délais'}</button>
+      <button class="btn sec sm" onclick="openCgraPrep('${d.id}')">🛂 ${LANG==='nl'?'CGVS-voorbereiding':'Préparer audition CGRA'}</button>
       <button class="btn sec sm" onclick="transDossier('${d.id}')">🌐 ${LANG==='nl'?'Document vertalen (NL→FR)':'Traduire le document (NL→FR)'}</button>
       <button class="btn sec sm" onclick="genDossierComplet('${d.id}')">🖨️ ${LANG==='nl'?'Volledig dossier (PDF)':'Dossier complet (PDF)'}</button>
       <button class="btn sec sm" onclick="openDossierForm('${d.id}')">${t('det.modify')}</button>
@@ -1795,7 +1821,8 @@ const RAPPORTS_LEGACY=[
 ];
 function rtFind(id){return RAPPORTS_TYPE.find(x=>x.id===id)||RAPPORTS_LEGACY.find(x=>x.id===id);}
 function nowISO(){return new Date().toISOString().slice(0,10);}
-function addDays(iso,days){if(!iso)return '';const d=new Date(iso+'T00:00:00');d.setDate(d.getDate()+(+days||0));return d.toISOString().slice(0,10);}
+// Calcul en heure LOCALE (toISOString convertit en UTC et faisait perdre 1 jour en Belgique)
+function addDays(iso,days){if(!iso)return '';const d=new Date(iso+'T12:00:00');d.setDate(d.getDate()+(+days||0));const p=n=>String(n).padStart(2,'0');return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate());}
 /* Initialise les rapports obligatoires avec échéances calculées depuis une date de base */
 function initRapports(base){return RAPPORTS_TYPE.map(r=>({id:r.id,echeance:addDays(base||nowISO(),r.defJours),fait:false,dateFait:''}));}
 function initGestion(d){
@@ -2178,10 +2205,10 @@ function printReleve(id){
 }
 
 /* ============ VERSION & MISES À JOUR ============ */
-const APP_VERSION='1.6.1';
+const APP_VERSION='1.7.0';
 window.APP_VERSION=APP_VERSION;   // expose pour tests.html (const non attache a window)
-Object.assign(I18N.fr,{"dash.matrix":"📊 Suivi par dossier","nav.guide":"🎓 Guide du tuteur","guide.title":"🎓 Guide du tuteur débutant — de la désignation aux 18 ans","guide.banner":"13 modules pas-à-pas : cours, actions à faire, documents à remettre (et à qui), rendez-vous, pièges à éviter. Contenu basé sur la réglementation en vigueur.","dash.q1":"📄 Nouveau MENA (fiche DVZ)","dash.q2":"📂 Mes dossiers","dash.q3":"⏰ Urgences & échéances","gs.ph":"🔍 Recherche globale (dossiers, lois, cas, ressources)…","ft.check":"🔄 Vérifier les mises à jour","ft.dl":"Télécharger l’application","ft.manuel":"Mode d'emploi"});
-Object.assign(I18N.nl,{"dash.matrix":"📊 Opvolging per dossier","nav.guide":"🎓 Voogdengids","guide.title":"🎓 Gids voor de beginnende voogd — van aanstelling tot 18 jaar","guide.banner":"13 stap-voor-stapmodules: cursus, acties, documenten (en aan wie), afspraken, valkuilen. Inhoud gebaseerd op de geldende regelgeving.","dash.q1":"📄 Nieuwe NBMV (DVZ-fiche)","dash.q2":"📂 Mijn dossiers","dash.q3":"⏰ Urgenties & vervaldata","gs.ph":"🔍 Globaal zoeken (dossiers, wetten, gevallen, hulpbronnen)…","ft.check":"🔄 Updates controleren","ft.dl":"Applicatie downloaden","ft.manuel":"Handleiding"});
+Object.assign(I18N.fr,{"dash.matrix":"📊 Suivi par dossier","dash.q4":"📈 Mes statistiques","nav.guide":"🎓 Guide du tuteur","guide.title":"🎓 Guide du tuteur débutant — de la désignation aux 18 ans","guide.banner":"13 modules pas-à-pas : cours, actions à faire, documents à remettre (et à qui), rendez-vous, pièges à éviter. Contenu basé sur la réglementation en vigueur.","dash.q1":"📄 Nouveau MENA (fiche DVZ)","dash.q2":"📂 Mes dossiers","dash.q3":"⏰ Urgences & échéances","gs.ph":"🔍 Recherche globale (dossiers, lois, cas, ressources)…","ft.check":"🔄 Vérifier les mises à jour","ft.dl":"Télécharger l’application","ft.manuel":"Mode d'emploi"});
+Object.assign(I18N.nl,{"dash.matrix":"📊 Opvolging per dossier","dash.q4":"📈 Mijn statistieken","nav.guide":"🎓 Voogdengids","guide.title":"🎓 Gids voor de beginnende voogd — van aanstelling tot 18 jaar","guide.banner":"13 stap-voor-stapmodules: cursus, acties, documenten (en aan wie), afspraken, valkuilen. Inhoud gebaseerd op de geldende regelgeving.","dash.q1":"📄 Nieuwe NBMV (DVZ-fiche)","dash.q2":"📂 Mijn dossiers","dash.q3":"⏰ Urgenties & vervaldata","gs.ph":"🔍 Globaal zoeken (dossiers, wetten, gevallen, hulpbronnen)…","ft.check":"🔄 Updates controleren","ft.dl":"Applicatie downloaden","ft.manuel":"Handleiding"});
 const UPDATE_URL='https://tseli485.github.io/cgra-mena-platform/version.json';
 async function checkUpdates(){
   const n=document.getElementById('updNote');
@@ -2984,6 +3011,166 @@ function openAnalyseInput(dossierId){
     <textarea id="anaIn" rows="7"></textarea>
     <button class="btn" style="margin-top:.6rem" onclick="openAnalyse('${dossierId}',document.getElementById('anaIn').value,'${NL?'Handmatig':'Manuel'}')">🔎 ${NL?'Analyseren':'Analyser'}</button>`;
   openModal('anaModal');
+}
+
+
+/* ============ v1.7 : ALERTE JURIDIQUE (publiée via version.json) ============ */
+async function checkLegalAlert(){
+  const el=document.getElementById('legalAlert');if(!el)return;
+  try{
+    const r=await fetch(UPDATE_URL+'?a='+Date.now(),{cache:'no-store'});
+    const al=(await r.json()).alerte;
+    if(al&&al.id&&localStorage.getItem('mena_alert_seen')!==al.id){
+      el.innerHTML=`<div class="banner" style="border-left-color:var(--rouge)">⚖️ <strong>${LANG==='nl'?'JURIDISCHE WAARSCHUWING':'ALERTE JURIDIQUE'}</strong> — ${esc(LANG==='nl'?(al.nl||al.fr):al.fr)}
+        <button class="btn sec sm" style="margin-left:.6rem" onclick="localStorage.setItem('mena_alert_seen','${esc(al.id)}');document.getElementById('legalAlert').innerHTML=''">✓ ${LANG==='nl'?'Begrepen':'Compris'}</button></div>`;
+    }
+  }catch(e){/* hors ligne : pas d'alerte */}
+}
+
+/* ============ v1.7 : CALCULATEUR DE DÉLAIS LÉGAUX ============ */
+// Pour chaque événement : délais légaux qui en découlent (réglementation vérifiée 06/2026).
+const DELAI_EVENTS=[
+ {id:'designation',l:{fr:"Désignation comme tuteur",nl:"Aanstelling als voogd"},out:[
+   [5,{fr:"Première rencontre avec le jeune (recommandé ≤ 5 j)",nl:"Eerste ontmoeting met de jongere (aanbevolen ≤ 5 d)"}],
+   [15,{fr:"📤 RAPPORT INITIAL — Tutelles + juge de paix (art. 19, délai légal)",nl:"📤 EERSTE VERSLAG — Voogdij + vrederechter (art. 19, wettelijke termijn)"}],
+   [180,{fr:"📤 Rapport semestriel n°1 (juge de paix + copie Tutelles)",nl:"📤 Zesmaandelijks verslag nr. 1"}],
+   [360,{fr:"📤 Rapport semestriel n°2",nl:"📤 Zesmaandelijks verslag nr. 2"}]]},
+ {id:'reco',l:{fr:"Reconnaissance du statut de réfugié",nl:"Erkenning als vluchteling"},out:[
+   [14,{fr:"Commune : carte A + titre de voyage réfugié",nl:"Gemeente: A-kaart + reisdocument vluchteling"}],
+   [120,{fr:"⚠️ Point de contrôle : la demande de regroupement familial doit être prête",nl:"⚠️ Controlepunt: de aanvraag gezinshereniging moet klaar zijn"}],
+   [180,{fr:"🚨 FIN du délai favorable regroupement familial (6 mois — loi 18/07/2025)",nl:"🚨 EINDE gunstige termijn gezinshereniging (6 maanden — wet 18/07/2025)"}]]},
+ {id:'refus',l:{fr:"Décision négative du CGRA (notification)",nl:"Negatieve CGVS-beslissing (betekening)"},out:[
+   [3,{fr:"Avocat : préparation du recours",nl:"Advocaat: voorbereiding beroep"}],
+   [30,{fr:"🚨 DERNIER JOUR pour le recours au CCE",nl:"🚨 LAATSTE DAG voor beroep bij de RvV"}]]},
+ {id:'oqt',l:{fr:"Notification d'un OQT/BGV",nl:"Betekening van een BGV"},out:[
+   [2,{fr:"🚨 Avocat immédiatement (délais de recours courts — voir le document)",nl:"🚨 Onmiddellijk advocaat (korte beroepstermijnen — zie document)"}],
+   [7,{fr:"Vérifier la procédure solution durable (art. 61/14) avec l'avocat",nl:"Procedure duurzame oplossing (art. 61/14) nagaan met de advocaat"}]]},
+ {id:'convoc',l:{fr:"Convocation à l'audition CGRA (date de l'audition)",nl:"Oproeping CGVS-gehoor (datum van het gehoor)"},pre:true,out:[
+   [-7,{fr:"Préparation avec le jeune et l'avocat (outil « Préparer l'audition »)",nl:"Voorbereiding met jongere en advocaat"}],
+   [-2,{fr:"Vérifier interprète + trajet + documents à emporter",nl:"Tolk + traject + mee te nemen documenten nakijken"}],
+   [0,{fr:"🛂 AUDITION — présence du tuteur OBLIGATOIRE",nl:"🛂 GEHOOR — aanwezigheid voogd VERPLICHT"}]]},
+ {id:'titre',l:{fr:"Expiration d'un titre de séjour (date d'expiration)",nl:"Vervaldatum van een verblijfstitel"},pre:true,out:[
+   [-45,{fr:"Préparer le dossier de renouvellement",nl:"Verlengingsdossier voorbereiden"}],
+   [-30,{fr:"📤 Demander le renouvellement à la commune (≥ 30 j avant)",nl:"📤 Verlenging aanvragen bij de gemeente (≥ 30 d vooraf)"}]]}
+];
+function computeDelais(evId,baseDate){
+  const ev=DELAI_EVENTS.find(x=>x.id===evId);if(!ev||!baseDate)return [];
+  return ev.out.map(([j,lbl])=>({date:addDays(baseDate,j),titre:lbl,late:addDays(baseDate,j)<nowISO()}));
+}
+function openCalcDelais(dossierId){
+  const NL=LANG==='nl';
+  document.getElementById('calcBox').innerHTML=`
+    <h3>🧮 ${NL?'Termijnencalculator':'Calculateur de délais'}</h3>
+    <p class="muted" style="font-size:.85rem">${NL?'Kies een gebeurtenis en haar datum: alle wettelijke termijnen die eruit volgen worden berekend. Voeg ze in één klik toe aan de agenda van het dossier.':'Choisissez un événement et sa date : tous les délais légaux qui en découlent sont calculés. Ajoutez-les à l\'agenda du dossier en un clic.'}</p>
+    <label>${NL?'Gebeurtenis':'Événement'}</label>
+    <select id="cd_ev">${DELAI_EVENTS.map(e=>`<option value="${e.id}">${esc(tr(e.l))}</option>`).join('')}</select>
+    <label>${NL?'Datum van de gebeurtenis':'Date de l\'événement'}</label>
+    <input type="date" id="cd_date" value="${nowISO()}">
+    <button class="btn sm" style="margin:.6rem 0" onclick="renderCalc('${dossierId||''}')">➡️ ${NL?'Berekenen':'Calculer'}</button>
+    <div id="cd_out"></div>`;
+  openModal('calcModal');
+}
+function renderCalc(dossierId){
+  const NL=LANG==='nl';
+  const res=computeDelais(document.getElementById('cd_ev').value,document.getElementById('cd_date').value);
+  document.getElementById('cd_out').innerHTML=res.length?`
+    ${res.map(r=>`<div class="deadline ${r.late?'crit':''}"><strong>${esc(r.date)}</strong> — ${esc(tr(r.titre))}${r.late?` <span class="badge b-urgent">${NL?'VERSTREKEN':'DÉPASSÉ'}</span>`:''}</div>`).join('')}
+    ${dossierId?`<button class="btn sm" onclick="calcToRdv('${dossierId}')">📅 ${NL?'Toevoegen aan de agenda van het dossier':'Ajouter à l\'agenda du dossier'}</button>`:''}`:'';
+}
+function calcToRdv(dossierId){
+  const arr=loadDossiers();const d=arr.find(x=>x.id===dossierId);if(!d)return;
+  computeDelais(document.getElementById('cd_ev').value,document.getElementById('cd_date').value)
+    .forEach(r=>{if(!r.late)addRdvAuto(d,r.date,r.titre);});
+  saveDossiers(arr);closeModal('calcModal');openDossierDetail(dossierId);renderDashboard();
+}
+
+/* ============ v1.7 : PRÉPARATION DE L'AUDITION CGRA ============ */
+const CGRA_Q=[
+ {fr:"1. Identité & famille : qui es-tu, d'où viens-tu exactement (village, district, province), qui compose ta famille ?",nl:"1. Identiteit & familie: wie ben je, waar kom je precies vandaan (dorp, district, provincie), wie vormt je familie?"},
+ {fr:"2. Chronologie de la fuite : QUAND et POURQUOI as-tu quitté ton pays ? Raconte dans l'ordre, avec les dates même approximatives.",nl:"2. Chronologie van de vlucht: WANNEER en WAAROM verliet je je land? Vertel in volgorde, met (benaderende) data."},
+ {fr:"3. Craintes personnelles : que crains-tu CONCRÈTEMENT s'il fallait retourner ? Qui te menace, pourquoi toi ?",nl:"3. Persoonlijke vrees: wat vrees je CONCREET bij terugkeer? Wie bedreigt je, waarom jij?"},
+ {fr:"4. Événements précis : décris 2-3 événements vécus (dates, lieux, personnes) qui montrent le danger.",nl:"4. Precieze gebeurtenissen: beschrijf 2-3 beleefde gebeurtenissen (data, plaatsen, personen) die het gevaar tonen."},
+ {fr:"5. Le trajet : pays traversés, durée, conditions — sans rien inventer (les incohérences coûtent cher).",nl:"5. Het traject: doorkruiste landen, duur, omstandigheden — zonder iets te verzinnen (tegenstrijdigheden kosten duur)."},
+ {fr:"6. Preuves : documents d'identité, photos, attestations, articles — qu'avons-nous, que peut envoyer la famille ?",nl:"6. Bewijzen: identiteitsdocumenten, foto's, attesten, artikels — wat hebben we, wat kan de familie sturen?"},
+ {fr:"7. Points sensibles : sujets difficiles à aborder (violences, deuil) — préparer avec le psychologue si besoin.",nl:"7. Gevoelige punten: moeilijke onderwerpen (geweld, rouw) — zo nodig voorbereiden met de psycholoog."},
+ {fr:"8. Pratique : interprète demandé (langue/dialecte exact), pauses possibles, rôle de chacun (tuteur, avocat).",nl:"8. Praktisch: gevraagde tolk (exacte taal/dialect), pauzes mogelijk, rol van iedereen (voogd, advocaat)."}];
+function openCgraPrep(dossierId){
+  const d=loadDossiers().find(x=>x.id===dossierId);if(!d)return;
+  const NL=LANG==='nl';const P=d.cgraPrep||{};
+  document.getElementById('cgraBox').innerHTML=`
+    <h3>🛂 ${NL?'Het CGVS-gehoor voorbereiden':'Préparer l\'audition CGRA'} — ${esc(d.nom)}</h3>
+    <p class="muted" style="font-size:.85rem">${NL?'Vul samen met de jongere in, op zijn ritme (meerdere sessies). Exporteer daarna voor de advocaat. Gouden regel: de waarheid, in volgorde, zonder verzinsels.':'Remplissez avec le jeune, à son rythme (plusieurs séances). Exportez ensuite pour l\'avocat. Règle d\'or : la vérité, dans l\'ordre, sans rien inventer.'}</p>
+    ${CGRA_Q.map((q,i)=>`<label style="margin-top:.7rem">${esc(tr(q))}</label><textarea id="cg_${i}" rows="3">${esc(P['q'+i]||'')}</textarea>`).join('')}
+    <div class="row" style="margin-top:.8rem">
+      <button class="btn" onclick="saveCgraPrep('${d.id}')">💾 ${NL?'Opslaan':'Enregistrer'}</button>
+      <button class="btn sec" onclick="saveCgraPrep('${d.id}');printCgraPrep('${d.id}')">🖨️ ${NL?'PDF voor de advocaat':'PDF pour l\'avocat'}</button>
+    </div>`;
+  openModal('cgraModal');
+}
+function saveCgraPrep(id){
+  const arr=loadDossiers();const d=arr.find(x=>x.id===id);if(!d)return;
+  d.cgraPrep={};CGRA_Q.forEach((q,i)=>{d.cgraPrep['q'+i]=document.getElementById('cg_'+i).value;});
+  saveDossiers(arr);
+}
+function printCgraPrep(id){
+  const d=loadDossiers().find(x=>x.id===id);if(!d)return;const NL=LANG==='nl';const P=d.cgraPrep||{};
+  printDoc((NL?'Voorbereiding CGVS-gehoor — ':'Préparation audition CGRA — ')+d.nom,
+    `<h1>${NL?'Voorbereiding van het CGVS-gehoor':'Préparation de l\'audition CGRA'}</h1>
+     <p><strong>${esc(d.nom)}</strong>${d.fiche&&d.fiche.ov?' — OE '+esc(d.fiche.ov):''} — ${nowISO()}<br>
+     <span style="color:#555">${NL?'Vertrouwelijk — bestemd voor de advocaat van de minderjarige':'Confidentiel — destiné à l\'avocat du mineur'}</span></p>
+     ${CGRA_Q.map((q,i)=>`<h2 style="font-size:1rem;color:#19497F;margin-top:1rem">${esc(tr(q))}</h2><p>${esc(P['q'+i]||'—')}</p>`).join('')}`);
+}
+
+/* ============ v1.7 : STATISTIQUES DU TUTEUR ============ */
+async function openStats(){
+  const NL=LANG==='nl';const year=''+new Date().getFullYear();
+  await loadArchEnsure();
+  const all=loadDossiers().concat(ARCHIVES||[]);
+  let rapOk=0,rapLate=0,rapDu=0,km=0,eur=0,rdvFaits=0,conseilsOuverts=0;
+  all.forEach(d=>{
+    (d.rapports||[]).forEach(r=>{
+      if(r.fait&&(r.dateFait||'').startsWith(year)){rapDu++;(r.echeance&&r.dateFait<=r.echeance)?rapOk++:rapLate++;}
+      else if(!r.fait&&r.echeance&&r.echeance<nowISO())rapLate++;});
+    (d.frais||[]).forEach(f=>{if((f.date||'').startsWith(year)){km+=+f.km||0;eur+=fraisTotal(f);}});
+    (d.rdv||[]).forEach(r=>{if(r.fait&&(r.date||'').startsWith(year))rdvFaits++;});
+    conseilsOuverts+=(d.conseils||[]).length;
+  });
+  const actifs=loadDossiers().filter(d=>d.statut!=='clos').length;
+  document.getElementById('statsBox').innerHTML=`
+    <h3>📈 ${NL?'Mijn statistieken':'Mes statistiques'} — ${year}</h3>
+    <div class="grid cols-3" style="margin:.8rem 0">
+      <div class="stat"><div class="num">${actifs}</div><div class="lbl">${NL?'Actieve voogdijen':'Tutelles actives'}</div></div>
+      <div class="stat"><div class="num">${(ARCHIVES||[]).length}</div><div class="lbl">${NL?'Gearchiveerd':'Archivées'}</div></div>
+      <div class="stat"><div class="num">${rdvFaits}</div><div class="lbl">${NL?'Afspraken gedaan':'RDV réalisés'}</div></div>
+      <div class="stat" style="border-top-color:var(--vert)"><div class="num" style="color:var(--vert)">${rapOk}</div><div class="lbl">${NL?'Verslagen op tijd':'Rapports à temps'}</div></div>
+      <div class="stat" style="border-top-color:var(--rouge)"><div class="num" style="color:${rapLate?'var(--rouge)':'var(--vert)'}">${rapLate}</div><div class="lbl">${NL?'Verslagen te laat':'Rapports en retard'}</div></div>
+      <div class="stat"><div class="num">${conseilsOuverts}</div><div class="lbl">${NL?'Open adviezen':'Conseils à traiter'}</div></div>
+    </div>
+    <table><tr><th>${NL?'Terugbetaling voogd':'Remboursement tuteur'} ${year}</th><th style="text-align:right"></th></tr>
+      <tr><td>${NL?'Kilometers geregistreerd':'Kilomètres enregistrés'}</td><td style="text-align:right"><strong>${km.toFixed(1)} km</strong></td></tr>
+      <tr><td>${NL?'Te declareren bedrag (km + parking + andere)':'Montant à déclarer (km + parking + autres)'}</td><td style="text-align:right"><strong>${eur.toFixed(2)} €</strong></td></tr></table>
+    <p class="muted" style="font-size:.8rem;margin-top:.6rem">${NL?'Tip: genereer de kostendeclaratie per dossier (sectie Kosten) en stuur ze met de bewijsstukken naar de Dienst Voogdij.':'Astuce : générez la déclaration de frais par dossier (section Frais) et envoyez-la avec les justificatifs au Service des Tutelles.'}</p>`;
+  openModal('statsModal');
+}
+
+/* ============ v1.7 : NOTES DE VERSION ============ */
+const CHANGELOG={
+ '1.7.0':{fr:"🧮 Calculateur de délais légaux · 🛂 outil « Préparer l'audition CGRA » (8 questions, PDF avocat) · 📈 statistiques du tuteur (rapports à temps, km à déclarer) · ⚖️ alertes juridiques en direct · 🔐 module 14 RGPD · veille automatique du contenu des pages officielles",
+        nl:"🧮 Termijnencalculator · 🛂 tool « CGVS-gehoor voorbereiden » (8 vragen, PDF advocaat) · 📈 voogdstatistieken · ⚖️ live juridische waarschuwingen · 🔐 module 14 AVG · automatische monitoring van officiële pagina's"},
+ '1.6.1':{fr:"Réforme 2025 du regroupement familial propagée partout : Assistant Conseil, cas pratiques (+ « La course des 6 mois »), onglet Législation",
+        nl:"Hervorming 2025 gezinshereniging overal doorgevoerd: Adviesassistent, praktijkgevallen, tabblad Wetgeving"},
+ '1.6.0':{fr:"Mise à jour réglementaire 2025-2026 (loi 18/07/2025, CEDH 6/3/2025) · manuels FR/NL enrichis avec 21 captures",
+        nl:"Reglementaire update 2025-2026 · verrijkte handleidingen FR/NL met 21 schermafbeeldingen"}};
+function maybeWhatsNew(){
+  const seen=localStorage.getItem('mena_seen_v');
+  localStorage.setItem('mena_seen_v',APP_VERSION);
+  if(!seen||seen===APP_VERSION||!CHANGELOG[APP_VERSION])return;
+  const NL=LANG==='nl';
+  document.getElementById('wnBox').innerHTML=`
+    <h3>🆕 ${NL?'Nieuw in versie':'Nouveautés de la version'} ${APP_VERSION}</h3>
+    <p>${esc(NL?CHANGELOG[APP_VERSION].nl:CHANGELOG[APP_VERSION].fr)}</p>
+    <button class="btn" onclick="closeModal('wnModal')">✅ ${NL?'Begrepen':'Compris'}</button>`;
+  openModal('wnModal');
 }
 
 /* ============ UTIL ============ */

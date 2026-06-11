@@ -1,0 +1,25 @@
+name: Mise a jour winget automatique
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  winget:
+    runs-on: windows-latest
+    steps:
+      - name: Verifier le jeton
+        id: tok
+        shell: bash
+        run: |
+          if [ -z "${{ secrets.WINGET_TOKEN }}" ]; then
+            echo "absent=true" >> $GITHUB_OUTPUT
+            echo "::notice::Secret WINGET_TOKEN absent — creez un PAT classique (scope public_repo) dans Settings > Secrets pour activer la soumission automatique a winget."
+          fi
+      - name: Soumettre la nouvelle version a winget-pkgs
+        if: steps.tok.outputs.absent != 'true'
+        uses: vedantmgoyal9/winget-releaser@main
+        with:
+          identifier: Tseli485.MENA-Tuteur
+          installers-regex: 'MENA-Tuteur-Windows\.exe$'
+          token: ${{ secrets.WINGET_TOKEN }}

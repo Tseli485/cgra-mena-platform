@@ -1,0 +1,65 @@
+name: Veille contenu (pages officielles)
+
+on:
+  schedule:
+    - cron: '0 7 1,15 * *'   # les 1er et 15 du mois
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  veille:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Comparer le contenu des pages cles
+        run: |
+          python3 - << 'EOF'
+          import urllib.request, hashlib, json, re, os
+          PAGES = {
+            "justice-tuteur": "https://justice.belgium.be/fr/themes_et_dossiers/enfants_et_jeunes/mineurs_etrangers_non_accompagne/tuteur",
+            "justice-remuneration": "https://justice.belgium.be/fr/themes_et_dossiers/enfants_et_jeunes/mineurs_etrangers_non_accompagne/tuteur/remuneration_du_tuteur",
+            "justice-controle": "https://justice.belgium.be/fr/themes_et_dossiers/enfants_et_jeunes/mineurs_etrangers_non_accompagne/tuteur/controle_du_tuteur",
+            "cgra-mena": "https://www.cgra.be/fr/asile/mineurs-etrangers-non-accompagnes",
+            "myria-rf": "https://www.myria.be/fr/droits-fondamentaux/regroupement-familial",
+            "fedasil-mena": "https://www.fedasil.be/fr/asile-en-belgique/mineurs/trajet-daccueil-des-mena",
+          }
+          HFILE = "docs/veille-hashes.json"
+          old = json.load(open(HFILE)) if os.path.exists(HFILE) else {}
+          new, changed = {}, []
+          for k, u in PAGES.items():
+              try:
+                  req = urllib.request.Request(u, headers={"User-Agent": "Mozilla/5.0 (veille-mena)"})
+                  html = urllib.request.urlopen(req, timeout=25).read().decode("utf-8", "ignore")
+                  txt = re.sub(r"<script[\s\S]*?</script>|<style[\s\S]*?</style>|<[^>]+>", " ", html)
+                  txt = re.sub(r"\s+", " ", txt).strip()
+                  h = hashlib.sha256(txt.encode()).hexdigest()
+                  new[k] = h
+                  if k in old and old[k] != h:
+                      changed.append(f"{k}: {u}")
+              except Exception as e:
+                  new[k] = old.get(k, "")
+                  print("ERR", k, e)
+          os.makedirs("docs", exist_ok=True)
+          json.dump(new, open(HFILE, "w"), indent=1)
+          if changed:
+              open("changed.txt", "w").write("\n".join(changed))
+          print("changements:", len(changed))
+          EOF
+      - name: Commiter les empreintes
+        run: |
+          git config user.name "veille-bot"
+          git config user.email "actions@github.com"
+          git add docs/veille-hashes.json
+          git diff --cached --quiet || git commit -m "chore(veille): empreintes des pages officielles"
+          git push
+      - name: Ouvrir une issue si contenu modifie
+        if: hashFiles('changed.txt') != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue create --title "⚖️ Veille: contenu officiel modifie ($(date +%Y-%m-%d))" \
+            --body "$(printf 'Des pages officielles ont change — verifier si une regle MENA a evolue et mettre a jour app + manuels:\n\n```\n%s\n```' "$(cat changed.txt)")" \
+            --repo ${{ github.repository }}

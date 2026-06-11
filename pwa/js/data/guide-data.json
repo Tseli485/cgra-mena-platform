@@ -566,6 +566,47 @@
     "nl": "Gouden regel: wat uitgelegd wordt, wordt aanvaard — zelfs een weigering. Gebruik de Adviesassistent van de app."
    },
    "refs": "Loi 3/7/1978 (contrat étudiant) ; AR 8/10/1981 (titres de voyage) ; pratique Fedasil"
+  },
+  {
+   "id": "m14",
+   "ico": "🔐",
+   "titre": {
+    "fr": "Module 14 — Protéger les données du jeune (RGPD)",
+    "nl": "Module 14 — De gegevens van de jongere beschermen (AVG)"
+   },
+   "cours": {
+    "fr": "En tant que tuteur, vous traitez des données ULTRA-SENSIBLES : santé, religion, récit d'asile, données judiciaires d'un mineur. Le RGPD et la loi du 30/07/2018 s'appliquent. Principes : 1) MINIMISATION — ne collectez et ne transmettez que ce qui est nécessaire à la démarche concernée ; 2) DESTINATAIRES LÉGITIMES uniquement — Service des Tutelles, juge de paix, avocat, OE/CGRA, école, médecin : chacun reçoit SA partie, jamais « tout le dossier » par défaut ; 3) SÉCURITÉ — cette application chiffre tout (AES-256) sur votre appareil : n'exportez jamais vers un cloud non chiffré, n'envoyez jamais le récit d'asile par messagerie non sécurisée ; 4) PHOTOS — pas de publication, même « anonymisée », sans nécessité ; 5) CONSERVATION — à la fin de la tutelle, remettez les originaux au jeune, archivez le dossier chiffré et supprimez ce qui n'a plus de finalité ; 6) VIOLATION — appareil perdu/volé : changez immédiatement votre mot de passe maître depuis un autre appareil restauré, et prévenez le Service des Tutelles si des données ont pu fuiter.",
+    "nl": "Als voogd verwerkt u ULTRAGEVOELIGE gegevens: gezondheid, religie, asielrelaas, gerechtelijke gegevens van een minderjarige. De AVG en de wet van 30/07/2018 zijn van toepassing. Principes: 1) MINIMALISATIE — verzamel en deel enkel wat nodig is voor de betrokken stap; 2) enkel LEGITIEME BESTEMMELINGEN — Dienst Voogdij, vrederechter, advocaat, DVZ/CGVS, school, arts: elk krijgt ZIJN deel, nooit standaard « het hele dossier »; 3) BEVEILIGING — deze applicatie versleutelt alles (AES-256) op uw toestel: exporteer nooit naar een onversleutelde cloud, stuur het asielrelaas nooit via onbeveiligde berichten; 4) FOTO'S — geen publicatie zonder noodzaak; 5) BEWARING — geef op het einde de originelen aan de jongere, archiveer versleuteld en wis wat geen doel meer heeft; 6) DATALEK — toestel verloren/gestolen: wijzig onmiddellijk uw hoofdwachtwoord op een hersteld toestel en verwittig de Dienst Voogdij."
+   },
+   "actions": {
+    "fr": [
+     "Avant chaque envoi, se demander : ce destinataire a-t-il BESOIN de cette information précise ?",
+     "Utiliser les pièces jointes chiffrées de l'app plutôt qu'un dossier sur le bureau",
+     "Exporter la sauvegarde chiffrée chaque semaine — jamais de copie non chiffrée",
+     "À la clôture : remise des originaux au jeune + archivage chiffré",
+     "En cas de perte d'appareil : restaurer la sauvegarde ailleurs et changer le mot de passe"
+    ],
+    "nl": [
+     "Vóór elke verzending: heeft deze bestemmeling deze precieze informatie NODIG?",
+     "De versleutelde bijlagen van de app gebruiken in plaats van een map op het bureaublad",
+     "Wekelijks de versleutelde back-up exporteren — nooit een onversleutelde kopie",
+     "Bij afsluiting: originelen aan de jongere + versleuteld archief",
+     "Bij toestelverlies: back-up elders herstellen en wachtwoord wijzigen"
+    ]
+   },
+   "documents": {
+    "fr": [
+     "Aucun document spécifique — mais chaque envoi de données EST un traitement : tracez-le dans les notes du dossier"
+    ],
+    "nl": [
+     "Geen specifiek document — maar elke gegevensverzending IS een verwerking: noteer ze in het dossier"
+    ]
+   },
+   "conseils": {
+    "fr": "Le réflexe en or : « le besoin d'en connaître ». L'école n'a pas besoin du récit d'asile ; le juge de paix n'a pas besoin du dossier médical complet. Moins vous diffusez, mieux vous protégez le jeune.",
+    "nl": "De gouden reflex: « need to know ». De school heeft het asielrelaas niet nodig; de vrederechter niet het volledige medische dossier. Hoe minder u verspreidt, hoe beter u de jongere beschermt."
+   },
+   "refs": "RGPD (UE) 2016/679 ; loi du 30/07/2018 ; art. 458 C. pén. (secret professionnel)"
   }
  ]
 }

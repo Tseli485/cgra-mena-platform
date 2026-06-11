@@ -658,6 +658,8 @@ function applyI18n(){
   document.getElementById('langNl').classList.toggle('active',LANG==='nl');
 }
 function setLang(l){
+  const _ml=document.querySelector('footer a[href$=\"emploi.html\"],footer a[href$=\"handleiding.html\"]');
+  if(_ml)_ml.href=(l==='nl')?'handleiding.html':'mode-emploi.html';
   LANG=l;localStorage.setItem('mena_lang',l);
   applyI18n();refreshAuthUI();setOnline();
   renderLegislation();
@@ -2175,7 +2177,7 @@ function printReleve(id){
 }
 
 /* ============ VERSION & MISES À JOUR ============ */
-const APP_VERSION='1.5.2';
+const APP_VERSION='1.6.0';
 window.APP_VERSION=APP_VERSION;   // expose pour tests.html (const non attache a window)
 Object.assign(I18N.fr,{"dash.matrix":"📊 Suivi par dossier","nav.guide":"🎓 Guide du tuteur","guide.title":"🎓 Guide du tuteur débutant — de la désignation aux 18 ans","guide.banner":"13 modules pas-à-pas : cours, actions à faire, documents à remettre (et à qui), rendez-vous, pièges à éviter. Contenu basé sur la réglementation en vigueur.","dash.q1":"📄 Nouveau MENA (fiche DVZ)","dash.q2":"📂 Mes dossiers","dash.q3":"⏰ Urgences & échéances","gs.ph":"🔍 Recherche globale (dossiers, lois, cas, ressources)…","ft.check":"🔄 Vérifier les mises à jour","ft.dl":"Télécharger l’application","ft.manuel":"Mode d'emploi"});
 Object.assign(I18N.nl,{"dash.matrix":"📊 Opvolging per dossier","nav.guide":"🎓 Voogdengids","guide.title":"🎓 Gids voor de beginnende voogd — van aanstelling tot 18 jaar","guide.banner":"13 stap-voor-stapmodules: cursus, acties, documenten (en aan wie), afspraken, valkuilen. Inhoud gebaseerd op de geldende regelgeving.","dash.q1":"📄 Nieuwe NBMV (DVZ-fiche)","dash.q2":"📂 Mijn dossiers","dash.q3":"⏰ Urgenties & vervaldata","gs.ph":"🔍 Globaal zoeken (dossiers, wetten, gevallen, hulpbronnen)…","ft.check":"🔄 Updates controleren","ft.dl":"Applicatie downloaden","ft.manuel":"Handleiding"});
@@ -2854,13 +2856,13 @@ const DOC_DETECTORS=[
  {id:'refugie',re:/(reconnu\s?e?\s(comme\s)?r[ée]fugi[ée]|statut de r[ée]fugi[ée]|qualit[ée] de r[ée]fugi[ée].{0,20}reconnue|erkend als vluchteling|vluchtelingenstatus.{0,20}(toegekend|erkend))/i,
   label:{fr:"Statut de RÉFUGIÉ reconnu détecté",nl:"Erkenning als VLUCHTELING gedetecteerd"},
   apply(d){d.statutJur={fr:'Réfugié reconnu',nl:'Erkend vluchteling'};
-    addConseil(d,{fr:"⚖️ Réfugié reconnu : la famille dispose d'UN AN (art. 10 L.15/12/1980) pour demander le regroupement familial SANS conditions de logement/ressources. Informez la famille immédiatement (Module 8 du Guide). Demandez aussi le titre de voyage et la carte A à la commune.",nl:"⚖️ Erkend vluchteling: de familie heeft ÉÉN JAAR (art. 10 W.15/12/1980) om gezinshereniging aan te vragen ZONDER woonst-/inkomensvoorwaarden. Informeer de familie onmiddellijk (Module 8). Vraag ook het reisdocument en de A-kaart aan."});
-    addRdvAuto(d,addDays(nowISO(),300),{fr:"⚠️ Vérifier que la demande de regroupement familial est partie (délai 1 an)",nl:"⚠️ Nagaan of de aanvraag gezinshereniging vertrokken is (termijn 1 jaar)"});
+    addConseil(d,{fr:"⚖️ Réfugié reconnu — ATTENTION RÉFORME 2025 : depuis la loi du 18/07/2025 (en vigueur le 18/08/2025), la famille ne dispose plus que de 6 MOIS (au lieu d'un an) pour demander le regroupement familial sans conditions de revenus/logement. Et le silence de l'administration vaut désormais REFUS implicite. Informez la famille AUJOURD'HUI et saisissez l'avocat (Module 8 du Guide). Demandez aussi le titre de voyage et la carte A à la commune.",nl:"⚖️ Erkend vluchteling — OPGELET HERVORMING 2025: sinds de wet van 18/07/2025 (in werking 18/08/2025) heeft de familie nog slechts 6 MAANDEN (i.p.v. een jaar) om gezinshereniging aan te vragen zonder inkomens-/woonstvoorwaarden. Stilzwijgen van de administratie geldt voortaan als impliciete WEIGERING. Informeer de familie VANDAAG en schakel de advocaat in (Module 8). Vraag ook het reisdocument en de A-kaart aan."});
+    addRdvAuto(d,addDays(nowISO(),120),{fr:"⚠️ Vérifier que la demande de regroupement familial est PARTIE (délai 6 mois — loi 18/07/2025)",nl:"⚠️ Nagaan of de aanvraag gezinshereniging VERTROKKEN is (termijn 6 maanden — wet 18/07/2025)"});
     addRdvAuto(d,addDays(nowISO(),14),{fr:"Commune : carte A + titre de voyage réfugié",nl:"Gemeente: A-kaart + reisdocument vluchteling"});}},
  {id:'subsidiaire',re:/(protection subsidiaire|subsidiaire bescherming)/i,
   label:{fr:"PROTECTION SUBSIDIAIRE détectée",nl:"SUBSIDIAIRE BESCHERMING gedetecteerd"},
   apply(d){d.statutJur={fr:'Protection subsidiaire',nl:'Subsidiaire bescherming'};
-    addConseil(d,{fr:"⚖️ Protection subsidiaire : titre de séjour limité (carte A, 1 an renouvelable). Le regroupement familial reste possible (délai d'un an pour conditions allégées). Surveillez chaque renouvellement.",nl:"⚖️ Subsidiaire bescherming: beperkt verblijf (A-kaart, 1 jaar verlengbaar). Gezinshereniging blijft mogelijk. Bewaak elke verlenging."});
+    addConseil(d,{fr:"⚖️ Protection subsidiaire : titre de séjour limité (carte A renouvelable). RÉFORME 2025 : la loi du 18/07/2025 a restreint le regroupement familial des bénéficiaires de la protection subsidiaire (notamment les parents d'un MENA), MAIS la Cour constitutionnelle a SUSPENDU une partie de cette différence de traitement (arrêt du 26/02/2026, questions renvoyées à la CJUE). La situation évolue : vérifiez l'état du droit avec l'avocat avant toute démarche familiale. Surveillez chaque renouvellement de titre.",nl:"⚖️ Subsidiaire bescherming: beperkt verblijf (verlengbare A-kaart). HERVORMING 2025: de wet van 18/07/2025 beperkte de gezinshereniging voor subsidiair beschermden (o.a. ouders van een NBMV), MAAR het Grondwettelijk Hof heeft een deel van dat verschil in behandeling GESCHORST (arrest 26/02/2026, vragen aan het HvJ-EU). De situatie evolueert: check de stand van het recht met de advocaat vóór elke gezinsstap."});
     addRdvAuto(d,addDays(nowISO(),330),{fr:"Renouvellement de la carte A (protection subsidiaire)",nl:"Verlenging A-kaart (subsidiaire bescherming)"});}},
  {id:'refus',re:/(d[ée]cision (de )?refus|refus (du|de la) (CGRA|protection)|weigering van de (vluchtelingenstatus|asielaanvraag|internationale bescherming)|negatieve beslissing)/i,
   label:{fr:"DÉCISION DE REFUS détectée",nl:"WEIGERINGSBESLISSING gedetecteerd"},
@@ -2914,7 +2916,7 @@ const DOC_DETECTORS=[
     addRdvAuto(d,addDays(nowISO(),1),{fr:"🚨 Organiser l'assistance Salduz (avocat 0800 90 808) avant l'audition",nl:"🚨 Salduz-bijstand regelen (advocaat 0800 90 808) vóór het verhoor"});}},
  {id:'age_majeur',re:/(d[ée]clar[ée]e? majeur|test d'[âa]ge.{0,80}(majeur|18 ans)|leeftijdsonderzoek.{0,80}meerderjarig|meerderjarig verklaard)/i,
   label:{fr:"DÉCLARÉ MAJEUR après test d'âge — URGENT",nl:"MEERDERJARIG VERKLAARD na leeftijdstest — DRINGEND"},
-  apply(d){addConseil(d,{fr:"🚨 Déclaré majeur : la tutelle va prendre fin et l'accueil MENA aussi. RECOURS possible (Conseil d'État, délai court) — contactez l'avocat AUJOURD'HUI. Vérifiez la marge d'erreur scientifique du test (souvent ±2 ans) et tout document d'identité prouvant la minorité. Anticipez l'hébergement adulte en parallèle.",nl:"🚨 Meerderjarig verklaard: de voogdij en de NBMV-opvang eindigen. BEROEP mogelijk (Raad van State, korte termijn) — contacteer de advocaat VANDAAG. Controleer de wetenschappelijke foutmarge (±2 jaar) en elk identiteitsdocument."});
+  apply(d){addConseil(d,{fr:"🚨 Déclaré majeur : la tutelle va prendre fin et l'accueil MENA aussi. RECOURS possible (Conseil d'État, délai court) — contactez l'avocat AUJOURD'HUI. Vérifiez la marge d'erreur scientifique du test (souvent ±2 ans) et tout document d'identité prouvant la minorité. ATOUT JURIDIQUE : la CEDH a condamné la Belgique le 6 MARS 2025 (violation art. 8) car la procédure belge de détermination de l'âge manque de garanties procédurales — invoquez cet arrêt dans le recours. Anticipez l'hébergement adulte en parallèle.",nl:"🚨 Meerderjarig verklaard: de voogdij en de NBMV-opvang eindigen. BEROEP mogelijk (Raad van State, korte termijn) — contacteer de advocaat VANDAAG. Controleer de wetenschappelijke foutmarge (±2 jaar) en elk identiteitsdocument. JURIDISCHE TROEF: het EHRM veroordeelde België op 6 MAART 2025 (schending art. 8) wegens onvoldoende procedurele waarborgen bij de leeftijdsbepaling — roep dit arrest in."});
     addRdvAuto(d,addDays(nowISO(),1),{fr:"🚨 Avocat : recours contre le résultat du test d'âge",nl:"🚨 Advocaat: beroep tegen leeftijdstest"});}},
  {id:'ordo_tutelle',re:/(ordonnance de d[ée]signation|d[ée]sign[ée]e? (comme|en qualit[ée] de) tuteur|aanstelling als voogd|beschikking.{0,30}voogd)/i,
   label:{fr:"Ordonnance de désignation du tuteur détectée",nl:"Aanstellingsbeschikking voogd gedetecteerd"},

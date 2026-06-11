@@ -1,0 +1,272 @@
+<!doctype html><html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Handleiding — Platform MENA Voogd</title>
+<style>
+:root{--bleu:#19497F;--fonce:#123A68;--or:#B07E2B;--ink:#16243A;--bg:#F4F6F9;--bord:#D9DEE7;--vert:#1E7F5C;--rouge:#B3362B}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;font-size:1.02rem}
+header{background:linear-gradient(150deg,var(--fonce),#1D5694);border-bottom:3px solid var(--or);color:#fff;padding:2.4rem 2rem;text-align:center}
+header h1{font-family:Georgia,serif;font-size:1.9rem}
+header p{opacity:.9;margin-top:.4rem;max-width:640px;margin-inline:auto}
+main{max-width:860px;margin:0 auto;padding:2rem 1.5rem 4rem}
+h2{font-family:Georgia,serif;font-size:1.45rem;margin:2.6rem 0 .8rem;padding-bottom:.35rem;border-bottom:1px solid var(--bord);position:relative}
+h2:after{content:"";position:absolute;left:0;bottom:-1px;width:64px;height:3px;background:var(--or)}
+h2 .num{display:inline-block;background:var(--bleu);color:#fff;border-radius:50%;width:2rem;height:2rem;line-height:2rem;text-align:center;font-size:1rem;margin-right:.5rem;font-family:'Segoe UI',sans-serif}
+h3{font-size:1.08rem;margin:1.4rem 0 .4rem;color:var(--fonce)}
+p{margin:.6rem 0}
+figure{margin:1.1rem 0;text-align:center}
+figure img{max-width:100%;border:1px solid var(--bord);border-radius:.6rem;box-shadow:0 4px 18px rgba(22,36,58,.12)}
+figcaption{font-size:.82rem;color:#5F6B7A;margin-top:.4rem;font-style:italic}
+.tip{background:#FDF6E9;border-left:4px solid var(--or);padding:.85rem 1.1rem;border-radius:.45rem;margin:1rem 0;font-size:.95rem}
+.tip:before{content:"💡 Tip — ";font-weight:700}
+.warn{background:#FAE9E7;border-left:4px solid var(--rouge);padding:.85rem 1.1rem;border-radius:.45rem;margin:1rem 0;font-size:.95rem}
+.warn:before{content:"⚠️ Belangrijk — ";font-weight:700}
+.ok{background:#EDF7F2;border-left:4px solid var(--vert);padding:.85rem 1.1rem;border-radius:.45rem;margin:1rem 0;font-size:.95rem}
+ol.steps{margin:.6rem 0 .6rem 1.4rem}
+ol.steps li{margin:.45rem 0}
+ul{margin:.5rem 0 .5rem 1.4rem}
+.toc{background:#fff;border:1px solid var(--bord);border-top:3px solid var(--or);border-radius:.7rem;padding:1.3rem 1.6rem;margin:1.6rem 0}
+.toc h2{margin-top:0;border:none}.toc h2:after{display:none}
+.toc ol{columns:2;column-gap:2rem;margin-left:1.2rem}
+.toc a{color:var(--bleu);text-decoration:none}
+.toc a:hover{text-decoration:underline}
+kbd,.btn-ex{display:inline-block;background:var(--bleu);color:#fff;padding:.1rem .55rem;border-radius:.35rem;font-size:.85em;font-weight:600}
+code{background:#EEF1F5;padding:.1rem .4rem;border-radius:.3rem;font-size:.9em}
+footer{text-align:center;color:#5F6B7A;font-size:.8rem;padding:2rem;border-top:1px solid var(--bord)}
+@media print{header{padding:1.2rem}figure img{box-shadow:none}h2{page-break-after:avoid}figure{page-break-inside:avoid}.toc ol{columns:1}}
+@page{margin:1.6cm}
+</style></head><body>
+<header>
+  <h1>📖 Handleiding stap voor stap</h1>
+  <p><strong>Platform MENA Voogd</strong> — complete gids voor de beginnende voogd. Geen technische of juridische voorkennis nodig: volg de stappen in volgorde, de applicatie neemt u bij de hand.</p>
+</header>
+<main>
+
+<p style="text-align:right;font-size:.85rem">🇫🇷 <a href="mode-emploi.html">Version française — Mode d'emploi</a></p>
+
+<div class="tip" style="background:#EDF7F2;border-left-color:#1E7F5C">
+<strong>Drie fictieve jongeren begeleiden u doorheen deze handleiding</strong> (al hun gegevens zijn verzonnen):
+<ul style="margin:.4rem 0 0 1.4rem">
+<li><strong>Karim, 16 jaar (Afghanistan)</strong> — uw « lopende » voogdij: zijn dossier ziet u op de meeste schermafbeeldingen (verslagen, bank, kosten, actieve adviezen…).</li>
+<li><strong>Fatou, 16 jaar (Guinee)</strong> — de voogdij die start: u bent net aangesteld, alles moet nog gebeuren.</li>
+<li><strong>Ali, 18 jaar (Afghanistan)</strong> — de afgeronde voogdij: zijn dossier is afgesloten en gearchiveerd.</li>
+</ul>
+Volg hen: elk scherm in deze handleiding komt overeen met een echt moment uit het leven van een voogdij.</div>
+
+<div class="toc">
+<h2>Inhoud</h2>
+<ol>
+<li><a href="#s1">De applicatie openen</a></li>
+<li><a href="#s2">Uw wachtwoord aanmaken</a></li>
+<li><a href="#s3">De welkomstrondleiding</a></li>
+<li><a href="#s4">Het dashboard</a></li>
+<li><a href="#s5">De vervaldata van één jongere bekijken</a></li>
+<li><a href="#s6">Een dossier aanmaken (DVZ-fiche)</a></li>
+<li><a href="#s7">De automatische documentanalyse</a></li>
+<li><a href="#s8">Het dossier van de jongere in detail</a></li>
+<li><a href="#s9">De vrederechter en uw verslagen</a></li>
+<li><a href="#s10">De agenda met afspraken</a></li>
+<li><a href="#s11">Het geld van de jongere (bank)</a></li>
+<li><a href="#s12">Uw verplaatsingskosten</a></li>
+<li><a href="#s13">Documenten bewaren (bijlagen)</a></li>
+<li><a href="#s14">Een document vertalen NL ↔ FR</a></li>
+<li><a href="#s15">De Voogdengids (uw cursussen)</a></li>
+<li><a href="#s16">Het glossarium van afkortingen</a></li>
+<li><a href="#s17">Back-uppen en doorgeven</a></li>
+<li><a href="#s18">Een dossier afsluiten op 18 jaar</a></li>
+<li><a href="#s19">Veelgestelde vragen</a></li>
+<li><a href="#s20">⚖️ De nieuwe regels 2025-2026</a></li>
+</ol>
+</div>
+
+<h2 id="s1"><span class="num">1</span>De applicatie openen</h2>
+<p>Drie mogelijkheden — kies de eenvoudigste voor u:</p>
+<ol class="steps">
+<li><strong>De internetlink</strong> (aanbevolen): open <a href="https://tseli485.github.io/cgra-mena-platform/">tseli485.github.io/cgra-mena-platform</a> in uw browser (Chrome, Edge, Firefox…). Tip: kies in het browsermenu « <em>App installeren</em> » om ze als een echte applicatie te gebruiken, die daarna <strong>ook zonder internet</strong> werkt.</li>
+<li><strong>De bureaubladapplicatie</strong>: download ze via de <a href="telecharger.html">downloadpagina</a> (Windows, Mac, Linux). Dubbelklikken, klaar.</li>
+<li><strong>Enkel Windows</strong>: typ <code>winget install MENA-Tuteur</code> in een terminal (zodra de Microsoft-publicatie gevalideerd is).</li>
+</ol>
+<div class="tip">De applicatie werkt volledig <strong>op uw toestel</strong>. Niets — helemaal niets — over de jongeren wordt naar het internet gestuurd.</div>
+
+<h2 id="s2"><span class="num">2</span>Uw wachtwoord aanmaken</h2>
+<p>Bij de eerste opening vraagt de applicatie u een wachtwoord aan te maken. Dat is <strong>de sleutel die alle gegevens versleutelt</strong> (AES-256, hetzelfde niveau als de banken).</p>
+<figure><img src="manual/nl/01-mot-de-passe.png" alt="Scherm wachtwoord aanmaken"><figcaption>Het beveiligde scherm bij de eerste start.</figcaption></figure>
+<ol class="steps">
+<li>Kies een wachtwoord van minstens 8 tekens dat u onthoudt.</li>
+<li>Bevestig het en valideer.</li>
+</ol>
+<div class="warn">Noteer dit wachtwoord op een veilige plaats (NIET in de applicatie). Niemand kan het in uw plaats terughalen: het beschermt de gegevens. Bij verlies wist de link « Wachtwoord vergeten? » alles en begint u opnieuw — vandaar het belang van back-ups (stap 17).</div>
+<div class="tip">De applicatie vergrendelt zichzelf na <strong>10 minuten inactiviteit</strong>, en u kunt ze altijd vergrendelen met de knop 🔒 rechtsboven. Maak er een gewoonte van wanneer u uw scherm verlaat.</div>
+
+<h2 id="s3"><span class="num">3</span>De welkomstrondleiding</h2>
+<p>Net na het aanmaken van het wachtwoord toont een venster de 5 essentiële handelingen. Lees het rustig: het is de samenvatting van deze hele handleiding.</p>
+<figure><img src="manual/nl/02-bienvenue.png" alt="Rondleiding in 5 stappen"><figcaption>De welkomstrondleiding, één keer getoond.</figcaption></figure>
+
+<h2 id="s4"><span class="num">4</span>Het dashboard</h2>
+<p>Dit is uw startpagina. Van boven naar onder:</p>
+<figure><img src="manual/nl/03-tableau-de-bord.png" alt="Dashboard"><figcaption>Het dashboard met twee actieve dossiers (Karim en Fatou).</figcaption></figure>
+<ul>
+<li><strong>De back-upherinnering</strong> (rode banner): verschijnt als u al meer dan 7 dagen geen back-up exporteerde. Negeer ze niet!</li>
+<li><strong>De drie grote knoppen</strong>: een nieuw NBMV-dossier aanmaken, uw dossiers bekijken, naar de vervaldata gaan.</li>
+<li><strong>Het globale zoekveld</strong>: typ om het even welk woord (een naam, « gezinshereniging », « Salduz »…) — het zoekt in uw dossiers, de wetgeving, de praktijkgevallen en de hulpbronnen.</li>
+<li><strong>De tellers</strong>: aantal dossiers, dringende, gemiddelde voortgang.</li>
+</ul>
+
+<h2 id="s5"><span class="num">5</span>De vervaldata van één jongere bekijken</h2>
+<p>Om verwarring tussen jongeren te vermijden toont de kaart « ⏰ Vervaldata » niets zolang u <strong>geen jongere kiest</strong> in het keuzemenu.</p>
+<p><em>Concreet voorbeeld:</em> u bent voogd van Karim en Fatou. Door <strong>Karim</strong> te selecteren ziet u ZIJN halfjaarlijkse verslagen en ZIJN afspraken — niets van Fatou. Onmogelijk om de termijnen van de ene met de andere te verwarren.</p>
+<figure><img src="manual/nl/04-echeances-selection.png" alt="Vervaldata van de gekozen jongere"><figcaption>Na selectie: enkel de verslagen en afspraken van DEZE jongere. Rood = te laat.</figcaption></figure>
+<p>En voor het overzicht van <strong>al</strong> uw jongeren in één oogopslag, kijk net eronder:</p>
+<figure><img src="manual/nl/05-suivi-par-dossier.png" alt="Opvolging per dossier"><figcaption>Eén lijn per jongere: volgende afspraak, volgend verslag, saldo, voortgang. Klik op een lijn om het dossier te openen.</figcaption></figure>
+
+<h2 id="s6"><span class="num">6</span>Een dossier aanmaken: de DVZ-fiche importeren</h2>
+<p>Wanneer de Dienst Voogdij u een jongere toevertrouwt, ontvangt u zijn <strong>fiche « niet-begeleide minderjarige vreemdeling »</strong> (de DVZ-fiche). De applicatie leest ze voor u:</p>
+<ol class="steps">
+<li>Klik op het dashboard op <span class="btn-ex">📄 Nieuwe NBMV (DVZ-fiche)</span>.</li>
+<li>Klik op « 📎 Een PDF-fiche automatisch lezen » en kies het ontvangen PDF-bestand.</li>
+<li>De applicatie vult de velden zelf in — <strong>inclusief de foto van de jongere</strong>, automatisch uitgesneden.</li>
+<li>Controleer, vul aan indien nodig, en klik op <span class="btn-ex">📁 Dossier aanmaken</span>.</li>
+</ol>
+<figure><img src="manual/nl/06-mes-dossiers.png" alt="Dossierlijst"><figcaption>Elk dossier wordt een kaart: foto, status (de kleurband), volgende vervaldag, voortgang.</figcaption></figure>
+<figure><img src="manual/nl/07-import-fiche.png" alt="Importvenster DVZ-fiche"><figcaption>Het importvenster (hier ingevuld met het ingebouwde fictieve voorbeeld).</figcaption></figure>
+<div class="tip">Geen PDF bij de hand? Klik op « ⚡ Voorbeeld laden (fictieve fiche) » om te oefenen zonder enig risico: die gegevens zijn verzonnen.</div>
+
+<h2 id="s7"><span class="num">7</span>De automatische documentanalyse</h2>
+<p>Dit is uw juridisch vangnet. <strong>Elk document dat u invoert</strong> (geïmporteerde fiche, vertaling, PDF-bijlage, geplakte tekst) wordt geanalyseerd: de applicatie detecteert 19 belangrijke situaties — weigeringsbeslissing, erkenning als vluchteling, bevel om het grondgebied te verlaten, adreswijziging, oproeping door politie of CGVS, leeftijdstest, verdwijning…</p>
+<p><em>Uit het leven gegrepen:</em> u ontvangt een brief van 3 pagina's over Karim. U plakt hem in de analyse: de applicatie detecteert een <strong>weigering van het CGVS</strong> ÉN dat Karim <strong>overgeplaatst is naar Charleroi</strong>. In één klik: het beroep (30 dagen) wordt ingepland met de advocaat, het adres wordt bijgewerkt, en de applicatie meldt dat de bevoegde vrederechter wellicht verandert.</p>
+<figure><img src="manual/nl/08-analyse-document.png" alt="Analyse van een document"><figcaption>Hier detecteerde de applicatie een weigering ÉN een adreswijziging in dezelfde brief.</figcaption></figure>
+<ol class="steps">
+<li>Vink de juiste detecties aan (alles is standaard aangevinkt).</li>
+<li>Klik op <span class="btn-ex">✅ Doorvoeren in het dossier</span>.</li>
+<li>De applicatie werkt <strong>het hele dossier</strong> bij: adres, bevoegde vrederechter, juridisch statuut, checklist, en maakt de nodige afspraken aan (bv. « beroep binnen 30 dagen » → afspraak advocaat D+3) plus <strong>juridische adviezen</strong> met wetsverwijzingen.</li>
+</ol>
+<div class="warn">De analyse helpt u maar vervangt uw lezing noch de advocaat: lees het document altijd zelf, en bel bij de minste twijfel de advocaat van de jongere (gratis — Bureau voor juridische bijstand).</div>
+
+<h2 id="s8"><span class="num">8</span>Het dossier van de jongere in detail</h2>
+<p>Klik op een kaart om het volledige dossier te openen. Alles is geordend in uitklapbare secties:</p>
+<figure><img src="manual/nl/09-dossier-detail.png" alt="Dossier in detail"><figcaption>Bovenaan: identiteit, statuut, voortgang. De sectie « Actieve adviezen » opent vanzelf wanneer er acties nodig zijn.</figcaption></figure>
+<figure><img src="manual/nl/10-fiche-dvz.png" alt="DVZ-fiche per rubriek"><figcaption>« Eerste vaststellingen DVZ »: de volledige fiche in duidelijke rubrieken (identiteit, familie, gezondheid, traject, kwetsbaarheid…) — niets wordt weggelaten.</figcaption></figure>
+<figure><img src="manual/nl/16-conseils-actifs.png" alt="Actieve adviezen en historiek"><figcaption>De actieve juridische adviezen (met wetsverwijzingen) en de historiek van elke wijziging. Klik op ✓ wanneer een advies behandeld is.</figcaption></figure>
+
+<h2 id="s9"><span class="num">9</span>De vrederechter en uw verplichte verslagen</h2>
+<p>Als voogd legt de wet u drie soorten verslagen op (programmawet 24/12/2002, art. 19 en 24):</p>
+<ul>
+<li><strong>Eerste verslag</strong>: binnen <strong>15 dagen</strong> na uw aanstelling → Dienst Voogdij ÉN vrederechter;</li>
+<li><strong>Halfjaarlijks verslag</strong>: <strong>2 keer per jaar</strong> → vrederechter, kopie aan de Dienst Voogdij;</li>
+<li><strong>Eindverslag</strong>: binnen 15 dagen na het einde van de voogdij.</li>
+</ul>
+<figure><img src="manual/nl/11-juge-rapports.png" alt="Vrederechter en verslagen"><figcaption>Typ de postcode van de jongere → de applicatie vindt de bevoegde vrederechter (adres, telefoon). De vervaldata van de verslagen worden automatisch berekend.</figcaption></figure>
+<ol class="steps">
+<li>Vul de <strong>postcode</strong> van de verblijfplaats in en klik op « 🔍 Vrederechter zoeken ». Sla op.</li>
+<li>Klik op elke vervaldag op <span class="btn-ex">🖨️ PDF</span>: het verslag wordt <strong>vooringevuld</strong> met de dossiergegevens (identiteit, school, gezondheid, rekeningsaldo…). U vult enkel de zones <em>[Aan te vullen]</em> aan.</li>
+<li>« ✉️ Verzending voorbereiden » maakt de e-mail met de juiste bestemmeling.</li>
+<li>Vink het verslag af zodra verzonden: de applicatie bewaart de datum.</li>
+</ol>
+
+<h2 id="s10"><span class="num">10</span>De agenda met afspraken</h2>
+<p>Bij het aanmaken van het dossier plant de applicatie de <strong>10 typische afspraken</strong> van het begin van een voogdij (eerste ontmoeting, centrum, advocaat, eerste verslag, school, arts, bank, CGVS-voorbereiding…). Wijzig de data vrij, voeg eigen afspraken toe, en exporteer alles naar uw persoonlijke agenda (<code>.ics</code>-bestand: Google Agenda, Outlook…).</p>
+<figure><img src="manual/nl/12-agenda.png" alt="Agenda van het dossier"><figcaption>Vink een afspraak af zodra ze plaatsvond: ze voedt automatisch uw volgende verslag.</figcaption></figure>
+<div class="tip">Afspraken binnen 30 dagen verschijnen op het dashboard, en de applicatie kan systeemmeldingen tonen (aanvaard ze wanneer de browser het vraagt).</div>
+
+<h2 id="s11"><span class="num">11</span>Het geld van de jongere (bankopvolging)</h2>
+<p>U beheert de goederen van de minderjarige onder toezicht van de vrederechter. Noteer hier elke inkomst en uitgave: de applicatie berekent het saldo en genereert het <strong>officiële uittreksel</strong> bij uw halfjaarlijks verslag.</p>
+<figure><img src="manual/nl/13-banque.png" alt="Bankopvolging"><figcaption>Het verrichtingenregister van Karim. Onder de tabel: « Uittreksel (PDF) » voor de vrederechter. De applicatie adviseert ook banken dicht bij de jongere (gratis jongerenrekening).</figcaption></figure>
+<div class="warn">Vermeng NOOIT uw geld met dat van de jongere. Vraag voor elke belangrijke handeling (groot bedrag, erfenis) eerst de machtiging van de vrederechter.</div>
+
+<h2 id="s12"><span class="num">12</span>Uw verplaatsingskosten (terugbetaling)</h2>
+<p>De FOD Justitie betaalt u <strong>0,428 €/km</strong> terug (geïndexeerd tarief — aanpasbaar in de applicatie) plus parking en verantwoorde kosten. Noteer elke verplaatsing <em>dezelfde dag</em>:</p>
+<figure><img src="manual/nl/14-frais.png" alt="Kosten en verplaatsingen"><figcaption>De knop « 🗺️ Km berekenen (Maps) » opent de route in Google Maps: lees de afstand af en vul heen-terug in.</figcaption></figure>
+<ol class="steps">
+<li>Datum, reden (bv. « CGVS-gehoor »), vertrek en bestemming.</li>
+<li>Klik op « 🗺️ Km berekenen » → neem de km over (heen-terug).</li>
+<li>Voeg parking/diversen toe, dan ➕.</li>
+<li>Op het einde van de periode: <span class="btn-ex">🖨️ Kostendeclaratie (PDF)</span> → naar de Dienst Voogdij met uw bewijsstukken.</li>
+</ol>
+
+<h2 id="s13"><span class="num">13</span>Documenten bewaren (bijlagen)</h2>
+<p>Scan of fotografeer elk officieel document (bijlage 26, attest, kaart, rapport…) en plaats het in het dossier: het wordt <strong>versleuteld</strong> op uw toestel bewaard. Een PDF wordt bovendien automatisch geanalyseerd (stap 7).</p>
+<figure><img src="manual/nl/15-pieces-jointes.png" alt="Versleutelde bijlagen"><figcaption>Het dossier van Karim bevat al zijn bijlage 26 en zijn schoolattest — AES-256-versleuteld, nooit verzonden.</figcaption></figure>
+
+<h2 id="s14"><span class="num">14</span>Een document vertalen NL ↔ FR</h2>
+<p>Twee hulpmiddelen, bereikbaar vanuit het dossier (« 🌐 Document vertalen ») of het importvenster:</p>
+<ul>
+<li><strong>➡️ Woordenboek (direct)</strong>: onmiddellijke vertaling, exact voor de administratieve woordenschat; onzekere woorden worden geel gemarkeerd.</li>
+<li><strong>🧠 AI-vertaling (lokaal)</strong>: een echte neuronale vertaling, in <strong>beide richtingen NL ↔ FR</strong>. Eerste gebruik: eenmalige download van ±47 MB, daarna werkt alles offline. Zoals altijd: <strong>niets verlaat uw toestel</strong>.</li>
+</ul>
+<figure><img src="manual/nl/17-traduction.png" alt="Vertaaltool"><figcaption>Plak de tekst, kies de richting, vertaal — en « Opslaan in dossiernotities ».</figcaption></figure>
+
+<h2 id="s15"><span class="num">15</span>De Voogdengids: uw volledige cursussen</h2>
+<p>Het tabblad <span class="btn-ex">🎓 Voogdengids</span> is uw ingebouwde opleiding: <strong>13 modules</strong> die de hele voogdij dekken, van uw aanstelling tot de 18 jaar van de jongere. Elke module bevat: een eenvoudige cursus, de acties in volgorde, de af te geven documenten (en aan wie), de valkuilen en de wetsverwijzingen.</p>
+<figure><img src="manual/nl/18-guide.png" alt="Voogdengids"><figcaption>De 13 modules + alle actoren (met « wanneer contacteren ») + de aanbevolen banken.</figcaption></figure>
+<div class="tip">Herlees vóór elke grote stap (CGVS-gehoor, gezinshereniging, 18 jaar…) de overeenkomstige module: 10 minuten lezen vermijdt weken fouten.</div>
+
+<h2 id="s16"><span class="num">16</span>Het glossarium van afkortingen</h2>
+<p>CGVS, BGV, OKAN, MINTEH… De NBMV-wereld zit vol afkortingen. Klik op de knop <span class="btn-ex">📖</span> rechtsboven, op elk moment:</p>
+<figure><img src="manual/nl/19-glossaire.png" alt="Glossarium"><figcaption>19 afkortingen uitgelegd, in het Nederlands en het Frans.</figcaption></figure>
+
+<h2 id="s17"><span class="num">17</span>Back-uppen en een dossier doorgeven</h2>
+<p>Uw gegevens leven enkel op uw toestel: de back-up is dus <strong>uw verantwoordelijkheid</strong>. Eén keer per week (de banner op het dashboard herinnert u eraan):</p>
+<figure><img src="manual/nl/20-sauvegarde.png" alt="Back-up en transfer"><figcaption>Versleutelde export: kies een back-upwachtwoord, een .menabackup-bestand wordt gedownload.</figcaption></figure>
+<ol class="steps">
+<li>Dashboard → <span class="btn-ex">💾 Back-up / Transfer</span>.</li>
+<li>Kies een back-upwachtwoord (mag verschillen van het hoofdwachtwoord) → « Exporteren ». Bewaar het bestand veilig (USB-stick, schijf).</li>
+<li><strong>Een dossier doorgeven aan een collega-voogd</strong>: bezorg hem het <code>.menabackup</code>-bestand + het wachtwoord <em>via twee verschillende kanalen</em> (bv. bestand per e-mail, wachtwoord per sms). Hij importeert het via hetzelfde venster: dossiers, archieven en bijlagen inbegrepen.</li>
+</ol>
+
+<h2 id="s18"><span class="num">18</span>Een dossier afsluiten (de 18 jaar)</h2>
+<p>De voogdij eindigt automatisch op 18 jaar (bereid de overgang voor vanaf 16,5 jaar — Module 11 van de Gids). Zodra het eindverslag verzonden is en de documenten aan de jongere overhandigd:</p>
+<p><em>Voorbeeld:</em> Ali is net 18 geworden. U stuurde het eindverslag, overhandigde zijn originele documenten en sloot de rekening af in zijn aanwezigheid. Zijn dossier gaat naar de archieven — twee jaar later stelt de Dienst Voogdij u een vraag: u raadpleegt het in twee klikken.</p>
+<ol class="steps">
+<li>Open het dossier → <span class="btn-ex">📦 Afsluiten & archiveren</span>.</li>
+<li>Het dossier verlaat uw actieve lijst maar blijft <strong>altijd raadpleegbaar</strong> in 🗂️ Archieven (versleuteld, alleen-lezen). U kunt het ook herstellen of definitief verwijderen.</li>
+</ol>
+<figure><img src="manual/nl/21-archives.png" alt="Archieven"><figcaption>De archieven: het dossier van Ali, veilig bewaard, raadpleegbaar, herstelbaar.</figcaption></figure>
+
+<h2 id="s19"><span class="num">19</span>Veelgestelde vragen</h2>
+<h3>« Ik ben mijn wachtwoord vergeten »</h3>
+<p>Op het aanmeldscherm wist « Wachtwoord vergeten? Resetten » alles en begint u opnieuw. Herstel daarna uw laatste <code>.menabackup</code> — precies daarom maakt u elke week een back-up.</p>
+<h3>« Gaan mijn gegevens naar het internet? »</h3>
+<p>Nee. Nooit. De dossiers zijn versleuteld (AES-256) en staan enkel in uw browser/toestel. Zelfs de AI-vertaling draait lokaal. De code van de applicatie is publiek en controleerbaar.</p>
+<h3>« Werkt de applicatie zonder internet? »</h3>
+<p>Ja, zodra ze één keer geopend werd (en geïnstalleerd via « App installeren »). Enkel de allereerste lading en de eenmalige download van de AI-vertaalmodellen vragen een verbinding.</p>
+<h3>« Hoe updaten? »</h3>
+<p>Onderaan de pagina vergelijkt « 🔄 Updates controleren » uw versie met de laatst gepubliceerde. De webversie werkt zichzelf bij.</p>
+<h3>« Wie bellen in noodgevallen? »</h3>
+<ul>
+<li><strong>Verdwijning</strong>: politie + Child Focus <strong>116 000</strong> (24/7) + Dienst Voogdij + Fedasil — binnen 24 u.</li>
+<li><strong>Politieverhoor</strong>: Salduz-permanentie advocaten <strong>0800 90 808</strong> — nooit een verhoor zonder advocaat.</li>
+<li><strong>Dienst Voogdij</strong>: 02 542 70 51 (noodgevallen: 078 15 43 24).</li>
+</ul>
+
+<h2 id="s20"><span class="num">20</span>⚖️ De nieuwe regels 2025-2026, eenvoudig uitgelegd</h2>
+<p>Het vreemdelingenrecht is recent sterk veranderd. De applicatie is aan deze hervormingen aangepast (haar automatische adviezen houden er rekening mee), maar u moet ze begrijpen. Dit is de essentie, in juni 2026 geverifieerd op de officiële bronnen.</p>
+
+<h3>A. Gezinshereniging: de wet van 18 juli 2025</h3>
+<p>In werking sinds <strong>18 augustus 2025</strong>; deze wet verstrengt de regels aanzienlijk. Wat concreet verandert voor uw voogdijen:</p>
+<ul>
+<li><strong>De « gunstige » termijn gaat van 1 jaar naar 6 MAANDEN.</strong> Wanneer uw jongere als vluchteling erkend wordt, kan zijn familie (ouders) hem vervoegen <em>zonder inkomens- en woonstvoorwaarden</em> — maar alleen als de aanvraag binnen <strong>6 maanden</strong> na de erkenning wordt ingediend. Vóór de hervorming was dat een jaar. <em>Praktisch gevolg: vanaf de positieve CGVS-beslissing is het een race tegen de klok — de applicatie maakt automatisch de herinnering en het advies aan zodra ze de erkenning in een document detecteert.</em></li>
+<li><strong>Na de 6 maanden:</strong> de familie moet een inkomen van minstens <strong>120 % van het leefloon</strong> bewijzen (ongeveer 2 130 € netto/maand — sociale uitkeringen tellen niet mee), een voldoende woonst en een ziekteverzekering. Voor de meeste families in het herkomstland is dat zo goed als onmogelijk.</li>
+<li><strong>Stilzwijgen geldt voortaan als WEIGERING.</strong> Vroeger werd een aanvraag zonder antwoord binnen de termijn (9 maanden) automatisch aanvaard. Dat is omgekeerd: zonder antwoord is de aanvraag <em>automatisch verworpen</em>, en is beroep nodig. Volg dus elke aanvraag actief op met de advocaat.</li>
+<li><strong>Specifieke NBMV-beperking:</strong> een ouder kan zijn minderjarig erkend kind niet meer vervoegen als het kind bij aankomst in België <em>vergezeld was door de andere ouder</em>.</li>
+<li><strong>Subsidiaire bescherming — heet hangijzer:</strong> de wet sloot gezinshereniging van de ouders met een subsidiair beschermde NBMV uit. Het <strong>Grondwettelijk Hof schorste</strong> dit verschil in behandeling (arrest van 26 februari 2026, vragen aan het Hof van Justitie van de EU). Het recht is dus <em>in beweging</em>: beslis nooit alleen voor een subsidiair beschermde jongere — bel de advocaat en raadpleeg <a href="https://www.myria.be">Myria</a>.</li>
+</ul>
+<div class="warn">Onthoud de reflex: <strong>erkenning van het statuut = de aanvraag van de familie moet binnen 6 maanden vertrekken</strong>. Dat is DE belangrijkste termijn van de hervorming voor een voogd.</div>
+
+<h3>B. De leeftijdstest: België veroordeeld (EHRM, 6 maart 2025)</h3>
+<p>Het Europees Hof voor de Rechten van de Mens oordeelde dat de Belgische leeftijdsbepalingsprocedure <strong>onvoldoende procedurele waarborgen</strong> biedt (schending van artikel 8). Concreet, als uw jongere na de drievoudige medische test meerderjarig wordt verklaard:</p>
+<ul>
+<li>heeft het beroep vandaag <strong>veel meer gewicht</strong> — de advocaat moet dit arrest citeren;</li>
+<li>eis altijd de volledige kopie van de resultaten en de <strong>foutmarge</strong> (vaak ±2 jaar);</li>
+<li>verzamel elk identiteitsdocument (taskara, geboorteakte) via de familie — nooit via de ambassade voor een asielzoeker.</li>
+</ul>
+<p>De applicatie citeert dit arrest automatisch in haar advies wanneer de documentanalyse een resultaat « meerderjarig » detecteert.</p>
+
+<h3>C. De opvang onder druk (hervorming 2025)</h3>
+<p>De asielhervorming van juli 2025 laat o.a. toe om opvang te weigeren aan personen die al bescherming genieten in een ander EU-land, en het opvangnetwerk krimpt. Ook hier schorste het Grondwettelijk Hof bepaalde maatregelen (26 februari 2026). <strong>Wat niet verandert:</strong> een NBMV is prioritair en heeft altijd recht op aangepaste opvang. Wordt een plaats geweigerd of is ze ongeschikt, meld het onmiddellijk aan de Dienst Voogdij en de advocaat — laat een minderjarige nooit zonder huisvestingsoplossing.</p>
+
+<div class="tip">De applicatie controleert haar juridische inhoud en toont de verificatiedatum (tabblad Hulpbronnen → Officiële bronnen). Bij twijfel primeert altijd de officiële bron: Belgisch Staatsblad, CGVS, justitie.belgium.be, Myria.</div>
+
+<div class="ok">U bent er klaar voor. Maak uw wachtwoord aan, importeer uw eerste fiche, en laat de applicatie u gidsen — module na module, vervaldag na vervaldag. Veel succes met uw voogdij! 🛡️</div>
+
+</main>
+<footer>Platform MENA Voogd — Handleiding v1.6 · regelgeving geverifieerd juni 2026 · <a href="index.html">← Terug naar de applicatie</a> · Afdrukken of opslaan als PDF: Ctrl+P</footer>
+</body></html>

@@ -564,6 +564,11 @@
   </div>
 </div>
 
+<!-- MODAL PLANIFICATEUR DE TOURNÉE -->
+<div class="modal" id="tourneeModal"><div class="modal-box" style="max-width:760px">
+  <button class="close" onclick="closeModal('tourneeModal')">&times;</button><div id="tourneeBox"></div>
+</div></div>
+
 <!-- MODAL CALCULATEUR DE DÉLAIS -->
 <div class="modal" id="calcModal"><div class="modal-box">
   <button class="close" onclick="closeModal('calcModal')">&times;</button><div id="calcBox"></div>
@@ -1224,6 +1229,7 @@ function openDossierDetail(id){
         <div style="flex:1;min-width:110px"><label>${LANG==='nl'?'Van':'De'}</label><input id="fr_de" placeholder="${LANG==='nl'?'uw adres':'votre adresse'}"></div>
         <div style="flex:1;min-width:110px"><label>${LANG==='nl'?'Naar':'À'}</label><input id="fr_a" placeholder="${LANG==='nl'?'bestemming':'destination'}"></div>
         <button class="btn sec sm" onclick="mapsRoute()">🗺️ ${LANG==='nl'?'Km berekenen (Maps)':'Calculer km (Maps)'}</button>
+        <button class="btn sm" onclick="openTournee('${d.id}')">🧭 ${LANG==='nl'?'Rondrit plannen (meerdere bezoeken)':'Planifier une tournée (plusieurs visites)'}</button>
       </div>
       <div class="row" style="gap:.4rem;align-items:flex-end;margin-top:.3rem">
         <div><label>${LANG==='nl'?'Km (heen-terug)':'Km (aller-retour)'}</label><input id="fr_km" type="number" step="0.1" style="width:110px"></div>
@@ -2205,7 +2211,7 @@ function printReleve(id){
 }
 
 /* ============ VERSION & MISES À JOUR ============ */
-const APP_VERSION='1.7.0';
+const APP_VERSION='1.7.1';
 window.APP_VERSION=APP_VERSION;   // expose pour tests.html (const non attache a window)
 Object.assign(I18N.fr,{"dash.matrix":"📊 Suivi par dossier","dash.q4":"📈 Mes statistiques","nav.guide":"🎓 Guide du tuteur","guide.title":"🎓 Guide du tuteur débutant — de la désignation aux 18 ans","guide.banner":"13 modules pas-à-pas : cours, actions à faire, documents à remettre (et à qui), rendez-vous, pièges à éviter. Contenu basé sur la réglementation en vigueur.","dash.q1":"📄 Nouveau MENA (fiche DVZ)","dash.q2":"📂 Mes dossiers","dash.q3":"⏰ Urgences & échéances","gs.ph":"🔍 Recherche globale (dossiers, lois, cas, ressources)…","ft.check":"🔄 Vérifier les mises à jour","ft.dl":"Télécharger l’application","ft.manuel":"Mode d'emploi"});
 Object.assign(I18N.nl,{"dash.matrix":"📊 Opvolging per dossier","dash.q4":"📈 Mijn statistieken","nav.guide":"🎓 Voogdengids","guide.title":"🎓 Gids voor de beginnende voogd — van aanstelling tot 18 jaar","guide.banner":"13 stap-voor-stapmodules: cursus, acties, documenten (en aan wie), afspraken, valkuilen. Inhoud gebaseerd op de geldende regelgeving.","dash.q1":"📄 Nieuwe NBMV (DVZ-fiche)","dash.q2":"📂 Mijn dossiers","dash.q3":"⏰ Urgenties & vervaldata","gs.ph":"🔍 Globaal zoeken (dossiers, wetten, gevallen, hulpbronnen)…","ft.check":"🔄 Updates controleren","ft.dl":"Applicatie downloaden","ft.manuel":"Handleiding"});
@@ -3155,6 +3161,8 @@ async function openStats(){
 
 /* ============ v1.7 : NOTES DE VERSION ============ */
 const CHANGELOG={
+ '1.7.1':{fr:"🧭 Planificateur de tournée : plusieurs visites le même jour, itinéraire optimal calculé, ordre modifiable, km aller-retour estimés et ajustables, trajet complet dans Google Maps, enregistrement en frais",
+        nl:"🧭 Rondritplanner: meerdere bezoeken op één dag, optimale route, aanpasbare volgorde, geschatte en aanpasbare heen-terug-km, volledige route in Google Maps, opslag als kost"},
  '1.7.0':{fr:"🧮 Calculateur de délais légaux · 🛂 outil « Préparer l'audition CGRA » (8 questions, PDF avocat) · 📈 statistiques du tuteur (rapports à temps, km à déclarer) · ⚖️ alertes juridiques en direct · 🔐 module 14 RGPD · veille automatique du contenu des pages officielles",
         nl:"🧮 Termijnencalculator · 🛂 tool « CGVS-gehoor voorbereiden » (8 vragen, PDF advocaat) · 📈 voogdstatistieken · ⚖️ live juridische waarschuwingen · 🔐 module 14 AVG · automatische monitoring van officiële pagina's"},
  '1.6.1':{fr:"Réforme 2025 du regroupement familial propagée partout : Assistant Conseil, cas pratiques (+ « La course des 6 mois »), onglet Législation",
@@ -3171,6 +3179,158 @@ function maybeWhatsNew(){
     <p>${esc(NL?CHANGELOG[APP_VERSION].nl:CHANGELOG[APP_VERSION].fr)}</p>
     <button class="btn" onclick="closeModal('wnModal')">✅ ${NL?'Begrepen':'Compris'}</button>`;
   openModal('wnModal');
+}
+
+
+/* ============ v1.7.1 : PLANIFICATEUR DE TOURNÉE MULTI-VISITES ============ */
+// Plusieurs visites le même jour : géocodage (OpenStreetMap, sans clé API),
+// itinéraire optimal calculé localement (TSP exact ≤6 étapes, sinon plus
+// proche voisin + 2-opt), ordre modifiable, km AR estimés (facteur routier
+// 1,3) TOUJOURS ajustables, prix au tarif €/km du jour, ouverture du trajet
+// complet dans Google Maps. Seules des ADRESSES sont envoyées au service de
+// cartes — jamais le nom du jeune.
+const ROAD_FACTOR=1.3;
+function havKm(a,b){const R=6371,r=x=>x*Math.PI/180;const dLa=r(b.lat-a.lat),dLo=r(b.lon-a.lon);const h=Math.sin(dLa/2)**2+Math.cos(r(a.lat))*Math.cos(r(b.lat))*Math.sin(dLo/2)**2;return 2*R*Math.asin(Math.sqrt(h));}
+function tspOrder(dep,stops){
+  const n=stops.length;
+  const D=(i,j)=>havKm(i<0?dep:stops[i],j<0?dep:stops[j]);
+  const tour=o=>{let km=D(-1,o[0]);for(let k=0;k<o.length-1;k++)km+=D(o[k],o[k+1]);return km+D(o[o.length-1],-1);};
+  if(n===1)return{order:[0],km:tour([0])};
+  let best=null,bestKm=1e15;
+  if(n<=6){
+    const perm=(rest,cur)=>{
+      if(!rest.length){const km=tour(cur);if(km<bestKm){bestKm=km;best=[...cur];}return;}
+      for(let i=0;i<rest.length;i++)perm(rest.filter((_,j)=>j!==i),[...cur,rest[i]]);
+    };
+    perm([...Array(n).keys()],[]);
+  }else{
+    let rest=[...Array(n).keys()],cur=-1,order=[];
+    while(rest.length){let bi=0;for(let i=1;i<rest.length;i++)if(D(cur,rest[i])<D(cur,rest[bi]))bi=i;cur=rest.splice(bi,1)[0];order.push(cur);}
+    let improved=true;
+    while(improved){improved=false;
+      for(let i=0;i<n-1;i++)for(let j=i+1;j<n;j++){
+        const o2=[...order.slice(0,i),...order.slice(i,j+1).reverse(),...order.slice(j+1)];
+        if(tour(o2)<tour(order)-1e-9){order=o2;improved=true;}
+      }}
+    best=order;bestKm=tour(order);
+  }
+  return{order:best,km:bestKm};
+}
+async function geocode(q){
+  const r=await fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=be,fr,nl,de,lu&q='+encodeURIComponent(q));
+  if(!r.ok)throw new Error('geocodage indisponible');
+  const j=await r.json();
+  if(!j.length)throw new Error((LANG==='nl'?'Adres niet gevonden: ':'Adresse introuvable : ')+q);
+  return{lat:+j[0].lat,lon:+j[0].lon};
+}
+let TOUR={did:null,dep:null,stops:[],order:[],kmEst:0};
+function openTournee(dossierId){
+  const NL=LANG==='nl';
+  TOUR={did:dossierId,dep:null,stops:[],order:[],kmEst:0};
+  const dep=localStorage.getItem('mena_depart')||'';
+  document.getElementById('tourneeBox').innerHTML=`
+    <h3>🧭 ${NL?'Rondrit plannen':'Planifier une tournée'}</h3>
+    <p class="muted" style="font-size:.84rem">${NL?'Meerdere bezoeken op één dag: voer uw vertrekadres en de te bezoeken plaatsen in. De app berekent de meest economische volgorde (heen-terug naar uw vertrekpunt), die u vrij kunt aanpassen. Enkel adressen worden naar de kaartendienst gestuurd — nooit de naam van de jongere.':'Plusieurs visites sur la journée : entrez votre adresse de départ et les lieux à visiter. L\'application calcule l\'ordre le plus économique (aller-retour à votre point de départ), que vous pouvez réorganiser librement. Seules des adresses sont envoyées au service de cartes — jamais le nom du jeune.'}</p>
+    <label>🏠 ${NL?'Vertrek & terugkeer':'Départ & retour'}</label>
+    <input id="to_dep" value="${esc(dep)}" placeholder="${NL?'uw adres':'votre adresse'}">
+    <label style="margin-top:.5rem">📍 ${NL?'Te bezoeken plaatsen':'Lieux à visiter'}</label>
+    <div id="to_stops">
+      ${[0,1,2].map(i=>`<input class="to_stop" style="margin-bottom:.35rem" placeholder="${NL?'bezoek':'visite'} ${i+1} — ${NL?'adres':'adresse'}">`).join('')}
+    </div>
+    <button class="btn sec sm" onclick="addTourStop()">➕ ${NL?'Plaats toevoegen':'Ajouter un lieu'}</button>
+    <button class="btn sm" onclick="planTournee()" style="margin-left:.4rem">🧭 ${NL?'Optimale route voorstellen':'Proposer l\'itinéraire optimal'}</button>
+    <div class="muted" id="to_note" style="font-size:.82rem;min-height:1.1em;margin-top:.4rem"></div>
+    <div id="to_result"></div>`;
+  openModal('tourneeModal');
+}
+function addTourStop(){
+  const NL=LANG==='nl';
+  const div=document.getElementById('to_stops');
+  const n=div.querySelectorAll('.to_stop').length+1;
+  const inp=document.createElement('input');
+  inp.className='to_stop';inp.style.marginBottom='.35rem';
+  inp.placeholder=(NL?'bezoek ':'visite ')+n+' — '+(NL?'adres':'adresse');
+  div.appendChild(inp);
+}
+async function planTournee(){
+  const NL=LANG==='nl';
+  const note=document.getElementById('to_note');
+  const depAddr=document.getElementById('to_dep').value.trim();
+  const stopAddrs=[...document.querySelectorAll('.to_stop')].map(i=>i.value.trim()).filter(Boolean);
+  if(!depAddr||stopAddrs.length<1){note.textContent=NL?'Vul het vertrek en minstens één plaats in.':'Renseignez le départ et au moins un lieu.';return;}
+  localStorage.setItem('mena_depart',depAddr);
+  try{
+    note.textContent='⏳ '+(NL?'Adressen opzoeken…':'Localisation des adresses…')+' (1/'+(stopAddrs.length+1)+')';
+    const dep={addr:depAddr,geo:await geocode(depAddr)};
+    const stops=[];
+    for(let i=0;i<stopAddrs.length;i++){
+      await new Promise(r=>setTimeout(r,1100));   // respect du service gratuit
+      note.textContent='⏳ '+(NL?'Adressen opzoeken…':'Localisation des adresses…')+' ('+(i+2)+'/'+(stopAddrs.length+1)+')';
+      stops.push({addr:stopAddrs[i],geo:await geocode(stopAddrs[i])});
+    }
+    const t=tspOrder(dep.geo,stops.map(x=>x.geo));
+    TOUR.dep=dep;TOUR.stops=stops;TOUR.order=t.order;
+    note.textContent='';
+    renderTournee();
+  }catch(e){note.textContent='⚠️ '+e.message;}
+}
+function tourTotalKm(){
+  const pts=TOUR.order.map(i=>TOUR.stops[i].geo);
+  let km=havKm(TOUR.dep.geo,pts[0]);
+  for(let k=0;k<pts.length-1;k++)km+=havKm(pts[k],pts[k+1]);
+  km+=havKm(pts[pts.length-1],TOUR.dep.geo);
+  return km*ROAD_FACTOR;
+}
+function renderTournee(){
+  const NL=LANG==='nl';
+  TOUR.kmEst=Math.round(tourTotalKm()*10)/10;
+  const pkm=+getPkm();
+  const legs=[];
+  const pts=TOUR.order.map(i=>TOUR.stops[i]);
+  legs.push([TOUR.dep.addr,pts[0].addr,havKm(TOUR.dep.geo,pts[0].geo)*ROAD_FACTOR]);
+  for(let k=0;k<pts.length-1;k++)legs.push([pts[k].addr,pts[k+1].addr,havKm(pts[k].geo,pts[k+1].geo)*ROAD_FACTOR]);
+  legs.push([pts[pts.length-1].addr,TOUR.dep.addr,havKm(pts[pts.length-1].geo,TOUR.dep.geo)*ROAD_FACTOR]);
+  document.getElementById('to_result').innerHTML=`
+    <h4 style="color:var(--accent);margin:.8rem 0 .3rem">${NL?'Voorgestelde route (aanpasbaar)':'Itinéraire proposé (modifiable)'}</h4>
+    ${TOUR.order.map((si,pos)=>`<div class="deadline" style="border-left-color:var(--bleu2)">
+      <strong>${pos+1}.</strong> ${esc(TOUR.stops[si].addr)}
+      <span style="float:right">
+        <button class="btn sec sm" ${pos===0?'disabled':''} onclick="moveTourStop(${pos},-1)" title="${NL?'vroeger':'plus tôt'}">↑</button>
+        <button class="btn sec sm" ${pos===TOUR.order.length-1?'disabled':''} onclick="moveTourStop(${pos},1)" title="${NL?'later':'plus tard'}">↓</button>
+      </span></div>`).join('')}
+    <table style="margin-top:.5rem"><tr><th>${NL?'Traject':'Trajet'}</th><th style="text-align:right">${NL?'≈ km (weg)':'≈ km (route)'}</th></tr>
+      ${legs.map(l=>`<tr><td style="font-size:.82rem">${esc(l[0].split(',')[0])} → ${esc(l[1].split(',')[0])}</td><td style="text-align:right">${l[2].toFixed(1)}</td></tr>`).join('')}
+      <tr><td><strong>TOTAL ${NL?'(heen-terug)':'(aller-retour)'}</strong></td><td style="text-align:right"><strong>${TOUR.kmEst.toFixed(1)} km</strong></td></tr></table>
+    <div class="row" style="align-items:flex-end;margin-top:.6rem;gap:.5rem">
+      <div><label>${NL?'Km (aanpasbaar)':'Km (ajustable)'}</label><input id="to_km" type="number" step="0.1" value="${TOUR.kmEst}" style="width:110px" oninput="document.getElementById('to_prix').textContent=((+this.value||0)*${pkm}).toFixed(2)"></div>
+      <div style="padding-bottom:.55rem">× ${pkm.toFixed(3)} €/km = <strong><span id="to_prix">${(TOUR.kmEst*pkm).toFixed(2)}</span> €</strong></div>
+    </div>
+    <p class="muted" style="font-size:.76rem">${NL?'Schatting via de weg (luchtlijn × 1,3). Open Google Maps voor de exacte km en pas het veld aan.':'Estimation routière (vol d\'oiseau × 1,3). Ouvrez Google Maps pour les km exacts et ajustez le champ.'}</p>
+    <div class="row" style="margin-top:.5rem">
+      <button class="btn sec sm" onclick="openTourMaps()">🗺️ ${NL?'Volledige route in Google Maps':'Itinéraire complet dans Google Maps'}</button>
+      <button class="btn sm" onclick="saveTournee()">💾 ${NL?'Rondrit opslaan als kost':'Enregistrer la tournée en frais'}</button>
+    </div>`;
+}
+function moveTourStop(pos,dir){
+  const o=TOUR.order;
+  [o[pos],o[pos+dir]]=[o[pos+dir],o[pos]];
+  renderTournee();
+}
+function openTourMaps(){
+  const wp=TOUR.order.map(i=>encodeURIComponent(TOUR.stops[i].addr)).join('%7C');
+  const dep=encodeURIComponent(TOUR.dep.addr);
+  window.open('https://www.google.com/maps/dir/?api=1&origin='+dep+'&destination='+dep+'&waypoints='+wp+'&travelmode=driving','_blank');
+}
+function saveTournee(){
+  const NL=LANG==='nl';
+  const arr=loadDossiers();const d=arr.find(x=>x.id===TOUR.did);if(!d)return;
+  const km=+document.getElementById('to_km').value||TOUR.kmEst;
+  const noms=TOUR.order.map((i,p)=>(p+1)+') '+TOUR.stops[i].addr.split(',')[0]).join(' · ');
+  d.frais=d.frais||[];
+  d.frais.push({date:nowISO(),motif:(NL?'Rondrit: ':'Tournée : ')+noms,
+    de:TOUR.dep.addr.split(',')[0],a:(NL?'rondrit ':'boucle ')+TOUR.order.length+(NL?' bezoeken':' visites'),
+    km:km,pkm:+getPkm(),park:0,autres:0});
+  saveDossiers(arr);closeModal('tourneeModal');openDossierDetail(TOUR.did);
 }
 
 /* ============ UTIL ============ */

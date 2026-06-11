@@ -37,3 +37,32 @@ jobs:
         run: |
           ! grep -rniE "9777786|baghlan|saltanat|dorina popa|basir ahmad" pwa/ || (echo "DONNEES REELLES DETECTEES" && exit 1)
           echo "OK — aucune donnée personnelle réelle"
+
+  tests-e2e:
+    name: Tests navigateur (bloquants)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Installer Playwright
+        run: pip -q install playwright && python -m playwright install chromium --with-deps
+      - name: Executer pwa/tests.html (echec si un test echoue)
+        run: |
+          python -m http.server 8766 --directory pwa &
+          sleep 2
+          python - << 'PYEOF'
+          from playwright.sync_api import sync_playwright
+          with sync_playwright() as p:
+              b = p.chromium.launch()
+              pg = b.new_page()
+              pg.goto('http://localhost:8766/tests.html')
+              pg.wait_for_timeout(5000)
+              res = pg.evaluate("document.querySelector('h2')?.textContent")
+              ok = pg.evaluate("document.querySelector('h2')?.className")
+              fails = pg.evaluate("[...document.querySelectorAll('#r li.ko')].map(li=>li.textContent)")
+              print('Resultat:', res)
+              if fails: print('ECHECS:', fails)
+              assert ok == 'ok' and res, 'tests navigateur en echec'
+              b.close()
+          PYEOF

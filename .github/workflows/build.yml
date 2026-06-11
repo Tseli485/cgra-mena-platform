@@ -101,3 +101,27 @@ jobs:
           git config user.email "actions@github.com"
           git subtree split --prefix pwa -b gh-pages-ci
           git push -f origin gh-pages-ci:gh-pages
+
+  winget:
+    name: winget-submit (mise a jour automatique)
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: release
+    runs-on: windows-latest
+    steps:
+      - name: Verifier le jeton
+        id: tok
+        shell: bash
+        run: |
+          if [ -z "${{ secrets.WINGET_TOKEN }}" ]; then
+            echo "absent=true" >> $GITHUB_OUTPUT
+            echo "::notice::Secret WINGET_TOKEN absent — soumission winget ignoree."
+          fi
+      - name: Soumettre a winget-pkgs
+        if: steps.tok.outputs.absent != 'true'
+        continue-on-error: true
+        uses: vedantmgoyal9/winget-releaser@main
+        with:
+          identifier: Tseli485.MENA-Tuteur
+          installers-regex: 'MENA-Tuteur-Windows\.exe$'
+          release-tag: ${{ github.ref_name }}
+          token: ${{ secrets.WINGET_TOKEN }}

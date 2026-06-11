@@ -62,6 +62,11 @@ document.getElementById('app').addEventListener('load',async()=>{
     const r=W.tspOrder(dep,stops);
     const naive=(()=>{const D=(a,b)=>W.havKm(a,b);return D(dep,stops[0])+D(stops[0],stops[1])+D(stops[1],stops[2])+D(stops[2],dep);})();
     return r.order.length===3 && r.km<naive-10 && r.order[1]===2;});
+  // 12. adresse belge structurée (géocodage par code postal)
+  await T('parseAdresseBE : rue + CP + commune',()=>{
+    const a=W.parseAdresseBE('Rue de la Station 12, 6061 Montignies-sur-Sambre');
+    const b=W.parseAdresseBE('pas une adresse');
+    return a&&a.cp==='6061'&&a.city==='Montignies-sur-Sambre'&&a.street==='Rue de la Station 12'&&b===null;});
   const h=document.createElement('h2');h.textContent=`Résultat : ${pass}/${total}`;h.className=pass===total?'ok':'ko';R.before(h);
 });
 </script></body></html>

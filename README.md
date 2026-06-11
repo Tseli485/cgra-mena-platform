@@ -1,5 +1,7 @@
 # 🛡️ Plateforme MENA Tuteur
 
+[![CI](https://github.com/Tseli485/cgra-mena-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/Tseli485/cgra-mena-platform/actions/workflows/ci.yml) [![Release](https://img.shields.io/github/v/release/Tseli485/cgra-mena-platform?label=release)](https://github.com/Tseli485/cgra-mena-platform/releases/latest)
+
 **Application sécurisée de gestion de dossiers de mineurs étrangers non accompagnés (MENA) pour tuteurs en Belgique.**
 Bilingue FR/NL · chiffrée (AES-256) · 100 % hors ligne · gratuite.
 

@@ -33,6 +33,39 @@ jobs:
           assert m.group(1) == v, f"index.html={m.group(1)} != version.json={v}"
           print("Versions cohérentes:", v)
           EOF
+      - name: Gate encodage UTF-8 (bug cp1252 attrape le 11/06/2026)
+        run: |
+          python3 - << 'EOF'
+          import glob, sys
+          bad = []
+          for f in glob.glob('pwa/**/*.json', recursive=True) + glob.glob('pwa/*.html') + glob.glob('pwa/js/*.js'):
+              try: open(f, encoding='utf-8').read()
+              except Exception as e: bad.append(f"{f}: {e}")
+          if bad: print(chr(10).join(bad)); sys.exit(1)
+          print("OK — tous les fichiers texte sont en UTF-8")
+          EOF
+      - name: Gate syntaxe JS de index.html (node --check)
+        run: |
+          python3 - << 'EOF'
+          s = open('pwa/index.html', encoding='utf-8').read()
+          i = s.index('<script src="js/nl-fr-dict.js"')
+          j = s.index('<script>', i); k = s.index('</script>', j)
+          open('_chk.js', 'w', encoding='utf-8').write(s[j+8:k])
+          EOF
+          node --check _chk.js && echo "OK — syntaxe JS valide"
+          node --check pwa/js/bergamot-worker.js && echo "OK — worker valide"
+          node --check pwa/js/nl-fr-dict.js && echo "OK — dictionnaire valide"
+      - name: Gate notes de version (CHANGELOG contient APP_VERSION)
+        run: |
+          python3 - << 'EOF'
+          import re
+          s = open('pwa/index.html', encoding='utf-8').read()
+          v = re.search(r"APP_VERSION='([^']+)'", s).group(1)
+          assert f"'{v}':" in s.split('const CHANGELOG=')[1][:4000], f"CHANGELOG sans entree pour {v}"
+          print("OK — CHANGELOG a une entree pour", v)
+          EOF
+      - name: Audit harness deterministe
+        run: node scripts/harness-audit.js repo --format text
       - name: Vérifier qu'aucune donnée réelle n'est présente
         run: |
           ! grep -rniE "9777786|baghlan|saltanat|dorina popa|basir ahmad" pwa/ || (echo "DONNEES REELLES DETECTEES" && exit 1)

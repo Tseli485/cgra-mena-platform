@@ -1,306 +1,3428 @@
 {
-  "avertissement": {"fr": "Cet assistant fournit une information juridique de première ligne fondée sur la réglementation MENA (Belgique/UE) en vigueur. Il ne remplace pas l'avis d'un avocat ni la décision du Service des Tutelles. Vérifiez toujours les délais auprès de la juridiction compétente.", "nl": "Deze assistent biedt eerstelijns juridische informatie op basis van de geldende NBMV-regelgeving (België/EU). Hij vervangt niet het advies van een advocaat noch de beslissing van de Dienst Voogdij. Controleer de termijnen steeds bij de bevoegde instantie."},
-  "pays_liste": ["Afghanistan", "Afrique du Sud", "Albanie", "Algérie", "Angola", "Arabie saoudite", "Arménie", "Azerbaïdjan", "Bangladesh", "Bénin", "Bhoutan", "Biélorussie", "Birmanie (Myanmar)", "Bolivie", "Bosnie-Herzégovine", "Burkina Faso", "Burundi", "Cambodge", "Cameroun", "Centrafrique", "Chine", "Colombie", "Comores", "Congo (Brazzaville)", "Côte d'Ivoire", "Cuba", "Djibouti", "Égypte", "Émirats arabes unis", "Équateur", "Érythrée", "Eswatini", "Éthiopie", "Gambie", "Géorgie", "Ghana", "Guinée", "Guinée équatoriale", "Guinée-Bissau", "Haïti", "Honduras", "Inde", "Indonésie", "Irak", "Iran", "Jordanie", "Kazakhstan", "Kenya", "Kosovo", "Koweït", "Laos", "Liban", "Liberia", "Libye", "Macédoine du Nord", "Madagascar", "Malaisie", "Mali", "Maroc", "Mauritanie", "Mexique", "Moldavie", "Mongolie", "Monténégro", "Mozambique", "Népal", "Nicaragua", "Niger", "Nigéria", "Ouganda", "Ouzbékistan", "Pakistan", "Palestine", "Philippines", "RD Congo", "Russie", "Rwanda", "Sénégal", "Serbie", "Sierra Leone", "Somalie", "Soudan", "Soudan du Sud", "Sri Lanka", "Syrie", "Tadjikistan", "Tanzanie", "Tchad", "Thaïlande", "Togo", "Tunisie", "Turkménistan", "Turquie", "Ukraine", "Venezuela", "Vietnam", "Yémen", "Zimbabwe", "Autre / non précisé"],
-  "pays_profils": {
-    "Afghanistan": {"considerations": [
-      {"theme": {"fr": "Conflit armé & régime taliban", "nl": "Gewapend conflict & talibanregime"}, "texte": {"fr": "Violence généralisée et persécutions documentées ; éléments pouvant fonder une protection internationale.", "nl": "Gedocumenteerd veralgemeend geweld en vervolging; elementen die internationale bescherming kunnen onderbouwen."}, "scenario": "asile_refus", "base": "Convention de Genève ; Directive 2011/95/UE (protection subsidiaire)"},
-      {"theme": {"fr": "Restriction de scolarisation des filles", "nl": "Beperking van onderwijs voor meisjes"}, "texte": {"fr": "Pour une fille, l'interdiction d'accès à l'éducation au pays peut constituer un élément de persécution et un motif d'asile.", "nl": "Voor een meisje kan het verbod op toegang tot onderwijs in het land een element van vervolging en een asielgrond vormen."}, "scenario": "ecole_refus", "base": "Directive 2011/95/UE, art. 9-10 ; CIDE art. 28"},
-      {"theme": {"fr": "Mariage précoce / forcé", "nl": "Vroeg / gedwongen huwelijk"}, "texte": {"fr": "Risque documenté de mariage précoce ; vigilance en cas de projet de retour ou pression familiale.", "nl": "Gedocumenteerd risico op vroeghuwelijk; waakzaamheid bij terugkeerplannen of familiale druk."}, "scenario": "pression_familiale", "base": "Convention d'Istanbul, art. 37"}
-    ]},
-    "Syrie": {"considerations": [
-      {"theme": {"fr": "Conflit armé", "nl": "Gewapend conflict"}, "texte": {"fr": "Violence généralisée documentée ; éléments pouvant fonder le statut de réfugié ou la protection subsidiaire.", "nl": "Gedocumenteerd veralgemeend geweld; elementen die de vluchtelingenstatus of subsidiaire bescherming kunnen onderbouwen."}, "scenario": "asile_refus", "base": "Convention de Genève ; Directive 2011/95/UE, art. 15"},
-      {"theme": {"fr": "Recrutement / conscription", "nl": "Rekrutering / dienstplicht"}, "texte": {"fr": "Risque de recrutement forcé des adolescents par des groupes armés.", "nl": "Risico op gedwongen rekrutering van adolescenten door gewapende groepen."}, "scenario": "asile_refus", "base": "Protocole facultatif CIDE (enfants & conflits armés)"}
-    ]},
-    "Érythrée": {"considerations": [
-      {"theme": {"fr": "Service militaire à durée indéterminée", "nl": "Dienstplicht van onbepaalde duur"}, "texte": {"fr": "La conscription nationale, de durée indéfinie et assortie de mauvais traitements documentés, est un motif d'asile largement reconnu, y compris pour les mineurs approchant l'âge d'enrôlement.", "nl": "De nationale dienstplicht, van onbepaalde duur en met gedocumenteerde mishandeling, is een breed erkende asielgrond, ook voor minderjarigen die de rekruteringsleeftijd naderen."}, "scenario": "asile_refus", "base": "Convention de Genève ; jurisprudence asile constante"},
-      {"theme": {"fr": "MGF", "nl": "VGV (vrouwelijke genitale verminking)"}, "texte": {"fr": "Prévalence élevée de mutilations génitales féminines : vigilance pour les filles.", "nl": "Hoge prevalentie van vrouwelijke genitale verminking: waakzaamheid voor meisjes."}, "scenario": "pression_familiale", "base": "Convention d'Istanbul, art. 38 ; Code pénal belge, art. 409"}
-    ]},
-    "Guinée": {"considerations": [
-      {"theme": {"fr": "MGF (prévalence très élevée)", "nl": "VGV (zeer hoge prevalentie)"}, "texte": {"fr": "La Guinée présente une des plus fortes prévalences de MGF au monde : risque sérieux pour une fille, notamment avant un voyage au pays.", "nl": "Guinee kent een van de hoogste VGV-prevalenties ter wereld: ernstig risico voor een meisje, met name vóór een reis naar het land."}, "scenario": "pression_familiale", "base": "Convention d'Istanbul, art. 38 ; Code pénal belge, art. 409 (applicable même à l'étranger)"},
-      {"theme": {"fr": "Mariage précoce", "nl": "Vroeghuwelijk"}, "texte": {"fr": "Fréquence documentée des mariages précoces.", "nl": "Gedocumenteerde frequentie van vroeghuwelijken."}, "scenario": "pression_familiale", "base": "Convention d'Istanbul, art. 37"}
-    ]},
-    "Somalie": {"considerations": [
-      {"theme": {"fr": "MGF (quasi généralisée)", "nl": "VGV (vrijwel algemeen)"}, "texte": {"fr": "Prévalence parmi les plus élevées au monde : risque majeur pour une fille.", "nl": "Prevalentie bij de hoogste ter wereld: groot risico voor een meisje."}, "scenario": "pression_familiale", "base": "Convention d'Istanbul, art. 38 ; Code pénal belge, art. 409"},
-      {"theme": {"fr": "Conflit & enfants soldats", "nl": "Conflict & kindsoldaten"}, "texte": {"fr": "Conflit armé et recrutement d'enfants documentés.", "nl": "Gedocumenteerd gewapend conflict en rekrutering van kinderen."}, "scenario": "asile_refus", "base": "Protocole facultatif CIDE ; Convention de Genève"},
-      {"theme": {"fr": "Traite", "nl": "Mensenhandel"}, "texte": {"fr": "Pays d'origine/transit de réseaux de traite : vigilance.", "nl": "Herkomst-/transitland van mensenhandelnetwerken: waakzaamheid."}, "scenario": "traite", "base": "Directive 2011/36/UE"}
-    ]},
-    "Mali": {"considerations": [
-      {"theme": {"fr": "MGF", "nl": "VGV"}, "texte": {"fr": "Prévalence élevée de MGF : vigilance pour les filles.", "nl": "Hoge VGV-prevalentie: waakzaamheid voor meisjes."}, "scenario": "pression_familiale", "base": "Convention d'Istanbul ; Code pénal belge, art. 409"},
-      {"theme": {"fr": "Conflit (nord & centre)", "nl": "Conflict (noorden & centrum)"}, "texte": {"fr": "Insécurité documentée selon les régions : élément de contexte pour la protection.", "nl": "Gedocumenteerde onveiligheid naargelang de regio's: contextelement voor de bescherming."}, "scenario": "asile_refus", "base": "Directive 2011/95/UE, art. 15"}
-    ]},
-    "Égypte": {"considerations": [
-      {"theme": {"fr": "MGF", "nl": "VGV"}, "texte": {"fr": "Prévalence élevée malgré l'interdiction légale : vigilance pour les filles.", "nl": "Hoge prevalentie ondanks het wettelijk verbod: waakzaamheid voor meisjes."}, "scenario": "pression_familiale", "base": "Convention d'Istanbul ; Code pénal belge, art. 409"}
-    ]},
-    "Soudan": {"considerations": [
-      {"theme": {"fr": "MGF", "nl": "VGV"}, "texte": {"fr": "Prévalence élevée de MGF.", "nl": "Hoge VGV-prevalentie."}, "scenario": "pression_familiale", "base": "Convention d'Istanbul ; Code pénal belge, art. 409"},
-      {"theme": {"fr": "Conflit armé", "nl": "Gewapend conflict"}, "texte": {"fr": "Violence généralisée documentée selon les régions.", "nl": "Gedocumenteerd veralgemeend geweld naargelang de regio's."}, "scenario": "asile_refus", "base": "Directive 2011/95/UE, art. 15"}
-    ]},
-    "Soudan du Sud": {"considerations": [
-      {"theme": {"fr": "Conflit & enfants soldats", "nl": "Conflict & kindsoldaten"}, "texte": {"fr": "Conflit armé et recrutement d'enfants documentés.", "nl": "Gedocumenteerd gewapend conflict en rekrutering van kinderen."}, "scenario": "asile_refus", "base": "Protocole facultatif CIDE ; Convention de Genève"},
-      {"theme": {"fr": "Mariage précoce", "nl": "Vroeghuwelijk"}, "texte": {"fr": "Fréquence très élevée des mariages précoces.", "nl": "Zeer hoge frequentie van vroeghuwelijken."}, "scenario": "pression_familiale", "base": "Convention d'Istanbul, art. 37"}
-    ]},
-    "Éthiopie": {"considerations": [
-      {"theme": {"fr": "MGF", "nl": "VGV"}, "texte": {"fr": "Prévalence régionale de MGF.", "nl": "Regionale VGV-prevalentie."}, "scenario": "pression_familiale", "base": "Convention d'Istanbul ; Code pénal belge, art. 409"},
-      {"theme": {"fr": "Mariage précoce", "nl": "Vroeghuwelijk"}, "texte": {"fr": "Mariages précoces documentés.", "nl": "Gedocumenteerde vroeghuwelijken."}, "scenario": "pression_familiale", "base": "Convention d'Istanbul, art. 37"}
-    ]},
-    "Sierra Leone": {"considerations": [
-      {"theme": {"fr": "MGF", "nl": "VGV"}, "texte": {"fr": "Prévalence élevée de MGF.", "nl": "Hoge VGV-prevalentie."}, "scenario": "pression_familiale", "base": "Convention d'Istanbul ; Code pénal belge, art. 409"}
-    ]},
-    "Côte d'Ivoire": {"considerations": [
-      {"theme": {"fr": "MGF", "nl": "VGV"}, "texte": {"fr": "Prévalence régionale de MGF.", "nl": "Regionale VGV-prevalentie."}, "scenario": "pression_familiale", "base": "Convention d'Istanbul ; Code pénal belge, art. 409"}
-    ]},
-    "Gambie": {"considerations": [
-      {"theme": {"fr": "MGF", "nl": "VGV"}, "texte": {"fr": "Prévalence élevée de MGF.", "nl": "Hoge VGV-prevalentie."}, "scenario": "pression_familiale", "base": "Convention d'Istanbul ; Code pénal belge, art. 409"}
-    ]},
-    "Guinée-Bissau": {"considerations": [
-      {"theme": {"fr": "MGF", "nl": "VGV"}, "texte": {"fr": "Prévalence élevée de MGF.", "nl": "Hoge VGV-prevalentie."}, "scenario": "pression_familiale", "base": "Convention d'Istanbul ; Code pénal belge, art. 409"}
-    ]},
-    "Djibouti": {"considerations": [
-      {"theme": {"fr": "MGF", "nl": "VGV"}, "texte": {"fr": "Prévalence très élevée de MGF.", "nl": "Zeer hoge VGV-prevalentie."}, "scenario": "pression_familiale", "base": "Convention d'Istanbul ; Code pénal belge, art. 409"}
-    ]},
-    "Sénégal": {"considerations": [
-      {"theme": {"fr": "MGF (régional)", "nl": "VGV (regionaal)"}, "texte": {"fr": "Prévalence de MGF dans certaines régions/communautés.", "nl": "VGV-prevalentie in bepaalde regio's/gemeenschappen."}, "scenario": "pression_familiale", "base": "Convention d'Istanbul ; Code pénal belge, art. 409"}
-    ]},
-    "Burkina Faso": {"considerations": [
-      {"theme": {"fr": "Mariage précoce & MGF", "nl": "Vroeghuwelijk & VGV"}, "texte": {"fr": "Mariages précoces et MGF documentés.", "nl": "Gedocumenteerde vroeghuwelijken en VGV."}, "scenario": "pression_familiale", "base": "Convention d'Istanbul, art. 37-38"},
-      {"theme": {"fr": "Conflit (nord)", "nl": "Conflict (noorden)"}, "texte": {"fr": "Insécurité documentée selon les régions.", "nl": "Gedocumenteerde onveiligheid naargelang de regio's."}, "scenario": "asile_refus", "base": "Directive 2011/95/UE, art. 15"}
-    ]},
-    "Niger": {"considerations": [
-      {"theme": {"fr": "Mariage précoce (prévalence très élevée)", "nl": "Vroeghuwelijk (zeer hoge prevalentie)"}, "texte": {"fr": "Le Niger présente une des plus fortes prévalences de mariage précoce au monde.", "nl": "Niger kent een van de hoogste prevalenties van vroeghuwelijk ter wereld."}, "scenario": "pression_familiale", "base": "Convention d'Istanbul, art. 37"}
-    ]},
-    "Tchad": {"considerations": [
-      {"theme": {"fr": "Mariage précoce & MGF", "nl": "Vroeghuwelijk & VGV"}, "texte": {"fr": "Mariages précoces et MGF documentés.", "nl": "Gedocumenteerde vroeghuwelijken en VGV."}, "scenario": "pression_familiale", "base": "Convention d'Istanbul, art. 37-38"}
-    ]},
-    "Nigéria": {"considerations": [
-      {"theme": {"fr": "Traite (exploitation sexuelle)", "nl": "Mensenhandel (seksuele uitbuiting)"}, "texte": {"fr": "Réseaux de traite documentés (recours fréquent à l'emprise, y compris rituelle) : vigilance accrue pour les filles.", "nl": "Gedocumenteerde mensenhandelnetwerken (frequent gebruik van psychische greep, ook ritueel): verhoogde waakzaamheid voor meisjes."}, "scenario": "traite", "base": "Directive 2011/36/UE ; Protocole de Palerme"},
-      {"theme": {"fr": "MGF (régional)", "nl": "VGV (regionaal)"}, "texte": {"fr": "MGF présente dans certaines régions.", "nl": "VGV aanwezig in bepaalde regio's."}, "scenario": "pression_familiale", "base": "Convention d'Istanbul ; Code pénal belge, art. 409"},
-      {"theme": {"fr": "Conflit (nord-est)", "nl": "Conflict (noordoosten)"}, "texte": {"fr": "Insécurité documentée dans certaines régions.", "nl": "Gedocumenteerde onveiligheid in bepaalde regio's."}, "scenario": "asile_refus", "base": "Directive 2011/95/UE, art. 15"}
-    ]},
-    "RD Congo": {"considerations": [
-      {"theme": {"fr": "Conflit & enfants soldats (est)", "nl": "Conflict & kindsoldaten (oosten)"}, "texte": {"fr": "Conflit armé et recrutement d'enfants documentés, notamment dans l'est.", "nl": "Gedocumenteerd gewapend conflict en rekrutering van kinderen, met name in het oosten."}, "scenario": "asile_refus", "base": "Protocole facultatif CIDE ; Convention de Genève"},
-      {"theme": {"fr": "Traite", "nl": "Mensenhandel"}, "texte": {"fr": "Réseaux d'exploitation documentés : vigilance.", "nl": "Gedocumenteerde uitbuitingsnetwerken: waakzaamheid."}, "scenario": "traite", "base": "Directive 2011/36/UE"}
-    ]},
-    "Centrafrique": {"considerations": [
-      {"theme": {"fr": "Conflit & enfants soldats", "nl": "Conflict & kindsoldaten"}, "texte": {"fr": "Conflit armé et recrutement d'enfants documentés.", "nl": "Gedocumenteerd gewapend conflict en rekrutering van kinderen."}, "scenario": "asile_refus", "base": "Protocole facultatif CIDE ; Convention de Genève"}
-    ]},
-    "Yémen": {"considerations": [
-      {"theme": {"fr": "Conflit armé", "nl": "Gewapend conflict"}, "texte": {"fr": "Violence généralisée documentée.", "nl": "Gedocumenteerd veralgemeend geweld."}, "scenario": "asile_refus", "base": "Directive 2011/95/UE, art. 15"},
-      {"theme": {"fr": "Mariage précoce", "nl": "Vroeghuwelijk"}, "texte": {"fr": "Fréquence des mariages précoces.", "nl": "Frequentie van vroeghuwelijken."}, "scenario": "pression_familiale", "base": "Convention d'Istanbul, art. 37"}
-    ]},
-    "Irak": {"considerations": [
-      {"theme": {"fr": "Conflit / insécurité régionale", "nl": "Conflict / regionale onveiligheid"}, "texte": {"fr": "Insécurité documentée selon les régions : élément de contexte pour la protection.", "nl": "Gedocumenteerde onveiligheid naargelang de regio's: contextelement voor de bescherming."}, "scenario": "asile_refus", "base": "Directive 2011/95/UE, art. 15"}
-    ]},
-    "Ouganda": {"considerations": [
-      {"theme": {"fr": "Criminalisation de l'homosexualité", "nl": "Strafbaarstelling van homoseksualiteit"}, "texte": {"fr": "L'homosexualité est criminalisée (législation aggravée en 2023) : un mineur LGBTQ+ peut relever de l'asile au titre de l'appartenance à un groupe social.", "nl": "Homoseksualiteit is strafbaar (verstrengde wetgeving in 2023): een LGBTQ+-minderjarige kan in aanmerking komen voor asiel wegens het behoren tot een sociale groep."}, "scenario": "asile_refus", "base": "Convention de Genève ; Directive 2011/95/UE, art. 10 ; CJUE C-148/13"}
-    ]},
-    "Iran": {"considerations": [
-      {"theme": {"fr": "Criminalisation de l'homosexualité", "nl": "Strafbaarstelling van homoseksualiteit"}, "texte": {"fr": "L'homosexualité est sévèrement réprimée : motif possible de protection internationale.", "nl": "Homoseksualiteit wordt streng bestraft: mogelijke grond voor internationale bescherming."}, "scenario": "asile_refus", "base": "Convention de Genève ; Directive 2011/95/UE, art. 10"}
-    ]},
-    "Cameroun": {"considerations": [
-      {"theme": {"fr": "Criminalisation de l'homosexualité", "nl": "Strafbaarstelling van homoseksualiteit"}, "texte": {"fr": "L'homosexualité est pénalisée : motif possible de protection.", "nl": "Homoseksualiteit is strafbaar: mogelijke beschermingsgrond."}, "scenario": "asile_refus", "base": "Convention de Genève ; Directive 2011/95/UE, art. 10"},
-      {"theme": {"fr": "Conflit (régions anglophones)", "nl": "Conflict (Engelstalige regio's)"}, "texte": {"fr": "Insécurité documentée dans certaines régions.", "nl": "Gedocumenteerde onveiligheid in bepaalde regio's."}, "scenario": "asile_refus", "base": "Directive 2011/95/UE, art. 15"}
-    ]},
-    "Bangladesh": {"considerations": [
-      {"theme": {"fr": "Mariage précoce", "nl": "Vroeghuwelijk"}, "texte": {"fr": "Fréquence élevée des mariages précoces.", "nl": "Hoge frequentie van vroeghuwelijken."}, "scenario": "pression_familiale", "base": "Convention d'Istanbul, art. 37"},
-      {"theme": {"fr": "Traite (travail)", "nl": "Mensenhandel (arbeid)"}, "texte": {"fr": "Réseaux d'exploitation par le travail documentés (servitude pour dette).", "nl": "Gedocumenteerde netwerken van arbeidsuitbuiting (schuldslavernij)."}, "scenario": "traite", "base": "Directive 2011/36/UE ; OIT n°182"}
-    ]},
-    "Pakistan": {"considerations": [
-      {"theme": {"fr": "Mariage précoce", "nl": "Vroeghuwelijk"}, "texte": {"fr": "Mariages précoces documentés.", "nl": "Gedocumenteerde vroeghuwelijken."}, "scenario": "pression_familiale", "base": "Convention d'Istanbul, art. 37"},
-      {"theme": {"fr": "Insécurité régionale", "nl": "Regionale onveiligheid"}, "texte": {"fr": "Insécurité documentée selon les régions.", "nl": "Gedocumenteerde onveiligheid naargelang de regio's."}, "scenario": "asile_refus", "base": "Directive 2011/95/UE, art. 15"}
-    ]},
-    "Libye": {"considerations": [
-      {"theme": {"fr": "Conditions sur la route migratoire", "nl": "Omstandigheden op de migratieroute"}, "texte": {"fr": "Violences, détention et traite documentées sur le parcours : pertinent pour l'évaluation du trauma et de la traite.", "nl": "Gedocumenteerd geweld, detentie en mensenhandel onderweg: relevant voor de beoordeling van trauma en mensenhandel."}, "scenario": "traite", "base": "Directive 2011/36/UE ; CIDE art. 39"}
-    ]}
-  },
-  "scenarios": [
+ "avertissement": {
+  "fr": "Cet assistant fournit une information juridique de première ligne fondée sur la réglementation MENA (Belgique/UE) en vigueur. Il ne remplace pas l'avis d'un avocat ni la décision du Service des Tutelles. Vérifiez toujours les délais auprès de la juridiction compétente.",
+  "nl": "Deze assistent biedt eerstelijns juridische informatie op basis van de geldende NBMV-regelgeving (België/EU). Hij vervangt niet het advies van een advocaat noch de beslissing van de Dienst Voogdij. Controleer de termijnen steeds bij de bevoegde instantie."
+ },
+ "pays_liste": [
+  "Afghanistan",
+  "Afrique du Sud",
+  "Albanie",
+  "Algérie",
+  "Angola",
+  "Arabie saoudite",
+  "Arménie",
+  "Azerbaïdjan",
+  "Bangladesh",
+  "Bénin",
+  "Bhoutan",
+  "Biélorussie",
+  "Birmanie (Myanmar)",
+  "Bolivie",
+  "Bosnie-Herzégovine",
+  "Burkina Faso",
+  "Burundi",
+  "Cambodge",
+  "Cameroun",
+  "Centrafrique",
+  "Chine",
+  "Colombie",
+  "Comores",
+  "Congo (Brazzaville)",
+  "Côte d'Ivoire",
+  "Cuba",
+  "Djibouti",
+  "Égypte",
+  "Émirats arabes unis",
+  "Équateur",
+  "Érythrée",
+  "Eswatini",
+  "Éthiopie",
+  "Gambie",
+  "Géorgie",
+  "Ghana",
+  "Guinée",
+  "Guinée équatoriale",
+  "Guinée-Bissau",
+  "Haïti",
+  "Honduras",
+  "Inde",
+  "Indonésie",
+  "Irak",
+  "Iran",
+  "Jordanie",
+  "Kazakhstan",
+  "Kenya",
+  "Kosovo",
+  "Koweït",
+  "Laos",
+  "Liban",
+  "Liberia",
+  "Libye",
+  "Macédoine du Nord",
+  "Madagascar",
+  "Malaisie",
+  "Mali",
+  "Maroc",
+  "Mauritanie",
+  "Mexique",
+  "Moldavie",
+  "Mongolie",
+  "Monténégro",
+  "Mozambique",
+  "Népal",
+  "Nicaragua",
+  "Niger",
+  "Nigéria",
+  "Ouganda",
+  "Ouzbékistan",
+  "Pakistan",
+  "Palestine",
+  "Philippines",
+  "RD Congo",
+  "Russie",
+  "Rwanda",
+  "Sénégal",
+  "Serbie",
+  "Sierra Leone",
+  "Somalie",
+  "Soudan",
+  "Soudan du Sud",
+  "Sri Lanka",
+  "Syrie",
+  "Tadjikistan",
+  "Tanzanie",
+  "Tchad",
+  "Thaïlande",
+  "Togo",
+  "Tunisie",
+  "Turkménistan",
+  "Turquie",
+  "Ukraine",
+  "Venezuela",
+  "Vietnam",
+  "Yémen",
+  "Zimbabwe",
+  "Autre / non précisé"
+ ],
+ "pays_profils": {
+  "Afghanistan": {
+   "considerations": [
     {
-      "id": "asile_refus",
-      "domaine": {"fr": "Séjour & Asile", "nl": "Verblijf & Asiel"},
-      "probleme": {"fr": "La demande de protection internationale a été refusée", "nl": "Het verzoek om internationale bescherming is geweigerd"},
-      "motsCles": ["refus", "asile", "cgra", "négatif", "débouté", "protection", "recours", "rejet", "weigering", "asiel", "negatief", "beroep", "afgewezen", "bescherming"],
-      "questions": [
-        {"id": "delai", "texte": {"fr": "Depuis combien de temps la décision de refus a-t-elle été notifiée ?", "nl": "Hoelang geleden werd de weigeringsbeslissing betekend?"}, "options": [{"val": "moins30", "label": {"fr": "Moins de 30 jours", "nl": "Minder dan 30 dagen"}}, {"val": "plus30", "label": {"fr": "Plus de 30 jours", "nl": "Meer dan 30 dagen"}}]},
-        {"id": "nouveaux", "texte": {"fr": "Disposez-vous d'éléments nouveaux qui n'ont pas été examinés ?", "nl": "Beschikt u over nieuwe elementen die niet werden onderzocht?"}, "options": [{"val": "oui", "label": {"fr": "Oui, éléments nouveaux", "nl": "Ja, nieuwe elementen"}}, {"val": "non", "label": {"fr": "Non", "nl": "Nee"}}]}
-      ],
-      "solutions": [
-        {"rang": 1, "titre": {"fr": "Introduire un recours au Conseil du Contentieux des Étrangers (CCE)", "nl": "Beroep instellen bij de Raad voor Vreemdelingenbetwistingen (RvV)"}, "condition": {"q": "delai", "in": ["moins30"]}, "description": {"fr": "Recours de plein contentieux contre la décision du CGRA. Le juge réexamine le dossier en fait et en droit.", "nl": "Beroep met volle rechtsmacht tegen de beslissing van het CGVS. De rechter herbekijkt het dossier in feite en in rechte."}, "base_legale": [{"texte": {"fr": "Loi du 15/12/1980, recours au CCE", "nl": "Wet van 15/12/1980, beroep bij de RvV"}, "ref": "art. 39/2 §1"}, {"texte": {"fr": "Directive 2013/32/UE (procédures), droit à un recours effectif", "nl": "Richtlijn 2013/32/EU (procedures), recht op een daadwerkelijk rechtsmiddel"}, "ref": "art. 46"}], "avantages": [{"fr": "Effet suspensif : pas d'éloignement pendant le recours", "nl": "Schorsende werking: geen verwijdering tijdens het beroep"}, {"fr": "Réexamen complet du dossier", "nl": "Volledige herziening van het dossier"}], "inconvenients": [{"fr": "Délai strict de 30 jours", "nl": "Strikte termijn van 30 dagen"}, {"fr": "Assistance d'un avocat fortement recommandée", "nl": "Bijstand van een advocaat sterk aanbevolen"}], "delai": {"fr": "30 jours à compter de la notification", "nl": "30 dagen vanaf de betekening"}},
-        {"rang": 1, "titre": {"fr": "Introduire une demande ultérieure (nouveaux éléments)", "nl": "Een volgend verzoek indienen (nieuwe elementen)"}, "condition": {"q": "nouveaux", "in": ["oui"]}, "description": {"fr": "Si le délai de recours est dépassé mais que des éléments nouveaux existent (nouvelles preuves, évolution de la situation au pays), une demande ultérieure peut être introduite.", "nl": "Als de beroepstermijn verstreken is maar er nieuwe elementen zijn (nieuw bewijs, gewijzigde situatie in het land), kan een volgend verzoek worden ingediend."}, "base_legale": [{"texte": {"fr": "Loi du 15/12/1980, demande ultérieure", "nl": "Wet van 15/12/1980, volgend verzoek"}, "ref": "art. 51/8"}, {"texte": {"fr": "Directive 2013/32/UE", "nl": "Richtlijn 2013/32/EU"}, "ref": "art. 40-42"}], "avantages": [{"fr": "Possible même après l'échéance du recours", "nl": "Mogelijk zelfs na het verstrijken van het beroep"}, {"fr": "Permet de faire valoir des faits nouveaux", "nl": "Laat toe nieuwe feiten te doen gelden"}], "inconvenients": [{"fr": "Les éléments doivent être réellement nouveaux", "nl": "De elementen moeten werkelijk nieuw zijn"}, {"fr": "Effet suspensif non automatique", "nl": "Schorsende werking niet automatisch"}], "delai": {"fr": "Dès l'obtention des éléments nouveaux", "nl": "Zodra de nieuwe elementen beschikbaar zijn"}},
-        {"rang": 2, "titre": {"fr": "Réévaluer la solution durable avec le Service des Tutelles", "nl": "De duurzame oplossing herbekijken met de Dienst Voogdij"}, "description": {"fr": "Indépendamment de l'asile, l'autorité doit rechercher la solution durable conforme à l'intérêt supérieur du mineur (séjour, réunification, ou retour encadré).", "nl": "Los van het asiel moet de autoriteit de duurzame oplossing zoeken in het belang van de minderjarige (verblijf, hereniging of begeleide terugkeer)."}, "base_legale": [{"texte": {"fr": "Loi-programme du 24/12/2002 (Tutelle MENA)", "nl": "Programmawet van 24/12/2002 (Voogdij NBMV)"}, "ref": "Titre XIII, Ch. 6"}, {"texte": {"fr": "CIDE", "nl": "IVRK"}, "ref": "art. 3"}], "avantages": [{"fr": "Approche globale au-delà de l'asile", "nl": "Globale aanpak die verder gaat dan asiel"}, {"fr": "Centrée sur l'intérêt de l'enfant", "nl": "Gericht op het belang van het kind"}], "inconvenients": [{"fr": "Procédure parallèle, pas un recours en soi", "nl": "Parallelle procedure, op zich geen beroep"}], "delai": {"fr": "En continu", "nl": "Doorlopend"}}
-      ],
-      "note_precision": {"fr": "Le délai exact et l'effet suspensif dépendent du type de décision (recevabilité, fond, demande ultérieure). Faites confirmer par un avocat spécialisé.", "nl": "De exacte termijn en de schorsende werking hangen af van het type beslissing (ontvankelijkheid, grond, volgend verzoek). Laat dit bevestigen door een gespecialiseerde advocaat."}
+     "theme": {
+      "fr": "Conflit armé & régime taliban",
+      "nl": "Gewapend conflict & talibanregime"
+     },
+     "texte": {
+      "fr": "Violence généralisée et persécutions documentées ; éléments pouvant fonder une protection internationale.",
+      "nl": "Gedocumenteerd veralgemeend geweld en vervolging; elementen die internationale bescherming kunnen onderbouwen."
+     },
+     "scenario": "asile_refus",
+     "base": "Convention de Genève ; Directive 2011/95/UE (protection subsidiaire)"
     },
     {
-      "id": "dublin",
-      "domaine": {"fr": "Séjour & Asile", "nl": "Verblijf & Asiel"},
-      "probleme": {"fr": "Le mineur risque un transfert Dublin vers un autre pays de l'UE", "nl": "De minderjarige dreigt een Dublin-overdracht naar een ander EU-land"},
-      "motsCles": ["dublin", "transfert", "eurodac", "empreintes", "autre pays", "responsable", "renvoi", "overdracht", "vingerafdrukken", "ander land", "verantwoordelijk"],
-      "questions": [
-        {"id": "famille", "texte": {"fr": "Le mineur a-t-il de la famille (parent, frère/sœur, oncle/tante) légalement présente dans un pays de l'UE ?", "nl": "Heeft de minderjarige familie (ouder, broer/zus, oom/tante) die legaal in een EU-land verblijft?"}, "options": [{"val": "ici", "label": {"fr": "Oui, dans le pays actuel", "nl": "Ja, in het huidige land"}}, {"val": "autre", "label": {"fr": "Oui, dans un autre pays UE", "nl": "Ja, in een ander EU-land"}}, {"val": "non", "label": {"fr": "Non, aucune famille dans l'UE", "nl": "Nee, geen familie in de EU"}}]}
-      ],
-      "solutions": [
-        {"rang": 1, "titre": {"fr": "S'opposer au transfert : pour un MENA isolé, l'État responsable est celui où il se trouve", "nl": "Verzet tegen de overdracht: voor een alleenstaande NBMV is de verantwoordelijke staat die waar hij zich bevindt"}, "condition": {"q": "famille", "in": ["non"]}, "description": {"fr": "Pour un mineur non accompagné sans famille dans l'UE, l'État responsable de l'examen est en principe celui où il a introduit sa demande et où il se trouve, conformément à la jurisprudence européenne.", "nl": "Voor een niet-begeleide minderjarige zonder familie in de EU is de verantwoordelijke staat in beginsel die waar hij zijn verzoek indiende en zich bevindt, conform de Europese rechtspraak."}, "base_legale": [{"texte": {"fr": "Règlement Dublin III", "nl": "Dublin III-verordening"}, "ref": "art. 8.4"}, {"texte": {"fr": "CJUE, arrêt MA e.a.", "nl": "HvJ-EU, arrest MA e.a."}, "ref": "C-648/11"}, {"texte": {"fr": "CIDE", "nl": "IVRK"}, "ref": "art. 3 (intérêt supérieur)"}], "avantages": [{"fr": "Évite un transfert préjudiciable", "nl": "Vermijdt een nadelige overdracht"}, {"fr": "Fondé sur une jurisprudence claire", "nl": "Gebaseerd op duidelijke rechtspraak"}], "inconvenients": [{"fr": "Nécessite de contester activement dans les délais", "nl": "Vereist actief en tijdig betwisten"}], "delai": {"fr": "Délais Dublin courts : agir sans attendre", "nl": "Korte Dublin-termijnen: handel zonder uitstel"}},
-        {"rang": 1, "titre": {"fr": "Demander le rapprochement vers le membre de famille", "nl": "Verzoek tot hereniging met het familielid"}, "condition": {"q": "famille", "in": ["autre"]}, "description": {"fr": "Quand un membre de famille est légalement présent dans un autre État membre, Dublin permet de désigner cet État comme responsable, dans l'intérêt de l'enfant (rapprochement familial).", "nl": "Wanneer een familielid legaal in een andere lidstaat verblijft, laat Dublin toe die staat als verantwoordelijke aan te duiden, in het belang van het kind (gezinshereniging)."}, "base_legale": [{"texte": {"fr": "Règlement Dublin III", "nl": "Dublin III-verordening"}, "ref": "art. 8, 9, 10"}, {"texte": {"fr": "CIDE", "nl": "IVRK"}, "ref": "art. 10"}], "avantages": [{"fr": "Favorise l'unité familiale", "nl": "Bevordert de eenheid van het gezin"}, {"fr": "Conforme à l'intérêt de l'enfant", "nl": "In het belang van het kind"}], "inconvenients": [{"fr": "Preuve du lien familial requise", "nl": "Bewijs van de familieband vereist"}, {"fr": "Délais de prise/reprise en charge stricts", "nl": "Strikte termijnen voor (terug)overname"}], "delai": {"fr": "Requête dans les délais Dublin", "nl": "Verzoek binnen de Dublin-termijnen"}},
-        {"rang": 2, "titre": {"fr": "Contester la décision de transfert et documenter les défaillances d'accueil", "nl": "De overdrachtsbeslissing betwisten en opvangtekorten documenteren"}, "description": {"fr": "Si une décision de transfert est prise, elle peut être contestée, notamment en démontrant des défaillances systémiques dans l'État de destination.", "nl": "Als een overdrachtsbeslissing wordt genomen, kan ze worden betwist, met name door systemische tekortkomingen in de bestemmingsstaat aan te tonen."}, "base_legale": [{"texte": {"fr": "Règlement Dublin III, recours", "nl": "Dublin III-verordening, beroep"}, "ref": "art. 27"}, {"texte": {"fr": "Charte des droits fondamentaux de l'UE", "nl": "Handvest van de grondrechten van de EU"}, "ref": "art. 4 & 24"}], "avantages": [{"fr": "Recours prévu par le règlement", "nl": "Beroep voorzien door de verordening"}, {"fr": "Protection contre traitements inhumains", "nl": "Bescherming tegen onmenselijke behandeling"}], "inconvenients": [{"fr": "Délais très courts", "nl": "Zeer korte termijnen"}, {"fr": "Charge de la preuve des défaillances", "nl": "Bewijslast van de tekortkomingen"}], "delai": {"fr": "Délai de recours du règlement (très court)", "nl": "Beroepstermijn van de verordening (zeer kort)"}}
-      ],
-      "note_precision": {"fr": "Précisez si des empreintes ont été enregistrées (hit Eurodac) et dans quel État, ainsi que la composition familiale exacte.", "nl": "Verduidelijk of er vingerafdrukken werden geregistreerd (Eurodac-hit) en in welke staat, evenals de exacte gezinssamenstelling."}
+     "theme": {
+      "fr": "Restriction de scolarisation des filles",
+      "nl": "Beperking van onderwijs voor meisjes"
+     },
+     "texte": {
+      "fr": "Pour une fille, l'interdiction d'accès à l'éducation au pays peut constituer un élément de persécution et un motif d'asile.",
+      "nl": "Voor een meisje kan het verbod op toegang tot onderwijs in het land een element van vervolging en een asielgrond vormen."
+     },
+     "scenario": "ecole_refus",
+     "base": "Directive 2011/95/UE, art. 9-10 ; CIDE art. 28"
     },
     {
-      "id": "age_conteste",
-      "domaine": {"fr": "Identité & Âge", "nl": "Identiteit & Leeftijd"},
-      "probleme": {"fr": "L'âge du mineur est mis en doute par les autorités", "nl": "De leeftijd van de minderjarige wordt door de autoriteiten in twijfel getrokken"},
-      "motsCles": ["âge", "test", "minorité", "majeur", "doute", "os", "radiographie", "détermination", "leeftijd", "minderjarigheid", "meerderjarig", "twijfel", "bot", "bepaling"],
-      "questions": [
-        {"id": "tuteur", "texte": {"fr": "Un tuteur provisoire a-t-il déjà été désigné ?", "nl": "Werd er al een voorlopige voogd aangesteld?"}, "options": [{"val": "oui", "label": {"fr": "Oui", "nl": "Ja"}}, {"val": "non", "label": {"fr": "Non / je ne sais pas", "nl": "Nee / ik weet het niet"}}]}
-      ],
-      "solutions": [
-        {"rang": 1, "titre": {"fr": "Faire valoir la présomption de minorité et obtenir une tutelle provisoire", "nl": "Het vermoeden van minderjarigheid inroepen en een voorlopige voogdij verkrijgen"}, "description": {"fr": "En cas de doute sur l'âge, la personne doit être présumée mineure et bénéficier de la protection jusqu'à ce que l'âge soit déterminé.", "nl": "Bij twijfel over de leeftijd moet de persoon als minderjarig worden vermoed en bescherming genieten totdat de leeftijd is bepaald."}, "base_legale": [{"texte": {"fr": "Loi-programme du 24/12/2002 (Tutelle)", "nl": "Programmawet van 24/12/2002 (Voogdij)"}, "ref": "art. 3 à 7"}, {"texte": {"fr": "Principe du bénéfice du doute (CIDE art. 3)", "nl": "Beginsel van het voordeel van de twijfel (IVRK art. 3)"}, "ref": "Comité des droits de l'enfant, Obs. gén. n°6"}], "avantages": [{"fr": "Protection immédiate pendant la procédure", "nl": "Onmiddellijke bescherming tijdens de procedure"}, {"fr": "Conforme au standard international", "nl": "In overeenstemming met de internationale norm"}], "inconvenients": [{"fr": "Provisoire jusqu'à détermination", "nl": "Voorlopig tot de bepaling"}], "delai": {"fr": "Immédiat (saisir le Service des Tutelles)", "nl": "Onmiddellijk (de Dienst Voogdij vatten)"}},
-        {"rang": 2, "titre": {"fr": "Encadrer le test médical d'âge (consentement + marge d'erreur)", "nl": "Het medische leeftijdsonderzoek omkaderen (toestemming + foutenmarge)"}, "description": {"fr": "Le test d'âge (examen médical triple) ne peut être réalisé qu'avec consentement éclairé ; sa marge d'erreur doit profiter au mineur.", "nl": "De leeftijdstest (drievoudig medisch onderzoek) mag enkel met geïnformeerde toestemming; de foutenmarge moet de minderjarige ten goede komen."}, "base_legale": [{"texte": {"fr": "Loi-programme du 24/12/2002 (Tutelle), test d'âge", "nl": "Programmawet van 24/12/2002 (Voogdij), leeftijdstest"}, "ref": "art. 7"}, {"texte": {"fr": "CIDE", "nl": "IVRK"}, "ref": "art. 8 (identité)"}], "avantages": [{"fr": "Cadre légal du test garanti", "nl": "Wettelijk kader van de test gewaarborgd"}, {"fr": "La marge d'erreur protège le jeune", "nl": "De foutenmarge beschermt de jongere"}], "inconvenients": [{"fr": "Fiabilité scientifique limitée des tests osseux", "nl": "Beperkte wetenschappelijke betrouwbaarheid van bottesten"}], "delai": {"fr": "Selon convocation, avec consentement", "nl": "Volgens oproeping, met toestemming"}},
-        {"rang": 3, "titre": {"fr": "Rassembler des preuves alternatives de minorité", "nl": "Alternatieve bewijzen van minderjarigheid verzamelen"}, "description": {"fr": "Documents reconstitués, témoignages, actes d'état civil obtenus du pays d'origine peuvent étayer la minorité.", "nl": "Gereconstrueerde documenten, getuigenissen en akten van de burgerlijke stand uit het herkomstland kunnen de minderjarigheid onderbouwen."}, "base_legale": [{"texte": {"fr": "CIDE", "nl": "IVRK"}, "ref": "art. 8"}], "avantages": [{"fr": "Renforce le dossier", "nl": "Versterkt het dossier"}, {"fr": "Indépendant du test médical", "nl": "Onafhankelijk van de medische test"}], "inconvenients": [{"fr": "Documents parfois difficiles à obtenir", "nl": "Documenten soms moeilijk te verkrijgen"}], "delai": {"fr": "En parallèle de la procédure", "nl": "Parallel aan de procedure"}}
-      ],
-      "note_precision": {"fr": "Indiquez si un test a déjà été réalisé et son résultat, et si le mineur dispose du moindre document d'état civil.", "nl": "Geef aan of er al een test werd uitgevoerd en het resultaat ervan, en of de minderjarige enig document van de burgerlijke stand heeft."}
-    },
-    {
-      "id": "sante_couverture",
-      "domaine": {"fr": "Santé", "nl": "Gezondheid"},
-      "probleme": {"fr": "Le mineur a besoin de soins mais n'a pas de couverture médicale", "nl": "De minderjarige heeft zorg nodig maar heeft geen medische dekking"},
-      "motsCles": ["soin", "médecin", "hôpital", "mutuelle", "amu", "couverture", "maladie", "santé", "remboursement", "zorg", "arts", "ziekenhuis", "ziekenfonds", "dekking", "ziekte", "gezondheid"],
-      "questions": [
-        {"id": "urgence", "texte": {"fr": "L'état de santé présente-t-il un caractère urgent ou vital ?", "nl": "Is de gezondheidstoestand dringend of levensbedreigend?"}, "options": [{"val": "oui", "label": {"fr": "Oui, urgent/vital", "nl": "Ja, dringend/vitaal"}}, {"val": "non", "label": {"fr": "Non, soins courants", "nl": "Nee, gewone zorg"}}]}
-      ],
-      "solutions": [
-        {"rang": 1, "titre": {"fr": "Activer l'Aide Médicale Urgente (AMU) via le CPAS", "nl": "Dringende Medische Hulp (DMH) activeren via het OCMW"}, "description": {"fr": "L'AMU garantit l'accès aux soins (urgents et préventifs) quelle que soit la situation administrative. Une attestation d'un médecin est requise.", "nl": "De DMH waarborgt toegang tot zorg (dringend en preventief) ongeacht de administratieve situatie. Een attest van een arts is vereist."}, "base_legale": [{"texte": {"fr": "AR du 12/12/1996 sur l'Aide Médicale Urgente", "nl": "KB van 12/12/1996 betreffende de Dringende Medische Hulp"}, "ref": "AMU/DMH"}, {"texte": {"fr": "CIDE", "nl": "IVRK"}, "ref": "art. 24 (droit à la santé)"}], "avantages": [{"fr": "Accès garanti même sans séjour régulier", "nl": "Gewaarborgde toegang zelfs zonder regelmatig verblijf"}, {"fr": "Couvre l'urgence et le préventif", "nl": "Dekt dringende en preventieve zorg"}], "inconvenients": [{"fr": "Démarche via le CPAS compétent", "nl": "Aanvraag via het bevoegde OCMW"}, {"fr": "Attestation médicale nécessaire", "nl": "Medisch attest noodzakelijk"}], "delai": {"fr": "Sans délai (urgence : prise en charge immédiate)", "nl": "Onverwijld (noodgeval: onmiddellijke opname)"}},
-        {"rang": 2, "titre": {"fr": "Affilier le mineur à une mutuelle si les conditions sont réunies", "nl": "De minderjarige aansluiten bij een ziekenfonds indien aan de voorwaarden is voldaan"}, "description": {"fr": "Selon le statut (demandeur de protection, séjour), une affiliation à l'assurance soins de santé peut être ouverte pour une couverture stable.", "nl": "Naargelang de status (verzoeker om bescherming, verblijf) kan een aansluiting bij de ziekteverzekering worden geopend voor een stabiele dekking."}, "base_legale": [{"texte": {"fr": "Loi relative à l'assurance obligatoire soins de santé (AMI)", "nl": "Wet betreffende de verplichte verzekering voor geneeskundige verzorging (ZIV)"}, "ref": "loi coordonnée 14/07/1994"}, {"texte": {"fr": "Directive 2013/33/UE (accueil)", "nl": "Richtlijn 2013/33/EU (opvang)"}, "ref": "art. 19 (soins de santé)"}], "avantages": [{"fr": "Couverture pérenne", "nl": "Duurzame dekking"}, {"fr": "Accès au médecin traitant et au suivi", "nl": "Toegang tot huisarts en opvolging"}], "inconvenients": [{"fr": "Conditions d'affiliation à vérifier", "nl": "Aansluitingsvoorwaarden te controleren"}], "delai": {"fr": "Dès que possible", "nl": "Zo snel mogelijk"}},
-        {"rang": 3, "titre": {"fr": "Mobiliser la prise en charge médicale de la structure d'accueil (Fedasil)", "nl": "De medische opvolging van de opvangstructuur (Fedasil) inschakelen"}, "description": {"fr": "Les demandeurs hébergés par Fedasil bénéficient d'un accompagnement médical organisé par la structure.", "nl": "Verzoekers die door Fedasil worden opgevangen, genieten een door de structuur georganiseerde medische begeleiding."}, "base_legale": [{"texte": {"fr": "Loi du 12/01/2007 sur l'accueil", "nl": "Opvangwet van 12/01/2007"}, "ref": "art. 23-25"}], "avantages": [{"fr": "Accès direct via le centre", "nl": "Rechtstreekse toegang via het centrum"}, {"fr": "Coordination médicale assurée", "nl": "Medische coördinatie verzekerd"}], "inconvenients": [{"fr": "Lié à l'hébergement en structure d'accueil", "nl": "Gekoppeld aan opvang in een opvangstructuur"}], "delai": {"fr": "Pendant l'hébergement", "nl": "Tijdens de opvang"}}
-      ],
-      "note_precision": {"fr": "Précisez le statut de séjour du mineur et s'il est hébergé par Fedasil, en famille ou de façon autonome.", "nl": "Verduidelijk de verblijfsstatus van de minderjarige en of hij door Fedasil, bij familie of zelfstandig wordt gehuisvest."}
-    },
-    {
-      "id": "detresse_psy",
-      "domaine": {"fr": "Santé", "nl": "Gezondheid"},
-      "probleme": {"fr": "Le mineur présente une détresse psychologique ou un risque suicidaire", "nl": "De minderjarige vertoont psychische nood of een suïciderisico"},
-      "motsCles": ["suicide", "psy", "psychologique", "trauma", "dépression", "automutilation", "détresse", "urgence", "santé mentale", "zelfmoord", "psychisch", "depressie", "zelfverwonding", "nood", "geestelijke gezondheid"],
-      "questions": [
-        {"id": "imminent", "texte": {"fr": "Y a-t-il un danger imminent (idées suicidaires actuelles, geste récent) ?", "nl": "Is er onmiddellijk gevaar (actuele suïcidegedachten, recente daad)?"}, "options": [{"val": "oui", "label": {"fr": "Oui, danger imminent", "nl": "Ja, onmiddellijk gevaar"}}, {"val": "non", "label": {"fr": "Non, souffrance sans urgence vitale", "nl": "Nee, lijden zonder vitale noodzaak"}}]}
-      ],
-      "solutions": [
-        {"rang": 1, "titre": {"fr": "Évaluation psychiatrique en urgence et mise en sécurité", "nl": "Spoedeisende psychiatrische evaluatie en in veiligheid brengen"}, "condition": {"q": "imminent", "in": ["oui"]}, "description": {"fr": "Un risque suicidaire imminent est une urgence vitale : orienter immédiatement vers les urgences psychiatriques ; une hospitalisation peut être nécessaire.", "nl": "Een onmiddellijk suïciderisico is een vitale noodsituatie: onmiddellijk doorverwijzen naar de psychiatrische spoeddienst; een opname kan nodig zijn."}, "base_legale": [{"texte": {"fr": "CIDE", "nl": "IVRK"}, "ref": "art. 6 (droit à la vie) & 24"}, {"texte": {"fr": "AMU", "nl": "DMH"}, "ref": "soins urgents garantis"}], "avantages": [{"fr": "Réponse à l'urgence vitale", "nl": "Antwoord op de vitale noodsituatie"}, {"fr": "Protection immédiate", "nl": "Onmiddellijke bescherming"}], "inconvenients": [{"fr": "Mesure intensive, à accompagner humainement", "nl": "Intensieve maatregel, menselijk te begeleiden"}], "delai": {"fr": "Immédiat", "nl": "Onmiddellijk"}},
-        {"rang": 1, "titre": {"fr": "Mettre en place un suivi en santé mentale adapté", "nl": "Een aangepaste geestelijke gezondheidsopvolging opzetten"}, "description": {"fr": "Orientation vers un centre de santé mentale ou un pédopsychiatre, avec interprète si besoin, et thérapie du trauma.", "nl": "Doorverwijzing naar een centrum voor geestelijke gezondheidszorg of een kinderpsychiater, met tolk indien nodig, en traumatherapie."}, "base_legale": [{"texte": {"fr": "Directive 2013/33/UE (accueil)", "nl": "Richtlijn 2013/33/EU (opvang)"}, "ref": "art. 19 & 25 (besoins particuliers)"}, {"texte": {"fr": "CIDE", "nl": "IVRK"}, "ref": "art. 39 (réadaptation)"}], "avantages": [{"fr": "Prise en charge durable", "nl": "Duurzame opvolging"}, {"fr": "Adaptée au trauma de l'exil", "nl": "Aangepast aan het trauma van ballingschap"}], "inconvenients": [{"fr": "Délais d'accès parfois longs", "nl": "Toegangstermijnen soms lang"}, {"fr": "Besoin d'interprétariat", "nl": "Nood aan tolken"}], "delai": {"fr": "Rapidement", "nl": "Snel"}},
-        {"rang": 2, "titre": {"fr": "Élaborer un plan de sécurité et stabiliser le cadre de vie", "nl": "Een veiligheidsplan opstellen en de leefomgeving stabiliseren"}, "description": {"fr": "Réduction des moyens, présence rapprochée, contacts d'urgence, et restauration d'un quotidien stable (sommeil, école, liens).", "nl": "Beperking van middelen, nabije aanwezigheid, noodcontacten en herstel van een stabiel dagelijks leven (slaap, school, banden)."}, "base_legale": [{"texte": {"fr": "CIDE", "nl": "IVRK"}, "ref": "art. 3 & 6"}], "avantages": [{"fr": "Réduit le risque au quotidien", "nl": "Vermindert het dagelijks risico"}, {"fr": "Effet thérapeutique du cadre", "nl": "Therapeutisch effect van het kader"}], "inconvenients": [{"fr": "Demande une coordination entre intervenants", "nl": "Vereist coördinatie tussen hulpverleners"}], "delai": {"fr": "Sans délai après l'évaluation", "nl": "Onverwijld na de evaluatie"}}
-      ],
-      "note_precision": {"fr": "En cas de danger immédiat, contactez les services d'urgence sans attendre. Précisez l'âge et le contexte (deuil, isolement, antécédents).", "nl": "Bij onmiddellijk gevaar, contacteer onverwijld de hulpdiensten. Verduidelijk de leeftijd en de context (rouw, isolement, voorgeschiedenis)."}
-    },
-    {
-      "id": "ecole_refus",
-      "domaine": {"fr": "Scolarité", "nl": "Onderwijs"},
-      "probleme": {"fr": "L'inscription scolaire du mineur est refusée ou bloquée", "nl": "De schoolinschrijving van de minderjarige wordt geweigerd of geblokkeerd"},
-      "motsCles": ["école", "scolarité", "inscription", "refus", "daspa", "classe", "enseignement", "school", "onderwijs", "inschrijving", "weigering", "okan", "klas"],
-      "questions": [],
-      "solutions": [
-        {"rang": 1, "titre": {"fr": "Faire valoir le droit (et l'obligation) à l'enseignement, indépendamment du statut", "nl": "Het recht (en de plicht) op onderwijs inroepen, ongeacht de status"}, "description": {"fr": "Tout mineur, quel que soit son statut de séjour, a droit et est tenu à la scolarité. Un refus fondé sur l'absence de titre de séjour est illégal.", "nl": "Elke minderjarige, ongeacht zijn verblijfsstatus, heeft recht en plicht tot onderwijs. Een weigering op grond van het ontbreken van een verblijfstitel is onwettig."}, "base_legale": [{"texte": {"fr": "Décret relatif à l'obligation scolaire", "nl": "Decreet betreffende de leerplicht"}, "ref": "scolarité obligatoire"}, {"texte": {"fr": "CIDE", "nl": "IVRK"}, "ref": "art. 28 (droit à l'éducation)"}, {"texte": {"fr": "Constitution belge", "nl": "Belgische Grondwet"}, "ref": "art. 24 (enseignement)"}], "avantages": [{"fr": "Droit clair et opposable", "nl": "Duidelijk en afdwingbaar recht"}, {"fr": "S'applique sans condition de séjour", "nl": "Geldt zonder verblijfsvoorwaarde"}], "inconvenients": [{"fr": "Peut nécessiter une intervention écrite/médiation", "nl": "Kan een schriftelijke tussenkomst/bemiddeling vereisen"}], "delai": {"fr": "Inscription à viser dans les 60 jours de l'arrivée", "nl": "Inschrijving te beogen binnen 60 dagen na aankomst"}},
-        {"rang": 2, "titre": {"fr": "Orienter vers un dispositif d'accueil linguistique (DASPA / classe passerelle)", "nl": "Doorverwijzen naar een taalonthaalvoorziening (OKAN / onthaalklas)"}, "description": {"fr": "Pour un primo-arrivant non francophone, l'inscription en dispositif d'accueil et de scolarisation facilite l'intégration.", "nl": "Voor een anderstalige nieuwkomer vergemakkelijkt de inschrijving in een onthaal- en scholingsvoorziening de integratie."}, "base_legale": [{"texte": {"fr": "Décret DASPA (dispositif d'accueil et de scolarisation des primo-arrivants)", "nl": "Decreet OKAN (onthaalonderwijs voor anderstalige nieuwkomers)"}, "ref": "DASPA/OKAN"}], "avantages": [{"fr": "Apprentissage de la langue", "nl": "Leren van de taal"}, {"fr": "Intégration progressive", "nl": "Geleidelijke integratie"}], "inconvenients": [{"fr": "Disponibilité variable selon les établissements", "nl": "Beschikbaarheid verschilt per school"}], "delai": {"fr": "Dès l'inscription", "nl": "Vanaf de inschrijving"}},
-        {"rang": 3, "titre": {"fr": "Saisir le service de médiation scolaire ou l'administration compétente", "nl": "De schoolbemiddelingsdienst of de bevoegde administratie inschakelen"}, "description": {"fr": "En cas de refus persistant, solliciter la médiation scolaire ou l'administration de l'enseignement pour faire respecter le droit.", "nl": "Bij aanhoudende weigering, de schoolbemiddeling of de onderwijsadministratie inschakelen om het recht te doen naleven."}, "base_legale": [{"texte": {"fr": "Réglementation sur les inscriptions scolaires", "nl": "Regelgeving inzake schoolinschrijvingen"}, "ref": "médiation scolaire"}], "avantages": [{"fr": "Voie de recours administrative", "nl": "Administratieve beroepsweg"}, {"fr": "Souvent rapide", "nl": "Vaak snel"}], "inconvenients": [{"fr": "Démarche supplémentaire", "nl": "Bijkomende stap"}], "delai": {"fr": "Si le refus persiste", "nl": "Indien de weigering aanhoudt"}}
-      ],
-      "note_precision": {"fr": "Précisez l'âge, la langue parlée et le motif invoqué par l'école pour le refus.", "nl": "Verduidelijk de leeftijd, de gesproken taal en de door de school ingeroepen reden voor de weigering."}
-    },
-    {
-      "id": "reunification",
-      "domaine": {"fr": "Famille", "nl": "Gezin"},
-      "probleme": {"fr": "Un membre de la famille du mineur se trouve dans un autre pays (réunification)", "nl": "Een familielid van de minderjarige bevindt zich in een ander land (hereniging)"},
-      "motsCles": ["famille", "réunification", "regroupement", "parent", "frère", "rapprochement", "adn", "gezin", "hereniging", "gezinshereniging", "ouder", "broer", "dna"],
-      "questions": [
-        {"id": "lieu", "texte": {"fr": "Où se trouve le membre de famille ?", "nl": "Waar bevindt het familielid zich?"}, "options": [{"val": "ue", "label": {"fr": "Dans un pays de l'UE", "nl": "In een EU-land"}}, {"val": "horsue", "label": {"fr": "Hors UE (pays tiers)", "nl": "Buiten de EU (derde land)"}}]},
-        {"id": "preuve", "texte": {"fr": "Disposez-vous de documents prouvant le lien familial ?", "nl": "Beschikt u over documenten die de familieband bewijzen?"}, "options": [{"val": "oui", "label": {"fr": "Oui", "nl": "Ja"}}, {"val": "non", "label": {"fr": "Non / incomplets", "nl": "Nee / onvolledig"}}]}
-      ],
-      "solutions": [
-        {"rang": 1, "titre": {"fr": "Activer le rapprochement familial via Dublin", "nl": "Gezinshereniging activeren via Dublin"}, "condition": {"q": "lieu", "in": ["ue"]}, "description": {"fr": "Si le membre de famille est légalement présent dans l'UE, le règlement Dublin permet de désigner cet État comme responsable, dans l'intérêt de l'enfant.", "nl": "Als het familielid legaal in de EU verblijft, laat de Dublin-verordening toe die staat als verantwoordelijke aan te duiden, in het belang van het kind."}, "base_legale": [{"texte": {"fr": "Règlement Dublin III", "nl": "Dublin III-verordening"}, "ref": "art. 8 à 10"}, {"texte": {"fr": "CIDE", "nl": "IVRK"}, "ref": "art. 10"}], "avantages": [{"fr": "Procédure dédiée à l'unité familiale", "nl": "Procedure gewijd aan de gezinseenheid"}, {"fr": "Priorité à l'intérêt de l'enfant", "nl": "Voorrang aan het belang van het kind"}], "inconvenients": [{"fr": "Délais stricts", "nl": "Strikte termijnen"}, {"fr": "Preuve du lien requise", "nl": "Bewijs van de band vereist"}], "delai": {"fr": "Requête dans les délais Dublin", "nl": "Verzoek binnen de Dublin-termijnen"}},
-        {"rang": 1, "titre": {"fr": "Demander le regroupement familial (membre hors UE)", "nl": "Gezinshereniging aanvragen (familielid buiten de EU)"}, "condition": {"q": "lieu", "in": ["horsue"]}, "description": {"fr": "Pour un mineur réfugié, le regroupement avec les parents/famille restés hors UE peut être demandé selon la directive regroupement.", "nl": "Voor een erkende minderjarige vluchteling kan hereniging met de ouders/familie buiten de EU worden aangevraagd volgens de gezinsherenigingsrichtlijn."}, "base_legale": [{"texte": {"fr": "Directive 2003/86/CE (regroupement familial)", "nl": "Richtlijn 2003/86/EG (gezinshereniging)"}, "ref": "regroupement"}, {"texte": {"fr": "Loi du 15/12/1980", "nl": "Wet van 15/12/1980"}, "ref": "regroupement familial"}], "avantages": [{"fr": "Droit renforcé pour les réfugiés", "nl": "Versterkt recht voor vluchtelingen"}, {"fr": "Réunit la cellule familiale", "nl": "Herenigt het gezin"}], "inconvenients": [{"fr": "Procédure longue", "nl": "Langdurige procedure"}, {"fr": "Conditions de preuve et de délais", "nl": "Bewijs- en termijnvoorwaarden"}], "delai": {"fr": "Délais favorables si demande rapide après reconnaissance", "nl": "Gunstige termijnen bij snelle aanvraag na erkenning"}},
-        {"rang": 2, "titre": {"fr": "Établir le lien familial par test ADN ou preuves alternatives", "nl": "De familieband aantonen via DNA-test of alternatieve bewijzen"}, "condition": {"q": "preuve", "in": ["non"]}, "description": {"fr": "À défaut de documents, un test ADN ou un faisceau de preuves (photos, témoignages) peut établir le lien.", "nl": "Bij gebrek aan documenten kan een DNA-test of een geheel van bewijzen (foto's, getuigenissen) de band aantonen."}, "base_legale": [{"texte": {"fr": "Pratique administrative en matière de preuve du lien (regroupement/Dublin)", "nl": "Administratieve praktijk inzake bewijs van de band (hereniging/Dublin)"}, "ref": "preuve du lien familial"}], "avantages": [{"fr": "Surmonte l'absence de documents", "nl": "Overbrugt het ontbreken van documenten"}], "inconvenients": [{"fr": "Coût et délais du test ADN", "nl": "Kosten en termijnen van de DNA-test"}], "delai": {"fr": "En parallèle de la demande", "nl": "Parallel aan de aanvraag"}}
-      ],
-      "note_precision": {"fr": "Précisez le lien exact (parent, fratrie, autre), le statut du membre de famille et l'existence de documents.", "nl": "Verduidelijk de exacte band (ouder, broer/zus, andere), de status van het familielid en het bestaan van documenten."}
-    },
-    {
-      "id": "pression_familiale",
-      "domaine": {"fr": "Protection & Violences", "nl": "Bescherming & Geweld"},
-      "probleme": {"fr": "Risque de mariage forcé, de MGF ou de retour forcé imposé par la famille", "nl": "Risico op gedwongen huwelijk, VGV of gedwongen terugkeer opgelegd door de familie"},
-      "motsCles": ["mariage forcé", "excision", "mgf", "mutilation", "voyage", "retour forcé", "pression", "famille", "gedwongen huwelijk", "besnijdenis", "vgv", "verminking", "reis", "druk"],
-      "questions": [
-        {"id": "imminent", "texte": {"fr": "Un départ ou un événement (voyage, cérémonie) est-il imminent ?", "nl": "Staat een vertrek of gebeurtenis (reis, ceremonie) op handen?"}, "options": [{"val": "oui", "label": {"fr": "Oui, imminent", "nl": "Ja, op handen"}}, {"val": "non", "label": {"fr": "Non / incertain", "nl": "Nee / onzeker"}}]}
-      ],
-      "solutions": [
-        {"rang": 1, "titre": {"fr": "Mise en sécurité immédiate et signalement", "nl": "Onmiddellijk in veiligheid brengen en melding"}, "description": {"fr": "Mettre le mineur en sécurité et signaler la situation aux autorités de protection de la jeunesse.", "nl": "De minderjarige in veiligheid brengen en de situatie melden aan de jeugdbeschermingsautoriteiten."}, "base_legale": [{"texte": {"fr": "Décret aide à la jeunesse (enfant en danger)", "nl": "Decreet jeugdhulp (kind in gevaar)"}, "ref": "protection de la jeunesse"}, {"texte": {"fr": "CIDE", "nl": "IVRK"}, "ref": "art. 19"}, {"texte": {"fr": "Convention d'Istanbul", "nl": "Verdrag van Istanbul"}, "ref": "art. 37-38"}], "avantages": [{"fr": "Protège immédiatement", "nl": "Beschermt onmiddellijk"}, {"fr": "Active le réseau de protection", "nl": "Activeert het beschermingsnetwerk"}], "inconvenients": [{"fr": "Peut tendre les relations familiales", "nl": "Kan de gezinsrelaties onder spanning zetten"}], "delai": {"fr": "Immédiat", "nl": "Onmiddellijk"}},
-        {"rang": 1, "titre": {"fr": "Empêcher le départ : mesure d'interdiction de sortie du territoire", "nl": "Het vertrek verhinderen: maatregel van uitreisverbod"}, "condition": {"q": "imminent", "in": ["oui"]}, "description": {"fr": "En cas de risque imminent de mariage forcé ou de MGF lors d'un voyage, solliciter en urgence une mesure empêchant la sortie du territoire.", "nl": "Bij onmiddellijk risico op gedwongen huwelijk of VGV tijdens een reis, dringend een maatregel vragen die het verlaten van het grondgebied verhindert."}, "base_legale": [{"texte": {"fr": "Mesures de protection de la jeunesse (urgence)", "nl": "Jeugdbeschermingsmaatregelen (dringend)"}, "ref": "interdiction de sortie du territoire"}, {"texte": {"fr": "Code pénal — mariage forcé / MGF", "nl": "Strafwetboek — gedwongen huwelijk / VGV"}, "ref": "art. 391sexies / art. 409"}], "avantages": [{"fr": "Bloque le risque à la source", "nl": "Blokkeert het risico bij de bron"}, {"fr": "Mesure d'urgence disponible", "nl": "Dringende maatregel beschikbaar"}], "inconvenients": [{"fr": "Nécessite une saisine rapide de l'autorité compétente", "nl": "Vereist een snelle vatting van de bevoegde autoriteit"}], "delai": {"fr": "En urgence avant le départ", "nl": "Dringend vóór het vertrek"}},
-        {"rang": 2, "titre": {"fr": "Soutenir le parent protecteur et informer du caractère pénal", "nl": "De beschermende ouder steunen en informeren over het strafbaar karakter"}, "description": {"fr": "Quand un parent s'oppose à la pratique, le soutenir ; rappeler que mariage forcé et MGF sont des infractions, y compris commises à l'étranger.", "nl": "Wanneer een ouder zich tegen de praktijk verzet, deze steunen; eraan herinneren dat gedwongen huwelijk en VGV misdrijven zijn, ook indien in het buitenland gepleegd."}, "base_legale": [{"texte": {"fr": "Code pénal — MGF", "nl": "Strafwetboek — VGV"}, "ref": "art. 409 (applicable même à l'étranger)"}, {"texte": {"fr": "Code pénal — mariage forcé", "nl": "Strafwetboek — gedwongen huwelijk"}, "ref": "art. 391sexies"}], "avantages": [{"fr": "Renforce un allié dans la famille", "nl": "Versterkt een bondgenoot binnen het gezin"}, {"fr": "Effet dissuasif", "nl": "Afschrikkend effect"}], "inconvenients": [{"fr": "Inopérant si aucun parent protecteur", "nl": "Niet bruikbaar zonder beschermende ouder"}], "delai": {"fr": "Sans délai", "nl": "Onverwijld"}}
-      ],
-      "note_precision": {"fr": "Précisez la nature du risque (mariage / MGF / retour), son imminence et l'existence d'un parent protecteur.", "nl": "Verduidelijk de aard van het risico (huwelijk / VGV / terugkeer), de imminentie en het bestaan van een beschermende ouder."}
-    },
-    {
-      "id": "disparition",
-      "domaine": {"fr": "Protection & Sécurité", "nl": "Bescherming & Veiligheid"},
-      "probleme": {"fr": "Le mineur a disparu ou a fugué", "nl": "De minderjarige is verdwenen of weggelopen"},
-      "motsCles": ["disparition", "fugue", "parti", "absent", "introuvable", "disparu", "fuite", "verdwijning", "weglopen", "vertrokken", "afwezig", "onvindbaar", "vlucht"],
-      "questions": [],
-      "solutions": [
-        {"rang": 1, "titre": {"fr": "Signaler immédiatement la disparition (police + Service des Tutelles)", "nl": "De verdwijning onmiddellijk melden (politie + Dienst Voogdij)"}, "description": {"fr": "Toute disparition de MENA est traitée comme inquiétante. Signaler sans délai à la police et au Service des Tutelles ; un signalement de disparition de mineur est diffusé.", "nl": "Elke verdwijning van een NBMV wordt als verontrustend behandeld. Onverwijld melden aan de politie en de Dienst Voogdij; een opsporingsbericht van een vermiste minderjarige wordt verspreid."}, "base_legale": [{"texte": {"fr": "Procédure « disparition inquiétante de mineur »", "nl": "Procedure « verontrustende verdwijning van een minderjarige »"}, "ref": "directive disparitions"}, {"texte": {"fr": "Loi-programme du 24/12/2002 (Tutelle)", "nl": "Programmawet van 24/12/2002 (Voogdij)"}, "ref": "devoirs du tuteur"}], "avantages": [{"fr": "Déclenche les recherches actives", "nl": "Start actief opsporingsonderzoek"}, {"fr": "Réponse adaptée au risque", "nl": "Aan het risico aangepaste reactie"}], "inconvenients": [{"fr": "Aucun — l'inaction aggrave le danger", "nl": "Geen — niets doen verergert het gevaar"}], "delai": {"fr": "Immédiat dès le constat", "nl": "Onmiddellijk bij de vaststelling"}},
-        {"rang": 1, "titre": {"fr": "Évaluer et signaler le risque de traite", "nl": "Het risico op mensenhandel beoordelen en melden"}, "description": {"fr": "Les MENA en fugue sont des cibles privilégiées des réseaux d'exploitation : signaler ce risque et alerter les services spécialisés.", "nl": "Weggelopen NBMV zijn een geliefd doelwit van uitbuitingsnetwerken: dit risico melden en de gespecialiseerde diensten verwittigen."}, "base_legale": [{"texte": {"fr": "Directive 2011/36/UE (traite)", "nl": "Richtlijn 2011/36/EU (mensenhandel)"}, "ref": "protection des victimes"}, {"texte": {"fr": "Loi du 10/08/2005 (traite) — Belgique", "nl": "Wet van 10/08/2005 (mensenhandel) — België"}, "ref": "traite des êtres humains"}], "avantages": [{"fr": "Anticipe l'exploitation", "nl": "Anticipeert op uitbuiting"}, {"fr": "Mobilise les services compétents", "nl": "Mobiliseert de bevoegde diensten"}], "inconvenients": [{"fr": "—", "nl": "—"}], "delai": {"fr": "Dès le signalement", "nl": "Vanaf de melding"}},
-        {"rang": 2, "titre": {"fr": "À son retour, remobiliser et réorienter l'accueil", "nl": "Bij terugkeer: opnieuw motiveren en de opvang heroriënteren"}, "description": {"fr": "Écouter sans juger les motifs de la fugue, vérifier la sécurité d'une éventuelle piste familiale par canaux officiels, et réorienter vers un accueil plus adapté.", "nl": "Zonder oordeel luisteren naar de redenen van het weglopen, de veiligheid van een eventueel familiespoor via officiële kanalen nagaan, en heroriënteren naar een meer aangepaste opvang."}, "base_legale": [{"texte": {"fr": "Loi du 12/01/2007 (accueil)", "nl": "Opvangwet van 12/01/2007"}, "ref": "hébergement adapté"}], "avantages": [{"fr": "Prévient la récidive", "nl": "Voorkomt herhaling"}, {"fr": "Traite la cause de la fugue", "nl": "Pakt de oorzaak van het weglopen aan"}], "inconvenients": [{"fr": "Demande un travail de lien", "nl": "Vereist relationeel werk"}], "delai": {"fr": "Dès le retour", "nl": "Vanaf de terugkeer"}}
-      ],
-      "note_precision": {"fr": "Indiquez depuis quand le mineur est absent, son âge, et toute destination ou contact présumé.", "nl": "Geef aan sinds wanneer de minderjarige afwezig is, zijn leeftijd, en elke vermoedelijke bestemming of contact."}
-    },
-    {
-      "id": "traite",
-      "domaine": {"fr": "Protection & Sécurité", "nl": "Bescherming & Veiligheid"},
-      "probleme": {"fr": "Le mineur pourrait être victime de traite ou d'exploitation", "nl": "De minderjarige zou slachtoffer kunnen zijn van mensenhandel of uitbuiting"},
-      "motsCles": ["traite", "exploitation", "prostitution", "travail forcé", "réseau", "emprise", "victime", "dette", "mensenhandel", "uitbuiting", "prostitutie", "dwangarbeid", "netwerk", "slachtoffer", "schuld"],
-      "questions": [],
-      "solutions": [
-        {"rang": 1, "titre": {"fr": "Mise à l'abri confidentielle et orientation vers un centre spécialisé traite", "nl": "Vertrouwelijke opvang en doorverwijzing naar een gespecialiseerd centrum mensenhandel"}, "description": {"fr": "Sécuriser le mineur dans un lieu tenu confidentiel face au réseau, et confier l'accompagnement à un centre spécialisé agréé.", "nl": "De minderjarige beveiligen op een voor het netwerk geheime plaats, en de begeleiding toevertrouwen aan een erkend gespecialiseerd centrum."}, "base_legale": [{"texte": {"fr": "Directive 2011/36/UE (traite)", "nl": "Richtlijn 2011/36/EU (mensenhandel)"}, "ref": "identification & protection"}, {"texte": {"fr": "Loi du 10/08/2005 — Belgique", "nl": "Wet van 10/08/2005 — België"}, "ref": "statut de protection des victimes"}, {"texte": {"fr": "Protocole de Palerme", "nl": "Protocol van Palermo"}, "ref": "définition de la traite"}], "avantages": [{"fr": "Protège la victime", "nl": "Beschermt het slachtoffer"}, {"fr": "Expertise spécialisée", "nl": "Gespecialiseerde expertise"}], "inconvenients": [{"fr": "Confidentialité à préserver strictement", "nl": "Vertrouwelijkheid strikt te bewaren"}], "delai": {"fr": "Immédiat", "nl": "Onmiddellijk"}},
-        {"rang": 1, "titre": {"fr": "Appliquer le principe de non-sanction de la victime", "nl": "Het beginsel van niet-bestraffing van het slachtoffer toepassen"}, "description": {"fr": "La victime mineure ne doit pas être sanctionnée pour des faits commis sous contrainte (travail illégal, faux documents, etc.).", "nl": "Het minderjarige slachtoffer mag niet worden bestraft voor feiten gepleegd onder dwang (illegaal werk, valse documenten, enz.)."}, "base_legale": [{"texte": {"fr": "Directive 2011/36/UE", "nl": "Richtlijn 2011/36/EU"}, "ref": "art. 8 (non-poursuite)"}, {"texte": {"fr": "CIDE", "nl": "IVRK"}, "ref": "art. 34-36"}], "avantages": [{"fr": "Protège la victime de la double peine", "nl": "Beschermt het slachtoffer tegen dubbele bestraffing"}], "inconvenients": [{"fr": "—", "nl": "—"}], "delai": {"fr": "Tout au long de la procédure", "nl": "Gedurende de hele procedure"}},
-        {"rang": 2, "titre": {"fr": "Activer le statut de protection sans conditionner l'aide à la dénonciation", "nl": "Het beschermingsstatuut activeren zonder de hulp te koppelen aan aangifte"}, "description": {"fr": "Le statut de victime de traite offre séjour et accompagnement ; l'aide ne doit jamais être subordonnée à la coopération judiciaire.", "nl": "Het statuut van slachtoffer van mensenhandel biedt verblijf en begeleiding; de hulp mag nooit afhankelijk zijn van gerechtelijke samenwerking."}, "base_legale": [{"texte": {"fr": "Loi du 10/08/2005 & circulaires traite", "nl": "Wet van 10/08/2005 & omzendbrieven mensenhandel"}, "ref": "statut victime"}], "avantages": [{"fr": "Sécurise le séjour et le suivi", "nl": "Verzekert het verblijf en de opvolging"}, {"fr": "Respecte le rythme de la victime", "nl": "Respecteert het ritme van het slachtoffer"}], "inconvenients": [{"fr": "Période de réflexion à respecter", "nl": "Bedenktijd te respecteren"}], "delai": {"fr": "Dès l'identification", "nl": "Vanaf de identificatie"}}
-      ],
-      "note_precision": {"fr": "Précisez les indices d'exploitation (type de travail, contrôle, dette, menaces sur la famille) et l'état de l'emprise.", "nl": "Verduidelijk de aanwijzingen van uitbuiting (soort werk, controle, schuld, bedreigingen van de familie) en de mate van psychische greep."}
-    },
-    {
-      "id": "justice",
-      "domaine": {"fr": "Justice", "nl": "Justitie"},
-      "probleme": {"fr": "Le mineur est en conflit avec la loi (interpellation, contact police)", "nl": "De minderjarige is in aanraking met justitie (aanhouding, politiecontact)"},
-      "motsCles": ["police", "arrestation", "vol", "délit", "justice", "juge", "interpellation", "infraction", "politie", "aanhouding", "diefstal", "misdrijf", "rechter", "justitie"],
-      "questions": [],
-      "solutions": [
-        {"rang": 1, "titre": {"fr": "Être présent à l'audition et garantir l'assistance d'un avocat", "nl": "Aanwezig zijn bij het verhoor en de bijstand van een advocaat waarborgen"}, "description": {"fr": "Le tuteur doit être informé et présent ; l'assistance d'un avocat spécialisé en droit de la jeunesse est un droit du mineur.", "nl": "De voogd moet worden ingelicht en aanwezig zijn; de bijstand van een in jeugdrecht gespecialiseerde advocaat is een recht van de minderjarige."}, "base_legale": [{"texte": {"fr": "CIDE", "nl": "IVRK"}, "ref": "art. 40 (justice adaptée)"}, {"texte": {"fr": "Loi/Décret protection de la jeunesse", "nl": "Wet/Decreet jeugdbescherming"}, "ref": "droits du mineur"}, {"texte": {"fr": "Directive (UE) 2016/800 (garanties procédurales des enfants)", "nl": "Richtlijn (EU) 2016/800 (procedurele waarborgen voor kinderen)"}, "ref": "assistance d'un avocat"}], "avantages": [{"fr": "Protège les droits dès l'audition", "nl": "Beschermt de rechten vanaf het verhoor"}, {"fr": "Évite les déclarations préjudiciables", "nl": "Vermijdt nadelige verklaringen"}], "inconvenients": [{"fr": "Nécessite une réaction rapide", "nl": "Vereist een snelle reactie"}], "delai": {"fr": "Dès l'interpellation", "nl": "Vanaf de aanhouding"}},
-        {"rang": 1, "titre": {"fr": "Faire primer la mesure éducative sur la sanction", "nl": "De educatieve maatregel laten voorgaan op de bestraffing"}, "description": {"fr": "Le mineur relève de la logique de protection : privilégier mesures éducatives, réparation et alternatives à la détention.", "nl": "De minderjarige valt onder de beschermingslogica: voorrang aan educatieve maatregelen, herstel en alternatieven voor detentie."}, "base_legale": [{"texte": {"fr": "CIDE", "nl": "IVRK"}, "ref": "art. 37 & 40"}, {"texte": {"fr": "Règles de Beijing (ONU)", "nl": "Beijing-regels (VN)"}, "ref": "justice des mineurs"}], "avantages": [{"fr": "Favorise la réinsertion", "nl": "Bevordert de re-integratie"}, {"fr": "Détention en dernier recours", "nl": "Detentie als laatste redmiddel"}], "inconvenients": [{"fr": "Suivi éducatif à organiser", "nl": "Educatieve opvolging te organiseren"}], "delai": {"fr": "Devant le juge de la jeunesse", "nl": "Voor de jeugdrechter"}},
-        {"rang": 2, "titre": {"fr": "Documenter une éventuelle instrumentalisation et réinsérer", "nl": "Een eventuele instrumentalisering documenteren en re-integreren"}, "description": {"fr": "Si le mineur a été instrumentalisé par des plus âgés, le documenter et le plaider ; éloigner du groupe à risque et réengager une formation.", "nl": "Als de minderjarige door ouderen werd geïnstrumentaliseerd, dit documenteren en bepleiten; weghalen uit de risicogroep en opnieuw een opleiding aanvatten."}, "base_legale": [{"texte": {"fr": "CIDE", "nl": "IVRK"}, "ref": "art. 3 & 39"}], "avantages": [{"fr": "Contextualise les faits", "nl": "Plaatst de feiten in context"}, {"fr": "Prévient la récidive", "nl": "Voorkomt herhaling"}], "inconvenients": [{"fr": "Travail de fond nécessaire", "nl": "Grondig werk noodzakelijk"}], "delai": {"fr": "Après la phase d'audition", "nl": "Na de verhoorfase"}}
-      ],
-      "note_precision": {"fr": "Précisez la nature des faits, l'âge du mineur et s'il s'agit d'un premier contact avec la justice.", "nl": "Verduidelijk de aard van de feiten, de leeftijd van de minderjarige en of het om een eerste contact met justitie gaat."}
-    },
-    {
-      "id": "hebergement",
-      "domaine": {"fr": "Hébergement", "nl": "Huisvesting"},
-      "probleme": {"fr": "L'hébergement du mineur est inadapté ou inexistant", "nl": "De huisvesting van de minderjarige is ongeschikt of onbestaande"},
-      "motsCles": ["hébergement", "logement", "centre", "accueil", "sans solution", "fedasil", "rue", "inadapté", "huisvesting", "opvang", "centrum", "zonder oplossing", "straat", "ongeschikt"],
-      "questions": [
-        {"id": "sansabri", "texte": {"fr": "Le mineur est-il actuellement sans solution d'hébergement ?", "nl": "Heeft de minderjarige momenteel geen opvangoplossing?"}, "options": [{"val": "oui", "label": {"fr": "Oui, sans solution", "nl": "Ja, zonder oplossing"}}, {"val": "non", "label": {"fr": "Non, mais inadapté", "nl": "Nee, maar ongeschikt"}}]}
-      ],
-      "solutions": [
-        {"rang": 1, "titre": {"fr": "Exiger une place d'accueil adaptée (urgence si sans solution)", "nl": "Een aangepaste opvangplaats eisen (dringend indien zonder oplossing)"}, "condition": {"q": "sansabri", "in": ["oui"]}, "description": {"fr": "Tout MENA a droit à un accueil adapté à son âge et à son profil. En l'absence de solution, saisir Fedasil et le Service des Tutelles en urgence.", "nl": "Elke NBMV heeft recht op opvang aangepast aan zijn leeftijd en profiel. Bij gebrek aan een oplossing dringend Fedasil en de Dienst Voogdij vatten."}, "base_legale": [{"texte": {"fr": "Loi du 12/01/2007 sur l'accueil", "nl": "Opvangwet van 12/01/2007"}, "ref": "droit à l'accueil"}, {"texte": {"fr": "Directive 2013/33/UE (accueil)", "nl": "Richtlijn 2013/33/EU (opvang)"}, "ref": "art. 24 (mineurs non accompagnés)"}, {"texte": {"fr": "CIDE", "nl": "IVRK"}, "ref": "art. 20 (enfant privé de milieu familial)"}], "avantages": [{"fr": "Droit opposable à l'accueil", "nl": "Afdwingbaar recht op opvang"}, {"fr": "Protection renforcée des MENA", "nl": "Versterkte bescherming van NBMV"}], "inconvenients": [{"fr": "Saturation possible du réseau", "nl": "Mogelijke verzadiging van het netwerk"}], "delai": {"fr": "Urgent", "nl": "Dringend"}},
-        {"rang": 2, "titre": {"fr": "Demander une réorientation vers une structure adaptée au profil", "nl": "Een heroriëntatie naar een aan het profiel aangepaste structuur vragen"}, "condition": {"q": "sansabri", "in": ["non"]}, "description": {"fr": "Si l'hébergement actuel est inadapté (âge, vulnérabilité, sécurité), demander une réorientation vers une structure mieux ajustée.", "nl": "Als de huidige opvang ongeschikt is (leeftijd, kwetsbaarheid, veiligheid), een heroriëntatie naar een beter passende structuur vragen."}, "base_legale": [{"texte": {"fr": "Loi du 12/01/2007 sur l'accueil", "nl": "Opvangwet van 12/01/2007"}, "ref": "adaptation de l'accueil"}, {"texte": {"fr": "Directive 2013/33/UE", "nl": "Richtlijn 2013/33/EU"}, "ref": "art. 21-22 (besoins particuliers)"}], "avantages": [{"fr": "Hébergement ajusté au profil", "nl": "Huisvesting aangepast aan het profiel"}, {"fr": "Réduit les risques (fugue, conflits)", "nl": "Vermindert de risico's (weglopen, conflicten)"}], "inconvenients": [{"fr": "Délais de réorientation", "nl": "Termijnen voor heroriëntatie"}], "delai": {"fr": "Selon disponibilité", "nl": "Volgens beschikbaarheid"}},
-        {"rang": 2, "titre": {"fr": "Mobiliser l'aide du CPAS si le mineur n'est pas en réseau d'accueil", "nl": "De hulp van het OCMW inschakelen indien de minderjarige niet in het opvangnetwerk zit"}, "description": {"fr": "Hors réseau Fedasil, le CPAS peut intervenir pour l'aide sociale et l'hébergement.", "nl": "Buiten het Fedasil-netwerk kan het OCMW tussenkomen voor maatschappelijke hulp en huisvesting."}, "base_legale": [{"texte": {"fr": "Loi organique des CPAS du 08/07/1976", "nl": "Organieke OCMW-wet van 08/07/1976"}, "ref": "aide sociale"}], "avantages": [{"fr": "Filet de sécurité complémentaire", "nl": "Aanvullend vangnet"}], "inconvenients": [{"fr": "Compétence territoriale à déterminer", "nl": "Territoriale bevoegdheid te bepalen"}], "delai": {"fr": "Sans délai", "nl": "Onverwijld"}}
-      ],
-      "note_precision": {"fr": "Précisez l'âge, le statut (demandeur ou non), et la raison de l'inadaptation (sécurité, âge, vulnérabilité).", "nl": "Verduidelijk de leeftijd, de status (verzoeker of niet) en de reden van de ongeschiktheid (veiligheid, leeftijd, kwetsbaarheid)."}
-    },
-    {
-      "id": "transition18",
-      "domaine": {"fr": "Transition vers la majorité", "nl": "Overgang naar meerderjarigheid"},
-      "probleme": {"fr": "Le mineur approche de 18 ans : préparer la fin de tutelle", "nl": "De minderjarige nadert 18 jaar: het einde van de voogdij voorbereiden"},
-      "motsCles": ["18 ans", "majorité", "fin de tutelle", "autonomie", "séjour", "logement adulte", "transition", "18 jaar", "meerderjarigheid", "einde voogdij", "zelfstandigheid", "verblijf", "overgang"],
-      "questions": [
-        {"id": "sejour", "texte": {"fr": "Le mineur a-t-il un titre de séjour stable ?", "nl": "Heeft de minderjarige een stabiele verblijfstitel?"}, "options": [{"val": "oui", "label": {"fr": "Oui (séjour reconnu)", "nl": "Ja (erkend verblijf)"}}, {"val": "non", "label": {"fr": "Non / précaire", "nl": "Nee / precair"}}]}
-      ],
-      "solutions": [
-        {"rang": 1, "titre": {"fr": "Sécuriser le statut de séjour avant la majorité", "nl": "De verblijfsstatus veiligstellen vóór de meerderjarigheid"}, "condition": {"q": "sejour", "in": ["non"]}, "description": {"fr": "Avant 18 ans, finaliser autant que possible la procédure de séjour ; la majorité fragilise la protection. Anticiper recours et demandes.", "nl": "Vóór 18 jaar de verblijfsprocedure zoveel mogelijk afronden; de meerderjarigheid verzwakt de bescherming. Beroepen en aanvragen anticiperen."}, "base_legale": [{"texte": {"fr": "Loi du 15/12/1980", "nl": "Wet van 15/12/1980"}, "ref": "séjour"}, {"texte": {"fr": "CIDE / Comité, transition vers l'âge adulte", "nl": "IVRK / Comité, overgang naar volwassenheid"}, "ref": "Obs. gén. n°6"}], "avantages": [{"fr": "Évite une bascule dans l'irrégularité à 18 ans", "nl": "Vermijdt het afglijden naar onregelmatigheid op 18 jaar"}, {"fr": "Maximise les droits acquis mineur", "nl": "Maximaliseert de als minderjarige verworven rechten"}], "inconvenients": [{"fr": "Procédures parfois longues : anticiper tôt", "nl": "Procedures soms lang: tijdig anticiperen"}], "delai": {"fr": "Dès 16-17 ans, avant l'anniversaire", "nl": "Vanaf 16-17 jaar, vóór de verjaardag"}},
-        {"rang": 1, "titre": {"fr": "Construire le projet d'autonomie (logement, formation, droits)", "nl": "Het zelfstandigheidsproject opbouwen (huisvesting, opleiding, rechten)"}, "description": {"fr": "Préparer logement (autonome/supervisé), formation/emploi, ouverture des droits sociaux adultes et compréhension de leur fonctionnement.", "nl": "Huisvesting (zelfstandig/begeleid), opleiding/werk voorbereiden, sociale volwassenrechten openen en de werking ervan begrijpen."}, "base_legale": [{"texte": {"fr": "Loi-programme du 24/12/2002 (Tutelle)", "nl": "Programmawet van 24/12/2002 (Voogdij)"}, "ref": "art. 24 (fin de tutelle à 18 ans)"}, {"texte": {"fr": "Dispositifs jeunes adultes / aide à la jeunesse", "nl": "Voorzieningen jongvolwassenen / jeugdhulp"}, "ref": "prolongation d'accompagnement"}], "avantages": [{"fr": "Évite la rupture sèche", "nl": "Vermijdt een abrupte breuk"}, {"fr": "Favorise l'insertion durable", "nl": "Bevordert duurzame integratie"}], "inconvenients": [{"fr": "Coordination de plusieurs acteurs", "nl": "Coördinatie van meerdere actoren"}], "delai": {"fr": "Démarrer dès 16-17 ans", "nl": "Starten vanaf 16-17 jaar"}},
-        {"rang": 2, "titre": {"fr": "Organiser le relais vers les dispositifs adultes et transmettre le dossier", "nl": "De doorverwijzing naar volwassenenvoorzieningen organiseren en het dossier overdragen"}, "description": {"fr": "Avant la fin de tutelle, organiser le passage de relais et transmettre un dossier complet aux services qui prendront le suivi.", "nl": "Vóór het einde van de voogdij de overdracht organiseren en een volledig dossier overdragen aan de diensten die de opvolging overnemen."}, "base_legale": [{"texte": {"fr": "Loi-programme du 24/12/2002 (Tutelle)", "nl": "Programmawet van 24/12/2002 (Voogdij)"}, "ref": "art. 24"}], "avantages": [{"fr": "Continuité de l'accompagnement", "nl": "Continuïteit van de begeleiding"}, {"fr": "Pas de perte d'information", "nl": "Geen verlies van informatie"}], "inconvenients": [{"fr": "Dépend des places disponibles côté adultes", "nl": "Afhankelijk van beschikbare plaatsen bij volwassenen"}], "delai": {"fr": "Quelques mois avant 18 ans", "nl": "Enkele maanden vóór 18 jaar"}}
-      ],
-      "note_precision": {"fr": "Précisez la date des 18 ans, le statut de séjour actuel et le projet (études, formation, emploi).", "nl": "Verduidelijk de datum van de 18e verjaardag, de huidige verblijfsstatus en het project (studies, opleiding, werk)."}
+     "theme": {
+      "fr": "Mariage précoce / forcé",
+      "nl": "Vroeg / gedwongen huwelijk"
+     },
+     "texte": {
+      "fr": "Risque documenté de mariage précoce ; vigilance en cas de projet de retour ou pression familiale.",
+      "nl": "Gedocumenteerd risico op vroeghuwelijk; waakzaamheid bij terugkeerplannen of familiale druk."
+     },
+     "scenario": "pression_familiale",
+     "base": "Convention d'Istanbul, art. 37"
     }
-  ]
+   ]
+  },
+  "Syrie": {
+   "considerations": [
+    {
+     "theme": {
+      "fr": "Conflit armé",
+      "nl": "Gewapend conflict"
+     },
+     "texte": {
+      "fr": "Violence généralisée documentée ; éléments pouvant fonder le statut de réfugié ou la protection subsidiaire.",
+      "nl": "Gedocumenteerd veralgemeend geweld; elementen die de vluchtelingenstatus of subsidiaire bescherming kunnen onderbouwen."
+     },
+     "scenario": "asile_refus",
+     "base": "Convention de Genève ; Directive 2011/95/UE, art. 15"
+    },
+    {
+     "theme": {
+      "fr": "Recrutement / conscription",
+      "nl": "Rekrutering / dienstplicht"
+     },
+     "texte": {
+      "fr": "Risque de recrutement forcé des adolescents par des groupes armés.",
+      "nl": "Risico op gedwongen rekrutering van adolescenten door gewapende groepen."
+     },
+     "scenario": "asile_refus",
+     "base": "Protocole facultatif CIDE (enfants & conflits armés)"
+    }
+   ]
+  },
+  "Érythrée": {
+   "considerations": [
+    {
+     "theme": {
+      "fr": "Service militaire à durée indéterminée",
+      "nl": "Dienstplicht van onbepaalde duur"
+     },
+     "texte": {
+      "fr": "La conscription nationale, de durée indéfinie et assortie de mauvais traitements documentés, est un motif d'asile largement reconnu, y compris pour les mineurs approchant l'âge d'enrôlement.",
+      "nl": "De nationale dienstplicht, van onbepaalde duur en met gedocumenteerde mishandeling, is een breed erkende asielgrond, ook voor minderjarigen die de rekruteringsleeftijd naderen."
+     },
+     "scenario": "asile_refus",
+     "base": "Convention de Genève ; jurisprudence asile constante"
+    },
+    {
+     "theme": {
+      "fr": "MGF",
+      "nl": "VGV (vrouwelijke genitale verminking)"
+     },
+     "texte": {
+      "fr": "Prévalence élevée de mutilations génitales féminines : vigilance pour les filles.",
+      "nl": "Hoge prevalentie van vrouwelijke genitale verminking: waakzaamheid voor meisjes."
+     },
+     "scenario": "pression_familiale",
+     "base": "Convention d'Istanbul, art. 38 ; Code pénal belge, art. 409"
+    }
+   ]
+  },
+  "Guinée": {
+   "considerations": [
+    {
+     "theme": {
+      "fr": "MGF (prévalence très élevée)",
+      "nl": "VGV (zeer hoge prevalentie)"
+     },
+     "texte": {
+      "fr": "La Guinée présente une des plus fortes prévalences de MGF au monde : risque sérieux pour une fille, notamment avant un voyage au pays.",
+      "nl": "Guinee kent een van de hoogste VGV-prevalenties ter wereld: ernstig risico voor een meisje, met name vóór een reis naar het land."
+     },
+     "scenario": "pression_familiale",
+     "base": "Convention d'Istanbul, art. 38 ; Code pénal belge, art. 409 (applicable même à l'étranger)"
+    },
+    {
+     "theme": {
+      "fr": "Mariage précoce",
+      "nl": "Vroeghuwelijk"
+     },
+     "texte": {
+      "fr": "Fréquence documentée des mariages précoces.",
+      "nl": "Gedocumenteerde frequentie van vroeghuwelijken."
+     },
+     "scenario": "pression_familiale",
+     "base": "Convention d'Istanbul, art. 37"
+    }
+   ]
+  },
+  "Somalie": {
+   "considerations": [
+    {
+     "theme": {
+      "fr": "MGF (quasi généralisée)",
+      "nl": "VGV (vrijwel algemeen)"
+     },
+     "texte": {
+      "fr": "Prévalence parmi les plus élevées au monde : risque majeur pour une fille.",
+      "nl": "Prevalentie bij de hoogste ter wereld: groot risico voor een meisje."
+     },
+     "scenario": "pression_familiale",
+     "base": "Convention d'Istanbul, art. 38 ; Code pénal belge, art. 409"
+    },
+    {
+     "theme": {
+      "fr": "Conflit & enfants soldats",
+      "nl": "Conflict & kindsoldaten"
+     },
+     "texte": {
+      "fr": "Conflit armé et recrutement d'enfants documentés.",
+      "nl": "Gedocumenteerd gewapend conflict en rekrutering van kinderen."
+     },
+     "scenario": "asile_refus",
+     "base": "Protocole facultatif CIDE ; Convention de Genève"
+    },
+    {
+     "theme": {
+      "fr": "Traite",
+      "nl": "Mensenhandel"
+     },
+     "texte": {
+      "fr": "Pays d'origine/transit de réseaux de traite : vigilance.",
+      "nl": "Herkomst-/transitland van mensenhandelnetwerken: waakzaamheid."
+     },
+     "scenario": "traite",
+     "base": "Directive 2011/36/UE"
+    }
+   ]
+  },
+  "Mali": {
+   "considerations": [
+    {
+     "theme": {
+      "fr": "MGF",
+      "nl": "VGV"
+     },
+     "texte": {
+      "fr": "Prévalence élevée de MGF : vigilance pour les filles.",
+      "nl": "Hoge VGV-prevalentie: waakzaamheid voor meisjes."
+     },
+     "scenario": "pression_familiale",
+     "base": "Convention d'Istanbul ; Code pénal belge, art. 409"
+    },
+    {
+     "theme": {
+      "fr": "Conflit (nord & centre)",
+      "nl": "Conflict (noorden & centrum)"
+     },
+     "texte": {
+      "fr": "Insécurité documentée selon les régions : élément de contexte pour la protection.",
+      "nl": "Gedocumenteerde onveiligheid naargelang de regio's: contextelement voor de bescherming."
+     },
+     "scenario": "asile_refus",
+     "base": "Directive 2011/95/UE, art. 15"
+    }
+   ]
+  },
+  "Égypte": {
+   "considerations": [
+    {
+     "theme": {
+      "fr": "MGF",
+      "nl": "VGV"
+     },
+     "texte": {
+      "fr": "Prévalence élevée malgré l'interdiction légale : vigilance pour les filles.",
+      "nl": "Hoge prevalentie ondanks het wettelijk verbod: waakzaamheid voor meisjes."
+     },
+     "scenario": "pression_familiale",
+     "base": "Convention d'Istanbul ; Code pénal belge, art. 409"
+    }
+   ]
+  },
+  "Soudan": {
+   "considerations": [
+    {
+     "theme": {
+      "fr": "MGF",
+      "nl": "VGV"
+     },
+     "texte": {
+      "fr": "Prévalence élevée de MGF.",
+      "nl": "Hoge VGV-prevalentie."
+     },
+     "scenario": "pression_familiale",
+     "base": "Convention d'Istanbul ; Code pénal belge, art. 409"
+    },
+    {
+     "theme": {
+      "fr": "Conflit armé",
+      "nl": "Gewapend conflict"
+     },
+     "texte": {
+      "fr": "Violence généralisée documentée selon les régions.",
+      "nl": "Gedocumenteerd veralgemeend geweld naargelang de regio's."
+     },
+     "scenario": "asile_refus",
+     "base": "Directive 2011/95/UE, art. 15"
+    }
+   ]
+  },
+  "Soudan du Sud": {
+   "considerations": [
+    {
+     "theme": {
+      "fr": "Conflit & enfants soldats",
+      "nl": "Conflict & kindsoldaten"
+     },
+     "texte": {
+      "fr": "Conflit armé et recrutement d'enfants documentés.",
+      "nl": "Gedocumenteerd gewapend conflict en rekrutering van kinderen."
+     },
+     "scenario": "asile_refus",
+     "base": "Protocole facultatif CIDE ; Convention de Genève"
+    },
+    {
+     "theme": {
+      "fr": "Mariage précoce",
+      "nl": "Vroeghuwelijk"
+     },
+     "texte": {
+      "fr": "Fréquence très élevée des mariages précoces.",
+      "nl": "Zeer hoge frequentie van vroeghuwelijken."
+     },
+     "scenario": "pression_familiale",
+     "base": "Convention d'Istanbul, art. 37"
+    }
+   ]
+  },
+  "Éthiopie": {
+   "considerations": [
+    {
+     "theme": {
+      "fr": "MGF",
+      "nl": "VGV"
+     },
+     "texte": {
+      "fr": "Prévalence régionale de MGF.",
+      "nl": "Regionale VGV-prevalentie."
+     },
+     "scenario": "pression_familiale",
+     "base": "Convention d'Istanbul ; Code pénal belge, art. 409"
+    },
+    {
+     "theme": {
+      "fr": "Mariage précoce",
+      "nl": "Vroeghuwelijk"
+     },
+     "texte": {
+      "fr": "Mariages précoces documentés.",
+      "nl": "Gedocumenteerde vroeghuwelijken."
+     },
+     "scenario": "pression_familiale",
+     "base": "Convention d'Istanbul, art. 37"
+    }
+   ]
+  },
+  "Sierra Leone": {
+   "considerations": [
+    {
+     "theme": {
+      "fr": "MGF",
+      "nl": "VGV"
+     },
+     "texte": {
+      "fr": "Prévalence élevée de MGF.",
+      "nl": "Hoge VGV-prevalentie."
+     },
+     "scenario": "pression_familiale",
+     "base": "Convention d'Istanbul ; Code pénal belge, art. 409"
+    }
+   ]
+  },
+  "Côte d'Ivoire": {
+   "considerations": [
+    {
+     "theme": {
+      "fr": "MGF",
+      "nl": "VGV"
+     },
+     "texte": {
+      "fr": "Prévalence régionale de MGF.",
+      "nl": "Regionale VGV-prevalentie."
+     },
+     "scenario": "pression_familiale",
+     "base": "Convention d'Istanbul ; Code pénal belge, art. 409"
+    }
+   ]
+  },
+  "Gambie": {
+   "considerations": [
+    {
+     "theme": {
+      "fr": "MGF",
+      "nl": "VGV"
+     },
+     "texte": {
+      "fr": "Prévalence élevée de MGF.",
+      "nl": "Hoge VGV-prevalentie."
+     },
+     "scenario": "pression_familiale",
+     "base": "Convention d'Istanbul ; Code pénal belge, art. 409"
+    }
+   ]
+  },
+  "Guinée-Bissau": {
+   "considerations": [
+    {
+     "theme": {
+      "fr": "MGF",
+      "nl": "VGV"
+     },
+     "texte": {
+      "fr": "Prévalence élevée de MGF.",
+      "nl": "Hoge VGV-prevalentie."
+     },
+     "scenario": "pression_familiale",
+     "base": "Convention d'Istanbul ; Code pénal belge, art. 409"
+    }
+   ]
+  },
+  "Djibouti": {
+   "considerations": [
+    {
+     "theme": {
+      "fr": "MGF",
+      "nl": "VGV"
+     },
+     "texte": {
+      "fr": "Prévalence très élevée de MGF.",
+      "nl": "Zeer hoge VGV-prevalentie."
+     },
+     "scenario": "pression_familiale",
+     "base": "Convention d'Istanbul ; Code pénal belge, art. 409"
+    }
+   ]
+  },
+  "Sénégal": {
+   "considerations": [
+    {
+     "theme": {
+      "fr": "MGF (régional)",
+      "nl": "VGV (regionaal)"
+     },
+     "texte": {
+      "fr": "Prévalence de MGF dans certaines régions/communautés.",
+      "nl": "VGV-prevalentie in bepaalde regio's/gemeenschappen."
+     },
+     "scenario": "pression_familiale",
+     "base": "Convention d'Istanbul ; Code pénal belge, art. 409"
+    }
+   ]
+  },
+  "Burkina Faso": {
+   "considerations": [
+    {
+     "theme": {
+      "fr": "Mariage précoce & MGF",
+      "nl": "Vroeghuwelijk & VGV"
+     },
+     "texte": {
+      "fr": "Mariages précoces et MGF documentés.",
+      "nl": "Gedocumenteerde vroeghuwelijken en VGV."
+     },
+     "scenario": "pression_familiale",
+     "base": "Convention d'Istanbul, art. 37-38"
+    },
+    {
+     "theme": {
+      "fr": "Conflit (nord)",
+      "nl": "Conflict (noorden)"
+     },
+     "texte": {
+      "fr": "Insécurité documentée selon les régions.",
+      "nl": "Gedocumenteerde onveiligheid naargelang de regio's."
+     },
+     "scenario": "asile_refus",
+     "base": "Directive 2011/95/UE, art. 15"
+    }
+   ]
+  },
+  "Niger": {
+   "considerations": [
+    {
+     "theme": {
+      "fr": "Mariage précoce (prévalence très élevée)",
+      "nl": "Vroeghuwelijk (zeer hoge prevalentie)"
+     },
+     "texte": {
+      "fr": "Le Niger présente une des plus fortes prévalences de mariage précoce au monde.",
+      "nl": "Niger kent een van de hoogste prevalenties van vroeghuwelijk ter wereld."
+     },
+     "scenario": "pression_familiale",
+     "base": "Convention d'Istanbul, art. 37"
+    }
+   ]
+  },
+  "Tchad": {
+   "considerations": [
+    {
+     "theme": {
+      "fr": "Mariage précoce & MGF",
+      "nl": "Vroeghuwelijk & VGV"
+     },
+     "texte": {
+      "fr": "Mariages précoces et MGF documentés.",
+      "nl": "Gedocumenteerde vroeghuwelijken en VGV."
+     },
+     "scenario": "pression_familiale",
+     "base": "Convention d'Istanbul, art. 37-38"
+    }
+   ]
+  },
+  "Nigéria": {
+   "considerations": [
+    {
+     "theme": {
+      "fr": "Traite (exploitation sexuelle)",
+      "nl": "Mensenhandel (seksuele uitbuiting)"
+     },
+     "texte": {
+      "fr": "Réseaux de traite documentés (recours fréquent à l'emprise, y compris rituelle) : vigilance accrue pour les filles.",
+      "nl": "Gedocumenteerde mensenhandelnetwerken (frequent gebruik van psychische greep, ook ritueel): verhoogde waakzaamheid voor meisjes."
+     },
+     "scenario": "traite",
+     "base": "Directive 2011/36/UE ; Protocole de Palerme"
+    },
+    {
+     "theme": {
+      "fr": "MGF (régional)",
+      "nl": "VGV (regionaal)"
+     },
+     "texte": {
+      "fr": "MGF présente dans certaines régions.",
+      "nl": "VGV aanwezig in bepaalde regio's."
+     },
+     "scenario": "pression_familiale",
+     "base": "Convention d'Istanbul ; Code pénal belge, art. 409"
+    },
+    {
+     "theme": {
+      "fr": "Conflit (nord-est)",
+      "nl": "Conflict (noordoosten)"
+     },
+     "texte": {
+      "fr": "Insécurité documentée dans certaines régions.",
+      "nl": "Gedocumenteerde onveiligheid in bepaalde regio's."
+     },
+     "scenario": "asile_refus",
+     "base": "Directive 2011/95/UE, art. 15"
+    }
+   ]
+  },
+  "RD Congo": {
+   "considerations": [
+    {
+     "theme": {
+      "fr": "Conflit & enfants soldats (est)",
+      "nl": "Conflict & kindsoldaten (oosten)"
+     },
+     "texte": {
+      "fr": "Conflit armé et recrutement d'enfants documentés, notamment dans l'est.",
+      "nl": "Gedocumenteerd gewapend conflict en rekrutering van kinderen, met name in het oosten."
+     },
+     "scenario": "asile_refus",
+     "base": "Protocole facultatif CIDE ; Convention de Genève"
+    },
+    {
+     "theme": {
+      "fr": "Traite",
+      "nl": "Mensenhandel"
+     },
+     "texte": {
+      "fr": "Réseaux d'exploitation documentés : vigilance.",
+      "nl": "Gedocumenteerde uitbuitingsnetwerken: waakzaamheid."
+     },
+     "scenario": "traite",
+     "base": "Directive 2011/36/UE"
+    }
+   ]
+  },
+  "Centrafrique": {
+   "considerations": [
+    {
+     "theme": {
+      "fr": "Conflit & enfants soldats",
+      "nl": "Conflict & kindsoldaten"
+     },
+     "texte": {
+      "fr": "Conflit armé et recrutement d'enfants documentés.",
+      "nl": "Gedocumenteerd gewapend conflict en rekrutering van kinderen."
+     },
+     "scenario": "asile_refus",
+     "base": "Protocole facultatif CIDE ; Convention de Genève"
+    }
+   ]
+  },
+  "Yémen": {
+   "considerations": [
+    {
+     "theme": {
+      "fr": "Conflit armé",
+      "nl": "Gewapend conflict"
+     },
+     "texte": {
+      "fr": "Violence généralisée documentée.",
+      "nl": "Gedocumenteerd veralgemeend geweld."
+     },
+     "scenario": "asile_refus",
+     "base": "Directive 2011/95/UE, art. 15"
+    },
+    {
+     "theme": {
+      "fr": "Mariage précoce",
+      "nl": "Vroeghuwelijk"
+     },
+     "texte": {
+      "fr": "Fréquence des mariages précoces.",
+      "nl": "Frequentie van vroeghuwelijken."
+     },
+     "scenario": "pression_familiale",
+     "base": "Convention d'Istanbul, art. 37"
+    }
+   ]
+  },
+  "Irak": {
+   "considerations": [
+    {
+     "theme": {
+      "fr": "Conflit / insécurité régionale",
+      "nl": "Conflict / regionale onveiligheid"
+     },
+     "texte": {
+      "fr": "Insécurité documentée selon les régions : élément de contexte pour la protection.",
+      "nl": "Gedocumenteerde onveiligheid naargelang de regio's: contextelement voor de bescherming."
+     },
+     "scenario": "asile_refus",
+     "base": "Directive 2011/95/UE, art. 15"
+    }
+   ]
+  },
+  "Ouganda": {
+   "considerations": [
+    {
+     "theme": {
+      "fr": "Criminalisation de l'homosexualité",
+      "nl": "Strafbaarstelling van homoseksualiteit"
+     },
+     "texte": {
+      "fr": "L'homosexualité est criminalisée (législation aggravée en 2023) : un mineur LGBTQ+ peut relever de l'asile au titre de l'appartenance à un groupe social.",
+      "nl": "Homoseksualiteit is strafbaar (verstrengde wetgeving in 2023): een LGBTQ+-minderjarige kan in aanmerking komen voor asiel wegens het behoren tot een sociale groep."
+     },
+     "scenario": "asile_refus",
+     "base": "Convention de Genève ; Directive 2011/95/UE, art. 10 ; CJUE C-148/13"
+    }
+   ]
+  },
+  "Iran": {
+   "considerations": [
+    {
+     "theme": {
+      "fr": "Criminalisation de l'homosexualité",
+      "nl": "Strafbaarstelling van homoseksualiteit"
+     },
+     "texte": {
+      "fr": "L'homosexualité est sévèrement réprimée : motif possible de protection internationale.",
+      "nl": "Homoseksualiteit wordt streng bestraft: mogelijke grond voor internationale bescherming."
+     },
+     "scenario": "asile_refus",
+     "base": "Convention de Genève ; Directive 2011/95/UE, art. 10"
+    }
+   ]
+  },
+  "Cameroun": {
+   "considerations": [
+    {
+     "theme": {
+      "fr": "Criminalisation de l'homosexualité",
+      "nl": "Strafbaarstelling van homoseksualiteit"
+     },
+     "texte": {
+      "fr": "L'homosexualité est pénalisée : motif possible de protection.",
+      "nl": "Homoseksualiteit is strafbaar: mogelijke beschermingsgrond."
+     },
+     "scenario": "asile_refus",
+     "base": "Convention de Genève ; Directive 2011/95/UE, art. 10"
+    },
+    {
+     "theme": {
+      "fr": "Conflit (régions anglophones)",
+      "nl": "Conflict (Engelstalige regio's)"
+     },
+     "texte": {
+      "fr": "Insécurité documentée dans certaines régions.",
+      "nl": "Gedocumenteerde onveiligheid in bepaalde regio's."
+     },
+     "scenario": "asile_refus",
+     "base": "Directive 2011/95/UE, art. 15"
+    }
+   ]
+  },
+  "Bangladesh": {
+   "considerations": [
+    {
+     "theme": {
+      "fr": "Mariage précoce",
+      "nl": "Vroeghuwelijk"
+     },
+     "texte": {
+      "fr": "Fréquence élevée des mariages précoces.",
+      "nl": "Hoge frequentie van vroeghuwelijken."
+     },
+     "scenario": "pression_familiale",
+     "base": "Convention d'Istanbul, art. 37"
+    },
+    {
+     "theme": {
+      "fr": "Traite (travail)",
+      "nl": "Mensenhandel (arbeid)"
+     },
+     "texte": {
+      "fr": "Réseaux d'exploitation par le travail documentés (servitude pour dette).",
+      "nl": "Gedocumenteerde netwerken van arbeidsuitbuiting (schuldslavernij)."
+     },
+     "scenario": "traite",
+     "base": "Directive 2011/36/UE ; OIT n°182"
+    }
+   ]
+  },
+  "Pakistan": {
+   "considerations": [
+    {
+     "theme": {
+      "fr": "Mariage précoce",
+      "nl": "Vroeghuwelijk"
+     },
+     "texte": {
+      "fr": "Mariages précoces documentés.",
+      "nl": "Gedocumenteerde vroeghuwelijken."
+     },
+     "scenario": "pression_familiale",
+     "base": "Convention d'Istanbul, art. 37"
+    },
+    {
+     "theme": {
+      "fr": "Insécurité régionale",
+      "nl": "Regionale onveiligheid"
+     },
+     "texte": {
+      "fr": "Insécurité documentée selon les régions.",
+      "nl": "Gedocumenteerde onveiligheid naargelang de regio's."
+     },
+     "scenario": "asile_refus",
+     "base": "Directive 2011/95/UE, art. 15"
+    }
+   ]
+  },
+  "Libye": {
+   "considerations": [
+    {
+     "theme": {
+      "fr": "Conditions sur la route migratoire",
+      "nl": "Omstandigheden op de migratieroute"
+     },
+     "texte": {
+      "fr": "Violences, détention et traite documentées sur le parcours : pertinent pour l'évaluation du trauma et de la traite.",
+      "nl": "Gedocumenteerd geweld, detentie en mensenhandel onderweg: relevant voor de beoordeling van trauma en mensenhandel."
+     },
+     "scenario": "traite",
+     "base": "Directive 2011/36/UE ; CIDE art. 39"
+    }
+   ]
+  }
+ },
+ "scenarios": [
+  {
+   "id": "asile_refus",
+   "domaine": {
+    "fr": "Séjour & Asile",
+    "nl": "Verblijf & Asiel"
+   },
+   "probleme": {
+    "fr": "La demande de protection internationale a été refusée",
+    "nl": "Het verzoek om internationale bescherming is geweigerd"
+   },
+   "motsCles": [
+    "refus",
+    "asile",
+    "cgra",
+    "négatif",
+    "débouté",
+    "protection",
+    "recours",
+    "rejet",
+    "weigering",
+    "asiel",
+    "negatief",
+    "beroep",
+    "afgewezen",
+    "bescherming"
+   ],
+   "questions": [
+    {
+     "id": "delai",
+     "texte": {
+      "fr": "Depuis combien de temps la décision de refus a-t-elle été notifiée ?",
+      "nl": "Hoelang geleden werd de weigeringsbeslissing betekend?"
+     },
+     "options": [
+      {
+       "val": "moins30",
+       "label": {
+        "fr": "Moins de 30 jours",
+        "nl": "Minder dan 30 dagen"
+       }
+      },
+      {
+       "val": "plus30",
+       "label": {
+        "fr": "Plus de 30 jours",
+        "nl": "Meer dan 30 dagen"
+       }
+      }
+     ]
+    },
+    {
+     "id": "nouveaux",
+     "texte": {
+      "fr": "Disposez-vous d'éléments nouveaux qui n'ont pas été examinés ?",
+      "nl": "Beschikt u over nieuwe elementen die niet werden onderzocht?"
+     },
+     "options": [
+      {
+       "val": "oui",
+       "label": {
+        "fr": "Oui, éléments nouveaux",
+        "nl": "Ja, nieuwe elementen"
+       }
+      },
+      {
+       "val": "non",
+       "label": {
+        "fr": "Non",
+        "nl": "Nee"
+       }
+      }
+     ]
+    }
+   ],
+   "solutions": [
+    {
+     "rang": 1,
+     "titre": {
+      "fr": "Introduire un recours au Conseil du Contentieux des Étrangers (CCE)",
+      "nl": "Beroep instellen bij de Raad voor Vreemdelingenbetwistingen (RvV)"
+     },
+     "condition": {
+      "q": "delai",
+      "in": [
+       "moins30"
+      ]
+     },
+     "description": {
+      "fr": "Recours de plein contentieux contre la décision du CGRA. Le juge réexamine le dossier en fait et en droit.",
+      "nl": "Beroep met volle rechtsmacht tegen de beslissing van het CGVS. De rechter herbekijkt het dossier in feite en in rechte."
+     },
+     "base_legale": [
+      {
+       "texte": {
+        "fr": "Loi du 15/12/1980, recours au CCE",
+        "nl": "Wet van 15/12/1980, beroep bij de RvV"
+       },
+       "ref": "art. 39/2 §1"
+      },
+      {
+       "texte": {
+        "fr": "Directive 2013/32/UE (procédures), droit à un recours effectif",
+        "nl": "Richtlijn 2013/32/EU (procedures), recht op een daadwerkelijk rechtsmiddel"
+       },
+       "ref": "art. 46"
+      }
+     ],
+     "avantages": [
+      {
+       "fr": "Effet suspensif : pas d'éloignement pendant le recours",
+       "nl": "Schorsende werking: geen verwijdering tijdens het beroep"
+      },
+      {
+       "fr": "Réexamen complet du dossier",
+       "nl": "Volledige herziening van het dossier"
+      }
+     ],
+     "inconvenients": [
+      {
+       "fr": "Délai strict de 30 jours",
+       "nl": "Strikte termijn van 30 dagen"
+      },
+      {
+       "fr": "Assistance d'un avocat fortement recommandée",
+       "nl": "Bijstand van een advocaat sterk aanbevolen"
+      }
+     ],
+     "delai": {
+      "fr": "30 jours à compter de la notification",
+      "nl": "30 dagen vanaf de betekening"
+     }
+    },
+    {
+     "rang": 1,
+     "titre": {
+      "fr": "Introduire une demande ultérieure (nouveaux éléments)",
+      "nl": "Een volgend verzoek indienen (nieuwe elementen)"
+     },
+     "condition": {
+      "q": "nouveaux",
+      "in": [
+       "oui"
+      ]
+     },
+     "description": {
+      "fr": "Si le délai de recours est dépassé mais que des éléments nouveaux existent (nouvelles preuves, évolution de la situation au pays), une demande ultérieure peut être introduite.",
+      "nl": "Als de beroepstermijn verstreken is maar er nieuwe elementen zijn (nieuw bewijs, gewijzigde situatie in het land), kan een volgend verzoek worden ingediend."
+     },
+     "base_legale": [
+      {
+       "texte": {
+        "fr": "Loi du 15/12/1980, demande ultérieure",
+        "nl": "Wet van 15/12/1980, volgend verzoek"
+       },
+       "ref": "art. 51/8"
+      },
+      {
+       "texte": {
+        "fr": "Directive 2013/32/UE",
+        "nl": "Richtlijn 2013/32/EU"
+       },
+       "ref": "art. 40-42"
+      }
+     ],
+     "avantages": [
+      {
+       "fr": "Possible même après l'échéance du recours",
+       "nl": "Mogelijk zelfs na het verstrijken van het beroep"
+      },
+      {
+       "fr": "Permet de faire valoir des faits nouveaux",
+       "nl": "Laat toe nieuwe feiten te doen gelden"
+      }
+     ],
+     "inconvenients": [
+      {
+       "fr": "Les éléments doivent être réellement nouveaux",
+       "nl": "De elementen moeten werkelijk nieuw zijn"
+      },
+      {
+       "fr": "Effet suspensif non automatique",
+       "nl": "Schorsende werking niet automatisch"
+      }
+     ],
+     "delai": {
+      "fr": "Dès l'obtention des éléments nouveaux",
+      "nl": "Zodra de nieuwe elementen beschikbaar zijn"
+     }
+    },
+    {
+     "rang": 2,
+     "titre": {
+      "fr": "Réévaluer la solution durable avec le Service des Tutelles",
+      "nl": "De duurzame oplossing herbekijken met de Dienst Voogdij"
+     },
+     "description": {
+      "fr": "Indépendamment de l'asile, l'autorité doit rechercher la solution durable conforme à l'intérêt supérieur du mineur (séjour, réunification, ou retour encadré).",
+      "nl": "Los van het asiel moet de autoriteit de duurzame oplossing zoeken in het belang van de minderjarige (verblijf, hereniging of begeleide terugkeer)."
+     },
+     "base_legale": [
+      {
+       "texte": {
+        "fr": "Loi-programme du 24/12/2002 (Tutelle MENA)",
+        "nl": "Programmawet van 24/12/2002 (Voogdij NBMV)"
+       },
+       "ref": "Titre XIII, Ch. 6"
+      },
+      {
+       "texte": {
+        "fr": "CIDE",
+        "nl": "IVRK"
+       },
+       "ref": "art. 3"
+      }
+     ],
+     "avantages": [
+      {
+       "fr": "Approche globale au-delà de l'asile",
+       "nl": "Globale aanpak die verder gaat dan asiel"
+      },
+      {
+       "fr": "Centrée sur l'intérêt de l'enfant",
+       "nl": "Gericht op het belang van het kind"
+      }
+     ],
+     "inconvenients": [
+      {
+       "fr": "Procédure parallèle, pas un recours en soi",
+       "nl": "Parallelle procedure, op zich geen beroep"
+      }
+     ],
+     "delai": {
+      "fr": "En continu",
+      "nl": "Doorlopend"
+     }
+    }
+   ],
+   "note_precision": {
+    "fr": "Le délai exact et l'effet suspensif dépendent du type de décision (recevabilité, fond, demande ultérieure). Faites confirmer par un avocat spécialisé.",
+    "nl": "De exacte termijn en de schorsende werking hangen af van het type beslissing (ontvankelijkheid, grond, volgend verzoek). Laat dit bevestigen door een gespecialiseerde advocaat."
+   }
+  },
+  {
+   "id": "dublin",
+   "domaine": {
+    "fr": "Séjour & Asile",
+    "nl": "Verblijf & Asiel"
+   },
+   "probleme": {
+    "fr": "Le mineur risque un transfert Dublin vers un autre pays de l'UE",
+    "nl": "De minderjarige dreigt een Dublin-overdracht naar een ander EU-land"
+   },
+   "motsCles": [
+    "dublin",
+    "transfert",
+    "eurodac",
+    "empreintes",
+    "autre pays",
+    "responsable",
+    "renvoi",
+    "overdracht",
+    "vingerafdrukken",
+    "ander land",
+    "verantwoordelijk"
+   ],
+   "questions": [
+    {
+     "id": "famille",
+     "texte": {
+      "fr": "Le mineur a-t-il de la famille (parent, frère/sœur, oncle/tante) légalement présente dans un pays de l'UE ?",
+      "nl": "Heeft de minderjarige familie (ouder, broer/zus, oom/tante) die legaal in een EU-land verblijft?"
+     },
+     "options": [
+      {
+       "val": "ici",
+       "label": {
+        "fr": "Oui, dans le pays actuel",
+        "nl": "Ja, in het huidige land"
+       }
+      },
+      {
+       "val": "autre",
+       "label": {
+        "fr": "Oui, dans un autre pays UE",
+        "nl": "Ja, in een ander EU-land"
+       }
+      },
+      {
+       "val": "non",
+       "label": {
+        "fr": "Non, aucune famille dans l'UE",
+        "nl": "Nee, geen familie in de EU"
+       }
+      }
+     ]
+    }
+   ],
+   "solutions": [
+    {
+     "rang": 1,
+     "titre": {
+      "fr": "S'opposer au transfert : pour un MENA isolé, l'État responsable est celui où il se trouve",
+      "nl": "Verzet tegen de overdracht: voor een alleenstaande NBMV is de verantwoordelijke staat die waar hij zich bevindt"
+     },
+     "condition": {
+      "q": "famille",
+      "in": [
+       "non"
+      ]
+     },
+     "description": {
+      "fr": "Pour un mineur non accompagné sans famille dans l'UE, l'État responsable de l'examen est en principe celui où il a introduit sa demande et où il se trouve, conformément à la jurisprudence européenne.",
+      "nl": "Voor een niet-begeleide minderjarige zonder familie in de EU is de verantwoordelijke staat in beginsel die waar hij zijn verzoek indiende en zich bevindt, conform de Europese rechtspraak."
+     },
+     "base_legale": [
+      {
+       "texte": {
+        "fr": "Règlement Dublin III",
+        "nl": "Dublin III-verordening"
+       },
+       "ref": "art. 8.4"
+      },
+      {
+       "texte": {
+        "fr": "CJUE, arrêt MA e.a.",
+        "nl": "HvJ-EU, arrest MA e.a."
+       },
+       "ref": "C-648/11"
+      },
+      {
+       "texte": {
+        "fr": "CIDE",
+        "nl": "IVRK"
+       },
+       "ref": "art. 3 (intérêt supérieur)"
+      }
+     ],
+     "avantages": [
+      {
+       "fr": "Évite un transfert préjudiciable",
+       "nl": "Vermijdt een nadelige overdracht"
+      },
+      {
+       "fr": "Fondé sur une jurisprudence claire",
+       "nl": "Gebaseerd op duidelijke rechtspraak"
+      }
+     ],
+     "inconvenients": [
+      {
+       "fr": "Nécessite de contester activement dans les délais",
+       "nl": "Vereist actief en tijdig betwisten"
+      }
+     ],
+     "delai": {
+      "fr": "Délais Dublin courts : agir sans attendre",
+      "nl": "Korte Dublin-termijnen: handel zonder uitstel"
+     }
+    },
+    {
+     "rang": 1,
+     "titre": {
+      "fr": "Demander le rapprochement vers le membre de famille",
+      "nl": "Verzoek tot hereniging met het familielid"
+     },
+     "condition": {
+      "q": "famille",
+      "in": [
+       "autre"
+      ]
+     },
+     "description": {
+      "fr": "Quand un membre de famille est légalement présent dans un autre État membre, Dublin permet de désigner cet État comme responsable, dans l'intérêt de l'enfant (rapprochement familial).",
+      "nl": "Wanneer een familielid legaal in een andere lidstaat verblijft, laat Dublin toe die staat als verantwoordelijke aan te duiden, in het belang van het kind (gezinshereniging)."
+     },
+     "base_legale": [
+      {
+       "texte": {
+        "fr": "Règlement Dublin III",
+        "nl": "Dublin III-verordening"
+       },
+       "ref": "art. 8, 9, 10"
+      },
+      {
+       "texte": {
+        "fr": "CIDE",
+        "nl": "IVRK"
+       },
+       "ref": "art. 10"
+      }
+     ],
+     "avantages": [
+      {
+       "fr": "Favorise l'unité familiale",
+       "nl": "Bevordert de eenheid van het gezin"
+      },
+      {
+       "fr": "Conforme à l'intérêt de l'enfant",
+       "nl": "In het belang van het kind"
+      }
+     ],
+     "inconvenients": [
+      {
+       "fr": "Preuve du lien familial requise",
+       "nl": "Bewijs van de familieband vereist"
+      },
+      {
+       "fr": "Délais de prise/reprise en charge stricts",
+       "nl": "Strikte termijnen voor (terug)overname"
+      }
+     ],
+     "delai": {
+      "fr": "Requête dans les délais Dublin",
+      "nl": "Verzoek binnen de Dublin-termijnen"
+     }
+    },
+    {
+     "rang": 2,
+     "titre": {
+      "fr": "Contester la décision de transfert et documenter les défaillances d'accueil",
+      "nl": "De overdrachtsbeslissing betwisten en opvangtekorten documenteren"
+     },
+     "description": {
+      "fr": "Si une décision de transfert est prise, elle peut être contestée, notamment en démontrant des défaillances systémiques dans l'État de destination.",
+      "nl": "Als een overdrachtsbeslissing wordt genomen, kan ze worden betwist, met name door systemische tekortkomingen in de bestemmingsstaat aan te tonen."
+     },
+     "base_legale": [
+      {
+       "texte": {
+        "fr": "Règlement Dublin III, recours",
+        "nl": "Dublin III-verordening, beroep"
+       },
+       "ref": "art. 27"
+      },
+      {
+       "texte": {
+        "fr": "Charte des droits fondamentaux de l'UE",
+        "nl": "Handvest van de grondrechten van de EU"
+       },
+       "ref": "art. 4 & 24"
+      }
+     ],
+     "avantages": [
+      {
+       "fr": "Recours prévu par le règlement",
+       "nl": "Beroep voorzien door de verordening"
+      },
+      {
+       "fr": "Protection contre traitements inhumains",
+       "nl": "Bescherming tegen onmenselijke behandeling"
+      }
+     ],
+     "inconvenients": [
+      {
+       "fr": "Délais très courts",
+       "nl": "Zeer korte termijnen"
+      },
+      {
+       "fr": "Charge de la preuve des défaillances",
+       "nl": "Bewijslast van de tekortkomingen"
+      }
+     ],
+     "delai": {
+      "fr": "Délai de recours du règlement (très court)",
+      "nl": "Beroepstermijn van de verordening (zeer kort)"
+     }
+    }
+   ],
+   "note_precision": {
+    "fr": "Précisez si des empreintes ont été enregistrées (hit Eurodac) et dans quel État, ainsi que la composition familiale exacte.",
+    "nl": "Verduidelijk of er vingerafdrukken werden geregistreerd (Eurodac-hit) en in welke staat, evenals de exacte gezinssamenstelling."
+   }
+  },
+  {
+   "id": "age_conteste",
+   "domaine": {
+    "fr": "Identité & Âge",
+    "nl": "Identiteit & Leeftijd"
+   },
+   "probleme": {
+    "fr": "L'âge du mineur est mis en doute par les autorités",
+    "nl": "De leeftijd van de minderjarige wordt door de autoriteiten in twijfel getrokken"
+   },
+   "motsCles": [
+    "âge",
+    "test",
+    "minorité",
+    "majeur",
+    "doute",
+    "os",
+    "radiographie",
+    "détermination",
+    "leeftijd",
+    "minderjarigheid",
+    "meerderjarig",
+    "twijfel",
+    "bot",
+    "bepaling"
+   ],
+   "questions": [
+    {
+     "id": "tuteur",
+     "texte": {
+      "fr": "Un tuteur provisoire a-t-il déjà été désigné ?",
+      "nl": "Werd er al een voorlopige voogd aangesteld?"
+     },
+     "options": [
+      {
+       "val": "oui",
+       "label": {
+        "fr": "Oui",
+        "nl": "Ja"
+       }
+      },
+      {
+       "val": "non",
+       "label": {
+        "fr": "Non / je ne sais pas",
+        "nl": "Nee / ik weet het niet"
+       }
+      }
+     ]
+    }
+   ],
+   "solutions": [
+    {
+     "rang": 1,
+     "titre": {
+      "fr": "Faire valoir la présomption de minorité et obtenir une tutelle provisoire",
+      "nl": "Het vermoeden van minderjarigheid inroepen en een voorlopige voogdij verkrijgen"
+     },
+     "description": {
+      "fr": "En cas de doute sur l'âge, la personne doit être présumée mineure et bénéficier de la protection jusqu'à ce que l'âge soit déterminé.",
+      "nl": "Bij twijfel over de leeftijd moet de persoon als minderjarig worden vermoed en bescherming genieten totdat de leeftijd is bepaald."
+     },
+     "base_legale": [
+      {
+       "texte": {
+        "fr": "Loi-programme du 24/12/2002 (Tutelle)",
+        "nl": "Programmawet van 24/12/2002 (Voogdij)"
+       },
+       "ref": "art. 3 à 7"
+      },
+      {
+       "texte": {
+        "fr": "Principe du bénéfice du doute (CIDE art. 3)",
+        "nl": "Beginsel van het voordeel van de twijfel (IVRK art. 3)"
+       },
+       "ref": "Comité des droits de l'enfant, Obs. gén. n°6"
+      }
+     ],
+     "avantages": [
+      {
+       "fr": "Protection immédiate pendant la procédure",
+       "nl": "Onmiddellijke bescherming tijdens de procedure"
+      },
+      {
+       "fr": "Conforme au standard international",
+       "nl": "In overeenstemming met de internationale norm"
+      }
+     ],
+     "inconvenients": [
+      {
+       "fr": "Provisoire jusqu'à détermination",
+       "nl": "Voorlopig tot de bepaling"
+      }
+     ],
+     "delai": {
+      "fr": "Immédiat (saisir le Service des Tutelles)",
+      "nl": "Onmiddellijk (de Dienst Voogdij vatten)"
+     }
+    },
+    {
+     "rang": 2,
+     "titre": {
+      "fr": "Encadrer le test médical d'âge (consentement + marge d'erreur)",
+      "nl": "Het medische leeftijdsonderzoek omkaderen (toestemming + foutenmarge)"
+     },
+     "description": {
+      "fr": "Le test d'âge (examen médical triple) ne peut être réalisé qu'avec consentement éclairé ; sa marge d'erreur doit profiter au mineur.",
+      "nl": "De leeftijdstest (drievoudig medisch onderzoek) mag enkel met geïnformeerde toestemming; de foutenmarge moet de minderjarige ten goede komen."
+     },
+     "base_legale": [
+      {
+       "texte": {
+        "fr": "Loi-programme du 24/12/2002 (Tutelle), test d'âge",
+        "nl": "Programmawet van 24/12/2002 (Voogdij), leeftijdstest"
+       },
+       "ref": "art. 7"
+      },
+      {
+       "texte": {
+        "fr": "CIDE",
+        "nl": "IVRK"
+       },
+       "ref": "art. 8 (identité)"
+      }
+     ],
+     "avantages": [
+      {
+       "fr": "Cadre légal du test garanti",
+       "nl": "Wettelijk kader van de test gewaarborgd"
+      },
+      {
+       "fr": "La marge d'erreur protège le jeune",
+       "nl": "De foutenmarge beschermt de jongere"
+      }
+     ],
+     "inconvenients": [
+      {
+       "fr": "Fiabilité scientifique limitée des tests osseux",
+       "nl": "Beperkte wetenschappelijke betrouwbaarheid van bottesten"
+      }
+     ],
+     "delai": {
+      "fr": "Selon convocation, avec consentement",
+      "nl": "Volgens oproeping, met toestemming"
+     }
+    },
+    {
+     "rang": 3,
+     "titre": {
+      "fr": "Rassembler des preuves alternatives de minorité",
+      "nl": "Alternatieve bewijzen van minderjarigheid verzamelen"
+     },
+     "description": {
+      "fr": "Documents reconstitués, témoignages, actes d'état civil obtenus du pays d'origine peuvent étayer la minorité.",
+      "nl": "Gereconstrueerde documenten, getuigenissen en akten van de burgerlijke stand uit het herkomstland kunnen de minderjarigheid onderbouwen."
+     },
+     "base_legale": [
+      {
+       "texte": {
+        "fr": "CIDE",
+        "nl": "IVRK"
+       },
+       "ref": "art. 8"
+      }
+     ],
+     "avantages": [
+      {
+       "fr": "Renforce le dossier",
+       "nl": "Versterkt het dossier"
+      },
+      {
+       "fr": "Indépendant du test médical",
+       "nl": "Onafhankelijk van de medische test"
+      }
+     ],
+     "inconvenients": [
+      {
+       "fr": "Documents parfois difficiles à obtenir",
+       "nl": "Documenten soms moeilijk te verkrijgen"
+      }
+     ],
+     "delai": {
+      "fr": "En parallèle de la procédure",
+      "nl": "Parallel aan de procedure"
+     }
+    }
+   ],
+   "note_precision": {
+    "fr": "Indiquez si un test a déjà été réalisé et son résultat, et si le mineur dispose du moindre document d'état civil.",
+    "nl": "Geef aan of er al een test werd uitgevoerd en het resultaat ervan, en of de minderjarige enig document van de burgerlijke stand heeft."
+   }
+  },
+  {
+   "id": "sante_couverture",
+   "domaine": {
+    "fr": "Santé",
+    "nl": "Gezondheid"
+   },
+   "probleme": {
+    "fr": "Le mineur a besoin de soins mais n'a pas de couverture médicale",
+    "nl": "De minderjarige heeft zorg nodig maar heeft geen medische dekking"
+   },
+   "motsCles": [
+    "soin",
+    "médecin",
+    "hôpital",
+    "mutuelle",
+    "amu",
+    "couverture",
+    "maladie",
+    "santé",
+    "remboursement",
+    "zorg",
+    "arts",
+    "ziekenhuis",
+    "ziekenfonds",
+    "dekking",
+    "ziekte",
+    "gezondheid"
+   ],
+   "questions": [
+    {
+     "id": "urgence",
+     "texte": {
+      "fr": "L'état de santé présente-t-il un caractère urgent ou vital ?",
+      "nl": "Is de gezondheidstoestand dringend of levensbedreigend?"
+     },
+     "options": [
+      {
+       "val": "oui",
+       "label": {
+        "fr": "Oui, urgent/vital",
+        "nl": "Ja, dringend/vitaal"
+       }
+      },
+      {
+       "val": "non",
+       "label": {
+        "fr": "Non, soins courants",
+        "nl": "Nee, gewone zorg"
+       }
+      }
+     ]
+    }
+   ],
+   "solutions": [
+    {
+     "rang": 1,
+     "titre": {
+      "fr": "Activer l'Aide Médicale Urgente (AMU) via le CPAS",
+      "nl": "Dringende Medische Hulp (DMH) activeren via het OCMW"
+     },
+     "description": {
+      "fr": "L'AMU garantit l'accès aux soins (urgents et préventifs) quelle que soit la situation administrative. Une attestation d'un médecin est requise.",
+      "nl": "De DMH waarborgt toegang tot zorg (dringend en preventief) ongeacht de administratieve situatie. Een attest van een arts is vereist."
+     },
+     "base_legale": [
+      {
+       "texte": {
+        "fr": "AR du 12/12/1996 sur l'Aide Médicale Urgente",
+        "nl": "KB van 12/12/1996 betreffende de Dringende Medische Hulp"
+       },
+       "ref": "AMU/DMH"
+      },
+      {
+       "texte": {
+        "fr": "CIDE",
+        "nl": "IVRK"
+       },
+       "ref": "art. 24 (droit à la santé)"
+      }
+     ],
+     "avantages": [
+      {
+       "fr": "Accès garanti même sans séjour régulier",
+       "nl": "Gewaarborgde toegang zelfs zonder regelmatig verblijf"
+      },
+      {
+       "fr": "Couvre l'urgence et le préventif",
+       "nl": "Dekt dringende en preventieve zorg"
+      }
+     ],
+     "inconvenients": [
+      {
+       "fr": "Démarche via le CPAS compétent",
+       "nl": "Aanvraag via het bevoegde OCMW"
+      },
+      {
+       "fr": "Attestation médicale nécessaire",
+       "nl": "Medisch attest noodzakelijk"
+      }
+     ],
+     "delai": {
+      "fr": "Sans délai (urgence : prise en charge immédiate)",
+      "nl": "Onverwijld (noodgeval: onmiddellijke opname)"
+     }
+    },
+    {
+     "rang": 2,
+     "titre": {
+      "fr": "Affilier le mineur à une mutuelle si les conditions sont réunies",
+      "nl": "De minderjarige aansluiten bij een ziekenfonds indien aan de voorwaarden is voldaan"
+     },
+     "description": {
+      "fr": "Selon le statut (demandeur de protection, séjour), une affiliation à l'assurance soins de santé peut être ouverte pour une couverture stable.",
+      "nl": "Naargelang de status (verzoeker om bescherming, verblijf) kan een aansluiting bij de ziekteverzekering worden geopend voor een stabiele dekking."
+     },
+     "base_legale": [
+      {
+       "texte": {
+        "fr": "Loi relative à l'assurance obligatoire soins de santé (AMI)",
+        "nl": "Wet betreffende de verplichte verzekering voor geneeskundige verzorging (ZIV)"
+       },
+       "ref": "loi coordonnée 14/07/1994"
+      },
+      {
+       "texte": {
+        "fr": "Directive 2013/33/UE (accueil)",
+        "nl": "Richtlijn 2013/33/EU (opvang)"
+       },
+       "ref": "art. 19 (soins de santé)"
+      }
+     ],
+     "avantages": [
+      {
+       "fr": "Couverture pérenne",
+       "nl": "Duurzame dekking"
+      },
+      {
+       "fr": "Accès au médecin traitant et au suivi",
+       "nl": "Toegang tot huisarts en opvolging"
+      }
+     ],
+     "inconvenients": [
+      {
+       "fr": "Conditions d'affiliation à vérifier",
+       "nl": "Aansluitingsvoorwaarden te controleren"
+      }
+     ],
+     "delai": {
+      "fr": "Dès que possible",
+      "nl": "Zo snel mogelijk"
+     }
+    },
+    {
+     "rang": 3,
+     "titre": {
+      "fr": "Mobiliser la prise en charge médicale de la structure d'accueil (Fedasil)",
+      "nl": "De medische opvolging van de opvangstructuur (Fedasil) inschakelen"
+     },
+     "description": {
+      "fr": "Les demandeurs hébergés par Fedasil bénéficient d'un accompagnement médical organisé par la structure.",
+      "nl": "Verzoekers die door Fedasil worden opgevangen, genieten een door de structuur georganiseerde medische begeleiding."
+     },
+     "base_legale": [
+      {
+       "texte": {
+        "fr": "Loi du 12/01/2007 sur l'accueil",
+        "nl": "Opvangwet van 12/01/2007"
+       },
+       "ref": "art. 23-25"
+      }
+     ],
+     "avantages": [
+      {
+       "fr": "Accès direct via le centre",
+       "nl": "Rechtstreekse toegang via het centrum"
+      },
+      {
+       "fr": "Coordination médicale assurée",
+       "nl": "Medische coördinatie verzekerd"
+      }
+     ],
+     "inconvenients": [
+      {
+       "fr": "Lié à l'hébergement en structure d'accueil",
+       "nl": "Gekoppeld aan opvang in een opvangstructuur"
+      }
+     ],
+     "delai": {
+      "fr": "Pendant l'hébergement",
+      "nl": "Tijdens de opvang"
+     }
+    }
+   ],
+   "note_precision": {
+    "fr": "Précisez le statut de séjour du mineur et s'il est hébergé par Fedasil, en famille ou de façon autonome.",
+    "nl": "Verduidelijk de verblijfsstatus van de minderjarige en of hij door Fedasil, bij familie of zelfstandig wordt gehuisvest."
+   }
+  },
+  {
+   "id": "detresse_psy",
+   "domaine": {
+    "fr": "Santé",
+    "nl": "Gezondheid"
+   },
+   "probleme": {
+    "fr": "Le mineur présente une détresse psychologique ou un risque suicidaire",
+    "nl": "De minderjarige vertoont psychische nood of een suïciderisico"
+   },
+   "motsCles": [
+    "suicide",
+    "psy",
+    "psychologique",
+    "trauma",
+    "dépression",
+    "automutilation",
+    "détresse",
+    "urgence",
+    "santé mentale",
+    "zelfmoord",
+    "psychisch",
+    "depressie",
+    "zelfverwonding",
+    "nood",
+    "geestelijke gezondheid"
+   ],
+   "questions": [
+    {
+     "id": "imminent",
+     "texte": {
+      "fr": "Y a-t-il un danger imminent (idées suicidaires actuelles, geste récent) ?",
+      "nl": "Is er onmiddellijk gevaar (actuele suïcidegedachten, recente daad)?"
+     },
+     "options": [
+      {
+       "val": "oui",
+       "label": {
+        "fr": "Oui, danger imminent",
+        "nl": "Ja, onmiddellijk gevaar"
+       }
+      },
+      {
+       "val": "non",
+       "label": {
+        "fr": "Non, souffrance sans urgence vitale",
+        "nl": "Nee, lijden zonder vitale noodzaak"
+       }
+      }
+     ]
+    }
+   ],
+   "solutions": [
+    {
+     "rang": 1,
+     "titre": {
+      "fr": "Évaluation psychiatrique en urgence et mise en sécurité",
+      "nl": "Spoedeisende psychiatrische evaluatie en in veiligheid brengen"
+     },
+     "condition": {
+      "q": "imminent",
+      "in": [
+       "oui"
+      ]
+     },
+     "description": {
+      "fr": "Un risque suicidaire imminent est une urgence vitale : orienter immédiatement vers les urgences psychiatriques ; une hospitalisation peut être nécessaire.",
+      "nl": "Een onmiddellijk suïciderisico is een vitale noodsituatie: onmiddellijk doorverwijzen naar de psychiatrische spoeddienst; een opname kan nodig zijn."
+     },
+     "base_legale": [
+      {
+       "texte": {
+        "fr": "CIDE",
+        "nl": "IVRK"
+       },
+       "ref": "art. 6 (droit à la vie) & 24"
+      },
+      {
+       "texte": {
+        "fr": "AMU",
+        "nl": "DMH"
+       },
+       "ref": "soins urgents garantis"
+      }
+     ],
+     "avantages": [
+      {
+       "fr": "Réponse à l'urgence vitale",
+       "nl": "Antwoord op de vitale noodsituatie"
+      },
+      {
+       "fr": "Protection immédiate",
+       "nl": "Onmiddellijke bescherming"
+      }
+     ],
+     "inconvenients": [
+      {
+       "fr": "Mesure intensive, à accompagner humainement",
+       "nl": "Intensieve maatregel, menselijk te begeleiden"
+      }
+     ],
+     "delai": {
+      "fr": "Immédiat",
+      "nl": "Onmiddellijk"
+     }
+    },
+    {
+     "rang": 1,
+     "titre": {
+      "fr": "Mettre en place un suivi en santé mentale adapté",
+      "nl": "Een aangepaste geestelijke gezondheidsopvolging opzetten"
+     },
+     "description": {
+      "fr": "Orientation vers un centre de santé mentale ou un pédopsychiatre, avec interprète si besoin, et thérapie du trauma.",
+      "nl": "Doorverwijzing naar een centrum voor geestelijke gezondheidszorg of een kinderpsychiater, met tolk indien nodig, en traumatherapie."
+     },
+     "base_legale": [
+      {
+       "texte": {
+        "fr": "Directive 2013/33/UE (accueil)",
+        "nl": "Richtlijn 2013/33/EU (opvang)"
+       },
+       "ref": "art. 19 & 25 (besoins particuliers)"
+      },
+      {
+       "texte": {
+        "fr": "CIDE",
+        "nl": "IVRK"
+       },
+       "ref": "art. 39 (réadaptation)"
+      }
+     ],
+     "avantages": [
+      {
+       "fr": "Prise en charge durable",
+       "nl": "Duurzame opvolging"
+      },
+      {
+       "fr": "Adaptée au trauma de l'exil",
+       "nl": "Aangepast aan het trauma van ballingschap"
+      }
+     ],
+     "inconvenients": [
+      {
+       "fr": "Délais d'accès parfois longs",
+       "nl": "Toegangstermijnen soms lang"
+      },
+      {
+       "fr": "Besoin d'interprétariat",
+       "nl": "Nood aan tolken"
+      }
+     ],
+     "delai": {
+      "fr": "Rapidement",
+      "nl": "Snel"
+     }
+    },
+    {
+     "rang": 2,
+     "titre": {
+      "fr": "Élaborer un plan de sécurité et stabiliser le cadre de vie",
+      "nl": "Een veiligheidsplan opstellen en de leefomgeving stabiliseren"
+     },
+     "description": {
+      "fr": "Réduction des moyens, présence rapprochée, contacts d'urgence, et restauration d'un quotidien stable (sommeil, école, liens).",
+      "nl": "Beperking van middelen, nabije aanwezigheid, noodcontacten en herstel van een stabiel dagelijks leven (slaap, school, banden)."
+     },
+     "base_legale": [
+      {
+       "texte": {
+        "fr": "CIDE",
+        "nl": "IVRK"
+       },
+       "ref": "art. 3 & 6"
+      }
+     ],
+     "avantages": [
+      {
+       "fr": "Réduit le risque au quotidien",
+       "nl": "Vermindert het dagelijks risico"
+      },
+      {
+       "fr": "Effet thérapeutique du cadre",
+       "nl": "Therapeutisch effect van het kader"
+      }
+     ],
+     "inconvenients": [
+      {
+       "fr": "Demande une coordination entre intervenants",
+       "nl": "Vereist coördinatie tussen hulpverleners"
+      }
+     ],
+     "delai": {
+      "fr": "Sans délai après l'évaluation",
+      "nl": "Onverwijld na de evaluatie"
+     }
+    }
+   ],
+   "note_precision": {
+    "fr": "En cas de danger immédiat, contactez les services d'urgence sans attendre. Précisez l'âge et le contexte (deuil, isolement, antécédents).",
+    "nl": "Bij onmiddellijk gevaar, contacteer onverwijld de hulpdiensten. Verduidelijk de leeftijd en de context (rouw, isolement, voorgeschiedenis)."
+   }
+  },
+  {
+   "id": "ecole_refus",
+   "domaine": {
+    "fr": "Scolarité",
+    "nl": "Onderwijs"
+   },
+   "probleme": {
+    "fr": "L'inscription scolaire du mineur est refusée ou bloquée",
+    "nl": "De schoolinschrijving van de minderjarige wordt geweigerd of geblokkeerd"
+   },
+   "motsCles": [
+    "école",
+    "scolarité",
+    "inscription",
+    "refus",
+    "daspa",
+    "classe",
+    "enseignement",
+    "school",
+    "onderwijs",
+    "inschrijving",
+    "weigering",
+    "okan",
+    "klas"
+   ],
+   "questions": [],
+   "solutions": [
+    {
+     "rang": 1,
+     "titre": {
+      "fr": "Faire valoir le droit (et l'obligation) à l'enseignement, indépendamment du statut",
+      "nl": "Het recht (en de plicht) op onderwijs inroepen, ongeacht de status"
+     },
+     "description": {
+      "fr": "Tout mineur, quel que soit son statut de séjour, a droit et est tenu à la scolarité. Un refus fondé sur l'absence de titre de séjour est illégal.",
+      "nl": "Elke minderjarige, ongeacht zijn verblijfsstatus, heeft recht en plicht tot onderwijs. Een weigering op grond van het ontbreken van een verblijfstitel is onwettig."
+     },
+     "base_legale": [
+      {
+       "texte": {
+        "fr": "Décret relatif à l'obligation scolaire",
+        "nl": "Decreet betreffende de leerplicht"
+       },
+       "ref": "scolarité obligatoire"
+      },
+      {
+       "texte": {
+        "fr": "CIDE",
+        "nl": "IVRK"
+       },
+       "ref": "art. 28 (droit à l'éducation)"
+      },
+      {
+       "texte": {
+        "fr": "Constitution belge",
+        "nl": "Belgische Grondwet"
+       },
+       "ref": "art. 24 (enseignement)"
+      }
+     ],
+     "avantages": [
+      {
+       "fr": "Droit clair et opposable",
+       "nl": "Duidelijk en afdwingbaar recht"
+      },
+      {
+       "fr": "S'applique sans condition de séjour",
+       "nl": "Geldt zonder verblijfsvoorwaarde"
+      }
+     ],
+     "inconvenients": [
+      {
+       "fr": "Peut nécessiter une intervention écrite/médiation",
+       "nl": "Kan een schriftelijke tussenkomst/bemiddeling vereisen"
+      }
+     ],
+     "delai": {
+      "fr": "Inscription à viser dans les 60 jours de l'arrivée",
+      "nl": "Inschrijving te beogen binnen 60 dagen na aankomst"
+     }
+    },
+    {
+     "rang": 2,
+     "titre": {
+      "fr": "Orienter vers un dispositif d'accueil linguistique (DASPA / classe passerelle)",
+      "nl": "Doorverwijzen naar een taalonthaalvoorziening (OKAN / onthaalklas)"
+     },
+     "description": {
+      "fr": "Pour un primo-arrivant non francophone, l'inscription en dispositif d'accueil et de scolarisation facilite l'intégration.",
+      "nl": "Voor een anderstalige nieuwkomer vergemakkelijkt de inschrijving in een onthaal- en scholingsvoorziening de integratie."
+     },
+     "base_legale": [
+      {
+       "texte": {
+        "fr": "Décret DASPA (dispositif d'accueil et de scolarisation des primo-arrivants)",
+        "nl": "Decreet OKAN (onthaalonderwijs voor anderstalige nieuwkomers)"
+       },
+       "ref": "DASPA/OKAN"
+      }
+     ],
+     "avantages": [
+      {
+       "fr": "Apprentissage de la langue",
+       "nl": "Leren van de taal"
+      },
+      {
+       "fr": "Intégration progressive",
+       "nl": "Geleidelijke integratie"
+      }
+     ],
+     "inconvenients": [
+      {
+       "fr": "Disponibilité variable selon les établissements",
+       "nl": "Beschikbaarheid verschilt per school"
+      }
+     ],
+     "delai": {
+      "fr": "Dès l'inscription",
+      "nl": "Vanaf de inschrijving"
+     }
+    },
+    {
+     "rang": 3,
+     "titre": {
+      "fr": "Saisir le service de médiation scolaire ou l'administration compétente",
+      "nl": "De schoolbemiddelingsdienst of de bevoegde administratie inschakelen"
+     },
+     "description": {
+      "fr": "En cas de refus persistant, solliciter la médiation scolaire ou l'administration de l'enseignement pour faire respecter le droit.",
+      "nl": "Bij aanhoudende weigering, de schoolbemiddeling of de onderwijsadministratie inschakelen om het recht te doen naleven."
+     },
+     "base_legale": [
+      {
+       "texte": {
+        "fr": "Réglementation sur les inscriptions scolaires",
+        "nl": "Regelgeving inzake schoolinschrijvingen"
+       },
+       "ref": "médiation scolaire"
+      }
+     ],
+     "avantages": [
+      {
+       "fr": "Voie de recours administrative",
+       "nl": "Administratieve beroepsweg"
+      },
+      {
+       "fr": "Souvent rapide",
+       "nl": "Vaak snel"
+      }
+     ],
+     "inconvenients": [
+      {
+       "fr": "Démarche supplémentaire",
+       "nl": "Bijkomende stap"
+      }
+     ],
+     "delai": {
+      "fr": "Si le refus persiste",
+      "nl": "Indien de weigering aanhoudt"
+     }
+    }
+   ],
+   "note_precision": {
+    "fr": "Précisez l'âge, la langue parlée et le motif invoqué par l'école pour le refus.",
+    "nl": "Verduidelijk de leeftijd, de gesproken taal en de door de school ingeroepen reden voor de weigering."
+   }
+  },
+  {
+   "id": "reunification",
+   "domaine": {
+    "fr": "Famille",
+    "nl": "Gezin"
+   },
+   "probleme": {
+    "fr": "Un membre de la famille du mineur se trouve dans un autre pays (réunification)",
+    "nl": "Een familielid van de minderjarige bevindt zich in een ander land (hereniging)"
+   },
+   "motsCles": [
+    "famille",
+    "réunification",
+    "regroupement",
+    "parent",
+    "frère",
+    "rapprochement",
+    "adn",
+    "gezin",
+    "hereniging",
+    "gezinshereniging",
+    "ouder",
+    "broer",
+    "dna"
+   ],
+   "questions": [
+    {
+     "id": "lieu",
+     "texte": {
+      "fr": "Où se trouve le membre de famille ?",
+      "nl": "Waar bevindt het familielid zich?"
+     },
+     "options": [
+      {
+       "val": "ue",
+       "label": {
+        "fr": "Dans un pays de l'UE",
+        "nl": "In een EU-land"
+       }
+      },
+      {
+       "val": "horsue",
+       "label": {
+        "fr": "Hors UE (pays tiers)",
+        "nl": "Buiten de EU (derde land)"
+       }
+      }
+     ]
+    },
+    {
+     "id": "preuve",
+     "texte": {
+      "fr": "Disposez-vous de documents prouvant le lien familial ?",
+      "nl": "Beschikt u over documenten die de familieband bewijzen?"
+     },
+     "options": [
+      {
+       "val": "oui",
+       "label": {
+        "fr": "Oui",
+        "nl": "Ja"
+       }
+      },
+      {
+       "val": "non",
+       "label": {
+        "fr": "Non / incomplets",
+        "nl": "Nee / onvolledig"
+       }
+      }
+     ]
+    }
+   ],
+   "solutions": [
+    {
+     "rang": 1,
+     "titre": {
+      "fr": "Activer le rapprochement familial via Dublin",
+      "nl": "Gezinshereniging activeren via Dublin"
+     },
+     "condition": {
+      "q": "lieu",
+      "in": [
+       "ue"
+      ]
+     },
+     "description": {
+      "fr": "Si le membre de famille est légalement présent dans l'UE, le règlement Dublin permet de désigner cet État comme responsable, dans l'intérêt de l'enfant.",
+      "nl": "Als het familielid legaal in de EU verblijft, laat de Dublin-verordening toe die staat als verantwoordelijke aan te duiden, in het belang van het kind."
+     },
+     "base_legale": [
+      {
+       "texte": {
+        "fr": "Règlement Dublin III",
+        "nl": "Dublin III-verordening"
+       },
+       "ref": "art. 8 à 10"
+      },
+      {
+       "texte": {
+        "fr": "CIDE",
+        "nl": "IVRK"
+       },
+       "ref": "art. 10"
+      }
+     ],
+     "avantages": [
+      {
+       "fr": "Procédure dédiée à l'unité familiale",
+       "nl": "Procedure gewijd aan de gezinseenheid"
+      },
+      {
+       "fr": "Priorité à l'intérêt de l'enfant",
+       "nl": "Voorrang aan het belang van het kind"
+      }
+     ],
+     "inconvenients": [
+      {
+       "fr": "Délais stricts",
+       "nl": "Strikte termijnen"
+      },
+      {
+       "fr": "Preuve du lien requise",
+       "nl": "Bewijs van de band vereist"
+      }
+     ],
+     "delai": {
+      "fr": "Requête dans les délais Dublin",
+      "nl": "Verzoek binnen de Dublin-termijnen"
+     }
+    },
+    {
+     "rang": 1,
+     "titre": {
+      "fr": "Demander le regroupement familial (membre hors UE)",
+      "nl": "Gezinshereniging aanvragen (familielid buiten de EU)"
+     },
+     "condition": {
+      "q": "lieu",
+      "in": [
+       "horsue"
+      ]
+     },
+     "description": {
+      "fr": "Pour un mineur reconnu réfugié, le regroupement avec les parents restés hors UE est possible. ⚠️ RÉFORME 2025 (loi du 18/07/2025) : la demande doit être introduite dans les 6 MOIS de la reconnaissance pour être dispensée des conditions de revenus/logement ; au-delà, la famille doit prouver ≥ 120 % du revenu d'intégration (≈ 2 130 €/mois, allocations exclues). L'absence de réponse de l'administration vaut désormais REFUS implicite. Un parent est exclu si l'enfant était accompagné de l'autre parent à l'arrivée. Pour la protection subsidiaire : restrictions partiellement suspendues par la Cour constitutionnelle (26/02/2026) — vérifier l'état du droit avec l'avocat.",
+      "nl": "Voor een erkende minderjarige vluchteling is hereniging met de ouders buiten de EU mogelijk. ⚠️ HERVORMING 2025 (wet 18/07/2025): de aanvraag moet binnen 6 MAANDEN na de erkenning worden ingediend om vrijgesteld te zijn van inkomens-/woonstvoorwaarden; daarna moet de familie ≥ 120 % van het leefloon bewijzen (≈ 2 130 €/maand, uitkeringen uitgesloten). Geen antwoord van de administratie geldt voortaan als impliciete WEIGERING. Een ouder is uitgesloten als het kind bij aankomst vergezeld was door de andere ouder. Subsidiaire bescherming: beperkingen gedeeltelijk geschorst door het Grondwettelijk Hof (26/02/2026) — check de stand van het recht met de advocaat."
+     },
+     "base_legale": [
+      {
+       "texte": {
+        "fr": "Directive 2003/86/CE (regroupement familial)",
+        "nl": "Richtlijn 2003/86/EG (gezinshereniging)"
+       },
+       "ref": "regroupement"
+      },
+      {
+       "texte": {
+        "fr": "Loi du 15/12/1980",
+        "nl": "Wet van 15/12/1980"
+       },
+       "ref": "regroupement familial"
+      },
+      {
+       "texte": {
+        "fr": "Loi du 18/07/2025 (réforme du regroupement familial)",
+        "nl": "Wet van 18/07/2025 (hervorming gezinshereniging)"
+       },
+       "ref": "MB 28/07/2025 ; C. const. susp. 26/02/2026"
+      }
+     ],
+     "avantages": [
+      {
+       "fr": "Droit renforcé pour les réfugiés",
+       "nl": "Versterkt recht voor vluchtelingen"
+      },
+      {
+       "fr": "Réunit la cellule familiale",
+       "nl": "Herenigt het gezin"
+      }
+     ],
+     "inconvenients": [
+      {
+       "fr": "Délai favorable réduit à 6 mois (réforme 2025)",
+       "nl": "Gunstige termijn verkort tot 6 maanden (hervorming 2025)"
+      },
+      {
+       "fr": "Au-delà : revenus 120 % RIS + logement + mutuelle exigés",
+       "nl": "Daarna: inkomen 120 % leefloon + woonst + ziekenfonds vereist"
+      },
+      {
+       "fr": "Silence administratif = refus implicite (recours nécessaire)",
+       "nl": "Stilzwijgen = impliciete weigering (beroep nodig)"
+      }
+     ],
+     "delai": {
+      "fr": "⚠️ 6 MOIS après la reconnaissance (loi 18/07/2025) — agir immédiatement",
+      "nl": "⚠️ 6 MAANDEN na de erkenning (wet 18/07/2025) — onmiddellijk handelen"
+     }
+    },
+    {
+     "rang": 2,
+     "titre": {
+      "fr": "Établir le lien familial par test ADN ou preuves alternatives",
+      "nl": "De familieband aantonen via DNA-test of alternatieve bewijzen"
+     },
+     "condition": {
+      "q": "preuve",
+      "in": [
+       "non"
+      ]
+     },
+     "description": {
+      "fr": "À défaut de documents, un test ADN ou un faisceau de preuves (photos, témoignages) peut établir le lien.",
+      "nl": "Bij gebrek aan documenten kan een DNA-test of een geheel van bewijzen (foto's, getuigenissen) de band aantonen."
+     },
+     "base_legale": [
+      {
+       "texte": {
+        "fr": "Pratique administrative en matière de preuve du lien (regroupement/Dublin)",
+        "nl": "Administratieve praktijk inzake bewijs van de band (hereniging/Dublin)"
+       },
+       "ref": "preuve du lien familial"
+      }
+     ],
+     "avantages": [
+      {
+       "fr": "Surmonte l'absence de documents",
+       "nl": "Overbrugt het ontbreken van documenten"
+      }
+     ],
+     "inconvenients": [
+      {
+       "fr": "Coût et délais du test ADN",
+       "nl": "Kosten en termijnen van de DNA-test"
+      }
+     ],
+     "delai": {
+      "fr": "En parallèle de la demande",
+      "nl": "Parallel aan de aanvraag"
+     }
+    }
+   ],
+   "note_precision": {
+    "fr": "Précisez le lien exact (parent, fratrie, autre), le statut du membre de famille et l'existence de documents.",
+    "nl": "Verduidelijk de exacte band (ouder, broer/zus, andere), de status van het familielid en het bestaan van documenten."
+   }
+  },
+  {
+   "id": "pression_familiale",
+   "domaine": {
+    "fr": "Protection & Violences",
+    "nl": "Bescherming & Geweld"
+   },
+   "probleme": {
+    "fr": "Risque de mariage forcé, de MGF ou de retour forcé imposé par la famille",
+    "nl": "Risico op gedwongen huwelijk, VGV of gedwongen terugkeer opgelegd door de familie"
+   },
+   "motsCles": [
+    "mariage forcé",
+    "excision",
+    "mgf",
+    "mutilation",
+    "voyage",
+    "retour forcé",
+    "pression",
+    "famille",
+    "gedwongen huwelijk",
+    "besnijdenis",
+    "vgv",
+    "verminking",
+    "reis",
+    "druk"
+   ],
+   "questions": [
+    {
+     "id": "imminent",
+     "texte": {
+      "fr": "Un départ ou un événement (voyage, cérémonie) est-il imminent ?",
+      "nl": "Staat een vertrek of gebeurtenis (reis, ceremonie) op handen?"
+     },
+     "options": [
+      {
+       "val": "oui",
+       "label": {
+        "fr": "Oui, imminent",
+        "nl": "Ja, op handen"
+       }
+      },
+      {
+       "val": "non",
+       "label": {
+        "fr": "Non / incertain",
+        "nl": "Nee / onzeker"
+       }
+      }
+     ]
+    }
+   ],
+   "solutions": [
+    {
+     "rang": 1,
+     "titre": {
+      "fr": "Mise en sécurité immédiate et signalement",
+      "nl": "Onmiddellijk in veiligheid brengen en melding"
+     },
+     "description": {
+      "fr": "Mettre le mineur en sécurité et signaler la situation aux autorités de protection de la jeunesse.",
+      "nl": "De minderjarige in veiligheid brengen en de situatie melden aan de jeugdbeschermingsautoriteiten."
+     },
+     "base_legale": [
+      {
+       "texte": {
+        "fr": "Décret aide à la jeunesse (enfant en danger)",
+        "nl": "Decreet jeugdhulp (kind in gevaar)"
+       },
+       "ref": "protection de la jeunesse"
+      },
+      {
+       "texte": {
+        "fr": "CIDE",
+        "nl": "IVRK"
+       },
+       "ref": "art. 19"
+      },
+      {
+       "texte": {
+        "fr": "Convention d'Istanbul",
+        "nl": "Verdrag van Istanbul"
+       },
+       "ref": "art. 37-38"
+      }
+     ],
+     "avantages": [
+      {
+       "fr": "Protège immédiatement",
+       "nl": "Beschermt onmiddellijk"
+      },
+      {
+       "fr": "Active le réseau de protection",
+       "nl": "Activeert het beschermingsnetwerk"
+      }
+     ],
+     "inconvenients": [
+      {
+       "fr": "Peut tendre les relations familiales",
+       "nl": "Kan de gezinsrelaties onder spanning zetten"
+      }
+     ],
+     "delai": {
+      "fr": "Immédiat",
+      "nl": "Onmiddellijk"
+     }
+    },
+    {
+     "rang": 1,
+     "titre": {
+      "fr": "Empêcher le départ : mesure d'interdiction de sortie du territoire",
+      "nl": "Het vertrek verhinderen: maatregel van uitreisverbod"
+     },
+     "condition": {
+      "q": "imminent",
+      "in": [
+       "oui"
+      ]
+     },
+     "description": {
+      "fr": "En cas de risque imminent de mariage forcé ou de MGF lors d'un voyage, solliciter en urgence une mesure empêchant la sortie du territoire.",
+      "nl": "Bij onmiddellijk risico op gedwongen huwelijk of VGV tijdens een reis, dringend een maatregel vragen die het verlaten van het grondgebied verhindert."
+     },
+     "base_legale": [
+      {
+       "texte": {
+        "fr": "Mesures de protection de la jeunesse (urgence)",
+        "nl": "Jeugdbeschermingsmaatregelen (dringend)"
+       },
+       "ref": "interdiction de sortie du territoire"
+      },
+      {
+       "texte": {
+        "fr": "Code pénal — mariage forcé / MGF",
+        "nl": "Strafwetboek — gedwongen huwelijk / VGV"
+       },
+       "ref": "art. 391sexies / art. 409"
+      }
+     ],
+     "avantages": [
+      {
+       "fr": "Bloque le risque à la source",
+       "nl": "Blokkeert het risico bij de bron"
+      },
+      {
+       "fr": "Mesure d'urgence disponible",
+       "nl": "Dringende maatregel beschikbaar"
+      }
+     ],
+     "inconvenients": [
+      {
+       "fr": "Nécessite une saisine rapide de l'autorité compétente",
+       "nl": "Vereist een snelle vatting van de bevoegde autoriteit"
+      }
+     ],
+     "delai": {
+      "fr": "En urgence avant le départ",
+      "nl": "Dringend vóór het vertrek"
+     }
+    },
+    {
+     "rang": 2,
+     "titre": {
+      "fr": "Soutenir le parent protecteur et informer du caractère pénal",
+      "nl": "De beschermende ouder steunen en informeren over het strafbaar karakter"
+     },
+     "description": {
+      "fr": "Quand un parent s'oppose à la pratique, le soutenir ; rappeler que mariage forcé et MGF sont des infractions, y compris commises à l'étranger.",
+      "nl": "Wanneer een ouder zich tegen de praktijk verzet, deze steunen; eraan herinneren dat gedwongen huwelijk en VGV misdrijven zijn, ook indien in het buitenland gepleegd."
+     },
+     "base_legale": [
+      {
+       "texte": {
+        "fr": "Code pénal — MGF",
+        "nl": "Strafwetboek — VGV"
+       },
+       "ref": "art. 409 (applicable même à l'étranger)"
+      },
+      {
+       "texte": {
+        "fr": "Code pénal — mariage forcé",
+        "nl": "Strafwetboek — gedwongen huwelijk"
+       },
+       "ref": "art. 391sexies"
+      }
+     ],
+     "avantages": [
+      {
+       "fr": "Renforce un allié dans la famille",
+       "nl": "Versterkt een bondgenoot binnen het gezin"
+      },
+      {
+       "fr": "Effet dissuasif",
+       "nl": "Afschrikkend effect"
+      }
+     ],
+     "inconvenients": [
+      {
+       "fr": "Inopérant si aucun parent protecteur",
+       "nl": "Niet bruikbaar zonder beschermende ouder"
+      }
+     ],
+     "delai": {
+      "fr": "Sans délai",
+      "nl": "Onverwijld"
+     }
+    }
+   ],
+   "note_precision": {
+    "fr": "Précisez la nature du risque (mariage / MGF / retour), son imminence et l'existence d'un parent protecteur.",
+    "nl": "Verduidelijk de aard van het risico (huwelijk / VGV / terugkeer), de imminentie en het bestaan van een beschermende ouder."
+   }
+  },
+  {
+   "id": "disparition",
+   "domaine": {
+    "fr": "Protection & Sécurité",
+    "nl": "Bescherming & Veiligheid"
+   },
+   "probleme": {
+    "fr": "Le mineur a disparu ou a fugué",
+    "nl": "De minderjarige is verdwenen of weggelopen"
+   },
+   "motsCles": [
+    "disparition",
+    "fugue",
+    "parti",
+    "absent",
+    "introuvable",
+    "disparu",
+    "fuite",
+    "verdwijning",
+    "weglopen",
+    "vertrokken",
+    "afwezig",
+    "onvindbaar",
+    "vlucht"
+   ],
+   "questions": [],
+   "solutions": [
+    {
+     "rang": 1,
+     "titre": {
+      "fr": "Signaler immédiatement la disparition (police + Service des Tutelles)",
+      "nl": "De verdwijning onmiddellijk melden (politie + Dienst Voogdij)"
+     },
+     "description": {
+      "fr": "Toute disparition de MENA est traitée comme inquiétante. Signaler sans délai à la police et au Service des Tutelles ; un signalement de disparition de mineur est diffusé.",
+      "nl": "Elke verdwijning van een NBMV wordt als verontrustend behandeld. Onverwijld melden aan de politie en de Dienst Voogdij; een opsporingsbericht van een vermiste minderjarige wordt verspreid."
+     },
+     "base_legale": [
+      {
+       "texte": {
+        "fr": "Procédure « disparition inquiétante de mineur »",
+        "nl": "Procedure « verontrustende verdwijning van een minderjarige »"
+       },
+       "ref": "directive disparitions"
+      },
+      {
+       "texte": {
+        "fr": "Loi-programme du 24/12/2002 (Tutelle)",
+        "nl": "Programmawet van 24/12/2002 (Voogdij)"
+       },
+       "ref": "devoirs du tuteur"
+      }
+     ],
+     "avantages": [
+      {
+       "fr": "Déclenche les recherches actives",
+       "nl": "Start actief opsporingsonderzoek"
+      },
+      {
+       "fr": "Réponse adaptée au risque",
+       "nl": "Aan het risico aangepaste reactie"
+      }
+     ],
+     "inconvenients": [
+      {
+       "fr": "Aucun — l'inaction aggrave le danger",
+       "nl": "Geen — niets doen verergert het gevaar"
+      }
+     ],
+     "delai": {
+      "fr": "Immédiat dès le constat",
+      "nl": "Onmiddellijk bij de vaststelling"
+     }
+    },
+    {
+     "rang": 1,
+     "titre": {
+      "fr": "Évaluer et signaler le risque de traite",
+      "nl": "Het risico op mensenhandel beoordelen en melden"
+     },
+     "description": {
+      "fr": "Les MENA en fugue sont des cibles privilégiées des réseaux d'exploitation : signaler ce risque et alerter les services spécialisés.",
+      "nl": "Weggelopen NBMV zijn een geliefd doelwit van uitbuitingsnetwerken: dit risico melden en de gespecialiseerde diensten verwittigen."
+     },
+     "base_legale": [
+      {
+       "texte": {
+        "fr": "Directive 2011/36/UE (traite)",
+        "nl": "Richtlijn 2011/36/EU (mensenhandel)"
+       },
+       "ref": "protection des victimes"
+      },
+      {
+       "texte": {
+        "fr": "Loi du 10/08/2005 (traite) — Belgique",
+        "nl": "Wet van 10/08/2005 (mensenhandel) — België"
+       },
+       "ref": "traite des êtres humains"
+      }
+     ],
+     "avantages": [
+      {
+       "fr": "Anticipe l'exploitation",
+       "nl": "Anticipeert op uitbuiting"
+      },
+      {
+       "fr": "Mobilise les services compétents",
+       "nl": "Mobiliseert de bevoegde diensten"
+      }
+     ],
+     "inconvenients": [
+      {
+       "fr": "—",
+       "nl": "—"
+      }
+     ],
+     "delai": {
+      "fr": "Dès le signalement",
+      "nl": "Vanaf de melding"
+     }
+    },
+    {
+     "rang": 2,
+     "titre": {
+      "fr": "À son retour, remobiliser et réorienter l'accueil",
+      "nl": "Bij terugkeer: opnieuw motiveren en de opvang heroriënteren"
+     },
+     "description": {
+      "fr": "Écouter sans juger les motifs de la fugue, vérifier la sécurité d'une éventuelle piste familiale par canaux officiels, et réorienter vers un accueil plus adapté.",
+      "nl": "Zonder oordeel luisteren naar de redenen van het weglopen, de veiligheid van een eventueel familiespoor via officiële kanalen nagaan, en heroriënteren naar een meer aangepaste opvang."
+     },
+     "base_legale": [
+      {
+       "texte": {
+        "fr": "Loi du 12/01/2007 (accueil)",
+        "nl": "Opvangwet van 12/01/2007"
+       },
+       "ref": "hébergement adapté"
+      }
+     ],
+     "avantages": [
+      {
+       "fr": "Prévient la récidive",
+       "nl": "Voorkomt herhaling"
+      },
+      {
+       "fr": "Traite la cause de la fugue",
+       "nl": "Pakt de oorzaak van het weglopen aan"
+      }
+     ],
+     "inconvenients": [
+      {
+       "fr": "Demande un travail de lien",
+       "nl": "Vereist relationeel werk"
+      }
+     ],
+     "delai": {
+      "fr": "Dès le retour",
+      "nl": "Vanaf de terugkeer"
+     }
+    }
+   ],
+   "note_precision": {
+    "fr": "Indiquez depuis quand le mineur est absent, son âge, et toute destination ou contact présumé.",
+    "nl": "Geef aan sinds wanneer de minderjarige afwezig is, zijn leeftijd, en elke vermoedelijke bestemming of contact."
+   }
+  },
+  {
+   "id": "traite",
+   "domaine": {
+    "fr": "Protection & Sécurité",
+    "nl": "Bescherming & Veiligheid"
+   },
+   "probleme": {
+    "fr": "Le mineur pourrait être victime de traite ou d'exploitation",
+    "nl": "De minderjarige zou slachtoffer kunnen zijn van mensenhandel of uitbuiting"
+   },
+   "motsCles": [
+    "traite",
+    "exploitation",
+    "prostitution",
+    "travail forcé",
+    "réseau",
+    "emprise",
+    "victime",
+    "dette",
+    "mensenhandel",
+    "uitbuiting",
+    "prostitutie",
+    "dwangarbeid",
+    "netwerk",
+    "slachtoffer",
+    "schuld"
+   ],
+   "questions": [],
+   "solutions": [
+    {
+     "rang": 1,
+     "titre": {
+      "fr": "Mise à l'abri confidentielle et orientation vers un centre spécialisé traite",
+      "nl": "Vertrouwelijke opvang en doorverwijzing naar een gespecialiseerd centrum mensenhandel"
+     },
+     "description": {
+      "fr": "Sécuriser le mineur dans un lieu tenu confidentiel face au réseau, et confier l'accompagnement à un centre spécialisé agréé.",
+      "nl": "De minderjarige beveiligen op een voor het netwerk geheime plaats, en de begeleiding toevertrouwen aan een erkend gespecialiseerd centrum."
+     },
+     "base_legale": [
+      {
+       "texte": {
+        "fr": "Directive 2011/36/UE (traite)",
+        "nl": "Richtlijn 2011/36/EU (mensenhandel)"
+       },
+       "ref": "identification & protection"
+      },
+      {
+       "texte": {
+        "fr": "Loi du 10/08/2005 — Belgique",
+        "nl": "Wet van 10/08/2005 — België"
+       },
+       "ref": "statut de protection des victimes"
+      },
+      {
+       "texte": {
+        "fr": "Protocole de Palerme",
+        "nl": "Protocol van Palermo"
+       },
+       "ref": "définition de la traite"
+      }
+     ],
+     "avantages": [
+      {
+       "fr": "Protège la victime",
+       "nl": "Beschermt het slachtoffer"
+      },
+      {
+       "fr": "Expertise spécialisée",
+       "nl": "Gespecialiseerde expertise"
+      }
+     ],
+     "inconvenients": [
+      {
+       "fr": "Confidentialité à préserver strictement",
+       "nl": "Vertrouwelijkheid strikt te bewaren"
+      }
+     ],
+     "delai": {
+      "fr": "Immédiat",
+      "nl": "Onmiddellijk"
+     }
+    },
+    {
+     "rang": 1,
+     "titre": {
+      "fr": "Appliquer le principe de non-sanction de la victime",
+      "nl": "Het beginsel van niet-bestraffing van het slachtoffer toepassen"
+     },
+     "description": {
+      "fr": "La victime mineure ne doit pas être sanctionnée pour des faits commis sous contrainte (travail illégal, faux documents, etc.).",
+      "nl": "Het minderjarige slachtoffer mag niet worden bestraft voor feiten gepleegd onder dwang (illegaal werk, valse documenten, enz.)."
+     },
+     "base_legale": [
+      {
+       "texte": {
+        "fr": "Directive 2011/36/UE",
+        "nl": "Richtlijn 2011/36/EU"
+       },
+       "ref": "art. 8 (non-poursuite)"
+      },
+      {
+       "texte": {
+        "fr": "CIDE",
+        "nl": "IVRK"
+       },
+       "ref": "art. 34-36"
+      }
+     ],
+     "avantages": [
+      {
+       "fr": "Protège la victime de la double peine",
+       "nl": "Beschermt het slachtoffer tegen dubbele bestraffing"
+      }
+     ],
+     "inconvenients": [
+      {
+       "fr": "—",
+       "nl": "—"
+      }
+     ],
+     "delai": {
+      "fr": "Tout au long de la procédure",
+      "nl": "Gedurende de hele procedure"
+     }
+    },
+    {
+     "rang": 2,
+     "titre": {
+      "fr": "Activer le statut de protection sans conditionner l'aide à la dénonciation",
+      "nl": "Het beschermingsstatuut activeren zonder de hulp te koppelen aan aangifte"
+     },
+     "description": {
+      "fr": "Le statut de victime de traite offre séjour et accompagnement ; l'aide ne doit jamais être subordonnée à la coopération judiciaire.",
+      "nl": "Het statuut van slachtoffer van mensenhandel biedt verblijf en begeleiding; de hulp mag nooit afhankelijk zijn van gerechtelijke samenwerking."
+     },
+     "base_legale": [
+      {
+       "texte": {
+        "fr": "Loi du 10/08/2005 & circulaires traite",
+        "nl": "Wet van 10/08/2005 & omzendbrieven mensenhandel"
+       },
+       "ref": "statut victime"
+      }
+     ],
+     "avantages": [
+      {
+       "fr": "Sécurise le séjour et le suivi",
+       "nl": "Verzekert het verblijf en de opvolging"
+      },
+      {
+       "fr": "Respecte le rythme de la victime",
+       "nl": "Respecteert het ritme van het slachtoffer"
+      }
+     ],
+     "inconvenients": [
+      {
+       "fr": "Période de réflexion à respecter",
+       "nl": "Bedenktijd te respecteren"
+      }
+     ],
+     "delai": {
+      "fr": "Dès l'identification",
+      "nl": "Vanaf de identificatie"
+     }
+    }
+   ],
+   "note_precision": {
+    "fr": "Précisez les indices d'exploitation (type de travail, contrôle, dette, menaces sur la famille) et l'état de l'emprise.",
+    "nl": "Verduidelijk de aanwijzingen van uitbuiting (soort werk, controle, schuld, bedreigingen van de familie) en de mate van psychische greep."
+   }
+  },
+  {
+   "id": "justice",
+   "domaine": {
+    "fr": "Justice",
+    "nl": "Justitie"
+   },
+   "probleme": {
+    "fr": "Le mineur est en conflit avec la loi (interpellation, contact police)",
+    "nl": "De minderjarige is in aanraking met justitie (aanhouding, politiecontact)"
+   },
+   "motsCles": [
+    "police",
+    "arrestation",
+    "vol",
+    "délit",
+    "justice",
+    "juge",
+    "interpellation",
+    "infraction",
+    "politie",
+    "aanhouding",
+    "diefstal",
+    "misdrijf",
+    "rechter",
+    "justitie"
+   ],
+   "questions": [],
+   "solutions": [
+    {
+     "rang": 1,
+     "titre": {
+      "fr": "Être présent à l'audition et garantir l'assistance d'un avocat",
+      "nl": "Aanwezig zijn bij het verhoor en de bijstand van een advocaat waarborgen"
+     },
+     "description": {
+      "fr": "Le tuteur doit être informé et présent ; l'assistance d'un avocat spécialisé en droit de la jeunesse est un droit du mineur.",
+      "nl": "De voogd moet worden ingelicht en aanwezig zijn; de bijstand van een in jeugdrecht gespecialiseerde advocaat is een recht van de minderjarige."
+     },
+     "base_legale": [
+      {
+       "texte": {
+        "fr": "CIDE",
+        "nl": "IVRK"
+       },
+       "ref": "art. 40 (justice adaptée)"
+      },
+      {
+       "texte": {
+        "fr": "Loi/Décret protection de la jeunesse",
+        "nl": "Wet/Decreet jeugdbescherming"
+       },
+       "ref": "droits du mineur"
+      },
+      {
+       "texte": {
+        "fr": "Directive (UE) 2016/800 (garanties procédurales des enfants)",
+        "nl": "Richtlijn (EU) 2016/800 (procedurele waarborgen voor kinderen)"
+       },
+       "ref": "assistance d'un avocat"
+      }
+     ],
+     "avantages": [
+      {
+       "fr": "Protège les droits dès l'audition",
+       "nl": "Beschermt de rechten vanaf het verhoor"
+      },
+      {
+       "fr": "Évite les déclarations préjudiciables",
+       "nl": "Vermijdt nadelige verklaringen"
+      }
+     ],
+     "inconvenients": [
+      {
+       "fr": "Nécessite une réaction rapide",
+       "nl": "Vereist een snelle reactie"
+      }
+     ],
+     "delai": {
+      "fr": "Dès l'interpellation",
+      "nl": "Vanaf de aanhouding"
+     }
+    },
+    {
+     "rang": 1,
+     "titre": {
+      "fr": "Faire primer la mesure éducative sur la sanction",
+      "nl": "De educatieve maatregel laten voorgaan op de bestraffing"
+     },
+     "description": {
+      "fr": "Le mineur relève de la logique de protection : privilégier mesures éducatives, réparation et alternatives à la détention.",
+      "nl": "De minderjarige valt onder de beschermingslogica: voorrang aan educatieve maatregelen, herstel en alternatieven voor detentie."
+     },
+     "base_legale": [
+      {
+       "texte": {
+        "fr": "CIDE",
+        "nl": "IVRK"
+       },
+       "ref": "art. 37 & 40"
+      },
+      {
+       "texte": {
+        "fr": "Règles de Beijing (ONU)",
+        "nl": "Beijing-regels (VN)"
+       },
+       "ref": "justice des mineurs"
+      }
+     ],
+     "avantages": [
+      {
+       "fr": "Favorise la réinsertion",
+       "nl": "Bevordert de re-integratie"
+      },
+      {
+       "fr": "Détention en dernier recours",
+       "nl": "Detentie als laatste redmiddel"
+      }
+     ],
+     "inconvenients": [
+      {
+       "fr": "Suivi éducatif à organiser",
+       "nl": "Educatieve opvolging te organiseren"
+      }
+     ],
+     "delai": {
+      "fr": "Devant le juge de la jeunesse",
+      "nl": "Voor de jeugdrechter"
+     }
+    },
+    {
+     "rang": 2,
+     "titre": {
+      "fr": "Documenter une éventuelle instrumentalisation et réinsérer",
+      "nl": "Een eventuele instrumentalisering documenteren en re-integreren"
+     },
+     "description": {
+      "fr": "Si le mineur a été instrumentalisé par des plus âgés, le documenter et le plaider ; éloigner du groupe à risque et réengager une formation.",
+      "nl": "Als de minderjarige door ouderen werd geïnstrumentaliseerd, dit documenteren en bepleiten; weghalen uit de risicogroep en opnieuw een opleiding aanvatten."
+     },
+     "base_legale": [
+      {
+       "texte": {
+        "fr": "CIDE",
+        "nl": "IVRK"
+       },
+       "ref": "art. 3 & 39"
+      }
+     ],
+     "avantages": [
+      {
+       "fr": "Contextualise les faits",
+       "nl": "Plaatst de feiten in context"
+      },
+      {
+       "fr": "Prévient la récidive",
+       "nl": "Voorkomt herhaling"
+      }
+     ],
+     "inconvenients": [
+      {
+       "fr": "Travail de fond nécessaire",
+       "nl": "Grondig werk noodzakelijk"
+      }
+     ],
+     "delai": {
+      "fr": "Après la phase d'audition",
+      "nl": "Na de verhoorfase"
+     }
+    }
+   ],
+   "note_precision": {
+    "fr": "Précisez la nature des faits, l'âge du mineur et s'il s'agit d'un premier contact avec la justice.",
+    "nl": "Verduidelijk de aard van de feiten, de leeftijd van de minderjarige en of het om een eerste contact met justitie gaat."
+   }
+  },
+  {
+   "id": "hebergement",
+   "domaine": {
+    "fr": "Hébergement",
+    "nl": "Huisvesting"
+   },
+   "probleme": {
+    "fr": "L'hébergement du mineur est inadapté ou inexistant",
+    "nl": "De huisvesting van de minderjarige is ongeschikt of onbestaande"
+   },
+   "motsCles": [
+    "hébergement",
+    "logement",
+    "centre",
+    "accueil",
+    "sans solution",
+    "fedasil",
+    "rue",
+    "inadapté",
+    "huisvesting",
+    "opvang",
+    "centrum",
+    "zonder oplossing",
+    "straat",
+    "ongeschikt"
+   ],
+   "questions": [
+    {
+     "id": "sansabri",
+     "texte": {
+      "fr": "Le mineur est-il actuellement sans solution d'hébergement ?",
+      "nl": "Heeft de minderjarige momenteel geen opvangoplossing?"
+     },
+     "options": [
+      {
+       "val": "oui",
+       "label": {
+        "fr": "Oui, sans solution",
+        "nl": "Ja, zonder oplossing"
+       }
+      },
+      {
+       "val": "non",
+       "label": {
+        "fr": "Non, mais inadapté",
+        "nl": "Nee, maar ongeschikt"
+       }
+      }
+     ]
+    }
+   ],
+   "solutions": [
+    {
+     "rang": 1,
+     "titre": {
+      "fr": "Exiger une place d'accueil adaptée (urgence si sans solution)",
+      "nl": "Een aangepaste opvangplaats eisen (dringend indien zonder oplossing)"
+     },
+     "condition": {
+      "q": "sansabri",
+      "in": [
+       "oui"
+      ]
+     },
+     "description": {
+      "fr": "Tout MENA a droit à un accueil adapté à son âge et à son profil. En l'absence de solution, saisir Fedasil et le Service des Tutelles en urgence.",
+      "nl": "Elke NBMV heeft recht op opvang aangepast aan zijn leeftijd en profiel. Bij gebrek aan een oplossing dringend Fedasil en de Dienst Voogdij vatten."
+     },
+     "base_legale": [
+      {
+       "texte": {
+        "fr": "Loi du 12/01/2007 sur l'accueil",
+        "nl": "Opvangwet van 12/01/2007"
+       },
+       "ref": "droit à l'accueil"
+      },
+      {
+       "texte": {
+        "fr": "Directive 2013/33/UE (accueil)",
+        "nl": "Richtlijn 2013/33/EU (opvang)"
+       },
+       "ref": "art. 24 (mineurs non accompagnés)"
+      },
+      {
+       "texte": {
+        "fr": "CIDE",
+        "nl": "IVRK"
+       },
+       "ref": "art. 20 (enfant privé de milieu familial)"
+      }
+     ],
+     "avantages": [
+      {
+       "fr": "Droit opposable à l'accueil",
+       "nl": "Afdwingbaar recht op opvang"
+      },
+      {
+       "fr": "Protection renforcée des MENA",
+       "nl": "Versterkte bescherming van NBMV"
+      }
+     ],
+     "inconvenients": [
+      {
+       "fr": "Saturation possible du réseau",
+       "nl": "Mogelijke verzadiging van het netwerk"
+      }
+     ],
+     "delai": {
+      "fr": "Urgent",
+      "nl": "Dringend"
+     }
+    },
+    {
+     "rang": 2,
+     "titre": {
+      "fr": "Demander une réorientation vers une structure adaptée au profil",
+      "nl": "Een heroriëntatie naar een aan het profiel aangepaste structuur vragen"
+     },
+     "condition": {
+      "q": "sansabri",
+      "in": [
+       "non"
+      ]
+     },
+     "description": {
+      "fr": "Si l'hébergement actuel est inadapté (âge, vulnérabilité, sécurité), demander une réorientation vers une structure mieux ajustée.",
+      "nl": "Als de huidige opvang ongeschikt is (leeftijd, kwetsbaarheid, veiligheid), een heroriëntatie naar een beter passende structuur vragen."
+     },
+     "base_legale": [
+      {
+       "texte": {
+        "fr": "Loi du 12/01/2007 sur l'accueil",
+        "nl": "Opvangwet van 12/01/2007"
+       },
+       "ref": "adaptation de l'accueil"
+      },
+      {
+       "texte": {
+        "fr": "Directive 2013/33/UE",
+        "nl": "Richtlijn 2013/33/EU"
+       },
+       "ref": "art. 21-22 (besoins particuliers)"
+      }
+     ],
+     "avantages": [
+      {
+       "fr": "Hébergement ajusté au profil",
+       "nl": "Huisvesting aangepast aan het profiel"
+      },
+      {
+       "fr": "Réduit les risques (fugue, conflits)",
+       "nl": "Vermindert de risico's (weglopen, conflicten)"
+      }
+     ],
+     "inconvenients": [
+      {
+       "fr": "Délais de réorientation",
+       "nl": "Termijnen voor heroriëntatie"
+      }
+     ],
+     "delai": {
+      "fr": "Selon disponibilité",
+      "nl": "Volgens beschikbaarheid"
+     }
+    },
+    {
+     "rang": 2,
+     "titre": {
+      "fr": "Mobiliser l'aide du CPAS si le mineur n'est pas en réseau d'accueil",
+      "nl": "De hulp van het OCMW inschakelen indien de minderjarige niet in het opvangnetwerk zit"
+     },
+     "description": {
+      "fr": "Hors réseau Fedasil, le CPAS peut intervenir pour l'aide sociale et l'hébergement.",
+      "nl": "Buiten het Fedasil-netwerk kan het OCMW tussenkomen voor maatschappelijke hulp en huisvesting."
+     },
+     "base_legale": [
+      {
+       "texte": {
+        "fr": "Loi organique des CPAS du 08/07/1976",
+        "nl": "Organieke OCMW-wet van 08/07/1976"
+       },
+       "ref": "aide sociale"
+      }
+     ],
+     "avantages": [
+      {
+       "fr": "Filet de sécurité complémentaire",
+       "nl": "Aanvullend vangnet"
+      }
+     ],
+     "inconvenients": [
+      {
+       "fr": "Compétence territoriale à déterminer",
+       "nl": "Territoriale bevoegdheid te bepalen"
+      }
+     ],
+     "delai": {
+      "fr": "Sans délai",
+      "nl": "Onverwijld"
+     }
+    }
+   ],
+   "note_precision": {
+    "fr": "Précisez l'âge, le statut (demandeur ou non), et la raison de l'inadaptation (sécurité, âge, vulnérabilité).",
+    "nl": "Verduidelijk de leeftijd, de status (verzoeker of niet) en de reden van de ongeschiktheid (veiligheid, leeftijd, kwetsbaarheid)."
+   }
+  },
+  {
+   "id": "transition18",
+   "domaine": {
+    "fr": "Transition vers la majorité",
+    "nl": "Overgang naar meerderjarigheid"
+   },
+   "probleme": {
+    "fr": "Le mineur approche de 18 ans : préparer la fin de tutelle",
+    "nl": "De minderjarige nadert 18 jaar: het einde van de voogdij voorbereiden"
+   },
+   "motsCles": [
+    "18 ans",
+    "majorité",
+    "fin de tutelle",
+    "autonomie",
+    "séjour",
+    "logement adulte",
+    "transition",
+    "18 jaar",
+    "meerderjarigheid",
+    "einde voogdij",
+    "zelfstandigheid",
+    "verblijf",
+    "overgang"
+   ],
+   "questions": [
+    {
+     "id": "sejour",
+     "texte": {
+      "fr": "Le mineur a-t-il un titre de séjour stable ?",
+      "nl": "Heeft de minderjarige een stabiele verblijfstitel?"
+     },
+     "options": [
+      {
+       "val": "oui",
+       "label": {
+        "fr": "Oui (séjour reconnu)",
+        "nl": "Ja (erkend verblijf)"
+       }
+      },
+      {
+       "val": "non",
+       "label": {
+        "fr": "Non / précaire",
+        "nl": "Nee / precair"
+       }
+      }
+     ]
+    }
+   ],
+   "solutions": [
+    {
+     "rang": 1,
+     "titre": {
+      "fr": "Sécuriser le statut de séjour avant la majorité",
+      "nl": "De verblijfsstatus veiligstellen vóór de meerderjarigheid"
+     },
+     "condition": {
+      "q": "sejour",
+      "in": [
+       "non"
+      ]
+     },
+     "description": {
+      "fr": "Avant 18 ans, finaliser autant que possible la procédure de séjour ; la majorité fragilise la protection. Anticiper recours et demandes.",
+      "nl": "Vóór 18 jaar de verblijfsprocedure zoveel mogelijk afronden; de meerderjarigheid verzwakt de bescherming. Beroepen en aanvragen anticiperen."
+     },
+     "base_legale": [
+      {
+       "texte": {
+        "fr": "Loi du 15/12/1980",
+        "nl": "Wet van 15/12/1980"
+       },
+       "ref": "séjour"
+      },
+      {
+       "texte": {
+        "fr": "CIDE / Comité, transition vers l'âge adulte",
+        "nl": "IVRK / Comité, overgang naar volwassenheid"
+       },
+       "ref": "Obs. gén. n°6"
+      }
+     ],
+     "avantages": [
+      {
+       "fr": "Évite une bascule dans l'irrégularité à 18 ans",
+       "nl": "Vermijdt het afglijden naar onregelmatigheid op 18 jaar"
+      },
+      {
+       "fr": "Maximise les droits acquis mineur",
+       "nl": "Maximaliseert de als minderjarige verworven rechten"
+      }
+     ],
+     "inconvenients": [
+      {
+       "fr": "Procédures parfois longues : anticiper tôt",
+       "nl": "Procedures soms lang: tijdig anticiperen"
+      }
+     ],
+     "delai": {
+      "fr": "Dès 16-17 ans, avant l'anniversaire",
+      "nl": "Vanaf 16-17 jaar, vóór de verjaardag"
+     }
+    },
+    {
+     "rang": 1,
+     "titre": {
+      "fr": "Construire le projet d'autonomie (logement, formation, droits)",
+      "nl": "Het zelfstandigheidsproject opbouwen (huisvesting, opleiding, rechten)"
+     },
+     "description": {
+      "fr": "Préparer logement (autonome/supervisé), formation/emploi, ouverture des droits sociaux adultes et compréhension de leur fonctionnement.",
+      "nl": "Huisvesting (zelfstandig/begeleid), opleiding/werk voorbereiden, sociale volwassenrechten openen en de werking ervan begrijpen."
+     },
+     "base_legale": [
+      {
+       "texte": {
+        "fr": "Loi-programme du 24/12/2002 (Tutelle)",
+        "nl": "Programmawet van 24/12/2002 (Voogdij)"
+       },
+       "ref": "art. 24 (fin de tutelle à 18 ans)"
+      },
+      {
+       "texte": {
+        "fr": "Dispositifs jeunes adultes / aide à la jeunesse",
+        "nl": "Voorzieningen jongvolwassenen / jeugdhulp"
+       },
+       "ref": "prolongation d'accompagnement"
+      }
+     ],
+     "avantages": [
+      {
+       "fr": "Évite la rupture sèche",
+       "nl": "Vermijdt een abrupte breuk"
+      },
+      {
+       "fr": "Favorise l'insertion durable",
+       "nl": "Bevordert duurzame integratie"
+      }
+     ],
+     "inconvenients": [
+      {
+       "fr": "Coordination de plusieurs acteurs",
+       "nl": "Coördinatie van meerdere actoren"
+      }
+     ],
+     "delai": {
+      "fr": "Démarrer dès 16-17 ans",
+      "nl": "Starten vanaf 16-17 jaar"
+     }
+    },
+    {
+     "rang": 2,
+     "titre": {
+      "fr": "Organiser le relais vers les dispositifs adultes et transmettre le dossier",
+      "nl": "De doorverwijzing naar volwassenenvoorzieningen organiseren en het dossier overdragen"
+     },
+     "description": {
+      "fr": "Avant la fin de tutelle, organiser le passage de relais et transmettre un dossier complet aux services qui prendront le suivi.",
+      "nl": "Vóór het einde van de voogdij de overdracht organiseren en een volledig dossier overdragen aan de diensten die de opvolging overnemen."
+     },
+     "base_legale": [
+      {
+       "texte": {
+        "fr": "Loi-programme du 24/12/2002 (Tutelle)",
+        "nl": "Programmawet van 24/12/2002 (Voogdij)"
+       },
+       "ref": "art. 24"
+      }
+     ],
+     "avantages": [
+      {
+       "fr": "Continuité de l'accompagnement",
+       "nl": "Continuïteit van de begeleiding"
+      },
+      {
+       "fr": "Pas de perte d'information",
+       "nl": "Geen verlies van informatie"
+      }
+     ],
+     "inconvenients": [
+      {
+       "fr": "Dépend des places disponibles côté adultes",
+       "nl": "Afhankelijk van beschikbare plaatsen bij volwassenen"
+      }
+     ],
+     "delai": {
+      "fr": "Quelques mois avant 18 ans",
+      "nl": "Enkele maanden vóór 18 jaar"
+     }
+    }
+   ],
+   "note_precision": {
+    "fr": "Précisez la date des 18 ans, le statut de séjour actuel et le projet (études, formation, emploi).",
+    "nl": "Verduidelijk de datum van de 18e verjaardag, de huidige verblijfsstatus en het project (studies, opleiding, werk)."
+   }
+  }
+ ]
 }

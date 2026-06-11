@@ -1924,6 +1924,10 @@
       "fr": "Les demandes de réunification familiale sont traitées avec diligence et bienveillance.",
       "nl": "Aanvragen tot gezinshereniging worden met spoed en welwillendheid behandeld."
      }
+    },
+    {
+     "fr": "⚠️ Réforme 2025 : loi du 18/07/2025 — délai favorable réduit à 6 mois après la reconnaissance, revenus 120 % RIS exigés ensuite, silence administratif = refus implicite",
+     "nl": "⚠️ Hervorming 2025: wet van 18/07/2025 — gunstige termijn verkort tot 6 maanden na de erkenning, daarna inkomen 120 % leefloon vereist, stilzwijgen = impliciete weigering"
     }
    ],
    "delais_cles": [
@@ -1994,6 +1998,10 @@
     {
      "fr": "Le suivi post-réunification prévient les désillusions et les ruptures.",
      "nl": "De opvolging na de hereniging voorkomt ontgoochelingen en breuken."
+    },
+    {
+     "fr": "Depuis 2025, chaque dossier de regroupement se joue dans les 6 premiers mois : créez l'alerte le jour de la reconnaissance",
+     "nl": "Sinds 2025 wordt elk herenigingsdossier in de eerste 6 maanden beslist: maak het alarm aan op de dag van de erkenning"
     }
    ],
    "ressources": [
@@ -4089,6 +4097,117 @@
     "Fedasil retour volontaire",
     "OIM (REAB)",
     "Psychologue du centre"
+   ]
+  },
+  {
+   "id": "cas-rf-2025",
+   "titre": {
+    "fr": "Reconnu réfugié : la course des 6 mois (réforme 2025)",
+    "nl": "Erkend als vluchteling: de race van 6 maanden (hervorming 2025)"
+   },
+   "categorie": {
+    "fr": "Regroupement familial",
+    "nl": "Gezinshereniging"
+   },
+   "pays": "Syrie",
+   "age": 16,
+   "sexe": {
+    "fr": "Garçon",
+    "nl": "Jongen"
+   },
+   "vulnerabilites": [
+    {
+     "fr": "Famille au pays, pression psychologique",
+     "nl": "Familie in het land, psychologische druk"
+    }
+   ],
+   "situation": {
+    "fr": "Yusuf, 16 ans, Syrien, est reconnu réfugié le 10 janvier 2026. Ses parents et sa petite sœur sont à Damas. Avant la réforme, la famille aurait eu un an pour demander le regroupement sans conditions ; depuis la loi du 18/07/2025, elle n'a plus que 6 mois — et l'ambassade la plus proche est à Beyrouth.",
+    "nl": "Yusuf, 16, Syriër, wordt op 10 januari 2026 erkend als vluchteling. Zijn ouders en zusje zijn in Damascus. Vóór de hervorming had de familie een jaar om hereniging zonder voorwaarden aan te vragen; sinds de wet van 18/07/2025 nog slechts 6 maanden — en de dichtstbijzijnde ambassade is in Beiroet."
+   },
+   "chronologie": [
+    {
+     "fr": "10/01 : décision positive du CGRA — le tuteur déclenche IMMÉDIATEMENT le compte à rebours (l'app crée l'alerte automatiquement)",
+     "nl": "10/01: positieve CGVS-beslissing — de voogd start ONMIDDELLIJK het aftellen (de app maakt het alarm automatisch aan)"
+    },
+    {
+     "fr": "Semaine 2 : avocat + Croix-Rouge RLF : rassembler actes de naissance/mariage, photos, preuves du lien",
+     "nl": "Week 2: advocaat + Rode Kruis: geboorte-/huwelijksakten, foto's, bewijzen van de band verzamelen"
+    },
+    {
+     "fr": "Semaine 4 : la famille prend rendez-vous au poste diplomatique belge à Beyrouth (visa D regroupement) — délais de RDV longs : réserver tôt",
+     "nl": "Week 4: de familie maakt een afspraak bij de Belgische post in Beiroet (D-visum) — lange wachttijden: vroeg boeken"
+    },
+    {
+     "fr": "Mois 4 : dépôt complet de la demande (dans les 6 mois ✓) — accusé de réception conservé précieusement",
+     "nl": "Maand 4: volledige indiening (binnen 6 maanden ✓) — ontvangstbewijs zorgvuldig bewaard"
+    },
+    {
+     "fr": "Mois 9 : pas de réponse → depuis la réforme, le silence vaut REFUS : l'avocat introduit le recours dans les délais",
+     "nl": "Maand 9: geen antwoord → sinds de hervorming geldt stilzwijgen als WEIGERING: de advocaat dient tijdig beroep in"
+    }
+   ],
+   "cadre_legal": [
+    {
+     "fr": "Loi 15/12/1980, art. 10, modifiée par la loi du 18/07/2025 : délai favorable 6 mois ; ensuite revenus ≥ 120 % RIS, logement, mutuelle",
+     "nl": "Wet 15/12/1980, art. 10, gewijzigd door de wet van 18/07/2025: gunstige termijn 6 maanden; daarna inkomen ≥ 120 % leefloon, woonst, ziekenfonds"
+    },
+    {
+     "fr": "Silence de l'administration = refus implicite (réforme 2025) — recours au CCE",
+     "nl": "Stilzwijgen van de administratie = impliciete weigering (hervorming 2025) — beroep bij de RvV"
+    },
+    {
+     "fr": "C. const., 26/02/2026 : suspension partielle (différence réfugiés/protection subsidiaire) — droit en évolution",
+     "nl": "GwH, 26/02/2026: gedeeltelijke schorsing (verschil vluchtelingen/subsidiaire bescherming) — recht in beweging"
+    }
+   ],
+   "delais_cles": [
+    {
+     "fr": "6 MOIS après la reconnaissance pour la demande « sans conditions »",
+     "nl": "6 MAANDEN na de erkenning voor de aanvraag « zonder voorwaarden »"
+    },
+    {
+     "fr": "Réserver le RDV consulaire dès la semaine 1 (files d'attente longues)",
+     "nl": "Consulaire afspraak boeken vanaf week 1 (lange wachtrijen)"
+    }
+   ],
+   "actions_tuteur": [
+    {
+     "fr": "Le jour de la décision positive : informer la famille + saisir l'avocat + ouvrir le dossier de preuves",
+     "nl": "Op de dag van de positieve beslissing: familie informeren + advocaat inschakelen + bewijsdossier openen"
+    },
+    {
+     "fr": "Vérifier quel poste diplomatique est compétent et ses délais de rendez-vous",
+     "nl": "Nagaan welke diplomatieke post bevoegd is en haar afspraaktermijnen"
+    },
+    {
+     "fr": "Suivre activement la demande : depuis 2025, l'absence de réponse est un refus — ne jamais « attendre »",
+     "nl": "De aanvraag actief opvolgen: sinds 2025 is geen antwoord een weigering — nooit « afwachten »"
+    },
+    {
+     "fr": "Documenter chaque envoi (recommandés, accusés) pour le recours éventuel",
+     "nl": "Elke verzending documenteren (aangetekend, ontvangstbewijzen) voor een eventueel beroep"
+    }
+   ],
+   "solution": {
+    "fr": "La demande déposée au 4e mois est complète ; face au silence, le recours aboutit : visas délivrés 14 mois après la reconnaissance. Sans la réactivité du premier jour, le délai de 6 mois était manqué et les conditions de revenus auraient été inatteignables.",
+    "nl": "De in maand 4 ingediende aanvraag is volledig; na het stilzwijgen slaagt het beroep: visa afgeleverd 14 maanden na de erkenning. Zonder de reactiviteit van dag één was de termijn van 6 maanden gemist."
+   },
+   "lecons": [
+    {
+     "fr": "La réforme 2025 a transformé le regroupement en course contre la montre : le tuteur qui attend un mois fait perdre le droit",
+     "nl": "De hervorming 2025 maakte van hereniging een race tegen de klok: een voogd die een maand wacht, verspeelt het recht"
+    },
+    {
+     "fr": "Le silence administratif n'est plus votre allié : tout suivi est actif, daté, documenté",
+     "nl": "Administratief stilzwijgen is niet langer uw bondgenoot: elke opvolging is actief, gedateerd, gedocumenteerd"
+    }
+   ],
+   "ressources": [
+    "Avocat (BAJ)",
+    "Croix-Rouge RLF (preuves du lien familial)",
+    "Myria (analyse de la loi 2025)",
+    "Poste diplomatique belge compétent"
    ]
   }
  ]

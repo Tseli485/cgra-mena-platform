@@ -414,9 +414,20 @@
     </div>
     <div id="resCats" class="row" style="gap:.4rem;margin-bottom:1rem"></div>
     <div id="resourcesContent" class="loading"></div>
+    <div class="card" style="margin-top:1.2rem" id="hebergCard">
+      <h3>🏠 <span data-i18n="heb.title">Lieux d'hébergement MENA (réseau officiel)</span></h3>
+      <div class="filters">
+        <input id="hebSearch" placeholder="🔍" oninput="renderHeberg()" style="min-width:140px">
+        <select id="hebRegion" onchange="renderHeberg()"><option value="">Région</option><option value="BXL">Bruxelles</option><option value="WAL">Wallonie</option><option value="VLA">Vlaanderen</option></select>
+        <select id="hebOp" onchange="renderHeberg()"><option value="">Opérateur</option><option value="fedasil">Fedasil</option><option value="coo">COO</option><option value="mena">MENA</option><option value="croixrouge">Croix-Rouge</option><option value="rodekruis">Rode Kruis</option><option value="partenaire">Partenaires</option></select>
+      </div>
+      <div id="hebList" class="loading"></div>
+    </div>
     <div class="card" style="margin-top:1.2rem" id="sourcesOfficielles"></div>
   </section>
 </main>
+
+<datalist id="dlAdr"></datalist>
 
 <footer>
   <span id="appVersionLbl"></span> ·
@@ -962,6 +973,7 @@ function onUnlocked(){
   notifInit();      // notifications d'échéances (1 salve/jour max)
   checkLegalAlert();// alerte juridique publiée via le site
   maybeWhatsNew();  // notes de version
+  fillDatalist();   // liste déroulante d'adresses (centres + institutions)
 }
 function lockApp(){
   CRYPTO_KEY=null;DOSSIERS=[];ARCHIVES=null;
@@ -1014,7 +1026,7 @@ function go(view){
   window.scrollTo(0,0);
   if(view==='lifecycle')renderLifecycle();
   if(view==='cases')renderCases();
-  if(view==='resources'){renderResources();renderSourcesOff();}
+  if(view==='resources'){renderResources();renderSourcesOff();renderHeberg();}
   if(view==='guide')renderGuide();
   if(view==='conseil')renderConseil();
 }
@@ -1226,8 +1238,8 @@ function openDossierDetail(id){
         <div style="flex:1;min-width:120px"><label>${LANG==='nl'?'Reden':'Motif'}</label><input id="fr_motif" placeholder="${LANG==='nl'?'bv. CGVS-gehoor':'ex. audition CGRA'}"></div>
       </div>
       <div class="row" style="gap:.4rem;align-items:flex-end;margin-top:.3rem">
-        <div style="flex:1;min-width:110px"><label>${LANG==='nl'?'Van':'De'}</label><input id="fr_de" placeholder="${LANG==='nl'?'uw adres':'votre adresse'}"></div>
-        <div style="flex:1;min-width:110px"><label>${LANG==='nl'?'Naar':'À'}</label><input id="fr_a" placeholder="${LANG==='nl'?'bestemming':'destination'}"></div>
+        <div style="flex:1;min-width:110px"><label>${LANG==='nl'?'Van':'De'}</label><input id="fr_de" list="dlAdr" placeholder="${LANG==='nl'?'straat nr, 1234 gemeente':'rue n°, 1234 commune'}"></div>
+        <div style="flex:1;min-width:110px"><label>${LANG==='nl'?'Naar':'À'}</label><input id="fr_a" list="dlAdr" placeholder="${LANG==='nl'?'adres of centrum (lijst)':'adresse ou centre (liste)'}"></div>
         <button class="btn sec sm" onclick="mapsRoute()">🗺️ ${LANG==='nl'?'Km berekenen (Maps)':'Calculer km (Maps)'}</button>
         <button class="btn sm" onclick="openTournee('${d.id}')">🧭 ${LANG==='nl'?'Rondrit plannen (meerdere bezoeken)':'Planifier une tournée (plusieurs visites)'}</button>
       </div>
@@ -2211,10 +2223,10 @@ function printReleve(id){
 }
 
 /* ============ VERSION & MISES À JOUR ============ */
-const APP_VERSION='1.7.1';
+const APP_VERSION='1.7.2';
 window.APP_VERSION=APP_VERSION;   // expose pour tests.html (const non attache a window)
-Object.assign(I18N.fr,{"dash.matrix":"📊 Suivi par dossier","dash.q4":"📈 Mes statistiques","nav.guide":"🎓 Guide du tuteur","guide.title":"🎓 Guide du tuteur débutant — de la désignation aux 18 ans","guide.banner":"13 modules pas-à-pas : cours, actions à faire, documents à remettre (et à qui), rendez-vous, pièges à éviter. Contenu basé sur la réglementation en vigueur.","dash.q1":"📄 Nouveau MENA (fiche DVZ)","dash.q2":"📂 Mes dossiers","dash.q3":"⏰ Urgences & échéances","gs.ph":"🔍 Recherche globale (dossiers, lois, cas, ressources)…","ft.check":"🔄 Vérifier les mises à jour","ft.dl":"Télécharger l’application","ft.manuel":"Mode d'emploi"});
-Object.assign(I18N.nl,{"dash.matrix":"📊 Opvolging per dossier","dash.q4":"📈 Mijn statistieken","nav.guide":"🎓 Voogdengids","guide.title":"🎓 Gids voor de beginnende voogd — van aanstelling tot 18 jaar","guide.banner":"13 stap-voor-stapmodules: cursus, acties, documenten (en aan wie), afspraken, valkuilen. Inhoud gebaseerd op de geldende regelgeving.","dash.q1":"📄 Nieuwe NBMV (DVZ-fiche)","dash.q2":"📂 Mijn dossiers","dash.q3":"⏰ Urgenties & vervaldata","gs.ph":"🔍 Globaal zoeken (dossiers, wetten, gevallen, hulpbronnen)…","ft.check":"🔄 Updates controleren","ft.dl":"Applicatie downloaden","ft.manuel":"Handleiding"});
+Object.assign(I18N.fr,{"dash.matrix":"📊 Suivi par dossier","dash.q4":"📈 Mes statistiques","heb.title":"Lieux d'hébergement MENA (réseau officiel)","nav.guide":"🎓 Guide du tuteur","guide.title":"🎓 Guide du tuteur débutant — de la désignation aux 18 ans","guide.banner":"13 modules pas-à-pas : cours, actions à faire, documents à remettre (et à qui), rendez-vous, pièges à éviter. Contenu basé sur la réglementation en vigueur.","dash.q1":"📄 Nouveau MENA (fiche DVZ)","dash.q2":"📂 Mes dossiers","dash.q3":"⏰ Urgences & échéances","gs.ph":"🔍 Recherche globale (dossiers, lois, cas, ressources)…","ft.check":"🔄 Vérifier les mises à jour","ft.dl":"Télécharger l’application","ft.manuel":"Mode d'emploi"});
+Object.assign(I18N.nl,{"dash.matrix":"📊 Opvolging per dossier","dash.q4":"📈 Mijn statistieken","heb.title":"NBMV-opvangplaatsen (officieel netwerk)","nav.guide":"🎓 Voogdengids","guide.title":"🎓 Gids voor de beginnende voogd — van aanstelling tot 18 jaar","guide.banner":"13 stap-voor-stapmodules: cursus, acties, documenten (en aan wie), afspraken, valkuilen. Inhoud gebaseerd op de geldende regelgeving.","dash.q1":"📄 Nieuwe NBMV (DVZ-fiche)","dash.q2":"📂 Mijn dossiers","dash.q3":"⏰ Urgenties & vervaldata","gs.ph":"🔍 Globaal zoeken (dossiers, wetten, gevallen, hulpbronnen)…","ft.check":"🔄 Updates controleren","ft.dl":"Applicatie downloaden","ft.manuel":"Handleiding"});
 const UPDATE_URL='https://tseli485.github.io/cgra-mena-platform/version.json';
 async function checkUpdates(){
   const n=document.getElementById('updNote');
@@ -2470,7 +2482,7 @@ function mapsRoute(){
   const a=encodeURIComponent(document.getElementById('fr_a').value.trim());
   const n=document.getElementById('fr_note');
   if(!de||!a){n.textContent=LANG==='nl'?'Vul vertrek en bestemming in.':'Renseignez départ et destination.';return;}
-  window.open('https://www.google.com/maps/dir/?api=1&origin='+de+'&destination='+a+'&travelmode=driving','_blank');
+  openExt('https://www.google.com/maps/dir/?api=1&origin='+de+'&destination='+a+'&travelmode=driving','fr_note');
   n.textContent=LANG==='nl'?'Lees de afstand in Google Maps en vul het aantal km (heen-terug) hieronder in.':'Lisez la distance dans Google Maps puis saisissez les km (aller-retour) ci-dessous.';
 }
 function addFrais(id){
@@ -3161,6 +3173,8 @@ async function openStats(){
 
 /* ============ v1.7 : NOTES DE VERSION ============ */
 const CHANGELOG={
+ '1.7.2':{fr:"🏠 Base des 101 centres d'accueil officiels (Fedasil/Croix-Rouge/Rode Kruis/COO) classés par région · liste déroulante d'adresses dans les frais et tournées (+ saisie libre) · géocodage par CODE POSTAL (fini les erreurs de commune) · repli si pop-up Google Maps bloquée",
+        nl:"🏠 Databank van de 101 officiële opvangcentra per regio · adressenkeuzelijst in kosten en rondritten (+ vrije invoer) · geocodering per POSTCODE · fallback bij geblokkeerde Google Maps-pop-up"},
  '1.7.1':{fr:"🧭 Planificateur de tournée : plusieurs visites le même jour, itinéraire optimal calculé, ordre modifiable, km aller-retour estimés et ajustables, trajet complet dans Google Maps, enregistrement en frais",
         nl:"🧭 Rondritplanner: meerdere bezoeken op één dag, optimale route, aanpasbare volgorde, geschatte en aanpasbare heen-terug-km, volledige route in Google Maps, opslag als kost"},
  '1.7.0':{fr:"🧮 Calculateur de délais légaux · 🛂 outil « Préparer l'audition CGRA » (8 questions, PDF avocat) · 📈 statistiques du tuteur (rapports à temps, km à déclarer) · ⚖️ alertes juridiques en direct · 🔐 module 14 RGPD · veille automatique du contenu des pages officielles",
@@ -3217,11 +3231,25 @@ function tspOrder(dep,stops){
   return{order:best,km:bestKm};
 }
 async function geocode(q){
-  const r=await fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=be,fr,nl,de,lu&q='+encodeURIComponent(q));
-  if(!r.ok)throw new Error('geocodage indisponible');
-  const j=await r.json();
-  if(!j.length)throw new Error((LANG==='nl'?'Adres niet gevonden: ':'Adresse introuvable : ')+q);
-  return{lat:+j[0].lat,lon:+j[0].lon};
+  // 1) adresse structurée « rue, 1234 commune » → recherche par CODE POSTAL (zéro
+  //    ambiguïté de commune) ; 2) repli texte libre + Belgique ; 3) texte libre.
+  const base='https://nominatim.openstreetmap.org/search?format=json&limit=1';
+  const tries=[];
+  const pa=parseAdresseBE(q);
+  if(pa)tries.push(base+'&country=Belgium&postalcode='+encodeURIComponent(pa.cp)+'&city='+encodeURIComponent(pa.city)+'&street='+encodeURIComponent(pa.street));
+  tries.push(base+'&countrycodes=be&q='+encodeURIComponent(q));
+  tries.push(base+'&countrycodes=be,fr,nl,de,lu&q='+encodeURIComponent(q));
+  for(const url of tries){
+    const r=await fetch(url);
+    if(!r.ok)continue;
+    const j=await r.json();
+    if(j.length)return{lat:+j[0].lat,lon:+j[0].lon};
+    await new Promise(rs=>setTimeout(rs,400));
+  }
+  throw new Error((LANG==='nl'
+    ?'Adres niet gevonden: ':'Adresse introuvable : ')+q+(LANG==='nl'
+    ?' — gebruik het formaat « straat nr, 1234 gemeente »'
+    :' — utilisez le format « rue n°, 1234 commune »'));
 }
 let TOUR={did:null,dep:null,stops:[],order:[],kmEst:0};
 function openTournee(dossierId){
@@ -3232,10 +3260,11 @@ function openTournee(dossierId){
     <h3>🧭 ${NL?'Rondrit plannen':'Planifier une tournée'}</h3>
     <p class="muted" style="font-size:.84rem">${NL?'Meerdere bezoeken op één dag: voer uw vertrekadres en de te bezoeken plaatsen in. De app berekent de meest economische volgorde (heen-terug naar uw vertrekpunt), die u vrij kunt aanpassen. Enkel adressen worden naar de kaartendienst gestuurd — nooit de naam van de jongere.':'Plusieurs visites sur la journée : entrez votre adresse de départ et les lieux à visiter. L\'application calcule l\'ordre le plus économique (aller-retour à votre point de départ), que vous pouvez réorganiser librement. Seules des adresses sont envoyées au service de cartes — jamais le nom du jeune.'}</p>
     <label>🏠 ${NL?'Vertrek & terugkeer':'Départ & retour'}</label>
-    <input id="to_dep" value="${esc(dep)}" placeholder="${NL?'uw adres':'votre adresse'}">
+    <input id="to_dep" list="dlAdr" value="${esc(dep)}" placeholder="${NL?'bv. Stationsstraat 12, 6061 Montignies-sur-Sambre':'ex. Rue de la Station 12, 6061 Montignies-sur-Sambre'}">
+    <p class="muted" style="font-size:.76rem;margin:.2rem 0 0">📍 ${NL?'Formaat: straat + nr, POSTCODE gemeente (de postcode vermijdt verwarring tussen gemeenten). Kies een centrum in de lijst of typ vrij.':'Format : rue + n°, CODE POSTAL commune (le code postal évite toute confusion entre communes). Choisissez un centre dans la liste ou tapez librement.'}</p>
     <label style="margin-top:.5rem">📍 ${NL?'Te bezoeken plaatsen':'Lieux à visiter'}</label>
     <div id="to_stops">
-      ${[0,1,2].map(i=>`<input class="to_stop" style="margin-bottom:.35rem" placeholder="${NL?'bezoek':'visite'} ${i+1} — ${NL?'adres':'adresse'}">`).join('')}
+      ${[0,1,2].map(i=>`<input class="to_stop" list="dlAdr" style="margin-bottom:.35rem" placeholder="${NL?'bezoek':'visite'} ${i+1} — ${NL?'adres of centrum uit de lijst':'adresse ou centre de la liste'}">`).join('')}
     </div>
     <button class="btn sec sm" onclick="addTourStop()">➕ ${NL?'Plaats toevoegen':'Ajouter un lieu'}</button>
     <button class="btn sm" onclick="planTournee()" style="margin-left:.4rem">🧭 ${NL?'Optimale route voorstellen':'Proposer l\'itinéraire optimal'}</button>
@@ -3248,7 +3277,7 @@ function addTourStop(){
   const div=document.getElementById('to_stops');
   const n=div.querySelectorAll('.to_stop').length+1;
   const inp=document.createElement('input');
-  inp.className='to_stop';inp.style.marginBottom='.35rem';
+  inp.className='to_stop';inp.style.marginBottom='.35rem';inp.setAttribute('list','dlAdr');
   inp.placeholder=(NL?'bezoek ':'visite ')+n+' — '+(NL?'adres':'adresse');
   div.appendChild(inp);
 }
@@ -3319,7 +3348,7 @@ function moveTourStop(pos,dir){
 function openTourMaps(){
   const wp=TOUR.order.map(i=>encodeURIComponent(TOUR.stops[i].addr)).join('%7C');
   const dep=encodeURIComponent(TOUR.dep.addr);
-  window.open('https://www.google.com/maps/dir/?api=1&origin='+dep+'&destination='+dep+'&waypoints='+wp+'&travelmode=driving','_blank');
+  openExt('https://www.google.com/maps/dir/?api=1&origin='+dep+'&destination='+dep+'&waypoints='+wp+'&travelmode=driving','to_note');
 }
 function saveTournee(){
   const NL=LANG==='nl';
@@ -3331,6 +3360,69 @@ function saveTournee(){
     de:TOUR.dep.addr.split(',')[0],a:(NL?'rondrit ':'boucle ')+TOUR.order.length+(NL?' bezoeken':' visites'),
     km:km,pkm:+getPkm(),park:0,autres:0});
   saveDossiers(arr);closeModal('tourneeModal');openDossierDetail(TOUR.did);
+}
+
+
+/* ============ v1.7.2 : HÉBERGEMENTS (101 centres officiels) & ADRESSES ============ */
+let HEBERG=null;
+async function loadHeberg(){
+  if(!HEBERG)HEBERG=await loadJSON('js/data/hebergements-data.json');
+  return HEBERG;
+}
+// Liste déroulante d'adresses : centres d'hébergement + institutions clés.
+// La VALEUR insérée = l'adresse seule (c'est elle qui sert au calcul d'itinéraire).
+async function fillDatalist(){
+  const dl=document.getElementById('dlAdr');if(!dl||dl.children.length)return;
+  const H=await loadHeberg();if(!H)return;
+  const opts=[];
+  H.centres.forEach(c=>opts.push([c.adresse,`🏠 ${c.nom} (${c.operateurLbl}) — ${c.cp} ${c.commune}`]));
+  if(!INTERV)INTERV=await loadJSON('js/data/intervenants-data.json');
+  (INTERV&&INTERV.intervenants||[]).forEach(x=>{
+    const a=String(x.adresse||'');
+    if(/\d{4}/.test(a)&&!/voir|kanton|arrondissement/i.test(a))opts.push([a.split(' (')[0],`🏛️ ${tr(x.nom)}`]);
+  });
+  dl.innerHTML=opts.map(([v,l])=>`<option value="${esc(v)}" label="${esc(l)}"></option>`).join('');
+}
+// Adresse belge structurée : « rue n°, 1234 Commune » → géocodage fiable par CP
+function parseAdresseBE(q){
+  const m=String(q).trim().match(/^(.*?)[,;]?\s*([1-9][0-9]{3})\s+([A-Za-zÀ-ÿ' .\-]{2,40})$/);
+  return m?{street:m[1].trim(),cp:m[2],city:m[3].trim()}:null;
+}
+// Ouvre un lien externe avec repli si le navigateur bloque les pop-ups
+function openExt(url,noteId){
+  const w=window.open(url,'_blank');
+  if(!w||w.closed){
+    const n=document.getElementById(noteId);
+    if(n)n.innerHTML='⚠️ '+(LANG==='nl'?'Pop-up geblokkeerd — ':'Pop-up bloquée — ')+`<a href="${url}" target="_blank" rel="noopener"><strong>${LANG==='nl'?'klik hier om Google Maps te openen':'cliquez ici pour ouvrir Google Maps'}</strong></a>`;
+  }
+}
+
+
+async function renderHeberg(){
+  const el=document.getElementById('hebList');if(!el)return;
+  const H=await loadHeberg();if(!H){el.innerHTML='—';return;}
+  const NL=LANG==='nl';
+  const q=(document.getElementById('hebSearch').value||'').toLowerCase();
+  const reg=document.getElementById('hebRegion').value,op=document.getElementById('hebOp').value;
+  let L=H.centres.filter(c=>(!reg||c.region===reg)&&(!op||c.operateur===op)&&
+    (!q||(c.nom+' '+c.commune+' '+c.cp+' '+c.adresse).toLowerCase().includes(q)));
+  const regLbl={BXL:'Bruxelles',WAL:'Wallonie',VLA:'Vlaanderen'};
+  el.innerHTML=`<p class="muted" style="font-size:.8rem">${esc(tr(H.note))}<br>📅 ${NL?'Bron':'Source'} : ${esc(H.source)}</p>
+    <p class="muted">${L.length} ${NL?'centra':'centres'}</p>
+    ${['BXL','WAL','VLA'].map(r=>{
+      const g=L.filter(c=>c.region===r);
+      if(!g.length)return'';
+      return `<details class="accordion" ${reg||q?'open':''}><summary>${regLbl[r]} — ${g.length}</summary><div class="body">
+        ${g.map(c=>`<div class="list-item" style="cursor:default">
+          <div class="row" style="justify-content:space-between">
+            <strong>${esc(c.nom)}</strong><span class="badge b-nouveau">${esc(c.operateurLbl)}</span>
+          </div>
+          <div class="muted">📍 ${esc(c.adresse)}</div>
+          <div class="row" style="margin-top:.3rem">
+            <button class="btn sec sm" onclick="navigator.clipboard.writeText('${esc(c.adresse)}').then(()=>this.textContent='✅')">📋 ${NL?'Adres kopiëren':'Copier l\'adresse'}</button>
+            <button class="btn sec sm" onclick="openExt('https://www.google.com/maps/search/?api=1&query='+encodeURIComponent('${esc(c.adresse)}'),'hebList')">🗺️ Maps</button>
+          </div></div>`).join('')}
+      </div></details>`;}).join('')}`;
 }
 
 /* ============ UTIL ============ */

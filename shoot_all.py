@@ -152,6 +152,51 @@ with sync_playwright() as p:
 
     pg.evaluate("openArchives()"); pg.wait_for_timeout(500)
     shot(pg, '#archModal .modal-box', '21-archives')
+    pg.evaluate("closeModal('archModal')")
+
+    # 22 — alerte juridique (bandeau, vue dashboard)
+    pg.evaluate("go('dashboard');localStorage.removeItem('mena_alert_seen');checkLegalAlert()")
+    pg.wait_for_timeout(900)
+    if pg.locator('#legalAlert .banner').count():
+        shot(pg, '#legalAlert', '22-alerte')
+
+    # 23 — calculateur de délais (rempli : reconnaissance le 10/01/2026)
+    pg.evaluate(f"openCalcDelais('{d1}')")
+    pg.wait_for_timeout(300)
+    pg.evaluate("document.getElementById('cd_ev').value='reco';document.getElementById('cd_date').value='2026-01-10';")
+    pg.evaluate(f"renderCalc('{d1}')")
+    pg.wait_for_timeout(300)
+    shot(pg, '#calcModal .modal-box', '23-calculateur')
+    pg.evaluate("closeModal('calcModal')")
+
+    # 24 — préparation CGRA (réponses fictives)
+    pg.evaluate(f"openCgraPrep('{d1}')")
+    pg.wait_for_timeout(300)
+    if LANG == 'fr':
+        A0="Karim D., né le 01.01.2010 dans la province de Baghlan (district fictif). Père agriculteur, mère au foyer, deux sœurs plus jeunes restées au pays avec la mère."
+        A1="Départ en mars 2025 : le père a été menacé après avoir refusé de collaborer avec un groupe armé local. Karim, visé comme « fils aîné », a quitté le village avec un passeur payé par un oncle."
+        A2="Crainte d'être enrôlé de force et de représailles contre la famille. Les menaces ont continué après son départ (messages reçus par l'oncle)."
+    else:
+        A0="Karim D., geboren 01.01.2010 in de provincie Baghlan (fictief district). Vader landbouwer, moeder huisvrouw, twee jongere zussen bij de moeder gebleven."
+        A1="Vertrek in maart 2025: de vader werd bedreigd nadat hij weigerde mee te werken met een lokale gewapende groep. Karim, geviseerd als « oudste zoon », verliet het dorp met een smokkelaar betaald door een oom."
+        A2="Vrees voor gedwongen rekrutering en represailles tegen de familie. De bedreigingen gingen door na zijn vertrek (berichten ontvangen door de oom)."
+    pg.evaluate(f"document.getElementById('cg_0').value={A0!r};document.getElementById('cg_1').value={A1!r};document.getElementById('cg_2').value={A2!r};")
+    pg.wait_for_timeout(200)
+    shot(pg, '#cgraModal .modal-box', '24-cgra-prep')
+    pg.evaluate(f"saveCgraPrep('{d1}');closeModal('cgraModal')")
+
+    # 25 — statistiques (données fictives présentes : frais, rdv, conseils)
+    pg.evaluate("openStats()")
+    pg.wait_for_timeout(600)
+    shot(pg, '#statsModal .modal-box', '25-stats')
+    pg.evaluate("closeModal('statsModal')")
+
+    # 26 — notes de version
+    pg.evaluate("localStorage.setItem('mena_seen_v','1.6.1');maybeWhatsNew()")
+    pg.wait_for_timeout(300)
+    if pg.locator('#wnModal.open').count():
+        shot(pg, '#wnModal .modal-box', '26-nouveautes')
+        pg.evaluate("closeModal('wnModal')")
 
     b.close()
 

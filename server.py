@@ -30,7 +30,32 @@ class Handler(http.server.SimpleHTTPRequestHandler):
     def log_message(self, *a):
         pass  # silencieux
 
+def ensure_shortcut():
+    """Windows : cree un raccourci 'MENA Tuteur' sur le Bureau et dans le menu
+    Demarrer au premier lancement de l'exe — l'installation se resume a un
+    double-clic. Idempotent, silencieux en cas d'echec."""
+    if os.name != "nt" or not getattr(sys, "frozen", False):
+        return
+    try:
+        import subprocess
+        exe = sys.executable.replace("'", "''")
+        ps = (
+            "$w=New-Object -ComObject WScript.Shell;"
+            "foreach($f in @($w.SpecialFolders.Item('Desktop'),$w.SpecialFolders.Item('Programs'))){"
+            "$p=Join-Path $f 'MENA Tuteur.lnk';"
+            "if(-not (Test-Path $p)){$s=$w.CreateShortcut($p);"
+            "$s.TargetPath='" + exe + "';$s.IconLocation='" + exe + ",0';"
+            "$s.Description='Plateforme MENA Tuteur';$s.Save();Write-Output ('OK '+$p)}}"
+        )
+        r = subprocess.run(["powershell", "-NoProfile", "-Command", ps],
+                           capture_output=True, text=True, timeout=20)
+        if "OK" in (r.stdout or ""):
+            print("  Raccourci 'MENA Tuteur' cree (Bureau + menu Demarrer).")
+    except Exception:
+        pass
+
 def main():
+    ensure_shortcut()
     socketserver.TCPServer.allow_reuse_address = True
     httpd = socketserver.TCPServer(("127.0.0.1", PORT), Handler)
     print("=" * 60)

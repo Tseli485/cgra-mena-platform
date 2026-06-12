@@ -232,6 +232,7 @@
       <button id="langFr" onclick="setLang('fr')">FR</button>
       <button id="langNl" onclick="setLang('nl')">NL</button>
     </div>
+    <button class="icon-btn" onclick="openTuteurProfil()" title="Mon profil tuteur / Mijn voogdprofiel">👤</button>
     <button class="icon-btn" onclick="openGlossaire()" title="Glossaire">📖</button>
     <button class="icon-btn" id="themeBtn" onclick="toggleTheme()" title="Thème">🌙</button>
     <button class="lock-btn" onclick="lockApp()" data-i18n="btn.lock">🔒 Verrouiller</button>
@@ -575,6 +576,11 @@
     <div id="archBox"></div>
   </div>
 </div>
+
+<!-- MODAL PROFIL TUTEUR -->
+<div class="modal" id="tuteurModal"><div class="modal-box">
+  <button class="close" onclick="closeModal('tuteurModal')">&times;</button><div id="tuteurBox"></div>
+</div></div>
 
 <!-- MODAL FRAIS GLOBAUX (par jeune) -->
 <div class="modal" id="fraisGModal"><div class="modal-box" style="max-width:860px">
@@ -980,6 +986,7 @@ function onUnlocked(){
   checkLegalAlert();// alerte juridique publiée via le site
   maybeWhatsNew();  // notes de version
   fillDatalist();   // liste déroulante d'adresses (centres + institutions)
+  loadTuteur();     // profil du tuteur (documents + départ par défaut)
 }
 function lockApp(){
   CRYPTO_KEY=null;DOSSIERS=[];ARCHIVES=null;
@@ -1244,9 +1251,10 @@ function openDossierDetail(id){
         <div style="flex:1;min-width:120px"><label>${LANG==='nl'?'Reden':'Motif'}</label><input id="fr_motif" placeholder="${LANG==='nl'?'bv. CGVS-gehoor':'ex. audition CGRA'}"></div>
       </div>
       <div class="row" style="gap:.4rem;align-items:flex-end;margin-top:.3rem">
-        <div style="flex:1;min-width:110px"><label>${LANG==='nl'?'Van':'De'}</label><input id="fr_de" list="dlAdr" placeholder="${LANG==='nl'?'straat nr, 1234 gemeente':'rue n°, 1234 commune'}"></div>
+        <div style="flex:1;min-width:110px"><label>${LANG==='nl'?'Van':'De'}</label><input id="fr_de" list="dlAdr" value="${esc(tuteurAdr())}" placeholder="${LANG==='nl'?'straat nr, 1234 gemeente':'rue n°, 1234 commune'}"></div>
         <div style="flex:1;min-width:110px"><label>${LANG==='nl'?'Naar':'À'}</label><input id="fr_a" list="dlAdr" placeholder="${LANG==='nl'?'adres of centrum (lijst)':'adresse ou centre (liste)'}"></div>
-        <button class="btn sec sm" onclick="mapsRoute()">🗺️ ${LANG==='nl'?'Km berekenen (Maps)':'Calculer km (Maps)'}</button>
+        <button class="btn sm" onclick="kmAuto('fr_de','fr_a','fr_km','fr_note')">📏 ${LANG==='nl'?'Km automatisch (beste route)':'Km auto (meilleur itinéraire)'}</button>
+        <button class="btn sec sm" onclick="mapsRoute()">🗺️ Maps</button>
         <button class="btn sm" onclick="openTournee('${d.id}')">🧭 ${LANG==='nl'?'Rondrit plannen (meerdere bezoeken)':'Planifier une tournée (plusieurs visites)'}</button>
       </div>
       <div class="row" style="gap:.4rem;align-items:flex-end;margin-top:.3rem">
@@ -2160,7 +2168,7 @@ function genReport(id,rid){
     <h1>${esc(tr(rt.label))}</h1>
     <p style="color:#555">${NL?'Datum':'Date'} : ${nowISO()} — ${NL?'Wettelijke basis':'Base légale'} : ${esc(rt.base)}</p>
     <table style="margin:.6rem 0"><tr>
-      <td style="width:50%;vertical-align:top"><strong>${NL?'Van (voogd)':'De (tuteur)'} :</strong><br>${FILL}<br>${FILL}</td>
+      <td style="width:50%;vertical-align:top"><strong>${NL?'Van (voogd)':'De (tuteur)'} :</strong><br>${TUTEUR.nom?tuteurBloc(NL):FILL+'<br>'+FILL}</td>
       <td style="vertical-align:top"><strong>${NL?'Aan':'À'} :</strong><br>${esc(destNom)}${destAdr?'<br>'+esc(destAdr):''}${rt.dest==='juge'?'<br><span style="color:#555">'+(NL?'Kopie: Dienst Voogdij, Waterloolaan 115, 1000 Brussel':'Copie : Service des Tutelles, Bd de Waterloo 115, 1000 Bruxelles')+'</span>':''}</td>
     </tr></table>
     ${sec(1,NL?'Identiteit van de minderjarige':'Identité du mineur')}
@@ -2186,7 +2194,7 @@ function genReport(id,rid){
     <p>${d.notes?esc(d.notes).slice(0,2500):FILL}</p>
     <br><table><tr>
       <td style="width:50%">${NL?'Opgemaakt te':'Fait à'} ${FILL}, ${NL?'op':'le'} ${nowISO()}</td>
-      <td style="text-align:right">${NL?'De voogd,':'Le tuteur,'}<br><br><br>____________________</td>
+      <td style="text-align:right">${NL?'De voogd,':'Le tuteur,'} ${esc(TUTEUR.nom||'')}<br><br><br>____________________</td>
     </tr></table>`;
   printDoc(tr(rt.label),html);
 }
@@ -2229,7 +2237,7 @@ function printReleve(id){
 }
 
 /* ============ VERSION & MISES À JOUR ============ */
-const APP_VERSION='1.7.3';
+const APP_VERSION='1.7.4';
 window.APP_VERSION=APP_VERSION;   // expose pour tests.html (const non attache a window)
 Object.assign(I18N.fr,{"dash.matrix":"📊 Suivi par dossier","dash.q4":"📈 Mes statistiques","dash.q5":"🚗 Mes frais (par jeune)","heb.title":"Lieux d'hébergement MENA (réseau officiel)","nav.guide":"🎓 Guide du tuteur","guide.title":"🎓 Guide du tuteur débutant — de la désignation aux 18 ans","guide.banner":"13 modules pas-à-pas : cours, actions à faire, documents à remettre (et à qui), rendez-vous, pièges à éviter. Contenu basé sur la réglementation en vigueur.","dash.q1":"📄 Nouveau MENA (fiche DVZ)","dash.q2":"📂 Mes dossiers","dash.q3":"⏰ Urgences & échéances","gs.ph":"🔍 Recherche globale (dossiers, lois, cas, ressources)…","ft.check":"🔄 Vérifier les mises à jour","ft.dl":"Télécharger l’application","ft.manuel":"Mode d'emploi"});
 Object.assign(I18N.nl,{"dash.matrix":"📊 Opvolging per dossier","dash.q4":"📈 Mijn statistieken","dash.q5":"🚗 Mijn kosten (per jongere)","heb.title":"NBMV-opvangplaatsen (officieel netwerk)","nav.guide":"🎓 Voogdengids","guide.title":"🎓 Gids voor de beginnende voogd — van aanstelling tot 18 jaar","guide.banner":"13 stap-voor-stapmodules: cursus, acties, documenten (en aan wie), afspraken, valkuilen. Inhoud gebaseerd op de geldende regelgeving.","dash.q1":"📄 Nieuwe NBMV (DVZ-fiche)","dash.q2":"📂 Mijn dossiers","dash.q3":"⏰ Urgenties & vervaldata","gs.ph":"🔍 Globaal zoeken (dossiers, wetten, gevallen, hulpbronnen)…","ft.check":"🔄 Updates controleren","ft.dl":"Applicatie downloaden","ft.manuel":"Handleiding"});
@@ -2262,6 +2270,13 @@ function renderBkReminder(){
   const el=document.getElementById('bkReminder');if(!el)return;
   const last=+localStorage.getItem('mena_last_export')||0;
   const days=last?Math.floor((Date.now()-last)/864e5):999;
+  if(!TUTEUR.nom){
+    el.innerHTML=`<div class="banner">👤 ${LANG==='nl'
+      ?'Vul uw voogdprofiel in (knop 👤 bovenaan): uw gegevens komen automatisch op alle documenten en uw thuisadres wordt het standaardvertrekpunt.'
+      :'Complétez votre profil tuteur (bouton 👤 en haut) : vos coordonnées s\'inscriront automatiquement sur tous les documents et votre domicile deviendra le départ par défaut des trajets.'}
+      <button class="btn sm" style="margin-left:.6rem" onclick="openTuteurProfil()">${LANG==='nl'?'Profiel invullen':'Compléter'}</button></div>`;
+    return;
+  }
   if(DOSSIERS.length&&days>7){
     el.innerHTML=`<div class="banner" style="border-left:4px solid var(--rouge)">💾 ${LANG==='nl'
       ?`Laatste back-up: ${last?days+' dagen geleden':'nooit'}. Maak een versleutelde back-up om gegevensverlies te voorkomen.`
@@ -2507,6 +2522,7 @@ function genFraisPDF(id){
   const totKm=d.frais.reduce((t2,f)=>t2+(+f.km||0),0);
   printDoc(LANG==='nl'?'Kostendeclaratie voogd':'Déclaration de frais du tuteur',
     `<h1>${LANG==='nl'?'Kostendeclaratie van de voogd':'Déclaration de frais du tuteur'}</h1>
+     ${TUTEUR.nom?`<p>${tuteurBloc(LANG==='nl')}</p>`:''}
      <p>${LANG==='nl'?'Dossier':'Dossier'} : <strong>${esc(d.nom)}</strong>${d.fiche&&d.fiche.ov?' — OV '+esc(d.fiche.ov):''}<br>
      ${LANG==='nl'?'Datum':'Date'} : ${nowISO()}<br>
      ${LANG==='nl'?'Bestemmeling: Dienst Voogdij (FOD Justitie), Waterloolaan 115, 1000 Brussel':'Destinataire : Service des Tutelles (SPF Justice), Bd de Waterloo 115, 1000 Bruxelles'}</p>
@@ -2514,7 +2530,7 @@ function genFraisPDF(id){
      ${d.frais.map(f=>`<tr><td>${esc(f.date)}</td><td>${esc(f.motif)}</td><td>${esc(f.de)} → ${esc(f.a)}</td><td class="r">${(+f.km).toFixed(1)}</td><td class="r">${(+f.pkm).toFixed(3)}</td><td class="r">${(+f.park).toFixed(2)}</td><td class="r">${(+f.autres).toFixed(2)}</td><td class="r">${fraisTotal(f).toFixed(2)}</td></tr>`).join('')}
      <tr><td colspan="3"><strong>TOTAL</strong></td><td class="r"><strong>${totKm.toFixed(1)}</strong></td><td colspan="3"></td><td class="r"><strong>${tot.toFixed(2)} €</strong></td></tr></table>
      <p style="font-size:.85rem;color:#555">${LANG==='nl'?'Reële afstanden deur-tot-deur, controleerbaar via Google Maps/Michelin (KB 18/01/1965). Bewijsstukken in bijlage.':'Distances réelles porte-à-porte, contrôlables via Google Maps/Michelin (AR 18/01/1965). Justificatifs en annexe.'}</p>
-     <p style="margin-top:2rem">${LANG==='nl'?'Handtekening van de voogd':'Signature du tuteur'} : ______________________</p>`);
+     <p style="margin-top:2rem">${LANG==='nl'?'Handtekening van de voogd':'Signature du tuteur'}${TUTEUR.nom?' — '+esc(TUTEUR.nom):''} : ______________________</p>`);
 }
 
 /* ============ v1.2 : ARCHIVES (dossiers clôturés, chiffrés, consultables) ============ */
@@ -3142,6 +3158,7 @@ function printCgraPrep(id){
     `<h1>${NL?'Voorbereiding van het CGVS-gehoor':'Préparation de l\'audition CGRA'}</h1>
      <p><strong>${esc(d.nom)}</strong>${d.fiche&&d.fiche.ov?' — OE '+esc(d.fiche.ov):''} — ${nowISO()}<br>
      <span style="color:#555">${NL?'Vertrouwelijk — bestemd voor de advocaat van de minderjarige':'Confidentiel — destiné à l\'avocat du mineur'}</span></p>
+     ${TUTEUR.nom?`<p style="font-size:.85rem">${NL?'Voogd':'Tuteur'} : ${tuteurBloc(NL)}</p>`:''}
      ${CGRA_Q.map((q,i)=>`<h2 style="font-size:1rem;color:#19497F;margin-top:1rem">${esc(tr(q))}</h2><p>${esc(P['q'+i]||'—')}</p>`).join('')}`);
 }
 
@@ -3185,6 +3202,8 @@ async function openStats(){
 
 /* ============ v1.7 : NOTES DE VERSION ============ */
 const CHANGELOG={
+ '1.7.4':{fr:"👤 Profil du tuteur (coordonnées + domicile, chiffré) injecté automatiquement sur tous les documents · domicile = départ par défaut des trajets (modifiable) · 📏 km du MEILLEUR ITINÉRAIRE calculés directement dans le programme (routage routier réel), pour les trajets simples ET les tournées",
+        nl:"👤 Voogdprofiel (gegevens + thuisadres, versleuteld) automatisch op alle documenten · thuisadres = standaardvertrek (aanpasbaar) · 📏 km van de BESTE ROUTE rechtstreeks in het programma berekend (werkelijke wegroutering)"},
  '1.7.3':{fr:"🚗 Gestion pro des frais PAR JEUNE : vue globale groupée par MENA (sous-totaux km/€), filtres année/mois, ajout d'un trajet en choisissant le jeune, déclaration PDF globale par tutelle, ventilation par jeune dans les statistiques",
         nl:"🚗 Professioneel kostenbeheer PER JONGERE: globaal overzicht per NBMV (subtotalen km/€), jaar-/maandfilters, verplaatsing toevoegen met keuze van de jongere, globale PDF-declaratie per voogdij"},
  '1.7.2':{fr:"🏠 Base des 101 centres d'accueil officiels (Fedasil/Croix-Rouge/Rode Kruis/COO) classés par région · liste déroulante d'adresses dans les frais et tournées (+ saisie libre) · géocodage par CODE POSTAL (fini les erreurs de commune) · repli si pop-up Google Maps bloquée",
@@ -3269,7 +3288,7 @@ let TOUR={did:null,dep:null,stops:[],order:[],kmEst:0};
 function openTournee(dossierId){
   const NL=LANG==='nl';
   TOUR={did:dossierId,dep:null,stops:[],order:[],kmEst:0};
-  const dep=localStorage.getItem('mena_depart')||'';
+  const dep=tuteurAdr()||localStorage.getItem('mena_depart')||'';
   document.getElementById('tourneeBox').innerHTML=`
     <h3>🧭 ${NL?'Rondrit plannen':'Planifier une tournée'}</h3>
     <p class="muted" style="font-size:.84rem">${NL?'Meerdere bezoeken op één dag: voer uw vertrekadres en de te bezoeken plaatsen in. De app berekent de meest economische volgorde (heen-terug naar uw vertrekpunt), die u vrij kunt aanpassen. Enkel adressen worden naar de kaartendienst gestuurd — nooit de naam van de jongere.':'Plusieurs visites sur la journée : entrez votre adresse de départ et les lieux à visiter. L\'application calcule l\'ordre le plus économique (aller-retour à votre point de départ), que vous pouvez réorganiser librement. Seules des adresses sont envoyées au service de cartes — jamais le nom du jeune.'}</p>
@@ -3312,9 +3331,10 @@ async function planTournee(){
       stops.push({addr:stopAddrs[i],geo:await geocode(stopAddrs[i])});
     }
     const t=tspOrder(dep.geo,stops.map(x=>x.geo));
-    TOUR.dep=dep;TOUR.stops=stops;TOUR.order=t.order;
+    TOUR.dep=dep;TOUR.stops=stops;TOUR.order=t.order;TOUR.realLegs=null;
     note.textContent='';
     renderTournee();
+    tourRealKm();   // affine avec les km routiers réels (meilleur itinéraire)
   }catch(e){note.textContent='⚠️ '+e.message;}
 }
 function tourTotalKm(){
@@ -3324,15 +3344,21 @@ function tourTotalKm(){
   km+=havKm(pts[pts.length-1],TOUR.dep.geo);
   return km*ROAD_FACTOR;
 }
-function renderTournee(){
+function renderTournee(real){
   const NL=LANG==='nl';
-  TOUR.kmEst=Math.round(tourTotalKm()*10)/10;
+  if(!real)TOUR.kmEst=Math.round(tourTotalKm()*10)/10;
   const pkm=+getPkm();
   const legs=[];
   const pts=TOUR.order.map(i=>TOUR.stops[i]);
-  legs.push([TOUR.dep.addr,pts[0].addr,havKm(TOUR.dep.geo,pts[0].geo)*ROAD_FACTOR]);
-  for(let k=0;k<pts.length-1;k++)legs.push([pts[k].addr,pts[k+1].addr,havKm(pts[k].geo,pts[k+1].geo)*ROAD_FACTOR]);
-  legs.push([pts[pts.length-1].addr,TOUR.dep.addr,havKm(pts[pts.length-1].geo,TOUR.dep.geo)*ROAD_FACTOR]);
+  if(real&&TOUR.realLegs&&TOUR.realLegs.length===pts.length+1){
+    legs.push([TOUR.dep.addr,pts[0].addr,TOUR.realLegs[0]]);
+    for(let k=0;k<pts.length-1;k++)legs.push([pts[k].addr,pts[k+1].addr,TOUR.realLegs[k+1]]);
+    legs.push([pts[pts.length-1].addr,TOUR.dep.addr,TOUR.realLegs[pts.length]]);
+  }else{
+    legs.push([TOUR.dep.addr,pts[0].addr,havKm(TOUR.dep.geo,pts[0].geo)*ROAD_FACTOR]);
+    for(let k=0;k<pts.length-1;k++)legs.push([pts[k].addr,pts[k+1].addr,havKm(pts[k].geo,pts[k+1].geo)*ROAD_FACTOR]);
+    legs.push([pts[pts.length-1].addr,TOUR.dep.addr,havKm(pts[pts.length-1].geo,TOUR.dep.geo)*ROAD_FACTOR]);
+  }
   document.getElementById('to_result').innerHTML=`
     <h4 style="color:var(--accent);margin:.8rem 0 .3rem">${NL?'Voorgestelde route (aanpasbaar)':'Itinéraire proposé (modifiable)'}</h4>
     ${TOUR.order.map((si,pos)=>`<div class="deadline" style="border-left-color:var(--bleu2)">
@@ -3341,7 +3367,7 @@ function renderTournee(){
         <button class="btn sec sm" ${pos===0?'disabled':''} onclick="moveTourStop(${pos},-1)" title="${NL?'vroeger':'plus tôt'}">↑</button>
         <button class="btn sec sm" ${pos===TOUR.order.length-1?'disabled':''} onclick="moveTourStop(${pos},1)" title="${NL?'later':'plus tard'}">↓</button>
       </span></div>`).join('')}
-    <table style="margin-top:.5rem"><tr><th>${NL?'Traject':'Trajet'}</th><th style="text-align:right">${NL?'≈ km (weg)':'≈ km (route)'}</th></tr>
+    <table style="margin-top:.5rem"><tr><th>${NL?'Traject':'Trajet'}</th><th style="text-align:right">${(real&&TOUR.realLegs)?(NL?'km (werkelijke weg ✓)':'km (route réelle ✓)'):(NL?'≈ km (schatting)':'≈ km (estimation)')}</th></tr>
       ${legs.map(l=>`<tr><td style="font-size:.82rem">${esc(l[0].split(',')[0])} → ${esc(l[1].split(',')[0])}</td><td style="text-align:right">${l[2].toFixed(1)}</td></tr>`).join('')}
       <tr><td><strong>TOTAL ${NL?'(heen-terug)':'(aller-retour)'}</strong></td><td style="text-align:right"><strong>${TOUR.kmEst.toFixed(1)} km</strong></td></tr></table>
     <div class="row" style="align-items:flex-end;margin-top:.6rem;gap:.5rem">
@@ -3357,7 +3383,9 @@ function renderTournee(){
 function moveTourStop(pos,dir){
   const o=TOUR.order;
   [o[pos],o[pos+dir]]=[o[pos+dir],o[pos]];
+  TOUR.realLegs=null;
   renderTournee();
+  tourRealKm();   // recalcule les km réels du nouvel ordre
 }
 function openTourMaps(){
   const wp=TOUR.order.map(i=>encodeURIComponent(TOUR.stops[i].addr)).join('%7C');
@@ -3496,8 +3524,9 @@ function fgAddForm(){
         <div style="flex:1;min-width:130px"><label>${NL?'Reden':'Motif'}</label><input id="fg_motif"></div>
       </div>
       <div class="row" style="align-items:flex-end;gap:.4rem;margin-top:.3rem">
-        <div style="flex:1;min-width:120px"><label>${NL?'Van':'De'}</label><input id="fg_de" list="dlAdr" placeholder="${NL?'straat nr, 1234 gemeente':'rue n°, 1234 commune'}"></div>
+        <div style="flex:1;min-width:120px"><label>${NL?'Van':'De'}</label><input id="fg_de" list="dlAdr" value="${esc(tuteurAdr())}" placeholder="${NL?'straat nr, 1234 gemeente':'rue n°, 1234 commune'}"></div>
         <div style="flex:1;min-width:120px"><label>${NL?'Naar':'À'}</label><input id="fg_a" list="dlAdr"></div>
+        <button class="btn sm" onclick="kmAuto('fg_de','fg_a','fg_km','fg_note')">📏 ${NL?'Km auto':'Km auto'}</button>
         <button class="btn sec sm" onclick="openExt('https://www.google.com/maps/dir/?api=1&origin='+encodeURIComponent(document.getElementById('fg_de').value)+'&destination='+encodeURIComponent(document.getElementById('fg_a').value)+'&travelmode=driving','fg_note')">🗺️ Maps</button>
         <div><label>Km AR</label><input id="fg_km" type="number" step="0.1" style="width:90px"></div>
         <div><label>Parking €</label><input id="fg_park" type="number" step="0.01" style="width:80px"></div>
@@ -3532,6 +3561,7 @@ async function genFraisGlobalPDF(annee,mois){
   const periode=annee+(mois?'-'+mois:'');
   printDoc((NL?'Kostendeclaratie ':'Déclaration de frais ')+periode,`
     <h1>${NL?'Kostendeclaratie van de voogd':'Déclaration de frais du tuteur'} — ${esc(periode)}</h1>
+    ${TUTEUR.nom?`<p>${tuteurBloc(NL)}</p>`:''}
     <p>${NL?'Datum':'Date'} : ${nowISO()}<br>
     ${NL?'Bestemmeling: Dienst Voogdij (FOD Justitie), Waterloolaan 115, 1000 Brussel':'Destinataire : Service des Tutelles (SPF Justice), Bd de Waterloo 115, 1000 Bruxelles'}<br>
     <span style="color:#555">${NL?'Verplaatsingen per voogdij (KB 18/01/1965 — reële afstanden deur-tot-deur, bewijsstukken in bijlage)':'Déplacements détaillés par tutelle (AR 18/01/1965 — distances réelles porte-à-porte, justificatifs en annexe)'}</span></p>
@@ -3541,7 +3571,97 @@ async function genFraisGlobalPDF(annee,mois){
       ${g.list.map(f=>`<tr><td>${esc(f.date)}</td><td>${esc(f.motif)}</td><td>${esc(f.de)} → ${esc(f.a)}</td><td class="r">${(+f.km).toFixed(1)}</td><td class="r">${(+f.pkm).toFixed(3)}</td><td class="r">${(+f.park||0).toFixed(2)}</td><td class="r">${fraisTotal(f).toFixed(2)}</td></tr>`).join('')}
       <tr><td colspan="3"><strong>${NL?'Subtotaal':'Sous-total'}</strong></td><td class="r"><strong>${st.km.toFixed(1)}</strong></td><td colspan="2"></td><td class="r"><strong>${st.eur.toFixed(2)} €</strong></td></tr></table>`;}).join('')}
     <h2 style="font-family:Georgia,serif;font-size:1.1rem;color:#19497F;margin-top:1.2rem">${NL?'ALGEMEEN TOTAAL':'TOTAL GÉNÉRAL'} ${esc(periode)} : ${tot.km.toFixed(1)} km — ${tot.eur.toFixed(2)} €</h2>
-    <p style="margin-top:2rem">${NL?'Handtekening van de voogd':'Signature du tuteur'} : ______________________</p>`);
+    <p style="margin-top:2rem">${NL?'Handtekening van de voogd':'Signature du tuteur'}${TUTEUR.nom?' — '+esc(TUTEUR.nom):''} : ______________________</p>`);
+}
+
+
+/* ============ v1.7.4 : PROFIL DU TUTEUR (chiffré, auto-injecté partout) ============ */
+let TUTEUR={};
+const TUTEUR_STORE='mena_tuteur_enc';
+async function loadTuteur(){
+  TUTEUR={};
+  const raw=localStorage.getItem(TUTEUR_STORE);
+  if(raw&&CRYPTO_KEY){try{TUTEUR=JSON.parse(await aesDecrypt(CRYPTO_KEY,JSON.parse(raw)));}catch(e){}}
+}
+function tuteurAdr(){
+  return TUTEUR.rue&&TUTEUR.cp?`${TUTEUR.rue}, ${TUTEUR.cp} ${TUTEUR.commune||''}`.trim():'';
+}
+// Bloc identité du tuteur pour les documents générés
+function tuteurBloc(NL){
+  if(!TUTEUR.nom)return '';
+  return `<strong>${esc(TUTEUR.nom)}</strong>${TUTEUR.agrement?' — '+(NL?'voogd nr.':'tuteur n°')+' '+esc(TUTEUR.agrement):''}<br>`+
+    `${esc(tuteurAdr())}<br>`+
+    `${TUTEUR.tel?'☎ '+esc(TUTEUR.tel):''}${TUTEUR.tel&&TUTEUR.email?' · ':''}${TUTEUR.email?'✉ '+esc(TUTEUR.email):''}`;
+}
+function openTuteurProfil(){
+  const NL=LANG==='nl';const T=TUTEUR;
+  document.getElementById('tuteurBox').innerHTML=`
+    <h3>👤 ${NL?'Mijn voogdprofiel':'Mon profil tuteur'}</h3>
+    <p class="muted" style="font-size:.84rem">${NL?'Eenmaal ingevuld worden uw gegevens AUTOMATISCH gebruikt op alle documenten (verslagen, kostendeclaraties…) en wordt uw thuisadres het standaardvertrekpunt van elke verplaatsing. Versleuteld bewaard op dit toestel.':'Une fois complétées, vos données sont utilisées AUTOMATIQUEMENT sur tous les documents (rapports, déclarations de frais…) et votre domicile devient le point de départ par défaut de chaque trajet. Conservées chiffrées sur cet appareil.'}</p>
+    <label>${NL?'Naam en voornaam':'Nom et prénom'}</label><input id="tp_nom" value="${esc(T.nom||'')}">
+    <label>${NL?'Adres (straat en nr)':'Adresse (rue et n°)'}</label><input id="tp_rue" value="${esc(T.rue||'')}" placeholder="${NL?'bv. Stationsstraat 12':'ex. Rue de la Station 12'}">
+    <div class="grid cols-2">
+      <div><label>${NL?'Postcode':'Code postal'}</label><input id="tp_cp" value="${esc(T.cp||'')}" placeholder="6061"></div>
+      <div><label>${NL?'Gemeente':'Commune'}</label><input id="tp_com" value="${esc(T.commune||'')}"></div>
+    </div>
+    <div class="grid cols-2">
+      <div><label>${NL?'Telefoon':'Téléphone'}</label><input id="tp_tel" value="${esc(T.tel||'')}"></div>
+      <div><label>Email</label><input id="tp_email" value="${esc(T.email||'')}"></div>
+    </div>
+    <label>${NL?'Voogdnummer (optioneel)':'N° de tuteur / agrément (optionnel)'}</label><input id="tp_agr" value="${esc(T.agrement||'')}">
+    <button class="btn" style="margin-top:.8rem" onclick="saveTuteurProfil()">💾 ${NL?'Opslaan':'Enregistrer'}</button>
+    <span class="muted" id="tp_note" style="margin-left:.6rem"></span>`;
+  openModal('tuteurModal');
+}
+async function saveTuteurProfil(){
+  TUTEUR={nom:tp_nom.value.trim(),rue:tp_rue.value.trim(),cp:tp_cp.value.trim(),
+    commune:tp_com.value.trim(),tel:tp_tel.value.trim(),email:tp_email.value.trim(),agrement:tp_agr.value.trim()};
+  localStorage.setItem(TUTEUR_STORE,JSON.stringify(await aesEncrypt(CRYPTO_KEY,JSON.stringify(TUTEUR))));
+  document.getElementById('tp_note').textContent='✅';
+  renderBkReminder();
+  setTimeout(()=>closeModal('tuteurModal'),500);
+}
+
+/* ============ v1.7.4 : KM ROUTIERS RÉELS DANS LE PROGRAMME (OSRM) ============ */
+// Routage routier réel (itinéraire le plus rapide) — service public OSRM,
+// sans clé API. Seules des COORDONNÉES sont envoyées, jamais le nom du jeune.
+async function osrmRoute(points){   // points = [{lat,lon},...] → {km, legsKm[]}
+  const coords=points.map(p=>p.lon+','+p.lat).join(';');
+  const r=await fetch('https://router.project-osrm.org/route/v1/driving/'+coords+'?overview=false');
+  if(!r.ok)throw new Error('routeur indisponible');
+  const j=await r.json();
+  if(j.code!=='Ok'||!j.routes||!j.routes.length)throw new Error('itinéraire introuvable');
+  return{km:j.routes[0].distance/1000,legsKm:(j.routes[0].legs||[]).map(l=>l.distance/1000)};
+}
+// Km aller-retour réels entre deux adresses → remplit un champ (ajustable)
+async function kmAuto(deId,aId,kmId,noteId){
+  const NL=LANG==='nl';
+  const note=document.getElementById(noteId);
+  const de=document.getElementById(deId).value.trim(),a=document.getElementById(aId).value.trim();
+  if(!de||!a){note.textContent=NL?'Vul vertrek en bestemming in.':'Renseignez départ et destination.';return;}
+  try{
+    note.textContent='⏳ '+(NL?'Beste route berekenen…':'Calcul du meilleur itinéraire…');
+    const g1=await geocode(de);
+    await new Promise(r=>setTimeout(r,1100));
+    const g2=await geocode(a);
+    const ro=await osrmRoute([g1,g2]);
+    const ar=Math.round(ro.km*2*10)/10;
+    document.getElementById(kmId).value=ar;
+    note.textContent='✅ '+(NL?`Snelste route: ${ro.km.toFixed(1)} km enkel → ${ar} km heen-terug (aanpasbaar).`:`Meilleur itinéraire : ${ro.km.toFixed(1)} km aller → ${ar} km aller-retour (ajustable).`);
+  }catch(e){note.textContent='⚠️ '+e.message+' — '+(NL?'gebruik desnoods de Maps-knop.':'utilisez au besoin le bouton Maps.');}
+}
+// Tournée : affiner l'estimation avec les km routiers réels de l'ordre choisi
+async function tourRealKm(){
+  const NL=LANG==='nl';
+  const note=document.getElementById('to_note');
+  try{
+    note.textContent='⏳ '+(NL?'Werkelijke wegkilometers berekenen…':'Calcul des km routiers réels…');
+    const pts=[TOUR.dep.geo,...TOUR.order.map(i=>TOUR.stops[i].geo),TOUR.dep.geo];
+    const ro=await osrmRoute(pts);
+    TOUR.realLegs=ro.legsKm;TOUR.kmEst=Math.round(ro.km*10)/10;
+    renderTournee(true);
+    note.textContent='✅ '+(NL?'Werkelijke wegkilometers (snelste route).':'Km routiers réels (itinéraire le plus rapide).');
+  }catch(e){note.textContent='⚠️ '+(NL?'Router onbereikbaar — schatting behouden.':'Routeur injoignable — estimation conservée.');}
 }
 
 /* ============ UTIL ============ */

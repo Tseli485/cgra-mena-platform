@@ -67,6 +67,12 @@ document.getElementById('app').addEventListener('load',async()=>{
     const a=W.parseAdresseBE('Rue de la Station 12, 6061 Montignies-sur-Sambre');
     const b=W.parseAdresseBE('pas une adresse');
     return a&&a.cp==='6061'&&a.city==='Montignies-sur-Sambre'&&a.street==='Rue de la Station 12'&&b===null;});
+  // 13. frais par jeune et par période (sous-totaux)
+  await T('fraisPeriode/fraisSum : filtre période + sous-total',()=>{
+    const d={frais:[{date:'2026-05-20',km:130,pkm:0.428,park:8,autres:0},{date:'2026-06-03',km:74,pkm:0.428,park:0,autres:0},{date:'2025-12-01',km:50,pkm:0.428,park:0,autres:0}]};
+    const an=W.fraisPeriode(d,'2026','');const mois=W.fraisPeriode(d,'2026','05');
+    const s1=W.fraisSum(an);
+    return an.length===2&&mois.length===1&&Math.abs(s1.km-204)<0.01&&Math.abs(s1.eur-(204*0.428+8))<0.01;});
   const h=document.createElement('h2');h.textContent=`Résultat : ${pass}/${total}`;h.className=pass===total?'ok':'ko';R.before(h);
 });
 </script></body></html>

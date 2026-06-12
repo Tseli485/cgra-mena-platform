@@ -232,6 +232,7 @@
       <button id="langFr" onclick="setLang('fr')">FR</button>
       <button id="langNl" onclick="setLang('nl')">NL</button>
     </div>
+    <button class="icon-btn" onclick="openManual()" title="Mode d'emploi / Handleiding">❓</button>
     <button class="icon-btn" onclick="openTuteurProfil()" title="Mon profil tuteur / Mijn voogdprofiel">👤</button>
     <button class="icon-btn" onclick="openGlossaire()" title="Glossaire">📖</button>
     <button class="icon-btn" id="themeBtn" onclick="toggleTheme()" title="Thème">🌙</button>
@@ -434,7 +435,7 @@
 <footer>
   <span id="appVersionLbl"></span> ·
   <a href="telecharger.html">💻 <span data-i18n="ft.dl">Télécharger l'application</span></a> ·
-  <a href="mode-emploi.html">📖 <span data-i18n="ft.manuel">Mode d'emploi</span></a> ·
+  <a href="mode-emploi.html" onclick="event.preventDefault();openManual()">📖 <span data-i18n="ft.manuel">Mode d'emploi</span></a> ·
   <a href="#" onclick="checkUpdates();return false" data-i18n="ft.check">🔄 Vérifier les mises à jour</a>
   <span id="updNote"></span>
 </footer>
@@ -2237,7 +2238,7 @@ function printReleve(id){
 }
 
 /* ============ VERSION & MISES À JOUR ============ */
-const APP_VERSION='1.7.4';
+const APP_VERSION='1.7.5';
 window.APP_VERSION=APP_VERSION;   // expose pour tests.html (const non attache a window)
 Object.assign(I18N.fr,{"dash.matrix":"📊 Suivi par dossier","dash.q4":"📈 Mes statistiques","dash.q5":"🚗 Mes frais (par jeune)","heb.title":"Lieux d'hébergement MENA (réseau officiel)","nav.guide":"🎓 Guide du tuteur","guide.title":"🎓 Guide du tuteur débutant — de la désignation aux 18 ans","guide.banner":"13 modules pas-à-pas : cours, actions à faire, documents à remettre (et à qui), rendez-vous, pièges à éviter. Contenu basé sur la réglementation en vigueur.","dash.q1":"📄 Nouveau MENA (fiche DVZ)","dash.q2":"📂 Mes dossiers","dash.q3":"⏰ Urgences & échéances","gs.ph":"🔍 Recherche globale (dossiers, lois, cas, ressources)…","ft.check":"🔄 Vérifier les mises à jour","ft.dl":"Télécharger l’application","ft.manuel":"Mode d'emploi"});
 Object.assign(I18N.nl,{"dash.matrix":"📊 Opvolging per dossier","dash.q4":"📈 Mijn statistieken","dash.q5":"🚗 Mijn kosten (per jongere)","heb.title":"NBMV-opvangplaatsen (officieel netwerk)","nav.guide":"🎓 Voogdengids","guide.title":"🎓 Gids voor de beginnende voogd — van aanstelling tot 18 jaar","guide.banner":"13 stap-voor-stapmodules: cursus, acties, documenten (en aan wie), afspraken, valkuilen. Inhoud gebaseerd op de geldende regelgeving.","dash.q1":"📄 Nieuwe NBMV (DVZ-fiche)","dash.q2":"📂 Mijn dossiers","dash.q3":"⏰ Urgenties & vervaldata","gs.ph":"🔍 Globaal zoeken (dossiers, wetten, gevallen, hulpbronnen)…","ft.check":"🔄 Updates controleren","ft.dl":"Applicatie downloaden","ft.manuel":"Handleiding"});
@@ -3202,6 +3203,8 @@ async function openStats(){
 
 /* ============ v1.7 : NOTES DE VERSION ============ */
 const CHANGELOG={
+ '1.7.5':{fr:"⚡ Installation simplifiée : l'application Windows crée elle-même son raccourci sur le Bureau et dans le menu Démarrer au premier double-clic · ❓ nouveau bouton Aide qui ouvre toujours le mode d'emploi (local ou en ligne)",
+        nl:"⚡ Vereenvoudigde installatie: de Windows-app maakt zelf haar snelkoppeling op het Bureaublad en in het Startmenu · ❓ nieuwe Help-knop die de handleiding altijd opent (lokaal of online)"},
  '1.7.4':{fr:"👤 Profil du tuteur (coordonnées + domicile, chiffré) injecté automatiquement sur tous les documents · domicile = départ par défaut des trajets (modifiable) · 📏 km du MEILLEUR ITINÉRAIRE calculés directement dans le programme (routage routier réel), pour les trajets simples ET les tournées",
         nl:"👤 Voogdprofiel (gegevens + thuisadres, versleuteld) automatisch op alle documenten · thuisadres = standaardvertrek (aanpasbaar) · 📏 km van de BESTE ROUTE rechtstreeks in het programma berekend (werkelijke wegroutering)"},
  '1.7.3':{fr:"🚗 Gestion pro des frais PAR JEUNE : vue globale groupée par MENA (sous-totaux km/€), filtres année/mois, ajout d'un trajet en choisissant le jeune, déclaration PDF globale par tutelle, ventilation par jeune dans les statistiques",
@@ -3662,6 +3665,22 @@ async function tourRealKm(){
     renderTournee(true);
     note.textContent='✅ '+(NL?'Werkelijke wegkilometers (snelste route).':'Km routiers réels (itinéraire le plus rapide).');
   }catch(e){note.textContent='⚠️ '+(NL?'Router onbereikbaar — schatting behouden.':'Routeur injoignable — estimation conservée.');}
+}
+
+/* ============ v1.7.5 : OUVERTURE FIABLE DU MODE D'EMPLOI ============ */
+// Essaie la version locale ; si absente (ancien exécutable), bascule sur la
+// version en ligne ; si la fenêtre est bloquée, navigue dans l'onglet courant.
+function openManual(){
+  const page=LANG==='nl'?'handleiding.html':'mode-emploi.html';
+  const online='https://tseli485.github.io/cgra-mena-platform/'+page;
+  fetch(page,{method:'HEAD'}).then(r=>{
+    const url=r.ok?page:online;
+    const w=window.open(url,'_blank');
+    if(!w)location.href=url;
+  }).catch(()=>{
+    const w=window.open(online,'_blank');
+    if(!w)location.href=online;
+  });
 }
 
 /* ============ UTIL ============ */

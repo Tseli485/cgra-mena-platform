@@ -263,6 +263,7 @@
       <button class="btn sec" onclick="go('dossiers')" data-i18n="dash.q2">📂 Mes dossiers</button>
       <button class="btn sec" onclick="document.getElementById('dashDeadlines').scrollIntoView({behavior:'smooth'})" data-i18n="dash.q3">⏰ Urgences &amp; échéances</button>
       <button class="btn sec" onclick="openStats()" data-i18n="dash.q4">📈 Mes statistiques</button>
+      <button class="btn sec" onclick="openFraisGlobal()" data-i18n="dash.q5">🚗 Mes frais (par jeune)</button>
     </div>
     <div class="row" style="margin:.2rem 0 1rem">
       <input id="gsearch" data-ph="gs.ph" style="flex:1;min-width:220px" oninput="globalSearch(this.value)">
@@ -574,6 +575,11 @@
     <div id="archBox"></div>
   </div>
 </div>
+
+<!-- MODAL FRAIS GLOBAUX (par jeune) -->
+<div class="modal" id="fraisGModal"><div class="modal-box" style="max-width:860px">
+  <button class="close" onclick="closeModal('fraisGModal')">&times;</button><div id="fraisGBox"></div>
+</div></div>
 
 <!-- MODAL PLANIFICATEUR DE TOURNÉE -->
 <div class="modal" id="tourneeModal"><div class="modal-box" style="max-width:760px">
@@ -2223,10 +2229,10 @@ function printReleve(id){
 }
 
 /* ============ VERSION & MISES À JOUR ============ */
-const APP_VERSION='1.7.2';
+const APP_VERSION='1.7.3';
 window.APP_VERSION=APP_VERSION;   // expose pour tests.html (const non attache a window)
-Object.assign(I18N.fr,{"dash.matrix":"📊 Suivi par dossier","dash.q4":"📈 Mes statistiques","heb.title":"Lieux d'hébergement MENA (réseau officiel)","nav.guide":"🎓 Guide du tuteur","guide.title":"🎓 Guide du tuteur débutant — de la désignation aux 18 ans","guide.banner":"13 modules pas-à-pas : cours, actions à faire, documents à remettre (et à qui), rendez-vous, pièges à éviter. Contenu basé sur la réglementation en vigueur.","dash.q1":"📄 Nouveau MENA (fiche DVZ)","dash.q2":"📂 Mes dossiers","dash.q3":"⏰ Urgences & échéances","gs.ph":"🔍 Recherche globale (dossiers, lois, cas, ressources)…","ft.check":"🔄 Vérifier les mises à jour","ft.dl":"Télécharger l’application","ft.manuel":"Mode d'emploi"});
-Object.assign(I18N.nl,{"dash.matrix":"📊 Opvolging per dossier","dash.q4":"📈 Mijn statistieken","heb.title":"NBMV-opvangplaatsen (officieel netwerk)","nav.guide":"🎓 Voogdengids","guide.title":"🎓 Gids voor de beginnende voogd — van aanstelling tot 18 jaar","guide.banner":"13 stap-voor-stapmodules: cursus, acties, documenten (en aan wie), afspraken, valkuilen. Inhoud gebaseerd op de geldende regelgeving.","dash.q1":"📄 Nieuwe NBMV (DVZ-fiche)","dash.q2":"📂 Mijn dossiers","dash.q3":"⏰ Urgenties & vervaldata","gs.ph":"🔍 Globaal zoeken (dossiers, wetten, gevallen, hulpbronnen)…","ft.check":"🔄 Updates controleren","ft.dl":"Applicatie downloaden","ft.manuel":"Handleiding"});
+Object.assign(I18N.fr,{"dash.matrix":"📊 Suivi par dossier","dash.q4":"📈 Mes statistiques","dash.q5":"🚗 Mes frais (par jeune)","heb.title":"Lieux d'hébergement MENA (réseau officiel)","nav.guide":"🎓 Guide du tuteur","guide.title":"🎓 Guide du tuteur débutant — de la désignation aux 18 ans","guide.banner":"13 modules pas-à-pas : cours, actions à faire, documents à remettre (et à qui), rendez-vous, pièges à éviter. Contenu basé sur la réglementation en vigueur.","dash.q1":"📄 Nouveau MENA (fiche DVZ)","dash.q2":"📂 Mes dossiers","dash.q3":"⏰ Urgences & échéances","gs.ph":"🔍 Recherche globale (dossiers, lois, cas, ressources)…","ft.check":"🔄 Vérifier les mises à jour","ft.dl":"Télécharger l’application","ft.manuel":"Mode d'emploi"});
+Object.assign(I18N.nl,{"dash.matrix":"📊 Opvolging per dossier","dash.q4":"📈 Mijn statistieken","dash.q5":"🚗 Mijn kosten (per jongere)","heb.title":"NBMV-opvangplaatsen (officieel netwerk)","nav.guide":"🎓 Voogdengids","guide.title":"🎓 Gids voor de beginnende voogd — van aanstelling tot 18 jaar","guide.banner":"13 stap-voor-stapmodules: cursus, acties, documenten (en aan wie), afspraken, valkuilen. Inhoud gebaseerd op de geldende regelgeving.","dash.q1":"📄 Nieuwe NBMV (DVZ-fiche)","dash.q2":"📂 Mijn dossiers","dash.q3":"⏰ Urgenties & vervaldata","gs.ph":"🔍 Globaal zoeken (dossiers, wetten, gevallen, hulpbronnen)…","ft.check":"🔄 Updates controleren","ft.dl":"Applicatie downloaden","ft.manuel":"Handleiding"});
 const UPDATE_URL='https://tseli485.github.io/cgra-mena-platform/version.json';
 async function checkUpdates(){
   const n=document.getElementById('updNote');
@@ -3164,6 +3170,12 @@ async function openStats(){
       <div class="stat" style="border-top-color:var(--rouge)"><div class="num" style="color:${rapLate?'var(--rouge)':'var(--vert)'}">${rapLate}</div><div class="lbl">${NL?'Verslagen te laat':'Rapports en retard'}</div></div>
       <div class="stat"><div class="num">${conseilsOuverts}</div><div class="lbl">${NL?'Open adviezen':'Conseils à traiter'}</div></div>
     </div>
+    <h4 style="color:var(--accent);margin:.6rem 0 .3rem">${NL?'Kosten per jongere':'Frais par jeune'} (${year})</h4>
+    <table style="margin-bottom:.6rem"><tr><th>${NL?'Jongere':'Jeune'}</th><th style="text-align:right">Km</th><th style="text-align:right">€</th></tr>
+      ${all.map(d=>{const l=(d.frais||[]).filter(f=>String(f.date||'').startsWith(year));if(!l.length)return'';
+        const k=l.reduce((t,f)=>t+(+f.km||0),0),e=l.reduce((t,f)=>t+fraisTotal(f),0);
+        return `<tr style="cursor:pointer" onclick="closeModal('statsModal');openFraisGlobal({annee:'${year}'})"><td>${esc(d.nom)}</td><td style="text-align:right">${k.toFixed(1)}</td><td style="text-align:right">${e.toFixed(2)}</td></tr>`;}).join('')}
+    </table>
     <table><tr><th>${NL?'Terugbetaling voogd':'Remboursement tuteur'} ${year}</th><th style="text-align:right"></th></tr>
       <tr><td>${NL?'Kilometers geregistreerd':'Kilomètres enregistrés'}</td><td style="text-align:right"><strong>${km.toFixed(1)} km</strong></td></tr>
       <tr><td>${NL?'Te declareren bedrag (km + parking + andere)':'Montant à déclarer (km + parking + autres)'}</td><td style="text-align:right"><strong>${eur.toFixed(2)} €</strong></td></tr></table>
@@ -3173,6 +3185,8 @@ async function openStats(){
 
 /* ============ v1.7 : NOTES DE VERSION ============ */
 const CHANGELOG={
+ '1.7.3':{fr:"🚗 Gestion pro des frais PAR JEUNE : vue globale groupée par MENA (sous-totaux km/€), filtres année/mois, ajout d'un trajet en choisissant le jeune, déclaration PDF globale par tutelle, ventilation par jeune dans les statistiques",
+        nl:"🚗 Professioneel kostenbeheer PER JONGERE: globaal overzicht per NBMV (subtotalen km/€), jaar-/maandfilters, verplaatsing toevoegen met keuze van de jongere, globale PDF-declaratie per voogdij"},
  '1.7.2':{fr:"🏠 Base des 101 centres d'accueil officiels (Fedasil/Croix-Rouge/Rode Kruis/COO) classés par région · liste déroulante d'adresses dans les frais et tournées (+ saisie libre) · géocodage par CODE POSTAL (fini les erreurs de commune) · repli si pop-up Google Maps bloquée",
         nl:"🏠 Databank van de 101 officiële opvangcentra per regio · adressenkeuzelijst in kosten en rondritten (+ vrije invoer) · geocodering per POSTCODE · fallback bij geblokkeerde Google Maps-pop-up"},
  '1.7.1':{fr:"🧭 Planificateur de tournée : plusieurs visites le même jour, itinéraire optimal calculé, ordre modifiable, km aller-retour estimés et ajustables, trajet complet dans Google Maps, enregistrement en frais",
@@ -3423,6 +3437,111 @@ async function renderHeberg(){
             <button class="btn sec sm" onclick="openExt('https://www.google.com/maps/search/?api=1&query='+encodeURIComponent('${esc(c.adresse)}'),'hebList')">🗺️ Maps</button>
           </div></div>`).join('')}
       </div></details>`;}).join('')}`;
+}
+
+
+/* ============ v1.7.3 : GESTION PRO DES FRAIS PAR MENA ============ */
+// Chaque trajet est rattaché à SON jeune (d.frais). Cette vue regroupe tout :
+// par jeune, par période, sous-totaux, ajout direct, déclaration PDF globale.
+function fraisPeriode(d,annee,mois){
+  return (d.frais||[]).filter(f=>{
+    const dt=String(f.date||'');
+    return (!annee||dt.startsWith(annee))&&(!mois||dt.slice(5,7)===mois);
+  });
+}
+function fraisSum(list){
+  return {km:list.reduce((t,f)=>t+(+f.km||0),0),
+          eur:list.reduce((t,f)=>t+fraisTotal(f),0),
+          n:list.length};
+}
+async function openFraisGlobal(sel){
+  const NL=LANG==='nl';
+  await loadArchEnsure();
+  const all=loadDossiers().concat(ARCHIVES||[]);
+  // années disponibles
+  const years=[...new Set(all.flatMap(d=>(d.frais||[]).map(f=>String(f.date||'').slice(0,4))).filter(Boolean))].sort().reverse();
+  const annee=(sel&&sel.annee)||years[0]||String(new Date().getFullYear());
+  const mois=(sel&&sel.mois)||'';
+  const MOIS=NL?['','jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec']
+              :['','janv','févr','mars','avr','mai','juin','juil','août','sept','oct','nov','déc'];
+  const groups=all.map(d=>({d,list:fraisPeriode(d,annee,mois)})).filter(g=>g.list.length);
+  const tot=fraisSum(groups.flatMap(g=>g.list));
+  document.getElementById('fraisGBox').innerHTML=`
+    <h3>🚗 ${NL?'Mijn kosten — per jongere':'Mes frais — par jeune'}</h3>
+    <div class="row" style="align-items:flex-end">
+      <div><label>${NL?'Jaar':'Année'}</label><select id="fg_an" style="width:auto" onchange="openFraisGlobal({annee:this.value,mois:document.getElementById('fg_mo').value})">${(years.length?years:[annee]).map(y=>`<option ${y===annee?'selected':''}>${y}</option>`).join('')}</select></div>
+      <div><label>${NL?'Maand':'Mois'}</label><select id="fg_mo" style="width:auto" onchange="openFraisGlobal({annee:document.getElementById('fg_an').value,mois:this.value})"><option value="">${NL?'alle':'tous'}</option>${[...Array(12)].map((_,i)=>{const m=String(i+1).padStart(2,'0');return `<option value="${m}" ${m===mois?'selected':''}>${MOIS[i+1]}</option>`;}).join('')}</select></div>
+      <button class="btn sec sm" style="margin-bottom:.15rem" onclick="genFraisGlobalPDF('${annee}','${mois}')">🖨️ ${NL?'Globale declaratie (PDF)':'Déclaration globale (PDF)'}</button>
+      <button class="btn sm" style="margin-bottom:.15rem" onclick="fgAddForm()">➕ ${NL?'Verplaatsing toevoegen':'Ajouter un trajet'}</button>
+    </div>
+    <div id="fg_add"></div>
+    ${groups.length?groups.map(g=>{const st=fraisSum(g.list);return `
+      <details class="accordion" open><summary>👤 ${esc(g.d.nom)}${g.d.archiveLe?' <span class="badge b-clos">'+(NL?'gearchiveerd':'archivé')+'</span>':''} — ${st.n} ${NL?'verplaatsingen':'trajets'} · <strong>${st.km.toFixed(1)} km · ${st.eur.toFixed(2)} €</strong></summary><div class="body">
+        <table><tr><th>Date</th><th>${NL?'Reden':'Motif'}</th><th>${NL?'Traject':'Trajet'}</th><th class="r">Km</th><th class="r">€</th><th></th></tr>
+        ${g.list.map(f=>{const i=(g.d.frais||[]).indexOf(f);return `<tr><td>${esc(f.date)}</td><td>${esc(f.motif)}</td><td style="font-size:.78rem">${esc(f.de)} → ${esc(f.a)}</td><td class="r">${(+f.km).toFixed(1)}</td><td class="r">${fraisTotal(f).toFixed(2)}</td><td><button class="btn danger sm" onclick="fgDel('${g.d.id}',${i})">×</button></td></tr>`;}).join('')}
+        <tr><td colspan="3"><strong>${NL?'Subtotaal':'Sous-total'} ${esc(g.d.nom.split(',')[0])}</strong></td><td class="r"><strong>${st.km.toFixed(1)}</strong></td><td class="r"><strong>${st.eur.toFixed(2)}</strong></td><td></td></tr></table>
+      </div></details>`;}).join('')
+    :`<p class="muted" style="margin-top:.8rem">${NL?'Geen verplaatsing voor deze periode. Voeg er een toe of registreer ze vanuit het dossier van de jongere (sectie Kosten).':'Aucun trajet pour cette période. Ajoutez-en un ci-dessus, ou enregistrez-les depuis le dossier du jeune (section Frais).'}</p>`}
+    ${groups.length?`<div class="banner" style="margin-top:.8rem"><strong>TOTAL ${esc(annee)}${mois?'-'+mois:''} : ${tot.km.toFixed(1)} km · ${tot.eur.toFixed(2)} €</strong> (${groups.length} ${NL?'jongeren':'jeunes'}, ${tot.n} ${NL?'verplaatsingen':'trajets'})</div>`:''}`;
+  openModal('fraisGModal');
+}
+function fgAddForm(){
+  const NL=LANG==='nl';
+  const ds=loadDossiers();
+  document.getElementById('fg_add').innerHTML=`
+    <div class="card" style="margin:.6rem 0">
+      <div class="row" style="align-items:flex-end;gap:.4rem">
+        <div style="min-width:160px"><label>👤 ${NL?'Jongere':'Jeune'}</label><select id="fg_d">${ds.map(d=>`<option value="${d.id}">${esc(d.nom)}</option>`).join('')}</select></div>
+        <div><label>Date</label><input id="fg_date" type="date" value="${nowISO()}" style="width:auto"></div>
+        <div style="flex:1;min-width:130px"><label>${NL?'Reden':'Motif'}</label><input id="fg_motif"></div>
+      </div>
+      <div class="row" style="align-items:flex-end;gap:.4rem;margin-top:.3rem">
+        <div style="flex:1;min-width:120px"><label>${NL?'Van':'De'}</label><input id="fg_de" list="dlAdr" placeholder="${NL?'straat nr, 1234 gemeente':'rue n°, 1234 commune'}"></div>
+        <div style="flex:1;min-width:120px"><label>${NL?'Naar':'À'}</label><input id="fg_a" list="dlAdr"></div>
+        <button class="btn sec sm" onclick="openExt('https://www.google.com/maps/dir/?api=1&origin='+encodeURIComponent(document.getElementById('fg_de').value)+'&destination='+encodeURIComponent(document.getElementById('fg_a').value)+'&travelmode=driving','fg_note')">🗺️ Maps</button>
+        <div><label>Km AR</label><input id="fg_km" type="number" step="0.1" style="width:90px"></div>
+        <div><label>Parking €</label><input id="fg_park" type="number" step="0.01" style="width:80px"></div>
+        <button class="btn sm" onclick="fgSave()">💾</button>
+      </div>
+      <div class="muted" id="fg_note" style="font-size:.78rem"></div>
+    </div>`;
+}
+function fgSave(){
+  const arr=loadDossiers();const d=arr.find(x=>x.id===document.getElementById('fg_d').value);if(!d)return;
+  const f={date:document.getElementById('fg_date').value||nowISO(),motif:document.getElementById('fg_motif').value.trim(),
+    de:document.getElementById('fg_de').value.trim(),a:document.getElementById('fg_a').value.trim(),
+    km:+document.getElementById('fg_km').value||0,pkm:+getPkm(),park:+document.getElementById('fg_park').value||0,autres:0};
+  if(!f.motif&&!f.km){document.getElementById('fg_note').textContent=LANG==='nl'?'Vul minstens reden en km in.':'Renseignez au moins le motif et les km.';return;}
+  d.frais=d.frais||[];d.frais.push(f);saveDossiers(arr);
+  openFraisGlobal({annee:document.getElementById('fg_an').value,mois:document.getElementById('fg_mo').value});
+}
+async function fgDel(did,i){
+  await loadArchEnsure();
+  const arr=loadDossiers();let d=arr.find(x=>x.id===did);
+  if(d){d.frais.splice(i,1);saveDossiers(arr);}
+  else{d=(ARCHIVES||[]).find(x=>x.id===did);if(d){d.frais.splice(i,1);await persistArch();}}
+  openFraisGlobal({annee:document.getElementById('fg_an').value,mois:document.getElementById('fg_mo').value});
+}
+async function genFraisGlobalPDF(annee,mois){
+  const NL=LANG==='nl';
+  await loadArchEnsure();
+  const all=loadDossiers().concat(ARCHIVES||[]);
+  const groups=all.map(d=>({d,list:fraisPeriode(d,annee,mois)})).filter(g=>g.list.length);
+  if(!groups.length)return;
+  const tot=fraisSum(groups.flatMap(g=>g.list));
+  const periode=annee+(mois?'-'+mois:'');
+  printDoc((NL?'Kostendeclaratie ':'Déclaration de frais ')+periode,`
+    <h1>${NL?'Kostendeclaratie van de voogd':'Déclaration de frais du tuteur'} — ${esc(periode)}</h1>
+    <p>${NL?'Datum':'Date'} : ${nowISO()}<br>
+    ${NL?'Bestemmeling: Dienst Voogdij (FOD Justitie), Waterloolaan 115, 1000 Brussel':'Destinataire : Service des Tutelles (SPF Justice), Bd de Waterloo 115, 1000 Bruxelles'}<br>
+    <span style="color:#555">${NL?'Verplaatsingen per voogdij (KB 18/01/1965 — reële afstanden deur-tot-deur, bewijsstukken in bijlage)':'Déplacements détaillés par tutelle (AR 18/01/1965 — distances réelles porte-à-porte, justificatifs en annexe)'}</span></p>
+    ${groups.map(g=>{const st=fraisSum(g.list);return `
+      <h2 style="font-family:Georgia,serif;font-size:1.05rem;color:#19497F;border-bottom:1px solid #D9DEE7;margin:1rem 0 .3rem">${NL?'Voogdij':'Tutelle'} : ${esc(g.d.nom)}${g.d.fiche&&g.d.fiche.ov?' — OV '+esc(g.d.fiche.ov):''}</h2>
+      <table><tr><th>Date</th><th>${NL?'Reden':'Motif'}</th><th>${NL?'Traject (heen-terug)':'Trajet (aller-retour)'}</th><th class="r">Km</th><th class="r">€/km</th><th class="r">Parking</th><th class="r">Total</th></tr>
+      ${g.list.map(f=>`<tr><td>${esc(f.date)}</td><td>${esc(f.motif)}</td><td>${esc(f.de)} → ${esc(f.a)}</td><td class="r">${(+f.km).toFixed(1)}</td><td class="r">${(+f.pkm).toFixed(3)}</td><td class="r">${(+f.park||0).toFixed(2)}</td><td class="r">${fraisTotal(f).toFixed(2)}</td></tr>`).join('')}
+      <tr><td colspan="3"><strong>${NL?'Subtotaal':'Sous-total'}</strong></td><td class="r"><strong>${st.km.toFixed(1)}</strong></td><td colspan="2"></td><td class="r"><strong>${st.eur.toFixed(2)} €</strong></td></tr></table>`;}).join('')}
+    <h2 style="font-family:Georgia,serif;font-size:1.1rem;color:#19497F;margin-top:1.2rem">${NL?'ALGEMEEN TOTAAL':'TOTAL GÉNÉRAL'} ${esc(periode)} : ${tot.km.toFixed(1)} km — ${tot.eur.toFixed(2)} €</h2>
+    <p style="margin-top:2rem">${NL?'Handtekening van de voogd':'Signature du tuteur'} : ______________________</p>`);
 }
 
 /* ============ UTIL ============ */

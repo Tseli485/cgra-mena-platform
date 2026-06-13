@@ -1,10 +1,12 @@
 /* Service Worker — Plateforme MENA Tuteur
    Stratégie : network-first pour HTML/JSON (toujours à jour, fallback hors ligne),
    cache-first pour les assets statiques. Version bumpée pour purger les anciens caches. */
-const CACHE = 'mena-v24';
+const CACHE = 'mena-v25';
 const CORE = [
   './',
   './index.html',
+  './mode-emploi.html',
+  './handleiding.html',
   './manifest.json',
   './version.json',
   './icon-192.png',

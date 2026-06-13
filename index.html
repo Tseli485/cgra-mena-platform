@@ -936,6 +936,46 @@
   </div>
 </div>
 
+<!-- MODAL MESSAGERIE BIDIRECTIONNELLE (jeune ↔ tuteur, avec traduction) -->
+<div class="modal" id="msgrModal">
+  <div class="modal-box" style="max-width:640px">
+    <button class="close" onclick="closeModal('msgrModal')">&times;</button>
+    <h3 id="msgrTitle">💬 Messagerie</h3>
+    <details class="accordion"><summary>📱 <span id="msgrContactSum">Coordonnées du jeune</span></summary><div class="body">
+      <div class="grid cols-2">
+        <div><label id="msgrTelLbl">Téléphone (WhatsApp)</label><input id="mc_tel" placeholder="+32 4xx xx xx xx"></div>
+        <div><label>Email</label><input id="mc_email" type="email" placeholder="email@exemple.be"></div>
+      </div>
+      <label id="msgrCanalLbl">Canal préféré</label>
+      <select id="mc_canal"><option value="whatsapp">WhatsApp</option><option value="sms">SMS</option><option value="email">Email</option><option value="signal">Signal</option><option value="autre">Autre</option></select>
+      <label id="msgrNotesLbl">Notes</label><textarea id="mc_notes" rows="2"></textarea>
+      <button class="btn sm" onclick="saveMsgrContact()">💾 <span id="msgrSaveLbl">Enregistrer</span></button>
+    </div></details>
+    <div class="muted" id="msgrLangNote" style="margin:.6rem 0;font-size:.84rem"></div>
+    <div id="msgrThread" style="max-height:280px;overflow:auto;border:1px solid var(--bord,#E2E8F0);border-radius:.5rem;padding:.5rem;background:#FAFBFC"></div>
+    <div style="margin-top:.8rem;border-top:1px solid var(--bord,#E2E8F0);padding-top:.7rem">
+      <div class="row" style="gap:1rem;flex-wrap:wrap;margin-bottom:.4rem">
+        <label style="font-weight:normal"><input type="radio" name="msgrSens" value="out" checked onchange="msgrSensChange()"> <span id="msgrRadioOut">Répondre / écrire au jeune</span></label>
+        <label style="font-weight:normal"><input type="radio" name="msgrSens" value="in" onchange="msgrSensChange()"> <span id="msgrRadioIn">Enregistrer un message reçu</span></label>
+      </div>
+      <label id="msgrInLabel">Votre message (FR)</label>
+      <textarea id="msgrInput" rows="3"></textarea>
+      <div class="row" style="gap:.5rem;align-items:center;margin:.3rem 0">
+        <button class="btn sec sm" onclick="msgrTranslate()">🌐 <span id="msgrTransLbl">Traduire</span></button>
+        <span id="msgrTransNote" class="muted" style="font-size:.8rem"></span>
+      </div>
+      <label id="msgrOutLabel">Traduction (modifiable)</label>
+      <textarea id="msgrOutput" rows="3"></textarea>
+      <div class="row" id="msgrSendRow" style="gap:.5rem;flex-wrap:wrap;margin-top:.5rem">
+        <button class="btn sm" id="msgrWaBtn" onclick="msgrSendWa()">💬 <span id="msgrWaLbl">WhatsApp + archiver</span></button>
+        <button class="btn sec sm" id="msgrMailBtn" onclick="msgrSendMail()">📧 <span id="msgrMailLbl">Email + archiver</span></button>
+        <button class="btn sec sm" onclick="msgrArchive()">💾 <span id="msgrArchLbl">Archiver seulement</span></button>
+      </div>
+      <p class="muted" style="font-size:.74rem;margin-top:.5rem" id="msgrPrivacy">🌐 La traduction en ligne (langues autres que NL/FR) envoie uniquement le texte du message au service de traduction. NL↔FR reste 100% sur votre appareil.</p>
+    </div>
+  </div>
+</div>
+
 <script src="js/nl-fr-dict.js"></script>
 <script src="js/lib/pdf.min.js"></script>
 <script>
@@ -1517,6 +1557,13 @@ function openDossierDetail(id){
       <div class="muted" style="margin-top:.6rem;font-size:.8rem">📌 ${LANG==='nl'?'Geverifieerde centrale contacten':'Contacts centraux vérifiés'} :<br>
         • ${esc(tr(tu.nom))} — ${esc(tu.adresse)} — ☎ ${tu.tel} — ✉️ ${tu.email}<br>
         • ${esc(tr(dv.nom))} — ${esc(dv.adresse)} — ✉️ ${dv.email}</div>
+    </div></details>
+
+    <details class="accordion"><summary>💬 ${LANG==='nl'?'Berichten & contactgegevens van de jongere':'Messagerie & coordonnées du jeune'}</summary><div class="body">
+      <p class="muted">${LANG==='nl'?'Stuur en archiveer berichten met de jongere in zijn taal (WhatsApp/e-mail), met vertaling. Ontvangen berichten worden vertaald naar NL/FR en gearchiveerd.':'Envoyez et archivez des messages avec le jeune dans sa langue (WhatsApp/email), avec traduction. Les messages reçus sont traduits en FR/NL et archivés.'}</p>
+      <p style="margin:.4rem 0">${LANG==='nl'?'Telefoon':'Téléphone'} : <strong>${esc((d.contact&&d.contact.tel)||(LANG==='nl'?'niet ingevuld':'non renseigné'))}</strong> · Email : <strong>${esc((d.contact&&d.contact.email)||'—')}</strong></p>
+      <button class="btn sm" onclick="openMsgr('${d.id}')">💬 ${LANG==='nl'?'Berichten openen':'Ouvrir la messagerie'}</button>
+      ${(d.messages&&d.messages.length)?`<span class="muted" style="margin-left:.6rem">${d.messages.length} ${LANG==='nl'?'gearchiveerde berichten':'messages archivés'}</span>`:''}
     </div></details>
 
     <details class="accordion"><summary>📅 ${LANG==='nl'?'Agenda & afspraken':'Agenda & rendez-vous'}</summary><div class="body">
@@ -2571,7 +2618,7 @@ function printReleve(id){
 }
 
 /* ============ VERSION & MISES À JOUR ============ */
-const APP_VERSION='1.7.7';
+const APP_VERSION='1.7.8';
 window.APP_VERSION=APP_VERSION;   // expose pour tests.html (const non attache a window)
 Object.assign(I18N.fr,{"dash.matrix":"📊 Suivi par dossier","dash.q4":"📈 Mes statistiques","dash.q5":"🚗 Mes frais (par jeune)","heb.title":"Lieux d'hébergement MENA (réseau officiel)","nav.guide":"🎓 Guide du tuteur","guide.title":"🎓 Guide du tuteur débutant — de la désignation aux 18 ans","guide.banner":"13 modules pas-à-pas : cours, actions à faire, documents à remettre (et à qui), rendez-vous, pièges à éviter. Contenu basé sur la réglementation en vigueur.","dash.q1":"📄 Nouveau MENA (fiche DVZ)","dash.q2":"📂 Mes dossiers","dash.q3":"⏰ Urgences & échéances","gs.ph":"🔍 Recherche globale (dossiers, lois, cas, ressources)…","ft.check":"🔄 Vérifier les mises à jour","ft.dl":"Télécharger l’application","ft.manuel":"Mode d'emploi"});
 Object.assign(I18N.nl,{"dash.matrix":"📊 Opvolging per dossier","dash.q4":"📈 Mijn statistieken","dash.q5":"🚗 Mijn kosten (per jongere)","heb.title":"NBMV-opvangplaatsen (officieel netwerk)","nav.guide":"🎓 Voogdengids","guide.title":"🎓 Gids voor de beginnende voogd — van aanstelling tot 18 jaar","guide.banner":"13 stap-voor-stapmodules: cursus, acties, documenten (en aan wie), afspraken, valkuilen. Inhoud gebaseerd op de geldende regelgeving.","dash.q1":"📄 Nieuwe NBMV (DVZ-fiche)","dash.q2":"📂 Mijn dossiers","dash.q3":"⏰ Urgenties & vervaldata","gs.ph":"🔍 Globaal zoeken (dossiers, wetten, gevallen, hulpbronnen)…","ft.check":"🔄 Updates controleren","ft.dl":"Applicatie downloaden","ft.manuel":"Handleiding"});
@@ -2590,9 +2637,16 @@ async function checkUpdates(){
         if(!d.latest||d.latest===APP_VERSION){
           n.textContent=' — ✅ '+(LANG==='nl'?'U gebruikt de laatste versie.':'Vous utilisez la dernière version.');
         } else {
-          const lab=LANG==='nl'?'Nu bijwerken':'Mettre à jour maintenant';
-          n.innerHTML=' — <strong>v'+esc(d.latest)+'</strong> '+(LANG==='nl'?'beschikbaar':'disponible')
-            +'&nbsp;<button onclick="autoUpdate()" style="background:var(--acc);color:#fff;border:none;border-radius:.4rem;padding:.2rem .8rem;cursor:pointer;font-size:.85rem">⬇️ '+lab+'</button>';
+          // Mise à jour en un clic : on confirme puis tout est automatique (téléchargement + remplacement + redémarrage).
+          const go=confirm(LANG==='nl'
+            ?'Nieuwe versie v'+d.latest+' beschikbaar.\n\nNu automatisch bijwerken? De applicatie sluit even af en herstart vanzelf in de nieuwe versie. Uw gegevens blijven bewaard.'
+            :'Nouvelle version v'+d.latest+' disponible.\n\nMettre à jour automatiquement maintenant ? L\'application se fermera brièvement et redémarrera seule dans la nouvelle version. Vos données sont conservées.');
+          if(go){autoUpdate();}
+          else{
+            const lab=LANG==='nl'?'Nu bijwerken':'Mettre à jour maintenant';
+            n.innerHTML=' — <strong>v'+esc(d.latest)+'</strong> '+(LANG==='nl'?'beschikbaar':'disponible')
+              +'&nbsp;<button onclick="autoUpdate()" style="background:var(--acc,#19497F);color:#fff;border:none;border-radius:.4rem;padding:.2rem .8rem;cursor:pointer;font-size:.85rem">⬇️ '+lab+'</button>';
+          }
         }
         return;
       }
@@ -3591,6 +3645,8 @@ async function openStats(){
 
 /* ============ v1.7 : NOTES DE VERSION ============ */
 const CHANGELOG={
+ '1.7.8':{fr:"💬 Messagerie bidirectionnelle avec le jeune : coordonnées (téléphone WhatsApp + email) par dossier, envoi de messages dans sa langue, réception de ses réponses traduites en FR/NL, archive complète des échanges · 🌐 traduction NL↔FR locale (hors ligne) + autres langues à la demande · ⚡ mise à jour automatique en un clic (confirmation → tout se fait seul)",
+         nl:"💬 Tweerichtingsberichten met de jongere: contactgegevens (WhatsApp-telefoon + e-mail) per dossier, berichten in zijn taal versturen, antwoorden vertaald naar NL/FR ontvangen, volledig archief van de uitwisselingen · 🌐 NL↔FR-vertaling lokaal (offline) + andere talen op aanvraag · ⚡ automatische update met één klik (bevestiging → alles gebeurt vanzelf)"},
  '1.7.7':{fr:"🔄 Mise à jour automatique en un clic : l'application se télécharge et se remplace elle-même sans aucune intervention · 🗓️ Nouveau module Agenda & Interprètes : rendez-vous, base des 13 organismes agréés, messages MENA en 12 langues (WhatsApp/email), demandes de visite",
          nl:"🔄 Automatische update met één klik: de app downloadt en vervangt zichzelf zonder tussenkomst · 🗓️ Nieuwe module Agenda & Tolken: afspraken, databank 13 erkende organisaties, NBMV-berichten in 12 talen (WhatsApp/e-mail), bezoekverzoeken"},
  '1.7.5':{fr:"⚡ Installation simplifiée : l'application Windows crée elle-même son raccourci sur le Bureau et dans le menu Démarrer au premier double-clic · ❓ nouveau bouton Aide qui ouvre toujours le mode d'emploi (local ou en ligne)",
@@ -4560,10 +4616,181 @@ const LANG_MAP={'Arabe':'Arabe','Arabic':'Arabe','Pashto':'Pashto','Dari':'Dari/
 
 function ipName(ip){return ip?(ip.prenom?ip.prenom+' '+ip.nom:ip.nom):'';}
 
+/* ============ v1.7.8 : MESSAGERIE BIDIRECTIONNELLE JEUNE ↔ TUTEUR ============ */
+// Coordonnées du jeune (d.contact) + archive des échanges (d.messages) + traduction.
+// NL↔FR : moteur local Bergamot (hors ligne). Autres langues : traduction en ligne
+// MyMemory À LA DEMANDE (seul le texte du message transite, jamais le nom/dossier).
+const LANG_ISO={'Français':'fr','Nederlands':'nl','Anglais':'en','Arabe':'ar','Pashto':'ps','Dari/Farsi':'fa','Somali':'so','Tigrinya':'ti','Albanais':'sq','Ukrainien':'uk','Russe':'ru','Géorgien':'ka'};
+const RTL_KEYS={'Arabe':1,'Pashto':1,'Dari/Farsi':1};
+function langKeyOf(d){const raw=(d.langue||d.fiche?.langue||'').trim();return LANG_MAP[raw]||(LANG==='nl'?'Nederlands':'Français');}
+// MyMemory limite ~500 caractères par requête : on découpe sur les fins de phrase.
+function myMemSplit(t){
+  const max=480;if(t.length<=max)return[t];
+  const parts=[];let buf='';
+  t.split(/(?<=[.!?。\n])\s+/).forEach(s=>{
+    if((buf+s).length>max){if(buf){parts.push(buf.trim());buf='';}
+      if(s.length>max){for(let i=0;i<s.length;i+=max)parts.push(s.slice(i,i+max));}else buf=s+' ';}
+    else buf+=s+' ';
+  });
+  if(buf.trim())parts.push(buf.trim());
+  return parts;
+}
+async function tradMyMemory(text,from,to){
+  const out=[];
+  for(const c of myMemSplit(text)){
+    const r=await fetch('https://api.mymemory.translated.net/get?q='+encodeURIComponent(c)+'&langpair='+from+'|'+to);
+    if(!r.ok)throw new Error('HTTP '+r.status);
+    const j=await r.json();
+    const status=j.responseStatus;
+    if(status&&String(status)!=='200')throw new Error(j.responseDetails||('status '+status));
+    out.push((j.responseData&&j.responseData.translatedText)||'');
+  }
+  return out.join(' ');
+}
+// Traduit entre la langue du jeune (clé de template) et FR/NL.
+async function tradMsg(text,fromKey,toKey,status){
+  const fi=LANG_ISO[fromKey]||'en',ti=LANG_ISO[toKey]||'fr';
+  if(fi===ti)return text;
+  if((fi==='nl'&&ti==='fr')||(fi==='fr'&&ti==='nl')){            // hors ligne (Bergamot)
+    const dir=fi==='nl'?'nlfr':'frnl';
+    try{await bgEnsure(dir,status||(()=>{}));return await bgTranslate(dir,text);}catch(e){/* bascule en ligne */}
+  }
+  if(!navigator.onLine)throw new Error(LANG==='nl'?'Geen internet voor online vertaling.':'Pas d\'internet pour la traduction en ligne.');
+  return await tradMyMemory(text,fi,ti);
+}
+
+let MSGR_DOSSIER=null;
+function openMsgr(dossierId){
+  const d=loadDossiers().find(x=>x.id===dossierId);if(!d)return;
+  MSGR_DOSSIER=dossierId;
+  const NL=LANG==='nl';const setT=(id,fr,nl)=>{const e=document.getElementById(id);if(e)e.textContent=NL?nl:fr;};
+  const c=d.contact||{};
+  document.getElementById('mc_tel').value=c.tel||'';
+  document.getElementById('mc_email').value=c.email||'';
+  document.getElementById('mc_canal').value=c.canal||'whatsapp';
+  document.getElementById('mc_notes').value=c.notes||'';
+  document.getElementById('msgrTitle').textContent='💬 '+(NL?'Berichten — ':'Messagerie — ')+d.nom;
+  setT('msgrContactSum','Coordonnées du jeune','Contactgegevens jongere');
+  setT('msgrTelLbl','Téléphone (WhatsApp)','Telefoon (WhatsApp)');
+  setT('msgrCanalLbl','Canal préféré','Voorkeurskanaal');
+  setT('msgrNotesLbl','Notes','Notities');
+  setT('msgrSaveLbl','Enregistrer','Opslaan');
+  setT('msgrRadioOut','Répondre / écrire au jeune','Antwoorden / schrijven aan de jongere');
+  setT('msgrRadioIn','Enregistrer un message reçu','Ontvangen bericht opslaan');
+  setT('msgrTransLbl','Traduire','Vertalen');
+  setT('msgrOutLabel','Traduction (modifiable)','Vertaling (bewerkbaar)');
+  setT('msgrWaLbl','WhatsApp + archiver','WhatsApp + archiveren');
+  setT('msgrMailLbl','Email + archiver','E-mail + archiveren');
+  setT('msgrArchLbl','Archiver seulement','Alleen archiveren');
+  setT('msgrPrivacy','🌐 La traduction en ligne (langues autres que NL/FR) envoie uniquement le texte du message au service de traduction. NL↔FR reste 100% sur votre appareil.','🌐 Online vertaling (andere talen dan NL/FR) stuurt enkel de berichttekst naar de vertaaldienst. NL↔FR blijft 100% op uw toestel.');
+  const lk=langKeyOf(d);const online=!['Français','Nederlands'].includes(lk);
+  document.getElementById('msgrLangNote').innerHTML=(NL?'Taal van de jongere':'Langue du jeune')+' : <strong>'+esc(lk)+'</strong> · '+(online?(NL?'🌐 online vertaling (op aanvraag)':'🌐 traduction en ligne (à la demande)'):(NL?'🧠 lokale vertaling NL↔FR':'🧠 traduction locale NL↔FR'));
+  document.getElementById('msgrInput').value='';
+  document.getElementById('msgrOutput').value='';
+  document.getElementById('msgrTransNote').textContent='';
+  if(document.querySelector('input[name="msgrSens"][value="out"]'))document.querySelector('input[name="msgrSens"][value="out"]').checked=true;
+  msgrSensChange();
+  renderMsgrThread();
+  openModal('msgrModal');
+}
+function saveMsgrContact(){
+  const arr=loadDossiers();const d=arr.find(x=>x.id===MSGR_DOSSIER);if(!d)return;
+  d.contact={tel:document.getElementById('mc_tel').value.trim(),email:document.getElementById('mc_email').value.trim(),canal:document.getElementById('mc_canal').value,notes:document.getElementById('mc_notes').value.trim()};
+  saveDossiers(arr);
+  const note=document.getElementById('msgrTransNote');note.textContent='✅ '+(LANG==='nl'?'Contactgegevens opgeslagen':'Coordonnées enregistrées');setTimeout(()=>{note.textContent='';},1800);
+}
+function msgrSens(){const el=document.querySelector('input[name="msgrSens"]:checked');return el?el.value:'out';}
+function msgrSensChange(){
+  const NL=LANG==='nl';const out=msgrSens()==='out';
+  document.getElementById('msgrInLabel').textContent=out?(NL?'Uw bericht ('+(NL?'NL':'FR')+')':'Votre message (FR)'):(NL?'Ontvangen bericht (taal van de jongere)':'Message reçu (langue du jeune)');
+  document.getElementById('msgrInput').placeholder=out?(NL?'Schrijf uw bericht in het Nederlands…':'Écrivez votre message en français…'):(NL?'Plak hier het ontvangen bericht…':'Collez ici le message reçu…');
+  document.getElementById('msgrSendRow').style.display=out?'flex':'none';
+}
+async function msgrTranslate(){
+  const d=loadDossiers().find(x=>x.id===MSGR_DOSSIER);if(!d)return;
+  const txt=document.getElementById('msgrInput').value.trim();if(!txt)return;
+  const NL=LANG==='nl';const meKey=NL?'Nederlands':'Français';const youthKey=langKeyOf(d);const out=msgrSens()==='out';
+  const fromKey=out?meKey:youthKey,toKey=out?youthKey:meKey;
+  const note=document.getElementById('msgrTransNote');note.textContent='⏳ '+(NL?'Vertalen…':'Traduction…');
+  try{
+    const res=await tradMsg(txt,fromKey,toKey,m=>{note.textContent=m;});
+    const o=document.getElementById('msgrOutput');o.value=res;o.dir=RTL_KEYS[toKey]?'rtl':'ltr';
+    note.textContent='✅ '+(NL?'Vertaald — controleer en pas aan indien nodig.':'Traduit — vérifiez et corrigez si besoin.');
+  }catch(e){note.textContent='⚠️ '+esc(e.message||'')+' — '+(NL?'vul handmatig in.':'saisissez la traduction manuellement.');}
+}
+function msgrArchive(silent){
+  const arr=loadDossiers();const d=arr.find(x=>x.id===MSGR_DOSSIER);if(!d)return null;
+  const NL=LANG==='nl';const out=msgrSens()==='out';const youthKey=langKeyOf(d);
+  const inp=document.getElementById('msgrInput').value.trim();
+  const trad=document.getElementById('msgrOutput').value.trim();
+  if(!inp&&!trad)return null;
+  const texteJeune=out?trad:inp;const texteTuteur=out?inp:trad;
+  const m={id:'m'+Date.now().toString(36)+Math.floor(Math.random()*1e4),ts:nowISO(),sens:out?'out':'in',lang:youthKey,texteJeune,texteTuteur};
+  d.messages=d.messages||[];d.messages.push(m);saveDossiers(arr);
+  if(!silent){document.getElementById('msgrInput').value='';document.getElementById('msgrOutput').value='';document.getElementById('msgrTransNote').textContent='✅ '+(NL?'Gearchiveerd':'Archivé');renderMsgrThread();}
+  return m;
+}
+function msgrSendWa(){
+  const d=loadDossiers().find(x=>x.id===MSGR_DOSSIER);if(!d)return;
+  const tel=(d.contact?.tel||'').replace(/\D/g,'');
+  const txt=document.getElementById('msgrOutput').value.trim()||document.getElementById('msgrInput').value.trim();
+  if(!txt)return;
+  if(!tel){alert(LANG==='nl'?'Geen telefoonnummer. Vul het in bij de contactgegevens hierboven.':'Pas de numéro. Renseignez-le dans les coordonnées ci-dessus.');return;}
+  msgrArchive(true);renderMsgrThread();
+  window.open('https://wa.me/'+tel+'?text='+encodeURIComponent(txt),'_blank');
+  document.getElementById('msgrInput').value='';document.getElementById('msgrOutput').value='';
+  document.getElementById('msgrTransNote').textContent='✅ '+(LANG==='nl'?'Verstuurd via WhatsApp + gearchiveerd':'Envoyé via WhatsApp + archivé');
+}
+function msgrSendMail(){
+  const d=loadDossiers().find(x=>x.id===MSGR_DOSSIER);if(!d)return;
+  const email=d.contact?.email||'';
+  const txt=document.getElementById('msgrOutput').value.trim()||document.getElementById('msgrInput').value.trim();
+  if(!txt)return;
+  if(!email){alert(LANG==='nl'?'Geen e-mailadres. Vul het in bij de contactgegevens hierboven.':'Pas d\'adresse email. Renseignez-la dans les coordonnées ci-dessus.');return;}
+  msgrArchive(true);renderMsgrThread();
+  const subj=encodeURIComponent(LANG==='nl'?'Bericht van uw voogd':'Message de votre tuteur');
+  window.open('mailto:'+encodeURIComponent(email)+'?subject='+subj+'&body='+encodeURIComponent(txt),'_blank');
+  document.getElementById('msgrInput').value='';document.getElementById('msgrOutput').value='';
+  document.getElementById('msgrTransNote').textContent='✅ '+(LANG==='nl'?'E-mail geopend + gearchiveerd':'Email ouvert + archivé');
+}
+function renderMsgrThread(){
+  const d=loadDossiers().find(x=>x.id===MSGR_DOSSIER);const NL=LANG==='nl';
+  const el=document.getElementById('msgrThread');if(!el)return;
+  const msgs=(d&&d.messages)||[];
+  if(!msgs.length){el.innerHTML='<p class="muted" style="text-align:center;padding:1rem">'+(NL?'Nog geen berichten.':'Aucun message pour l\'instant.')+'</p>';return;}
+  el.innerHTML=msgs.slice().reverse().map(m=>{
+    const out=m.sens==='out';
+    const who=out?(NL?'➡️ Verzonden':'➡️ Envoyé'):(NL?'⬅️ Ontvangen':'⬅️ Reçu');
+    const rtl=RTL_KEYS[m.lang]?' dir="rtl"':'';
+    const bg=out?'background:#E8F0FE;margin-left:1.4rem':'background:#F1F3F5;margin-right:1.4rem';
+    return '<div style="border-radius:.5rem;padding:.5rem .7rem;margin:.4rem 0;'+bg+'">'
+      +'<div style="font-size:.72rem;color:#5F6B7A;margin-bottom:.25rem">'+who+' · '+esc((m.ts||'').replace('T',' ').slice(0,16))+' · '+esc(m.lang||'')
+      +' <button onclick="msgrDel(\''+m.id+'\')" title="'+(NL?'Verwijderen':'Supprimer')+'" style="float:right;border:none;background:none;cursor:pointer">🗑️</button></div>'
+      +'<div style="font-size:.92rem;white-space:pre-wrap;word-break:break-word">'+esc(m.texteTuteur||'')+'</div>'
+      +(m.texteJeune?'<div'+rtl+' style="font-size:.85rem;color:#5F6B7A;white-space:pre-wrap;word-break:break-word;margin-top:.3rem;border-top:1px dashed #CBD3DC;padding-top:.3rem">'+esc(m.texteJeune)+'</div>':'')
+      +'</div>';
+  }).join('');
+}
+function msgrDel(id){
+  if(!confirm(LANG==='nl'?'Dit bericht uit het archief verwijderen?':'Supprimer ce message de l\'archive ?'))return;
+  const arr=loadDossiers();const d=arr.find(x=>x.id===MSGR_DOSSIER);if(!d)return;
+  d.messages=(d.messages||[]).filter(m=>m.id!==id);saveDossiers(arr);renderMsgrThread();
+}
+// Archive une notification de rendez-vous envoyée (depuis le modal msgMenaModal)
+function archiveApptMsg(){
+  if(!CURRENT_MSG_DOSSIER_ID||!CURRENT_MSG_TEXT)return;
+  const arr=loadDossiers();const d=arr.find(x=>x.id===CURRENT_MSG_DOSSIER_ID);if(!d)return;
+  d.messages=d.messages||[];
+  d.messages.push({id:'m'+Date.now().toString(36)+Math.floor(Math.random()*1e4),ts:nowISO(),sens:'out',lang:CURRENT_MSG_LANGKEY||langKeyOf(d),texteJeune:CURRENT_MSG_TEXT,texteTuteur:'['+(LANG==='nl'?'Afspraakmelding verstuurd':'Notification de rendez-vous envoyée')+']'});
+  saveDossiers(arr);
+}
+
 let CURRENT_MSG_RDV_ID=null;
 let CURRENT_MSG_TEXT=null;
 let CURRENT_MSG_MENA_TEL=null;
 let CURRENT_MSG_MENA_EMAIL=null;
+let CURRENT_MSG_DOSSIER_ID=null;
+let CURRENT_MSG_LANGKEY=null;
 
 function openMsgMena(rdvId){
   const r=AG.rdv.find(x=>x.id===rdvId);if(!r)return;
@@ -4576,8 +4803,10 @@ function openMsgMena(rdvId){
   const msg=tmpl.build(d,r,ip,TUTEUR||{});
   CURRENT_MSG_RDV_ID=rdvId;
   CURRENT_MSG_TEXT=msg;
-  CURRENT_MSG_MENA_TEL=d.fiche?.tel||d.tel||'';
-  CURRENT_MSG_MENA_EMAIL=d.fiche?.email||d.email||'';
+  CURRENT_MSG_DOSSIER_ID=d.id;
+  CURRENT_MSG_LANGKEY=langKey;
+  CURRENT_MSG_MENA_TEL=d.contact?.tel||d.fiche?.tel||d.tel||'';
+  CURRENT_MSG_MENA_EMAIL=d.contact?.email||d.fiche?.email||d.email||'';
   document.getElementById('msgMenaLangLabel').textContent=langKey;
   const box=document.getElementById('msgMenaContent');
   box.style.direction=tmpl.dir;
@@ -4607,8 +4836,10 @@ function previewMsgMena(){
   const tmpl=MSG_TEMPLATES[langKey]||MSG_TEMPLATES['Français'];
   const msg=tmpl.build(d,tempR,ip,TUTEUR||{});
   CURRENT_MSG_TEXT=msg;
-  CURRENT_MSG_MENA_TEL=d.fiche?.tel||d.tel||'';
-  CURRENT_MSG_MENA_EMAIL=d.fiche?.email||d.email||'';
+  CURRENT_MSG_DOSSIER_ID=d.id;
+  CURRENT_MSG_LANGKEY=langKey;
+  CURRENT_MSG_MENA_TEL=d.contact?.tel||d.fiche?.tel||d.tel||'';
+  CURRENT_MSG_MENA_EMAIL=d.contact?.email||d.fiche?.email||d.email||'';
   document.getElementById('msgMenaLangLabel').textContent=langKey;
   const box=document.getElementById('msgMenaContent');
   box.style.direction=tmpl.dir;
@@ -4623,6 +4854,7 @@ function sendMsgWhatsApp(){
   const tel=CURRENT_MSG_MENA_TEL.replace(/\D/g,'');
   const url='https://wa.me/'+tel+'?text='+encodeURIComponent(CURRENT_MSG_TEXT);
   window.open(url,'_blank');
+  archiveApptMsg();
 }
 
 function sendMsgEmail(){
@@ -4630,6 +4862,7 @@ function sendMsgEmail(){
   const subj=encodeURIComponent(LANG==='nl'?'Uw afspraak':'Votre rendez-vous');
   const body=encodeURIComponent(CURRENT_MSG_TEXT);
   window.open('mailto:'+encodeURIComponent(CURRENT_MSG_MENA_EMAIL)+'?subject='+subj+'&body='+body,'_blank');
+  archiveApptMsg();
 }
 
 function copyMsgMena(){

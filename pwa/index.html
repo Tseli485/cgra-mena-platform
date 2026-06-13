@@ -201,6 +201,37 @@
   footer{color:var(--gris);font-size:.75rem;text-align:center;padding:1.2rem 0 1.6rem;border-top:1px solid var(--bord);margin-top:1.5rem}
   footer a{color:var(--accent)}
   :focus-visible{outline:2px solid var(--bleu2);outline-offset:2px}
+  /* ===== Agenda & Interprètes ===== */
+  .ag-tab{transition:background .15s,color .15s}
+  .ag-tab.active{background:var(--bleu);color:#fff}
+  [data-theme="dark"] .ag-tab.active{background:var(--bleu2)}
+  .rdv-card{background:var(--surface);border:1px solid var(--bord);border-left:4px solid var(--bleu2);border-radius:.6rem;padding:1rem 1.2rem;margin-bottom:.7rem;box-shadow:var(--shadow);position:relative;cursor:pointer;transition:box-shadow .15s}
+  .rdv-card:hover{box-shadow:var(--shadow-lg)}
+  .rdv-card.statut-confirme{border-left-color:var(--vert)}
+  .rdv-card.statut-realise{border-left-color:var(--gris);opacity:.8}
+  .rdv-card.statut-annule{border-left-color:var(--rouge);opacity:.7}
+  .rdv-card.statut-urgent{border-left-color:var(--rouge)}
+  .rdv-header{display:flex;align-items:center;justify-content:space-between;gap:.6rem;flex-wrap:wrap}
+  .rdv-date{font-family:var(--serif);font-size:1.1rem;font-weight:700;color:var(--accent)}
+  .rdv-meta{font-size:.82rem;color:var(--gris);margin-top:.3rem}
+  .rdv-interp{font-size:.82rem;color:var(--vert);margin-top:.2rem}
+  .rdv-actions{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.7rem}
+  .interp-card{background:var(--surface);border:1px solid var(--bord);border-radius:.6rem;padding:1rem 1.2rem;margin-bottom:.7rem;box-shadow:var(--shadow)}
+  .interp-card.perso{border-left:3px solid var(--or)}
+  .interp-langs{display:flex;flex-wrap:wrap;gap:.3rem;margin:.4rem 0}
+  .lang-tag{background:var(--bleu-clair);color:var(--bleu-fonce);padding:.15rem .55rem;border-radius:1rem;font-size:.74rem;font-weight:600}
+  [data-theme="dark"] .lang-tag{background:var(--bleu-fonce);color:var(--bleu2)}
+  .interp-type{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:.15rem .5rem;border-radius:1rem}
+  .interp-type.jure{background:#e8f4e8;color:#1a6b2f}[data-theme="dark"] .interp-type.jure{background:#153320;color:#5dcc7a}
+  .interp-type.asbl{background:#e3ecf7;color:#19497f}[data-theme="dark"] .interp-type.asbl{background:#1c3252;color:#7fb0f0}
+  .interp-type.social{background:#f3e9d7;color:#7a5512}[data-theme="dark"] .interp-type.social{background:#3a2f1a;color:#efcb8c}
+  .interp-type.commercial{background:#fae9e7;color:#8c2a21}[data-theme="dark"] .interp-type.commercial{background:#3a1e1a;color:#f6b3aa}
+  .interp-type.personnel{background:var(--or-clair);color:var(--or)}[data-theme="dark"] .interp-type.personnel{background:#3a2f1a;color:var(--or)}
+  .req-card{background:var(--surface);border:1px solid var(--bord);border-left:4px solid var(--orange);border-radius:.6rem;padding:.9rem 1.1rem;margin-bottom:.6rem;box-shadow:var(--shadow)}
+  .req-card.statut-planifie{border-left-color:var(--vert)}
+  .req-card.statut-realise{border-left-color:var(--gris);opacity:.8}
+  .req-card.statut-refuse{border-left-color:var(--rouge);opacity:.7}
+  .msg-preview{background:var(--surface2);border:1px dashed var(--bord);border-radius:.5rem;padding:.8rem 1rem;font-size:.88rem;line-height:1.7;white-space:pre-wrap;word-break:break-word;max-height:220px;overflow-y:auto}
 </style>
 </head>
 <body>
@@ -250,6 +281,7 @@
     <li><a class="nav" data-view="cases" data-i18n="nav.cases">📚 Cas Pratiques</a></li>
     <li><a class="nav" data-view="guide" data-i18n="nav.guide">🎓 Guide du tuteur</a></li>
     <li><a class="nav" data-view="resources" data-i18n="nav.resources">📁 Ressources</a></li>
+    <li><a class="nav" data-view="agenda" data-i18n="nav.agenda">🗓️ Agenda & Interprètes</a></li>
   </ul>
 </nav>
 
@@ -427,6 +459,79 @@
       <div id="hebList" class="loading"></div>
     </div>
     <div class="card" style="margin-top:1.2rem" id="sourcesOfficielles"></div>
+  </section>
+
+  <!-- AGENDA & INTERPRÈTES -->
+  <section class="view" id="agenda">
+    <h2 class="title" data-i18n="ag.title">🗓️ Agenda &amp; Interprètes</h2>
+    <div class="banner" data-i18n="ag.banner">Gérez vos rendez-vous, coordonnez les interprètes et envoyez des notifications aux jeunes dans leur langue.</div>
+    <!-- Sous-onglets -->
+    <div class="ag-tabs row" style="margin-bottom:1.2rem;gap:.5rem">
+      <button class="btn ag-tab active" id="agtab-rdv" onclick="agTab('rdv')" data-i18n="ag.tab.rdv">📅 Rendez-vous</button>
+      <button class="btn sec ag-tab" id="agtab-interp" onclick="agTab('interp')" data-i18n="ag.tab.interp">🌐 Interprètes</button>
+      <button class="btn sec ag-tab" id="agtab-req" onclick="agTab('req')" data-i18n="ag.tab.req">📋 Demandes de visite</button>
+    </div>
+
+    <!-- Sous-vue : Rendez-vous -->
+    <div id="agview-rdv">
+      <div class="row" style="margin-bottom:.8rem;gap:.6rem">
+        <button class="btn" onclick="openRdvForm()" data-i18n="ag.rdv.new">➕ Nouveau rendez-vous</button>
+        <select id="rdvFilterDoss" onchange="renderRdv()" style="width:auto"><option value="" data-i18n="ag.rdv.alldoss">Tous les dossiers</option></select>
+        <select id="rdvFilterType" onchange="renderRdv()" style="width:auto">
+          <option value="" data-i18n="ag.rdv.alltype">Tous les types</option>
+          <option value="avocat" data-i18n="ag.rdv.t.avocat">E-avocat / Avocat</option>
+          <option value="cgra" data-i18n="ag.rdv.t.cgra">Audience CGRA</option>
+          <option value="oe" data-i18n="ag.rdv.t.oe">Office Étrangers</option>
+          <option value="medical">Médical / Santé</option>
+          <option value="ecole">École</option>
+          <option value="tutelle">Service des Tutelles</option>
+          <option value="juge">Juge de paix</option>
+          <option value="autre" data-i18n="ag.rdv.t.autre">Autre</option>
+        </select>
+        <select id="rdvFilterStatut" onchange="renderRdv()" style="width:auto">
+          <option value="" data-i18n="ag.rdv.allstatut">Tous les statuts</option>
+          <option value="planifie" data-i18n="ag.rdv.s.planifie">Planifié</option>
+          <option value="confirme" data-i18n="ag.rdv.s.confirme">Confirmé</option>
+          <option value="realise" data-i18n="ag.rdv.s.realise">Réalisé</option>
+          <option value="annule" data-i18n="ag.rdv.s.annule">Annulé</option>
+        </select>
+      </div>
+      <div id="rdvList"></div>
+    </div>
+
+    <!-- Sous-vue : Interprètes -->
+    <div id="agview-interp" style="display:none">
+      <div class="row" style="margin-bottom:.8rem;gap:.6rem">
+        <button class="btn" onclick="openInterpForm()" data-i18n="ag.interp.add">➕ Ajouter un interprète personnel</button>
+        <input id="interpSearch" placeholder="🔍 Nom, langue, ville…" oninput="renderInterpretes()" style="flex:1;min-width:180px">
+        <select id="interpFilterLang" onchange="renderInterpretes()" style="width:auto"><option value="" data-i18n="ag.interp.alllang">Toutes les langues</option></select>
+        <select id="interpFilterType" onchange="renderInterpretes()" style="width:auto">
+          <option value="" data-i18n="ag.interp.alltype">Tous les types</option>
+          <option value="jure">Juré</option>
+          <option value="asbl">ASBL / Gratuit</option>
+          <option value="social">Social</option>
+          <option value="commercial">Commercial</option>
+        </select>
+      </div>
+      <div id="interpList"></div>
+    </div>
+
+    <!-- Sous-vue : Demandes de visite -->
+    <div id="agview-req" style="display:none">
+      <div class="row" style="margin-bottom:.8rem;gap:.6rem">
+        <button class="btn" onclick="openVisReqForm()" data-i18n="ag.req.new">➕ Nouvelle demande de visite</button>
+        <select id="reqFilterDoss" onchange="renderVisReq()" style="width:auto"><option value="" data-i18n="ag.rdv.alldoss">Tous les dossiers</option></select>
+        <select id="reqFilterStatut" onchange="renderVisReq()" style="width:auto">
+          <option value="" data-i18n="ag.rdv.allstatut">Tous les statuts</option>
+          <option value="demande">Demande reçue</option>
+          <option value="en-cours">En cours de coordination</option>
+          <option value="planifie">RDV planifié</option>
+          <option value="realise">Réalisé</option>
+          <option value="refuse">Refusé / Reporté</option>
+        </select>
+      </div>
+      <div id="reqList"></div>
+    </div>
   </section>
 </main>
 
@@ -629,6 +734,208 @@
   </div>
 </div>
 
+<!-- MODAL INTERPRÈTE (ajout / édition) -->
+<div class="modal" id="interpModal">
+  <div class="modal-box">
+    <button class="close" onclick="closeModal('interpModal')">&times;</button>
+    <h3 id="interpModalTitle">Ajouter un interprète personnel</h3>
+    <form id="interpForm" onsubmit="saveInterp(event)">
+      <input type="hidden" id="ip_id">
+      <div class="grid cols-2">
+        <div><label>Nom *</label><input id="ip_nom" required placeholder="Nom de famille"></div>
+        <div><label>Prénom</label><input id="ip_prenom" placeholder="Prénom"></div>
+      </div>
+      <label>Langues parlées * <span class="muted" style="font-size:.78rem">(séparées par virgule)</span></label>
+      <input id="ip_langues" required placeholder="ex. Arabe, Pashto, Dari">
+      <div class="grid cols-2">
+        <div><label>Téléphone *</label><input id="ip_tel" required placeholder="+32 4xx xxx xxx"></div>
+        <div><label>Email</label><input id="ip_email" type="email" placeholder="email@exemple.be"></div>
+      </div>
+      <div class="grid cols-2">
+        <div><label>Adresse / Rue</label><input id="ip_adresse" placeholder="Rue et numéro"></div>
+        <div><label>Code postal</label><input id="ip_cp" placeholder="1000"></div>
+      </div>
+      <div class="grid cols-2">
+        <div><label>Commune</label><input id="ip_commune" placeholder="Bruxelles"></div>
+        <div><label>Type</label>
+          <select id="ip_type">
+            <option value="jure">Juré (officiel)</option>
+            <option value="asbl">ASBL / Bénévole</option>
+            <option value="social">Interprétation sociale</option>
+            <option value="commercial">Commercial</option>
+            <option value="personnel">Contact personnel</option>
+          </select>
+        </div>
+      </div>
+      <label>Tarif / Disponibilité</label>
+      <input id="ip_tarif" placeholder="ex. Gratuit / 60€/h / Sur demande">
+      <label>Notes</label>
+      <textarea id="ip_notes" rows="2" placeholder="Remarques, spécialisations, conditions..."></textarea>
+      <div class="row" style="margin-top:1.2rem;justify-content:flex-end">
+        <button type="button" class="btn sec" onclick="closeModal('interpModal')">Annuler</button>
+        <button type="submit" class="btn">💾 Enregistrer</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- MODAL RENDEZ-VOUS (ajout / édition) -->
+<div class="modal" id="rdvModal">
+  <div class="modal-box" style="max-width:660px">
+    <button class="close" onclick="closeModal('rdvModal')">&times;</button>
+    <h3 id="rdvModalTitle">Nouveau rendez-vous</h3>
+    <form id="rdvForm" onsubmit="saveRdvForm(event)">
+      <input type="hidden" id="rv_id">
+      <div class="grid cols-2">
+        <div><label>Dossier MENA *</label>
+          <select id="rv_dossier" required><option value="">— Choisir —</option></select>
+        </div>
+        <div><label>Type de rendez-vous *</label>
+          <select id="rv_type" required>
+            <option value="">— Choisir —</option>
+            <option value="avocat">E-avocat / Avocat</option>
+            <option value="cgra">Audience CGRA</option>
+            <option value="oe">Office des Étrangers</option>
+            <option value="medical">Médical / Santé</option>
+            <option value="ecole">École / Formation</option>
+            <option value="tutelle">Service des Tutelles</option>
+            <option value="juge">Juge de paix</option>
+            <option value="cgvs">Audience CGVS</option>
+            <option value="autre">Autre</option>
+          </select>
+        </div>
+      </div>
+      <div class="grid cols-2">
+        <div><label>Date *</label><input id="rv_date" type="date" required></div>
+        <div><label>Heure *</label><input id="rv_heure" type="time" required></div>
+      </div>
+      <div class="grid cols-2">
+        <div><label>Lieu (nom institution)</label><input id="rv_lieu" placeholder="ex. CGRA, Cabinet Dupont…"></div>
+        <div><label>Adresse complète</label><input id="rv_adresse" placeholder="Rue XX, 1000 Bruxelles"></div>
+      </div>
+      <label>Interprète nécessaire ?</label>
+      <select id="rv_interp_need" onchange="toggleInterpSelect()">
+        <option value="non">Non / Pas nécessaire</option>
+        <option value="oui">Oui — à sélectionner</option>
+        <option value="confirme">Oui — déjà confirmé</option>
+      </select>
+      <div id="rv_interp_block" style="display:none;margin-top:.5rem">
+        <label>Interprète</label>
+        <select id="rv_interp_id"><option value="">— Choisir un interprète —</option></select>
+        <div class="row" style="gap:.5rem;margin-top:.4rem">
+          <button type="button" class="btn sec sm" onclick="openInterpForm()" style="white-space:nowrap">➕ Ajouter interprète</button>
+          <span class="muted" style="font-size:.8rem" id="rv_interp_contact"></span>
+        </div>
+      </div>
+      <label>Statut</label>
+      <select id="rv_statut">
+        <option value="planifie">Planifié</option>
+        <option value="confirme">Confirmé</option>
+        <option value="realise">Réalisé</option>
+        <option value="annule">Annulé</option>
+      </select>
+      <hr style="margin:1rem 0;border-color:var(--bord)">
+      <strong style="color:var(--accent)">📱 Notification au MENA</strong>
+      <div class="grid cols-2" style="margin-top:.5rem">
+        <div><label>Point de prise en charge du jeune</label>
+          <select id="rv_pickup">
+            <option value="autonome">Autonome (se déplace seul)</option>
+            <option value="domicile">Tuteur passe au domicile</option>
+            <option value="centre">Point de rencontre au centre</option>
+            <option value="autre">Autre (préciser dans notes)</option>
+          </select>
+        </div>
+        <div><label>Lieu de prise en charge (si pas autonome)</label>
+          <input id="rv_pickup_lieu" placeholder="ex. Rue de la Paix 12, 1000 Bruxelles"></div>
+      </div>
+      <div class="row" style="margin-top:.6rem;gap:.6rem">
+        <button type="button" class="btn sec" onclick="previewMsgMENA()" style="white-space:nowrap">👁️ Aperçu message MENA</button>
+        <span class="muted" style="font-size:.8rem">Le message sera généré dans la langue du jeune dès enregistrement.</span>
+      </div>
+      <label>Notes tuteur</label>
+      <textarea id="rv_notes" rows="2" placeholder="Documents à préparer, contexte, intervenants…"></textarea>
+      <div class="row" style="margin-top:1.2rem;justify-content:flex-end">
+        <button type="button" class="btn sec" onclick="closeModal('rdvModal')">Annuler</button>
+        <button type="submit" class="btn">💾 Enregistrer</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- MODAL DEMANDE DE VISITE (du MENA) -->
+<div class="modal" id="visReqModal">
+  <div class="modal-box">
+    <button class="close" onclick="closeModal('visReqModal')">&times;</button>
+    <h3 id="visReqModalTitle">Demande de visite / contact</h3>
+    <form id="visReqForm" onsubmit="saveVisReqForm(event)">
+      <input type="hidden" id="vr_id">
+      <div class="grid cols-2">
+        <div><label>Dossier MENA *</label>
+          <select id="vr_dossier" required><option value="">— Choisir —</option></select>
+        </div>
+        <div><label>Type de demande *</label>
+          <select id="vr_type" required>
+            <option value="">— Choisir —</option>
+            <option value="avocat">Voir l'avocat</option>
+            <option value="famille">Contact famille (réunification)</option>
+            <option value="amis">Visiter des amis / compatriotes</option>
+            <option value="medical">Consultation médicale</option>
+            <option value="cgra">Infos sur la procédure</option>
+            <option value="ecole">École / Formation</option>
+            <option value="loisirs">Activité / Loisirs</option>
+            <option value="autre">Autre</option>
+          </select>
+        </div>
+      </div>
+      <div class="grid cols-2">
+        <div><label>Date souhaitée par le jeune</label><input id="vr_date_souhait" type="date"></div>
+        <div><label>Urgence</label>
+          <select id="vr_urgence">
+            <option value="normale">Normale</option>
+            <option value="urgente">Urgente</option>
+            <option value="tres-urgente">Très urgente</option>
+          </select>
+        </div>
+      </div>
+      <label>Description de la demande</label>
+      <textarea id="vr_details" rows="3" placeholder="Que demande le jeune ? Contexte de la demande…"></textarea>
+      <label>Statut</label>
+      <select id="vr_statut">
+        <option value="demande">Demande reçue</option>
+        <option value="en-cours">En cours de coordination</option>
+        <option value="planifie">RDV planifié</option>
+        <option value="realise">Réalisé</option>
+        <option value="refuse">Refusé / Reporté</option>
+      </select>
+      <label>RDV lié (optionnel)</label>
+      <select id="vr_rdv_id"><option value="">— Aucun RDV lié —</option></select>
+      <label>Notes tuteur</label>
+      <textarea id="vr_notes" rows="2" placeholder="Raison du refus, alternatives proposées, suivi…"></textarea>
+      <div class="row" style="margin-top:1.2rem;justify-content:flex-end">
+        <button type="button" class="btn sec" onclick="closeModal('visReqModal')">Annuler</button>
+        <button type="submit" class="btn">💾 Enregistrer</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- MODAL MESSAGE MENA (notification dans sa langue) -->
+<div class="modal" id="msgMenaModal">
+  <div class="modal-box" style="max-width:580px">
+    <button class="close" onclick="closeModal('msgMenaModal')">&times;</button>
+    <h3>📱 Message au MENA — <span id="msgMenaLangLabel"></span></h3>
+    <p class="muted" style="font-size:.84rem;margin-bottom:.8rem">Message généré dans la langue du jeune. Envoyez via WhatsApp ou copiez pour SMS/autre.</p>
+    <div id="msgMenaContent" style="background:var(--gris-clair);border-radius:.5rem;padding:1rem;font-size:.95rem;line-height:1.7;white-space:pre-wrap;word-break:break-word"></div>
+    <div class="row" style="margin-top:1rem;gap:.6rem;flex-wrap:wrap">
+      <button class="btn" id="msgWhatsAppBtn" onclick="sendMsgWhatsApp()">💬 WhatsApp</button>
+      <button class="btn sec" onclick="copyMsgMena()">📋 Copier</button>
+      <button class="btn sec" id="msgEmailBtn" onclick="sendMsgEmail()">📧 Email</button>
+      <button class="btn sec" onclick="closeModal('msgMenaModal')">Fermer</button>
+    </div>
+    <p class="muted" style="font-size:.76rem;margin-top:.6rem">⚠️ Vérifiez que le MENA a bien un téléphone et que le numéro est à jour dans son dossier. Respectez les règles de contact fixées par le Service des Tutelles.</p>
+  </div>
+</div>
+
 <script src="js/nl-fr-dict.js"></script>
 <script src="js/lib/pdf.min.js"></script>
 <script>
@@ -662,6 +969,17 @@ const I18N = {
   "conseil.nodossier":"Aucun dossier enregistré. Créez-en un dans « Mes Dossiers » ou utilisez la saisie manuelle.","conseil.matching":"Problèmes correspondants :","conseil.nomatch":"Aucune correspondance — choisissez dans la liste ci-dessous.","conseil.questions":"3. Questions de précision","conseil.qhint":"Répondez pour affiner les solutions proposées.","conseil.choosesel":"— choisir —","conseil.context":"Contexte :","conseil.moreprecise":"<strong>Pour un conseil plus précis</strong>, répondez aux questions ci-dessus :","conseil.moresol":"solution(s) supplémentaire(s) pourrai(en)t s'appliquer.","conseil.answerfirst":"Répondez aux questions de précision pour afficher les solutions adaptées.","conseil.solution":"Solution","conseil.legalbasis":"⚖️ Base légale","conseil.adv":"Avantages","conseil.disadv":"Inconvénients / points d'attention","conseil.demarche":"🎯 Démarche recommandée","conseil.precisions":"ℹ️ Précisions utiles","conseil.countryconsid":"🌍 Considérations liées au pays d'origine :","conseil.countryintro":"Éléments de contexte documentés à confronter au récit individuel — ils peuvent renforcer l'analyse et orienter la protection.","conseil.viewlinked":"▶ Voir le problème lié","conseil.ctxtaken":"contexte complet pris en compte.","conseil.follow":"Suivi :",
   "cases.title":"📚 Cas Pratiques","cases.banner":"Cas concrets pour la <strong>formation du tuteur</strong>. Chaque cas détaille la situation, le <strong>cadre légal</strong>, les <strong>délais</strong>, les <strong>actions à mener</strong> et les leçons à retenir. Cliquez un cas pour le guide complet.","cases.search":"🔍 Rechercher (situation, pays, mot-clé)...","cases.allcat":"Toutes les catégories","cases.loading":"Chargement des cas…","cases.unavailable":"⚠️ Cas pratiques indisponibles.","cases.nomatch":"Aucun cas ne correspond à votre recherche.","cases.count":"cas","case.actions_n":"actions","case.refs_n":"références","case.delais_n":"délais","case.situation":"📖 Situation","case.chrono":"📅 Chronologie","case.legal":"⚖️ Cadre légal applicable","case.delais":"⏰ Délais clés","case.actions":"✅ Actions du tuteur (solutions adéquates et légales)","case.demarche":"🎯 Démarche recommandée","case.lecons":"💡 Leçons pour le tuteur","case.ressources":"📁 Ressources mobilisables",
   "res.title":"📁 Ressources & Contacts","res.search":"🔍 Rechercher (nom, ville)...","res.alltypes":"Tous les types","res.allregions":"Toutes les régions","res.loading":"Chargement des ressources…","res.unavailable":"Aucune ressource trouvée.","res.count":"ressource(s)","res.add":"➕ Ajouter / compléter une ressource","res.edited":"✎ complété","res.custom":"★ perso",
+  "nav.agenda":"🗓️ Agenda & Interprètes",
+  "ag.title":"🗓️ Agenda & Interprètes","ag.banner":"Gérez vos rendez-vous, coordonnez les interprètes et envoyez des notifications aux jeunes dans leur langue.",
+  "ag.tab.rdv":"📅 Rendez-vous","ag.tab.interp":"🌐 Interprètes","ag.tab.req":"📋 Demandes de visite",
+  "ag.rdv.new":"➕ Nouveau rendez-vous","ag.rdv.alldoss":"Tous les dossiers","ag.rdv.alltype":"Tous les types","ag.rdv.allstatut":"Tous les statuts",
+  "ag.rdv.t.avocat":"E-avocat / Avocat","ag.rdv.t.cgra":"Audience CGRA","ag.rdv.t.oe":"Office Étrangers","ag.rdv.t.autre":"Autre",
+  "ag.rdv.s.planifie":"Planifié","ag.rdv.s.confirme":"Confirmé","ag.rdv.s.realise":"Réalisé","ag.rdv.s.annule":"Annulé",
+  "ag.rdv.empty":"Aucun rendez-vous. Cliquez sur ➕ pour en créer un.",
+  "ag.interp.add":"➕ Ajouter un interprète personnel","ag.interp.alllang":"Toutes les langues","ag.interp.alltype":"Tous les types",
+  "ag.interp.official":"Organismes officiels","ag.interp.perso":"Mes interprètes personnels","ag.interp.empty":"Aucun interprète personnel ajouté.",
+  "ag.req.new":"➕ Nouvelle demande de visite","ag.req.empty":"Aucune demande de visite enregistrée.",
+  "ag.msg.copied":"✅ Message copié !",
   "auth.setup.title":"Créer votre accès","auth.setup.msg":"Premier lancement : créez un mot de passe pour chiffrer les dossiers.","auth.setup.btn":"Créer & déverrouiller","auth.login.title":"Accès sécurisé","auth.login.msg":"Cette plateforme contient des données sensibles de mineurs. Saisissez votre mot de passe.","auth.login.btn":"Déverrouiller","auth.pw":"Mot de passe","auth.pw2":"Confirmez le mot de passe","auth.hint":"🔒 Vos dossiers sont chiffrés (AES-256) sur cet appareil. Le mot de passe n'est jamais stocké ni transmis — il déverrouille le chiffrement. <strong>Il ne peut pas être récupéré en cas d'oubli.</strong>","auth.err.crypto":"Chiffrement indisponible. Utilisez http://localhost (pas file://).","auth.err.short":"Mot de passe : 6 caractères minimum.","auth.err.match":"Les mots de passe ne correspondent pas.","auth.err.wrong":"Mot de passe incorrect.","auth.err.generic":"Erreur : "
  },
  nl:{
@@ -691,6 +1009,17 @@ const I18N = {
   "conseil.nodossier":"Geen dossier opgeslagen. Maak er een aan in « Mijn dossiers » of gebruik handmatige invoer.","conseil.matching":"Overeenkomende problemen:","conseil.nomatch":"Geen overeenkomst — kies uit de lijst hieronder.","conseil.questions":"3. Verduidelijkingsvragen","conseil.qhint":"Beantwoord om de voorgestelde oplossingen te verfijnen.","conseil.choosesel":"— kiezen —","conseil.context":"Context:","conseil.moreprecise":"<strong>Voor nauwkeuriger advies</strong>, beantwoord de vragen hierboven:","conseil.moresol":"bijkomende oplossing(en) zou(den) van toepassing kunnen zijn.","conseil.answerfirst":"Beantwoord de verduidelijkingsvragen om de passende oplossingen te tonen.","conseil.solution":"Oplossing","conseil.legalbasis":"⚖️ Wettelijke grondslag","conseil.adv":"Voordelen","conseil.disadv":"Nadelen / aandachtspunten","conseil.demarche":"🎯 Aanbevolen aanpak","conseil.precisions":"ℹ️ Nuttige verduidelijkingen","conseil.countryconsid":"🌍 Overwegingen i.v.m. land van herkomst:","conseil.countryintro":"Gedocumenteerde contextelementen te toetsen aan het individuele verhaal — ze kunnen de analyse versterken en de bescherming sturen.","conseil.viewlinked":"▶ Bekijk het gerelateerde probleem","conseil.ctxtaken":"volledige context in aanmerking genomen.","conseil.follow":"Opvolging:",
   "cases.title":"📚 Praktijkgevallen","cases.banner":"Concrete gevallen voor de <strong>opleiding van de voogd</strong>. Elk geval beschrijft de situatie, het <strong>wettelijk kader</strong>, de <strong>termijnen</strong>, de <strong>te ondernemen acties</strong> en de lessen. Klik op een geval voor de volledige gids.","cases.search":"🔍 Zoeken (situatie, land, trefwoord)...","cases.allcat":"Alle categorieën","cases.loading":"Gevallen laden…","cases.unavailable":"⚠️ Praktijkgevallen niet beschikbaar.","cases.nomatch":"Geen geval komt overeen met uw zoekopdracht.","cases.count":"gevallen","case.actions_n":"acties","case.refs_n":"referenties","case.delais_n":"termijnen","case.situation":"📖 Situatie","case.chrono":"📅 Chronologie","case.legal":"⚖️ Toepasselijk wettelijk kader","case.delais":"⏰ Belangrijke termijnen","case.actions":"✅ Acties van de voogd (passende en wettelijke oplossingen)","case.demarche":"🎯 Aanbevolen aanpak","case.lecons":"💡 Lessen voor de voogd","case.ressources":"📁 Inzetbare hulpbronnen",
   "res.title":"📁 Hulpbronnen & Contacten","res.search":"🔍 Zoeken (naam, stad)...","res.alltypes":"Alle types","res.allregions":"Alle regio's","res.loading":"Hulpbronnen laden…","res.unavailable":"Geen hulpbron gevonden.","res.count":"hulpbron(nen)","res.add":"➕ Een hulpbron toevoegen / aanvullen","res.edited":"✎ aangevuld","res.custom":"★ eigen",
+  "nav.agenda":"🗓️ Agenda & Tolken",
+  "ag.title":"🗓️ Agenda & Tolken","ag.banner":"Beheer uw afspraken, coördineer de tolken en stuur meldingen naar de jongere in zijn taal.",
+  "ag.tab.rdv":"📅 Afspraken","ag.tab.interp":"🌐 Tolken","ag.tab.req":"📋 Bezoekverzoeken",
+  "ag.rdv.new":"➕ Nieuwe afspraak","ag.rdv.alldoss":"Alle dossiers","ag.rdv.alltype":"Alle types","ag.rdv.allstatut":"Alle statussen",
+  "ag.rdv.t.avocat":"E-advocaat / Advocaat","ag.rdv.t.cgra":"Gehoor CGVS","ag.rdv.t.oe":"Dienst Vreemdelingenzaken","ag.rdv.t.autre":"Andere",
+  "ag.rdv.s.planifie":"Gepland","ag.rdv.s.confirme":"Bevestigd","ag.rdv.s.realise":"Uitgevoerd","ag.rdv.s.annule":"Geannuleerd",
+  "ag.rdv.empty":"Geen afspraken. Klik op ➕ om er een aan te maken.",
+  "ag.interp.add":"➕ Persoonlijke tolk toevoegen","ag.interp.alllang":"Alle talen","ag.interp.alltype":"Alle types",
+  "ag.interp.official":"Officiële organisaties","ag.interp.perso":"Mijn persoonlijke tolken","ag.interp.empty":"Geen persoonlijke tolk toegevoegd.",
+  "ag.req.new":"➕ Nieuw bezoekverzoek","ag.req.empty":"Geen bezoekverzoek geregistreerd.",
+  "ag.msg.copied":"✅ Bericht gekopieerd!",
   "auth.setup.title":"Uw toegang aanmaken","auth.setup.msg":"Eerste start: maak een wachtwoord aan om de dossiers te versleutelen.","auth.setup.btn":"Aanmaken & ontgrendelen","auth.login.title":"Beveiligde toegang","auth.login.msg":"Dit platform bevat gevoelige gegevens van minderjarigen. Voer uw wachtwoord in.","auth.login.btn":"Ontgrendelen","auth.pw":"Wachtwoord","auth.pw2":"Bevestig het wachtwoord","auth.hint":"🔒 Uw dossiers zijn versleuteld (AES-256) op dit toestel. Het wachtwoord wordt nooit opgeslagen of verzonden — het ontgrendelt de versleuteling. <strong>Het kan niet worden hersteld bij verlies.</strong>","auth.err.crypto":"Versleuteling niet beschikbaar. Gebruik http://localhost (niet file://).","auth.err.short":"Wachtwoord: minimaal 6 tekens.","auth.err.match":"De wachtwoorden komen niet overeen.","auth.err.wrong":"Onjuist wachtwoord.","auth.err.generic":"Fout: "
  }
 };
@@ -980,6 +1309,8 @@ function onUnlocked(){
   document.getElementById('authGate').classList.add('hidden');
   document.getElementById('authForm').reset();
   renderDashboard();renderDossiers();renderLegislation();
+  loadAg();         // charge les données agenda (RDV, interprètes perso, demandes)
+  loadInterpOfficial(); // précharge les interprètes officiels en arrière-plan
   idleReset();      // démarre le verrouillage automatique (10 min d'inactivité)
   maybeTour();      // visite guidée au premier lancement
   updateArchBtn();  // compteur des archives
@@ -991,6 +1322,7 @@ function onUnlocked(){
 }
 function lockApp(){
   CRYPTO_KEY=null;DOSSIERS=[];ARCHIVES=null;
+  AG={rdv:[],visReq:[],interpPerso:[]};
   document.getElementById('authPw').value='';document.getElementById('authPw2').value='';
   document.getElementById('authErr').textContent='';
   refreshAuthUI();
@@ -1043,6 +1375,7 @@ function go(view){
   if(view==='resources'){renderResources();renderSourcesOff();renderHeberg();}
   if(view==='guide')renderGuide();
   if(view==='conseil')renderConseil();
+  if(view==='agenda')renderAgenda();
 }
 document.querySelectorAll('nav a').forEach(a=>a.addEventListener('click',()=>go(a.dataset.view)));
 
@@ -2238,7 +2571,7 @@ function printReleve(id){
 }
 
 /* ============ VERSION & MISES À JOUR ============ */
-const APP_VERSION='1.7.5';
+const APP_VERSION='1.7.6';
 window.APP_VERSION=APP_VERSION;   // expose pour tests.html (const non attache a window)
 Object.assign(I18N.fr,{"dash.matrix":"📊 Suivi par dossier","dash.q4":"📈 Mes statistiques","dash.q5":"🚗 Mes frais (par jeune)","heb.title":"Lieux d'hébergement MENA (réseau officiel)","nav.guide":"🎓 Guide du tuteur","guide.title":"🎓 Guide du tuteur débutant — de la désignation aux 18 ans","guide.banner":"13 modules pas-à-pas : cours, actions à faire, documents à remettre (et à qui), rendez-vous, pièges à éviter. Contenu basé sur la réglementation en vigueur.","dash.q1":"📄 Nouveau MENA (fiche DVZ)","dash.q2":"📂 Mes dossiers","dash.q3":"⏰ Urgences & échéances","gs.ph":"🔍 Recherche globale (dossiers, lois, cas, ressources)…","ft.check":"🔄 Vérifier les mises à jour","ft.dl":"Télécharger l’application","ft.manuel":"Mode d'emploi"});
 Object.assign(I18N.nl,{"dash.matrix":"📊 Opvolging per dossier","dash.q4":"📈 Mijn statistieken","dash.q5":"🚗 Mijn kosten (per jongere)","heb.title":"NBMV-opvangplaatsen (officieel netwerk)","nav.guide":"🎓 Voogdengids","guide.title":"🎓 Gids voor de beginnende voogd — van aanstelling tot 18 jaar","guide.banner":"13 stap-voor-stapmodules: cursus, acties, documenten (en aan wie), afspraken, valkuilen. Inhoud gebaseerd op de geldende regelgeving.","dash.q1":"📄 Nieuwe NBMV (DVZ-fiche)","dash.q2":"📂 Mijn dossiers","dash.q3":"⏰ Urgenties & vervaldata","gs.ph":"🔍 Globaal zoeken (dossiers, wetten, gevallen, hulpbronnen)…","ft.check":"🔄 Updates controleren","ft.dl":"Applicatie downloaden","ft.manuel":"Handleiding"});
@@ -3685,6 +4018,588 @@ function openManual(){
 
 /* ============ UTIL ============ */
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+
+/* ============ AGENDA & INTERPRÈTES ============ */
+const AG_STORE='mena_agenda_enc';
+let AG={rdv:[],visReq:[],interpPerso:[]};
+let INTERP_OFFICIAL=[];
+
+// Stockage chiffré (même pattern que DOSSIERS)
+async function persistAg(){
+  if(!CRYPTO_KEY)return;
+  const obj=await aesEncrypt(CRYPTO_KEY,JSON.stringify(AG));
+  localStorage.setItem(AG_STORE,JSON.stringify(obj));
+}
+async function loadAg(){
+  if(!CRYPTO_KEY)return;
+  const blob=localStorage.getItem(AG_STORE);
+  if(blob){try{AG=JSON.parse(await aesDecrypt(CRYPTO_KEY,JSON.parse(blob)));}catch(e){AG={rdv:[],visReq:[],interpPerso:[]};}}
+  else AG={rdv:[],visReq:[],interpPerso:[]};
+  if(!AG.rdv)AG.rdv=[];if(!AG.visReq)AG.visReq=[];if(!AG.interpPerso)AG.interpPerso=[];
+}
+
+// Chargement JSON interprètes officiels
+async function loadInterpOfficial(){
+  if(INTERP_OFFICIAL.length)return;
+  try{
+    const r=await fetch('js/data/interpretes-data.json');
+    const j=await r.json();
+    INTERP_OFFICIAL=j.organismes||[];
+  }catch(e){INTERP_OFFICIAL=[];}
+}
+
+// Navigation sous-onglets
+function agTab(tab){
+  ['rdv','interp','req'].forEach(k=>{
+    document.getElementById('agview-'+k).style.display=k===tab?'':'none';
+    const btn=document.getElementById('agtab-'+k);
+    btn.classList.toggle('active',k===tab);
+    btn.classList.toggle('sec',k!==tab);
+  });
+  if(tab==='rdv')renderRdv();
+  if(tab==='interp'){loadInterpOfficial().then(renderInterpretes);}
+  if(tab==='req')renderVisReq();
+}
+
+// Appelé quand on navigate vers la vue agenda
+async function renderAgenda(){
+  await loadAg();
+  await loadInterpOfficial();
+  renderRdv();
+  populateDossierSelects();
+}
+
+function populateDossierSelects(){
+  const doss=loadDossiers();
+  const opts=doss.map(d=>`<option value="${d.id}">${esc(d.nom)}</option>`).join('');
+  ['rdvFilterDoss','reqFilterDoss'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el)el.innerHTML=`<option value="">${t('ag.rdv.alldoss')}</option>`+opts;
+  });
+}
+
+// --- RENDEZ-VOUS ---
+const RDV_TYPE_ICON={avocat:'⚖️',cgra:'🛡️',oe:'🛂',medical:'🏥',ecole:'🎓',tutelle:'🏛️',juge:'⚖️',cgvs:'🛡️',autre:'📋'};
+const RDV_TYPE_FR={avocat:'E-avocat / Avocat',cgra:'Audience CGRA',oe:'Office des Étrangers',medical:'Médical',ecole:'École',tutelle:'Service des Tutelles',juge:'Juge de paix',cgvs:'Audience CGVS',autre:'Autre'};
+
+function renderRdv(){
+  const doss=loadDossiers();
+  const fD=document.getElementById('rdvFilterDoss').value;
+  const fT=document.getElementById('rdvFilterType').value;
+  const fS=document.getElementById('rdvFilterStatut').value;
+  let arr=[...(AG.rdv||[])].sort((a,b)=>a.date<b.date?1:-1);
+  if(fD)arr=arr.filter(r=>r.dossierId===fD);
+  if(fT)arr=arr.filter(r=>r.type===fT);
+  if(fS)arr=arr.filter(r=>r.statut===fS);
+  const el=document.getElementById('rdvList');
+  if(!arr.length){el.innerHTML=`<div class="empty">${t('ag.rdv.empty')}</div>`;return;}
+  const NL=LANG==='nl';
+  el.innerHTML=arr.map(r=>{
+    const d=doss.find(x=>x.id===r.dossierId);
+    const ip=getAllInterp().find(i=>i.id===r.interpId);
+    const statLabel={planifie:NL?'Gepland':'Planifié',confirme:NL?'Bevestigd':'Confirmé',realise:NL?'Uitgevoerd':'Réalisé',annule:NL?'Geannuleerd':'Annulé'};
+    const sc=r.statut||'planifie';
+    return `<div class="rdv-card statut-${sc}" onclick="openRdvDetail('${r.id}')">
+      <div class="rdv-header">
+        <span class="rdv-date">${RDV_TYPE_ICON[r.type]||'📋'} ${r.date} ${r.heure?'— '+r.heure:''}</span>
+        <span class="badge ${sc==='confirme'?'b-cours':sc==='realise'?'b-clos':sc==='annule'?'b-urgent':'b-nouveau'}">${statLabel[sc]||sc}</span>
+      </div>
+      <div class="rdv-meta">
+        <strong>${RDV_TYPE_FR[r.type]||r.type}</strong>${d?' · '+esc(d.nom):''}${r.lieu?' · '+esc(r.lieu):''}
+      </div>
+      ${ip?`<div class="rdv-interp">🌐 ${esc(ip.prenom?ip.prenom+' '+ip.nom:ip.nom)}</div>`:''}
+      <div class="rdv-actions">
+        <button class="btn sec sm" onclick="event.stopPropagation();openRdvForm('${r.id}')">✏️</button>
+        <button class="btn sec sm" onclick="event.stopPropagation();openMsgMena('${r.id}')">📱 ${NL?'Bericht NBMV':'Message MENA'}</button>
+        <button class="btn sec sm" onclick="event.stopPropagation();genCoordMsg('${r.id}')">📧 ${NL?'Coördinatie':'Coordination'}</button>
+        <button class="btn danger sm" onclick="event.stopPropagation();deleteRdvItem('${r.id}')">🗑️</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function openRdvDetail(id){openRdvForm(id);}
+
+function openRdvForm(id){
+  const doss=loadDossiers();
+  const r=id?AG.rdv.find(x=>x.id===id):null;
+  document.getElementById('rdvModalTitle').textContent=r?(LANG==='nl'?'Afspraak bewerken':'Modifier le rendez-vous'):(LANG==='nl'?'Nieuwe afspraak':'Nouveau rendez-vous');
+  document.getElementById('rv_id').value=r?r.id:'';
+  document.getElementById('rv_date').value=r?r.date:'';
+  document.getElementById('rv_heure').value=r?r.heure:'';
+  document.getElementById('rv_lieu').value=r?r.lieu||'':'';
+  document.getElementById('rv_adresse').value=r?r.adresse||'':'';
+  document.getElementById('rv_notes').value=r?r.notes||'':'';
+  document.getElementById('rv_statut').value=r?r.statut||'planifie':'planifie';
+  document.getElementById('rv_pickup').value=r?r.pickup||'autonome':'autonome';
+  document.getElementById('rv_pickup_lieu').value=r?r.pickupLieu||'':'';
+  // Dossier
+  const dSel=document.getElementById('rv_dossier');
+  dSel.innerHTML='<option value="">— Choisir —</option>'+doss.map(d=>`<option value="${d.id}"${r&&r.dossierId===d.id?' selected':''}>${esc(d.nom)}</option>`).join('');
+  // Type
+  document.getElementById('rv_type').value=r?r.type||'':'';
+  // Interprète need
+  const iNeed=r?r.interpNeed||'non':'non';
+  document.getElementById('rv_interp_need').value=iNeed;
+  // Interprètes select
+  const allI=getAllInterp();
+  const iSel=document.getElementById('rv_interp_id');
+  iSel.innerHTML='<option value="">— Choisir —</option>'+allI.map(i=>`<option value="${i.id}"${r&&r.interpId===i.id?' selected':''}>${esc(i.prenom?i.prenom+' '+i.nom:i.nom)} [${(i.langues||[]).slice(0,3).join(', ')}]</option>`).join('');
+  toggleInterpSelect();
+  updateInterpContact();
+  openModal('rdvModal');
+}
+
+function toggleInterpSelect(){
+  const v=document.getElementById('rv_interp_need').value;
+  document.getElementById('rv_interp_block').style.display=(v==='oui'||v==='confirme')?'':'none';
+  updateInterpContact();
+}
+function updateInterpContact(){
+  const iSel=document.getElementById('rv_interp_id');
+  const id=iSel.value;
+  const sp=document.getElementById('rv_interp_contact');
+  if(!id||!sp)return;
+  const ip=getAllInterp().find(i=>i.id===id);
+  sp.textContent=ip?((ip.tel||'')+(ip.email?' · '+ip.email:'')):'';
+}
+
+async function saveRdvForm(e){
+  e.preventDefault();
+  const id=document.getElementById('rv_id').value||('RDV'+Date.now());
+  const dossierId=document.getElementById('rv_dossier').value;
+  const doss=loadDossiers().find(x=>x.id===dossierId);
+  const data={
+    id,dossierId,
+    type:document.getElementById('rv_type').value,
+    date:document.getElementById('rv_date').value,
+    heure:document.getElementById('rv_heure').value,
+    lieu:document.getElementById('rv_lieu').value.trim(),
+    adresse:document.getElementById('rv_adresse').value.trim(),
+    interpNeed:document.getElementById('rv_interp_need').value,
+    interpId:document.getElementById('rv_interp_id').value,
+    statut:document.getElementById('rv_statut').value,
+    pickup:document.getElementById('rv_pickup').value,
+    pickupLieu:document.getElementById('rv_pickup_lieu').value.trim(),
+    notes:document.getElementById('rv_notes').value.trim(),
+    cree:AG.rdv.find(x=>x.id===id)?.cree||new Date().toISOString().slice(0,10)
+  };
+  const idx=AG.rdv.findIndex(x=>x.id===id);
+  if(idx>=0)AG.rdv[idx]=data;else AG.rdv.push(data);
+  await persistAg();
+  closeModal('rdvModal');
+  renderRdv();
+  // Proposer message MENA si dossier trouvé et notification souhaitée
+  if(doss&&data.date){
+    const NL=LANG==='nl';
+    if(confirm(NL?`Bericht sturen naar ${doss.nom}?`:`Envoyer un message à ${doss.nom} ?`)){
+      openMsgMena(id);
+    }
+  }
+}
+
+async function deleteRdvItem(id){
+  const NL=LANG==='nl';
+  if(!confirm(NL?'Afspraak verwijderen?':'Supprimer ce rendez-vous ?'))return;
+  AG.rdv=AG.rdv.filter(x=>x.id!==id);
+  await persistAg();renderRdv();
+}
+
+// --- INTERPRÈTES ---
+function getAllInterp(){
+  const perso=(AG.interpPerso||[]).map(i=>({...i,_src:'perso'}));
+  const off=INTERP_OFFICIAL.map(i=>({
+    id:i.id,nom:tr(i.nom),prenom:'',langues:i.langues||[],
+    adresse:i.adresse+(i.cp?' '+i.cp:'')+(i.commune?' '+i.commune:''),
+    tel:i.tel,tel_urgence:i.tel_urgence||'',email:i.email||'',
+    web:i.web||'',type:i.type||'asbl',tarif:i.tarif||'',
+    notes:tr(i.notes)||'',perso:false,_src:'official'
+  }));
+  return [...perso,...off];
+}
+
+function renderInterpretes(){
+  const q=(document.getElementById('interpSearch').value||'').toLowerCase();
+  const fL=document.getElementById('interpFilterLang').value;
+  const fT=document.getElementById('interpFilterType').value;
+  const NL=LANG==='nl';
+  // Populate lang filter if empty
+  const lSel=document.getElementById('interpFilterLang');
+  if(lSel.options.length<=1){
+    const langs=[...new Set(INTERP_OFFICIAL.flatMap(i=>i.langues||[]))].sort();
+    lSel.innerHTML=`<option value="">${t('ag.interp.alllang')}</option>`+langs.map(l=>`<option value="${l}">${l}</option>`).join('');
+  }
+  // Personal
+  let perso=[...(AG.interpPerso||[])];
+  if(q)perso=perso.filter(i=>(i.nom+' '+i.prenom+' '+(i.langues||[]).join(' ')+(i.commune||'')).toLowerCase().includes(q));
+  if(fL)perso=perso.filter(i=>(i.langues||[]).some(l=>l.toLowerCase().includes(fL.toLowerCase())));
+  if(fT)perso=perso.filter(i=>i.type===fT);
+  // Official
+  let off=[...INTERP_OFFICIAL];
+  if(q)off=off.filter(i=>(tr(i.nom)+' '+(i.langues||[]).join(' ')+(i.commune||'')).toLowerCase().includes(q));
+  if(fL)off=off.filter(i=>(i.langues||[]).some(l=>l.toLowerCase().includes(fL.toLowerCase())));
+  if(fT)off=off.filter(i=>i.type===fT);
+  const el=document.getElementById('interpList');
+  let html='';
+  // Personal section
+  html+=`<div class="card" style="margin-bottom:1.2rem"><h3 style="margin-bottom:.7rem">👤 ${t('ag.interp.perso')}</h3>`;
+  if(!perso.length)html+=`<p class="muted">${t('ag.interp.empty')}</p>`;
+  else html+=perso.map(i=>renderInterpCard(i,true)).join('');
+  html+='</div>';
+  // Official section
+  html+=`<div class="card"><h3 style="margin-bottom:.7rem">🏛️ ${t('ag.interp.official')} (${off.length})</h3>`;
+  html+=off.map(i=>renderInterpCard(i,false)).join('');
+  html+='</div>';
+  el.innerHTML=html;
+}
+
+function renderInterpCard(i,perso){
+  const NL=LANG==='nl';
+  const nom=perso?(i.prenom?i.prenom+' '+i.nom:i.nom):tr(i.nom||{fr:i.nom,nl:i.nom});
+  const type=i.type||'asbl';
+  const typeLabel={jure:'Juré',asbl:'ASBL',social:'Social',commercial:'Commercial',personnel:'Personnel'};
+  return `<div class="interp-card${perso?' perso':''}">
+    <div class="row" style="justify-content:space-between;align-items:flex-start">
+      <div>
+        <strong>${esc(nom)}</strong>
+        <span class="interp-type ${type}" style="margin-left:.5rem">${typeLabel[type]||type}</span>
+      </div>
+      <div class="row" style="gap:.3rem">
+        ${perso?`<button class="btn sec sm" onclick="openInterpForm('${i.id}')">✏️</button><button class="btn danger sm" onclick="deleteInterp('${i.id}')">🗑️</button>`:''}
+        <button class="btn sec sm" onclick="selectInterpForRdv('${i.id}')">➕ ${NL?'RDV':'RDV'}</button>
+      </div>
+    </div>
+    <div class="interp-langs">${(i.langues||[]).map(l=>`<span class="lang-tag">${l}</span>`).join('')}</div>
+    <div class="muted" style="font-size:.82rem">
+      ${i.tel?`📞 <a href="tel:${i.tel}">${esc(i.tel)}</a> `:''}`+
+      (i.tel_urgence?`(urgences: ${esc(i.tel_urgence)}) `:'')+
+      `${i.email?`· 📧 <a href="mailto:${i.email}">${esc(i.email)}</a> `:''}${i.web?`· 🌐 <a href="${i.web}" target="_blank" rel="noopener">Site</a>`:''}
+    </div>
+    ${i.tarif?`<div class="muted" style="font-size:.8rem;margin-top:.3rem">💶 ${esc(i.tarif)}</div>`:''}
+    ${i.notes?`<details style="margin-top:.4rem"><summary class="muted" style="cursor:pointer;font-size:.8rem">Notes</summary><p style="font-size:.82rem;margin-top:.3rem">${esc(tr(i.notes))}</p></details>`:''}
+  </div>`;
+}
+
+function selectInterpForRdv(id){
+  openRdvForm();
+  setTimeout(()=>{
+    document.getElementById('rv_interp_need').value='oui';
+    toggleInterpSelect();
+    document.getElementById('rv_interp_id').value=id;
+    updateInterpContact();
+  },100);
+}
+
+function openInterpForm(id){
+  const i=id?AG.interpPerso.find(x=>x.id===id):null;
+  document.getElementById('interpModalTitle').textContent=i?(LANG==='nl'?'Tolk bewerken':'Modifier l\'interprète'):(LANG==='nl'?'Persoonlijke tolk toevoegen':'Ajouter un interprète personnel');
+  document.getElementById('ip_id').value=i?i.id:'';
+  document.getElementById('ip_nom').value=i?i.nom||'':'';
+  document.getElementById('ip_prenom').value=i?i.prenom||'':'';
+  document.getElementById('ip_langues').value=i?(i.langues||[]).join(', '):'';
+  document.getElementById('ip_tel').value=i?i.tel||'':'';
+  document.getElementById('ip_email').value=i?i.email||'':'';
+  document.getElementById('ip_adresse').value=i?i.adresse||'':'';
+  document.getElementById('ip_cp').value=i?i.cp||'':'';
+  document.getElementById('ip_commune').value=i?i.commune||'':'';
+  document.getElementById('ip_type').value=i?i.type||'jure':'jure';
+  document.getElementById('ip_tarif').value=i?i.tarif||'':'';
+  document.getElementById('ip_notes').value=i?i.notes||'':'';
+  openModal('interpModal');
+}
+
+async function saveInterp(e){
+  e.preventDefault();
+  const id=document.getElementById('ip_id').value||('IP'+Date.now());
+  const data={
+    id,nom:document.getElementById('ip_nom').value.trim(),
+    prenom:document.getElementById('ip_prenom').value.trim(),
+    langues:document.getElementById('ip_langues').value.split(',').map(s=>s.trim()).filter(Boolean),
+    tel:document.getElementById('ip_tel').value.trim(),
+    email:document.getElementById('ip_email').value.trim(),
+    adresse:document.getElementById('ip_adresse').value.trim(),
+    cp:document.getElementById('ip_cp').value.trim(),
+    commune:document.getElementById('ip_commune').value.trim(),
+    type:document.getElementById('ip_type').value,
+    tarif:document.getElementById('ip_tarif').value.trim(),
+    notes:document.getElementById('ip_notes').value.trim(),
+    perso:true,
+    cree:AG.interpPerso.find(x=>x.id===id)?.cree||new Date().toISOString().slice(0,10)
+  };
+  const idx=AG.interpPerso.findIndex(x=>x.id===id);
+  if(idx>=0)AG.interpPerso[idx]=data;else AG.interpPerso.push(data);
+  await persistAg();
+  closeModal('interpModal');
+  renderInterpretes();
+}
+
+async function deleteInterp(id){
+  if(!confirm(LANG==='nl'?'Tolk verwijderen?':'Supprimer cet interprète ?'))return;
+  AG.interpPerso=AG.interpPerso.filter(x=>x.id!==id);
+  await persistAg();renderInterpretes();
+}
+
+// --- DEMANDES DE VISITE ---
+function renderVisReq(){
+  const doss=loadDossiers();
+  const fD=document.getElementById('reqFilterDoss').value;
+  const fS=document.getElementById('reqFilterStatut').value;
+  let arr=[...(AG.visReq||[])].sort((a,b)=>a.cree<b.cree?1:-1);
+  if(fD)arr=arr.filter(r=>r.dossierId===fD);
+  if(fS)arr=arr.filter(r=>r.statut===fS);
+  const el=document.getElementById('reqList');
+  const NL=LANG==='nl';
+  if(!arr.length){el.innerHTML=`<div class="empty">${t('ag.req.empty')}</div>`;return;}
+  const typeLabel={avocat:'⚖️ Avocat',famille:'👨‍👩‍👧 Famille',amis:'👫 Amis',medical:'🏥 Médical',cgra:'🛡️ CGRA/Info',ecole:'🎓 École',loisirs:'🎭 Loisirs',autre:'📋 Autre'};
+  const statLabel={demande:NL?'Verzoek ontvangen':'Demande reçue','en-cours':NL?'In coördinatie':'En coordination',planifie:NL?'RDV gepland':'RDV planifié',realise:NL?'Uitgevoerd':'Réalisé',refuse:NL?'Geweigerd/Uitgesteld':'Refusé/Reporté'};
+  const urg={normale:'',urgente:'🔶 ',tres_urgente:'🔴 '};
+  el.innerHTML=arr.map(r=>{
+    const d=doss.find(x=>x.id===r.dossierId);
+    const rdv=AG.rdv.find(x=>x.id===r.rdvId);
+    const sc=r.statut||'demande';
+    return `<div class="req-card statut-${sc}">
+      <div class="row" style="justify-content:space-between">
+        <strong>${urg[r.urgence]||''}${typeLabel[r.type]||r.type}</strong>
+        <span class="badge ${sc==='planifie'?'b-cours':sc==='realise'?'b-clos':sc==='refuse'?'b-urgent':'b-nouveau'}">${statLabel[sc]||sc}</span>
+      </div>
+      <div class="muted" style="font-size:.84rem;margin:.3rem 0">${d?esc(d.nom)+' · ':''} ${NL?'Gewenste datum':'Date souhaitée'}: ${r.dateSouhait||'—'}</div>
+      ${r.details?`<p style="font-size:.85rem;margin:.3rem 0">${esc(r.details)}</p>`:''}
+      ${rdv?`<div style="font-size:.82rem;color:var(--vert)">📅 RDV : ${rdv.date} ${rdv.heure||''} — ${esc(rdv.lieu||'')}</div>`:''}
+      <div class="rdv-actions">
+        <button class="btn sec sm" onclick="openVisReqForm('${r.id}')">✏️</button>
+        <button class="btn sec sm" onclick="openRdvFromReq('${r.id}')">📅 ${NL?'RDV aanmaken':'Créer RDV'}</button>
+        <button class="btn danger sm" onclick="deleteVisReqItem('${r.id}')">🗑️</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function openVisReqForm(id){
+  const doss=loadDossiers();
+  const r=id?AG.visReq.find(x=>x.id===id):null;
+  document.getElementById('visReqModalTitle').textContent=r?(LANG==='nl'?'Bezoekverzoek bewerken':'Modifier la demande'):(LANG==='nl'?'Nieuw bezoekverzoek':'Nouvelle demande de visite');
+  document.getElementById('vr_id').value=r?r.id:'';
+  document.getElementById('vr_type').value=r?r.type||'':'';
+  document.getElementById('vr_date_souhait').value=r?r.dateSouhait||'':'';
+  document.getElementById('vr_urgence').value=r?r.urgence||'normale':'normale';
+  document.getElementById('vr_details').value=r?r.details||'':'';
+  document.getElementById('vr_statut').value=r?r.statut||'demande':'demande';
+  document.getElementById('vr_notes').value=r?r.notes||'':'';
+  const dSel=document.getElementById('vr_dossier');
+  dSel.innerHTML='<option value="">— Choisir —</option>'+doss.map(d=>`<option value="${d.id}"${r&&r.dossierId===d.id?' selected':''}>${esc(d.nom)}</option>`).join('');
+  const rdvSel=document.getElementById('vr_rdv_id');
+  rdvSel.innerHTML='<option value="">— Aucun —</option>'+(AG.rdv||[]).filter(x=>!r||x.dossierId===r.dossierId).map(x=>`<option value="${x.id}"${r&&r.rdvId===x.id?' selected':''}>${x.date} ${x.heure||''} — ${RDV_TYPE_FR[x.type]||x.type}</option>`).join('');
+  openModal('visReqModal');
+}
+
+async function saveVisReqForm(e){
+  e.preventDefault();
+  const id=document.getElementById('vr_id').value||('VR'+Date.now());
+  const data={
+    id,dossierId:document.getElementById('vr_dossier').value,
+    type:document.getElementById('vr_type').value,
+    dateSouhait:document.getElementById('vr_date_souhait').value,
+    urgence:document.getElementById('vr_urgence').value,
+    details:document.getElementById('vr_details').value.trim(),
+    statut:document.getElementById('vr_statut').value,
+    rdvId:document.getElementById('vr_rdv_id').value,
+    notes:document.getElementById('vr_notes').value.trim(),
+    cree:AG.visReq.find(x=>x.id===id)?.cree||new Date().toISOString().slice(0,10)
+  };
+  const idx=AG.visReq.findIndex(x=>x.id===id);
+  if(idx>=0)AG.visReq[idx]=data;else AG.visReq.push(data);
+  await persistAg();closeModal('visReqModal');renderVisReq();
+}
+
+async function deleteVisReqItem(id){
+  if(!confirm(LANG==='nl'?'Verzoek verwijderen?':'Supprimer cette demande ?'))return;
+  AG.visReq=AG.visReq.filter(x=>x.id!==id);
+  await persistAg();renderVisReq();
+}
+
+function openRdvFromReq(reqId){
+  const r=AG.visReq.find(x=>x.id===reqId);
+  closeModal('visReqModal');
+  openRdvForm();
+  setTimeout(()=>{
+    if(r){
+      document.getElementById('rv_dossier').value=r.dossierId||'';
+      document.getElementById('rv_date').value=r.dateSouhait||'';
+      const tmap={avocat:'avocat',medical:'medical',ecole:'ecole',cgra:'cgra',famille:'autre',amis:'autre',loisirs:'autre'};
+      document.getElementById('rv_type').value=tmap[r.type]||'autre';
+    }
+  },100);
+}
+
+// --- MESSAGES MENA (multilingue) ---
+// Templates par langue : {header, date_label, time_label, place_label, pickup_label, interp_label, contact_label, footer}
+const MSG_TEMPLATES={
+  'Français':{
+    dir:'ltr',
+    build:(d,r,ip,tutor)=>`Bonjour ${d.nom},\n\nVous avez un rendez-vous prévu :\n\n📅 Date : ${r.date}\n⏰ Heure : ${r.heure||'—'}\n📍 Lieu : ${r.lieu||'—'}${r.adresse?'\n🗺️ Adresse : '+r.adresse:''}${ip?'\n🌐 Interprète présent : '+ipName(ip):''}${r.pickup&&r.pickup!=='autonome'?'\n🚗 Prise en charge : '+(r.pickupLieu||r.pickup):''}
+\nEn cas de question, contactez votre tuteur${tutor&&tutor.tel?' : '+tutor.tel:''}.
+\nCordialement,\nVotre tuteur${tutor&&tutor.nom?' '+tutor.nom:''}`
+  },
+  'Nederlands':{
+    dir:'ltr',
+    build:(d,r,ip,tutor)=>`Hallo ${d.nom},\n\nU hebt een afspraak gepland:\n\n📅 Datum: ${r.date}\n⏰ Uur: ${r.heure||'—'}\n📍 Locatie: ${r.lieu||'—'}${r.adresse?'\n🗺️ Adres: '+r.adresse:''}${ip?'\n🌐 Tolk aanwezig: '+ipName(ip):''}${r.pickup&&r.pickup!=='autonome'?'\n🚗 Ophalen: '+(r.pickupLieu||r.pickup):''}
+\nBij vragen, neem contact op met uw voogd${tutor&&tutor.tel?' : '+tutor.tel:''}.
+\nMet vriendelijke groeten,\nUw voogd${tutor&&tutor.nom?' '+tutor.nom:''}`
+  },
+  'Arabe':{
+    dir:'rtl',
+    build:(d,r,ip,tutor)=>`مرحبًا ${d.nom}،\n\nلديك موعد مقرر:\n\n📅 التاريخ: ${r.date}\n⏰ الوقت: ${r.heure||'—'}\n📍 المكان: ${r.lieu||'—'}${r.adresse?'\n🗺️ العنوان: '+r.adresse:''}${ip?'\n🌐 سيكون هناك مترجم: '+ipName(ip):''}${r.pickup&&r.pickup!=='autonome'?'\n🚗 نقطة الالتقاء: '+(r.pickupLieu||r.pickup):''}
+\nإذا كان لديك أي سؤال، اتصل بوصيّك${tutor&&tutor.tel?' : '+tutor.tel:''}.
+\nمع التحيات،\nوصيّك${tutor&&tutor.nom?' '+tutor.nom:''}`
+  },
+  'Pashto':{
+    dir:'rtl',
+    build:(d,r,ip,tutor)=>`سلام ${d.nom}،\n\nستاسو وخت ټاکل شوی:\n\n📅 نیټه: ${r.date}\n⏰ وخت: ${r.heure||'—'}\n📍 ځای: ${r.lieu||'—'}${r.adresse?'\n🗺️ پته: '+r.adresse:''}${ip?'\n🌐 ژباړونکی به حاضر وي: '+ipName(ip):''}${r.pickup&&r.pickup!=='autonome'?'\n🚗 د راوړلو ځای: '+(r.pickupLieu||r.pickup):''}
+\nکه پوښتنه لرئ، خپل سرپرست سره اړیکه ونیسئ${tutor&&tutor.tel?' : '+tutor.tel:''}.`
+  },
+  'Dari/Farsi':{
+    dir:'rtl',
+    build:(d,r,ip,tutor)=>`سلام ${d.nom}،\n\nوقت ملاقات شما تعیین شده است:\n\n📅 تاریخ: ${r.date}\n⏰ ساعت: ${r.heure||'—'}\n📍 مکان: ${r.lieu||'—'}${r.adresse?'\n🗺️ آدرس: '+r.adresse:''}${ip?'\n🌐 مترجم حاضر خواهد بود: '+ipName(ip):''}${r.pickup&&r.pickup!=='autonome'?'\n🚗 محل تحویل: '+(r.pickupLieu||r.pickup):''}
+\nاگر سوالی دارید با سرپرست خود تماس بگیرید${tutor&&tutor.tel?' : '+tutor.tel:''}.`
+  },
+  'Somali':{
+    dir:'ltr',
+    build:(d,r,ip,tutor)=>`Salaan ${d.nom},\n\nWaxaad leedahay ballanta la qorsheeyay:\n\n📅 Taariikhda: ${r.date}\n⏰ Saacadda: ${r.heure||'—'}\n📍 Goobta: ${r.lieu||'—'}${r.adresse?'\n🗺️ Ciwaanka: '+r.adresse:''}${ip?'\n🌐 Turjubaan ayaa jiri doona: '+ipName(ip):''}${r.pickup&&r.pickup!=='autonome'?'\n🚗 Meeshii la kulmayaa: '+(r.pickupLieu||r.pickup):''}
+\nHaddaad su'aalo qabtid, xiriir gaarsii ilaaliyahaaga${tutor&&tutor.tel?' : '+tutor.tel:''}.`
+  },
+  'Tigrinya':{
+    dir:'ltr',
+    build:(d,r,ip,tutor)=>`ሰላም ${d.nom}፣\n\nቆጸራ ተወዲቡልካ ኣሎ:\n\n📅 ዕለት: ${r.date}\n⏰ ሰዓት: ${r.heure||'—'}\n📍 ቦታ: ${r.lieu||'—'}${r.adresse?'\n🗺️ ኣድራሻ: '+r.adresse:''}${ip?'\n🌐 ተርጓሚ ክህሉ እዩ: '+ipName(ip):''}${r.pickup&&r.pickup!=='autonome'?'\n🚗 መቐበሊ ቦታ: '+(r.pickupLieu||r.pickup):''}
+\nሕቶ እንተሃሊዩካ፡ ምስ ሓለዋኻ ርክብ ምስረፍ${tutor&&tutor.tel?' : '+tutor.tel:''}.`
+  },
+  'Albanais':{
+    dir:'ltr',
+    build:(d,r,ip,tutor)=>`Përshëndetje ${d.nom},\n\nKeni një takim të planifikuar:\n\n📅 Data: ${r.date}\n⏰ Ora: ${r.heure||'—'}\n📍 Vendi: ${r.lieu||'—'}${r.adresse?'\n🗺️ Adresa: '+r.adresse:''}${ip?'\n🌐 Do të jetë i pranishëm një përkthyes: '+ipName(ip):''}${r.pickup&&r.pickup!=='autonome'?'\n🚗 Pika takimi: '+(r.pickupLieu||r.pickup):''}
+\nNëse keni pyetje, kontaktoni tutorën tuaj${tutor&&tutor.tel?' : '+tutor.tel:''}.`
+  },
+  'Ukrainien':{
+    dir:'ltr',
+    build:(d,r,ip,tutor)=>`Привіт ${d.nom},\n\nВи маєте заплановану зустріч:\n\n📅 Дата: ${r.date}\n⏰ Час: ${r.heure||'—'}\n📍 Місце: ${r.lieu||'—'}${r.adresse?'\n🗺️ Адреса: '+r.adresse:''}${ip?'\n🌐 Буде перекладач: '+ipName(ip):''}${r.pickup&&r.pickup!=='autonome'?'\n🚗 Місце зустрічі: '+(r.pickupLieu||r.pickup):''}
+\nЯкщо є питання, зв'яжіться зі своїм опікуном${tutor&&tutor.tel?' : '+tutor.tel:''}.`
+  },
+  'Russe':{
+    dir:'ltr',
+    build:(d,r,ip,tutor)=>`Привет ${d.nom},\n\nУ вас запланована встреча:\n\n📅 Дата: ${r.date}\n⏰ Время: ${r.heure||'—'}\n📍 Место: ${r.lieu||'—'}${r.adresse?'\n🗺️ Адрес: '+r.adresse:''}${ip?'\n🌐 Будет переводчик: '+ipName(ip):''}${r.pickup&&r.pickup!=='autonome'?'\n🚗 Место встречи: '+(r.pickupLieu||r.pickup):''}
+\nЕсли есть вопросы, свяжитесь с вашим опекуном${tutor&&tutor.tel?' : '+tutor.tel:''}.`
+  },
+  'Géorgien':{
+    dir:'ltr',
+    build:(d,r,ip,tutor)=>`გამარჯობა ${d.nom},\n\nთქვენ გაქვთ დაგეგმილი შეხვედრა:\n\n📅 თარიღი: ${r.date}\n⏰ დრო: ${r.heure||'—'}\n📍 ადგილი: ${r.lieu||'—'}${r.adresse?'\n🗺️ მისამართი: '+r.adresse:''}${ip?'\n🌐 მთარგმნელი იქნება: '+ipName(ip):''}${r.pickup&&r.pickup!=='autonome'?'\n🚗 შეხვედრის ადგილი: '+(r.pickupLieu||r.pickup):''}
+\nკითხვების შემთხვევაში დაუკავშირდით თქვენს მეურნეს${tutor&&tutor.tel?' : '+tutor.tel:''}.`
+  },
+  'Anglais':{
+    dir:'ltr',
+    build:(d,r,ip,tutor)=>`Hello ${d.nom},\n\nYou have a scheduled appointment:\n\n📅 Date: ${r.date}\n⏰ Time: ${r.heure||'—'}\n📍 Place: ${r.lieu||'—'}${r.adresse?'\n🗺️ Address: '+r.adresse:''}${ip?'\n🌐 An interpreter will be present: '+ipName(ip):''}${r.pickup&&r.pickup!=='autonome'?'\n🚗 Meeting point: '+(r.pickupLieu||r.pickup):''}
+\nFor any questions, contact your guardian${tutor&&tutor.tel?' : '+tutor.tel:''}.`
+  }
+};
+// Map langue dossier -> template key
+const LANG_MAP={'Arabe':'Arabe','Arabic':'Arabe','Pashto':'Pashto','Dari':'Dari/Farsi','Dari/Farsi':'Dari/Farsi','Farsi':'Dari/Farsi','Somali':'Somali','Tigrinya':'Tigrinya','Albanais':'Albanais','Albanian':'Albanais','Ukrainien':'Ukrainien','Ukrainian':'Ukrainien','Russe':'Russe','Russian':'Russe','Géorgien':'Géorgien','Georgian':'Géorgien','Anglais':'Anglais','English':'Anglais','Français':'Français','French':'Français','Nederlands':'Nederlands','Dutch':'Nederlands','Néerlandais':'Nederlands'};
+
+function ipName(ip){return ip?(ip.prenom?ip.prenom+' '+ip.nom:ip.nom):'';}
+
+let CURRENT_MSG_RDV_ID=null;
+let CURRENT_MSG_TEXT=null;
+let CURRENT_MSG_MENA_TEL=null;
+let CURRENT_MSG_MENA_EMAIL=null;
+
+function openMsgMena(rdvId){
+  const r=AG.rdv.find(x=>x.id===rdvId);if(!r)return;
+  const d=loadDossiers().find(x=>x.id===r.dossierId);if(!d)return;
+  const ip=getAllInterp().find(i=>i.id===r.interpId);
+  // Langue du jeune
+  const langRaw=(d.langue||d.fiche?.langue||'').trim();
+  const langKey=LANG_MAP[langRaw]||(LANG==='nl'?'Nederlands':'Français');
+  const tmpl=MSG_TEMPLATES[langKey]||MSG_TEMPLATES['Français'];
+  const msg=tmpl.build(d,r,ip,TUTEUR||{});
+  CURRENT_MSG_RDV_ID=rdvId;
+  CURRENT_MSG_TEXT=msg;
+  CURRENT_MSG_MENA_TEL=d.fiche?.tel||d.tel||'';
+  CURRENT_MSG_MENA_EMAIL=d.fiche?.email||d.email||'';
+  document.getElementById('msgMenaLangLabel').textContent=langKey;
+  const box=document.getElementById('msgMenaContent');
+  box.style.direction=tmpl.dir;
+  box.textContent=msg;
+  document.getElementById('msgWhatsAppBtn').disabled=!CURRENT_MSG_MENA_TEL;
+  document.getElementById('msgEmailBtn').disabled=!CURRENT_MSG_MENA_EMAIL;
+  openModal('msgMenaModal');
+}
+
+function previewMsgMena(){
+  // Aperçu depuis le formulaire RDV (avant enregistrement)
+  const dossierId=document.getElementById('rv_dossier').value;
+  const d=loadDossiers().find(x=>x.id===dossierId);
+  if(!d){alert(LANG==='nl'?'Selecteer eerst een dossier.':'Sélectionnez d\'abord un dossier.');return;}
+  const tempR={
+    date:document.getElementById('rv_date').value||'—',
+    heure:document.getElementById('rv_heure').value||'',
+    lieu:document.getElementById('rv_lieu').value||'',
+    adresse:document.getElementById('rv_adresse').value||'',
+    interpId:document.getElementById('rv_interp_id').value,
+    pickup:document.getElementById('rv_pickup').value,
+    pickupLieu:document.getElementById('rv_pickup_lieu').value
+  };
+  const ip=getAllInterp().find(i=>i.id===tempR.interpId);
+  const langRaw=(d.langue||d.fiche?.langue||'').trim();
+  const langKey=LANG_MAP[langRaw]||(LANG==='nl'?'Nederlands':'Français');
+  const tmpl=MSG_TEMPLATES[langKey]||MSG_TEMPLATES['Français'];
+  const msg=tmpl.build(d,tempR,ip,TUTEUR||{});
+  CURRENT_MSG_TEXT=msg;
+  CURRENT_MSG_MENA_TEL=d.fiche?.tel||d.tel||'';
+  CURRENT_MSG_MENA_EMAIL=d.fiche?.email||d.email||'';
+  document.getElementById('msgMenaLangLabel').textContent=langKey;
+  const box=document.getElementById('msgMenaContent');
+  box.style.direction=tmpl.dir;
+  box.textContent=msg;
+  document.getElementById('msgWhatsAppBtn').disabled=!CURRENT_MSG_MENA_TEL;
+  document.getElementById('msgEmailBtn').disabled=!CURRENT_MSG_MENA_EMAIL;
+  openModal('msgMenaModal');
+}
+
+function sendMsgWhatsApp(){
+  if(!CURRENT_MSG_TEXT||!CURRENT_MSG_MENA_TEL)return;
+  const tel=CURRENT_MSG_MENA_TEL.replace(/\D/g,'');
+  const url='https://wa.me/'+tel+'?text='+encodeURIComponent(CURRENT_MSG_TEXT);
+  window.open(url,'_blank');
+}
+
+function sendMsgEmail(){
+  if(!CURRENT_MSG_TEXT||!CURRENT_MSG_MENA_EMAIL)return;
+  const subj=encodeURIComponent(LANG==='nl'?'Uw afspraak':'Votre rendez-vous');
+  const body=encodeURIComponent(CURRENT_MSG_TEXT);
+  window.open('mailto:'+encodeURIComponent(CURRENT_MSG_MENA_EMAIL)+'?subject='+subj+'&body='+body,'_blank');
+}
+
+function copyMsgMena(){
+  if(!CURRENT_MSG_TEXT)return;
+  navigator.clipboard.writeText(CURRENT_MSG_TEXT).then(()=>{
+    const btn=document.querySelector('#msgMenaModal .btn.sec');
+    const prev=btn?.textContent;
+    if(btn){btn.textContent=t('ag.msg.copied');setTimeout(()=>{btn.textContent=prev;},1800);}
+  });
+}
+
+// --- COORDINATION EMAIL (interprète + intervenants) ---
+function genCoordMsg(rdvId){
+  const r=AG.rdv.find(x=>x.id===rdvId);if(!r)return;
+  const d=loadDossiers().find(x=>x.id===r.dossierId);
+  const ip=getAllInterp().find(i=>i.id===r.interpId);
+  const NL=LANG==='nl';
+  const typeLabel=RDV_TYPE_FR[r.type]||r.type;
+  let msg=NL
+    ?`Geachte,\n\nHierbij bevestig ik een afspraak in het kader van de voogdij van een NBMV:\n\nType: ${typeLabel}\nDatum: ${r.date}\nUur: ${r.heure||'—'}\nLocatie: ${r.lieu||'—'}${r.adresse?'\nAdres: '+r.adresse:''}\n${ip?'Tolk: '+ipName(ip)+' ('+((ip.langues||[]).join(', '))+')\n':''}\nGelieve uw beschikbaarheid te bevestigen.\n\nMet vriendelijke groeten,\n${TUTEUR?.nom||'de voogd'}${TUTEUR?.tel?'\nTel: '+TUTEUR.tel:''}${TUTEUR?.email?'\nEmail: '+TUTEUR.email:''}`
+    :`Madame, Monsieur,\n\nJe vous contacte dans le cadre de la tutelle d'un MENA pour confirmer un rendez-vous :\n\nType : ${typeLabel}\nDate : ${r.date}\nHeure : ${r.heure||'—'}\nLieu : ${r.lieu||'—'}${r.adresse?'\nAdresse : '+r.adresse:''}\n${ip?'Interprète : '+ipName(ip)+' ('+((ip.langues||[]).join(', '))+')\n':''}\nMerci de confirmer votre disponibilité.\n\nCordialement,\n${TUTEUR?.nom||'le tuteur'}${TUTEUR?.tel?'\nTél. : '+TUTEUR.tel:''}${TUTEUR?.email?'\nEmail : '+TUTEUR.email:''}`;
+  const ipEmail=ip?.email||'';
+  const subj=encodeURIComponent((NL?'Bevestiging afspraak NBMV — ':'Confirmation RDV MENA — ')+r.date);
+  const body=encodeURIComponent(msg);
+  const to=encodeURIComponent(ipEmail);
+  window.open('mailto:'+to+'?subject='+subj+'&body='+body,'_blank');
+}
 
 /* ============ INIT ============ */
 function setOnline(){document.getElementById('appStatus').textContent=navigator.onLine?t('status.online'):t('status.offline');}

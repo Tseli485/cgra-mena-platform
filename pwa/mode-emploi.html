@@ -64,7 +64,7 @@ Suivez-les : chaque écran du manuel correspond à un moment réel de la vie d'u
 <li><a href="#s7">L'analyse automatique des documents</a></li>
 <li><a href="#s8">Le dossier du jeune en détail</a></li>
 <li><a href="#s9">Le juge de paix et vos rapports</a></li>
-<li><a href="#s10">L'agenda des rendez-vous</a></li>
+<li><a href="#s10">L'agenda des rendez-vous &amp; les interprètes</a></li>
 <li><a href="#s11">L'argent du jeune (banque)</a></li>
 <li><a href="#s12">Vos frais de déplacement</a></li>
 <li><a href="#s13">Conserver les documents (pièces jointes)</a></li>
@@ -163,10 +163,70 @@ Suivez-les : chaque écran du manuel correspond à un moment réel de la vie d'u
 <li>Cochez le rapport une fois envoyé : l'application garde la date.</li>
 </ol>
 
-<h2 id="s10"><span class="num">10</span>L'agenda des rendez-vous</h2>
+<h2 id="s10"><span class="num">10</span>L'agenda des rendez-vous &amp; les interprètes</h2>
+
+<h3>📅 L'agenda du dossier (dans chaque dossier)</h3>
 <p>À la création du dossier, l'application planifie pour vous les <strong>10 rendez-vous types</strong> du début de tutelle (première rencontre, centre, avocat, rapport initial, école, médecin, banque, préparation CGRA…). Modifiez les dates librement, ajoutez vos propres rendez-vous, et exportez tout vers votre agenda personnel (fichier <code>.ics</code> : Google Agenda, Outlook…).</p>
 <figure><img src="manual/12-agenda.png" alt="Agenda du dossier"><figcaption>Cochez un rendez-vous réalisé : il alimentera automatiquement votre prochain rapport.</figcaption></figure>
 <div class="tip">Les rendez-vous à moins de 30 jours remontent sur le tableau de bord, et l'application peut afficher des notifications (acceptez-les quand le navigateur le propose).</div>
+
+<h3>🗓️ Le module Agenda &amp; Interprètes (onglet principal)</h3>
+<p>La plupart des MENA ne parlent ni français ni néerlandais. Chaque rendez-vous important (audition CGRA, avocat, médecin, juge de paix…) nécessite un interprète. Le module <span class="btn-ex">🗓️ Agenda &amp; Interprètes</span> centralise tout cela : rendez-vous, interprètes, demandes de visite du jeune et messages automatiques dans sa langue.</p>
+
+<h3>📋 Les trois sous-onglets</h3>
+<p>Cliquez sur <span class="btn-ex">🗓️ Agenda &amp; Interprètes</span> dans la barre de navigation :</p>
+<ul>
+<li><strong>📅 Rendez-vous</strong> — créez, modifiez et suivez tous vos rendez-vous (type, date, heure, lieu, statut, interprète). Filtrez par dossier, type ou statut.</li>
+<li><strong>🌐 Interprètes</strong> — consultez la base des organismes agréés (13 structures nationales : Convocabulaire, SPF Justice, CIRÉ, Fedasil, Vluchtelingenwerk…) et ajoutez vos interprètes personnels (chiffrés sur votre appareil).</li>
+<li><strong>📋 Demandes de visite</strong> — enregistrez les demandes faites par le jeune (« je veux voir mon avocat », « contacter ma famille »…), suivez leur statut et créez directement le rendez-vous correspondant.</li>
+</ul>
+
+<h3>🌐 La base des interprètes agréés</h3>
+<p>L'onglet <strong>Interprètes</strong> contient 13 organismes officiels et ASBL couvrant les principales langues MENA en Belgique :</p>
+<ul>
+<li><strong>Langues couvertes :</strong> Arabe, Pashto, Dari, Somali, Tigrinya, Amharique, Kurde, Lingala, Albanais, Géorgien, Ukrainien, Russe, et plus de 30 autres langues via les agences commerciales.</li>
+<li><strong>Gratuit ou payant :</strong> chaque fiche indique le tarif (beaucoup sont gratuits pour les MENA : Convocabulaire, Alter, Fedasil, CIRÉ…) et le délai de réservation.</li>
+<li><strong>Ajouter un interprète personnel :</strong> si vous avez trouvé un interprète de confiance, ajoutez-le avec toutes ses coordonnées — il sera disponible dans toutes vos saisies de rendez-vous et sera chiffré sur votre appareil.</li>
+</ul>
+<div class="tip">Pour une audition CGRA, commencez par <strong>Convocabulaire</strong> (gratuit, spécialisé asile, national) : email <code>convocabulaire@caritas.be</code>, minimum 48h à l'avance. Le Service des Tutelles peut aussi mobiliser ses propres interprètes via votre référent.</div>
+
+<h3>📅 Créer un rendez-vous et lier un interprète</h3>
+<ol class="steps">
+<li>Cliquez sur <span class="btn-ex">➕ Nouveau rendez-vous</span>.</li>
+<li>Choisissez le <strong>dossier MENA</strong> et le <strong>type</strong> (e-avocat, audience CGRA, OE, médical, école, juge de paix…).</li>
+<li>Renseignez la <strong>date, l'heure, le lieu</strong> et l'adresse complète.</li>
+<li>Si un interprète est nécessaire, choisissez-le dans la liste (vos interprètes personnels + organismes agréés).</li>
+<li>Choisissez le <strong>mode de transport du jeune</strong> : autonome (il se déplace seul), ou tuteur qui passe le chercher (précisez l'adresse de prise en charge).</li>
+<li>Enregistrez — l'application propose immédiatement d'envoyer un message de notification au jeune dans sa langue.</li>
+</ol>
+
+<h3>📱 Envoyer un message au MENA dans sa langue</h3>
+<p>C'est l'une des fonctions les plus importantes du module. Dès qu'un rendez-vous est confirmé, l'application génère automatiquement un message de notification dans <strong>la langue parlée du jeune</strong> (détectée depuis son dossier) :</p>
+<ul>
+<li><strong>12 langues disponibles :</strong> Arabe, Pashto, Dari/Farsi, Somali, Tigrinya, Albanais, Ukrainien, Russe, Géorgien, Français, Néerlandais, Anglais (fallback).</li>
+<li>Le message contient : date, heure, lieu, adresse, présence d'un interprète, point de prise en charge.</li>
+<li>Les langues à écriture de droite à gauche (Arabe, Pashto, Dari) s'affichent correctement.</li>
+</ul>
+<p>Pour envoyer le message, cliquez sur <span class="btn-ex">📱 Message MENA</span> depuis la carte de rendez-vous, puis choisissez :</p>
+<ul>
+<li><span class="btn-ex">💬 WhatsApp</span> — ouvre directement WhatsApp avec le numéro du jeune et le message pré-rempli (le numéro doit être saisi dans son dossier).</li>
+<li><span class="btn-ex">📋 Copier</span> — copie le message pour le coller dans n'importe quelle application (SMS, Messenger, Signal…).</li>
+<li><span class="btn-ex">📧 Email</span> — ouvre votre client email avec le message pré-rempli.</li>
+</ul>
+<div class="warn">Avant d'envoyer, vérifiez que le MENA possède bien un téléphone et que son numéro est à jour dans le dossier. Respectez les consignes de contact fixées par le Service des Tutelles (certains centres ont des règles sur les téléphones).</div>
+
+<h3>📧 Coordonner avec l'interprète (email)</h3>
+<p>Sur chaque carte de rendez-vous, le bouton <span class="btn-ex">📧 Coordination</span> génère un email pré-rédigé (FR ou NL selon votre langue) contenant tous les éléments du rendez-vous, à envoyer directement à l'interprète et aux autres intervenants pour confirmer leur disponibilité.</p>
+
+<h3>📋 Gérer les demandes de visite du MENA</h3>
+<p>Le jeune exprime une demande : « je veux voir mon avocat », « contacter ma famille en Allemagne », « aller à un match de foot »… Enregistrez-la dans <strong>Demandes de visite</strong> :</p>
+<ol class="steps">
+<li>Cliquez sur <span class="btn-ex">➕ Nouvelle demande de visite</span>.</li>
+<li>Choisissez le dossier, le type de demande, la date souhaitée par le jeune et l'urgence.</li>
+<li>Notez les détails et le statut (<em>Demande reçue → En cours de coordination → RDV planifié → Réalisé</em>).</li>
+<li>Depuis la demande, cliquez <span class="btn-ex">📅 Créer RDV</span> pour basculer directement vers la création du rendez-vous correspondant — la date et le type sont pré-remplis.</li>
+</ol>
+<div class="tip">Gardez une trace de toutes les demandes, même refusées : si le Service des Tutelles ou le juge de paix demande un compte-rendu de votre suivi, vous aurez l'historique complet.</div>
 
 <h2 id="s11"><span class="num">11</span>L'argent du jeune (suivi bancaire)</h2>
 <p>Vous gérez les biens du mineur sous le contrôle du juge de paix. Notez ici chaque entrée et sortie : l'application calcule le solde et génère le <strong>relevé officiel</strong> à joindre à votre rapport semestriel.</p>
@@ -323,5 +383,5 @@ Suivez-les : chaque écran du manuel correspond à un moment réel de la vie d'u
 <div class="ok">Vous êtes prêt(e). Commencez par créer votre mot de passe, importez votre première fiche, et laissez l'application vous guider — module après module, échéance après échéance. Bonne tutelle ! 🛡️</div>
 
 </main>
-<footer>Plateforme MENA Tuteur — Mode d'emploi v1.6 — réglementation vérifiée juin 2026 · <a href="index.html">← Retour à l'application</a> · Pour imprimer ou enregistrer en PDF : Ctrl+P</footer>
+<footer>Plateforme MENA Tuteur — Mode d'emploi v1.7.6 — réglementation vérifiée juin 2026 · <a href="index.html">← Retour à l'application</a> · Pour imprimer ou enregistrer en PDF : Ctrl+P</footer>
 </body></html>

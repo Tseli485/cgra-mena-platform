@@ -2571,20 +2571,75 @@ function printReleve(id){
 }
 
 /* ============ VERSION & MISES À JOUR ============ */
-const APP_VERSION='1.7.6';
+const APP_VERSION='1.7.7';
 window.APP_VERSION=APP_VERSION;   // expose pour tests.html (const non attache a window)
 Object.assign(I18N.fr,{"dash.matrix":"📊 Suivi par dossier","dash.q4":"📈 Mes statistiques","dash.q5":"🚗 Mes frais (par jeune)","heb.title":"Lieux d'hébergement MENA (réseau officiel)","nav.guide":"🎓 Guide du tuteur","guide.title":"🎓 Guide du tuteur débutant — de la désignation aux 18 ans","guide.banner":"13 modules pas-à-pas : cours, actions à faire, documents à remettre (et à qui), rendez-vous, pièges à éviter. Contenu basé sur la réglementation en vigueur.","dash.q1":"📄 Nouveau MENA (fiche DVZ)","dash.q2":"📂 Mes dossiers","dash.q3":"⏰ Urgences & échéances","gs.ph":"🔍 Recherche globale (dossiers, lois, cas, ressources)…","ft.check":"🔄 Vérifier les mises à jour","ft.dl":"Télécharger l’application","ft.manuel":"Mode d'emploi"});
 Object.assign(I18N.nl,{"dash.matrix":"📊 Opvolging per dossier","dash.q4":"📈 Mijn statistieken","dash.q5":"🚗 Mijn kosten (per jongere)","heb.title":"NBMV-opvangplaatsen (officieel netwerk)","nav.guide":"🎓 Voogdengids","guide.title":"🎓 Gids voor de beginnende voogd — van aanstelling tot 18 jaar","guide.banner":"13 stap-voor-stapmodules: cursus, acties, documenten (en aan wie), afspraken, valkuilen. Inhoud gebaseerd op de geldende regelgeving.","dash.q1":"📄 Nieuwe NBMV (DVZ-fiche)","dash.q2":"📂 Mijn dossiers","dash.q3":"⏰ Urgenties & vervaldata","gs.ph":"🔍 Globaal zoeken (dossiers, wetten, gevallen, hulpbronnen)…","ft.check":"🔄 Updates controleren","ft.dl":"Applicatie downloaden","ft.manuel":"Handleiding"});
 const UPDATE_URL='https://tseli485.github.io/cgra-mena-platform/version.json';
 async function checkUpdates(){
   const n=document.getElementById('updNote');
-  n.textContent=' ⏳';
+  n.innerHTML=' ⏳';
+  // Mode exe : essaye l'API locale d'abord
+  try{
+    const ctrl=new AbortController(),tid=setTimeout(()=>ctrl.abort(),5000);
+    const r=await fetch('/api/check-update',{signal:ctrl.signal});
+    clearTimeout(tid);
+    if(r.ok){
+      const d=await r.json();
+      if(d.exe){
+        if(!d.latest||d.latest===APP_VERSION){
+          n.textContent=' — ✅ '+(LANG==='nl'?'U gebruikt de laatste versie.':'Vous utilisez la dernière version.');
+        } else {
+          const lab=LANG==='nl'?'Nu bijwerken':'Mettre à jour maintenant';
+          n.innerHTML=' — <strong>v'+esc(d.latest)+'</strong> '+(LANG==='nl'?'beschikbaar':'disponible')
+            +'&nbsp;<button onclick="autoUpdate()" style="background:var(--acc);color:#fff;border:none;border-radius:.4rem;padding:.2rem .8rem;cursor:pointer;font-size:.85rem">⬇️ '+lab+'</button>';
+        }
+        return;
+      }
+    }
+  }catch(e){/* pas en mode exe ou hors ligne */}
+  // Mode PWA navigateur : vérification directe sur GitHub Pages
   try{
     const r=await fetch(UPDATE_URL+'?t='+Date.now(),{cache:'no-store'});
     const v=(await r.json()).version;
-    if(v && v!==APP_VERSION)n.innerHTML=' — '+(LANG==='nl'?'Nieuwe versie beschikbaar':'Nouvelle version disponible')+' : <strong>'+esc(v)+'</strong> → <a href="https://github.com/Tseli485/cgra-mena-platform/releases/latest" target="_blank" rel="noopener">'+(LANG==='nl'?'downloaden':'télécharger')+'</a>';
+    if(v&&v!==APP_VERSION)n.innerHTML=' — '+(LANG==='nl'?'Nieuwe versie beschikbaar':'Nouvelle version disponible')+' : <strong>'+esc(v)+'</strong> → <a href="https://github.com/Tseli485/cgra-mena-platform/releases/latest" target="_blank" rel="noopener">'+(LANG==='nl'?'downloaden':'télécharger')+'</a>';
     else n.textContent=' — ✅ '+(LANG==='nl'?'U gebruikt de laatste versie.':'Vous utilisez la dernière version.');
   }catch(e){n.textContent=' — ⚠️ '+(LANG==='nl'?'Verificatie onmogelijk (offline?).':'Vérification impossible (hors ligne ?).');}
+}
+
+async function autoUpdate(){
+  const n=document.getElementById('updNote');
+  const msg=(fr,nl)=>LANG==='nl'?nl:fr;
+  n.innerHTML=' — ⏳ '+msg('Téléchargement…','Downloaden…')+' <span id="updPct">0 %</span>';
+  try{
+    await fetch('/api/update');
+    const iv=setInterval(async()=>{
+      try{
+        const d=await(await fetch('/api/update-status')).json();
+        const pct=document.getElementById('updPct');
+        if(d.status==='downloading'){
+          if(pct)pct.textContent=(d.percent>=0?d.percent+'%':'…');
+        } else if(d.status==='applying'){
+          n.innerHTML=' — ⏳ '+msg('Application de la mise à jour…','Update wordt toegepast…');
+        } else if(d.status==='done'){
+          clearInterval(iv);
+          n.innerHTML=' — ✅ '+msg('Mise à jour appliquée — redémarrage dans 5 s…','Update klaar — herstart over 5 s…');
+          setTimeout(()=>window.location.reload(),5000);
+        } else if(d.status==='error'){
+          clearInterval(iv);
+          n.innerHTML=' — ❌ '+esc(d.error)+'&nbsp;<a href="https://github.com/Tseli485/cgra-mena-platform/releases/latest" target="_blank">'
+            +msg('téléchargement manuel','manueel downloaden')+'</a>';
+        }
+      }catch(e){
+        // Serveur fermé = nouveau exe en cours de démarrage
+        clearInterval(iv);
+        n.innerHTML=' — ✅ '+msg('Redémarrage en cours…','Herstart loopt…');
+        setTimeout(()=>window.location.reload(),5000);
+      }
+    },1000);
+  }catch(e){
+    n.innerHTML=' — ❌ '+msg('Erreur réseau.','Netwerkfout.')+' <a href="https://github.com/Tseli485/cgra-mena-platform/releases/latest" target="_blank">'+msg('Téléchargement manuel','Manueel downloaden')+'</a>';
+  }
 }
 
 /* ============ VERROUILLAGE AUTOMATIQUE (inactivité) ============ */
@@ -3536,6 +3591,8 @@ async function openStats(){
 
 /* ============ v1.7 : NOTES DE VERSION ============ */
 const CHANGELOG={
+ '1.7.7':{fr:"🔄 Mise à jour automatique en un clic : l'application se télécharge et se remplace elle-même sans aucune intervention · 🗓️ Nouveau module Agenda & Interprètes : rendez-vous, base des 13 organismes agréés, messages MENA en 12 langues (WhatsApp/email), demandes de visite",
+         nl:"🔄 Automatische update met één klik: de app downloadt en vervangt zichzelf zonder tussenkomst · 🗓️ Nieuwe module Agenda & Tolken: afspraken, databank 13 erkende organisaties, NBMV-berichten in 12 talen (WhatsApp/e-mail), bezoekverzoeken"},
  '1.7.5':{fr:"⚡ Installation simplifiée : l'application Windows crée elle-même son raccourci sur le Bureau et dans le menu Démarrer au premier double-clic · ❓ nouveau bouton Aide qui ouvre toujours le mode d'emploi (local ou en ligne)",
         nl:"⚡ Vereenvoudigde installatie: de Windows-app maakt zelf haar snelkoppeling op het Bureaublad en in het Startmenu · ❓ nieuwe Help-knop die de handleiding altijd opent (lokaal of online)"},
  '1.7.4':{fr:"👤 Profil du tuteur (coordonnées + domicile, chiffré) injecté automatiquement sur tous les documents · domicile = départ par défaut des trajets (modifiable) · 📏 km du MEILLEUR ITINÉRAIRE calculés directement dans le programme (routage routier réel), pour les trajets simples ET les tournées",

@@ -2687,7 +2687,7 @@ function printReleve(id){
 }
 
 /* ============ VERSION & MISES À JOUR ============ */
-const APP_VERSION='1.7.12';
+const APP_VERSION='1.7.13';
 window.APP_VERSION=APP_VERSION;   // expose pour tests.html (const non attache a window)
 Object.assign(I18N.fr,{"dash.matrix":"📊 Suivi par dossier","dash.q4":"📈 Mes statistiques","dash.q5":"🚗 Mes frais (par jeune)","heb.title":"Lieux d'hébergement MENA (réseau officiel)","nav.guide":"🎓 Guide du tuteur","guide.title":"🎓 Guide du tuteur débutant — de la désignation aux 18 ans","guide.banner":"13 modules pas-à-pas : cours, actions à faire, documents à remettre (et à qui), rendez-vous, pièges à éviter. Contenu basé sur la réglementation en vigueur.","dash.q1":"📄 Nouveau MENA (fiche DVZ)","dash.q2":"📂 Mes dossiers","dash.q3":"⏰ Urgences & échéances","gs.ph":"🔍 Recherche globale (dossiers, lois, cas, ressources)…","ft.check":"🔄 Vérifier les mises à jour","ft.dl":"Télécharger l’application","ft.manuel":"Mode d'emploi","ft.pdf":"📄 Mode d'emploi en PDF"});
 Object.assign(I18N.nl,{"dash.matrix":"📊 Opvolging per dossier","dash.q4":"📈 Mijn statistieken","dash.q5":"🚗 Mijn kosten (per jongere)","heb.title":"NBMV-opvangplaatsen (officieel netwerk)","nav.guide":"🎓 Voogdengids","guide.title":"🎓 Gids voor de beginnende voogd — van aanstelling tot 18 jaar","guide.banner":"13 stap-voor-stapmodules: cursus, acties, documenten (en aan wie), afspraken, valkuilen. Inhoud gebaseerd op de geldende regelgeving.","dash.q1":"📄 Nieuwe NBMV (DVZ-fiche)","dash.q2":"📂 Mijn dossiers","dash.q3":"⏰ Urgenties & vervaldata","gs.ph":"🔍 Globaal zoeken (dossiers, wetten, gevallen, hulpbronnen)…","ft.check":"🔄 Updates controleren","ft.dl":"Applicatie downloaden","ft.manuel":"Handleiding","ft.pdf":"📄 Handleiding als PDF"});
@@ -3714,6 +3714,8 @@ async function openStats(){
 
 /* ============ v1.7 : NOTES DE VERSION ============ */
 const CHANGELOG={
+ '1.7.13':{fr:"🧹 Filet de sécurité anti-doublons : à chaque démarrage, l'application supprime automatiquement les anciens installeurs « MENA-Tuteur-Windows*.exe » qui traîneraient dans le dossier Téléchargements. Garantit une seule version sur le PC, sans intervention.",
+         nl:"🧹 Veiligheidsnet tegen dubbels: bij elke start verwijdert de applicatie automatisch oude installers « MENA-Tuteur-Windows*.exe » in de map Downloads. Eén versie op de pc, zonder tussenkomst."},
  '1.7.12':{fr:"📖 Lecteur du mode d'emploi intégré à l'application : on le visionne ET on l'imprime (ou l'enregistre en PDF) directement, sans ouvrir d'onglet ni dépendre des popups — fonctionne aussi hors ligne. Boutons 🖨️ Imprimer / PDF et ↗️ Plein écran.",
          nl:"📖 Ingebouwde lezer voor de handleiding: u bekijkt ÉN drukt ze af (of bewaart als PDF) rechtstreeks, zonder tabblad of pop-ups — werkt ook offline. Knoppen 🖨️ Afdrukken / PDF en ↗️ Volledig scherm."},
  '1.7.11':{fr:"🔧 Correctif mise à jour en un clic : le sondage de progression était bloqué par le cache (service worker) — corrigé, la maj automatique se déroule maintenant jusqu'au bout · 🗂️ Installation UNIQUE : l'application s'installe désormais à un emplacement fixe et ÉCRASE l'ancienne version (qu'on télécharge OU qu'on mette à jour) — fini les multiples copies sur le PC ; le raccourci pointe toujours vers cette version unique.",

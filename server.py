@@ -238,6 +238,47 @@ def ensure_shortcut():
     _make_shortcut(install_target())
 
 
+def _downloads_dir():
+    """Dossier Téléchargements (gère un éventuel déplacement via le registre)."""
+    try:
+        import winreg
+        key = winreg.OpenKey(
+            winreg.HKEY_CURRENT_USER,
+            r"Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders")
+        val, _ = winreg.QueryValueEx(key, "{374DE290-123F-4565-9164-39C4925E467B}")
+        winreg.CloseKey(key)
+        val = os.path.expandvars(val)
+        if val and os.path.isdir(val):
+            return val
+    except Exception:
+        pass
+    return os.path.join(os.path.expanduser("~"), "Downloads")
+
+
+def clean_downloads():
+    """Filet de sécurité : supprime les installeurs 'MENA-Tuteur-Windows*.exe'
+    qui traînent dans Téléchargements (l'app installée vit dans %LOCALAPPDATA%,
+    sous un autre nom). Ne touche jamais l'exe en cours. Silencieux, best-effort."""
+    if not (getattr(sys, "frozen", False) and os.name == "nt"):
+        return
+    try:
+        import glob
+        current = os.path.normcase(os.path.abspath(sys.executable))
+        n = 0
+        for f in glob.glob(os.path.join(_downloads_dir(), "MENA-Tuteur-Windows*.exe")):
+            try:
+                if os.path.normcase(os.path.abspath(f)) == current:
+                    continue  # ne jamais supprimer l'exe en cours d'exécution
+                os.remove(f)
+                n += 1
+            except Exception:
+                pass
+        if n:
+            print("  Nettoyage : %d copie(s) obsolete(s) supprimee(s) des Telechargements." % n)
+    except Exception:
+        pass
+
+
 def main():
     # Installation unique : si on tourne depuis Téléchargements/Bureau, on se
     # recopie à l'emplacement fixe (écrase l'ancienne version), on relance de
@@ -245,6 +286,7 @@ def main():
     if ensure_installed():
         return
     ensure_shortcut()
+    threading.Thread(target=clean_downloads, daemon=True).start()  # filet de sécurité anti-doublons
     # ThreadingHTTPServer : le sondage /api/update-status reste réactif pendant
     # le téléchargement de la mise à jour (qui tourne dans un thread séparé).
     http.server.ThreadingHTTPServer.allow_reuse_address = True

@@ -32,16 +32,62 @@ ul{margin:.5rem 0 .5rem 1.4rem}
 kbd,.btn-ex{display:inline-block;background:var(--bleu);color:#fff;padding:.1rem .55rem;border-radius:.35rem;font-size:.85em;font-weight:600}
 code{background:#EEF1F5;padding:.1rem .4rem;border-radius:.3rem;font-size:.9em}
 footer{text-align:center;color:#5F6B7A;font-size:.8rem;padding:2rem;border-top:1px solid var(--bord)}
-@media print{header{padding:1.2rem}figure img{box-shadow:none}h2{page-break-after:avoid}figure{page-break-inside:avoid}.toc ol{columns:1}}
-@page{margin:1.6cm}
+/* PDF-downloadknop (scherm) */
+.pdf-cta{display:flex;justify-content:flex-end;gap:.6rem;align-items:center;margin:1rem 0 .2rem}
+.pdf-dl-btn{background:var(--bleu);color:#fff;border:none;border-radius:.55rem;padding:.6rem 1.15rem;font-size:.95rem;font-weight:600;cursor:pointer;box-shadow:0 3px 12px rgba(22,36,58,.18);transition:background .15s}
+.pdf-dl-btn:hover{background:var(--fonce)}
+.pdf-hint{font-size:.78rem;color:#5F6B7A}
+.print-cover{display:none}
+/* ===== AFDRUK / PDF-EXPORT — universitaire syllabus-stijl ===== */
+@page{margin:1.7cm 1.5cm}
+@media print{
+  html,body{background:#fff!important;color:#000}
+  body{font-size:10.5pt;line-height:1.5}
+  .screen-only,.pdf-cta,header,footer{display:none!important}
+  main{max-width:none;margin:0;padding:0}
+  .print-cover{display:flex!important;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:22cm;break-after:page;page-break-after:always}
+  .print-cover .pc-shield{font-size:4.6rem;line-height:1}
+  .print-cover .pc-kicker{letter-spacing:.28em;font-size:.78rem;color:var(--or);font-weight:700;margin-top:1rem}
+  .print-cover h1{font-family:Georgia,serif;font-size:2.5rem;color:var(--fonce);margin:.35rem 0}
+  .print-cover .pc-band{width:120px;height:5px;background:var(--or);margin:.8rem 0 1.2rem;border-radius:3px}
+  .print-cover .pc-sub{font-size:1.12rem;color:#41506A;max-width:15cm}
+  .print-cover .pc-meta{margin-top:2.4rem;font-size:.92rem;color:#5F6B7A;line-height:1.7}
+  .toc{break-after:page;page-break-after:always;border:none;background:#fff;padding:0;margin:0}
+  .toc h2{font-family:Georgia,serif;font-size:1.6rem;border:none}
+  .toc h2:after{display:none}
+  .toc ol{columns:1;margin-left:1.4rem;font-size:1.02rem}
+  .toc li{margin:.3rem 0}
+  .toc a{color:var(--ink);text-decoration:none}
+  h2[id]{break-before:page;page-break-before:always;break-after:avoid;page-break-after:avoid;margin-top:0;padding-top:.2rem}
+  h3{break-after:avoid;page-break-after:avoid}
+  figure,.tip,.warn,.ok,table,blockquote{break-inside:avoid;page-break-inside:avoid}
+  ol.steps>li,ul>li{break-inside:avoid;page-break-inside:avoid}
+  figure img{box-shadow:none;border:1px solid #C9D2DE;max-height:10.5cm;width:auto;margin:0 auto}
+  p,li{orphans:3;widows:3}
+  a{color:var(--ink);text-decoration:none}
+}
 </style></head><body>
+<!-- Voorpagina (alleen afdruk / PDF) -->
+<section class="print-cover" aria-hidden="true">
+  <div class="pc-shield">🛡️</div>
+  <div class="pc-kicker">SYLLABUS VOOR DE NBMV-VOOGD</div>
+  <h1>Platform MENA Voogd</h1>
+  <div class="pc-band"></div>
+  <div class="pc-sub">Handleiding stap voor stap — complete gids voor de voogd van een niet-begeleide minderjarige vreemdeling (NBMV), in België.</div>
+  <div class="pc-meta">Versie <span class="pdf-version">v1.7.10</span> · regelgeving geverifieerd juni 2026<br>Applicatie 100% offline · gegevens versleuteld met AES-256<br>tseli485.github.io/cgra-mena-platform</div>
+</section>
 <header>
   <h1>📖 Handleiding stap voor stap</h1>
   <p><strong>Platform MENA Voogd</strong> — complete gids voor de beginnende voogd. Geen technische of juridische voorkennis nodig: volg de stappen in volgorde, de applicatie neemt u bij de hand.</p>
 </header>
 <main>
 
-<p style="text-align:right;font-size:.85rem">🇫🇷 <a href="mode-emploi.html">Version française — Mode d'emploi</a></p>
+<div class="pdf-cta screen-only">
+  <span class="pdf-hint">Syllabus-opmaak, nette paginaovergangen — kies « Opslaan als PDF » als printer.</span>
+  <button class="pdf-dl-btn" onclick="window.print()">📄 Downloaden als PDF</button>
+</div>
+
+<p class="screen-only" style="text-align:right;font-size:.85rem">🇫🇷 <a href="mode-emploi.html">Version française — Mode d'emploi</a></p>
 
 <div class="tip" style="background:#EDF7F2;border-left-color:#1E7F5C">
 <strong>Drie fictieve jongeren begeleiden u doorheen deze handleiding</strong> (al hun gegevens zijn verzonnen):
@@ -435,5 +481,15 @@ Volg hen: elk scherm in deze handleiding komt overeen met een echt moment uit he
 <div class="ok">U bent er klaar voor. Maak uw wachtwoord aan, importeer uw eerste fiche, en laat de applicatie u gidsen — module na module, vervaldag na vervaldag. Veel succes met uw voogdij! 🛡️</div>
 
 </main>
-<footer>Platform MENA Voogd — Handleiding v1.7.9 · regelgeving geverifieerd juni 2026 · <a href="index.html">← Terug naar de applicatie</a> · Afdrukken of opslaan als PDF: Ctrl+P</footer>
+<footer>Platform MENA Voogd — Handleiding <span class="pdf-version">v1.7.10</span> · regelgeving geverifieerd juni 2026 · <a href="index.html">← Terug naar de applicatie</a> · Afdrukken of opslaan als PDF: Ctrl+P</footer>
+<script>
+/* Versie automatisch uit version.json (de PDF toont steeds de geïnstalleerde versie) */
+fetch('version.json',{cache:'no-store'}).then(r=>r.json()).then(v=>{
+  if(v&&v.version)document.querySelectorAll('.pdf-version').forEach(e=>{e.textContent='v'+v.version;});
+}).catch(()=>{});
+/* Directe afdrukmodus (via de PDF-knop van de applicatie) */
+if(/[?&]print=1/.test(location.search)){
+  window.addEventListener('load',()=>setTimeout(()=>window.print(),700));
+}
+</script>
 </body></html>

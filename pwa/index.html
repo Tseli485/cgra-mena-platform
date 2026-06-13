@@ -467,9 +467,25 @@
     <div class="banner" data-i18n="ag.banner">Gérez vos rendez-vous, coordonnez les interprètes et envoyez des notifications aux jeunes dans leur langue.</div>
     <!-- Sous-onglets -->
     <div class="ag-tabs row" style="margin-bottom:1.2rem;gap:.5rem">
-      <button class="btn ag-tab active" id="agtab-rdv" onclick="agTab('rdv')" data-i18n="ag.tab.rdv">📅 Rendez-vous</button>
+      <button class="btn ag-tab active" id="agtab-cal" onclick="agTab('cal')" data-i18n="ag.tab.cal">📆 Calendrier</button>
+      <button class="btn sec ag-tab" id="agtab-rdv" onclick="agTab('rdv')" data-i18n="ag.tab.rdv">📋 Liste des rendez-vous</button>
       <button class="btn sec ag-tab" id="agtab-interp" onclick="agTab('interp')" data-i18n="ag.tab.interp">🌐 Interprètes</button>
       <button class="btn sec ag-tab" id="agtab-req" onclick="agTab('req')" data-i18n="ag.tab.req">📋 Demandes de visite</button>
+    </div>
+
+    <!-- Sous-vue : Calendrier (semaine) -->
+    <div id="agview-cal">
+      <div class="row" style="margin-bottom:.7rem;gap:.5rem;align-items:center;flex-wrap:wrap">
+        <button class="btn sec sm" onclick="calNav(-7)">‹ <span data-i18n="cal.prev">Semaine préc.</span></button>
+        <button class="btn sec sm" onclick="calToday()" data-i18n="cal.today">Aujourd'hui</button>
+        <button class="btn sec sm" onclick="calNav(7)"><span data-i18n="cal.next">Semaine suiv.</span> ›</button>
+        <strong id="calLabel" style="margin:0 .4rem"></strong>
+        <select id="calFilterDoss" onchange="renderCalendar()" style="width:auto;margin-left:auto"><option value="" data-i18n="ag.rdv.alldoss">Tous les dossiers</option></select>
+        <button class="btn sm" onclick="openRdvForm()" data-i18n="ag.rdv.new">➕ Nouveau rendez-vous</button>
+      </div>
+      <div id="calLegend" class="row" style="gap:.6rem;flex-wrap:wrap;margin-bottom:.6rem;font-size:.78rem"></div>
+      <div id="calGrid"></div>
+      <p class="muted" style="font-size:.78rem;margin-top:.5rem" data-i18n="cal.hint">💡 Cliquez sur une case vide pour créer un rendez-vous à cette heure · cliquez sur un rendez-vous pour le modifier. Les chevauchements sont signalés.</p>
     </div>
 
     <!-- Sous-vue : Rendez-vous -->
@@ -612,6 +628,16 @@
         <div><label data-i18n="fiche.f.adresseBE">Adresse en Belgique</label><input id="fi_adresseBE"></div>
         <div><label data-i18n="fiche.f.origine">Adresse pays d'origine</label><input id="fi_origine"></div>
       </div>
+      <fieldset style="border:1px solid var(--bord);border-radius:.5rem;padding:.7rem .9rem;margin:.4rem 0">
+        <legend style="font-size:.85rem;color:var(--accent);padding:0 .4rem">📱 <span data-i18n="fiche.f.contactLeg">Connexion avec le jeune (téléphone, email…)</span></legend>
+        <p class="muted" style="font-size:.78rem;margin:.1rem 0 .5rem" data-i18n="fiche.f.contactHint">Introduisez-les dès le départ : ils servent à TOUS les contacts futurs (messages, notifications de rendez-vous, visio).</p>
+        <div class="grid cols-2">
+          <div><label data-i18n="fiche.f.tel">Téléphone (WhatsApp)</label><input id="fi_tel" placeholder="+32 4xx xx xx xx"></div>
+          <div><label>Email</label><input id="fi_email" type="email" placeholder="email@exemple.be"></div>
+        </div>
+        <label data-i18n="fiche.f.canal">Canal de contact préféré</label>
+        <select id="fi_canal"><option value="whatsapp">WhatsApp</option><option value="sms">SMS</option><option value="email">Email</option><option value="signal">Signal</option><option value="autre" data-i18n="fiche.f.canalAutre">Autre</option></select>
+      </fieldset>
       <label data-i18n="fiche.f.motif">Motif de l'immigration</label>
       <textarea id="fi_motif" rows="2"></textarea>
       <label data-i18n="fiche.f.notes">Notes (parcours, scolarité, contacts…)</label>
@@ -806,8 +832,31 @@
         </div>
       </div>
       <div class="grid cols-2">
-        <div><label>Date *</label><input id="rv_date" type="date" required></div>
-        <div><label>Heure *</label><input id="rv_heure" type="time" required></div>
+        <div><label>Date *</label><input id="rv_date" type="date" required onchange="checkRdvConflict()"></div>
+        <div><label>Heure *</label><input id="rv_heure" type="time" required onchange="checkRdvConflict()"></div>
+      </div>
+      <div class="grid cols-2">
+        <div><label>⏱️ <span id="rv_duree_lbl">Durée</span></label>
+          <select id="rv_duree" onchange="checkRdvConflict()">
+            <option value="30">30 min</option><option value="45">45 min</option>
+            <option value="60" selected>1 h</option><option value="90">1 h 30</option>
+            <option value="120">2 h</option><option value="180">3 h</option>
+          </select></div>
+        <div><label>📹 <span id="rv_online_lbl">Rendez-vous en ligne (visio)</span></label>
+          <select id="rv_online" onchange="toggleVisio()">
+            <option value="non">Non — en présentiel</option>
+            <option value="oui">Oui — visioconférence</option>
+          </select></div>
+      </div>
+      <div id="rv_conflict" style="display:none;margin:.2rem 0"></div>
+      <div id="rv_visio_block" style="display:none;margin:.2rem 0 .5rem;padding:.5rem .7rem;background:#EAF3EC;border:1px solid #BFE0C6;border-radius:.5rem">
+        <div style="font-size:.82rem"><strong>🔗 <span id="rv_visio_lbl">Lien de la visioconférence</span></strong> <span class="muted" id="rv_visio_hint">— partagé au jeune et aux intervenants</span></div>
+        <div class="row" style="gap:.4rem;align-items:center;margin-top:.3rem">
+          <code id="rv_visio_url" style="flex:1;min-width:120px;word-break:break-all;font-size:.8rem"></code>
+          <button type="button" class="btn sec sm" onclick="copyVisio()">📋</button>
+          <button type="button" class="btn sec sm" onclick="openVisio()">↗️</button>
+          <button type="button" class="btn sec sm" onclick="genVisio(true)" title="Nouveau lien">🔄</button>
+        </div>
       </div>
       <div class="grid cols-2">
         <div><label>Lieu (nom institution)</label><input id="rv_lieu" placeholder="ex. CGRA, Cabinet Dupont…"></div>
@@ -849,7 +898,7 @@
           <input id="rv_pickup_lieu" placeholder="ex. Rue de la Paix 12, 1000 Bruxelles"></div>
       </div>
       <div class="row" style="margin-top:.6rem;gap:.6rem">
-        <button type="button" class="btn sec" onclick="previewMsgMENA()" style="white-space:nowrap">👁️ Aperçu message MENA</button>
+        <button type="button" class="btn sec" onclick="previewMsgMena()" style="white-space:nowrap">👁️ Aperçu message MENA</button>
         <span class="muted" style="font-size:.8rem">Le message sera généré dans la langue du jeune dès enregistrement.</span>
       </div>
       <label>Notes tuteur</label>
@@ -1011,7 +1060,9 @@ const I18N = {
   "res.title":"📁 Ressources & Contacts","res.search":"🔍 Rechercher (nom, ville)...","res.alltypes":"Tous les types","res.allregions":"Toutes les régions","res.loading":"Chargement des ressources…","res.unavailable":"Aucune ressource trouvée.","res.count":"ressource(s)","res.add":"➕ Ajouter / compléter une ressource","res.edited":"✎ complété","res.custom":"★ perso",
   "nav.agenda":"🗓️ Agenda & Interprètes",
   "ag.title":"🗓️ Agenda & Interprètes","ag.banner":"Gérez vos rendez-vous, coordonnez les interprètes et envoyez des notifications aux jeunes dans leur langue.",
-  "ag.tab.rdv":"📅 Rendez-vous","ag.tab.interp":"🌐 Interprètes","ag.tab.req":"📋 Demandes de visite",
+  "ag.tab.cal":"📆 Calendrier","ag.tab.rdv":"📋 Liste des rendez-vous","ag.tab.interp":"🌐 Interprètes","ag.tab.req":"📋 Demandes de visite",
+  "cal.prev":"Semaine préc.","cal.today":"Aujourd'hui","cal.next":"Semaine suiv.","cal.hint":"💡 Cliquez sur une case vide pour créer un rendez-vous à cette heure · cliquez sur un rendez-vous pour le modifier. Les chevauchements sont signalés.",
+  "fiche.f.contactLeg":"Connexion avec le jeune (téléphone, email…)","fiche.f.contactHint":"Introduisez-les dès le départ : ils servent à TOUS les contacts futurs (messages, notifications de rendez-vous, visio).","fiche.f.tel":"Téléphone (WhatsApp)","fiche.f.canal":"Canal de contact préféré","fiche.f.canalAutre":"Autre",
   "ag.rdv.new":"➕ Nouveau rendez-vous","ag.rdv.alldoss":"Tous les dossiers","ag.rdv.alltype":"Tous les types","ag.rdv.allstatut":"Tous les statuts",
   "ag.rdv.t.avocat":"E-avocat / Avocat","ag.rdv.t.cgra":"Audience CGRA","ag.rdv.t.oe":"Office Étrangers","ag.rdv.t.autre":"Autre",
   "ag.rdv.s.planifie":"Planifié","ag.rdv.s.confirme":"Confirmé","ag.rdv.s.realise":"Réalisé","ag.rdv.s.annule":"Annulé",
@@ -1051,7 +1102,9 @@ const I18N = {
   "res.title":"📁 Hulpbronnen & Contacten","res.search":"🔍 Zoeken (naam, stad)...","res.alltypes":"Alle types","res.allregions":"Alle regio's","res.loading":"Hulpbronnen laden…","res.unavailable":"Geen hulpbron gevonden.","res.count":"hulpbron(nen)","res.add":"➕ Een hulpbron toevoegen / aanvullen","res.edited":"✎ aangevuld","res.custom":"★ eigen",
   "nav.agenda":"🗓️ Agenda & Tolken",
   "ag.title":"🗓️ Agenda & Tolken","ag.banner":"Beheer uw afspraken, coördineer de tolken en stuur meldingen naar de jongere in zijn taal.",
-  "ag.tab.rdv":"📅 Afspraken","ag.tab.interp":"🌐 Tolken","ag.tab.req":"📋 Bezoekverzoeken",
+  "ag.tab.cal":"📆 Kalender","ag.tab.rdv":"📋 Lijst van afspraken","ag.tab.interp":"🌐 Tolken","ag.tab.req":"📋 Bezoekverzoeken",
+  "cal.prev":"Vorige week","cal.today":"Vandaag","cal.next":"Volgende week","cal.hint":"💡 Klik op een leeg vak om een afspraak op dat uur te maken · klik op een afspraak om ze te wijzigen. Overlappingen worden gemeld.",
+  "fiche.f.contactLeg":"Verbinding met de jongere (telefoon, e-mail…)","fiche.f.contactHint":"Vul ze meteen in: ze dienen voor ALLE toekomstige contacten (berichten, afspraakmeldingen, video).","fiche.f.tel":"Telefoon (WhatsApp)","fiche.f.canal":"Voorkeurskanaal voor contact","fiche.f.canalAutre":"Andere",
   "ag.rdv.new":"➕ Nieuwe afspraak","ag.rdv.alldoss":"Alle dossiers","ag.rdv.alltype":"Alle types","ag.rdv.allstatut":"Alle statussen",
   "ag.rdv.t.avocat":"E-advocaat / Advocaat","ag.rdv.t.cgra":"Gehoor CGVS","ag.rdv.t.oe":"Dienst Vreemdelingenzaken","ag.rdv.t.autre":"Andere",
   "ag.rdv.s.planifie":"Gepland","ag.rdv.s.confirme":"Bevestigd","ag.rdv.s.realise":"Uitgevoerd","ag.rdv.s.annule":"Geannuleerd",
@@ -2454,6 +2507,7 @@ function saveFiche(e){
     statut:'nouveau', langue:fi_langue.value.trim(), notes:fi_notes.value.trim(),
     arrivee:'', photo:FICHE_PHOTO||'',
     fiche: ficheData,
+    contact:{tel:(document.getElementById('fi_tel')?.value||'').trim(),email:(document.getElementById('fi_email')?.value||'').trim(),canal:(document.getElementById('fi_canal')?.value)||'whatsapp',notes:''},
     jugePaix:{cp:'',canton:'',adresse:'',tel:'',email:''},
     rapports:initRapports(nowISO()),
     banque:{operations:[]},
@@ -2618,7 +2672,7 @@ function printReleve(id){
 }
 
 /* ============ VERSION & MISES À JOUR ============ */
-const APP_VERSION='1.7.8';
+const APP_VERSION='1.7.9';
 window.APP_VERSION=APP_VERSION;   // expose pour tests.html (const non attache a window)
 Object.assign(I18N.fr,{"dash.matrix":"📊 Suivi par dossier","dash.q4":"📈 Mes statistiques","dash.q5":"🚗 Mes frais (par jeune)","heb.title":"Lieux d'hébergement MENA (réseau officiel)","nav.guide":"🎓 Guide du tuteur","guide.title":"🎓 Guide du tuteur débutant — de la désignation aux 18 ans","guide.banner":"13 modules pas-à-pas : cours, actions à faire, documents à remettre (et à qui), rendez-vous, pièges à éviter. Contenu basé sur la réglementation en vigueur.","dash.q1":"📄 Nouveau MENA (fiche DVZ)","dash.q2":"📂 Mes dossiers","dash.q3":"⏰ Urgences & échéances","gs.ph":"🔍 Recherche globale (dossiers, lois, cas, ressources)…","ft.check":"🔄 Vérifier les mises à jour","ft.dl":"Télécharger l’application","ft.manuel":"Mode d'emploi"});
 Object.assign(I18N.nl,{"dash.matrix":"📊 Opvolging per dossier","dash.q4":"📈 Mijn statistieken","dash.q5":"🚗 Mijn kosten (per jongere)","heb.title":"NBMV-opvangplaatsen (officieel netwerk)","nav.guide":"🎓 Voogdengids","guide.title":"🎓 Gids voor de beginnende voogd — van aanstelling tot 18 jaar","guide.banner":"13 stap-voor-stapmodules: cursus, acties, documenten (en aan wie), afspraken, valkuilen. Inhoud gebaseerd op de geldende regelgeving.","dash.q1":"📄 Nieuwe NBMV (DVZ-fiche)","dash.q2":"📂 Mijn dossiers","dash.q3":"⏰ Urgenties & vervaldata","gs.ph":"🔍 Globaal zoeken (dossiers, wetten, gevallen, hulpbronnen)…","ft.check":"🔄 Updates controleren","ft.dl":"Applicatie downloaden","ft.manuel":"Handleiding"});
@@ -3645,6 +3699,8 @@ async function openStats(){
 
 /* ============ v1.7 : NOTES DE VERSION ============ */
 const CHANGELOG={
+ '1.7.9':{fr:"📆 Agenda visuel hebdomadaire (vue calendrier) : tous vos rendez-vous d'un coup d'œil, couleur par jeune, clic sur une case vide pour créer un RDV · ⚠️ détection des chevauchements + proposition de créneaux libres avant/après · 📹 rendez-vous en ligne (visioconférence) avec lien partagé au jeune et aux intervenants · 📱 coordonnées du jeune saisies dès la création du dossier",
+         nl:"📆 Visuele weekagenda (kalenderweergave): al uw afspraken in één oogopslag, kleur per jongere, klik op een leeg vak om een afspraak te maken · ⚠️ detectie van overlappingen + voorstel van vrije slots ervoor/erna · 📹 online afspraken (videoconferentie) met link gedeeld met de jongere en de betrokkenen · 📱 contactgegevens van de jongere meteen bij het aanmaken van het dossier"},
  '1.7.8':{fr:"💬 Messagerie bidirectionnelle avec le jeune : coordonnées (téléphone WhatsApp + email) par dossier, envoi de messages dans sa langue, réception de ses réponses traduites en FR/NL, archive complète des échanges · 🌐 traduction NL↔FR locale (hors ligne) + autres langues à la demande · ⚡ mise à jour automatique en un clic (confirmation → tout se fait seul)",
          nl:"💬 Tweerichtingsberichten met de jongere: contactgegevens (WhatsApp-telefoon + e-mail) per dossier, berichten in zijn taal versturen, antwoorden vertaald naar NL/FR ontvangen, volledig archief van de uitwisselingen · 🌐 NL↔FR-vertaling lokaal (offline) + andere talen op aanvraag · ⚡ automatische update met één klik (bevestiging → alles gebeurt vanzelf)"},
  '1.7.7':{fr:"🔄 Mise à jour automatique en un clic : l'application se télécharge et se remplace elle-même sans aucune intervention · 🗓️ Nouveau module Agenda & Interprètes : rendez-vous, base des 13 organismes agréés, messages MENA en 12 langues (WhatsApp/email), demandes de visite",
@@ -4163,12 +4219,13 @@ async function loadInterpOfficial(){
 
 // Navigation sous-onglets
 function agTab(tab){
-  ['rdv','interp','req'].forEach(k=>{
+  ['cal','rdv','interp','req'].forEach(k=>{
     document.getElementById('agview-'+k).style.display=k===tab?'':'none';
     const btn=document.getElementById('agtab-'+k);
     btn.classList.toggle('active',k===tab);
     btn.classList.toggle('sec',k!==tab);
   });
+  if(tab==='cal')renderCalendar();
   if(tab==='rdv')renderRdv();
   if(tab==='interp'){loadInterpOfficial().then(renderInterpretes);}
   if(tab==='req')renderVisReq();
@@ -4178,17 +4235,165 @@ function agTab(tab){
 async function renderAgenda(){
   await loadAg();
   await loadInterpOfficial();
-  renderRdv();
   populateDossierSelects();
+  renderCalendar();
 }
 
 function populateDossierSelects(){
   const doss=loadDossiers();
   const opts=doss.map(d=>`<option value="${d.id}">${esc(d.nom)}</option>`).join('');
-  ['rdvFilterDoss','reqFilterDoss'].forEach(id=>{
+  ['rdvFilterDoss','reqFilterDoss','calFilterDoss'].forEach(id=>{
     const el=document.getElementById(id);
-    if(el)el.innerHTML=`<option value="">${t('ag.rdv.alldoss')}</option>`+opts;
+    if(el){const cur=el.value;el.innerHTML=`<option value="">${t('ag.rdv.alldoss')}</option>`+opts;el.value=cur;}
   });
+}
+
+/* ============ v1.7.9 : CALENDRIER VISUEL + CONFLITS + VISIO ============ */
+// Helpers temps (heure locale, conformément à addDays — jamais toISOString pour le calcul)
+function hmToMin(hm){if(!hm)return 0;const p=hm.split(':');return (+p[0]||0)*60+(+p[1]||0);}
+function minToHm(m){const h=Math.floor(m/60),mm=Math.round(m%60);return String(h).padStart(2,'0')+':'+String(mm).padStart(2,'0');}
+function rdvDuree(r){return +r.duree||60;}
+function rdvRange(r){const s=hmToMin(r.heure);return [s,s+rdvDuree(r)];}
+// Couleur stable par dossier (palette pro)
+const CAL_PALETTE=['#19497F','#2E7D5B','#9C5A2D','#7A3E9C','#B23A48','#1F7A8C','#A6791F','#4A5568'];
+function dossColor(dossierId){let h=0;const s=String(dossierId||'');for(let i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))>>>0;return CAL_PALETTE[h%CAL_PALETTE.length];}
+const CAL_START_H=8, CAL_END_H=20, CAL_HOURPX=46;
+let CAL_WEEK=null;   // date (Lundi) de la semaine affichée, format YYYY-MM-DD
+
+function mondayOf(ymdStr){
+  const d=new Date((ymdStr||nowISO())+'T12:00:00');   // midi local : pas de bascule UTC
+  const dow=(d.getDay()+6)%7;                          // 0 = lundi
+  return addDays(ymdStr||nowISO(),-dow);
+}
+function calToday(){CAL_WEEK=mondayOf(nowISO());renderCalendar();}
+function calNav(days){CAL_WEEK=addDays(CAL_WEEK||mondayOf(nowISO()),days);renderCalendar();}
+
+// Détection de conflits : RDV (non annulés) qui chevauchent [heure, heure+duree] le même jour
+function rdvConflicts(date,heure,duree,excludeId){
+  if(!date||!heure)return [];
+  const s=hmToMin(heure),e=s+(+duree||60);
+  return (AG.rdv||[]).filter(r=>r.id!==excludeId&&r.date===date&&r.statut!=='annule'&&r.heure)
+    .filter(r=>{const[rs,re]=rdvRange(r);return s<re&&rs<e;});
+}
+// Créneaux libres le jour donné pouvant accueillir 'duree', triés par proximité avec l'heure souhaitée
+function freeSlots(date,duree,aroundHeure,excludeId){
+  const DS=CAL_START_H*60,DE=CAL_END_H*60,dur=+duree||60;
+  const busy=(AG.rdv||[]).filter(r=>r.id!==excludeId&&r.date===date&&r.statut!=='annule'&&r.heure)
+    .map(rdvRange).sort((a,b)=>a[0]-b[0]);
+  const gaps=[];let cur=DS;
+  busy.forEach(([s,e])=>{if(s-cur>=dur)gaps.push([cur,s]);cur=Math.max(cur,e);});
+  if(DE-cur>=dur)gaps.push([cur,DE]);
+  const around=hmToMin(aroundHeure||'10:00'),cands=[];
+  gaps.forEach(([gs,ge])=>{const latest=ge-dur;[gs,Math.min(Math.max(around,gs),latest),latest].forEach(st=>{if(st>=gs&&st<=latest)cands.push(st);});});
+  const uniq=[...new Set(cands)].sort((a,b)=>Math.abs(a-around)-Math.abs(b-around));
+  return uniq.slice(0,6).map(st=>({start:minToHm(st),min:st,pos:st<around?'avant':(st>around?'après':'pile')}));
+}
+
+// Bannière de conflit en direct dans le formulaire RDV
+function checkRdvConflict(){
+  const box=document.getElementById('rv_conflict');if(!box)return;
+  const date=document.getElementById('rv_date').value;
+  const heure=document.getElementById('rv_heure').value;
+  const duree=document.getElementById('rv_duree').value;
+  const selfId=document.getElementById('rv_id').value;
+  if(!date||!heure){box.style.display='none';return;}
+  const NL=LANG==='nl';
+  const conf=rdvConflicts(date,heure,duree,selfId);
+  if(!conf.length){
+    box.style.display='';box.innerHTML='<div style="padding:.45rem .7rem;background:#EAF3EC;border:1px solid #BFE0C6;border-radius:.5rem;font-size:.82rem">✅ '+(NL?'Vrij slot — geen overlapping.':'Créneau libre — aucun chevauchement.')+'</div>';
+    return;
+  }
+  const doss=loadDossiers();
+  const list=conf.map(r=>{const d=doss.find(x=>x.id===r.dossierId);const[rs,re]=rdvRange(r);return '• '+r.heure+'–'+minToHm(re)+' '+(RDV_TYPE_FR[r.type]||r.type)+(d?' ('+esc(d.nom)+')':'');}).join('<br>');
+  const slots=freeSlots(date,duree,heure,selfId);
+  const slotBtns=slots.map(s=>'<button type="button" class="btn sec sm" style="margin:.15rem" onclick="applySlot(\''+s.start+'\')">'+s.start+' <span class="muted">('+(s.pos==='avant'?(NL?'eerder':'avant'):s.pos==='après'?(NL?'later':'après'):(NL?'idem':'pile'))+')</span></button>').join('');
+  box.style.display='';
+  box.innerHTML='<div style="padding:.5rem .7rem;background:#FCEDE9;border:1px solid #E8B4A8;border-radius:.5rem;font-size:.82rem">'
+    +'<strong>⚠️ '+(NL?'Overlapping met:':'Chevauchement avec :')+'</strong><br>'+list
+    +(slots.length?'<div style="margin-top:.45rem"><strong>'+(NL?'Vrije slots dichtbij:':'Créneaux libres à proximité :')+'</strong><br>'+slotBtns+'</div>'
+      :'<div style="margin-top:.45rem" class="muted">'+(NL?'Geen vrij slot deze dag (8–20u).':'Aucun créneau libre ce jour (8–20h).')+'</div>')
+    +'</div>';
+}
+function applySlot(hhmm){document.getElementById('rv_heure').value=hhmm;checkRdvConflict();}
+
+// --- Visioconférence (Jitsi Meet : gratuit, sans compte, lien partageable) ---
+function genVisio(force){
+  const url=document.getElementById('rv_visio_url');
+  if(!url)return;
+  if(url.textContent&&!force)return;
+  const did=(document.getElementById('rv_dossier').value||'x').replace(/[^a-zA-Z0-9]/g,'');
+  const rnd=Math.floor(Math.random()*1e6).toString(36)+Date.now().toString(36).slice(-4);
+  url.textContent='https://meet.jit.si/MENA-'+did+'-'+rnd;
+}
+function toggleVisio(){
+  const on=document.getElementById('rv_online').value==='oui';
+  document.getElementById('rv_visio_block').style.display=on?'':'none';
+  if(on)genVisio(false);
+}
+function copyVisio(){const u=document.getElementById('rv_visio_url').textContent;if(u)navigator.clipboard.writeText(u);}
+function openVisio(){const u=document.getElementById('rv_visio_url').textContent;if(u)window.open(u,'_blank');}
+
+// --- Rendu du calendrier hebdomadaire ---
+function renderCalendar(){
+  const grid=document.getElementById('calGrid');if(!grid)return;
+  if(!CAL_WEEK)CAL_WEEK=mondayOf(nowISO());
+  const NL=LANG==='nl';
+  const fDoss=document.getElementById('calFilterDoss')?.value||'';
+  const doss=loadDossiers();
+  const days=[];for(let i=0;i<7;i++)days.push(addDays(CAL_WEEK,i));
+  const dayNames=NL?['Ma','Di','Wo','Do','Vr','Za','Zo']:['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
+  const months=NL?['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec']:['jan','fév','mar','avr','mai','jun','jul','aoû','sep','oct','nov','déc'];
+  const d0=new Date(days[0]+'T12:00:00'),d6=new Date(days[6]+'T12:00:00');
+  document.getElementById('calLabel').textContent=d0.getDate()+' '+months[d0.getMonth()]+' – '+d6.getDate()+' '+months[d6.getMonth()]+' '+d6.getFullYear();
+  const today=nowISO();
+  // Légende : dossiers ayant un RDV cette semaine
+  const weekRdv=(AG.rdv||[]).filter(r=>days.includes(r.date)&&(!fDoss||r.dossierId===fDoss));
+  const dossInWeek=[...new Set(weekRdv.map(r=>r.dossierId))];
+  document.getElementById('calLegend').innerHTML=dossInWeek.map(id=>{const d=doss.find(x=>x.id===id);return '<span style="display:inline-flex;align-items:center;gap:.3rem"><span style="width:.8rem;height:.8rem;border-radius:.2rem;background:'+dossColor(id)+'"></span>'+esc(d?d.nom:'?')+'</span>';}).join('')||('<span class="muted">'+(NL?'Geen afspraak deze week.':'Aucun rendez-vous cette semaine.')+'</span>');
+  const bodyH=(CAL_END_H-CAL_START_H)*CAL_HOURPX;
+  // En-tête
+  let head='<div style="display:grid;grid-template-columns:48px repeat(7,1fr);gap:1px;min-width:680px">';
+  head+='<div></div>';
+  days.forEach((dy,i)=>{const isToday=dy===today;head+='<div style="text-align:center;padding:.3rem 0;font-size:.8rem;font-weight:600;border-radius:.4rem .4rem 0 0;'+(isToday?'background:var(--accent,#19497F);color:#fff':'background:var(--gris-clair,#EEF1F5)')+'">'+dayNames[i]+'<br>'+new Date(dy+'T12:00:00').getDate()+'</div>';});
+  head+='</div>';
+  // Corps : colonne heures + 7 colonnes jour (position absolue des blocs)
+  let hours='<div style="position:relative;width:48px">';
+  for(let h=CAL_START_H;h<CAL_END_H;h++)hours+='<div style="height:'+CAL_HOURPX+'px;font-size:.7rem;color:#5F6B7A;text-align:right;padding-right:.3rem;box-sizing:border-box;border-top:1px solid #EEF1F5">'+String(h).padStart(2,'0')+'h</div>';
+  hours+='</div>';
+  let cols='';
+  days.forEach(dy=>{
+    let col='<div class="cal-day" style="position:relative;height:'+bodyH+'px;border-left:1px solid #EEF1F5;background:repeating-linear-gradient(#fff,#fff '+(CAL_HOURPX-1)+'px,#EEF1F5 '+(CAL_HOURPX-1)+'px,#EEF1F5 '+CAL_HOURPX+'px)" onclick="calCellClick(event,\''+dy+'\')">';
+    const items=weekRdv.filter(r=>r.date===dy&&r.heure).sort((a,b)=>hmToMin(a.heure)-hmToMin(b.heure));
+    // détection de chevauchement pour décaler côte à côte
+    items.forEach((r,idx)=>{
+      const[rs,re]=rdvRange(r);
+      const top=((rs-CAL_START_H*60)/60)*CAL_HOURPX;
+      const hgt=Math.max(((re-rs)/60)*CAL_HOURPX-2,16);
+      const overlapped=items.filter(o=>{const[os,oe]=rdvRange(o);return rs<oe&&os<re;});
+      const pos=overlapped.indexOf(r),n=overlapped.length;
+      const w=n>1?(100/n):100,left=n>1?(pos*w):0;
+      const d=doss.find(x=>x.id===r.dossierId);const col0=dossColor(r.dossierId);
+      const ic=RDV_TYPE_ICON[r.type]||'📋';const vis=r.enLigne?'📹 ':'';
+      const annul=r.statut==='annule';
+      col+='<div onclick="event.stopPropagation();openRdvForm(\''+r.id+'\')" title="'+esc((d?d.nom+' — ':'')+(RDV_TYPE_FR[r.type]||r.type)+' '+r.heure+'–'+minToHm(re))+'" '
+        +'style="position:absolute;top:'+top+'px;height:'+hgt+'px;left:calc('+left+'% + 1px);width:calc('+w+'% - 2px);background:'+col0+';'+(annul?'opacity:.45;text-decoration:line-through;':'')+'color:#fff;border-radius:.35rem;padding:.15rem .3rem;font-size:.7rem;overflow:hidden;cursor:pointer;box-sizing:border-box;border:1px solid rgba(255,255,255,.25)">'
+        +'<strong>'+r.heure+'</strong> '+vis+ic+'<br>'+esc(d?d.nom:'')+'</div>';
+    });
+    col+='</div>';
+    cols+=col;
+  });
+  grid.innerHTML=head+'<div style="display:grid;grid-template-columns:48px repeat(7,1fr);gap:1px;min-width:680px;overflow-x:auto">'+hours+cols+'</div>';
+  // rendre le bloc scrollable horizontalement sur petit écran
+  grid.style.overflowX='auto';
+}
+function calCellClick(ev,dy){
+  const rect=ev.currentTarget.getBoundingClientRect();
+  const y=ev.clientY-rect.top;
+  let min=CAL_START_H*60+Math.floor(y/CAL_HOURPX)*60;     // arrondi à l'heure
+  // arrondi au quart d'heure le plus proche pour plus de finesse
+  min=CAL_START_H*60+Math.round((y/CAL_HOURPX)*4)/4*60;
+  min=Math.max(CAL_START_H*60,Math.min(min,(CAL_END_H-1)*60));
+  openRdvForm(null,{date:dy,heure:minToHm(Math.round(min/15)*15)});
 }
 
 // --- RENDEZ-VOUS ---
@@ -4214,7 +4419,7 @@ function renderRdv(){
     const sc=r.statut||'planifie';
     return `<div class="rdv-card statut-${sc}" onclick="openRdvDetail('${r.id}')">
       <div class="rdv-header">
-        <span class="rdv-date">${RDV_TYPE_ICON[r.type]||'📋'} ${r.date} ${r.heure?'— '+r.heure:''}</span>
+        <span class="rdv-date">${RDV_TYPE_ICON[r.type]||'📋'} ${r.date} ${r.heure?'— '+r.heure:''}${r.duree?' · '+r.duree+' min':''} ${r.enLigne?'📹':''}</span>
         <span class="badge ${sc==='confirme'?'b-cours':sc==='realise'?'b-clos':sc==='annule'?'b-urgent':'b-nouveau'}">${statLabel[sc]||sc}</span>
       </div>
       <div class="rdv-meta">
@@ -4233,19 +4438,31 @@ function renderRdv(){
 
 function openRdvDetail(id){openRdvForm(id);}
 
-function openRdvForm(id){
+function openRdvForm(id,prefill){
   const doss=loadDossiers();
   const r=id?AG.rdv.find(x=>x.id===id):null;
   document.getElementById('rdvModalTitle').textContent=r?(LANG==='nl'?'Afspraak bewerken':'Modifier le rendez-vous'):(LANG==='nl'?'Nieuwe afspraak':'Nouveau rendez-vous');
+  {const _NL=LANG==='nl',_setT=(id,fr,nl)=>{const e=document.getElementById(id);if(e)e.textContent=_NL?nl:fr;};
+   _setT('rv_duree_lbl','Durée','Duur');
+   _setT('rv_online_lbl','Rendez-vous en ligne (visio)','Afspraak online (video)');
+   _setT('rv_visio_lbl','Lien de la visioconférence','Link van de videoconferentie');
+   _setT('rv_visio_hint','— partagé au jeune et aux intervenants','— gedeeld met de jongere en de betrokkenen');
+   const onSel=document.getElementById('rv_online');
+   if(onSel){onSel.options[0].text=_NL?'Nee — ter plaatse':'Non — en présentiel';onSel.options[1].text=_NL?'Ja — videoconferentie':'Oui — visioconférence';}}
   document.getElementById('rv_id').value=r?r.id:'';
-  document.getElementById('rv_date').value=r?r.date:'';
-  document.getElementById('rv_heure').value=r?r.heure:'';
+  document.getElementById('rv_date').value=r?r.date:(prefill?.date||'');
+  document.getElementById('rv_heure').value=r?r.heure:(prefill?.heure||'');
+  document.getElementById('rv_duree').value=r?(r.duree||60):60;
   document.getElementById('rv_lieu').value=r?r.lieu||'':'';
   document.getElementById('rv_adresse').value=r?r.adresse||'':'';
   document.getElementById('rv_notes').value=r?r.notes||'':'';
   document.getElementById('rv_statut').value=r?r.statut||'planifie':'planifie';
   document.getElementById('rv_pickup').value=r?r.pickup||'autonome':'autonome';
   document.getElementById('rv_pickup_lieu').value=r?r.pickupLieu||'':'';
+  // Visio
+  document.getElementById('rv_online').value=r&&r.enLigne?'oui':'non';
+  document.getElementById('rv_visio_url').textContent=r?(r.visioLink||''):'';
+  toggleVisio();
   // Dossier
   const dSel=document.getElementById('rv_dossier');
   dSel.innerHTML='<option value="">— Choisir —</option>'+doss.map(d=>`<option value="${d.id}"${r&&r.dossierId===d.id?' selected':''}>${esc(d.nom)}</option>`).join('');
@@ -4260,6 +4477,7 @@ function openRdvForm(id){
   iSel.innerHTML='<option value="">— Choisir —</option>'+allI.map(i=>`<option value="${i.id}"${r&&r.interpId===i.id?' selected':''}>${esc(i.prenom?i.prenom+' '+i.nom:i.nom)} [${(i.langues||[]).slice(0,3).join(', ')}]</option>`).join('');
   toggleInterpSelect();
   updateInterpContact();
+  checkRdvConflict();
   openModal('rdvModal');
 }
 
@@ -4282,29 +4500,45 @@ async function saveRdvForm(e){
   const id=document.getElementById('rv_id').value||('RDV'+Date.now());
   const dossierId=document.getElementById('rv_dossier').value;
   const doss=loadDossiers().find(x=>x.id===dossierId);
+  const date=document.getElementById('rv_date').value;
+  const heure=document.getElementById('rv_heure').value;
+  const duree=+document.getElementById('rv_duree').value||60;
+  const statut=document.getElementById('rv_statut').value;
+  const NL=LANG==='nl';
+  // Contrôle de conflit (sauf RDV annulé) — averti mais l'utilisateur reste souple
+  if(statut!=='annule'){
+    const conf=rdvConflicts(date,heure,duree,id);
+    if(conf.length){
+      const lst=conf.map(r=>{const dd=loadDossiers().find(x=>x.id===r.dossierId);const[,re]=rdvRange(r);return r.heure+'–'+minToHm(re)+' '+(RDV_TYPE_FR[r.type]||r.type)+(dd?' ('+dd.nom+')':'');}).join('\n');
+      if(!confirm((NL?'⚠️ Dit slot overlapt met:\n':'⚠️ Ce créneau chevauche :\n')+lst+(NL?'\n\nToch opslaan?':'\n\nEnregistrer quand même ?'))){
+        checkRdvConflict();return;
+      }
+    }
+  }
+  const enLigne=document.getElementById('rv_online').value==='oui';
+  const visioLink=enLigne?(document.getElementById('rv_visio_url').textContent||''):'';
   const data={
     id,dossierId,
     type:document.getElementById('rv_type').value,
-    date:document.getElementById('rv_date').value,
-    heure:document.getElementById('rv_heure').value,
+    date,heure,duree,
+    enLigne,visioLink,
     lieu:document.getElementById('rv_lieu').value.trim(),
     adresse:document.getElementById('rv_adresse').value.trim(),
     interpNeed:document.getElementById('rv_interp_need').value,
     interpId:document.getElementById('rv_interp_id').value,
-    statut:document.getElementById('rv_statut').value,
+    statut,
     pickup:document.getElementById('rv_pickup').value,
     pickupLieu:document.getElementById('rv_pickup_lieu').value.trim(),
     notes:document.getElementById('rv_notes').value.trim(),
-    cree:AG.rdv.find(x=>x.id===id)?.cree||new Date().toISOString().slice(0,10)
+    cree:AG.rdv.find(x=>x.id===id)?.cree||nowISO()
   };
   const idx=AG.rdv.findIndex(x=>x.id===id);
   if(idx>=0)AG.rdv[idx]=data;else AG.rdv.push(data);
   await persistAg();
   closeModal('rdvModal');
-  renderRdv();
+  renderCalendar();renderRdv();
   // Proposer message MENA si dossier trouvé et notification souhaitée
   if(doss&&data.date){
-    const NL=LANG==='nl';
     if(confirm(NL?`Bericht sturen naar ${doss.nom}?`:`Envoyer un message à ${doss.nom} ?`)){
       openMsgMena(id);
     }
@@ -4545,6 +4779,12 @@ function openRdvFromReq(reqId){
 }
 
 // --- MESSAGES MENA (multilingue) ---
+// Ligne « lien visio » dans la langue du jeune (RDV en ligne)
+function visioLine(langKey,link){
+  if(!link)return '';
+  const L={'Français':'Lien de la visioconférence','Nederlands':'Link videoconferentie','Anglais':'Video call link','Arabe':'رابط مكالمة الفيديو','Pashto':'د ویډیو کال لینک','Dari/Farsi':'لینک تماس تصویری','Somali':'Linkiga wicitaanka muuqaalka','Tigrinya':'መላግቦ ቪድዮ ጻውዒት','Albanais':'Lidhja e video-thirrjes','Ukrainien':'Посилання на відеодзвінок','Russe':'Ссылка на видеозвонок','Géorgien':'ვიდეო ზარის ბმული'};
+  return '\n\n📹 '+(L[langKey]||'Video')+' :\n'+link;
+}
 // Templates par langue : {header, date_label, time_label, place_label, pickup_label, interp_label, contact_label, footer}
 const MSG_TEMPLATES={
   'Français':{
@@ -4800,7 +5040,8 @@ function openMsgMena(rdvId){
   const langRaw=(d.langue||d.fiche?.langue||'').trim();
   const langKey=LANG_MAP[langRaw]||(LANG==='nl'?'Nederlands':'Français');
   const tmpl=MSG_TEMPLATES[langKey]||MSG_TEMPLATES['Français'];
-  const msg=tmpl.build(d,r,ip,TUTEUR||{});
+  let msg=tmpl.build(d,r,ip,TUTEUR||{});
+  if(r.enLigne&&r.visioLink)msg+=visioLine(langKey,r.visioLink);
   CURRENT_MSG_RDV_ID=rdvId;
   CURRENT_MSG_TEXT=msg;
   CURRENT_MSG_DOSSIER_ID=d.id;
@@ -4828,13 +5069,16 @@ function previewMsgMena(){
     adresse:document.getElementById('rv_adresse').value||'',
     interpId:document.getElementById('rv_interp_id').value,
     pickup:document.getElementById('rv_pickup').value,
-    pickupLieu:document.getElementById('rv_pickup_lieu').value
+    pickupLieu:document.getElementById('rv_pickup_lieu').value,
+    enLigne:document.getElementById('rv_online').value==='oui',
+    visioLink:document.getElementById('rv_visio_url').textContent||''
   };
   const ip=getAllInterp().find(i=>i.id===tempR.interpId);
   const langRaw=(d.langue||d.fiche?.langue||'').trim();
   const langKey=LANG_MAP[langRaw]||(LANG==='nl'?'Nederlands':'Français');
   const tmpl=MSG_TEMPLATES[langKey]||MSG_TEMPLATES['Français'];
-  const msg=tmpl.build(d,tempR,ip,TUTEUR||{});
+  let msg=tmpl.build(d,tempR,ip,TUTEUR||{});
+  if(tempR.enLigne&&tempR.visioLink)msg+=visioLine(langKey,tempR.visioLink);
   CURRENT_MSG_TEXT=msg;
   CURRENT_MSG_DOSSIER_ID=d.id;
   CURRENT_MSG_LANGKEY=langKey;
@@ -4884,6 +5128,7 @@ function genCoordMsg(rdvId){
   let msg=NL
     ?`Geachte,\n\nHierbij bevestig ik een afspraak in het kader van de voogdij van een NBMV:\n\nType: ${typeLabel}\nDatum: ${r.date}\nUur: ${r.heure||'—'}\nLocatie: ${r.lieu||'—'}${r.adresse?'\nAdres: '+r.adresse:''}\n${ip?'Tolk: '+ipName(ip)+' ('+((ip.langues||[]).join(', '))+')\n':''}\nGelieve uw beschikbaarheid te bevestigen.\n\nMet vriendelijke groeten,\n${TUTEUR?.nom||'de voogd'}${TUTEUR?.tel?'\nTel: '+TUTEUR.tel:''}${TUTEUR?.email?'\nEmail: '+TUTEUR.email:''}`
     :`Madame, Monsieur,\n\nJe vous contacte dans le cadre de la tutelle d'un MENA pour confirmer un rendez-vous :\n\nType : ${typeLabel}\nDate : ${r.date}\nHeure : ${r.heure||'—'}\nLieu : ${r.lieu||'—'}${r.adresse?'\nAdresse : '+r.adresse:''}\n${ip?'Interprète : '+ipName(ip)+' ('+((ip.langues||[]).join(', '))+')\n':''}\nMerci de confirmer votre disponibilité.\n\nCordialement,\n${TUTEUR?.nom||'le tuteur'}${TUTEUR?.tel?'\nTél. : '+TUTEUR.tel:''}${TUTEUR?.email?'\nEmail : '+TUTEUR.email:''}`;
+  if(r.enLigne&&r.visioLink)msg+=(NL?'\n\n📹 Videoconferentie-link: ':'\n\n📹 Lien visioconférence : ')+r.visioLink;
   const ipEmail=ip?.email||'';
   const subj=encodeURIComponent((NL?'Bevestiging afspraak NBMV — ':'Confirmation RDV MENA — ')+r.date);
   const body=encodeURIComponent(msg);

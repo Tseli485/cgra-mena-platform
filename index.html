@@ -1026,6 +1026,20 @@
   </div>
 </div>
 
+<!-- MODAL LECTEUR DU MODE D'EMPLOI (visionner + imprimer dans l'app) -->
+<div class="modal" id="manualModal">
+  <div class="modal-box" style="max-width:980px;width:96vw;height:92vh;display:flex;flex-direction:column;padding:0;overflow:hidden">
+    <div style="display:flex;align-items:center;gap:.5rem;padding:.6rem .9rem;border-bottom:1px solid var(--bord);background:var(--gris-clair,#EEF1F5);flex-wrap:wrap">
+      <strong id="manualTitle" style="margin-right:auto">📖 Mode d'emploi</strong>
+      <button class="btn sm" onclick="printManual()">🖨️ <span id="manualPrintLbl">Imprimer / PDF</span></button>
+      <button class="btn sec sm" onclick="openManualTab()">↗️ <span id="manualTabLbl">Plein écran</span></button>
+      <button class="btn sec sm" onclick="closeModal('manualModal')">✕</button>
+    </div>
+    <div id="manualLoading" style="padding:2rem;text-align:center;color:#5F6B7A">⏳</div>
+    <iframe id="manualFrame" title="Mode d'emploi" onload="manualFrameLoaded()" style="flex:1;border:0;width:100%;background:#fff;display:none"></iframe>
+  </div>
+</div>
+
 <script src="js/nl-fr-dict.js"></script>
 <script src="js/lib/pdf.min.js"></script>
 <script>
@@ -2673,7 +2687,7 @@ function printReleve(id){
 }
 
 /* ============ VERSION & MISES À JOUR ============ */
-const APP_VERSION='1.7.11';
+const APP_VERSION='1.7.12';
 window.APP_VERSION=APP_VERSION;   // expose pour tests.html (const non attache a window)
 Object.assign(I18N.fr,{"dash.matrix":"📊 Suivi par dossier","dash.q4":"📈 Mes statistiques","dash.q5":"🚗 Mes frais (par jeune)","heb.title":"Lieux d'hébergement MENA (réseau officiel)","nav.guide":"🎓 Guide du tuteur","guide.title":"🎓 Guide du tuteur débutant — de la désignation aux 18 ans","guide.banner":"13 modules pas-à-pas : cours, actions à faire, documents à remettre (et à qui), rendez-vous, pièges à éviter. Contenu basé sur la réglementation en vigueur.","dash.q1":"📄 Nouveau MENA (fiche DVZ)","dash.q2":"📂 Mes dossiers","dash.q3":"⏰ Urgences & échéances","gs.ph":"🔍 Recherche globale (dossiers, lois, cas, ressources)…","ft.check":"🔄 Vérifier les mises à jour","ft.dl":"Télécharger l’application","ft.manuel":"Mode d'emploi","ft.pdf":"📄 Mode d'emploi en PDF"});
 Object.assign(I18N.nl,{"dash.matrix":"📊 Opvolging per dossier","dash.q4":"📈 Mijn statistieken","dash.q5":"🚗 Mijn kosten (per jongere)","heb.title":"NBMV-opvangplaatsen (officieel netwerk)","nav.guide":"🎓 Voogdengids","guide.title":"🎓 Gids voor de beginnende voogd — van aanstelling tot 18 jaar","guide.banner":"13 stap-voor-stapmodules: cursus, acties, documenten (en aan wie), afspraken, valkuilen. Inhoud gebaseerd op de geldende regelgeving.","dash.q1":"📄 Nieuwe NBMV (DVZ-fiche)","dash.q2":"📂 Mijn dossiers","dash.q3":"⏰ Urgenties & vervaldata","gs.ph":"🔍 Globaal zoeken (dossiers, wetten, gevallen, hulpbronnen)…","ft.check":"🔄 Updates controleren","ft.dl":"Applicatie downloaden","ft.manuel":"Handleiding","ft.pdf":"📄 Handleiding als PDF"});
@@ -3700,6 +3714,8 @@ async function openStats(){
 
 /* ============ v1.7 : NOTES DE VERSION ============ */
 const CHANGELOG={
+ '1.7.12':{fr:"📖 Lecteur du mode d'emploi intégré à l'application : on le visionne ET on l'imprime (ou l'enregistre en PDF) directement, sans ouvrir d'onglet ni dépendre des popups — fonctionne aussi hors ligne. Boutons 🖨️ Imprimer / PDF et ↗️ Plein écran.",
+         nl:"📖 Ingebouwde lezer voor de handleiding: u bekijkt ÉN drukt ze af (of bewaart als PDF) rechtstreeks, zonder tabblad of pop-ups — werkt ook offline. Knoppen 🖨️ Afdrukken / PDF en ↗️ Volledig scherm."},
  '1.7.11':{fr:"🔧 Correctif mise à jour en un clic : le sondage de progression était bloqué par le cache (service worker) — corrigé, la maj automatique se déroule maintenant jusqu'au bout · 🗂️ Installation UNIQUE : l'application s'installe désormais à un emplacement fixe et ÉCRASE l'ancienne version (qu'on télécharge OU qu'on mette à jour) — fini les multiples copies sur le PC ; le raccourci pointe toujours vers cette version unique.",
          nl:"🔧 Fix update met één klik: de voortgangspolling werd geblokkeerd door de cache (service worker) — opgelost, de automatische update loopt nu volledig door · 🗂️ UNIEKE installatie: de applicatie installeert zich nu op een vaste plek en OVERSCHRIJFT de oude versie (zowel bij downloaden ALS bij updaten) — geen meerdere kopieën meer op de pc; de snelkoppeling wijst altijd naar die ene versie."},
  '1.7.10':{fr:"📄 Mode d'emploi téléchargeable en PDF directement depuis l'application : présentation « syllabus universitaire » (page de garde, un chapitre par page, sauts de page soignés, encadrés jamais coupés). Toujours à jour automatiquement — le PDF est généré depuis le manuel vivant.",
@@ -4177,32 +4193,48 @@ async function tourRealKm(){
 /* ============ v1.7.5 : OUVERTURE FIABLE DU MODE D'EMPLOI ============ */
 // Essaie la version locale ; si absente (ancien exécutable), bascule sur la
 // version en ligne ; si la fenêtre est bloquée, navigue dans l'onglet courant.
-function openManual(){
-  const page=LANG==='nl'?'handleiding.html':'mode-emploi.html';
+// Lecteur intégré du mode d'emploi : on le VISIONNE et on l'IMPRIME directement
+// dans l'application (iframe), sans dépendre d'un nouvel onglet (popups, hors ligne).
+function manualPage(){return LANG==='nl'?'handleiding.html':'mode-emploi.html';}
+function openManual(printAfter){
+  const page=manualPage();
   const online='https://tseli485.github.io/cgra-mena-platform/'+page;
-  fetch(page,{method:'HEAD'}).then(r=>{
-    const url=r.ok?page:online;
-    const w=window.open(url,'_blank');
-    if(!w)location.href=url;
-  }).catch(()=>{
-    const w=window.open(online,'_blank');
-    if(!w)location.href=online;
-  });
+  const NL=LANG==='nl';
+  document.getElementById('manualTitle').textContent=NL?"📖 Handleiding":"📖 Mode d'emploi";
+  document.getElementById('manualPrintLbl').textContent=NL?'Afdrukken / PDF':'Imprimer / PDF';
+  document.getElementById('manualTabLbl').textContent=NL?'Volledig scherm':'Plein écran';
+  const fr=document.getElementById('manualFrame');
+  const ld=document.getElementById('manualLoading');
+  fr.dataset.printAfter=printAfter?'1':'';
+  fr.style.display='none';ld.style.display='';ld.textContent='⏳';
+  openModal('manualModal');
+  // charge la version locale si dispo, sinon la version en ligne
+  fetch(page,{method:'HEAD'}).then(r=>{fr.src=r.ok?page:online;}).catch(()=>{fr.src=online;});
 }
-// Ouvre le mode d'emploi en mode impression directe (-> « Enregistrer en PDF »).
-// Le PDF est généré depuis le HTML vivant : il reflète toujours la version installée.
-function downloadManualPdf(){
-  const page=(LANG==='nl'?'handleiding.html':'mode-emploi.html')+'?print=1';
+function manualFrameLoaded(){
+  const fr=document.getElementById('manualFrame');
+  if(!fr.src||fr.src==='about:blank')return;
+  const ld=document.getElementById('manualLoading');
+  if(ld)ld.style.display='none';
+  fr.style.display='';
+  if(fr.dataset.printAfter==='1'){fr.dataset.printAfter='';setTimeout(()=>printManual(),500);}
+}
+function printManual(){
+  const fr=document.getElementById('manualFrame');
+  try{fr.contentWindow.focus();fr.contentWindow.print();}
+  catch(e){ // iframe cross-origin (version en ligne) : on bascule sur un onglet auto-imprimé
+    const page=manualPage()+'?print=1';
+    window.open('https://tseli485.github.io/cgra-mena-platform/'+page,'_blank');
+  }
+}
+function openManualTab(){
+  const page=manualPage();
   const online='https://tseli485.github.io/cgra-mena-platform/'+page;
-  fetch(LANG==='nl'?'handleiding.html':'mode-emploi.html',{method:'HEAD'}).then(r=>{
-    const url=r.ok?page:online;
-    const w=window.open(url,'_blank');
-    if(!w)location.href=url;
-  }).catch(()=>{
-    const w=window.open(online,'_blank');
-    if(!w)location.href=online;
-  });
+  fetch(page,{method:'HEAD'}).then(r=>{const w=window.open(r.ok?page:online,'_blank');if(!w)location.href=(r.ok?page:online);})
+    .catch(()=>{const w=window.open(online,'_blank');if(!w)location.href=online;});
 }
+// « Mode d'emploi en PDF » : ouvre le lecteur et lance l'impression automatiquement.
+function downloadManualPdf(){openManual(true);}
 
 /* ============ UTIL ============ */
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}

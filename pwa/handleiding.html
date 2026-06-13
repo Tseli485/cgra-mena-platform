@@ -64,7 +64,7 @@ Volg hen: elk scherm in deze handleiding komt overeen met een echt moment uit he
 <li><a href="#s7">De automatische documentanalyse</a></li>
 <li><a href="#s8">Het dossier van de jongere in detail</a></li>
 <li><a href="#s9">De vrederechter en uw verslagen</a></li>
-<li><a href="#s10">De agenda met afspraken</a></li>
+<li><a href="#s10">De agenda &amp; tolken</a></li>
 <li><a href="#s11">Het geld van de jongere (bank)</a></li>
 <li><a href="#s12">Uw verplaatsingskosten</a></li>
 <li><a href="#s13">Documenten bewaren (bijlagen)</a></li>
@@ -163,10 +163,70 @@ Volg hen: elk scherm in deze handleiding komt overeen met een echt moment uit he
 <li>Vink het verslag af zodra verzonden: de applicatie bewaart de datum.</li>
 </ol>
 
-<h2 id="s10"><span class="num">10</span>De agenda met afspraken</h2>
+<h2 id="s10"><span class="num">10</span>De agenda &amp; tolken</h2>
+
+<h3>📅 De dossieragenda (in elk dossier)</h3>
 <p>Bij het aanmaken van het dossier plant de applicatie de <strong>10 typische afspraken</strong> van het begin van een voogdij (eerste ontmoeting, centrum, advocaat, eerste verslag, school, arts, bank, CGVS-voorbereiding…). Wijzig de data vrij, voeg eigen afspraken toe, en exporteer alles naar uw persoonlijke agenda (<code>.ics</code>-bestand: Google Agenda, Outlook…).</p>
 <figure><img src="manual/nl/12-agenda.png" alt="Agenda van het dossier"><figcaption>Vink een afspraak af zodra ze plaatsvond: ze voedt automatisch uw volgende verslag.</figcaption></figure>
 <div class="tip">Afspraken binnen 30 dagen verschijnen op het dashboard, en de applicatie kan systeemmeldingen tonen (aanvaard ze wanneer de browser het vraagt).</div>
+
+<h3>🗓️ De module Agenda &amp; Tolken (hoofdtab)</h3>
+<p>De meeste NBMV's spreken noch Frans noch Nederlands. Elke belangrijke afspraak (CGVS-gehoor, advocaat, arts, vrederechter…) vereist een tolk. De tab <span class="btn-ex">🗓️ Agenda &amp; Tolken</span> centraliseert alles: afspraken, tolken, bezoekverzoeken van de jongere en automatische berichten in zijn taal.</p>
+
+<h3>📋 De drie sub-tabs</h3>
+<p>Klik op <span class="btn-ex">🗓️ Agenda &amp; Tolken</span> in de navigatiebalk:</p>
+<ul>
+<li><strong>📅 Afspraken</strong> — maak, wijzig en volg al uw afspraken op (type, datum, uur, locatie, status, tolk). Filter per dossier, type of status.</li>
+<li><strong>🌐 Tolken</strong> — raadpleeg de databank van erkende organisaties (13 nationale structuren: Convocabulaire, SPF Justitie, CIRÉ, Fedasil, Vluchtelingenwerk…) en voeg uw eigen tolken toe (versleuteld op uw toestel).</li>
+<li><strong>📋 Bezoekverzoeken</strong> — registreer de verzoeken van de jongere (« ik wil mijn advocaat zien », « mijn familie contacteren »…), volg de status op en maak meteen de bijhorende afspraak aan.</li>
+</ul>
+
+<h3>🌐 De databank erkende tolken</h3>
+<p>De tab <strong>Tolken</strong> bevat 13 officiële organisaties en vzw's die de voornaamste NBMV-talen in België dekken:</p>
+<ul>
+<li><strong>Gedekte talen:</strong> Arabisch, Pashto, Dari, Somalisch, Tigrinya, Amhaars, Koerdisch, Lingala, Albanees, Georgisch, Oekraïens, Russisch, en meer dan 30 andere talen via de commerciële bureaus.</li>
+<li><strong>Gratis of betalend:</strong> elke fiche vermeldt het tarief (veel zijn gratis voor NBMV's: Convocabulaire, Alter, Fedasil, CIRÉ…) en de reservatietermijn.</li>
+<li><strong>Een eigen tolk toevoegen:</strong> als u een vertrouwde tolk heeft gevonden, voeg hem toe met al zijn contactgegevens — hij is beschikbaar in al uw afsprakenformulieren en wordt versleuteld op uw toestel bewaard.</li>
+</ul>
+<div class="tip">Voor een CGVS-gehoor, begin met <strong>Convocabulaire</strong> (gratis, gespecialiseerd in asiel, nationaal): e-mail <code>convocabulaire@caritas.be</code>, minstens 48u op voorhand. De Dienst Voogdij kan ook via uw referent eigen tolken inzetten.</div>
+
+<h3>📅 Een afspraak aanmaken en een tolk koppelen</h3>
+<ol class="steps">
+<li>Klik op <span class="btn-ex">➕ Nieuwe afspraak</span>.</li>
+<li>Kies het <strong>NBMV-dossier</strong> en het <strong>type</strong> (e-advocaat, CGVS-gehoor, DVZ, medisch, school, vrederechter…).</li>
+<li>Vul de <strong>datum, het uur, de locatie</strong> en het volledige adres in.</li>
+<li>Als een tolk nodig is, kies hem uit de lijst (uw eigen tolken + erkende organisaties).</li>
+<li>Kies de <strong>vervoerswijze van de jongere</strong>: autonoom (hij gaat zelf) of voogd haalt hem op (geef het ophaaladres op).</li>
+<li>Sla op — de applicatie stelt meteen voor een bevestigingsbericht te sturen aan de jongere in zijn taal.</li>
+</ol>
+
+<h3>📱 Een bericht sturen aan de NBMV in zijn taal</h3>
+<p>Dit is een van de belangrijkste functies van de module. Zodra een afspraak bevestigd is, genereert de applicatie automatisch een bericht in <strong>de taal van de jongere</strong> (gedetecteerd vanuit zijn dossier):</p>
+<ul>
+<li><strong>12 talen beschikbaar:</strong> Arabisch, Pashto, Dari/Farsi, Somalisch, Tigrinya, Albanees, Oekraïens, Russisch, Georgisch, Frans, Nederlands, Engels (fallback).</li>
+<li>Het bericht bevat: datum, uur, locatie, adres, aanwezigheid van een tolk, ophaallocatie.</li>
+<li>Rechts-naar-links talen (Arabisch, Pashto, Dari) worden correct weergegeven.</li>
+</ul>
+<p>Om het bericht te verzenden, klik op <span class="btn-ex">📱 Bericht NBMV</span> op de afsprakenkaart, en kies:</p>
+<ul>
+<li><span class="btn-ex">💬 WhatsApp</span> — opent WhatsApp direct met het nummer van de jongere en het vooraf ingevulde bericht (het nummer moet in zijn dossier staan).</li>
+<li><span class="btn-ex">📋 Kopiëren</span> — kopieert het bericht om het in een andere app te plakken (SMS, Messenger, Signal…).</li>
+<li><span class="btn-ex">📧 E-mail</span> — opent uw e-mailclient met het vooraf ingevulde bericht.</li>
+</ul>
+<div class="warn">Controleer voor het verzenden of de NBMV een gsm heeft en of zijn nummer up-to-date is in het dossier. Respecteer de contactregels van de Dienst Voogdij (sommige centra hebben regels voor gsm-gebruik).</div>
+
+<h3>📧 Coördineren met de tolk (e-mail)</h3>
+<p>Op elke afsprakenkaart genereert de knop <span class="btn-ex">📧 Coördinatie</span> een vooraf opgestelde e-mail (FR of NL naargelang uw taal) met alle gegevens van de afspraak, te sturen aan de tolk en andere betrokkenen ter bevestiging van hun beschikbaarheid.</p>
+
+<h3>📋 De bezoekverzoeken van de NBMV beheren</h3>
+<p>De jongere uit een verzoek: « ik wil mijn advocaat zien », « mijn familie in Duitsland contacteren », « naar een voetbalmatch gaan »… Registreer het in <strong>Bezoekverzoeken</strong>:</p>
+<ol class="steps">
+<li>Klik op <span class="btn-ex">➕ Nieuw bezoekverzoek</span>.</li>
+<li>Kies het dossier, het type verzoek, de gewenste datum van de jongere en de urgentie.</li>
+<li>Noteer de details en de status (<em>Verzoek ontvangen → In coördinatie → Afspraak gepland → Uitgevoerd</em>).</li>
+<li>Klik vanuit het verzoek op <span class="btn-ex">📅 Afspraak aanmaken</span> om rechtstreeks naar het aanmaakformulier te gaan — datum en type zijn vooringevuld.</li>
+</ol>
+<div class="tip">Bewaar alle verzoeken, ook geweigerde: als de Dienst Voogdij of de vrederechter een verslag van uw opvolging vraagt, heeft u de volledige historiek.</div>
 
 <h2 id="s11"><span class="num">11</span>Het geld van de jongere (bankopvolging)</h2>
 <p>U beheert de goederen van de minderjarige onder toezicht van de vrederechter. Noteer hier elke inkomst en uitgave: de applicatie berekent het saldo en genereert het <strong>officiële uittreksel</strong> bij uw halfjaarlijks verslag.</p>
@@ -321,5 +381,5 @@ Volg hen: elk scherm in deze handleiding komt overeen met een echt moment uit he
 <div class="ok">U bent er klaar voor. Maak uw wachtwoord aan, importeer uw eerste fiche, en laat de applicatie u gidsen — module na module, vervaldag na vervaldag. Veel succes met uw voogdij! 🛡️</div>
 
 </main>
-<footer>Platform MENA Voogd — Handleiding v1.6 · regelgeving geverifieerd juni 2026 · <a href="index.html">← Terug naar de applicatie</a> · Afdrukken of opslaan als PDF: Ctrl+P</footer>
+<footer>Platform MENA Voogd — Handleiding v1.7.6 · regelgeving geverifieerd juni 2026 · <a href="index.html">← Terug naar de applicatie</a> · Afdrukken of opslaan als PDF: Ctrl+P</footer>
 </body></html>

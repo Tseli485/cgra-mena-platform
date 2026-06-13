@@ -1,7 +1,7 @@
 /* Service Worker — Plateforme MENA Tuteur
    Stratégie : network-first pour HTML/JSON (toujours à jour, fallback hors ligne),
    cache-first pour les assets statiques. Version bumpée pour purger les anciens caches. */
-const CACHE = 'mena-v25';
+const CACHE = 'mena-v26';
 const CORE = [
   './',
   './index.html',
@@ -42,6 +42,14 @@ self.addEventListener('fetch', (event) => {
   const { request } = event;
   const url = new URL(request.url);
   if (url.origin !== location.origin || request.method !== 'GET') return;
+
+  // API locale (vérif/maj de version) : TOUJOURS le réseau direct, jamais le cache.
+  // Sinon le sondage /api/update-status renvoie la 1re réponse mise en cache
+  // et la mise à jour semble bloquée.
+  if (url.pathname.startsWith('/api/')) {
+    event.respondWith(fetch(request));
+    return;
+  }
 
   const isHTML = request.mode === 'navigate' || request.destination === 'document';
   const isJSON = url.pathname.endsWith('.json');

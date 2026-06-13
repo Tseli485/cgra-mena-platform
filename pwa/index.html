@@ -2673,7 +2673,7 @@ function printReleve(id){
 }
 
 /* ============ VERSION & MISES À JOUR ============ */
-const APP_VERSION='1.7.10';
+const APP_VERSION='1.7.11';
 window.APP_VERSION=APP_VERSION;   // expose pour tests.html (const non attache a window)
 Object.assign(I18N.fr,{"dash.matrix":"📊 Suivi par dossier","dash.q4":"📈 Mes statistiques","dash.q5":"🚗 Mes frais (par jeune)","heb.title":"Lieux d'hébergement MENA (réseau officiel)","nav.guide":"🎓 Guide du tuteur","guide.title":"🎓 Guide du tuteur débutant — de la désignation aux 18 ans","guide.banner":"13 modules pas-à-pas : cours, actions à faire, documents à remettre (et à qui), rendez-vous, pièges à éviter. Contenu basé sur la réglementation en vigueur.","dash.q1":"📄 Nouveau MENA (fiche DVZ)","dash.q2":"📂 Mes dossiers","dash.q3":"⏰ Urgences & échéances","gs.ph":"🔍 Recherche globale (dossiers, lois, cas, ressources)…","ft.check":"🔄 Vérifier les mises à jour","ft.dl":"Télécharger l’application","ft.manuel":"Mode d'emploi","ft.pdf":"📄 Mode d'emploi en PDF"});
 Object.assign(I18N.nl,{"dash.matrix":"📊 Opvolging per dossier","dash.q4":"📈 Mijn statistieken","dash.q5":"🚗 Mijn kosten (per jongere)","heb.title":"NBMV-opvangplaatsen (officieel netwerk)","nav.guide":"🎓 Voogdengids","guide.title":"🎓 Gids voor de beginnende voogd — van aanstelling tot 18 jaar","guide.banner":"13 stap-voor-stapmodules: cursus, acties, documenten (en aan wie), afspraken, valkuilen. Inhoud gebaseerd op de geldende regelgeving.","dash.q1":"📄 Nieuwe NBMV (DVZ-fiche)","dash.q2":"📂 Mijn dossiers","dash.q3":"⏰ Urgenties & vervaldata","gs.ph":"🔍 Globaal zoeken (dossiers, wetten, gevallen, hulpbronnen)…","ft.check":"🔄 Updates controleren","ft.dl":"Applicatie downloaden","ft.manuel":"Handleiding","ft.pdf":"📄 Handleiding als PDF"});
@@ -2684,7 +2684,7 @@ async function checkUpdates(){
   // Mode exe : essaye l'API locale d'abord
   try{
     const ctrl=new AbortController(),tid=setTimeout(()=>ctrl.abort(),5000);
-    const r=await fetch('/api/check-update',{signal:ctrl.signal});
+    const r=await fetch('/api/check-update',{signal:ctrl.signal,cache:'no-store'});
     clearTimeout(tid);
     if(r.ok){
       const d=await r.json();
@@ -2721,10 +2721,10 @@ async function autoUpdate(){
   const msg=(fr,nl)=>LANG==='nl'?nl:fr;
   n.innerHTML=' — ⏳ '+msg('Téléchargement…','Downloaden…')+' <span id="updPct">0 %</span>';
   try{
-    await fetch('/api/update');
+    await fetch('/api/update',{cache:'no-store'});
     const iv=setInterval(async()=>{
       try{
-        const d=await(await fetch('/api/update-status')).json();
+        const d=await(await fetch('/api/update-status',{cache:'no-store'})).json();
         const pct=document.getElementById('updPct');
         if(d.status==='downloading'){
           if(pct)pct.textContent=(d.percent>=0?d.percent+'%':'…');
@@ -3700,6 +3700,8 @@ async function openStats(){
 
 /* ============ v1.7 : NOTES DE VERSION ============ */
 const CHANGELOG={
+ '1.7.11':{fr:"🔧 Correctif mise à jour en un clic : le sondage de progression était bloqué par le cache (service worker) — corrigé, la maj automatique se déroule maintenant jusqu'au bout · 🗂️ Installation UNIQUE : l'application s'installe désormais à un emplacement fixe et ÉCRASE l'ancienne version (qu'on télécharge OU qu'on mette à jour) — fini les multiples copies sur le PC ; le raccourci pointe toujours vers cette version unique.",
+         nl:"🔧 Fix update met één klik: de voortgangspolling werd geblokkeerd door de cache (service worker) — opgelost, de automatische update loopt nu volledig door · 🗂️ UNIEKE installatie: de applicatie installeert zich nu op een vaste plek en OVERSCHRIJFT de oude versie (zowel bij downloaden ALS bij updaten) — geen meerdere kopieën meer op de pc; de snelkoppeling wijst altijd naar die ene versie."},
  '1.7.10':{fr:"📄 Mode d'emploi téléchargeable en PDF directement depuis l'application : présentation « syllabus universitaire » (page de garde, un chapitre par page, sauts de page soignés, encadrés jamais coupés). Toujours à jour automatiquement — le PDF est généré depuis le manuel vivant.",
          nl:"📄 Handleiding rechtstreeks als PDF te downloaden vanuit de applicatie: « universitaire syllabus »-opmaak (voorpagina, één hoofdstuk per pagina, nette paginaovergangen, kaders nooit afgesneden). Altijd automatisch up-to-date — de PDF wordt uit de levende handleiding gegenereerd."},
  '1.7.9':{fr:"📆 Agenda visuel hebdomadaire (vue calendrier) : tous vos rendez-vous d'un coup d'œil, couleur par jeune, clic sur une case vide pour créer un RDV · ⚠️ détection des chevauchements + proposition de créneaux libres avant/après · 📹 rendez-vous en ligne (visioconférence) avec lien partagé au jeune et aux intervenants · 📱 coordonnées du jeune saisies dès la création du dossier",

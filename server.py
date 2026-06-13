@@ -3,7 +3,7 @@
 """Lanceur autonome — Plateforme MENA Tuteur.
 Sert l'application en local (http://localhost) et ouvre le navigateur.
 Empaqueté en .exe via PyInstaller (l'utilisateur n'a pas besoin de Python)."""
-import http.server, socketserver, os, sys, threading, webbrowser, socket
+import http.server, os, sys, threading, webbrowser, socket
 import json, urllib.request, tempfile, subprocess
 
 def base_dir():
@@ -198,8 +198,10 @@ def ensure_shortcut():
 
 def main():
     ensure_shortcut()
-    socketserver.TCPServer.allow_reuse_address = True
-    httpd = socketserver.TCPServer(("127.0.0.1", PORT), Handler)
+    # ThreadingHTTPServer : le sondage /api/update-status reste réactif pendant
+    # le téléchargement de la mise à jour (qui tourne dans un thread séparé).
+    http.server.ThreadingHTTPServer.allow_reuse_address = True
+    httpd = http.server.ThreadingHTTPServer(("127.0.0.1", PORT), Handler)
     print("=" * 60)
     print("  Plateforme MENA Tuteur  v" + APP_VERSION)
     print("  Adresse : " + URL)

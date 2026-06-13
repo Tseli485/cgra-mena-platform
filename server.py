@@ -4,7 +4,7 @@
 Sert l'application en local (http://localhost) et ouvre le navigateur.
 Empaqueté en .exe via PyInstaller (l'utilisateur n'a pas besoin de Python)."""
 import http.server, os, sys, threading, webbrowser, socket
-import json, urllib.request, tempfile, subprocess
+import json, urllib.request, tempfile, subprocess, shutil
 
 def base_dir():
     # En .exe onefile, les données sont extraites dans sys._MEIPASS
@@ -51,7 +51,7 @@ def _do_update():
             _upd = {"status": "error", "percent": 0, "error": "non_windows_exe"}
             return
 
-        exe_path = sys.executable
+        exe_path = install_target()   # on écrase TOUJOURS l'emplacement d'installation unique
         tmp_dir = tempfile.mkdtemp(prefix="mena_upd_")
         tmp_exe = os.path.join(tmp_dir, "MENA-Tuteur-new.exe")
 
@@ -173,30 +173,77 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         self._json(dict(_upd))
 
 
-def ensure_shortcut():
-    """Windows : crée un raccourci 'MENA Tuteur' sur le Bureau et dans le menu
-    Démarrer au premier lancement de l'exe. Idempotent, silencieux en cas d'échec."""
-    if os.name != "nt" or not getattr(sys, "frozen", False):
-        return
+def install_target():
+    """Emplacement d'installation UNIQUE et fixe de l'exe (Windows)."""
+    base = os.environ.get("LOCALAPPDATA") or os.path.expanduser("~")
+    return os.path.join(base, "MENA-Tuteur", "MENA-Tuteur.exe")
+
+
+def _make_shortcut(target):
+    """(Re)crée le raccourci 'MENA Tuteur' (Bureau + menu Démarrer) pointant
+    TOUJOURS vers l'emplacement d'installation fixe — un seul raccourci, une
+    seule version."""
     try:
-        exe = sys.executable.replace("'", "''")
+        exe = target.replace("'", "''")
         ps = (
             "$w=New-Object -ComObject WScript.Shell;"
             "foreach($f in @($w.SpecialFolders.Item('Desktop'),$w.SpecialFolders.Item('Programs'))){"
-            "$p=Join-Path $f 'MENA Tuteur.lnk';"
-            "if(-not (Test-Path $p)){$s=$w.CreateShortcut($p);"
+            "$p=Join-Path $f 'MENA Tuteur.lnk';$s=$w.CreateShortcut($p);"
             "$s.TargetPath='" + exe + "';$s.IconLocation='" + exe + ",0';"
-            "$s.Description='Plateforme MENA Tuteur';$s.Save();Write-Output ('OK '+$p)}}"
+            "$s.Description='Plateforme MENA Tuteur';$s.Save()}"
         )
-        r = subprocess.run(["powershell", "-NoProfile", "-Command", ps],
-                           capture_output=True, text=True, timeout=20)
-        if "OK" in (r.stdout or ""):
-            print("  Raccourci 'MENA Tuteur' cree (Bureau + menu Demarrer).")
+        subprocess.run(["powershell", "-NoProfile", "-Command", ps],
+                       capture_output=True, text=True, timeout=20)
     except Exception:
         pass
 
 
+def ensure_installed():
+    """Garantit une installation UNIQUE à un emplacement fixe (%LOCALAPPDATA%).
+    Tout exe lancé depuis ailleurs (Téléchargements, Bureau…) se recopie à cet
+    emplacement en ÉCRASANT l'ancienne version, met à jour le raccourci, se
+    relance depuis là, puis supprime l'installeur source. Résultat : jamais
+    plusieurs versions sur le PC. Renvoie True s'il faut quitter ce processus."""
+    if not (getattr(sys, "frozen", False) and os.name == "nt"):
+        return False
+    try:
+        target = os.path.abspath(install_target())
+        current = os.path.abspath(sys.executable)
+        if os.path.normcase(current) == os.path.normcase(target):
+            return False  # déjà à l'emplacement d'installation : rien à faire
+        os.makedirs(os.path.dirname(target), exist_ok=True)
+        shutil.copy2(current, target)          # écrase l'ancienne version installée
+        _make_shortcut(target)
+        # Quand ce processus aura quitté : supprime l'installeur source puis lance
+        # la version installée (emplacement unique).
+        ps = (
+            "$src='{src}';$tgt='{tgt}';"
+            "for($i=0;$i -lt 60 -and (Test-Path $src);$i++){{Start-Sleep -Milliseconds 300;"
+            "try{{Remove-Item -LiteralPath $src -Force -ErrorAction Stop;break}}catch{{}}}}"
+            "Start-Process -FilePath $tgt"
+        ).format(src=current.replace("'", "''"), tgt=target.replace("'", "''"))
+        subprocess.Popen(["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass",
+                          "-WindowStyle", "Hidden", "-Command", ps],
+                         creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
+        print("  Installation a l'emplacement unique : " + target)
+        return True
+    except Exception:
+        return False  # en cas d'echec : on continue normalement depuis l'emplacement actuel
+
+
+def ensure_shortcut():
+    """Crée/rafraîchit le raccourci pointant vers l'emplacement d'installation fixe."""
+    if os.name != "nt" or not getattr(sys, "frozen", False):
+        return
+    _make_shortcut(install_target())
+
+
 def main():
+    # Installation unique : si on tourne depuis Téléchargements/Bureau, on se
+    # recopie à l'emplacement fixe (écrase l'ancienne version), on relance de
+    # là et on quitte. Évite d'avoir plusieurs versions sur le PC.
+    if ensure_installed():
+        return
     ensure_shortcut()
     # ThreadingHTTPServer : le sondage /api/update-status reste réactif pendant
     # le téléchargement de la mise à jour (qui tourne dans un thread séparé).

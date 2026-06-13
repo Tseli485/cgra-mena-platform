@@ -193,7 +193,8 @@ def _make_shortcut(target):
             "$s.Description='Plateforme MENA Tuteur';$s.Save()}"
         )
         subprocess.run(["powershell", "-NoProfile", "-Command", ps],
-                       capture_output=True, text=True, timeout=20)
+                       capture_output=True, text=True, timeout=20,
+                       creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
     except Exception:
         pass
 
@@ -279,24 +280,55 @@ def clean_downloads():
         pass
 
 
+def open_browser(url):
+    """Ouvre le navigateur par défaut de façon ROBUSTE (webbrowser.open échoue
+    parfois dans un exe figé). On essaie plusieurs méthodes dans l'ordre."""
+    try:                                   # 1) Windows : ShellExecute (le plus fiable)
+        if hasattr(os, "startfile"):
+            os.startfile(url)
+            return True
+    except Exception:
+        pass
+    try:                                   # 2) module standard
+        if webbrowser.open(url):
+            return True
+    except Exception:
+        pass
+    try:                                   # 3) repli ligne de commande
+        if os.name == "nt":
+            subprocess.Popen(["cmd", "/c", "start", "", url],
+                             creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
+        else:
+            subprocess.Popen(["xdg-open", url])
+        return True
+    except Exception:
+        return False
+
+
 def main():
     # Installation unique : si on tourne depuis Téléchargements/Bureau, on se
     # recopie à l'emplacement fixe (écrase l'ancienne version), on relance de
     # là et on quitte. Évite d'avoir plusieurs versions sur le PC.
     if ensure_installed():
         return
-    ensure_shortcut()
-    threading.Thread(target=clean_downloads, daemon=True).start()  # filet de sécurité anti-doublons
-    # ThreadingHTTPServer : le sondage /api/update-status reste réactif pendant
-    # le téléchargement de la mise à jour (qui tourne dans un thread séparé).
+    # On démarre le serveur AVANT tout le reste : le navigateur s'ouvre vite,
+    # sans attendre la création du raccourci (qui se fait en arrière-plan).
     http.server.ThreadingHTTPServer.allow_reuse_address = True
     httpd = http.server.ThreadingHTTPServer(("127.0.0.1", PORT), Handler)
     print("=" * 60)
     print("  Plateforme MENA Tuteur  v" + APP_VERSION)
-    print("  Adresse : " + URL)
+    print("  Si rien ne s'ouvre, copiez cette adresse dans votre navigateur :")
+    print("       " + URL)
     print("  Laissez cette fenetre ouverte. Fermez-la pour quitter.")
     print("=" * 60)
-    threading.Timer(1.0, lambda: webbrowser.open(URL)).start()
+
+    def _open():
+        if not open_browser(URL):
+            print("  >> Ouverture automatique impossible — ouvrez : " + URL)
+
+    threading.Timer(1.2, _open).start()
+    threading.Thread(target=ensure_shortcut, daemon=True).start()   # raccourci en arrière-plan (sans fenêtre)
+    threading.Thread(target=clean_downloads, daemon=True).start()   # filet anti-doublons en arrière-plan
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:

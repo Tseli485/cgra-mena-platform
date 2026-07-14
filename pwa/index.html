@@ -58,12 +58,13 @@
   .header .sub{opacity:.85;font-size:.85rem;letter-spacing:.02em}
   .header .status{font-size:.78rem;background:rgba(255,255,255,.14);padding:.35rem .8rem;border-radius:1rem}
   /* Navigation : onglets soulignés, sobres */
-  nav{background:var(--surface);border-bottom:1px solid var(--bord);position:sticky;top:0;z-index:50;overflow-x:auto;box-shadow:var(--shadow)}
-  nav ul{display:flex;list-style:none;max-width:1240px;margin:0 auto}
-  nav li{flex:1;min-width:118px}
-  nav a{display:block;padding:.95rem .7rem;text-align:center;color:var(--text2);text-decoration:none;font-weight:600;cursor:pointer;font-size:.86rem;border-bottom:3px solid transparent;transition:color .15s,border-color .15s;white-space:nowrap}
+  nav{background:var(--surface);border-bottom:1px solid var(--bord);position:sticky;top:0;z-index:50;box-shadow:var(--shadow)}
+  nav ul{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));list-style:none;max-width:1500px;margin:0 auto;padding:0 .65rem}
+  nav li{min-width:0}
+  nav a{display:flex;align-items:center;justify-content:center;min-height:50px;padding:.7rem .55rem;text-align:center;color:var(--text2);text-decoration:none;font-weight:600;cursor:pointer;font-size:.86rem;line-height:1.25;border-bottom:3px solid transparent;transition:color .15s,border-color .15s;white-space:normal;overflow-wrap:anywhere}
   nav a:hover{color:var(--accent);background:var(--surface2)}
   nav a.active{color:var(--accent);border-bottom-color:var(--or)}
+  nav a:focus-visible,.btn:focus-visible,.icon-btn:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #F2B84B;outline-offset:2px}
   main{max-width:1240px;margin:0 auto;padding:1.6rem 2rem 2.5rem}
   .view{display:none;animation:fade .25s}
   .view.active{display:block}
@@ -177,7 +178,10 @@
   #dashMatrix td{vertical-align:middle}
   #dashMatrix tr{cursor:pointer}
   #dashMatrix tr:hover td{background:var(--bleu-clair)}
-  @media(max-width:768px){main{padding:1rem}.header{padding:1rem}.header h1{font-size:1.2rem}}
+  @media(max-width:1180px) and (min-width:901px){nav ul{grid-template-columns:repeat(4,minmax(0,1fr))}}
+  @media(max-width:900px) and (min-width:769px){nav ul{grid-template-columns:repeat(3,minmax(0,1fr))}}
+  @media(max-width:768px){main{padding:1rem}.header{padding:1rem}.header h1{font-size:1.2rem}.hdr-ctrl{width:100%;justify-content:flex-start}nav{overflow-x:auto;scroll-snap-type:x proximity}nav ul{display:flex;width:max-content;padding:0}nav li{flex:0 0 150px;min-width:150px;scroll-snap-align:start}nav a{min-height:48px;padding:.7rem .55rem;white-space:nowrap;overflow-wrap:normal}}
+  @media(max-width:360px){.grid.cols-2{grid-template-columns:1fr}.quick3{grid-template-columns:1fr}.header{padding:.8rem}.hdr-ctrl{gap:.35rem}}
   @media(max-width:520px){.modal-box table,.card table{display:block;overflow-x:auto;white-space:nowrap}}
   @media print{nav,.hdr-ctrl,.btn,.filters,.lock-btn,.icon-btn,.lang-switch{display:none!important}body{background:#fff;color:#000}.card,.list-item,.doss-card{box-shadow:none;border:1px solid #ccc}}
   .dot{display:inline-block;width:.7rem;height:.7rem;border-radius:50%;margin-right:.35rem;vertical-align:baseline}
@@ -232,6 +236,9 @@
   .req-card.statut-realise{border-left-color:var(--gris);opacity:.8}
   .req-card.statut-refuse{border-left-color:var(--rouge);opacity:.7}
   .msg-preview{background:var(--surface2);border:1px dashed var(--bord);border-radius:.5rem;padding:.8rem 1rem;font-size:.88rem;line-height:1.7;white-space:pre-wrap;word-break:break-word;max-height:220px;overflow-y:auto}
+  #installBtn.installed{color:var(--vert);border-color:var(--vert)}
+  .install-steps{padding-left:1.25rem;line-height:1.65}
+  .install-steps li{margin:.35rem 0}
 </style>
 </head>
 <body>
@@ -264,6 +271,7 @@
       <button id="langNl" onclick="setLang('nl')">NL</button>
     </div>
     <button class="icon-btn" onclick="openManual()" title="Mode d'emploi / Handleiding">❓</button>
+    <button class="icon-btn" id="installBtn" onclick="installApp()" title="Installer sur cet appareil / Installeren op dit apparaat" aria-label="Installer l'application">⬇️</button>
     <button class="icon-btn" onclick="openTuteurProfil()" title="Mon profil tuteur / Mijn voogdprofiel">👤</button>
     <button class="icon-btn" onclick="openGlossaire()" title="Glossaire">📖</button>
     <button class="icon-btn" id="themeBtn" onclick="toggleTheme()" title="Thème">🌙</button>
@@ -282,6 +290,8 @@
     <li><a class="nav" data-view="guide" data-i18n="nav.guide">🎓 Guide du tuteur</a></li>
     <li><a class="nav" data-view="resources" data-i18n="nav.resources">📁 Ressources</a></li>
     <li><a class="nav" data-view="agenda" data-i18n="nav.agenda">🗓️ Agenda & Interprètes</a></li>
+    <li><a class="nav" data-view="documentsPro">📝 Documents Pro</a></li>
+    <li><a class="nav" data-view="automations">⚙️ Automatisations</a></li>
   </ul>
 </nav>
 
@@ -298,6 +308,8 @@
       <button class="btn sec" onclick="document.getElementById('dashDeadlines').scrollIntoView({behavior:'smooth'})" data-i18n="dash.q3">⏰ Urgences &amp; échéances</button>
       <button class="btn sec" onclick="openStats()" data-i18n="dash.q4">📈 Mes statistiques</button>
       <button class="btn sec" onclick="openFraisGlobal()" data-i18n="dash.q5">🚗 Mes frais (par jeune)</button>
+      <button class="btn sec" onclick="go('documentsPro')">📝 Documents Pro</button>
+      <button class="btn sec" onclick="go('automations')">⚙️ Automatisations</button>
     </div>
     <div class="row" style="margin:.2rem 0 1rem">
       <input id="gsearch" data-ph="gs.ph" style="flex:1;min-width:220px" oninput="globalSearch(this.value)">
@@ -321,8 +333,10 @@
           <button class="btn sec" onclick="go('legislation')" data-i18n="dash.viewleg">⚖️ Consulter la législation</button>
           <button class="btn sec" onclick="go('lifecycle')" data-i18n="dash.viewlife">🔄 Cycle de vie</button>
           <button class="btn sec" onclick="openBackup()" data-i18n="bk.btn">💾 Sauvegarde / Transfert</button>
+          <button class="btn sec" onclick="refreshCloudContent(true)" id="cloudRefreshBtn">🔄 Vérifier les contenus</button>
         </div>
         <p class="muted" style="margin-top:1rem" data-i18n="dash.localnote">Les dossiers sont enregistrés localement sur cet appareil (fonctionne hors ligne).</p>
+        <p class="muted" id="cloudStatus" style="font-size:.8rem;margin-top:.35rem">☁️ Contenus publics : en attente de vérification.</p>
       </div>
     </div>
   </section>
@@ -421,6 +435,50 @@
   <section class="view" id="cases">
     <h2 class="title" data-i18n="cases.title">📚 Cas Pratiques</h2>
     <div class="banner" data-html="cases.banner"></div>
+    <div class="card" id="caseAssistantCard" style="margin:1rem 0;border-top:4px solid var(--accent)">
+      <div class="row" style="justify-content:space-between;align-items:flex-start;gap:1rem">
+        <div>
+          <h3 style="margin:0 0 .3rem">🧭 Analyser une situation particulière</h3>
+          <p class="muted" style="margin:0">Décrivez les faits sans nom, date de naissance complète, adresse ni numéro national. L’analyse reste sur cet appareil.</p>
+        </div>
+        <span class="badge b-nouveau">Sources vérifiées · 14/07/2026</span>
+      </div>
+      <div class="grid cols-2" style="margin-top:1rem">
+        <div>
+          <label for="caseSituationType">Sujet principal</label>
+          <select id="caseSituationType">
+            <option value="">Je ne sais pas / plusieurs sujets</option>
+            <option value="designation">Début de tutelle / mission du tuteur</option>
+            <option value="age">Identité ou détermination de l’âge</option>
+            <option value="asile">Protection internationale / CGRA</option>
+            <option value="sejour">Séjour / solution durable / MINTEH</option>
+            <option value="famille">Famille / Dublin / regroupement familial</option>
+            <option value="accueil">Accueil, hébergement ou conflit au centre</option>
+            <option value="sante">Santé physique ou psychologique</option>
+            <option value="ecole">École, formation ou travail</option>
+            <option value="police">Police, justice ou avocat</option>
+            <option value="traite">Traite, exploitation ou violence</option>
+            <option value="disparition">Disparition ou fugue</option>
+            <option value="rapports">Rapports, argent, frais ou documents</option>
+            <option value="majorite">Approche des 18 ans / fin de tutelle</option>
+          </select>
+          <label for="caseAge">Âge approximatif</label>
+          <input id="caseAge" type="number" min="0" max="21" placeholder="Ex. 16">
+        </div>
+        <div>
+          <label for="caseSituation">Situation et question du tuteur</label>
+          <textarea id="caseSituation" rows="7" placeholder="Ex. Le jeune a reçu une décision, son avocat est absent et une échéance est indiquée dans le courrier. Que dois-je vérifier et qui contacter ?"></textarea>
+        </div>
+      </div>
+      <div class="row" style="margin-top:.7rem;gap:1rem;align-items:center;flex-wrap:wrap">
+        <label style="display:flex;align-items:center;gap:.45rem;margin:0"><input id="caseImmediateDanger" type="checkbox" style="width:auto"> Danger immédiat ou urgence médicale</label>
+        <label style="display:flex;align-items:center;gap:.45rem;margin:0"><input id="caseDecision" type="checkbox" style="width:auto"> Décision ou convocation reçue</label>
+        <button class="btn" onclick="analyseTutorCase()">Analyser et proposer un plan</button>
+        <button class="btn sec" onclick="resetTutorCase()">Effacer</button>
+      </div>
+      <p class="muted" style="font-size:.78rem;margin:.7rem 0 0">Cet outil aide à organiser les démarches. Il ne remplace ni l’avocat, ni le Service des Tutelles, ni l’autorité compétente. Tout délai figurant sur une décision doit être vérifié le jour même.</p>
+    </div>
+    <div id="caseAssistantResult" aria-live="polite"></div>
     <div class="filters">
       <input id="caseSearch" data-ph="cases.search" oninput="renderCases()">
       <select id="caseCat" onchange="renderCases()"><option value="" data-i18n="cases.allcat">Toutes les catégories</option></select>
@@ -431,7 +489,7 @@
   <!-- GUIDE DU TUTEUR -->
   <section class="view" id="guide">
     <h2 class="title" data-i18n="guide.title">🎓 Guide du tuteur débutant — de la désignation aux 18 ans</h2>
-    <div class="banner" data-i18n="guide.banner">13 modules pas-à-pas : cours, actions à faire, documents à remettre (et à qui), rendez-vous, pièges à éviter. Contenu basé sur la réglementation en vigueur.</div>
+    <div class="banner" data-i18n="guide.banner">14 modules approfondis : situations concrètes, méthode, actions à faire, documents, interlocuteurs, pièges à éviter et sources officielles.</div>
     <div id="guideContent" class="loading"></div>
     <div class="card" style="margin-top:1.2rem" id="intervContent"></div>
   </section>
@@ -548,6 +606,72 @@
       </div>
       <div id="reqList"></div>
     </div>
+  </section>
+
+  <!-- DOCUMENTS PROFESSIONNELS -->
+  <section class="view" id="documentsPro">
+    <h2 class="title">📝 Documents professionnels</h2>
+    <div class="banner">Registre complet des documents de tutelle : obligations récurrentes, pièces conditionnelles et outils de gestion. Chaque original officiel est conservé chiffré, sans modification, avec son empreinte SHA-256.</div>
+    <div class="card">
+      <h3>📚 Registre officiel et dossier documentaire</h3>
+      <div class="row" style="gap:.6rem;align-items:end">
+        <div style="flex:2;min-width:220px"><label>Dossier concerné</label><select id="officialDocDossier" onchange="renderOfficialRegistry()"></select></div>
+        <div style="flex:1;min-width:180px"><label>Catégorie</label><select id="officialDocCategory" onchange="renderOfficialRegistry()"><option value="">Toutes les catégories</option></select></div>
+        <label style="display:flex;align-items:center;gap:.4rem;padding-bottom:.65rem"><input id="officialDocRequired" type="checkbox" onchange="renderOfficialRegistry()" style="width:auto"> Obligatoires seulement</label>
+      </div>
+      <div id="officialDocStats" class="muted" style="margin:.7rem 0"></div>
+      <div class="banner" style="margin:.5rem 0 1rem">🔒 L’original déposé n’est jamais réécrit. Le programme prépare une copie de travail et les données de remplissage. Une nouvelle version conserve l’historique des originaux précédents.</div>
+      <div id="officialDocList"></div>
+    </div>
+    <div class="grid cols-2" style="margin-top:1rem">
+      <div class="card">
+        <h3>✍️ Préparer une copie de travail</h3>
+        <label>Dossier concerné</label><select id="proDocDossier" onchange="prepareProDocument()"></select>
+        <label>Type de document</label>
+        <select id="proDocType" onchange="prepareProDocument()">
+          <option value="rapport_initial">Rapport initial au Service des Tutelles</option>
+          <option value="rapport_periodique">Rapport périodique de suivi</option>
+          <option value="rapport_final">Rapport final de tutelle</option>
+          <option value="note_avocat">Note de synthèse pour l’avocat</option>
+          <option value="demande_interprete">Demande d’interprète</option>
+          <option value="autorisation">Autorisation du représentant légal</option>
+          <option value="courrier_ecole">Courrier à l’établissement scolaire</option>
+          <option value="orientation_medicale">Demande de suivi médical ou psychologique</option>
+          <option value="recherche_famille">Demande de recherche familiale</option>
+          <option value="transmission">Bordereau de transmission de dossier</option>
+        </select>
+        <label>Destinataire</label><input id="proDocRecipient" placeholder="Service, personne ou institution" oninput="prepareProDocument(false)">
+        <label>Objet complémentaire</label><input id="proDocSubject" placeholder="Facultatif" oninput="prepareProDocument(false)">
+        <label>Éléments particuliers à intégrer</label><textarea id="proDocNotes" rows="4" placeholder="Faits récents, demandes, décisions ou points d’attention…" oninput="prepareProDocument(false)"></textarea>
+        <div class="row" style="margin-top:.8rem">
+          <button class="btn" onclick="prepareProDocument()">✨ Générer</button>
+          <button class="btn sec" onclick="saveProDocument()">💾 Enregistrer au dossier</button>
+        </div>
+      </div>
+      <div class="card">
+        <h3>2. Vérifier et utiliser</h3>
+        <textarea id="proDocEditor" rows="25" aria-label="Texte du document professionnel"></textarea>
+        <div class="row" style="margin-top:.8rem">
+          <button class="btn" onclick="printProDocument()">🖨️ Imprimer / PDF</button>
+          <button class="btn sec" onclick="copyProDocument()">📋 Copier</button>
+          <button class="btn sec" onclick="emailProDocument()">📧 Préparer l’e-mail</button>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="margin-top:1rem"><h3>Historique chiffré du dossier</h3><div id="proDocHistory"></div></div>
+  </section>
+
+  <!-- AUTOMATISATIONS LOCALES -->
+  <section class="view" id="automations">
+    <h2 class="title">⚙️ Automatisations intelligentes</h2>
+    <div class="banner">Les règles s’exécutent localement à l’ouverture de l’application. Elles ne transmettent aucune donnée et créent des rappels propres à chaque dossier.</div>
+    <div class="row" style="margin:1rem 0">
+      <button class="btn" onclick="runAutomations(true)">▶️ Exécuter maintenant</button>
+      <button class="btn sec" onclick="renderAutomations()">🔄 Actualiser</button>
+      <span id="automationStatus" class="muted" role="status" aria-live="polite"></span>
+    </div>
+    <div class="grid cols-3" id="automationRules"></div>
+    <div class="card" style="margin-top:1rem"><h3>📌 Actions détectées</h3><div id="automationTasks"></div></div>
   </section>
 </main>
 
@@ -917,6 +1041,40 @@
   </div>
 </div>
 
+<!-- MODAL NOTE DE SUIVI (rendez-vous -> dossier) -->
+<div class="modal" id="caseNoteModal">
+  <div class="modal-box" style="max-width:620px">
+    <button class="close" onclick="closeModal('caseNoteModal')">&times;</button>
+    <h3 id="caseNoteTitle">📝 Note de suivi</h3>
+    <form onsubmit="saveCaseNote(event)">
+      <input type="hidden" id="cn_rdv_id">
+      <input type="hidden" id="cn_dossier_id">
+      <div class="grid cols-2">
+        <div><label id="cn_date_lbl">Date du suivi *</label><input type="date" id="cn_date" required></div>
+        <div><label id="cn_outcome_lbl">Résultat *</label>
+          <select id="cn_outcome" required>
+            <option value="termine">Terminé</option>
+            <option value="suivi">Suivi nécessaire</option>
+            <option value="replanifier">À replanifier</option>
+            <option value="absent">Absence</option>
+          </select>
+        </div>
+      </div>
+      <label id="cn_obs_lbl">Observations factuelles</label>
+      <textarea id="cn_observations" rows="4" maxlength="4000"></textarea>
+      <label id="cn_actions_lbl">Actions décidées</label>
+      <textarea id="cn_actions" rows="3" maxlength="2500"></textarea>
+      <label id="cn_follow_lbl">Date de relance (facultatif)</label>
+      <input type="date" id="cn_followup">
+      <p class="muted" id="cn_privacy" style="font-size:.78rem;margin-top:.5rem">🔒 Cette note reste chiffrée sur cet appareil et n'est pas envoyée à Supabase.</p>
+      <div class="row" style="margin-top:1.2rem;justify-content:flex-end">
+        <button type="button" class="btn sec" onclick="closeModal('caseNoteModal')" id="cn_cancel">Annuler</button>
+        <button type="submit" class="btn" id="cn_save">💾 Enregistrer la note</button>
+      </div>
+    </form>
+  </div>
+</div>
+
 <!-- MODAL DEMANDE DE VISITE (du MENA) -->
 <div class="modal" id="visReqModal">
   <div class="modal-box">
@@ -1041,12 +1199,20 @@
       <button class="btn sec sm" onclick="closeModal('manualModal')">✕</button>
     </div>
     <div id="manualLoading" style="padding:2rem;text-align:center;color:#5F6B7A">⏳</div>
-    <iframe id="manualFrame" title="Mode d'emploi" onload="manualFrameLoaded()" style="flex:1;border:0;width:100%;background:#fff;display:none"></iframe>
+    <iframe id="manualFrame" title="Mode d'emploi" onload="typeof manualFrameLoaded==='function'&&manualFrameLoaded()" style="flex:1;border:0;width:100%;background:#fff;display:none"></iframe>
   </div>
 </div>
 
+<!-- INSTALLATION INDÉPENDANTE SUR L'APPAREIL DU TUTEUR -->
+<div class="modal" id="installModal"><div class="modal-box" style="max-width:620px">
+  <button class="close" onclick="closeModal('installModal')">&times;</button>
+  <h3 id="installTitle">Installer MENA Tuteur</h3>
+  <div id="installContent"></div>
+</div></div>
+
 <script src="js/nl-fr-dict.js"></script>
 <script src="js/lib/pdf.min.js"></script>
+<script src="js/cloud-content.js"></script>
 <script>
 /* ============ INTERNATIONALISATION (FR / NL) ============ */
 let LANG = localStorage.getItem('mena_lang') || 'fr';
@@ -1203,7 +1369,7 @@ const LEGISLATION = [
    {titre:{fr:"Identification & détermination de l'âge",nl:"Identificatie & leeftijdsbepaling"},delai:{fr:"3 jours ouvrables (test possible)",nl:"3 werkdagen (test mogelijk)"},ref:"Art. 3-7 Loi Tutelle",desc:{fr:"En cas de doute sur la minorité, un test d'âge (examen médical triple) peut être réalisé. Le bénéfice du doute profite au mineur.",nl:"Bij twijfel over de minderjarigheid kan een leeftijdstest (drievoudig medisch onderzoek) worden uitgevoerd. Het voordeel van de twijfel komt de minderjarige ten goede."}},
  ]},
  {cat:{fr:"Séjour & Protection internationale",nl:"Verblijf & Internationale bescherming"},items:[
-   {titre:{fr:"⚠️ Regroupement familial — RÉFORME 2025",nl:"⚠️ Gezinshereniging — HERVORMING 2025"},delai:{fr:"6 mois après la reconnaissance (délai favorable)",nl:"6 maanden na de erkenning (gunstige termijn)"},ref:"Loi 18/07/2025 (MB 28/07/2025) ; C. const. 26/02/2026",desc:{fr:"Depuis le 18/08/2025 : délai favorable réduit d'1 an à 6 MOIS pour la famille d'un réfugié reconnu ; ensuite revenus ≥ 120 % du RIS (≈ 2 130 €/mois, allocations exclues) + logement + mutuelle. Le silence de l'administration vaut désormais REFUS implicite. Parent exclu si l'enfant était accompagné de l'autre parent. Restrictions pour la protection subsidiaire partiellement SUSPENDUES par la Cour constitutionnelle (26/02/2026, questions à la CJUE).",nl:"Sinds 18/08/2025: gunstige termijn verkort van 1 jaar naar 6 MAANDEN voor de familie van een erkend vluchteling; daarna inkomen ≥ 120 % van het leefloon (≈ 2 130 €/maand) + woonst + ziekenfonds. Stilzwijgen van de administratie geldt voortaan als impliciete WEIGERING. Ouder uitgesloten als het kind vergezeld was door de andere ouder. Beperkingen voor subsidiaire bescherming gedeeltelijk GESCHORST door het Grondwettelijk Hof (26/02/2026)."}},
+   {titre:{fr:"⚠️ Regroupement familial — RÉFORME 2025",nl:"⚠️ Gezinshereniging — HERVORMING 2025"},delai:{fr:"6 mois après la reconnaissance (délai favorable)",nl:"6 maanden na de erkenning (gunstige termijn)"},ref:"Loi 18/07/2025 (MB 08/08/2025) ; C. const. 26/02/2026",desc:{fr:"Depuis le 18/08/2025 : délai favorable réduit d'1 an à 6 MOIS pour la famille d'un réfugié reconnu ; ensuite revenus ≥ 120 % du RIS (≈ 2 130 €/mois, allocations exclues) + logement + mutuelle. Le silence de l'administration vaut désormais REFUS implicite. Parent exclu si l'enfant était accompagné de l'autre parent. Restrictions pour la protection subsidiaire partiellement SUSPENDUES par la Cour constitutionnelle (26/02/2026, questions à la CJUE).",nl:"Sinds 18/08/2025: gunstige termijn verkort van 1 jaar naar 6 MAANDEN voor de familie van een erkend vluchteling; daarna inkomen ≥ 120 % van het leefloon (≈ 2 130 €/maand) + woonst + ziekenfonds. Stilzwijgen van de administratie geldt voortaan als impliciete WEIGERING. Ouder uitgesloten als het kind vergezeld was door de andere ouder. Beperkingen voor subsidiaire bescherming gedeeltelijk GESCHORST door het Grondwettelijk Hof (26/02/2026)."}},
    {titre:{fr:"Demande de protection internationale",nl:"Verzoek om internationale bescherming"},delai:{fr:"Dès que possible après l'arrivée",nl:"Zo snel mogelijk na aankomst"},ref:"CGRA / Office des Étrangers",desc:{fr:"Le tuteur accompagne le mineur pour introduire sa demande d'asile. Procédure adaptée aux mineurs (audition spécifique).",nl:"De voogd begeleidt de minderjarige bij het indienen van zijn asielaanvraag. Aangepaste procedure voor minderjarigen (specifiek gehoor)."}},
    {titre:{fr:"Recherche de la solution durable",nl:"Zoeken naar de duurzame oplossing"},delai:{fr:"En continu durant la tutelle",nl:"Doorlopend tijdens de voogdij"},ref:"Directive 2011/95/UE; Loi 15/12/1980",desc:{fr:"L'autorité doit rechercher la solution durable conforme à l'intérêt supérieur de l'enfant : réunification familiale, séjour, ou retour encadré.",nl:"De autoriteit moet de duurzame oplossing zoeken die in het belang van het kind is: gezinshereniging, verblijf of begeleide terugkeer."}},
    {titre:{fr:"Recours contre décision négative",nl:"Beroep tegen negatieve beslissing"},delai:{fr:"30 jours (CCE)",nl:"30 dagen (RvV)"},ref:"Conseil du Contentieux des Étrangers",desc:{fr:"Délai de recours suspensif contre une décision de refus de séjour ou de protection.",nl:"Schorsende beroepstermijn tegen een beslissing tot weigering van verblijf of bescherming."}},
@@ -1432,6 +1598,8 @@ function onUnlocked(){
   maybeWhatsNew();  // notes de version
   fillDatalist();   // liste déroulante d'adresses (centres + institutions)
   loadTuteur();     // profil du tuteur (documents + départ par défaut)
+  refreshCloudContent(false); // contenus publics uniquement ; aucune donnée de dossier n'est transmise
+  setTimeout(()=>runAutomations(false),800); // règles locales après chargement des dossiers et de l'agenda
 }
 function lockApp(){
   CRYPTO_KEY=null;DOSSIERS=[];ARCHIVES=null;
@@ -1489,6 +1657,8 @@ function go(view){
   if(view==='guide')renderGuide();
   if(view==='conseil')renderConseil();
   if(view==='agenda')renderAgenda();
+  if(view==='documentsPro')renderDocumentsPro();
+  if(view==='automations')renderAutomations();
 }
 document.querySelectorAll('nav a').forEach(a=>a.addEventListener('click',()=>go(a.dataset.view)));
 
@@ -1657,6 +1827,19 @@ function openDossierDetail(id){
       <button class="btn sec sm" style="margin-top:.6rem" onclick="exportICS('${d.id}')">📆 ${LANG==='nl'?'Exporteren naar agenda (.ics)':'Exporter vers mon agenda (.ics)'}</button>
     </div></details>
 
+    <details class="accordion" ${(d.caseNotes||[]).length?'open':''}><summary>📝 ${LANG==='nl'?'Opvolgnotities':'Notes de suivi'}${(d.caseNotes||[]).length?` <span class="badge b-cours">${d.caseNotes.length}</span>`:''}</summary><div class="body">
+      <p class="muted">${LANG==='nl'?'Gestructureerde verslagen na een afspraak. Ze blijven versleuteld op dit toestel.':'Comptes rendus structurés après un rendez-vous. Ils restent chiffrés sur cet appareil.'}</p>
+      ${(d.caseNotes||[]).length?(d.caseNotes||[]).slice().sort((a,b)=>(b.date||'').localeCompare(a.date||'')).map(n=>`<div class="deadline" style="border-left-color:var(--accent)">
+        <div class="row" style="justify-content:space-between;align-items:flex-start">
+          <div><strong>${esc(n.date||'')}</strong> · ${esc(caseOutcomeLabel(n.outcome))}${n.type?` · ${esc(RDV_TYPE_FR[n.type]||n.type)}`:''}</div>
+          <button class="btn danger sm" data-dossier-id="${esc(d.id)}" data-note-id="${esc(n.id)}" onclick="deleteCaseNote(this.dataset.dossierId,this.dataset.noteId)" title="${LANG==='nl'?'Verwijderen':'Supprimer'}">🗑️</button>
+        </div>
+        ${n.observations?`<p style="white-space:pre-wrap;margin:.45rem 0">${esc(n.observations)}</p>`:''}
+        ${n.actions?`<p class="muted" style="white-space:pre-wrap;margin:.35rem 0"><strong>${LANG==='nl'?'Acties':'Actions'} :</strong> ${esc(n.actions)}</p>`:''}
+        ${n.followupDate?`<span class="badge ${n.followupDate<nowISO()?'b-urgent':'b-cours'}">⏰ ${LANG==='nl'?'Opvolging':'Relance'} ${esc(n.followupDate)}</span>`:''}
+      </div>`).join(''):`<p class="muted">${LANG==='nl'?'Nog geen opvolgnotitie. Maak er een vanuit Agenda & Tolken.':'Aucune note de suivi. Créez-en une depuis Agenda & Interprètes.'}</p>`}
+    </div></details>
+
     <details class="accordion"><summary>🏦 ${LANG==='nl'?'Bankbeheer':'Suivi bancaire'}</summary><div class="body">
       <p class="muted">${LANG==='nl'?'Handmatig register van verrichtingen (saldo + uittreksel voor de vrederechter). Echte bankkoppeling: later via server.':'Registre manuel des opérations (solde + relevé pour le juge de paix). Connexion bancaire réelle : ultérieurement via serveur.'}</p>
       <div id="bankAdv" class="muted" style="font-size:.85rem"></div>
@@ -1779,6 +1962,9 @@ function renderDashboard(){
         else if(r.date<=addDays(today,30))deadlines.push({nom:d.nom,label:'📅 '+rdvLbl(r.titre),date:r.date,id:d.id,over:false});
       }
     });
+    (d.caseNotes||[]).forEach(n=>{
+      if(n.followupDate)deadlines.push({nom:d.nom,label:'📝 '+(LANG==='nl'?'Opvolging afspraak':'Relance après rendez-vous'),date:n.followupDate,id:d.id,over:n.followupDate<today});
+    });
     const next=d.checklist.find(c=>!c.done);
     if(next)deadlines.push({nom:d.nom,label:t('dash.nextstep')+' '+ckLabel(next.t),date:'',id:d.id,over:false,etape:true});
   });
@@ -1862,6 +2048,92 @@ function renderLegislation(){
       </div>`).join('')}
     </div></details>`).join('');
 }
+
+/* ============ AIDE A LA DECISION — SOURCES VERIFIEES ============ */
+const LEGAL_HELP_SOURCES={
+  tutelles:{title:"Service des Tutelles — missions et contact",authority:"SPF Justice",url:"https://justice.belgium.be/fr/servicedestutelles"},
+  signalement:{title:"Signaler un MENA",authority:"SPF Justice",url:"https://justice.belgium.be/fr/themes_et_dossiers/enfants_et_jeunes/mineurs_etrangers_non_accompagne/service_des_tutelles/signalement_d_un_mineur_etranger_non_accompagne"},
+  manuel1:{title:"Manuel des tuteurs — Livre 1 : mission et tutelle",authority:"SPF Justice",url:"https://justice.belgium.be/sites/default/files/downloads/Mena/LIVRE%201.pdf"},
+  manuel2:{title:"Manuel — Livre 2 : soutien psychosocial",authority:"SPF Justice",url:"https://justice.belgium.be/sites/default/files/downloads/Mena/LIVRE%202.pdf"},
+  manuel3:{title:"Manuel — Livre 3 : protection internationale et MINTEH",authority:"SPF Justice",url:"https://justice.belgium.be/sites/default/files/downloads/Mena/LIVRE%203.pdf"},
+  manuel4:{title:"Manuel — Livre 4 : séjour et documents",authority:"SPF Justice",url:"https://justice.belgium.be/sites/default/files/downloads/Mena/LIVRE%204.pdf"},
+  manuel5:{title:"Manuel — Livre 5 : accueil et soutien",authority:"SPF Justice",url:"https://justice.belgium.be/sites/default/files/downloads/Mena/LIVRE%205.pdf"},
+  manuel7:{title:"Manuel — Livre 7 : droits, biens et rapports",authority:"SPF Justice",url:"https://justice.belgium.be/sites/default/files/downloads/Mena/LIVRE%207.pdf"},
+  directives:{title:"Directives générales pour les tuteurs",authority:"SPF Justice",url:"https://justice.belgium.be/sites/default/files/directives_generales_pour_tuteurs_-_02_12_2013.pdf"},
+  solution:{title:"Solution durable",authority:"SPF Justice",url:"https://justice.belgium.be/fr/themes_et_dossiers/enfants_et_jeunes/mineurs_etrangers_non_accompagne/tuteur/solution_durable"},
+  cgraMena:{title:"L’enfant non accompagné et la protection internationale",authority:"CGRA / CGVS",url:"https://www.cgra.be/fr/lenfant-non-accompagne"},
+  cgraGuide:{title:"Guide pour le mineur non accompagné",authority:"CGRA / CGVS",url:"https://www.cgra.be/sites/default/files/brochures/guide_pour_le_mineur_non_accompagne_fr_1.pdf"},
+  cgraContact:{title:"Cellule Mineurs — contact pour les tuteurs",authority:"CGRA / CGVS",url:"https://www.cgra.be/fr/contact-info"},
+  cgra2026:{title:"Entretien personnel et détermination de l’âge — règles depuis le 12 juin 2026",authority:"CGRA / CGVS",url:"https://www.cgra.be/fr/actualite/enregistrement-audio-de-lentretien-personnel-et-determination-de-lage"},
+  oe:{title:"Office des Étrangers",authority:"SPF Intérieur",url:"https://dofi.ibz.be/fr"},
+  fedasil:{title:"Accueil des demandeurs de protection internationale",authority:"Fedasil",url:"https://www.fedasil.be/fr"},
+  trajet:{title:"Le trajet MENA",authority:"Aide à la jeunesse — Fédération Wallonie-Bruxelles",url:"https://www.aidealajeunesse.cfwb.be/thematiques/mena/trajet-mena/"},
+  hebergement:{title:"Services d’hébergement MENA",authority:"Aide à la jeunesse — FWB",url:"https://www.aidealajeunesse.cfwb.be/thematiques/mena/services-dhebergement/"},
+  childfocus:{title:"Disparition ou exploitation sexuelle — 116 000",authority:"Child Focus",url:"https://childfocus.be/fr-be/"},
+  disparitionGuide:{title:"Guide opérationnel — disparition d’un MENA",authority:"Child Focus",url:"https://childfocus.be/Portals/0/Interactief%20draaiboek%20-%20verdwijning%20NBMV_FR.pdf"},
+  traite:{title:"Aide et signalement confidentiel — 078 05 58 00",authority:"SPF Justice / Stop Traite",url:"https://www.stoptraite.be"},
+  tribunaux:{title:"Cours et tribunaux — trouver une justice de paix",authority:"Ordre judiciaire",url:"https://www.tribunaux-rechtbanken.be/fr"},
+  baj:{title:"Bureaux d’aide juridique",authority:"Avocats.be",url:"https://www.avocats.be/fr/bureaux-daide-juridique-baj"},
+  enseignement:{title:"Enseignement en Fédération Wallonie-Bruxelles",authority:"Fédération Wallonie-Bruxelles",url:"https://www.enseignement.be"},
+  travail:{title:"Contrat d’occupation d’étudiant",authority:"SPF Emploi",url:"https://emploi.belgique.be/fr/themes/contrats-de-travail/contrats-de-travail-particuliers/contrat-doccupation-detudiants"},
+  droit:{title:"Législation belge consolidée",authority:"Justel / SPF Justice",url:"https://www.ejustice.just.fgov.be/cgi_loi/welcome.pl"}
+};
+const CASE_PATHWAYS={
+  designation:{title:"Début de tutelle et représentation",keywords:["désign","tuteur","tutelle","premier","mission","rapport initial"],steps:["Relire la décision de désignation et identifier la personne de référence au Service des Tutelles.","Rencontrer rapidement le jeune dans une langue qu’il comprend et expliquer votre rôle, vos limites et la confidentialité.","Vérifier l’hébergement, la sécurité, la santé, le signalement, les documents disponibles et les procédures déjà ouvertes.","Demander sans délai l’assistance d’un avocat adapté à la situation et obtenir ses coordonnées écrites.","Créer une chronologie datée et préparer le rapport initial avec les destinataires indiqués par le Service des Tutelles."],questions:["La désignation est-elle définitive ou provisoire ?","Qui détient les originaux des documents ?","Le jeune comprend-il le rôle du tuteur et peut-il exprimer son avis ?"],docs:["Décision de désignation","Fiche de signalement MENA","Coordonnées du lieu d’accueil et de l’avocat","Chronologie des premiers contacts"],sources:["tutelles","manuel1","directives","baj"]},
+  age:{title:"Identité et détermination de l’âge",keywords:["âge","age","test osseux","identité","date de naissance","mineur","majeur"],steps:["Recueillir séparément les déclarations du jeune et inventorier tous les documents ou indices disponibles sans lui suggérer de réponse.","Demander par écrit quel doute est soulevé, par quelle autorité et sur quels éléments il repose.","Prévenir immédiatement l’avocat et vérifier la voie, la forme et le délai de contestation sur la décision reçue.","Maintenir l’accompagnement et expliquer au jeune le déroulement, les limites et les conséquences possibles de l’évaluation.","Vérifier les règles CGRA entrées en application le 12 juin 2026 si une demande de protection internationale est concernée."],questions:["Une décision écrite et motivée a-t-elle été notifiée ?","Le jeune a-t-il des documents, copies, contacts familiaux ou scolaires ?","La procédure concerne-t-elle le Service des Tutelles, l’OE ou le CGRA ?"],docs:["Décision et preuve de notification","Documents d’identité ou scolaires","Avis médicaux existants","Échanges avec l’avocat"],sources:["manuel1","cgra2026","cgraMena","droit"]},
+  asile:{title:"Protection internationale",keywords:["asile","cgra","cgvs","protection internationale","audition","entretien personnel","réfugié","refus","cce","rvv"],steps:["Identifier précisément l’étape de la procédure et classer la convocation ou décision avec sa date de réception.","Contacter l’avocat le jour même en cas de décision, recours possible ou délai indiqué.","Expliquer au jeune la procédure dans une langue comprise, sans fabriquer ni compléter son récit à sa place.","Préparer l’entretien avec l’avocat : besoins procéduraux spéciaux, interprète, vulnérabilités, documents et personnes de confiance.","Après chaque entretien, noter les difficultés, demander les documents disponibles et organiser le suivi médical ou psychosocial utile."],questions:["S’agit-il d’une première demande, d’une demande ultérieure ou d’un recours ?","La langue et l’interprète conviennent-ils réellement ?","Des vulnérabilités ou besoins procéduraux ont-ils été signalés par écrit ?"],docs:["Annexe et preuve d’enregistrement","Convocations et décisions","Documents remis au CGRA","Coordonnées de l’avocat et de l’interprète"],sources:["cgraMena","cgraGuide","cgraContact","cgra2026","manuel3","baj"]},
+  sejour:{title:"Séjour, MINTEH et solution durable",keywords:["séjour","minteh","solution durable","annexe 38","ordre de reconduire","commune","carte a","régularisation","retour"],steps:["Distinguer la protection internationale, la procédure spéciale de séjour MENA et toute autre procédure déjà engagée.","Établir avec le jeune et l’avocat les trois hypothèses de solution durable, sans promettre un résultat.","Rassembler les éléments sur la famille, la sécurité, l’accueil possible, le parcours, l’intégration et l’intérêt supérieur du jeune.","Lire toute décision avec l’avocat et vérifier immédiatement notification, recours, autorité compétente et effet sur les documents.","Mettre à jour le projet du jeune et consigner son avis, y compris lorsqu’il diffère de celui des adultes."],questions:["Quelle procédure est officiellement ouverte ?","Existe-t-il une décision écrite de l’OE ou de la commune ?","Quelles garanties concrètes existent pour chaque solution envisagée ?"],docs:["Titres et annexes de séjour","Décisions OE/commune","Preuves d’identité et de liens familiaux","Plan de vie et avis du jeune"],sources:["solution","manuel3","manuel4","oe","droit"]},
+  famille:{title:"Famille, Dublin et regroupement",keywords:["famille","frère","soeur","sœur","parent","dublin","regroupement","réunification","recherche familiale"],steps:["Cartographier les liens familiaux déclarés, les pays concernés et les preuves disponibles, sans contacter une personne potentiellement dangereuse.","Demander à l’avocat quelle voie s’applique : Dublin, regroupement familial, recherche familiale ou autre procédure.","Vérifier très tôt les délais et conditions à partir de la situation juridique exacte du jeune et de sa famille.","Évaluer avec le jeune les risques, son souhait, la qualité du lien et les garanties d’accueil.","Conserver la preuve de chaque demande, envoi, rendez-vous et réponse des autorités."],questions:["Où se trouve chaque proche et quel est son statut ?","Le lien familial est-il documenté ou peut-il l’être ?","Le contact familial est-il souhaité et sans danger pour le jeune ?"],docs:["Actes d’état civil ou indices du lien","Titres de séjour des proches","Preuves de contact et d’adresse","Avis du jeune et analyse de sécurité"],sources:["manuel3","manuel4","oe","cgraMena","solution"]},
+  accueil:{title:"Accueil, hébergement et conflit",keywords:["centre","accueil","hébergement","logement","famille d'accueil","fedasil","transfert","conflit"],steps:["Vérifier immédiatement la sécurité, la vulnérabilité, l’âge et les besoins spécifiques du jeune.","Entendre séparément le jeune et le lieu d’accueil, puis consigner les faits datés et les mesures déjà tentées.","Demander une concertation formelle avec le référent et une réponse écrite si un transfert ou une exclusion est envisagé.","Mobiliser le Service des Tutelles et les services compétents de l’aide à la jeunesse si la prise en charge n’est plus adéquate.","Préparer une solution transitoire sûre avant toute rupture de placement."],questions:["Y a-t-il un danger immédiat ou une nuit sans hébergement ?","Le conflit masque-t-il une exploitation, une violence ou une souffrance psychique ?","Quelle décision écrite existe et qui peut la réexaminer ?"],docs:["Rapports d’incident","Projet d’accompagnement","Échanges avec le centre","Évaluation des besoins"],sources:["manuel2","manuel5","fedasil","trajet","hebergement","tutelles"]},
+  sante:{title:"Santé physique ou psychologique",keywords:["santé","maladie","médecin","hôpital","psychologue","trauma","suicide","automutil","dépression","médicament"],steps:["En cas de danger vital ou de risque suicidaire imminent, appeler le 112 et ne pas laisser le jeune seul.","Obtenir une évaluation par un professionnel compétent et transmettre uniquement les informations nécessaires.","Vérifier le consentement, la compréhension, l’interprétariat et la continuité des soins après un transfert.","Coordonner le lieu d’accueil, le médecin et les services psychosociaux sans vous substituer au diagnostic.","Consigner les décisions utiles au suivi en séparant clairement faits, propos et avis professionnels."],questions:["Le jeune est-il en sécurité maintenant ?","Un professionnel a-t-il évalué le risque ?","Qui assure le prochain rendez-vous et l’accès aux médicaments ?"],docs:["Plan de soins et rendez-vous","Coordonnées des professionnels","Consentements utiles","Informations strictement nécessaires au suivi"],sources:["manuel2","manuel5","trajet","tutelles"]},
+  ecole:{title:"École, formation et travail",keywords:["école","scolaire","daspa","okan","formation","stage","travail","job","étudiant","absence"],steps:["Vérifier l’inscription, la fréquentation, la langue, le niveau antérieur et les besoins d’aménagement.","Rencontrer le jeune et l’école pour distinguer difficulté pédagogique, santé, harcèlement, logement ou projet professionnel.","Obtenir un plan concret : personne de contact, soutien linguistique, échéances et prochaine évaluation.","Pour un travail ou un job étudiant, vérifier avec un service compétent l’âge, le contrat, les horaires, le séjour et l’effet financier.","Intégrer la scolarité ou la formation au projet d’autonomie et aux rapports périodiques."],questions:["Le jeune est-il effectivement inscrit et présent ?","Existe-t-il un contrat, un règlement ou une décision écrite ?","Le projet correspond-il au choix et aux capacités du jeune ?"],docs:["Attestation d’inscription","Bulletins et plan d’accompagnement","Contrat ou convention de stage","Justificatifs d’absences"],sources:["manuel5","manuel7","enseignement","travail","trajet"]},
+  police:{title:"Police, justice et défense",keywords:["police","vol","arrest","audition","juge","parquet","infraction","salduz","avocat","détention"],steps:["Demander où se trouve le jeune, sous quel statut il est entendu et quelle autorité gère le dossier.","Faire intervenir immédiatement un avocat compétent et ne pas conseiller au jeune de répondre sur le fond sans défense adaptée.","Vérifier l’interprète, l’information du jeune, sa compréhension et votre propre rôle dans la procédure.","Recueillir les références du procès-verbal, les convocations et toute décision, puis noter l’heure de chaque contact.","Organiser après l’événement la sécurité, le soutien psychosocial et la coordination avec le lieu d’accueil."],questions:["Le jeune est-il privé de liberté ?","Est-il suspect, victime ou témoin ?","Un avocat et un interprète ont-ils été effectivement contactés ?"],docs:["Convocation ou référence du PV","Coordonnées de l’avocat","Décisions judiciaires","Chronologie des appels"],sources:["manuel1","manuel4","baj","tribunaux","droit"]},
+  traite:{title:"Traite, exploitation ou violence",keywords:["traite","exploitation","prostitution","sexuel","travail forcé","menace","violence","réseau","dette","mariage forcé","mgf"],steps:["Si le danger est immédiat, appeler le 112 et organiser un lieu sûr sans confronter l’exploiteur présumé.","Contacter un centre spécialisé via Stop Traite (078 05 58 00) et informer le Service des Tutelles.","Préserver les éléments utiles sans enquêter vous-même ni exposer le jeune à des représailles.","Mobiliser un avocat et demander l’évaluation des mécanismes de protection et de séjour applicables.","Adapter téléphone, déplacements, contacts et hébergement au niveau de risque évalué par les professionnels."],questions:["Quel danger existe aujourd’hui et qui connaît le lieu du jeune ?","Y a-t-il contrôle, dette, menace, confiscation de documents ou contrainte ?","Un centre spécialisé a-t-il évalué les indicateurs ?"],docs:["Chronologie factuelle","Messages ou documents déjà disponibles","Coordonnées des professionnels","Plan de sécurité"],sources:["traite","tutelles","manuel4","manuel2","childfocus","baj"]},
+  disparition:{title:"Disparition ou fugue",keywords:["disparu","disparition","fugue","introuvable","sans nouvelles","116000","116 000"],steps:["Ne pas attendre : vérifier les faits essentiels et signaler immédiatement la disparition à la police.","Appeler Child Focus au 116 000, accessible 24 h/24 et 7 j/7, et suivre le guide opérationnel MENA.","Informer le lieu d’accueil et le Service des Tutelles ; transmettre les informations et la photo disponibles par les canaux demandés.","Documenter l’heure, le numéro de PV, les personnes contactées et tout nouvel élément sans mener seul des recherches dangereuses.","Au retour, organiser un accueil non punitif, une évaluation des risques et un plan de prévention avec le jeune."],questions:["Quand et où le jeune a-t-il été vu pour la dernière fois ?","Existe-t-il un risque d’exploitation, de violence, de suicide ou de départ transfrontalier ?","Le PV de disparition et le dossier Child Focus sont-ils ouverts ?"],docs:["Photo récente et description","Numéro de PV","Coordonnées et lieux connus","Chronologie des dernières 48 heures"],sources:["disparitionGuide","childfocus","tutelles","manuel5"]},
+  rapports:{title:"Rapports, biens, frais et documents",keywords:["rapport","semestriel","final","argent","compte","banque","frais","remboursement","document officiel"],steps:["Identifier le rapport ou document attendu, sa période, ses destinataires et l’échéance communiquée.","Mettre à jour les faits depuis le rapport précédent : séjour, accueil, santé, école, famille, projet et avis du jeune.","Pour les biens, distinguer les fonds réellement gérés par le tuteur et joindre les preuves de solde demandées.","Faire relire les données sensibles, vérifier les pièces et conserver une preuve d’envoi.","Ne jamais modifier un modèle officiel sans garder l’original ; signaler les rubriques non applicables plutôt que d’inventer."],questions:["Quel modèle officiel et quelle version doivent être utilisés ?","Quelles données ont changé depuis le dernier rapport ?","Les chiffres correspondent-ils aux extraits et justificatifs ?"],docs:["Modèle officiel original","Rapport précédent","Extraits ou preuve de solde","Preuves d’envoi"],sources:["manuel1","manuel7","directives","tutelles","tribunaux"]},
+  majorite:{title:"Approche des 18 ans et fin de tutelle",keywords:["18 ans","majorité","fin de tutelle","autonomie","transition","après 18","sortie"],steps:["Commencer plusieurs mois avant 18 ans un tableau des risques : séjour, logement, revenus, santé, formation, documents et réseau.","Vérifier avec l’avocat les procédures et décisions qui doivent intervenir avant la majorité.","Désigner pour chaque besoin un service adulte qui reprend effectivement le suivi et obtenir un premier rendez-vous.","Préparer avec le jeune ses documents, contacts, budget, accès numérique et plan d’urgence.","Rédiger le rapport final et organiser une transmission proportionnée, avec l’accord du jeune lorsque nécessaire."],questions:["Quel droit de séjour et quel hébergement existeront au lendemain des 18 ans ?","Qui reprend chaque suivi et le rendez-vous est-il confirmé ?","Le jeune possède-t-il ses documents et sait-il les utiliser ?"],docs:["Plan de transition","Titres et décisions de séjour","Budget et coordonnées des services","Rapport final et bordereau de transmission"],sources:["manuel1","manuel4","manuel5","manuel7","solution","trajet"]}
+};
+function normalizeCaseText(s){return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+function analyseTutorCase(){
+  const raw=(document.getElementById('caseSituation').value||'').trim();
+  const selected=document.getElementById('caseSituationType').value;
+  const age=+document.getElementById('caseAge').value||null;
+  const danger=document.getElementById('caseImmediateDanger').checked;
+  const decision=document.getElementById('caseDecision').checked;
+  const out=document.getElementById('caseAssistantResult');
+  if(raw.length<12&&!selected){out.innerHTML='<div class="banner" style="border-left-color:var(--rouge)">Décrivez la situation en quelques phrases ou choisissez un sujet principal.</div>';return;}
+  const txt=normalizeCaseText(raw);
+  let scores=Object.entries(CASE_PATHWAYS).map(([id,p])=>({id,p,score:(id===selected?8:0)+p.keywords.reduce((n,k)=>n+(txt.includes(normalizeCaseText(k))?2:0),0)})).filter(x=>x.score>0).sort((a,b)=>b.score-a.score);
+  if(!scores.length)scores=[{id:'designation',p:CASE_PATHWAYS.designation,score:1}];
+  scores=scores.slice(0,3);
+  const crisis=danger||/(suicid|automutil|danger immediat|menace de mort|violence actuelle|inconscient|urgence medical)/.test(txt);
+  const missing=/(disparu|disparition|fugue|introuvable|sans nouvelles)/.test(txt)||scores.some(x=>x.id==='disparition');
+  const exploitation=/(traite|exploitation|prostitution|travail force|reseau|mariage force)/.test(txt)||scores.some(x=>x.id==='traite');
+  const allSteps=[...new Set(scores.flatMap(x=>x.p.steps))];
+  const allQuestions=[...new Set(scores.flatMap(x=>x.p.questions))];
+  const allDocs=[...new Set(scores.flatMap(x=>x.p.docs))];
+  const sourceIds=[...new Set(scores.flatMap(x=>x.p.sources).concat(['tutelles']))];
+  if(decision&&!sourceIds.includes('baj'))sourceIds.push('baj');
+  let related=[];
+  if(Array.isArray(CASES))related=CASES.map((c,i)=>({c,i,score:scores.reduce((n,x)=>n+(normalizeCaseText(JSON.stringify(c)).includes(normalizeCaseText(x.p.title.split(' ')[0]))?1:0),0)+(txt&&normalizeCaseText(JSON.stringify(c)).split(' ').filter(w=>w.length>5&&txt.includes(w)).length)})).filter(x=>x.score>0).sort((a,b)=>b.score-a.score).slice(0,4);
+  out.innerHTML=`
+    ${crisis?'<div class="banner" style="border-left:5px solid var(--rouge);background:var(--danger-bg)"><strong>🚨 Danger immédiat :</strong> appelez le <strong>112</strong>, restez avec le jeune si cela peut être fait sans danger et suivez les instructions des secours.</div>':''}
+    ${missing?'<div class="banner" style="border-left:5px solid var(--rouge)"><strong>Disparition :</strong> ne pas attendre. Police puis <strong>Child Focus 116 000</strong> (24 h/24, 7 j/7), lieu d’accueil et Service des Tutelles.</div>':''}
+    ${exploitation?'<div class="banner" style="border-left:5px solid var(--rouge)"><strong>Exploitation possible :</strong> ne confrontez pas l’auteur présumé. Danger immédiat : 112. Conseil spécialisé confidentiel : <strong>078 05 58 00</strong>.</div>':''}
+    ${decision?'<div class="banner" style="border-left:5px solid #d97706"><strong>Décision ou convocation :</strong> notez la date et le mode de réception, scannez toutes les pages et contactez l’avocat aujourd’hui. Le délai exact doit être lu sur l’acte.</div>':''}
+    <div class="card" style="margin:1rem 0">
+      <div class="row" style="justify-content:space-between;gap:1rem"><h3 style="margin:0">Plan proposé</h3><span class="badge b-cours">${scores.map(x=>esc(x.p.title)).join(' · ')}</span></div>
+      ${age&&age>=17?'<p class="banner" style="margin-top:.8rem">Le jeune approche de 18 ans : ajoutez systématiquement séjour, logement, revenus, santé, formation et relais adulte au plan.</p>':''}
+      <h4 style="color:var(--accent)">1. Ce que le tuteur fait maintenant</h4><ol>${allSteps.map(x=>`<li style="margin:.45rem 0">${esc(x)}</li>`).join('')}</ol>
+      <h4 style="color:var(--accent)">2. Questions à vérifier avant de conclure</h4><ul class="clean">${allQuestions.map(x=>`<li>□ ${esc(x)}</li>`).join('')}</ul>
+      <h4 style="color:var(--accent)">3. Pièces à réunir</h4><div>${allDocs.map(x=>`<span class="badge b-nouveau" style="margin:.2rem;display:inline-block">${esc(x)}</span>`).join('')}</div>
+      <h4 style="color:var(--accent)">4. Sources et contacts à ouvrir</h4><div class="grid cols-2">${sourceIds.map(id=>LEGAL_HELP_SOURCES[id]).filter(Boolean).map(s=>`<a class="list-item" href="${esc(s.url)}" target="_blank" rel="noopener" style="text-decoration:none"><strong>${esc(s.title)}</strong><div class="muted">${esc(s.authority)} ↗</div></a>`).join('')}</div>
+      ${related.length?`<h4 style="color:var(--accent)">5. Cas pratiques proches</h4>${related.map(x=>`<button class="btn sec sm" style="margin:.2rem" onclick="showCase(${x.i})">${esc(tr(x.c.titre))}</button>`).join('')}`:''}
+      <p class="muted" style="font-size:.78rem;margin-top:1rem">Analyse d’orientation générée localement à partir des mots de la situation. Vérifiez toujours l’acte reçu, la source officielle à jour et l’avis de l’avocat ou de l’autorité compétente.</p>
+    </div>`;
+  out.scrollIntoView({behavior:'smooth',block:'start'});
+}
+function resetTutorCase(){['caseSituation','caseAge'].forEach(id=>document.getElementById(id).value='');document.getElementById('caseSituationType').value='';document.getElementById('caseImmediateDanger').checked=false;document.getElementById('caseDecision').checked=false;document.getElementById('caseAssistantResult').innerHTML='';}
 
 /* ============ CAS PRATIQUES ============ */
 async function renderCases(){
@@ -2306,7 +2578,7 @@ const RAPPORTS_LEGACY=[
   {id:"r_gestion",label:{fr:"Compte/rapport de gestion des biens au juge de paix",nl:"Beheersverslag van de goederen"},dest:"juge",base:"Gestion des biens — juge de paix"}
 ];
 function rtFind(id){return RAPPORTS_TYPE.find(x=>x.id===id)||RAPPORTS_LEGACY.find(x=>x.id===id);}
-function nowISO(){return new Date().toISOString().slice(0,10);}
+function nowISO(){const d=new Date(),p=n=>String(n).padStart(2,'0');return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate());}
 // Calcul en heure LOCALE (toISOString convertit en UTC et faisait perdre 1 jour en Belgique)
 function addDays(iso,days){if(!iso)return '';const d=new Date(iso+'T12:00:00');d.setDate(d.getDate()+(+days||0));const p=n=>String(n).padStart(2,'0');return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate());}
 /* Initialise les rapports obligatoires avec échéances calculées depuis une date de base */
@@ -2317,6 +2589,7 @@ function initGestion(d){
   if(!d.banque)d.banque={operations:[]};
   if(!d.rdv)d.rdv=genRdvDefaults(d.arrivee||d.cree);   // plan de rendez-vous auto
   if(!d.frais)d.frais=[];                              // déplacements & frais du tuteur
+  if(!d.caseNotes)d.caseNotes=[];                      // notes de suivi chiffrées, liées aux rendez-vous
   return d;
 }
 
@@ -2692,10 +2965,10 @@ function printReleve(id){
 }
 
 /* ============ VERSION & MISES À JOUR ============ */
-const APP_VERSION='1.7.15';
+const APP_VERSION='1.11.0';
 window.APP_VERSION=APP_VERSION;   // expose pour tests.html (const non attache a window)
-Object.assign(I18N.fr,{"dash.matrix":"📊 Suivi par dossier","dash.q4":"📈 Mes statistiques","dash.q5":"🚗 Mes frais (par jeune)","heb.title":"Lieux d'hébergement MENA (réseau officiel)","nav.guide":"🎓 Guide du tuteur","guide.title":"🎓 Guide du tuteur débutant — de la désignation aux 18 ans","guide.banner":"13 modules pas-à-pas : cours, actions à faire, documents à remettre (et à qui), rendez-vous, pièges à éviter. Contenu basé sur la réglementation en vigueur.","dash.q1":"📄 Nouveau MENA (fiche DVZ)","dash.q2":"📂 Mes dossiers","dash.q3":"⏰ Urgences & échéances","gs.ph":"🔍 Recherche globale (dossiers, lois, cas, ressources)…","ft.check":"🔄 Vérifier les mises à jour","ft.dl":"Télécharger l’application","ft.manuel":"Mode d'emploi","ft.pdf":"📄 Mode d'emploi en PDF","ft.site":"🌐 Site en ligne","ft.rel":"⬇️ Dernière version (exe)"});
-Object.assign(I18N.nl,{"dash.matrix":"📊 Opvolging per dossier","dash.q4":"📈 Mijn statistieken","dash.q5":"🚗 Mijn kosten (per jongere)","heb.title":"NBMV-opvangplaatsen (officieel netwerk)","nav.guide":"🎓 Voogdengids","guide.title":"🎓 Gids voor de beginnende voogd — van aanstelling tot 18 jaar","guide.banner":"13 stap-voor-stapmodules: cursus, acties, documenten (en aan wie), afspraken, valkuilen. Inhoud gebaseerd op de geldende regelgeving.","dash.q1":"📄 Nieuwe NBMV (DVZ-fiche)","dash.q2":"📂 Mijn dossiers","dash.q3":"⏰ Urgenties & vervaldata","gs.ph":"🔍 Globaal zoeken (dossiers, wetten, gevallen, hulpbronnen)…","ft.check":"🔄 Updates controleren","ft.dl":"Applicatie downloaden","ft.manuel":"Handleiding","ft.pdf":"📄 Handleiding als PDF","ft.site":"🌐 Online site","ft.rel":"⬇️ Laatste versie (exe)"});
+Object.assign(I18N.fr,{"dash.matrix":"📊 Suivi par dossier","dash.q4":"📈 Mes statistiques","dash.q5":"🚗 Mes frais (par jeune)","heb.title":"Lieux d'hébergement MENA (réseau officiel)","nav.guide":"🎓 Guide du tuteur","guide.title":"🎓 Guide du tuteur débutant — de la désignation aux 18 ans","guide.banner":"14 modules approfondis : situations concrètes, méthode, actions à faire, documents, interlocuteurs, pièges à éviter et sources officielles.","dash.q1":"📄 Nouveau MENA (fiche DVZ)","dash.q2":"📂 Mes dossiers","dash.q3":"⏰ Urgences & échéances","gs.ph":"🔍 Recherche globale (dossiers, lois, cas, ressources)…","ft.check":"🔄 Vérifier les mises à jour","ft.dl":"Télécharger l’application","ft.manuel":"Mode d'emploi","ft.pdf":"📄 Mode d'emploi en PDF","ft.site":"🌐 Site en ligne","ft.rel":"⬇️ Dernière version (exe)"});
+Object.assign(I18N.nl,{"dash.matrix":"📊 Opvolging per dossier","dash.q4":"📈 Mijn statistieken","dash.q5":"🚗 Mijn kosten (per jongere)","heb.title":"NBMV-opvangplaatsen (officieel netwerk)","nav.guide":"🎓 Voogdengids","guide.title":"🎓 Gids voor de beginnende voogd — van aanstelling tot 18 jaar","guide.banner":"14 uitgebreide modules: concrete situaties, methode, acties, documenten, contactpersonen, valkuilen en officiële bronnen.","dash.q1":"📄 Nieuwe NBMV (DVZ-fiche)","dash.q2":"📂 Mijn dossiers","dash.q3":"⏰ Urgenties & vervaldata","gs.ph":"🔍 Globaal zoeken (dossiers, wetten, gevallen, hulpbronnen)…","ft.check":"🔄 Updates controleren","ft.dl":"Applicatie downloaden","ft.manuel":"Handleiding","ft.pdf":"📄 Handleiding als PDF","ft.site":"🌐 Online site","ft.rel":"⬇️ Laatste versie (exe)"});
 const UPDATE_URL='https://tseli485.github.io/cgra-mena-platform/version.json';
 async function checkUpdates(){
   const n=document.getElementById('updNote');
@@ -2815,6 +3088,13 @@ async function globalSearch(q){
   LEGISLATION.forEach(c=>c.items.forEach(i=>{if((tr(i.titre)+' '+tr(i.detail||{fr:'',nl:''})).toLowerCase().includes(q))out.push({ico:'⚖️',lbl:tr(i.titre),sub:tr(c.cat),act:`go('legislation')`});}));
   ((CASES&&CASES.cases)||[]).forEach(c=>{if((tr(c.titre)+' '+tr(c.situation)).toLowerCase().includes(q))out.push({ico:'📚',lbl:tr(c.titre),sub:LANG==='nl'?'Praktijkgeval':'Cas pratique',act:`go('cases')`});});
   resArr.concat(loadCustomRes()).forEach(r=>{if((r.name+' '+(r.desc?tr(r.desc):'')).toLowerCase().includes(q))out.push({ico:'📁',lbl:r.name,sub:LANG==='nl'?'Hulpbron':'Ressource',act:`go('resources')`});});
+  if(window.MENA_CLOUD){
+    ['official_documents','legal_updates','resources_directory','courses'].forEach(table=>MENA_CLOUD.get(table).forEach(item=>{
+      const label=item.title||item.name||item.slug||'';
+      const body=[label,item.summary,item.description,item.impact,item.authority,item.topic].filter(Boolean).join(' ').toLowerCase();
+      if(body.includes(q))out.push({ico:table==='legal_updates'?'⚖️':'☁️',lbl:label,sub:LANG==='nl'?'Geverifieerde publieke inhoud':'Contenu public vérifié',act:`go('resources')`});
+    }));
+  }
   el.innerHTML=out.length?out.slice(0,12).map(x=>`<div class="list-item" onclick="${x.act};document.getElementById('gsearch').value='';globalSearch('')">${x.ico} <strong>${esc(x.lbl)}</strong> <span class="muted">— ${esc(x.sub)}</span></div>`).join('')
     :`<p class="muted">${LANG==='nl'?'Geen resultaat.':'Aucun résultat.'}</p>`;
 }
@@ -2868,7 +3148,7 @@ function maybeTour(){
 }
 
 /* ============ SOURCES OFFICIELLES (veille juridique) ============ */
-const DATA_VERIFIED='2026-06';   // date de dernière vérification du contenu juridique
+const DATA_VERIFIED='2026-07-14';   // date de dernière vérification du contenu juridique
 const SOURCES_OFF=[
  ["Service des Tutelles (SPF Justice)","https://justice.belgium.be/fr/themes_et_dossiers/enfants_et_jeunes/mineurs_etrangers_non_accompagne"],
  ["CGRA / CGVS","https://www.cgra.be/fr"],["Office des Étrangers / DVZ","https://dofi.ibz.be/fr"],
@@ -2878,9 +3158,17 @@ const SOURCES_OFF=[
 ];
 function renderSourcesOff(){
   const el=document.getElementById('sourcesOfficielles');if(!el)return;
+  const remoteSources=window.MENA_CLOUD?MENA_CLOUD.get('official_sources'):[];
+  const remoteDocs=window.MENA_CLOUD?MENA_CLOUD.get('official_documents'):[];
+  const legalUpdates=window.MENA_CLOUD?MENA_CLOUD.get('legal_updates').filter(x=>x.status!=='archived'):[];
   el.innerHTML=`<h3>📡 ${LANG==='nl'?'Officiële bronnen (juridische monitoring)':'Sources officielles (veille juridique)'}</h3>
     <p class="muted">${LANG==='nl'?'Juridische inhoud van deze app geverifieerd op':'Contenu juridique de cette application vérifié le'} <strong>${DATA_VERIFIED}</strong>. ${LANG==='nl'?'Raadpleeg bij twijfel altijd de officiële bron:':'En cas de doute, consultez toujours la source officielle :'}</p>
-    <ul class="clean">${SOURCES_OFF.map(([n,u])=>`<li>🔗 <a href="${u}" target="_blank" rel="noopener">${esc(n)}</a></li>`).join('')}</ul>`;
+    <ul class="clean">${SOURCES_OFF.map(([n,u])=>`<li>🔗 <a href="${u}" target="_blank" rel="noopener">${esc(n)}</a></li>`).join('')}</ul>
+    ${legalUpdates.length?`<h4 style="color:var(--accent);margin-top:1rem">⚖️ ${LANG==='nl'?'Juridische updates uit de geverifieerde databank':'Mises à jour de la base vérifiée'}</h4>
+      ${legalUpdates.slice(0,5).map(x=>{const u=safeHttpUrl(x.source_url);return `<div class="list-item"><strong>${esc(x.title)}</strong>${x.effective_on?` <span class="badge b-cours">${esc(x.effective_on)}</span>`:''}<div class="muted">${esc(x.summary||x.impact||'')}</div>${u?`<a href="${esc(u)}" target="_blank" rel="noopener">${LANG==='nl'?'Officiële bron':'Source officielle'} ↗</a>`:''}</div>`;}).join('')}`:''}
+    ${remoteDocs.length?`<h4 style="color:var(--accent);margin-top:1rem">📄 ${LANG==='nl'?'Officiële documenten':'Documents officiels'}</h4>
+      <ul class="clean">${remoteDocs.slice(0,12).map(x=>{const u=safeHttpUrl(x.url);return `<li>📄 ${u?`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(x.title)}</a>`:esc(x.title)} <span class="muted">— ${esc(x.authority||'')}</span></li>`;}).join('')}</ul>`:''}
+    ${remoteSources.length?`<p class="muted" style="font-size:.78rem;margin-top:.8rem">☁️ ${remoteSources.length} ${LANG==='nl'?'extra geverifieerde bronnen gesynchroniseerd':'sources vérifiées supplémentaires synchronisées'}.</p>`:''}`;
 }
 
 /* ============ TRADUCTION FR -> NL (sens inverse) + APERÇU SURLIGNÉ ============ */
@@ -2906,21 +3194,41 @@ function markUntranslated(src,out){
 
 /* ============ v1.2 : GUIDE DU TUTEUR ============ */
 let GUIDE=null,INTERV=null;
+const GUIDE_DEEP={
+  m1:{goal:"Installer une relation de confiance tout en sécurisant immédiatement la représentation juridique et le suivi.",situations:["Le jeune refuse le contact ou ne comprend pas le rôle du tuteur","Le dossier reçu est incomplet ou plusieurs procédures sont déjà ouvertes","Le lieu d’accueil et le jeune donnent des informations différentes"],method:["Séparer les faits vérifiés, les propos rapportés et vos hypothèses.","Créer dès le premier jour une chronologie et une liste de pièces manquantes.","Expliquer au jeune ce que vous ferez, ce que vous ne pouvez pas promettre et quand vous reviendrez vers lui."],sources:["manuel1","directives","tutelles","baj"]},
+  m2:{goal:"Défendre l’identité déclarée et les droits du jeune dans une procédure où l’âge est contesté.",situations:["Absence totale de document d’identité","Documents jugés peu fiables ou contradictoires","Décision concluant à la majorité"],method:["Inventorier les preuves directes et indirectes sans influencer le récit.","Exiger une décision écrite et transmettre immédiatement toutes les pages à l’avocat.","Vérifier quelle autorité conduit l’évaluation et quelles règles sont applicables à la date du dossier."],sources:["manuel1","cgra2026","droit","baj"]},
+  m3:{goal:"Permettre au jeune de comprendre et d’exercer ses droits pendant toute la procédure de protection internationale.",situations:["Convocation à l’entretien personnel","Interprète inadéquat ou besoin procédural particulier","Décision négative, statut subsidiaire ou demande ultérieure"],method:["Préparer la procédure, jamais un récit appris.","Formaliser par écrit les vulnérabilités et besoins d’adaptation.","À chaque courrier, relever réception, décision, délai, avocat et prochaine action."],sources:["cgraMena","cgraGuide","cgraContact","cgra2026","manuel3"]},
+  m4:{goal:"Obtenir un accueil stable et adapté aux besoins réels du jeune, y compris en situation de crise.",situations:["Transfert contesté ou rupture d’hébergement","Conflit avec le centre ou la famille d’accueil","Jeune très vulnérable, très jeune ou en errance"],method:["Évaluer d’abord la sécurité de la nuit à venir.","Organiser une concertation avec une demande et une conclusion écrites.","Préparer une continuité des soins, de l’école et des contacts lors de tout transfert."],sources:["manuel5","fedasil","trajet","hebergement","tutelles"]},
+  m5:{goal:"Construire un quotidien protecteur : santé, santé mentale, école, langue, loisirs et réseau.",situations:["Décrochage scolaire ou absences répétées","Trauma, crise psychique ou refus de soins","Harcèlement, isolement ou difficultés linguistiques"],method:["Chercher la cause avant de traiter le symptôme.","Définir qui fait quoi et la date du prochain contrôle.","Partager uniquement les données nécessaires avec chaque professionnel."],sources:["manuel2","manuel5","enseignement","trajet"]},
+  m6:{goal:"Gérer les biens du jeune de manière prudente, traçable et éducative.",situations:["Ouverture ou utilisation d’un compte bancaire","Revenus d’un job étudiant ou allocations","Dépense importante, dette ou pression de proches"],method:["Distinguer les fonds gérés par le tuteur de ceux gérés par un tiers.","Conserver décisions, soldes et justificatifs sans surveiller abusivement chaque dépense.","Associer le jeune au budget et expliquer les choix."],sources:["manuel7","travail","directives","tribunaux"]},
+  m7:{goal:"Produire des rapports exacts, utiles et vérifiables qui montrent l’évolution du dossier.",situations:["Rapport initial, périodique ou final","Changement important entre deux rapports","Désaccord avec le jeune ou une institution"],method:["Repartir du rapport précédent et documenter chaque changement.","Distinguer faits, avis du jeune, avis professionnel et décision du tuteur.","Vérifier destinataires, modèle, pièces et preuve d’envoi."],sources:["manuel1","manuel7","directives","tutelles","tribunaux"]},
+  m8:{goal:"Examiner les liens familiaux et les possibilités de réunification dans l’intérêt supérieur du jeune.",situations:["Un proche est localisé dans un autre État européen","Le contact familial comporte un risque","Le jeune obtient une protection et veut faire venir ses parents"],method:["Cartographier les personnes, pays, statuts et preuves.","Faire qualifier la procédure par l’avocat avant d’engager une démarche.","Documenter le souhait du jeune et les garanties d’accueil."],sources:["manuel3","manuel4","oe","cgraMena","solution"]},
+  m9:{goal:"Garantir la défense et la protection du jeune lorsqu’il rencontre la police ou la justice.",situations:["Le jeune est suspect, victime ou témoin","Privation de liberté ou audition urgente","Violence, exploitation ou conflit avec la loi"],method:["Identifier immédiatement le statut procédural et le lieu.","Faire intervenir un avocat et un interprète adaptés.","Après l’urgence, coordonner protection, hébergement et soutien psychosocial."],sources:["manuel1","manuel4","baj","tribunaux","traite"]},
+  m10:{goal:"Comparer les solutions de séjour sans promesse, à partir des droits, des faits et du projet du jeune.",situations:["Procédure MINTEH","Retour envisagé ou annexe 38","Séjour en Belgique ou regroupement familial"],method:["Distinguer chaque procédure et son autorité compétente.","Évaluer les garanties concrètes, pas seulement l’existence d’un proche.","Consigner le point de vue du jeune et le réexaminer lorsque les faits changent."],sources:["solution","manuel3","manuel4","oe","droit"]},
+  m11:{goal:"Éviter une rupture brutale à 18 ans en organisant chaque relais avant la fin de la tutelle.",situations:["Absence de séjour stable à 17 ans et demi","Fin d’hébergement ou de revenus à la majorité","Soins, formation ou accompagnement encore nécessaires"],method:["Utiliser un tableau séjour-logement-revenus-santé-formation-réseau.","Obtenir un nom, un rendez-vous et une confirmation pour chaque relais.","Remettre au jeune un dossier compréhensible et un plan d’urgence."],sources:["manuel1","manuel4","manuel5","manuel7","trajet"]},
+  m12:{goal:"Réclamer correctement rémunération et frais tout en séparant strictement ceux-ci des biens du jeune.",situations:["Déplacement, interprétariat ou dépense exceptionnelle","Justificatif manquant ou frais contesté","Clôture de mission"],method:["Utiliser le barème et le formulaire en vigueur à la date de la dépense.","Noter motif, dossier, date et preuve dès l’action.","Ne jamais imputer au jeune une dépense relevant de la mission du tuteur."],sources:["tutelles","manuel1","manuel7","directives"]},
+  m13:{goal:"Répondre aux demandes du jeune par une méthode reproductible, même lorsque la réponse n’est pas celle espérée.",situations:["Demande urgente irréalisable ou juridiquement incertaine","Demandes répétées liées à l’angoisse","Désaccord entre le jeune, le tuteur et le réseau"],method:["Reformuler la demande et le besoin qui se trouve derrière.","Dire ce qui est certain, ce qui doit être vérifié et quand une réponse sera donnée.","Présenter les options, conséquences et voies de recours dans une langue comprise."],sources:["manuel1","manuel2","directives","tutelles"]},
+  m14:{goal:"Protéger les données du jeune sans empêcher le travail coordonné des professionnels.",situations:["Envoi d’un dossier par e-mail","Perte ou vol d’un appareil","Demande d’information excessive par un tiers"],method:["Vérifier identité, compétence et besoin du destinataire.","Minimiser les données, chiffrer les sauvegardes et séparer comptes personnel et professionnel.","Documenter toute perte et demander immédiatement conseil en cas d’incident."],sources:["manuel1","directives","tutelles"]}
+};
 async function renderGuide(){
   if(!GUIDE)GUIDE=await loadJSON('js/data/guide-data.json');
   if(!INTERV)INTERV=await loadJSON('js/data/intervenants-data.json');
   const el=document.getElementById('guideContent');
   if(!GUIDE||!GUIDE.modules){el.innerHTML='<div class="empty">—</div>';return;}
-  el.innerHTML=GUIDE.modules.map(m=>`
+  el.innerHTML=GUIDE.modules.map(m=>{const deep=GUIDE_DEEP[m.id];return `
     <details class="accordion"><summary>${m.ico} ${esc(tr(m.titre))}</summary><div class="body">
       <p>${esc(tr(m.cours))}</p>
+      ${deep?`<div class="banner" style="margin:.7rem 0"><strong>🎯 Objectif pratique :</strong> ${esc(deep.goal)}</div>
+      <h4 style="color:var(--accent);margin:.7rem 0 .3rem">Situations que vous devez savoir traiter</h4><ul class="clean">${deep.situations.map(x=>`<li>• ${esc(x)}</li>`).join('')}</ul>
+      <h4 style="color:var(--accent);margin:.7rem 0 .3rem">Méthode de travail</h4><ol style="margin-left:1.2rem">${deep.method.map(x=>`<li style="margin:.25rem 0">${esc(x)}</li>`).join('')}</ol>`:''}
       <h4 style="color:var(--accent);margin:.7rem 0 .3rem">✅ ${LANG==='nl'?'Wat u moet doen (in volgorde)':'Ce que vous devez faire (dans l\'ordre)'}</h4>
       <ol style="margin-left:1.2rem">${tr(m.actions).map(a=>`<li style="margin:.25rem 0">${esc(a)}</li>`).join('')}</ol>
       <h4 style="color:var(--accent);margin:.7rem 0 .3rem">📤 ${LANG==='nl'?'Documenten — wat, aan wie':'Documents — quoi, à qui'}</h4>
       <ul class="clean">${tr(m.documents).map(x=>`<li>📄 ${esc(x)}</li>`).join('')}</ul>
       <div class="banner" style="margin-top:.7rem">💡 ${esc(tr(m.conseils))}</div>
       <p class="muted" style="font-size:.78rem;margin-top:.5rem">📖 ${esc(m.refs)}</p>
-    </div></details>`).join('');
+      ${deep?`<div style="margin-top:.6rem">${deep.sources.map(id=>LEGAL_HELP_SOURCES[id]).filter(Boolean).map(s=>`<a class="btn sec sm" href="${esc(s.url)}" target="_blank" rel="noopener" style="margin:.2rem">${esc(s.authority)} ↗</a>`).join('')}</div>`:''}
+    </div></details>`}).join('');
   // Documents officiels (modèles + formulaires des autorités)
   const docsOff=[
     ["📄",LANG==='nl'?'Modellen van verslagen & info voor voogden':'Modèles de rapports & infos pour tuteurs',"https://justice.belgium.be/fr/themes_et_dossiers/enfants_et_jeunes/mineurs_etrangers_non_accompagne/tuteur"],
@@ -3177,8 +3485,11 @@ function b64ToBuf(b){const bin=atob(b);const u=new Uint8Array(bin.length);for(le
 let IDB=null;
 function idbOpen(){return new Promise((res,rej)=>{
   if(IDB)return res(IDB);
-  const q=indexedDB.open('mena_pj',1);
-  q.onupgradeneeded=e=>{e.target.result.createObjectStore('pj',{keyPath:'id'});};
+  const q=indexedDB.open('mena_pj',2);
+  q.onupgradeneeded=e=>{const db=e.target.result;
+    if(!db.objectStoreNames.contains('pj'))db.createObjectStore('pj',{keyPath:'id'});
+    if(!db.objectStoreNames.contains('officialTemplates'))db.createObjectStore('officialTemplates',{keyPath:'id'});
+  };
   q.onsuccess=e=>{IDB=e.target.result;res(IDB);};
   q.onerror=()=>rej(q.error);
 });}
@@ -3719,6 +4030,18 @@ async function openStats(){
 
 /* ============ v1.7 : NOTES DE VERSION ============ */
 const CHANGELOG={
+ '1.11.0':{fr:"📚 Registre documentaire complet de la tutelle : obligations, pièces conditionnelles, interprétariat et gestion · 🔒 conservation chiffrée et strictement identique des originaux Word, Excel, PDF et images avec empreinte SHA-256 et versions · 📊 relevé des dépenses exportable dans Excel · 🔄 brouillons de rapports actualisés automatiquement à l'approche des échéances.",
+           nl:"📚 Volledig documentenregister voor de voogdij: verplichtingen, voorwaardelijke stukken, tolken en beheer · 🔒 versleutelde en strikt identieke bewaring van originele Word-, Excel-, PDF- en afbeeldingsbestanden met SHA-256-vingerafdruk en versies · 📊 onkostenstaat exporteerbaar naar Excel · 🔄 verslagontwerpen automatisch bijgewerkt wanneer de deadline nadert."},
+ '1.10.2':{fr:"🧭 Navigation corrigée : aucun chevauchement, onglets répartis proprement sur ordinateur et défilement horizontal stable sur mobile.",
+           nl:"🧭 Navigatie gecorrigeerd: geen overlapping, nette verdeling op computer en stabiel horizontaal scrollen op mobiel."},
+ '1.10.1':{fr:"⚖️ Références juridiques contrôlées : date de publication au Moniteur belge corrigée au 8 août 2025 et date de vérification précisée.",
+           nl:"⚖️ Juridische verwijzingen gecontroleerd: publicatiedatum in het Belgisch Staatsblad gecorrigeerd naar 8 augustus 2025 en verificatiedatum verduidelijkt."},
+ '1.10.0':{fr:"🧭 Nouveau centre d’aide aux situations particulières : description anonyme, détection des urgences, plan d’action, questions à vérifier, pièces à réunir, cas proches et sources officielles · 🎓 14 cours enrichis avec objectifs, scénarios, méthode et liens directs.",
+           nl:"🧭 Nieuw hulpcentrum voor bijzondere situaties: anonieme beschrijving, urgentiedetectie, actieplan, controlevragen, stukken, gelijkaardige cases en officiële bronnen · 🎓 14 uitgebreide cursussen met doelen, scenario's, methode en directe links."},
+ '1.9.0':{fr:"📝 Nouveau centre Documents Pro : 10 modèles préremplis, édition, impression/PDF, e-mail et historique chiffré par dossier · ⚙️ automatisations locales : rendez-vous, rapports, majorité, expiration de documents et sauvegarde · navigation enrichie pour ordinateur, tablette et téléphone.",
+          nl:"📝 Nieuw centrum Professionele documenten: 10 vooraf ingevulde modellen, bewerking, afdruk/PDF, e-mail en versleutelde historiek per dossier · ⚙️ lokale automatiseringen: afspraken, verslagen, meerderjarigheid, vervaldatums en back-up · uitgebreid navigatiemenu voor computer, tablet en telefoon."},
+ '1.8.0':{fr:"☁️ Contenus publics officiels synchronisés depuis Supabase avec cache hors ligne · 📝 rendez-vous transformable en note de suivi chiffrée + relance au tableau de bord · 📆 ajout privé à Google Calendar et itinéraire Google Maps sans nom du jeune · 🩹 lecteur du manuel fiabilisé · configuration Vercel sécurisée.",
+         nl:"☁️ Officiële publieke inhoud gesynchroniseerd via Supabase met offline cache · 📝 afspraak omzetbaar in versleutelde opvolgnotitie + herinnering op het dashboard · 📆 privacyvriendelijk toevoegen aan Google Agenda en Google Maps-route zonder naam van de jongere · 🩹 handleidinglezer hersteld · veilige Vercel-configuratie."},
  '1.7.15':{fr:"🔗 Liens directs dans le pied de page : site en ligne, mode d'emploi FR, handleiding NL et dernière version à télécharger — faciles à partager avec un autre tuteur · manuels FR/NL mis à jour (mise en page « syllabus » + PDF).",
          nl:"🔗 Directe links in de voettekst: online site, handleiding NL, mode d'emploi FR en laatste versie om te downloaden — makkelijk te delen met een andere voogd · handleidingen FR/NL bijgewerkt (« syllabus »-opmaak + PDF)."},
  '1.7.14':{fr:"🩹 Correctif démarrage : sur certains PC le navigateur ne s'ouvrait pas tout seul au lancement (l'app tournait, mais la page ne s'affichait pas). Ouverture du navigateur fiabilisée (plusieurs méthodes) + l'adresse est affichée dans la fenêtre au cas où. La création du raccourci se fait désormais en arrière-plan, sans fenêtre.",
@@ -4249,6 +4572,24 @@ function downloadManualPdf(){openManual(true);}
 
 /* ============ UTIL ============ */
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+const OFFICIAL_CONTENT_HOSTS=new Set(['justice.belgium.be','dofi.ibz.be','eur-lex.europa.eu','www.cgra.be','www.fedasil.be','www.rvv-cce.be']);
+function safeHttpUrl(value){
+  try{const u=new URL(String(value||''));return (u.protocol==='https:'&&OFFICIAL_CONTENT_HOSTS.has(u.hostname.toLowerCase()))?u.href:'';}catch(_){return '';}
+}
+async function refreshCloudContent(force){
+  const btn=document.getElementById('cloudRefreshBtn'),status=document.getElementById('cloudStatus');
+  if(!window.MENA_CLOUD){if(status)status.textContent='⚠️ '+(LANG==='nl'?'Cloudmodule niet beschikbaar.':'Module cloud indisponible.');return;}
+  if(btn)btn.disabled=true;
+  if(status)status.textContent='⏳ '+(LANG==='nl'?'Publieke inhoud controleren…':'Vérification des contenus publics…');
+  const s=await MENA_CLOUD.load({force:!!force});
+  const counts=['official_sources','official_documents','legal_updates','resources_directory','courses'].reduce((n,k)=>n+MENA_CLOUD.get(k).length,0);
+  if(status){
+    const mode=s.source==='network'?(LANG==='nl'?'online bijgewerkt':'mis à jour en ligne'):(s.source==='cache'?(LANG==='nl'?'offline cache':'cache hors ligne'):(LANG==='nl'?'niet beschikbaar':'indisponible'));
+    status.textContent=(counts?'✅ ':'⚠️ ')+(LANG==='nl'?'Publieke inhoud':'Contenus publics')+' : '+counts+' · '+mode+(s.error?' · '+(LANG==='nl'?'netwerkfout':'erreur réseau'):'');
+  }
+  if(btn){btn.disabled=false;btn.textContent=LANG==='nl'?'🔄 Inhoud controleren':'🔄 Vérifier les contenus';}
+  if(document.getElementById('resources')?.classList.contains('active'))renderSourcesOff();
+}
 
 /* ============ AGENDA & INTERPRÈTES ============ */
 const AG_STORE='mena_agenda_enc';
@@ -4490,6 +4831,9 @@ function renderRdv(){
       ${ip?`<div class="rdv-interp">🌐 ${esc(ip.prenom?ip.prenom+' '+ip.nom:ip.nom)}</div>`:''}
       <div class="rdv-actions">
         <button class="btn sec sm" onclick="event.stopPropagation();openRdvForm('${r.id}')">✏️</button>
+        ${r.adresse&&!r.enLigne?`<button class="btn sec sm" onclick="event.stopPropagation();openRdvRoute('${r.id}')">🗺️ ${NL?'Route':'Itinéraire'}</button>`:''}
+        <button class="btn sec sm" onclick="event.stopPropagation();openRdvGoogleCalendar('${r.id}')">📆 Google</button>
+        ${sc!=='annule'?`<button class="btn sec sm" onclick="event.stopPropagation();openCaseNote('${r.id}')">📝 ${NL?'Opvolging':'Suivi'}</button>`:''}
         <button class="btn sec sm" onclick="event.stopPropagation();openMsgMena('${r.id}')">📱 ${NL?'Bericht NBMV':'Message MENA'}</button>
         <button class="btn sec sm" onclick="event.stopPropagation();genCoordMsg('${r.id}')">📧 ${NL?'Coördinatie':'Coordination'}</button>
         <button class="btn danger sm" onclick="event.stopPropagation();deleteRdvItem('${r.id}')">🗑️</button>
@@ -4499,6 +4843,33 @@ function renderRdv(){
 }
 
 function openRdvDetail(id){openRdvForm(id);}
+
+function openRdvRoute(id){
+  const r=AG.rdv.find(x=>x.id===id);if(!r||!r.adresse)return;
+  const origin=(TUTEUR&&TUTEUR.adresse)||'';
+  const p=new URLSearchParams({api:'1',destination:r.adresse,travelmode:'driving'});
+  if(origin)p.set('origin',origin);
+  window.open('https://www.google.com/maps/dir/?'+p.toString(),'_blank','noopener');
+}
+
+function googleCalStamp(date,time){return String(date||'').replace(/-/g,'')+'T'+String(time||'09:00').replace(':','')+'00';}
+function openRdvGoogleCalendar(id){
+  const r=AG.rdv.find(x=>x.id===id);if(!r||!r.date)return;
+  const start=new Date(r.date+'T'+(r.heure||'09:00')+':00');
+  const end=new Date(start.getTime()+(+r.duree||60)*60000);
+  const p=n=>String(n).padStart(2,'0');
+  const endDate=end.getFullYear()+'-'+p(end.getMonth()+1)+'-'+p(end.getDate());
+  const endTime=p(end.getHours())+':'+p(end.getMinutes());
+  const type=RDV_TYPE_FR[r.type]||r.type||'Rendez-vous';
+  const params=new URLSearchParams({
+    action:'TEMPLATE',
+    text:(LANG==='nl'?'NBMV-afspraak — ':'Rendez-vous MENA — ')+type,
+    dates:googleCalStamp(r.date,r.heure)+'/'+googleCalStamp(endDate,endTime),
+    details:LANG==='nl'?'Voogdijafspraak. Geen persoonsgegevens toegevoegd.':'Rendez-vous de tutelle. Aucune donnée nominative ajoutée.',
+    location:r.adresse||r.lieu||''
+  });
+  window.open('https://calendar.google.com/calendar/render?'+params.toString(),'_blank','noopener');
+}
 
 function openRdvForm(id,prefill){
   const doss=loadDossiers();
@@ -4612,6 +4983,69 @@ async function deleteRdvItem(id){
   if(!confirm(NL?'Afspraak verwijderen?':'Supprimer ce rendez-vous ?'))return;
   AG.rdv=AG.rdv.filter(x=>x.id!==id);
   await persistAg();renderRdv();
+}
+
+function caseOutcomeLabel(value){
+  const NL=LANG==='nl';
+  return ({termine:NL?'Afgerond':'Terminé',suivi:NL?'Opvolging nodig':'Suivi nécessaire',replanifier:NL?'Opnieuw plannen':'À replanifier',absent:NL?'Afwezig':'Absence'})[value]||value||'—';
+}
+
+function openCaseNote(rdvId){
+  const r=AG.rdv.find(x=>x.id===rdvId);if(!r)return;
+  const d=loadDossiers().find(x=>x.id===r.dossierId);if(!d)return;
+  const NL=LANG==='nl';
+  document.getElementById('cn_rdv_id').value=r.id;
+  document.getElementById('cn_dossier_id').value=d.id;
+  document.getElementById('cn_date').value=r.date||nowISO();
+  document.getElementById('cn_outcome').value='termine';
+  document.getElementById('cn_observations').value='';
+  document.getElementById('cn_actions').value='';
+  document.getElementById('cn_followup').value='';
+  document.getElementById('caseNoteTitle').textContent=NL?'📝 Opvolgnotitie na afspraak':'📝 Note de suivi après rendez-vous';
+  document.getElementById('cn_date_lbl').textContent=NL?'Datum van opvolging *':'Date du suivi *';
+  document.getElementById('cn_outcome_lbl').textContent=NL?'Resultaat *':'Résultat *';
+  document.getElementById('cn_obs_lbl').textContent=NL?'Feitelijke observaties':'Observations factuelles';
+  document.getElementById('cn_actions_lbl').textContent=NL?'Besliste acties':'Actions décidées';
+  document.getElementById('cn_follow_lbl').textContent=NL?'Opvolgdatum (optioneel)':'Date de relance (facultatif)';
+  document.getElementById('cn_privacy').textContent=NL?'🔒 Deze notitie blijft versleuteld op dit toestel en wordt niet naar Supabase gestuurd.':"🔒 Cette note reste chiffrée sur cet appareil et n'est pas envoyée à Supabase.";
+  const options=document.getElementById('cn_outcome').options;
+  ['termine','suivi','replanifier','absent'].forEach((v,i)=>options[i].text=caseOutcomeLabel(v));
+  document.getElementById('cn_cancel').textContent=NL?'Annuleren':'Annuler';
+  document.getElementById('cn_save').textContent=NL?'💾 Notitie opslaan':'💾 Enregistrer la note';
+  openModal('caseNoteModal');
+}
+
+async function saveCaseNote(e){
+  e.preventDefault();
+  const rdvId=document.getElementById('cn_rdv_id').value;
+  const dossierId=document.getElementById('cn_dossier_id').value;
+  const r=AG.rdv.find(x=>x.id===rdvId);
+  const arr=loadDossiers(),d=arr.find(x=>x.id===dossierId);
+  if(!r||!d)return;
+  initGestion(d);
+  const outcome=document.getElementById('cn_outcome').value;
+  const note={
+    id:'CN'+Date.now(),rdvId:r.id,date:document.getElementById('cn_date').value,
+    type:r.type,outcome,
+    observations:document.getElementById('cn_observations').value.trim(),
+    actions:document.getElementById('cn_actions').value.trim(),
+    followupDate:document.getElementById('cn_followup').value,
+    createdAt:Date.now()
+  };
+  d.caseNotes.unshift(note);
+  d.journal=d.journal||[];
+  d.journal.unshift({date:nowISO(),source:'Agenda',label:{fr:'Note de suivi ajoutée',nl:'Opvolgnotitie toegevoegd'}});
+  r.statut=(outcome==='termine'||outcome==='suivi')?'realise':'annule';
+  saveDossiers(arr);await persistAg();
+  closeModal('caseNoteModal');
+  renderCalendar();renderRdv();renderDashboard();
+}
+
+function deleteCaseNote(dossierId,noteId){
+  if(!confirm(LANG==='nl'?'Deze opvolgnotitie verwijderen?':'Supprimer cette note de suivi ?'))return;
+  const arr=loadDossiers(),d=arr.find(x=>x.id===dossierId);if(!d)return;
+  d.caseNotes=(d.caseNotes||[]).filter(x=>x.id!==noteId);
+  saveDossiers(arr);openDossierDetail(dossierId);renderDashboard();
 }
 
 // --- INTERPRÈTES ---
@@ -5198,13 +5632,197 @@ function genCoordMsg(rdvId){
   window.open('mailto:'+to+'?subject='+subj+'&body='+body,'_blank');
 }
 
+/* ============ DOCUMENTS PROFESSIONNELS ============ */
+const OFFICIAL_DOC_CATEGORIES={mission:'Mission et rapports',procedure:'Séjour et protection',interprete:'Interprétariat',social:'Vie civile, sociale et santé',gestion:'Gestion professionnelle'};
+const OFFICIAL_DOC_REGISTRY=[
+ {id:'rapport_initial',cat:'mission',title:'Rapport initial de tutelle',level:'required',deadline:'Dans les 15 jours de la désignation',recipients:'Juge de paix + copie au Service des Tutelles',evolving:true,source:'SPF Justice — directives et Livre 7'},
+ {id:'rapport_periodique',cat:'mission',title:'Rapport intermédiaire de tutelle',level:'required',deadline:'Au moins deux fois par an',recipients:'Juge de paix + copie au Service des Tutelles',evolving:true,source:'SPF Justice — Livre 7'},
+ {id:'rapport_final',cat:'mission',title:'Rapport final de tutelle',level:'required',deadline:'Dans les 15 jours de la fin de tutelle',recipients:'Juge de paix + copie au Service des Tutelles',evolving:true,source:'SPF Justice — Livre 7'},
+ {id:'annexe_financiere',cat:'mission',title:'Aperçu des revenus, dépenses et soldes bancaires',level:'required',deadline:'Avec chaque rapport de tutelle',recipients:'Annexe du rapport',evolving:true,source:'SPF Justice — Livre 7'},
+ {id:'preuve_solde',cat:'mission',title:'Preuves des soldes des comptes bancaires',level:'required',deadline:'À joindre aux rapports',recipients:'Juge de paix / Service des Tutelles',source:'SPF Justice — Livre 7'},
+ {id:'decision_designation',cat:'mission',title:'Décision de désignation du tuteur',level:'received',deadline:'À conserver pendant toute la mission',recipients:'Dossier de tutelle',source:'Service des Tutelles'},
+ {id:'signalement_mena',cat:'procedure',title:'Fiche de signalement MENA',level:'conditional',deadline:'Dès le signalement si disponible',recipients:'Service des Tutelles / Office des étrangers',source:'SPF Justice / Office des étrangers'},
+ {id:'identite',cat:'procedure',title:'Passeport, acte de naissance et documents d’identité',level:'conditional',deadline:'À chaque réception ou renouvellement',recipients:'Dossier et autorités compétentes',source:'Autorité émettrice'},
+ {id:'sejour',cat:'procedure',title:'Attestations, annexes et titre de séjour',level:'conditional',deadline:'Suivre toute expiration',recipients:'Commune / Office des étrangers',evolving:true,source:'Office des étrangers / commune'},
+ {id:'asile',cat:'procedure',title:'Demande de protection, convocations, audition et décision CGRA',level:'conditional',deadline:'Selon la procédure',recipients:'CGRA / avocat',evolving:true,source:'CGRA / Office des étrangers'},
+ {id:'minteh',cat:'procedure',title:'Demande de solution durable MINTEH et compléments',level:'conditional',deadline:'Selon la procédure et chaque changement utile',recipients:'Bureau MINTEH — Office des étrangers',evolving:true,source:'SPF Justice — Livre 3 / Office des étrangers'},
+ {id:'recours',cat:'procedure',title:'Requête, inventaire de pièces et décisions de recours',level:'conditional',deadline:'Selon le délai communiqué par l’avocat',recipients:'Avocat / juridiction',evolving:true,source:'Avocat / juridiction compétente'},
+ {id:'demande_interprete',cat:'interprete',title:'Demande ou réquisition d’interprète',level:'conditional',deadline:'Avant le rendez-vous ou l’audition',recipients:'Service d’interprétariat / autorité',evolving:true,source:'Service demandeur'},
+ {id:'attestation_interprete',cat:'interprete',title:'Attestation de prestation de l’interprète',level:'conditional',deadline:'À faire signer après la prestation',recipients:'Organisme payeur / dossier',source:'Organisme d’interprétariat'},
+ {id:'facture_interprete',cat:'interprete',title:'Facture ou note de frais de l’interprète',level:'conditional',deadline:'Après la prestation',recipients:'Organisme payeur / comptabilité',source:'Interprète / organisme'},
+ {id:'proces_verbal_interprete',cat:'interprete',title:'Rapport d’audition signé avec l’interprète',level:'conditional',deadline:'À l’issue de l’audition officielle',recipients:'Autorité ayant mené l’audition',source:'SPF Justice — Livre 3'},
+ {id:'hebergement',cat:'social',title:'Convention, attestation et décisions d’hébergement',level:'conditional',deadline:'À chaque changement',recipients:'Service d’accueil / dossier',evolving:true,source:'Structure d’accueil'},
+ {id:'scolarite',cat:'social',title:'Inscription, fréquentation, bulletins et orientation scolaire',level:'conditional',deadline:'Chaque année et à chaque changement',recipients:'Établissement / dossier',evolving:true,source:'Établissement scolaire'},
+ {id:'sante',cat:'social',title:'Affiliation, consentements et documents médicaux nécessaires',level:'conditional',deadline:'Selon les soins et renouvellements',recipients:'Mutuelle / prestataire',evolving:true,source:'Mutuelle / prestataire de soins'},
+ {id:'famille',cat:'social',title:'Recherche familiale, liens familiaux et regroupement familial',level:'conditional',deadline:'Selon l’intérêt et la sécurité du jeune',recipients:'Autorités / services compétents',evolving:true,source:'Autorité ou service compétent'},
+ {id:'banque',cat:'social',title:'Ouverture de compte, procurations et extraits bancaires',level:'conditional',deadline:'Suivi continu',recipients:'Banque / dossier',evolving:true,source:'Établissement bancaire'},
+ {id:'releve_depenses',cat:'gestion',title:'Relevé professionnel des dépenses et déplacements (Excel)',level:'management',deadline:'Mise à jour continue; clôture avec les rapports',recipients:'Gestion du tuteur / contrôle',evolving:true,source:'Registre interne fondé sur le Livre 7'},
+ {id:'justificatifs_frais',cat:'gestion',title:'Justificatifs de frais, tickets, factures et indemnités',level:'management',deadline:'À classer au fil de l’eau',recipients:'Gestion du tuteur / organisme payeur',evolving:true,source:'Pièces comptables'},
+ {id:'registre_interventions',cat:'gestion',title:'Chronologie des démarches, contacts et décisions',level:'management',deadline:'Après chaque événement',recipients:'Dossier professionnel',evolving:true,source:'Registre interne'},
+ {id:'registre_rdv',cat:'gestion',title:'Registre des rendez-vous et prestations d’interprétariat',level:'management',deadline:'Après chaque rendez-vous',recipients:'Dossier professionnel',evolving:true,source:'Registre interne'},
+ {id:'bordereau_transmission',cat:'gestion',title:'Inventaire et bordereau de transmission du dossier',level:'conditional',deadline:'À tout transfert ou à la fin de tutelle',recipients:'Jeune / nouveau service / nouveau tuteur',evolving:true,source:'Bonne gestion professionnelle'}
+];
+function officialDossier(){return loadDossiers().find(d=>d.id===document.getElementById('officialDocDossier')?.value)}
+async function officialTemplateList(docType){const db=await idbOpen();return new Promise(res=>{const out=[];const q=db.transaction('officialTemplates').objectStore('officialTemplates').openCursor();q.onsuccess=e=>{const c=e.target.result;if(c){if(c.value.docType===docType)out.push(c.value);c.continue()}else res(out.sort((a,b)=>b.date.localeCompare(a.date)))};q.onerror=()=>res(out)})}
+async function officialTemplateAdd(docType,input){const f=input.files?.[0];if(!f||!CRYPTO_KEY)return;if(f.size>25*1024*1024){alert('Maximum 25 Mo par document.');return}const raw=await f.arrayBuffer(),hash=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',raw))).map(x=>x.toString(16).padStart(2,'0')).join(''),enc=await aesEncryptBytes(CRYPTO_KEY,raw),db=await idbOpen();const tx=db.transaction('officialTemplates','readwrite');tx.objectStore('officialTemplates').put({id:'OT'+Date.now(),docType,name:f.name,type:f.type||'application/octet-stream',size:f.size,date:new Date().toISOString(),hash,iv:enc.iv,ct:enc.ct});tx.oncomplete=()=>renderOfficialRegistry();input.value=''}
+async function officialTemplateOpen(id){const db=await idbOpen(),rec=await new Promise(res=>{const q=db.transaction('officialTemplates').objectStore('officialTemplates').get(id);q.onsuccess=()=>res(q.result);q.onerror=()=>res(null)});if(!rec)return;const buf=await aesDecryptBytes(CRYPTO_KEY,rec.iv,rec.ct),a=document.createElement('a');a.href=URL.createObjectURL(new Blob([buf],{type:rec.type}));a.download=rec.name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000)}
+async function officialTemplateDelete(id){if(!confirm('Supprimer cette version de l’original officiel ?'))return;const db=await idbOpen(),tx=db.transaction('officialTemplates','readwrite');tx.objectStore('officialTemplates').delete(id);tx.oncomplete=()=>renderOfficialRegistry()}
+function expenseExcelXml(d){const xe=v=>String(v??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'),rows=(d.frais||[]).map(f=>`<Row><Cell><Data ss:Type="String">${xe(f.date)}</Data></Cell><Cell><Data ss:Type="String">${xe(f.motif)}</Data></Cell><Cell><Data ss:Type="String">${xe(f.de)}</Data></Cell><Cell><Data ss:Type="String">${xe(f.a)}</Data></Cell><Cell><Data ss:Type="Number">${+f.km||0}</Data></Cell><Cell><Data ss:Type="Number">${+f.pkm||0}</Data></Cell><Cell><Data ss:Type="Number">${+f.park||0}</Data></Cell><Cell><Data ss:Type="Number">${+f.autres||0}</Data></Cell><Cell ss:Formula="=RC[-4]*RC[-3]+RC[-2]+RC[-1]"><Data ss:Type="Number">${fraisTotal(f)}</Data></Cell></Row>`).join(''),totalFormula=(d.frais||[]).length?` ss:Formula="=SUM(R3C9:R${2+d.frais.length}C9)"`:'';return `<?xml version="1.0"?><Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"><Styles><Style ss:ID="Header"><Font ss:Bold="1"/><Interior ss:Color="#E9A23B" ss:Pattern="Solid"/></Style><Style ss:ID="Money"><NumberFormat ss:Format="0.00 \&quot;€\&quot;"/></Style></Styles><Worksheet ss:Name="Dépenses"><Table><Row><Cell ss:MergeAcross="8" ss:StyleID="Header"><Data ss:Type="String">Relevé des dépenses — ${xe(d.nom||d.id)}</Data></Cell></Row><Row ss:StyleID="Header">${['Date','Motif','Départ','Destination','Km','€/km','Parking','Autres','Total €'].map(x=>`<Cell><Data ss:Type="String">${x}</Data></Cell>`).join('')}</Row>${rows}<Row ss:StyleID="Header"><Cell ss:MergeAcross="7"><Data ss:Type="String">TOTAL</Data></Cell><Cell${totalFormula} ss:StyleID="Money"><Data ss:Type="Number">${(d.frais||[]).reduce((s,f)=>s+fraisTotal(f),0)}</Data></Cell></Row></Table></Worksheet><Worksheet ss:Name="Identification"><Table><Row><Cell><Data ss:Type="String">Tuteur</Data></Cell><Cell><Data ss:Type="String">${xe(TUTEUR.nom)}</Data></Cell></Row><Row><Cell><Data ss:Type="String">N° tuteur</Data></Cell><Cell><Data ss:Type="String">${xe(TUTEUR.numero)}</Data></Cell></Row><Row><Cell><Data ss:Type="String">Dossier</Data></Cell><Cell><Data ss:Type="String">${xe(d.nom||d.id)}</Data></Cell></Row><Row><Cell><Data ss:Type="String">Export</Data></Cell><Cell><Data ss:Type="String">${nowISO()}</Data></Cell></Row></Table></Worksheet></Workbook>`}
+function exportExpenseExcel(){const d=officialDossier();if(!d)return alert('Sélectionnez un dossier.');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([expenseExcelXml(d)],{type:'application/vnd.ms-excel;charset=utf-8'}));a.download=`Releve-depenses-${String(d.nom||d.id).replace(/[^a-z0-9_-]+/gi,'-')}.xls`;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000)}
+function useOfficialDoc(id){if(id==='releve_depenses')return exportExpenseExcel();const map={rapport_initial:'rapport_initial',rapport_periodique:'rapport_periodique',rapport_final:'rapport_final',demande_interprete:'demande_interprete',bordereau_transmission:'transmission'};if(map[id]){document.getElementById('proDocDossier').value=document.getElementById('officialDocDossier').value;document.getElementById('proDocType').value=map[id];prepareProDocument();document.getElementById('proDocEditor').scrollIntoView({behavior:'smooth',block:'center'})}else alert('L’original sera conservé exactement. Déposez-le ici; le mappage de ses champs sera préparé à partir de ce fichier précis.')}
+async function renderOfficialRegistry(){const ds=loadDossiers(),sel=document.getElementById('officialDocDossier');if(!sel)return;const keep=sel.value||document.getElementById('proDocDossier')?.value;sel.innerHTML='<option value="">— Sélectionnez un dossier —</option>'+ds.map(d=>`<option value="${esc(d.id)}">${esc(d.nom||d.id)}</option>`).join('');if(ds.some(d=>d.id===keep))sel.value=keep;else if(ds.length)sel.value=ds[0].id;const cat=document.getElementById('officialDocCategory');if(cat.options.length===1)Object.entries(OFFICIAL_DOC_CATEGORIES).forEach(([k,v])=>cat.insertAdjacentHTML('beforeend',`<option value="${k}">${esc(v)}</option>`));const items=OFFICIAL_DOC_REGISTRY.filter(x=>(!cat.value||x.cat===cat.value)&&(!document.getElementById('officialDocRequired').checked||x.level==='required'));const lists=await Promise.all(items.map(x=>officialTemplateList(x.id)));document.getElementById('officialDocStats').textContent=`${OFFICIAL_DOC_REGISTRY.length} types recensés · ${OFFICIAL_DOC_REGISTRY.filter(x=>x.level==='required').length} obligations récurrentes · ${lists.filter(x=>x.length).length} originaux officiels déposés dans cette vue`;document.getElementById('officialDocList').innerHTML=items.map((x,i)=>{const vs=lists[i],last=vs[0],level=x.level==='required'?'Obligatoire':x.level==='conditional'?'Conditionnel':x.level==='received'?'À conserver':'Gestion professionnelle';return `<div class="req-card"><div class="row" style="justify-content:space-between;align-items:start"><div><strong>${esc(x.title)}</strong> <span class="badge ${x.level==='required'?'red':'blue'}">${level}</span><div class="muted">${esc(OFFICIAL_DOC_CATEGORIES[x.cat])} · ${esc(x.deadline)}</div><div class="muted">Destinataire : ${esc(x.recipients)} · Référence : ${esc(x.source)}</div></div>${x.evolving?'<span title="Se recalcule avec les données récentes">🔄 Évolutif</span>':''}</div><div style="margin-top:.55rem">${last?`<div>✅ Original actuel : <button class="btn sec sm" onclick="officialTemplateOpen('${last.id}')">${esc(last.name)}</button> <span class="muted">${Math.round(last.size/1024)} Ko · SHA-256 ${last.hash.slice(0,12)}… · ${vs.length} version(s)</span> <button class="btn danger sm" onclick="officialTemplateDelete('${last.id}')">×</button></div>`:'<div class="muted">Aucun original officiel déposé.</div>'}<div class="row" style="margin-top:.45rem"><label class="btn sec sm" style="cursor:pointer">📎 ${last?'Ajouter une nouvelle version':'Déposer l’original'}<input type="file" accept=".pdf,.doc,.docx,.xls,.xlsx,.odt,.ods,image/*" hidden onchange="officialTemplateAdd('${x.id}',this)"></label><button class="btn sm" onclick="useOfficialDoc('${x.id}')">✨ Préparer / actualiser</button></div></div></div>`}).join('')}
+const PRO_DOC_LABELS={
+  rapport_initial:'Rapport initial au Service des Tutelles',rapport_periodique:'Rapport périodique de suivi',
+  rapport_final:'Rapport final de tutelle',note_avocat:'Note de synthèse pour l’avocat',
+  demande_interprete:'Demande d’interprète',autorisation:'Autorisation du représentant légal',
+  courrier_ecole:'Courrier à l’établissement scolaire',orientation_medicale:'Demande de suivi médical ou psychologique',
+  recherche_famille:'Demande de recherche familiale',transmission:'Bordereau de transmission de dossier'
+};
+function proDocDossier(){return loadDossiers().find(d=>d.id===document.getElementById('proDocDossier')?.value)}
+function proIdentity(d){
+  const f=d.fiche||{};
+  return `Jeune : ${d.nom||'À compléter'}\nDate de naissance / âge : ${f.naissance||d.naissance||d.age||'À compléter'}\nNationalité : ${f.nationalite||d.pays||'À compléter'}\nN° OE : ${f.ov||d.ov||'À compléter'}\nAdresse / hébergement : ${f.adresseBE||d.adresse||'À compléter'}`;
+}
+function proTutor(){return `${TUTEUR.nom||'Nom du tuteur à compléter'}${TUTEUR.numero?' — n° '+TUTEUR.numero:''}\n${[TUTEUR.rue,[TUTEUR.cp,TUTEUR.ville].filter(Boolean).join(' ')].filter(Boolean).join(', ')}\n${TUTEUR.tel||''}${TUTEUR.email?' — '+TUTEUR.email:''}`.trim()}
+function proDocBody(type,d,recipient,subject,notes){
+  const identity=proIdentity(d),today=new Date().toLocaleDateString(LANG==='nl'?'nl-BE':'fr-BE');
+  const common=`${proTutor()}\n\nLe ${today}\n\nÀ l’attention de : ${recipient||'À compléter'}\nObjet : ${subject||PRO_DOC_LABELS[type]}\n\nMadame, Monsieur,\n\n`;
+  const recent=(d.caseNotes||[]).slice(0,5).map(n=>`- ${n.date||''} : ${n.title||n.type||'Suivi'} — ${n.content||''}`).join('\n')||'Aucun élément récent enregistré.';
+  const next=(d.rapports||[]).filter(r=>!r.fait).map(r=>`- ${r.nom||r.type||'Rapport'} : ${r.echeance||'date à préciser'}`).join('\n')||'Aucune échéance de rapport enregistrée.';
+  const bodies={
+    rapport_initial:`Agissant en qualité de tuteur légal du mineur repris ci-dessous, je vous transmets le rapport initial de prise en charge.\n\n${identity}\n\nSITUATION À LA DÉSIGNATION\n${d.notes||d.fiche?.notes||'À compléter après le premier entretien.'}\n\nDÉMARCHES ENGAGÉES\n${(d.checklist||[]).filter(x=>x.fait||x.done).map(x=>'- '+(x.texte||x.label||x)).join('\n')||'À compléter.'}\n\nPRIORITÉS ET POINTS DE VIGILANCE\n${notes||'À compléter.'}`,
+    rapport_periodique:`Je vous transmets le rapport périodique relatif au suivi du mineur suivant.\n\n${identity}\n\nÉVOLUTION DEPUIS LE DERNIER RAPPORT\n${recent}\n\nSITUATION ADMINISTRATIVE, SOCIALE, SCOLAIRE ET MÉDICALE\n${d.notes||'À compléter.'}\n\nÉCHÉANCES\n${next}\n\nACTIONS PRÉVUES ET POINTS D’ATTENTION\n${notes||'À compléter.'}`,
+    rapport_final:`Je vous transmets le rapport final clôturant ma mission de tutelle.\n\n${identity}\n\nSYNTHÈSE DE L’ACCOMPAGNEMENT\n${d.notes||recent}\n\nSITUATION À LA FIN DE LA TUTELLE\n${notes||'Séjour, logement, revenus, santé, scolarité/formation et accompagnement futur à compléter.'}\n\nTRANSMISSION\nLes documents utiles, informations de contact et échéances en cours ont été expliqués et transmis au jeune ou au service repreneur.`,
+    note_avocat:`Afin de préparer le suivi juridique du mineur ci-dessous, voici une synthèse actualisée.\n\n${identity}\n\nPROCÉDURE ET ÉLÉMENTS DU DOSSIER\n${d.notes||'À compléter.'}\n\nFAITS ET DÉMARCHES RÉCENTS\n${recent}\n\nDÉLAIS / AUDIENCES / QUESTIONS À TRAITER\n${next}\n${notes||'À compléter.'}`,
+    demande_interprete:`Je sollicite la mise à disposition d’un interprète pour accompagner le mineur suivant.\n\n${identity}\nLangue demandée : ${d.langue||d.fiche?.langue||'À compléter'}\nDate, heure et lieu : ${notes||'À compléter'}\nObjet du rendez-vous : ${subject||'À compléter'}\n\nMerci de confirmer la disponibilité, les modalités et la prise en charge éventuelle des frais.`,
+    autorisation:`Je soussigné(e), ${TUTEUR.nom||'nom du tuteur'}, agissant en qualité de tuteur légal, autorise la démarche décrite ci-dessous pour le mineur suivant.\n\n${identity}\n\nAUTORISATION\n${notes||'Nature, durée, lieu, responsable et conditions à compléter.'}\n\nCette autorisation est donnée dans l’intérêt du mineur et sous réserve du respect des règles applicables.`,
+    courrier_ecole:`En ma qualité de tuteur légal, je vous contacte au sujet de la scolarité du mineur suivant.\n\n${identity}\n\nOBJET DE LA DEMANDE\n${notes||'Inscription, suivi scolaire, absences, orientation, aménagement ou concertation à compléter.'}\n\nJe vous remercie de me tenir informé des décisions et de toute difficulté nécessitant l’intervention du représentant légal.`,
+    orientation_medicale:`Je sollicite une évaluation et, si nécessaire, un suivi adapté pour le mineur suivant.\n\n${identity}\n\nMOTIF ET ÉLÉMENTS UTILES\n${notes||'À compléter sans inclure d’informations non nécessaires.'}\n\nMerci de communiquer les modalités de rendez-vous et les recommandations utiles, dans le respect du secret professionnel et des droits du mineur.`,
+    recherche_famille:`Dans l’intérêt supérieur du mineur ci-dessous, je sollicite l’examen des possibilités de recherche et, si cela est sûr et approprié, de rétablissement des liens familiaux.\n\n${identity}\n\nÉLÉMENTS CONNUS ET PRÉCAUTIONS\n${notes||'Coordonnées, dernier contact, risques identifiés et consentement du jeune à compléter.'}\n\nToute démarche doit être menée sans compromettre la sécurité du mineur ou de sa famille.`,
+    transmission:`Veuillez trouver ci-joint les éléments utiles à la continuité du suivi du mineur suivant.\n\n${identity}\n\nPIÈCES ET INFORMATIONS TRANSMISES\n${notes||'Lister les pièces, leurs dates et leur destinataire.'}\n\nÉCHÉANCES EN COURS\n${next}\n\nMerci d’accuser réception de cette transmission.`
+  };
+  return common+(bodies[type]||'Document à compléter.')+`\n\nJe reste disponible pour toute information utile.\n\nCordialement,\n${TUTEUR.nom||'Le tuteur légal'}`;
+}
+function renderDocumentsPro(){
+  const sel=document.getElementById('proDocDossier');if(!sel)return;
+  const keep=sel.value;sel.innerHTML='<option value="">— Sélectionnez un dossier —</option>'+loadDossiers().map(d=>`<option value="${esc(d.id)}">${esc(d.nom||d.id)}</option>`).join('');
+  if(loadDossiers().some(d=>d.id===keep))sel.value=keep;
+  else if(loadDossiers().length)sel.value=loadDossiers()[0].id;
+  prepareProDocument();renderProDocHistory();renderOfficialRegistry();
+}
+function prepareProDocument(reset=true){
+  const d=proDocDossier(),ed=document.getElementById('proDocEditor');if(!d||!ed){if(ed)ed.value='Sélectionnez d’abord un dossier.';return;}
+  const type=document.getElementById('proDocType').value;
+  const auto=d.proDrafts?.[type];
+  if(reset||!ed.value)ed.value=auto?.text||proDocBody(type,d,document.getElementById('proDocRecipient').value,document.getElementById('proDocSubject').value,document.getElementById('proDocNotes').value);
+  renderProDocHistory();
+}
+function saveProDocument(){
+  const d=proDocDossier(),text=document.getElementById('proDocEditor').value.trim();if(!d||!text)return;
+  d.proDocuments=d.proDocuments||[];d.proDocuments.unshift({id:'PD'+Date.now(),type:document.getElementById('proDocType').value,title:PRO_DOC_LABELS[document.getElementById('proDocType').value],date:new Date().toISOString(),text});
+  saveDossiers(loadDossiers());renderProDocHistory();
+}
+function renderProDocHistory(){
+  const el=document.getElementById('proDocHistory');if(!el)return;const d=proDocDossier(),items=d?.proDocuments||[];
+  el.innerHTML=items.length?items.map(x=>`<div class="req-card"><strong>${esc(x.title)}</strong><div class="muted">${esc(new Date(x.date).toLocaleString())}</div><div class="row" style="margin-top:.4rem"><button class="btn sec sm" data-doc-id="${esc(x.id)}" onclick="loadProDocument(this.dataset.docId)">Ouvrir</button><button class="btn danger sm" data-doc-id="${esc(x.id)}" onclick="deleteProDocument(this.dataset.docId)">Supprimer</button></div></div>`).join(''):'<p class="muted">Aucun document enregistré pour ce dossier.</p>';
+}
+function loadProDocument(id){const d=proDocDossier(),x=d?.proDocuments?.find(v=>v.id===id);if(x)document.getElementById('proDocEditor').value=x.text}
+function deleteProDocument(id){const d=proDocDossier();if(!d)return;d.proDocuments=(d.proDocuments||[]).filter(x=>x.id!==id);saveDossiers(loadDossiers());renderProDocHistory()}
+function printProDocument(){const text=document.getElementById('proDocEditor').value;if(text)printDoc('Document professionnel',`<div style="white-space:pre-wrap;line-height:1.65">${esc(text)}</div>`)}
+function copyProDocument(){navigator.clipboard?.writeText(document.getElementById('proDocEditor').value)}
+function emailProDocument(){const d=proDocDossier(),type=document.getElementById('proDocType').value,text=document.getElementById('proDocEditor').value;window.open(`mailto:?subject=${encodeURIComponent(PRO_DOC_LABELS[type]+' — '+(d?.nom||''))}&body=${encodeURIComponent(text)}`,'_blank')}
+
+/* ============ AUTOMATISATIONS LOCALES ============ */
+const AUTO_RULES=[
+  ['rdv_7j','Rendez-vous proches','Signale les rendez-vous prévus dans les 7 prochains jours.'],
+  ['rapport_retard','Rapports obligatoires','Détecte les rapports échus ou à remettre sous 14 jours.'],
+  ['transition_165','Préparer les 18 ans','Déclenche le plan de transition dès 16 ans et 6 mois.'],
+  ['majorite','Fin de tutelle','Signale l’approche ou l’atteinte de la majorité.'],
+  ['document_expire','Documents à renouveler','Contrôle les dates d’expiration enregistrées dans le dossier.'],
+  ['backup','Sauvegarde chiffrée','Rappelle la sauvegarde si la dernière exportation dépasse 30 jours.']
+];
+function autoDays(date){if(!date)return null;const n=new Date(date+'T12:00:00'),t=new Date();t.setHours(12,0,0,0);return Math.ceil((n-t)/86400000)}
+function autoBirthDate(d){return d.fiche?.naissance||d.naissance||d.dateNaissance||''}
+function autoAgeMonths(d){const b=new Date(autoBirthDate(d));if(!Number.isNaN(+b)){const n=new Date();return (n.getFullYear()-b.getFullYear())*12+n.getMonth()-b.getMonth()-(n.getDate()<b.getDate()?1:0)}return Number(d.age||0)*12}
+function addAutoTask(d,rule,due,title,detail,severity='normal'){
+  d.autoTasks=d.autoTasks||[];const key=rule+'|'+(due||'')+'|'+title;if(d.autoTasks.some(x=>x.key===key))return;
+  d.autoTasks.push({id:'AT'+Date.now()+Math.random().toString(36).slice(2,6),key,rule,due,title,detail,severity,done:false,created:new Date().toISOString()});
+}
+function reportDraftFingerprint(d){return JSON.stringify({fiche:d.fiche,notes:d.notes,caseNotes:d.caseNotes,checklist:d.checklist,rapports:d.rapports,frais:d.frais,rdv:(AG?.rdv||[]).filter(r=>r.dossierId===d.id)})}
+function ensureAutoReportDraft(d,type,due){d.proDrafts=d.proDrafts||{};const fingerprint=reportDraftFingerprint(d),old=d.proDrafts[type];if(!old||old.fingerprint!==fingerprint){d.proDrafts[type]={type,due,fingerprint,updated:new Date().toISOString(),text:proDocBody(type,d,type==='rapport_final'?'Juge de paix et Service des Tutelles':'Juge de paix et Service des Tutelles','',`Brouillon actualisé automatiquement à partir des données enregistrées le ${new Date().toLocaleDateString('fr-BE')}. Vérifier les éléments manquants avant signature et envoi.`)}}}
+function runAutomations(showResult=false){
+  const ds=loadDossiers();let before=ds.reduce((n,d)=>n+(d.autoTasks||[]).length,0);
+  ds.forEach(d=>{
+    (d.rapports||[]).filter(r=>!r.fait&&r.echeance).forEach(r=>{const days=autoDays(r.echeance);if(days!==null&&days<=14){addAutoTask(d,'rapport_retard',r.echeance,days<0?'Rapport en retard':'Rapport à préparer',`${r.nom||r.type||'Rapport'} — ${Math.abs(days)} jour(s) ${days<0?'de retard':'restant(s)'}`,days<0?'urgent':'warning');const raw=((r.nom||'')+' '+(r.type||'')+' '+(r.id||'')).toLowerCase(),type=raw.includes('final')?'rapport_final':raw.includes('initial')?'rapport_initial':'rapport_periodique';ensureAutoReportDraft(d,type,r.echeance)}});
+    const months=autoAgeMonths(d);if(months>=198&&months<216)addAutoTask(d,'transition_165','',"Préparer le passage à la majorité",'Vérifier séjour, logement, revenus, formation, santé et accompagnement après 18 ans.','warning');
+    if(months>=213)addAutoTask(d,'majorite','',months>=216?'Vérifier la clôture de la tutelle':'Majorité dans moins de 3 mois','Préparer le rapport final et la transmission des documents.',months>=216?'urgent':'warning');
+    const expiries=[['Titre de séjour',d.fiche?.expirationSejour||d.expirationSejour],['Document d’identité',d.fiche?.expirationDocument||d.expirationDocument]];
+    expiries.forEach(([label,date])=>{const days=autoDays(date);if(days!==null&&days<=60)addAutoTask(d,'document_expire',date,`${label} à renouveler`,`${days<0?'Expiré depuis':'Expire dans'} ${Math.abs(days)} jour(s).`,days<0?'urgent':'warning')});
+    (AG?.rdv||[]).filter(r=>r.dossierId===d.id&&r.date&&r.statut!=='realise').forEach(r=>{const days=autoDays(r.date);if(days!==null&&days>=0&&days<=7)addAutoTask(d,'rdv_7j',r.date,'Rendez-vous à confirmer',`${r.type||'Rendez-vous'} — ${r.heure||''} ${r.lieu||r.adresse||''}`,'normal')});
+  });
+  const last=+localStorage.getItem('mena_last_export')||0;if(!last||Date.now()-last>30*86400000)ds.forEach(d=>addAutoTask(d,'backup','',"Effectuer une sauvegarde chiffrée",'La dernière sauvegarde date de plus de 30 jours.','warning'));
+  saveDossiers(ds);renderAutomations();const after=ds.reduce((n,d)=>n+(d.autoTasks||[]).length,0),status=document.getElementById('automationStatus');if(showResult&&status)status.textContent=`✓ ${after-before} nouvelle(s) action(s) créée(s).`;
+}
+function renderAutomations(){
+  const rules=document.getElementById('automationRules'),tasks=document.getElementById('automationTasks');if(!rules||!tasks)return;
+  const all=loadDossiers().flatMap(d=>(d.autoTasks||[]).map(x=>({...x,dossierId:d.id,dossierNom:d.nom||d.id}))).filter(x=>!x.done).sort((a,b)=>(a.due||'9999').localeCompare(b.due||'9999'));
+  rules.innerHTML=AUTO_RULES.map(([id,title,desc])=>`<div class="card"><h3>${esc(title)}</h3><p class="muted">${esc(desc)}</p><strong>${all.filter(x=>x.rule===id).length} action(s)</strong></div>`).join('');
+  tasks.innerHTML=all.length?all.map(x=>`<div class="req-card ${x.severity==='urgent'?'statut-refuse':x.severity==='warning'?'':'statut-planifie'}"><strong>${esc(x.title)}</strong><div>${esc(x.dossierNom)}${x.due?' · '+esc(x.due):''}</div><p class="muted">${esc(x.detail)}</p><button class="btn sec sm" data-dossier-id="${esc(x.dossierId)}" data-task-id="${esc(x.id)}" onclick="completeAutoTask(this.dataset.dossierId,this.dataset.taskId)">✓ Marquer comme traité</button></div>`).join(''):'<p class="muted">Aucune action automatique en attente.</p>';
+}
+function completeAutoTask(dossierId,taskId){const d=loadDossiers().find(x=>x.id===dossierId),t=d?.autoTasks?.find(x=>x.id===taskId);if(t)t.done=true;saveDossiers(loadDossiers());renderAutomations()}
+
 /* ============ INIT ============ */
+let INSTALL_PROMPT=null;
+
+function isInstalledApp(){
+  return window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true;
+}
+
+function updateInstallButton(){
+  const btn=document.getElementById('installBtn');if(!btn)return;
+  const installed=isInstalledApp();
+  btn.classList.toggle('installed',installed);
+  btn.textContent=installed?'✓':'⬇️';
+  btn.title=installed
+    ?(LANG==='nl'?'Geïnstalleerd op dit apparaat':'Installée sur cet appareil')
+    :(LANG==='nl'?'Installeren op dit apparaat':'Installer sur cet appareil');
+}
+
+function installHelp(){
+  const NL=LANG==='nl',ua=navigator.userAgent;
+  let steps;
+  if(/iPad|iPhone|iPod/.test(ua))steps=NL
+    ?['Open deze site in Safari.','Tik op de knop Delen.','Kies “Zet op beginscherm” en bevestig met “Voeg toe”.']
+    :['Ouvrez ce site dans Safari.','Touchez le bouton Partager.','Choisissez « Sur l’écran d’accueil », puis « Ajouter ».'];
+  else if(/Android/.test(ua))steps=NL
+    ?['Open het browsermenu (⋮).','Kies “App installeren” of “Toevoegen aan startscherm”.','Bevestig de installatie.']
+    :['Ouvrez le menu du navigateur (⋮).','Choisissez « Installer l’application » ou « Ajouter à l’écran d’accueil ».','Confirmez l’installation.'];
+  else steps=NL
+    ?['Open deze site in Chrome of Edge.','Klik op het installatiepictogram in de adresbalk of open het browsermenu.','Kies “MENA Tuteur installeren” en bevestig.']
+    :['Ouvrez ce site dans Chrome ou Edge.','Cliquez sur l’icône d’installation dans la barre d’adresse, ou ouvrez le menu du navigateur.','Choisissez « Installer MENA Tuteur », puis confirmez.'];
+  document.getElementById('installTitle').textContent=NL?'MENA Tuteur installeren':'Installer MENA Tuteur';
+  document.getElementById('installContent').innerHTML=`<p>${NL?'Elke voogd installeert een onafhankelijke kopie. De dossiers van dit apparaat zijn lokaal versleuteld en worden nooit gedeeld met andere voogden.':'Chaque tuteur installe une copie indépendante. Les dossiers de cet appareil sont chiffrés localement et ne sont jamais partagés avec les autres tuteurs.'}</p><ol class="install-steps">${steps.map(s=>`<li>${esc(s)}</li>`).join('')}</ol><div class="banner" style="margin-top:1rem">${NL?'De toepassing werkt daarna als een gewone app en blijft beschikbaar zonder internet voor reeds geladen inhoud. Maak regelmatig een versleutelde back-up.':'L’application fonctionnera ensuite comme une application normale et restera disponible hors connexion pour les contenus déjà chargés. Effectuez régulièrement une sauvegarde chiffrée.'}</div>`;
+  openModal('installModal');
+}
+
+async function installApp(){
+  if(isInstalledApp()){installHelp();return;}
+  if(!INSTALL_PROMPT){installHelp();return;}
+  INSTALL_PROMPT.prompt();
+  await INSTALL_PROMPT.userChoice;
+  INSTALL_PROMPT=null;updateInstallButton();
+}
+
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();INSTALL_PROMPT=e;updateInstallButton();});
+window.addEventListener('appinstalled',()=>{INSTALL_PROMPT=null;updateInstallButton();});
+
 function setOnline(){document.getElementById('appStatus').textContent=navigator.onLine?t('status.online'):t('status.offline');}
 window.addEventListener('online',setOnline);window.addEventListener('offline',setOnline);
 window.addEventListener('load',()=>{
   applyTheme();                            // thème clair/sombre
   applyI18n();                             // langue (FR/NL)
   setOnline();
+  updateInstallButton();
   document.getElementById('appVersionLbl').textContent='Plateforme MENA Tuteur v'+APP_VERSION;
   refreshAuthUI();                         // démarre verrouillé (écran de connexion)
   document.getElementById('authPw').focus();

@@ -1,1 +1,9 @@
-{"version": "1.7.15", "date": "2026-07-11", "alerte": {"id": "cc-subsidiaire-2026", "fr": "Suivi juridique en cours : la Cour constitutionnelle a suspendu une partie de la réforme du regroupement familial (protection subsidiaire) et interrogé la CJUE. Pour un jeune en protection subsidiaire, vérifiez l'état du droit avec l'avocat avant toute démarche familiale.", "nl": "Lopende juridische opvolging: het Grondwettelijk Hof schorste een deel van de hervorming gezinshereniging (subsidiaire bescherming) en bevroeg het HvJ-EU. Check voor een subsidiair beschermde jongere de stand van het recht met de advocaat vóór elke gezinsstap."}}
+{
+  "version": "1.11.0",
+  "date": "2026-07-14",
+  "alerte": {
+    "id": "cc-subsidiaire-2026",
+    "fr": "Suivi juridique en cours : par son arrêt 24/2026 du 26 février 2026, la Cour constitutionnelle a suspendu les règles plus strictes visant le regroupement familial des bénéficiaires de la protection subsidiaire et posé cinq questions à la CJUE. La suspension reste en vigueur jusqu'à l'arrêt sur les recours en annulation. Vérifiez l'état du droit avec l'avocat avant toute démarche familiale.",
+    "nl": "Lopende juridische opvolging: met arrest 24/2026 van 26 februari 2026 schorste het Grondwettelijk Hof de strengere regels voor gezinshereniging van subsidiair beschermden en stelde het vijf vragen aan het HvJ-EU. De schorsing blijft gelden tot het arrest over de vernietigingsberoepen. Controleer de actuele rechtspositie met de advocaat vóór elke gezinsstap."
+  }
+}

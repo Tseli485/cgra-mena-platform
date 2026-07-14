@@ -23,8 +23,8 @@ check('JavaScript intégré valide', () => {
 
 check('Version cohérente', () => {
   assert.match(html, new RegExp(`const APP_VERSION='${version.version.replaceAll('.', '\\.')}'`));
-  assert.equal(version.version, '1.11.0');
-  assert.match(sw, /const CACHE = 'mena-v37'/);
+  assert.equal(version.version, '1.11.1');
+  assert.match(sw, /const CACHE = 'mena-v38'/);
 });
 
 check('Assets hors ligne complets', () => {
